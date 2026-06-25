@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "project": "Project Regressor",
+  "versionCode": 274,
+  "displayVersion": "v2.74",
+  "cacheVersion": "project-regressor-mvp-v274",
+  "updatedAt": "2026-06-25",
+  "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
+  "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=274&cachebust=274",
+  "recommendedAndroidShell": "Trusted Web Activity",
+  "notes": [
+    "Public update manifest channel moved to ppippiru2/project-regressor-updates.",
+    "Source development can stay private while Android/PWA shells check a public update manifest.",
+    "Installed Android shell can keep using the hosted game URL for web-content updates.",
+    "Native APK shell changes still require a new APK build.",
+    "Android update shell baseline is recorded in data/android-update-config.sample.json."
+  ]
+}
