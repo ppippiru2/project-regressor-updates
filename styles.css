@@ -3311,11 +3311,14 @@ select:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  min-width: 0;
 }
 
 .editor-chip {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
+  min-width: 0;
   min-height: 1.75rem;
   max-width: 100%;
   border: 1px solid rgba(108, 210, 255, 0.22);
@@ -3326,6 +3329,7 @@ select:focus {
   font-weight: 800;
   overflow-wrap: anywhere;
   padding: 0 0.6rem;
+  white-space: normal;
 }
 
 .editor-asset-card {
@@ -3518,6 +3522,7 @@ select:focus {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
   background: rgba(4, 16, 40, 0.62);
+  min-width: 0;
   padding: 0.7rem;
 }
 
@@ -3526,13 +3531,23 @@ select:focus {
   justify-content: space-between;
   gap: 0.55rem;
   align-items: center;
+  min-width: 0;
 }
 
 .editor-retarget-body {
   display: grid;
   gap: 0.55rem;
+  grid-template-columns: minmax(0, 1fr);
   max-height: 5.75rem;
+  min-width: 0;
   overflow: hidden;
+}
+
+.editor-retarget-body > div {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
 }
 
 .editor-retarget-row.is-expanded .editor-retarget-body {
@@ -3540,6 +3555,7 @@ select:focus {
 }
 
 .editor-retarget-row code {
+  box-sizing: border-box;
   display: block;
   margin-top: 0.2rem;
   border: 1px solid rgba(57, 228, 255, 0.14);
@@ -3547,8 +3563,12 @@ select:focus {
   background: rgba(0, 0, 0, 0.24);
   color: var(--action-ready);
   font-size: 0.76rem;
+  max-width: 100%;
   overflow-wrap: anywhere;
   padding: 0.4rem 0.5rem;
+  white-space: normal;
+  width: 100%;
+  word-break: break-word;
 }
 
 .editor-retarget-empty {
@@ -5655,7 +5675,9 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .editor-retarget-row-head {
-    align-items: stretch;
+    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
   }
 
   .editor-shell,

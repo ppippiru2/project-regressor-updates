@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 339,
-  "displayVersion": "v3.39",
-  "cacheVersion": "project-regressor-mvp-v339",
+  "versionCode": 340,
+  "displayVersion": "v3.40",
+  "cacheVersion": "project-regressor-mvp-v340",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=339&cachebust=339",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=340&cachebust=340",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v340 keeps expanded editor retarget rows inside mobile card bounds by tightening code, chip, and body grid wrapping.",
+    "v340 extends the editor retarget quick check to guard long path wrapping in row bodies and chips.",
     "v339 stabilizes mobile wrapping and button widths for the editor retarget preview controls.",
     "v339 extends the editor retarget quick check to guard mobile control layout CSS.",
     "v338 adds a reset hint to retarget preview empty states so users can recover to the full list quickly.",
@@ -92,13 +94,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v339-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v340-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v339-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v340-debug.apk"
   },
   "version": {
-    "code": 339,
-    "name": "3.39.0",
-    "displayName": "v339"
+    "code": 340,
+    "name": "3.40.0",
+    "displayName": "v340"
   }
 }
