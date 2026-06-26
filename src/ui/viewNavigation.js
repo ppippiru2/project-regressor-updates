@@ -25,6 +25,12 @@ export function activateView(viewId = "combat", { scrollActiveTab = false } = {}
 
 export function keepActiveTabInView(button = document.querySelector(".nav-button.active")) {
   if (!button) return;
+  const nav = button.closest(".nav");
+  if (nav && window.matchMedia("(max-width: 700px)").matches) {
+    const targetLeft = button.offsetLeft + button.offsetWidth / 2 - nav.clientWidth / 2;
+    nav.scrollTo({ left: Math.max(0, targetLeft), behavior: "auto" });
+    return;
+  }
   button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
 }
 

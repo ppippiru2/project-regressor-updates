@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=349";
+import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=350";
 
 export function advanceHitCombo(state, now = Date.now()) {
   state.hitCount += 1;
