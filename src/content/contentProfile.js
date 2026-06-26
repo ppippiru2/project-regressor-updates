@@ -222,6 +222,60 @@ export const CONTENT_TEXT_RETARGET_CANDIDATES = {
   ],
 };
 
+export const CONTENT_ASSET_RETARGET_CANDIDATES = {
+  playerSprites: [
+    {
+      assetId: "player_regressor_spear_idle_v1",
+      slotPaths: ["player.combatIdle"],
+      sourceFile: "assets/characters/player_regressor_spear_idle.png",
+      cleanFile: "assets/characters/player_regressor_spear_idle.png",
+      webpFile: null,
+      targetAssetId: "player_returner_spear_idle_v1",
+      reason: "regressor player combat sprite",
+    },
+  ],
+  regionCards: [
+    {
+      assetId: "region_mana_mine_card_v54_actual",
+      slotPaths: ["region.cardImages.mana_mine", "region.battleBackgrounds.mana_mine"],
+      sourceFile: "assets/source/regions/tutorial_island/mana_mine_actual.png",
+      cleanFile: "assets/source/regions/tutorial_island/mana_mine_actual.png",
+      webpFile: "assets/optimized/regions/tutorial_island/mana_mine_actual.webp",
+      targetAssetId: "region_spirit_stone_mine_card_v1",
+      reason: "mana-system region card and battle background",
+    },
+    {
+      assetId: "region_rift_gate_card_v54_actual",
+      slotPaths: ["region.cardImages.rift_gate", "region.battleBackgrounds.rift_gate"],
+      sourceFile: "assets/source/regions/tutorial_island/rift_gate_actual.png",
+      cleanFile: "assets/source/regions/tutorial_island/rift_gate_actual.png",
+      webpFile: "assets/optimized/regions/tutorial_island/rift_gate_actual.webp",
+      targetAssetId: "region_demonic_sect_gate_card_v1",
+      reason: "gate/rift region card and battle background",
+    },
+  ],
+  regionNodeMaps: [
+    {
+      assetId: "region_mana_mine_node_map_v54_actual",
+      slotPaths: ["region.nodeMapImages.mana_mine"],
+      sourceFile: "assets/source/regions/tutorial_island/mana_mine_node_map_actual.png",
+      cleanFile: "assets/source/regions/tutorial_island/mana_mine_node_map_actual.png",
+      webpFile: "assets/optimized/regions/tutorial_island/mana_mine_node_map_actual.webp",
+      targetAssetId: "region_spirit_stone_mine_node_map_v1",
+      reason: "mana-system region node map",
+    },
+    {
+      assetId: "region_rift_gate_node_map_v54_actual",
+      slotPaths: ["region.nodeMapImages.rift_gate"],
+      sourceFile: "assets/source/regions/tutorial_island/rift_gate_node_map_actual.png",
+      cleanFile: "assets/source/regions/tutorial_island/rift_gate_node_map_actual.png",
+      webpFile: "assets/optimized/regions/tutorial_island/rift_gate_node_map_actual.webp",
+      targetAssetId: "region_demonic_sect_gate_node_map_v1",
+      reason: "gate/rift region node map",
+    },
+  ],
+};
+
 export const CONTENT_PROFILE_TEMPLATES = {
   projectRegressorHunter: {
     id: "project-regressor-hunter",
