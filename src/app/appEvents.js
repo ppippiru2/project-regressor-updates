@@ -1,10 +1,10 @@
-import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=341";
-import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=341";
-import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=341";
-import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=341";
-import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=341";
-import { bindNavigationEvents } from "../ui/navigationEvents.js?v=341";
-import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=341";
+import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=342";
+import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=342";
+import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=342";
+import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=342";
+import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=342";
+import { bindNavigationEvents } from "../ui/navigationEvents.js?v=342";
+import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=342";
 
 export function bindAppEvents(handlers) {
   bindCharacterCreationEvents(handlers.onCreateCharacter, handlers.onCancelCharacterCreation);

@@ -1,6 +1,6 @@
-import { applyDomLocalization } from "../localization/domText.js?v=341";
-import { getLocaleText, tf } from "../localization/index.js?v=341";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=341";
+import { applyDomLocalization } from "../localization/domText.js?v=342";
+import { getLocaleText, tf } from "../localization/index.js?v=342";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=342";
 
 const EDITOR_VERSION = "338";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
@@ -228,6 +228,7 @@ function renderRetargetPreviewDetail() {
   const visibleAssetCount = assetEntries.length;
   const visibleCount = visibleTextCount + visibleAssetCount;
   const totalCount = preview.counts.textOverrides + preview.counts.assetOverrides;
+  const filterSummary = retargetFilterSummary(detailText);
 
   return `
     <section class="editor-retarget-detail" aria-label="${escapeAttribute(detailText.title || "Retarget Preview Detail")}">
@@ -265,10 +266,13 @@ function renderRetargetPreviewDetail() {
         <button class="editor-retarget-reset" type="button" data-retarget-reset>
           ${escapeHtml(detailText.reset || "Reset")}
         </button>
-        <span class="editor-retarget-count">${escapeHtml(tf("editorPrep.retargetDetail.visibleCount", {
-          visible: visibleCount,
-          total: totalCount
-        }, `${visibleCount}/${totalCount}`))}</span>
+        <span class="editor-retarget-count">
+          <strong>${escapeHtml(tf("editorPrep.retargetDetail.visibleCount", {
+            visible: visibleCount,
+            total: totalCount
+          }, `${visibleCount}/${totalCount}`))}</strong>
+          ${filterSummary ? `<small>${escapeHtml(filterSummary)}</small>` : ""}
+        </span>
       </div>
       <div class="editor-retarget-grid">
         <section>
@@ -381,6 +385,33 @@ function retargetKindButton(kind, label) {
       ${escapeHtml(label)}
     </button>
   `;
+}
+
+function retargetFilterSummary(detailText) {
+  const filterKind = normalizeRetargetKind(retargetDetailFilter.kind);
+  const query = String(retargetDetailFilter.query || "").trim();
+  const filterLabel = filterKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
+
+  if (filterKind !== "all" && query) {
+    return tf("editorPrep.retargetDetail.activeFilterAndSearch", {
+      filter: filterLabel,
+      query
+    }, `${filterLabel} · ${query}`);
+  }
+
+  if (filterKind !== "all") {
+    return tf("editorPrep.retargetDetail.activeFilter", {
+      filter: filterLabel
+    }, filterLabel);
+  }
+
+  if (query) {
+    return tf("editorPrep.retargetDetail.activeSearch", {
+      query
+    }, query);
+  }
+
+  return "";
 }
 
 function emptyRetargetRows(detailText, sectionKind) {

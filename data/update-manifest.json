@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 341,
-  "displayVersion": "v3.41",
-  "cacheVersion": "project-regressor-mvp-v341",
+  "versionCode": 342,
+  "displayVersion": "v3.42",
+  "cacheVersion": "project-regressor-mvp-v342",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=341&cachebust=341",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=342&cachebust=342",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v342 adds active search and type-filter summaries inside the editor retarget visible-count badge.",
+    "v342 extends the editor retarget quick check to guard the filter summary helper, localization, and badge styles.",
     "v341 constrains editor retarget preview list heights with viewport-aware scroll bounds.",
     "v341 adds collapsed-row fade guards so long retarget details scan cleanly before expansion.",
     "v340 keeps expanded editor retarget rows inside mobile card bounds by tightening code, chip, and body grid wrapping.",
@@ -96,13 +98,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v341-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v342-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v341-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v342-debug.apk"
   },
   "version": {
-    "code": 341,
-    "name": "3.41.0",
-    "displayName": "v341"
+    "code": 342,
+    "name": "3.42.0",
+    "displayName": "v342"
   }
 }
