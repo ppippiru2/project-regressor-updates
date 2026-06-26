@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-23",
+  "policy": "Normal gameplay work records editor hooks here. The editor UI itself is updated in batches when the user explicitly asks to update the editor.",
+  "items": [
+    {
+      "id": "editor-bootstrap-v250",
+      "title": "기초 에디터 준비실",
+      "status": "done",
+      "priority": "high",
+      "source": "v250",
+      "summary": "manifest, backlog, asset slots, and local save key summaries can be reviewed from a separate editor page.",
+      "editorHooks": [
+        "editor.html",
+        "src/editor/editorMain.js",
+        "data/editor-manifest.json",
+        "data/editor-backlog.json"
+      ]
+    },
+    {
+      "id": "save-slot-editor",
+      "title": "세계선 저장 데이터 수동 편집",
+      "status": "planned",
+      "priority": "high",
+      "source": "user-request-save-editor",
+      "summary": "Allow editing active save, save slots, gold, level, region, equipment, inventory, and profile with validation and rollback.",
+      "editorHooks": [
+        "src/state/save.js",
+        "src/state/saveSlots.js",
+        "localStorage save keys",
+        "future rollback snapshot"
+      ]
+    },
+    {
+      "id": "node-map-manual-editor",
+      "title": "노드맵 수동 구성 에디터",
+      "status": "planned",
+      "priority": "high",
+      "source": "user-request-node-map-editor",
+      "summary": "Edit node positions, connections, node type budgets, hidden nodes, merchant/rest/treasure nodes, and background image slots.",
+      "editorHooks": [
+        "src/data/worldData.js:gateMaps",
+        "src/config/gateNodeTypes.js",
+        "src/state/gateNodeActions.js",
+        "data/GateMapData.sample.json"
+      ]
+    },
+    {
+      "id": "asset-slot-manager",
+      "title": "이미지/사운드 슬롯 관리자",
+      "status": "planned",
+      "priority": "high",
+      "source": "user-request-editor-assets",
+      "summary": "Manage expected file names, folders, missing assets, and crop presets for images and audio.",
+      "editorHooks": [
+        "data/asset-manifest.json",
+        "data/asset-slots.json",
+        "src/assets/assetData.js",
+        "future data/audio-manifest.json"
+      ]
+    },
+    {
+      "id": "item-monster-database",
+      "title": "아이템/몬스터 DB 관리",
+      "status": "planned",
+      "priority": "high",
+      "source": "user-request-editor-content-db",
+      "summary": "Edit equipment, item icons, monster stats, monster sprites, rewards, drop tables, and future legendary options.",
+      "editorHooks": [
+        "src/data/equipmentData.js:equipment",
+        "src/data/worldData.js:monsters",
+        "src/state/equipmentScore.js",
+        "src/state/combatRewards.js"
+      ]
+    },
+    {
+      "id": "initial-awakening-editor",
+      "title": "첫 각성/성향 질문 편집",
+      "status": "planned",
+      "priority": "medium",
+      "source": "user-request-character-start",
+      "summary": "Edit first-start profile defaults, dice stat rules, alignment questions, and result text.",
+      "editorHooks": [
+        "src/ui/characterCreationEvents.js",
+        "src/state/initialState.js",
+        "src/state/profile.js"
+      ]
+    },
+    {
+      "id": "sound-config-editor",
+      "title": "사운드/볼륨 기본값 설정",
+      "status": "planned",
+      "priority": "medium",
+      "source": "user-request-audio-settings",
+      "summary": "Configure default BGM/SFX volume and per-scene audio file slots.",
+      "editorHooks": [
+        "state.settings.audio",
+        "future data/audio-manifest.json",
+        "future src/audio/audioSystem.js"
+      ]
+    },
+    {
+      "id": "android-pwa-update-shell",
+      "title": "안드로이드 PWA 업데이트 셸 기준",
+      "status": "planned",
+      "priority": "high",
+      "source": "user-request-android-github-update",
+      "summary": "Track hosted PWA update manifest, GitHub Pages deployment, Android shell update boundaries, and release checklist for future APK or Trusted Web Activity packaging.",
+      "editorHooks": [
+        "data/update-manifest.json",
+        "data/android-update-config.sample.json",
+        "manifest.json",
+        "service-worker.js",
+        ".github/workflows/deploy-pages.yml",
+        "future android/twa project"
+      ]
+    },
+    {
+      "id": "publish-validation",
+      "title": "에디터 변경점 검증/내보내기",
+      "status": "planned",
+      "priority": "medium",
+      "source": "editor-safety",
+      "summary": "Validate changed JSON, create backup snapshots, and export editor changes into game runtime data files.",
+      "editorHooks": [
+        "future scripts/editor-export.js",
+        "future data/editor-export-log.json"
+      ]
+    }
+  ]
+}

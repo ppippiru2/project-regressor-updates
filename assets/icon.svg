@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Project Regressor">
+  <rect width="128" height="128" rx="24" fill="#101820"/>
+  <path d="M64 14 99 30v28c0 26-13 45-35 56-22-11-35-30-35-56V30l35-16Z" fill="#19c7d4" opacity=".18"/>
+  <path d="M64 23 91 36v22c0 20-9 35-27 45-18-10-27-25-27-45V36l27-13Z" fill="none" stroke="#19c7d4" stroke-width="6"/>
+  <path d="M49 72c9 7 21 7 30 0M45 52h38M55 41l-9 22m27-22 9 22" fill="none" stroke="#f4d35e" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="64" cy="67" r="8" fill="#f4d35e"/>
+</svg>

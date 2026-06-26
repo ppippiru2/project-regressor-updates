@@ -1,0 +1,32 @@
+{
+  "pureMana": {
+    "displayName": "정순한 마나",
+    "colorHint": "blue/cyan",
+    "usage": "기본 플레이어, 일반 마법"
+  },
+  "darkMana": {
+    "displayName": "흑마력",
+    "colorHint": "purple",
+    "usage": "일반 몬스터, 흑마법, 마공"
+  },
+  "divineMana": {
+    "displayName": "신성 마나",
+    "colorHint": "white/gold",
+    "usage": "성직자, 성기사, 천사 계열"
+  },
+  "flameMana": {
+    "displayName": "화염 마나",
+    "colorHint": "orange",
+    "usage": "화염 계열, 폭발 계열"
+  },
+  "natureMana": {
+    "displayName": "생명 마나",
+    "colorHint": "green",
+    "usage": "회복, 자연, 독/정화 계열"
+  },
+  "voidMana": {
+    "displayName": "공허 마나",
+    "colorHint": "black/silver",
+    "usage": "외신, 차원, 공허 계열"
+  }
+}

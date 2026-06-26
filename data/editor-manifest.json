@@ -1,0 +1,740 @@
+{
+  "version": 2,
+  "updatedAt": "2026-06-23",
+  "description": "Project Regressor future editor manifest. The editor is prepared separately from the game runtime so MVP gameplay work can continue without maintaining every editor screen at the same time.",
+  "maintenancePolicy": {
+    "gameFirst": true,
+    "runtimePriority": "The current implementation is the source of truth. This manifest records editor hooks and expected data surfaces.",
+    "updateMode": "During normal feature work, record only the editor-facing data target, asset slot, and backlog item. Batch-update the editor UI when the user explicitly asks to update the editor.",
+    "doNotBlockMvp": true,
+    "rules": [
+      "Do not move working gameplay code only to satisfy the editor.",
+      "When adding a new game system, add the future editor hook here or in data/editor-backlog.json.",
+      "Prefer stable JSON/data modules over hardcoded image, sound, monster, item, and node-map values.",
+      "Keep large image and audio files outside localStorage; store paths or slot ids whenever possible."
+    ]
+  },
+  "editorTheme": {
+    "title": "SYSTEM 권한",
+    "subtitle": "개발자용 데이터 준비실",
+    "navigationGroups": [
+      {
+        "id": "database",
+        "label": "DB 관리",
+        "panels": [
+          "initial_player",
+          "monster",
+          "item_equipment",
+          "craft_recipe",
+          "gate_node_map"
+        ]
+      },
+      {
+        "id": "system_config",
+        "label": "SYSTEM CONFIG",
+        "panels": [
+          "sound",
+          "save_data"
+        ]
+      },
+      {
+        "id": "export",
+        "label": "DATA EXPORT",
+        "panels": [
+          "asset_registry",
+          "publish"
+        ]
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": "initial_player",
+      "label": "초기 플레이어 세팅",
+      "status": "planned",
+      "priority": "high",
+      "purpose": "첫 각성 프로필, 1레벨 능력치 주사위, 심연의 질문, 기본 프로필 이미지를 조정한다.",
+      "primaryDataTargets": [
+        "src/state/initialState.js",
+        "src/ui/characterCreationEvents.js",
+        "src/state/profile.js",
+        "src/state/save.js"
+      ],
+      "assetSlots": [
+        "player.profilePortrait",
+        "player.combatIdle",
+        "player.combatAttack",
+        "player.combatHit",
+        "player.combatDead"
+      ],
+      "editorFields": [
+        "defaultName",
+        "defaultClass",
+        "defaultTitle",
+        "defaultAge",
+        "defaultGender",
+        "defaultAlignment",
+        "defaultCountry",
+        "defaultGroup",
+        "reservedHeightCm",
+        "reservedWeightKg",
+        "initialStatTotal",
+        "initialStatMin",
+        "initialStatMax",
+        "alignmentQuestions",
+        "portraitCrop"
+      ],
+      "futureControls": [
+        "텍스트 입력",
+        "선택 목록",
+        "초기 능력치 주사위 미리보기",
+        "성향 질문 카드 편집",
+        "이미지 크롭 프리셋",
+        "프로필 이미지 파일 첨부",
+        "플레이어 정보 저장"
+      ]
+    },
+    {
+      "id": "monster",
+      "label": "몬스터 관리",
+      "status": "planned",
+      "priority": "high",
+      "purpose": "몬스터 정체성, 스탯, 공격 패턴, 보상, 스프라이트, 사운드 훅을 관리한다.",
+      "primaryDataTargets": [
+        "src/data/worldData.js:monsters",
+        "src/combat/combatFormula.js",
+        "src/state/combatRewards.js",
+        "src/state/dataLookup.js"
+      ],
+      "assetSlots": [
+        "monster.defaultIdle",
+        "monster.defaultAttack",
+        "monster.defaultHit",
+        "monster.defaultDead",
+        "audio.sfx.monsterAttack",
+        "audio.sfx.monsterHit",
+        "audio.sfx.monsterDefeat"
+      ],
+      "editorFields": [
+        "id",
+        "name",
+        "rank",
+        "standardStatTemplate",
+        "level",
+        "primaryStatsManual",
+        "hp",
+        "mp",
+        "attack",
+        "defense",
+        "accuracy",
+        "evasion",
+        "critRate",
+        "expReward",
+        "goldReward",
+        "resistanceStats9",
+        "dropTable",
+        "spriteSlot",
+        "soundSet",
+        "imageAttachment",
+        "monsterBestiaryEntry"
+      ],
+      "futureControls": [
+        "몬스터 목록",
+        "몬스터 등록",
+        "몬스터 도감",
+        "등급별 표준 스탯 적용",
+        "주사위식 스탯 변이",
+        "스탯 숫자 입력",
+        "9대 저항력 입력",
+        "드랍 테이블 연결",
+        "스프라이트 슬롯 선택",
+        "전투 미리보기"
+      ]
+    },
+    {
+      "id": "item_equipment",
+      "label": "장비/아이템 관리",
+      "status": "partial",
+      "priority": "high",
+      "purpose": "장비, 소지품 아이템, 아이콘, 드랍 노출, 미래 전설 옵션을 관리한다.",
+      "primaryDataTargets": [
+        "src/data/equipmentData.js:equipment",
+        "src/state/equipmentActions.js",
+        "src/state/inventory.js",
+        "src/state/equipmentScore.js",
+        "data/asset-slots.json:slots.item.icons"
+      ],
+      "assetSlots": [
+        "item.icon",
+        "audio.sfx.itemAcquire",
+        "audio.sfx.itemEquip",
+        "audio.sfx.itemUpgrade"
+      ],
+      "editorFields": [
+        "id",
+        "name",
+        "type",
+        "slot",
+        "rarity",
+        "standardStatTemplate",
+        "bonusAttack",
+        "valueScore",
+        "stats",
+        "resistances",
+        "specialOptions",
+        "shopPrice",
+        "dropVisibility",
+        "iconSlot",
+        "iconAttachment",
+        "itemBestiaryEntry"
+      ],
+      "futureControls": [
+        "장비/아이템 추가",
+        "아이템 도감",
+        "아이템 목록",
+        "등급별 표준 스탯 적용",
+        "스탯 보너스 총합 재분배",
+        "저항력 보너스 재분배",
+        "상점 판매가 입력",
+        "정사각형 아이콘 슬롯",
+        "스탯/저항 편집",
+        "전설 옵션 자리",
+        "소지품 수량/테스트 지급"
+      ]
+    },
+    {
+      "id": "craft_recipe",
+      "label": "시스템 제작 레시피",
+      "status": "planned",
+      "priority": "medium",
+      "purpose": "나중에 제작 시스템이 열리면 재료, 결과물, 제작 조건, 사운드를 연결한다.",
+      "primaryDataTargets": [
+        "future:data/craft-recipes.json",
+        "future:src/state/crafting.js"
+      ],
+      "assetSlots": [
+        "audio.sfx.craftStart",
+        "audio.sfx.craftSuccess",
+        "audio.sfx.craftFail"
+      ],
+      "editorFields": [
+        "recipeId",
+        "name",
+        "resultItemId",
+        "materialItems",
+        "materialItem1",
+        "materialItem1Quantity",
+        "materialItem2",
+        "materialItem2Quantity",
+        "resultItem",
+        "unlockCondition",
+        "goldCost",
+        "failureOutcome",
+        "recipeListEntry"
+      ],
+      "futureControls": [
+        "완성품 ID 검색/입력",
+        "레시피 목록",
+        "재료 선택",
+        "재료 수량 입력",
+        "결과 아이템 선택",
+        "해금 조건 선택"
+      ]
+    },
+    {
+      "id": "gate_node_map",
+      "label": "무한의 탑/게이트 설계",
+      "status": "partial",
+      "priority": "high",
+      "purpose": "지역별 노드맵 배경, 노드 좌표, 연결선, 미확인/이벤트/히든/보스/상인/휴식/보물 구성을 수동 편집한다.",
+      "primaryDataTargets": [
+        "src/data/worldData.js:gateMaps",
+        "data/GateMapData.sample.json",
+        "src/config/gateNodeTypes.js",
+        "src/state/gateNodeActions.js",
+        "src/ui/renderGateMap.js"
+      ],
+      "assetSlots": [
+        "region.cardImage",
+        "region.combatBackground",
+        "gate.mapBackground"
+      ],
+      "editorFields": [
+        "mapId",
+        "regionId",
+        "stageType",
+        "difficultyFloors",
+        "stageName",
+        "backgroundSlot",
+        "combatBackgroundImage",
+        "coordinateMode",
+        "coordinateBounds",
+        "nodes",
+        "edges",
+        "nodeTypeBudgets",
+        "normalMonsterObjectives",
+        "hiddenBossObjective",
+        "clearRewardGold",
+        "clearRewardItem",
+        "hiddenRewardGold",
+        "hiddenRewardItem",
+        "revealedState",
+        "completedPath",
+        "farmableCompletedPath",
+        "stageListEntry"
+      ],
+      "nodeTypes": [
+        "start",
+        "combat",
+        "elite",
+        "boss",
+        "event",
+        "hidden_piece",
+        "hidden_treasure",
+        "hidden_boss",
+        "merchant",
+        "treasure",
+        "rest",
+        "unknown"
+      ],
+      "futureControls": [
+        "스테이지 환경 등록",
+        "등록된 스테이지 목록",
+        "배경 이미지 선택",
+        "전투 배경 이미지 첨부",
+        "일반 토벌 목표 검색/입력",
+        "히든 보스 목표 검색/입력",
+        "클리어 보상 설정",
+        "노드 드래그",
+        "연결선 추가/삭제",
+        "노드 타입 예산 편집",
+        "입장 전 미확인 표시 토글",
+        "완료 경로 반복 파밍 경로 확인"
+      ]
+    },
+    {
+      "id": "sound",
+      "label": "사운드/음향 설정",
+      "status": "planned",
+      "priority": "medium",
+      "purpose": "기본 BGM/SFX 볼륨과 상황별 사운드 파일 슬롯을 관리한다.",
+      "primaryDataTargets": [
+        "state.settings.audio",
+        "future:data/audio-manifest.json",
+        "future:src/audio/audioSystem.js"
+      ],
+      "assetSlots": [
+        "audio.bgm.mainLobby",
+        "audio.bgm.regionExplore",
+        "audio.bgm.combatNormal",
+        "audio.bgm.bossCombat",
+        "audio.sfx.attack",
+        "audio.sfx.critical",
+        "audio.sfx.itemAcquire",
+        "audio.sfx.uiConfirm"
+      ],
+      "editorFields": [
+        "defaultBgmVolume",
+        "defaultSfxVolume",
+        "mainLobbyBgmFile",
+        "dungeonBgmFile",
+        "combatHitSfxFile",
+        "clearSfxFile",
+        "shopCraftSfxFile",
+        "loop",
+        "fadeInMs",
+        "fadeOutMs",
+        "audioFileName"
+      ],
+      "futureControls": [
+        "볼륨 슬라이더",
+        "mp3/wav 파일 슬롯",
+        "재생 테스트",
+        "상황별 사운드 연결",
+        "기본 BGM/SFX 값 저장"
+      ]
+    },
+    {
+      "id": "save_data",
+      "label": "세계선 데이터 조작",
+      "status": "partial",
+      "priority": "high",
+      "purpose": "현재 세이브 슬롯, 플레이어 상태, 지역 진행, 소지품, 테스트용 수동 수정을 확인한다.",
+      "primaryDataTargets": [
+        "src/state/save.js",
+        "src/state/saveSlots.js",
+        "localStorage:project_regressor_mvp_save",
+        "localStorage:project_regressor_save_slots",
+        "localStorage:project_regressor_active_save_slot"
+      ],
+      "assetSlots": [],
+      "editorFields": [
+        "activeSlot",
+        "cheatSlotSelect",
+        "slotSummary",
+        "playerLevel",
+        "gold",
+        "rank",
+        "regionId",
+        "inventory",
+        "equipment",
+        "gateProgress",
+        "profile",
+        "missingSlotWarning"
+      ],
+      "futureControls": [
+        "세이브 슬롯 선택",
+        "세계선 데이터 조작",
+        "JSON 백업/복원",
+        "세이브 요약",
+        "테스트용 값 편집",
+        "검증 후 적용"
+      ]
+    },
+    {
+      "id": "asset_registry",
+      "label": "이미지/사운드 슬롯 관리",
+      "status": "partial",
+      "priority": "medium",
+      "purpose": "이미지와 사운드를 직접 파일명으로 연결할 수 있도록 슬롯, 예상 폴더, 예상 파일명을 관리한다.",
+      "primaryDataTargets": [
+        "data/asset-manifest.json",
+        "data/asset-slots.json",
+        "src/assets/assetData.js",
+        "src/assets/assetRegistry.js"
+      ],
+      "assetSlots": [
+        "asset.slotRegistry"
+      ],
+      "editorFields": [
+        "slotId",
+        "label",
+        "folder",
+        "expectedFileName",
+        "cropPreset",
+        "fallback",
+        "connectedDataTarget"
+      ],
+      "futureControls": [
+        "슬롯 검색",
+        "예상 파일명 복사",
+        "이미지 크롭 영역",
+        "폴더별 누락 파일 확인"
+      ]
+    },
+    {
+      "id": "publish",
+      "label": "시스템 갱신(저장)",
+      "status": "planned",
+      "priority": "medium",
+      "purpose": "에디터에서 수정한 데이터를 검증하고 게임 런타임 파일로 내보낼 준비를 한다.",
+      "primaryDataTargets": [
+        "data/update-manifest.json",
+        "data/android-update-config.sample.json",
+        "manifest.json",
+        "service-worker.js",
+        ".github/workflows/deploy-pages.yml",
+        "future:scripts/editor-export.js",
+        "future:data/editor-export-log.json"
+      ],
+      "assetSlots": [],
+      "editorFields": [
+        "versionCode",
+        "displayVersion",
+        "cacheVersion",
+        "launchUrl",
+        "pagesUrl",
+        "androidStartUrl",
+        "updateManifestUrl",
+        "changedFiles",
+        "validationWarnings",
+        "exportBundle",
+        "rollbackSnapshot"
+      ],
+      "futureControls": [
+        "웹/PWA 배포 버전 입력",
+        "안드로이드 셸 시작 주소 확인",
+        "업데이트 매니페스트 미리보기",
+        "GitHub Pages 배포 체크리스트",
+        "변경점 미리보기",
+        "JSON 검증",
+        "백업 생성",
+        "내보내기"
+      ]
+    }
+  ],
+  "assetSlots": {
+    "image": [
+      {
+        "slotId": "region.cardImage",
+        "label": "지역 카드 배경",
+        "folder": "assets/regions/",
+        "expectedFileName": "{regionId}_card.webp",
+        "cropPreset": "regionCardWide",
+        "dataTarget": "data/asset-slots.json:slots.region.card"
+      },
+      {
+        "slotId": "region.combatBackground",
+        "label": "전투 배경",
+        "folder": "assets/backgrounds/combat/",
+        "expectedFileName": "{regionId}_combat.webp",
+        "cropPreset": "combatStageWide",
+        "dataTarget": "data/asset-slots.json:slots.region.combat"
+      },
+      {
+        "slotId": "gate.mapBackground",
+        "label": "노드맵 배경",
+        "folder": "assets/backgrounds/gate/",
+        "expectedFileName": "{gateMapId}_map.webp",
+        "cropPreset": "gateMapPanel",
+        "dataTarget": "src/data/worldData.js:gateMaps.background"
+      },
+      {
+        "slotId": "player.profilePortrait",
+        "label": "플레이어 프로필 사진",
+        "folder": "assets/player/",
+        "expectedFileName": "player_profile.webp",
+        "cropPreset": "portraitTall",
+        "dataTarget": "state.playerProfile.image"
+      },
+      {
+        "slotId": "player.combatIdle",
+        "label": "플레이어 전투 스프라이트",
+        "folder": "assets/player/",
+        "expectedFileName": "player_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.player.combatIdle"
+      },
+      {
+        "slotId": "monster.defaultIdle",
+        "label": "몬스터 기본 스프라이트",
+        "folder": "assets/monsters/",
+        "expectedFileName": "{monsterId}_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "src/data/worldData.js:monsters.spriteSlot"
+      },
+      {
+        "slotId": "item.icon",
+        "label": "아이템 아이콘",
+        "folder": "assets/items/",
+        "expectedFileName": "{itemId}.png",
+        "cropPreset": "itemIconSquare",
+        "dataTarget": "data/asset-slots.json:slots.item.icons"
+      }
+    ],
+    "audio": [
+      {
+        "slotId": "audio.bgm.mainLobby",
+        "label": "메인 로비 BGM",
+        "folder": "assets/audio/bgm/",
+        "expectedFileName": "main_lobby.mp3",
+        "dataTarget": "future:data/audio-manifest.json:bgm.mainLobby"
+      },
+      {
+        "slotId": "audio.bgm.regionExplore",
+        "label": "지역 탐사 BGM",
+        "folder": "assets/audio/bgm/",
+        "expectedFileName": "{regionId}_explore.mp3",
+        "dataTarget": "future:data/audio-manifest.json:bgm.regionExplore"
+      },
+      {
+        "slotId": "audio.bgm.combatNormal",
+        "label": "일반 전투 BGM",
+        "folder": "assets/audio/bgm/",
+        "expectedFileName": "combat_normal.mp3",
+        "dataTarget": "future:data/audio-manifest.json:bgm.combatNormal"
+      },
+      {
+        "slotId": "audio.bgm.bossCombat",
+        "label": "보스 전투 BGM",
+        "folder": "assets/audio/bgm/",
+        "expectedFileName": "combat_boss.mp3",
+        "dataTarget": "future:data/audio-manifest.json:bgm.bossCombat"
+      },
+      {
+        "slotId": "audio.sfx.attack",
+        "label": "기본 공격 효과음",
+        "folder": "assets/audio/sfx/",
+        "expectedFileName": "attack_basic.wav",
+        "dataTarget": "future:data/audio-manifest.json:sfx.attack"
+      },
+      {
+        "slotId": "audio.sfx.critical",
+        "label": "치명타 효과음",
+        "folder": "assets/audio/sfx/",
+        "expectedFileName": "attack_critical.wav",
+        "dataTarget": "future:data/audio-manifest.json:sfx.critical"
+      },
+      {
+        "slotId": "audio.sfx.itemAcquire",
+        "label": "아이템 획득 효과음",
+        "folder": "assets/audio/sfx/",
+        "expectedFileName": "item_acquire.wav",
+        "dataTarget": "future:data/audio-manifest.json:sfx.itemAcquire"
+      },
+      {
+        "slotId": "audio.sfx.uiConfirm",
+        "label": "UI 확인 효과음",
+        "folder": "assets/audio/sfx/",
+        "expectedFileName": "ui_confirm.wav",
+        "dataTarget": "future:data/audio-manifest.json:sfx.uiConfirm"
+      }
+    ]
+  },
+  "cropPresets": {
+    "portraitTall": {
+      "aspectRatio": "3:4",
+      "recommendedSize": "384x512",
+      "use": "플레이어 정보창 프로필 사진"
+    },
+    "combatSpriteTall": {
+      "aspectRatio": "2:3",
+      "recommendedSize": "512x768",
+      "use": "전투 카드 내부 스프라이트"
+    },
+    "regionCardWide": {
+      "aspectRatio": "16:5",
+      "recommendedSize": "1280x400",
+      "use": "지역 이동 카드"
+    },
+    "gateMapPanel": {
+      "aspectRatio": "16:10",
+      "recommendedSize": "1280x800",
+      "use": "노드맵 배경"
+    },
+    "combatStageWide": {
+      "aspectRatio": "16:9",
+      "recommendedSize": "1280x720",
+      "use": "전투 배경"
+    },
+    "itemIconSquare": {
+      "aspectRatio": "1:1",
+      "recommendedSize": "256x256",
+      "use": "장비/소지품 아이콘"
+    }
+  },
+  "prototypeListMemory": [
+    {
+      "id": "prototype-initial-player",
+      "label": "초기 플레이어 세팅",
+      "keepForEditor": [
+        "초기 이름",
+        "직업/클래스",
+        "초기 칭호",
+        "나이",
+        "성별",
+        "성향",
+        "소속 국가",
+        "소속 단체",
+        "신장/체중 예약 필드",
+        "캐릭터 프로필 이미지",
+        "플레이어 정보 저장"
+      ]
+    },
+    {
+      "id": "prototype-monster",
+      "label": "몬스터 관리",
+      "keepForEditor": [
+        "몬스터 등록",
+        "몬스터 도감",
+        "ID",
+        "등급",
+        "표준 스탯 적용",
+        "몬스터 이름",
+        "기초 스탯 수동 조절",
+        "스탯 변이 주사위",
+        "9대 저항력",
+        "토벌 보상 골드",
+        "이미지 첨부",
+        "삭제"
+      ]
+    },
+    {
+      "id": "prototype-item",
+      "label": "장비/아이템 관리",
+      "keepForEditor": [
+        "장비/아이템 추가",
+        "아이템 도감",
+        "아이템 ID",
+        "등급",
+        "표준 스탯 적용",
+        "아이템 명칭",
+        "추가 공격력",
+        "스탯 보너스",
+        "스탯 총합 재분배",
+        "9대 저항력 보너스",
+        "저항력 재분배",
+        "상점 판매가",
+        "아이콘 첨부"
+      ]
+    },
+    {
+      "id": "prototype-craft",
+      "label": "시스템 제작 레시피",
+      "keepForEditor": [
+        "완성품 ID 검색/입력",
+        "재료 검색/ID",
+        "재료 수량",
+        "레시피 등록",
+        "레시피 목록"
+      ]
+    },
+    {
+      "id": "prototype-stage",
+      "label": "무한의 탑/게이트 설계",
+      "keepForEditor": [
+        "유형",
+        "난이도/층수",
+        "스테이지 명칭",
+        "전투 배경 이미지 첨부",
+        "일반 토벌 목표",
+        "히든 보스 목표",
+        "클리어 보상 골드",
+        "클리어 드랍 아이템",
+        "히든 보상 골드",
+        "히든 드랍 아이템",
+        "등록된 스테이지 목록"
+      ]
+    },
+    {
+      "id": "prototype-sound",
+      "label": "사운드/음향 설정",
+      "keepForEditor": [
+        "기본 BGM 볼륨",
+        "기본 SFX 볼륨",
+        "메인 로비 BGM",
+        "전투/던전 BGM",
+        "타격 효과음",
+        "클리어 효과음",
+        "상점/제작 효과음"
+      ]
+    },
+    {
+      "id": "prototype-save-cheat",
+      "label": "세계선 데이터 조작",
+      "keepForEditor": [
+        "조작할 세계선 슬롯 선택",
+        "등록 기록 없음 경고",
+        "현재 세이브 수동 확인",
+        "테스트용 치트 값 편집"
+      ]
+    },
+    {
+      "id": "prototype-export",
+      "label": "시스템 갱신(저장)",
+      "keepForEditor": [
+        "에디터 데이터 포맷",
+        "시스템 갱신 저장",
+        "내보내기 전 검증",
+        "백업 스냅샷"
+      ]
+    }
+  ],
+  "editorReadinessChecklist": [
+    "새 기능이 생기면 관련 dataTarget을 manifest나 backlog에 기록한다.",
+    "이미지/사운드가 필요한 기능은 slotId, folder, expectedFileName을 먼저 정한다.",
+    "게임 런타임에 직접 필요한 데이터와 에디터 편의용 메타데이터를 분리한다.",
+    "에디터에서 실제 저장/내보내기를 만들기 전에는 읽기 중심 화면으로 유지한다.",
+    "세이브 수정 기능은 검증 단계와 되돌리기 스냅샷을 함께 설계한다."
+  ]
+}
