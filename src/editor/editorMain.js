@@ -1,8 +1,8 @@
-import { applyDomLocalization } from "../localization/domText.js?v=335";
-import { getLocaleText, tf } from "../localization/index.js?v=335";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=335";
+import { applyDomLocalization } from "../localization/domText.js?v=336";
+import { getLocaleText, tf } from "../localization/index.js?v=336";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=336";
 
-const EDITOR_VERSION = "335";
+const EDITOR_VERSION = "336";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -98,6 +98,12 @@ function bindEvents() {
     }
   });
   elements.panelDetail?.addEventListener("click", (event) => {
+    const resetButton = event.target.closest("[data-retarget-reset]");
+    if (resetButton) {
+      resetRetargetDetailFilter();
+      renderPanelDetail();
+      return;
+    }
     const filterButton = event.target.closest("[data-retarget-kind]");
     if (filterButton) {
       retargetDetailFilter = {
@@ -256,6 +262,9 @@ function renderRetargetPreviewDetail() {
           ${retargetKindButton("text", detailText.textOnly || "Text")}
           ${retargetKindButton("asset", detailText.assetOnly || "Assets")}
         </div>
+        <button class="editor-retarget-reset" type="button" data-retarget-reset>
+          ${escapeHtml(detailText.reset || "Reset")}
+        </button>
         <span class="editor-retarget-count">${escapeHtml(tf("editorPrep.retargetDetail.visibleCount", {
           visible: visibleCount,
           total: totalCount
@@ -581,6 +590,19 @@ function persistRetargetDetailFilter() {
     }));
   } catch {
     // Editor convenience state is optional; failed persistence should not block the read-only screen.
+  }
+}
+
+function resetRetargetDetailFilter() {
+  retargetDetailFilter = {
+    kind: "all",
+    query: ""
+  };
+  expandedRetargetRows.clear();
+  try {
+    window.localStorage.removeItem(RETARGET_FILTER_STORAGE_KEY);
+  } catch {
+    // Editor convenience state is optional; failed reset should not block the read-only screen.
   }
 }
 

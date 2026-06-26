@@ -1434,6 +1434,7 @@ export const KO_KR_TEXT = {
       assetRow: "에셋 행",
       expand: "펼침",
       collapse: "접기",
+      reset: "초기화",
       empty: "표시할 항목 없음",
     },
     assetTypes: {

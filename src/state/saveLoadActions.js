@@ -1,6 +1,6 @@
 import { parseSavePayload, serializeSavePayload } from "./save.js";
 import { downloadSavePayload } from "./saveDownload.js";
-import { t } from "../localization/index.js?v=335";
+import { t } from "../localization/index.js?v=336";
 
 const EXPORT_SAVE_MESSAGE = t("saveLoad.exportMessage");
 const IMPORT_SAVE_MESSAGE = t("saveLoad.importMessage");

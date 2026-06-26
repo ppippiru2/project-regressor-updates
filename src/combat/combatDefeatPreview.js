@@ -1,6 +1,6 @@
 import { AUTO_RESTART_DELAY_MS } from "./combatState.js";
 import { clamp } from "./combatFormula.js";
-import { DEFEATED_TARGET_PREVIEW_MIN_VISIBLE_MS } from "./combatDisplayConfig.js?v=335";
+import { DEFEATED_TARGET_PREVIEW_MIN_VISIBLE_MS } from "./combatDisplayConfig.js?v=336";
 
 export function createDefeatedTargetPreview({
   monster,
