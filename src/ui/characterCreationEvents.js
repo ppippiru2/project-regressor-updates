@@ -1,23 +1,23 @@
-import { getLocaleText, tf } from "../localization/index.js?v=332";
-import { resolveAlignment } from "../state/profile.js?v=332";
+import { getLocaleText, tf } from "../localization/index.js?v=333";
+import { resolveAlignment } from "../state/profile.js?v=333";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=332";
+} from "../state/portraitFrame.js?v=333";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=332";
+} from "./portraitFrameView.js?v=333";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=332";
+} from "./diceSpriteRenderer.js?v=333";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

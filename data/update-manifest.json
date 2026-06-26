@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 332,
-  "displayVersion": "v3.32",
-  "cacheVersion": "project-regressor-mvp-v332",
+  "versionCode": 333,
+  "displayVersion": "v3.33",
+  "cacheVersion": "project-regressor-mvp-v333",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=332&cachebust=332",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=333&cachebust=333",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v333 adds a read-only retarget preview detail list to the editor theme preview panel.",
+    "v333 extends the editor retarget preview guard to check the detail renderer, styles, and localization keys.",
     "v332 connects the murim retarget preview to the editor manifest, backlog, and summary metrics.",
     "v332 adds a quick-check guard that validates the editor retarget preview panel, metadata, backlog hook, and preview counts.",
     "v331 shows the murim retarget preview summary in the settings build-info panel for quick developer inspection.",
@@ -78,13 +80,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v332-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v333-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v332-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v333-debug.apk"
   },
   "version": {
-    "code": 332,
-    "name": "3.32.0",
-    "displayName": "v332"
+    "code": 333,
+    "name": "3.33.0",
+    "displayName": "v333"
   }
 }

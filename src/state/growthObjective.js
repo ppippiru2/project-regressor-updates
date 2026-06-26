@@ -1,5 +1,5 @@
-import { MAX_NOTICE_DETAIL_LENGTH, OBJECTIVE_ROTATE_MS } from "./growthObjectiveConfig.js?v=332";
-import { t, tf } from "../localization/index.js?v=332";
+import { MAX_NOTICE_DETAIL_LENGTH, OBJECTIVE_ROTATE_MS } from "./growthObjectiveConfig.js?v=333";
+import { t, tf } from "../localization/index.js?v=333";
 
 export function createGrowthObjective(regions, player, expToNext, options = {}) {
   const objectives = createGrowthObjectives(regions, player, expToNext, options);

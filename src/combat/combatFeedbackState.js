@@ -1,4 +1,4 @@
-import { MAX_COMBAT_EFFECTS } from "./combatDisplayConfig.js?v=332";
+import { MAX_COMBAT_EFFECTS } from "./combatDisplayConfig.js?v=333";
 
 export function shouldShowCombatText(feedbackSettings, type) {
   if (type === "damage" && !feedbackSettings.damage) return false;

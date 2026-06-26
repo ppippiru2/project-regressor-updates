@@ -1,8 +1,8 @@
-import { applyDomLocalization } from "../localization/domText.js?v=332";
-import { getLocaleText, tf } from "../localization/index.js?v=332";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=332";
+import { applyDomLocalization } from "../localization/domText.js?v=333";
+import { getLocaleText, tf } from "../localization/index.js?v=333";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=333";
 
-const EDITOR_VERSION = "332";
+const EDITOR_VERSION = "333";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -142,6 +142,7 @@ function renderPanelDetail() {
     elements.panelDetail.innerHTML = `<p class="muted">${escapeHtml(EDITOR_TEXT.noPanel)}</p>`;
     return;
   }
+  const retargetDetail = panel.id === "theme_retarget_preview" ? renderRetargetPreviewDetail() : "";
 
   elements.panelDetail.innerHTML = `
     <div class="editor-detail-header">
@@ -158,6 +159,79 @@ function renderPanelDetail() {
       ${detailBlock(EDITOR_TEXT.detailTitles.futureControls, panel.futureControls)}
     </div>
     ${panel.nodeTypes ? `<div class="editor-chip-section"><strong>${escapeHtml(EDITOR_TEXT.detailTitles.nodeTypes)}</strong><div class="editor-chip-list">${panel.nodeTypes.map((type) => chip(type)).join("")}</div></div>` : ""}
+    ${retargetDetail}
+  `;
+}
+
+function renderRetargetPreviewDetail() {
+  const preview = createMurimRetargetPreview();
+  const detailText = EDITOR_TEXT.retargetDetail || {};
+  const textRows = preview.textOverrides.map((entry) => `
+    <article class="editor-retarget-row">
+      <div>
+        <span>${escapeHtml(detailText.sourcePath || "Source")}</span>
+        <code>${escapeHtml(entry.sourcePath)}</code>
+      </div>
+      <div>
+        <span>${escapeHtml(detailText.targetTextPath || "Target")}</span>
+        <code>${escapeHtml(entry.targetTextPath)}</code>
+      </div>
+      <p>${escapeHtml(entry.targetText || "")}</p>
+    </article>
+  `).join("");
+  const assetRows = preview.assetOverrides.map((entry) => `
+    <article class="editor-retarget-row">
+      <div>
+        <span>${escapeHtml(detailText.sourceAsset || "Source Asset")}</span>
+        <code>${escapeHtml(entry.sourceAssetId)}</code>
+      </div>
+      <div>
+        <span>${escapeHtml(detailText.targetAsset || "Target Asset")}</span>
+        <code>${escapeHtml(entry.targetAssetId)}</code>
+      </div>
+      <p>${escapeHtml(tf("editorPrep.retargetDetail.assetSummary", {
+        plannedFile: entry.plannedWebpFile || entry.plannedSourceFile || "-",
+        mappedTarget: entry.mappedTargetAssetId || "-",
+        slotCount: entry.slotPaths.length
+      }, ""))}</p>
+      <div class="editor-chip-list">${entry.slotPaths.map((slotPath) => chip(slotPath)).join("")}</div>
+    </article>
+  `).join("");
+
+  return `
+    <section class="editor-retarget-detail" aria-label="${escapeAttribute(detailText.title || "Retarget Preview Detail")}">
+      <div class="editor-retarget-head">
+        <div>
+          <h3>${escapeHtml(detailText.title || "")}</h3>
+          <p class="muted">${escapeHtml(preview.description)}</p>
+        </div>
+        <span>${escapeHtml(preview.isComplete ? (detailText.ready || "") : (detailText.review || ""))}</span>
+      </div>
+      <div class="editor-retarget-summary">
+        <strong>${escapeHtml(preview.title)}</strong>
+        <span>${escapeHtml(tf("editorPrep.retargetDetail.route", {
+          source: preview.sourceProfileId,
+          target: preview.targetProfileId
+        }, `${preview.sourceProfileId} -> ${preview.targetProfileId}`))}</span>
+        <span>${escapeHtml(tf("editorPrep.retargetDetail.counts", {
+          textCount: preview.counts.textOverrides,
+          assetCount: preview.counts.assetOverrides,
+          missingText: preview.counts.missingTextTargets,
+          missingAssets: preview.counts.missingAssetTargets,
+          mismatchedAssets: preview.counts.mismatchedAssetTargets
+        }, ""))}</span>
+      </div>
+      <div class="editor-retarget-grid">
+        <section>
+          <h4>${escapeHtml(tf("editorPrep.retargetDetail.textTitle", { count: preview.counts.textOverrides }, ""))}</h4>
+          <div class="editor-retarget-list">${textRows}</div>
+        </section>
+        <section>
+          <h4>${escapeHtml(tf("editorPrep.retargetDetail.assetTitle", { count: preview.counts.assetOverrides }, ""))}</h4>
+          <div class="editor-retarget-list">${assetRows}</div>
+        </section>
+      </div>
+    </section>
   `;
 }
 
