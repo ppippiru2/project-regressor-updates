@@ -87,6 +87,13 @@ export const KO_KR_TEXT = {
       },
     },
   },
+  retargetPreview: {
+    title: "테마 샘플 미리보기",
+    summary: "{title} · 텍스트 {textCount} · 에셋 {assetCount}",
+    profileRoute: "{source} → {target}",
+    ready: "미리보기 준비 완료",
+    needsReview: "검토 필요 · 텍스트 누락 {missingText} · 에셋 누락 {missingAssets} · 에셋 불일치 {mismatchedAssets}",
+  },
   staticHtml: {
     characterCreation: {
       ariaLabel: "캐릭터 생성",

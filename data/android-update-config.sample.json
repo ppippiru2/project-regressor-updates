@@ -5,7 +5,7 @@
   "recommendedShell": {
     "type": "Trusted Web Activity",
     "host": "ppippiru2.github.io",
-    "startUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=330&cachebust=330",
+    "startUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=331&cachebust=331",
     "updateManifestUrl": "https://ppippiru2.github.io/project-regressor-updates/data/update-manifest.json"
   },
   "contentUpdatePolicy": {

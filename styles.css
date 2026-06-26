@@ -3040,6 +3040,26 @@ select:focus {
   gap: 0.55rem;
 }
 
+.retarget-preview-line {
+  gap: 0.55rem;
+}
+
+.retarget-preview-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.retarget-preview-meta span {
+  border: 1px solid rgba(57, 228, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(57, 228, 255, 0.08);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0.28rem 0.55rem;
+}
+
 .deployment-update-actions {
   display: flex;
   flex-wrap: wrap;
