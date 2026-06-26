@@ -1565,6 +1565,16 @@ select:focus {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  min-width: 0;
+}
+
+.panel-title {
+  padding-right: 0.25rem;
+}
+
+.panel-title > div,
+.panel-title > span {
+  min-width: 0;
 }
 
 .battle-heading {
@@ -4324,6 +4334,17 @@ button:disabled {
 }
 
 .combat-log {
+  --log-accent-physical: #ead27d;
+  --log-accent-magic: #a9dfff;
+  --log-accent-critical: #ff8fa6;
+  --log-accent-poison: #9fe6b7;
+  --log-accent-reward: #91eeb9;
+  --log-accent-gold: #f1d982;
+  --log-accent-growth: #9deeb8;
+  --log-accent-monster: #d8c3ff;
+  --log-accent-system: #bdd7ea;
+  --log-accent-item: #c5f2ff;
+  --log-muted-event: rgba(202, 219, 233, 0.84);
   display: block;
   counter-reset: combat-log-line;
   height: 24rem;
@@ -4386,7 +4407,7 @@ button:disabled {
 .combat-log li.log-poison,
 .combat-log li.log-reward,
 .combat-log li.log-growth {
-  color: rgba(198, 216, 232, 0.82);
+  color: var(--log-muted-event);
 }
 
 .combat-log li.log-defeat {
@@ -4394,120 +4415,122 @@ button:disabled {
 }
 
 .combat-log li.log-lucky {
-  color: #ffe67b;
-  text-shadow: 0 0 12px rgba(255, 230, 123, 0.12);
+  color: var(--log-muted-event);
+  text-shadow: none;
 }
 
 .combat-log li.log-warning {
-  color: #ffc3cf;
+  color: rgba(230, 203, 214, 0.82);
 }
 
 .combat-log[data-color-mode="rich"] li.log-physical::after {
-  background: linear-gradient(180deg, #ffe27a, rgba(255, 226, 122, 0.2));
-  box-shadow: 0 0 9px rgba(255, 226, 122, 0.16);
+  background: linear-gradient(180deg, rgba(234, 210, 125, 0.92), rgba(234, 210, 125, 0.2));
+  box-shadow: 0 0 8px rgba(234, 210, 125, 0.12);
 }
 
 .combat-log[data-color-mode="rich"] li.log-magic::after {
-  background: linear-gradient(180deg, #70d8ff, rgba(112, 216, 255, 0.2));
-  box-shadow: 0 0 9px rgba(112, 216, 255, 0.18);
+  background: linear-gradient(180deg, rgba(169, 223, 255, 0.9), rgba(169, 223, 255, 0.18));
+  box-shadow: 0 0 8px rgba(169, 223, 255, 0.12);
 }
 
 .combat-log[data-color-mode="rich"] li.log-critical::after,
 .combat-log[data-color-mode="rich"] li.log-warning::after {
-  background: linear-gradient(180deg, #ff6f83, rgba(255, 111, 131, 0.18));
-  box-shadow: 0 0 10px rgba(255, 111, 131, 0.2);
+  background: linear-gradient(180deg, rgba(255, 143, 166, 0.9), rgba(255, 143, 166, 0.18));
+  box-shadow: 0 0 8px rgba(255, 143, 166, 0.13);
 }
 
 .combat-log[data-color-mode="rich"] li.log-poison::after {
-  background: linear-gradient(180deg, #4dbd68, rgba(77, 189, 104, 0.18));
-  box-shadow: 0 0 9px rgba(77, 189, 104, 0.18);
+  background: linear-gradient(180deg, rgba(159, 230, 183, 0.9), rgba(159, 230, 183, 0.18));
+  box-shadow: 0 0 8px rgba(159, 230, 183, 0.12);
 }
 
 .combat-log[data-color-mode="rich"] li.log-reward::after,
 .combat-log[data-color-mode="rich"] li.log-lucky::after {
-  background: linear-gradient(180deg, #ffe66d, #74ff9b);
-  box-shadow: 0 0 10px rgba(116, 255, 155, 0.2);
+  background: linear-gradient(180deg, rgba(145, 238, 185, 0.92), rgba(241, 217, 130, 0.32));
+  box-shadow: 0 0 8px rgba(145, 238, 185, 0.13);
 }
 
 .combat-log[data-color-mode="rich"] li.log-growth::after {
-  background: linear-gradient(180deg, #8cffb0, rgba(140, 255, 176, 0.2));
-  box-shadow: 0 0 9px rgba(140, 255, 176, 0.18);
+  background: linear-gradient(180deg, rgba(157, 238, 184, 0.92), rgba(157, 238, 184, 0.2));
+  box-shadow: 0 0 8px rgba(157, 238, 184, 0.12);
 }
 
 .combat-log[data-color-mode="rich"] li.log-defeat::after {
-  background: linear-gradient(180deg, #d7b7ff, rgba(215, 183, 255, 0.18));
-  box-shadow: 0 0 9px rgba(215, 183, 255, 0.16);
+  background: linear-gradient(180deg, rgba(216, 195, 255, 0.82), rgba(216, 195, 255, 0.16));
+  box-shadow: 0 0 8px rgba(216, 195, 255, 0.1);
 }
 
 .log-token-monster {
-  color: #d7b7ff;
+  color: var(--log-accent-monster, #d8c3ff);
   font-weight: 900;
+  text-shadow: 0 0 8px rgba(216, 195, 255, 0.1);
 }
 
 .log-token-critical {
-  color: #ff6f83;
+  color: var(--log-accent-critical, #ff8fa6);
   font-weight: 900;
+  text-shadow: 0 0 8px rgba(255, 143, 166, 0.1);
 }
 
 .log-token-critical-damage {
-  color: #ff5d73;
+  color: var(--log-accent-critical, #ff8fa6);
   font-weight: 900;
-  text-shadow: 0 0 10px rgba(255, 77, 109, 0.24);
+  text-shadow: 0 0 9px rgba(255, 143, 166, 0.12);
 }
 
 .log-token-physical {
-  color: #ffe27a;
+  color: var(--log-accent-physical, #ead27d);
   font-weight: 900;
 }
 
 .log-token-magic {
-  color: #70d8ff;
+  color: var(--log-accent-magic, #a9dfff);
   font-weight: 900;
 }
 
 .log-token-poison {
-  color: #4dbd68;
+  color: var(--log-accent-poison, #9fe6b7);
   font-weight: 900;
 }
 
 .log-token-heal {
-  color: #8cffb0;
+  color: var(--log-accent-growth, #9deeb8);
   font-weight: 900;
 }
 
 .log-token-exp {
-  color: #74ff9b;
+  color: var(--log-accent-reward, #91eeb9);
   font-weight: 900;
 }
 
 .log-token-gold {
-  color: #ffe66d;
+  color: var(--log-accent-gold, #f1d982);
   font-weight: 900;
 }
 
 .log-token-stat,
 .log-token-growth {
-  color: #8cffb0;
+  color: var(--log-accent-growth, #9deeb8);
   font-weight: 900;
 }
 
 .log-token-system {
-  color: #8fc7dd;
+  color: var(--log-accent-system, #bdd7ea);
   font-weight: 800;
 }
 
 .log-token-item {
-  color: #b9f7ff;
+  color: var(--log-accent-item, #c5f2ff);
   font-weight: 900;
 }
 
 .log-token-quantity {
-  color: #a9ffcf;
+  color: #bcebd4;
   font-weight: 900;
 }
 
 .log-token-skill {
-  color: #eaf6ff;
+  color: #e4f2ff;
   font-weight: 900;
 }
 
@@ -4857,6 +4880,17 @@ body[data-info-tooltips="off"] .info-term {
 .slot-actions button,
 .item-actions button {
   min-width: 3.75rem;
+}
+
+.slot-actions:has(button:only-child),
+.item-actions:has(button:only-child) {
+  grid-template-columns: minmax(3.75rem, max-content);
+}
+
+.slot-actions .slot-state:only-child,
+.item-actions .item-score:only-child,
+.item-actions .shop-price:only-child {
+  justify-self: end;
 }
 
 .inventory-action-button {
@@ -5760,6 +5794,28 @@ body[data-info-tooltips="off"] .info-term {
   .inventory-panel-heading,
   .region-panel-heading {
     flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .panel-title {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(4.6rem, max-content);
+    align-items: start;
+    gap: 0.55rem;
+    padding-right: 0;
+  }
+
+  .panel-title .ghost-button {
+    justify-self: end;
+    min-width: 4.6rem;
+  }
+
+  .log-panel .panel-title {
+    padding-right: 2.05rem;
+  }
+
+  .log-panel .panel-title .ghost-button {
+    min-width: 4rem;
   }
 
   .region-summary {
@@ -5788,13 +5844,36 @@ body[data-info-tooltips="off"] .info-term {
   .item-actions {
     grid-column: 2;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-content: space-between;
+    justify-content: stretch;
+    justify-self: stretch;
     width: 100%;
+  }
+
+  .slot-actions:has(.slot-state:only-child),
+  .item-actions:has(.item-score:only-child),
+  .item-actions:has(.shop-price:only-child) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .slot-actions .slot-state:only-child,
+  .item-actions .item-score:only-child,
+  .item-actions .shop-price:only-child {
+    justify-self: start;
+    min-width: min(10rem, 100%);
   }
 
   .slot-actions button,
   .item-actions button {
-    flex: 1;
+    width: 100%;
+  }
+
+  .shop-card .item-actions {
+    grid-template-columns: minmax(0, 0.88fr) minmax(4.8rem, 1fr);
+  }
+
+  .shop-card .shop-price,
+  .shop-card .inventory-action-button {
+    width: 100%;
   }
 
   .combat-controls {
@@ -5948,6 +6027,22 @@ body[data-info-tooltips="off"] .info-term {
   .region-card {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .stat-line,
+  .profile-line {
+    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 0.65rem;
+  }
+
+  .stat-value-action,
+  .profile-line strong,
+  .stat-line strong {
+    min-width: 0;
+    justify-self: end;
+    text-align: right;
   }
 
   #region-list {
@@ -6298,5 +6393,34 @@ body[data-info-tooltips="off"] .info-term {
   .inventory-action-button {
     min-width: 3.35rem;
     padding: 0 0.48rem;
+  }
+
+  .panel-title {
+    grid-template-columns: minmax(0, 1fr) minmax(4.15rem, max-content);
+  }
+
+  .panel-title .ghost-button {
+    min-width: 4.15rem;
+  }
+
+  .log-panel .panel-title {
+    padding-right: 2rem;
+  }
+
+  .log-panel .panel-title .ghost-button {
+    min-width: 3.8rem;
+  }
+
+  .combat-log {
+    padding-inline: 0.12rem;
+  }
+
+  .combat-log li {
+    grid-template-columns: 2.05rem minmax(0, 1fr);
+    column-gap: 0.64rem;
+  }
+
+  .combat-log li::after {
+    left: 2.46rem;
   }
 }

@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, COMBAT_RUNTIME_BALANCE } from "../balance/combatBalance.js?v=342";
+import { BREAK_GAUGE_BALANCE, COMBAT_RUNTIME_BALANCE } from "../balance/combatBalance.js?v=343";
 
 export const COMBAT_FRAME_MS = COMBAT_RUNTIME_BALANCE.frameMs;
 export const AUTO_RESTART_DELAY_MS = COMBAT_RUNTIME_BALANCE.autoRestartDelayMs;

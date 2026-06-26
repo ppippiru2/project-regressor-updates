@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=342";
+import { getLocaleText } from "../localization/index.js?v=343";
 
 const COMBAT_LOG_TEXT = getLocaleText().combatLogFormatter;
 const CLASS_PATTERNS = COMBAT_LOG_TEXT.classPatterns;
@@ -55,10 +55,10 @@ function highlightCombatLogTokens(value, category) {
     .replace(regex(TOKEN_PATTERNS.targetName, "gu"), '$1<span class="log-token-monster">$2</span>$3')
     .replace(
       regex(TOKEN_PATTERNS.systemTokens, "gu"),
-      '<span class="log-token-system">$1</span>'
+      (match) => wrapCombatLogToken("log-token-system", match)
     )
-    .replace(regex(TOKEN_PATTERNS.skillTokens, "gu"), '<span class="log-token-skill">$1</span>')
-    .replace(regex(TOKEN_PATTERNS.criticalToken, "gu"), '<span class="log-token-critical">$1</span>')
+    .replace(regex(TOKEN_PATTERNS.skillTokens, "gu"), (match) => wrapCombatLogToken("log-token-skill", match))
+    .replace(regex(TOKEN_PATTERNS.criticalToken, "gu"), (match) => wrapCombatLogToken("log-token-critical", match))
     .replace(regex(TOKEN_PATTERNS.damage, "gu"), `<span class="${damageClass}">$1</span>`)
     .replace(regex(TOKEN_PATTERNS.heal, "gu"), '<span class="log-token-heal">$1</span>')
     .replace(regex(TOKEN_PATTERNS.exp, "gu"), '<span class="log-token-exp">$1</span>')
@@ -71,6 +71,10 @@ function highlightCombatLogTokens(value, category) {
   }
 
   return highlighted;
+}
+
+function wrapCombatLogToken(className, value) {
+  return `<span class="${className}">${value}</span>`;
 }
 
 function fallbackCombatLogTokenClass(category) {

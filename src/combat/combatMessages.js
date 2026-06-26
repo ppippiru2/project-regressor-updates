@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=342";
+import { t, tf } from "../localization/index.js?v=343";
 
 export function combatStartMessage(monster) {
   return tf("combatMessages.start", { monsterName: monster.name });
@@ -17,9 +17,11 @@ export function playerMissMessage(action) {
 }
 
 export function playerHitMessage(result, action, monster) {
+  const name = actionName(action);
   return tf("combatMessages.hit", {
     criticalText: result.critical ? t("combatMessages.criticalPrefix") : "",
-    actionName: actionName(action),
+    actionName: name,
+    actionParticle: instrumentalParticle(name),
     monsterName: monster.name,
     damage: result.damage,
   });
@@ -43,4 +45,16 @@ export function bossBreakMessage() {
 
 function actionName(action) {
   return action.skill ? action.skill.name : t("combatMessages.basicAttack");
+}
+
+function instrumentalParticle(value) {
+  const text = String(value || "").trim();
+  const last = [...text].pop();
+  if (!last) return t("combatMessages.actionParticleDefault");
+
+  const code = last.charCodeAt(0);
+  if (code < 0xac00 || code > 0xd7a3) return t("combatMessages.actionParticleVowel");
+
+  const hasFinalConsonant = (code - 0xac00) % 28 !== 0;
+  return hasFinalConsonant ? t("combatMessages.actionParticleConsonant") : t("combatMessages.actionParticleVowel");
 }
