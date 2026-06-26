@@ -1,4 +1,4 @@
-﻿# Project Regressor Updates
+# Project Regressor Updates
 
 Hosted update payload for Project Regressor.
 
