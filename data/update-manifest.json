@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 343,
-  "displayVersion": "v3.43",
-  "cacheVersion": "project-regressor-mvp-v343",
+  "versionCode": 344,
+  "displayVersion": "v3.44",
+  "cacheVersion": "project-regressor-mvp-v344",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=343&cachebust=343",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=344&cachebust=344",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v344 fixes mobile panel content drift by keeping collapse-button safe space on headers instead of shifting whole card bodies.",
+    "v344 adds direct player-info portrait positioning and zoom controls to the status photo frame.",
+    "v344 verifies profile image upload, preview crop adjustment, save persistence, and status portrait rendering on a 390px mobile viewport.",
     "v343 improves mobile card, button, status row, shop, and combat-log header alignment without widening the phone bezel.",
     "v343 harmonizes combat-log token colors and fixes literal $1 placeholder leakage in highlighted log text.",
     "v343 adds a quick-check guard so combat-log token formatting cannot leak replacement placeholders again.",
@@ -99,13 +102,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v343-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v344-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v343-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v344-debug.apk"
   },
   "version": {
-    "code": 343,
-    "name": "3.43.0",
-    "displayName": "v343"
+    "code": 344,
+    "name": "3.44.0",
+    "displayName": "v344"
   }
 }

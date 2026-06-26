@@ -273,7 +273,7 @@ select:focus {
 
 .creation-profile-preview:active,
 .profile-edit-preview.has-image:active,
-.player-profile-portrait.has-custom-portrait:active {
+.player-profile-portrait.has-image:active {
   cursor: grabbing;
 }
 
@@ -347,22 +347,26 @@ select:focus {
 }
 
 .profile-crop-pad [data-creation-crop-move="up"],
-.profile-crop-pad [data-profile-crop-move="up"] {
+.profile-crop-pad [data-profile-crop-move="up"],
+.profile-crop-pad [data-status-crop-move="up"] {
   grid-column: 2;
 }
 
 .profile-crop-pad [data-creation-crop-move="left"],
-.profile-crop-pad [data-profile-crop-move="left"] {
+.profile-crop-pad [data-profile-crop-move="left"],
+.profile-crop-pad [data-status-crop-move="left"] {
   grid-column: 1;
 }
 
 .profile-crop-pad [data-creation-crop-move="right"],
-.profile-crop-pad [data-profile-crop-move="right"] {
+.profile-crop-pad [data-profile-crop-move="right"],
+.profile-crop-pad [data-status-crop-move="right"] {
   grid-column: 3;
 }
 
 .profile-crop-pad [data-creation-crop-move="down"],
-.profile-crop-pad [data-profile-crop-move="down"] {
+.profile-crop-pad [data-profile-crop-move="down"],
+.profile-crop-pad [data-status-crop-move="down"] {
   grid-column: 2;
 }
 
@@ -1369,6 +1373,13 @@ select:focus {
   margin-top: 0;
 }
 
+.profile-portrait-editor {
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+  justify-items: center;
+}
+
 .player-profile-portrait {
   --profile-sprite-image: none;
   width: 100%;
@@ -1384,6 +1395,13 @@ select:focus {
     0 0 22px rgba(57, 228, 255, 0.13);
   overflow: hidden;
   position: relative;
+  touch-action: none;
+  user-select: none;
+  cursor: default;
+}
+
+.player-profile-portrait.has-image {
+  cursor: grab;
 }
 
 .player-profile-portrait::before {
@@ -1405,14 +1423,28 @@ select:focus {
     linear-gradient(180deg, rgba(6, 31, 78, 0.86), rgba(1, 7, 22, 0.94));
 }
 
-.player-profile-portrait.has-custom-portrait::before {
+.player-profile-portrait.has-image::before {
   z-index: 2;
   background:
     linear-gradient(180deg, rgba(2, 10, 28, 0.05), rgba(2, 10, 28, 0.34));
 }
 
-.player-profile-portrait.has-custom-portrait .portrait-crop-image {
+.player-profile-portrait.has-image .portrait-crop-image {
   z-index: 1;
+}
+
+.profile-status-crop-controls {
+  width: 100%;
+  max-width: 12.5rem;
+}
+
+.profile-status-crop-controls small {
+  font-size: 0.72rem;
+}
+
+.profile-status-crop-controls button {
+  min-height: 2rem;
+  font-size: 0.72rem;
 }
 
 .player-profile-portrait::after {
@@ -5720,11 +5752,42 @@ body[data-info-tooltips="off"] .info-term {
   .system-window[data-panel-id],
   .readiness-panel[data-panel-id],
   .drop-preview[data-panel-id] {
-    padding-right: 2.75rem;
+    padding-right: var(--mobile-panel-pad);
+  }
+
+  .system-window[data-panel-id] {
+    padding-right: 0.65rem;
+  }
+
+  .readiness-panel[data-panel-id],
+  .drop-preview[data-panel-id] {
+    padding-right: 0.75rem;
+  }
+
+  .panel[data-panel-id] > :is(
+    .collapsed-panel-label,
+    .eyebrow,
+    h3,
+    .muted,
+    .panel-title,
+    .inventory-heading,
+    .inventory-panel-heading,
+    .region-panel-heading,
+    .status-panel-heading,
+    .status-system-header
+  ),
+  .system-window[data-panel-id] > :is(.collapsed-panel-label, .status-system-header, .eyebrow, h3),
+  .readiness-panel[data-panel-id] > :is(.collapsed-panel-label, div:first-child),
+  .drop-preview[data-panel-id] > :is(.collapsed-panel-label, div:first-child) {
+    padding-right: 2.35rem;
   }
 
   .battlefield.panel[data-panel-id] {
     padding-right: var(--mobile-panel-pad);
+  }
+
+  .battlefield.panel[data-panel-id] > :is(.battle-header, .battle-scene) {
+    padding-right: 0;
   }
 
   .topbar,

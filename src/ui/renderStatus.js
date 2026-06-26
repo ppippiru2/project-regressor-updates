@@ -1,7 +1,7 @@
-import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=343";
-import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=343";
-import { t, tf } from "../localization/index.js?v=343";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=343";
+import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=344";
+import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=344";
+import { t, tf } from "../localization/index.js?v=344";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=344";
 
 const PROFILE_FIELDS = [
   ["statusUi.profileFields.name", "name", "profile:name"],
@@ -45,29 +45,23 @@ function renderProfilePortrait(playerProfile, playerSpritePath) {
   const customPortrait = playerProfile?.portraitDataUrl || "";
   const portraitImage = customPortrait || playerSpritePath;
   const hasSprite = Boolean(portraitImage);
+  const cropControls = byId("profile-status-crop-controls");
   portrait.classList.toggle("has-sprite", hasSprite);
   portrait.classList.toggle("has-custom-portrait", Boolean(customPortrait));
   portrait.setAttribute("aria-label", tf("statusUi.portraitAria", {
     name: playerProfile?.name || t("statusUi.fallbackPortraitName"),
   }));
+  if (cropControls) cropControls.hidden = !hasSprite;
 
-  if (customPortrait) {
+  if (hasSprite) {
     portrait.style.removeProperty("--profile-sprite-image");
-    renderPortraitImagePreview(portrait, customPortrait, playerProfile?.portraitFrame, {
+    renderPortraitImagePreview(portrait, portraitImage, playerProfile?.portraitFrame, {
       label: playerProfile?.name || t("statusUi.fallbackPortraitName"),
     });
-  } else if (hasSprite) {
-    portrait.querySelectorAll(".portrait-crop-image").forEach((imageElement) => imageElement.remove());
-    portrait.style.setProperty("--profile-sprite-image", cssUrl(portraitImage));
   } else {
     portrait.querySelectorAll(".portrait-crop-image").forEach((imageElement) => imageElement.remove());
     portrait.style.removeProperty("--profile-sprite-image");
   }
-}
-
-function cssUrl(path) {
-  const safePath = String(path || "").replace(/\\/g, "/").replace(/"/g, "%22");
-  return `url("${safePath}")`;
 }
 
 export function renderStats(player, statePlayer, primaryStats, displayName, expToNext, rankLabel, playerProfile) {

@@ -1,16 +1,16 @@
-import { t, tf } from "../localization/index.js?v=343";
-import { saveSlotLabel } from "../state/saveSlots.js?v=343";
+import { t, tf } from "../localization/index.js?v=344";
+import { saveSlotLabel } from "../state/saveSlots.js?v=344";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=343";
+} from "../state/portraitFrame.js?v=344";
 import {
   applyPortraitFrameToElement,
   readPortraitFrameFromElement,
   renderPortraitImagePreview,
-} from "./portraitFrameView.js?v=343";
+} from "./portraitFrameView.js?v=344";
 
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 const CLEAR_SLOT_HOLD_MS = 5000;
@@ -36,10 +36,13 @@ export function bindSaveLoadEvents({
   const profileSaveButton = document.getElementById("profile-edit-save");
   const profileEditPreview = document.getElementById("profile-edit-preview");
   const profileCropControls = document.getElementById("profile-edit-crop-controls");
+  const statusProfilePortrait = document.getElementById("player-profile-portrait");
+  const statusProfileCropControls = document.getElementById("profile-status-crop-controls");
   let pendingProfileImageDataUrl = null;
   let pendingProfileImageFrame = null;
   let clearProfileImage = false;
   let profileDragState = null;
+  let statusProfileDragState = null;
 
   if (exportButton) exportButton.addEventListener("click", onExportSave);
 
@@ -154,6 +157,48 @@ export function bindSaveLoadEvents({
     profileEditPreview.addEventListener("pointercancel", endProfileDrag);
   }
 
+  if (statusProfileCropControls) {
+    statusProfileCropControls.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-status-crop-move], [data-status-crop-zoom], [data-status-crop-reset]");
+      if (!button || !hasAdjustableStatusPortrait()) return;
+      event.preventDefault();
+      const action = button.dataset.statusCropMove || button.dataset.statusCropZoom || "reset";
+      updateStatusProfileFrame(nudgePortraitFrame(readStatusProfileFrame(), action), { commit: true });
+    });
+  }
+
+  if (statusProfilePortrait) {
+    statusProfilePortrait.addEventListener("pointerdown", (event) => {
+      if (!hasAdjustableStatusPortrait()) return;
+      const rect = statusProfilePortrait.getBoundingClientRect();
+      statusProfileDragState = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        rect,
+        frame: readStatusProfileFrame(),
+      };
+      statusProfilePortrait.setPointerCapture?.(event.pointerId);
+      event.preventDefault();
+    });
+
+    statusProfilePortrait.addEventListener("pointermove", (event) => {
+      if (!statusProfileDragState || event.pointerId !== statusProfileDragState.pointerId) return;
+      const deltaXPercent = ((event.clientX - statusProfileDragState.startX) / Math.max(1, statusProfileDragState.rect.width)) * 100;
+      const deltaYPercent = ((event.clientY - statusProfileDragState.startY) / Math.max(1, statusProfileDragState.rect.height)) * 100;
+      updateStatusProfileFrame(dragPortraitFrame(statusProfileDragState.frame, deltaXPercent, deltaYPercent));
+      event.preventDefault();
+    });
+
+    const endStatusProfileDrag = (event) => {
+      if (!statusProfileDragState || event.pointerId !== statusProfileDragState.pointerId) return;
+      statusProfileDragState = null;
+      updateStatusProfileFrame(readStatusProfileFrame(), { commit: true });
+    };
+    statusProfilePortrait.addEventListener("pointerup", endStatusProfileDrag);
+    statusProfilePortrait.addEventListener("pointercancel", endStatusProfileDrag);
+  }
+
   document.body.addEventListener("input", (event) => {
     const volumeInput = event.target.closest("[data-audio-volume]");
     if (!volumeInput) return;
@@ -171,6 +216,26 @@ export function bindSaveLoadEvents({
     if (!profileEditPreview) return;
     pendingProfileImageFrame = applyPortraitFrameToElement(profileEditPreview, frame);
     profileEditPreview.dataset.profileDraftActive = "true";
+  }
+
+  function hasAdjustableStatusPortrait() {
+    return Boolean(statusProfilePortrait?.classList.contains("has-image"));
+  }
+
+  function readStatusProfileFrame() {
+    return statusProfilePortrait
+      ? readPortraitFrameFromElement(statusProfilePortrait)
+      : normalizePortraitFrame(DEFAULT_PORTRAIT_FRAME);
+  }
+
+  function updateStatusProfileFrame(frame, { commit = false } = {}) {
+    if (!statusProfilePortrait) return;
+    const normalizedFrame = applyPortraitFrameToElement(statusProfilePortrait, frame);
+    if (commit) {
+      onUpdateProfileSettings?.({
+        portraitFrame: normalizedFrame,
+      });
+    }
   }
 }
 
