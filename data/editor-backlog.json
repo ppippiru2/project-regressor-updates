@@ -18,6 +18,21 @@
       ]
     },
     {
+      "id": "theme-retarget-preview-editor",
+      "title": "테마 전환 미리보기 에디터 연결",
+      "status": "partial",
+      "priority": "high",
+      "source": "v332",
+      "summary": "Expose the murim retarget preview in editor manifest/backlog and show text/asset coverage from the editor summary without applying live data changes.",
+      "editorHooks": [
+        "data/editor-manifest.json:themeRetargetPreview",
+        "src/content/contentRetargetPreview.js",
+        "src/ui/renderRetargetPreview.js",
+        "src/editor/editorMain.js",
+        "build-scripts/check-editor-retarget-preview.mjs"
+      ]
+    },
+    {
       "id": "save-slot-editor",
       "title": "세계선 저장 데이터 수동 편집",
       "status": "planned",

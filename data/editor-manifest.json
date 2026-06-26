@@ -33,6 +33,7 @@
         "id": "system_config",
         "label": "SYSTEM CONFIG",
         "panels": [
+          "theme_retarget_preview",
           "sound",
           "save_data"
         ]
@@ -310,6 +311,52 @@
         "노드 타입 예산 편집",
         "입장 전 미확인 표시 토글",
         "완료 경로 반복 파밍 경로 확인"
+      ]
+    },
+    {
+      "id": "theme_retarget_preview",
+      "label": "테마 전환 미리보기",
+      "status": "partial",
+      "priority": "high",
+      "purpose": "헌터물 데이터를 무협물 샘플로 바꿀 때 검토해야 할 텍스트, 에셋, 프로필 경로를 읽기 전용으로 확인한다.",
+      "primaryDataTargets": [
+        "src/content/contentProfile.js",
+        "src/content/murimRetargetSample.js",
+        "src/content/contentRetargetPreview.js",
+        "src/ui/renderRetargetPreview.js",
+        "src/localization/ko-KR.js:retargetSamples.murim"
+      ],
+      "assetSlots": [
+        "player.combatIdle",
+        "region.cardImages.mana_mine",
+        "region.battleBackgrounds.mana_mine",
+        "region.nodeMapImages.mana_mine",
+        "region.cardImages.rift_gate",
+        "region.battleBackgrounds.rift_gate",
+        "region.nodeMapImages.rift_gate"
+      ],
+      "editorFields": [
+        "sourceProfileId",
+        "targetProfileId",
+        "mappingTemplateId",
+        "textOverrideCount",
+        "assetOverrideCount",
+        "missingTextTargets",
+        "missingAssetTargets",
+        "mismatchedAssetTargets",
+        "sampleTitle",
+        "sampleDescription",
+        "plannedSourceFile",
+        "plannedWebpFile"
+      ],
+      "futureControls": [
+        "테마 샘플 선택",
+        "텍스트 변경 전후 비교",
+        "에셋 교체 대상 목록",
+        "누락 문자열 경고",
+        "누락 에셋 경고",
+        "실제 테마 적용 전 검증 리포트",
+        "에디터 export 전 읽기 전용 미리보기"
       ]
     },
     {
@@ -613,7 +660,42 @@
       "use": "장비/소지품 아이콘"
     }
   },
+  "themeRetargetPreview": {
+    "id": "murim-retarget-preview-v1",
+    "sourceProfileId": "project-regressor-hunter",
+    "targetProfileId": "korean-fantasy-murim-template",
+    "sampleProfileId": "korean-fantasy-murim-sample-v1",
+    "mappingTemplateId": "hunter-to-murim-id-map-v1",
+    "expectedTextOverrides": 51,
+    "expectedAssetOverrides": 5,
+    "dataTargets": [
+      "src/content/contentProfile.js:CONTENT_TEXT_RETARGET_CANDIDATES",
+      "src/content/contentProfile.js:CONTENT_ASSET_RETARGET_CANDIDATES",
+      "src/content/murimRetargetSample.js",
+      "src/content/contentRetargetPreview.js",
+      "src/localization/ko-KR.js:retargetSamples.murim"
+    ],
+    "editorHooks": [
+      "src/ui/renderRetargetPreview.js",
+      "src/editor/editorMain.js",
+      "data/editor-backlog.json:theme-retarget-preview-editor"
+    ]
+  },
   "prototypeListMemory": [
+    {
+      "id": "prototype-theme-retarget-preview",
+      "label": "테마 전환 미리보기",
+      "keepForEditor": [
+        "sourceProfileId",
+        "targetProfileId",
+        "mappingTemplateId",
+        "텍스트 변경 후보 수",
+        "에셋 변경 후보 수",
+        "누락 문자열 경고",
+        "누락 에셋 경고",
+        "실제 적용 전 읽기 전용 검증"
+      ]
+    },
     {
       "id": "prototype-initial-player",
       "label": "초기 플레이어 세팅",

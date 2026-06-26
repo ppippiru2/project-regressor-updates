@@ -1,7 +1,8 @@
-import { applyDomLocalization } from "../localization/domText.js?v=331";
-import { getLocaleText, tf } from "../localization/index.js?v=331";
+import { applyDomLocalization } from "../localization/domText.js?v=332";
+import { getLocaleText, tf } from "../localization/index.js?v=332";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=332";
 
-const EDITOR_VERSION = "250";
+const EDITOR_VERSION = "332";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -92,6 +93,7 @@ function renderSummary() {
   const imageCount = manifest.assetSlots?.image?.length || 0;
   const audioCount = manifest.assetSlots?.audio?.length || 0;
   const backlogCount = backlog.items?.length || 0;
+  const retargetPreview = createMurimRetargetPreview();
 
   setText(elements.summaryTitle, EDITOR_TEXT.summaryTitle);
   setText(elements.summaryCopy, EDITOR_TEXT.summaryCopy);
@@ -100,7 +102,8 @@ function renderSummary() {
     localizedMetricCard("panel", panelCount),
     localizedMetricCard("imageSlot", imageCount),
     localizedMetricCard("audioSlot", audioCount),
-    localizedMetricCard("backlog", backlogCount)
+    localizedMetricCard("backlog", backlogCount),
+    retargetPreviewMetricCard(retargetPreview)
   ].join("");
 }
 
@@ -276,6 +279,31 @@ function localizedMetricCard(key, count) {
     metric.label || key,
     tf(`editorPrep.metrics.${key}.value`, { count }, String(count)),
     metric.hint || ""
+  );
+}
+
+function retargetPreviewMetricCard(preview) {
+  const metric = EDITOR_TEXT.metrics.themeRetargetPreview || {};
+  const manifestPreview = manifest.themeRetargetPreview || {};
+  const expectedText = Number(manifestPreview.expectedTextOverrides || 0);
+  const expectedAssets = Number(manifestPreview.expectedAssetOverrides || 0);
+  const expectedMatches =
+    (!expectedText || expectedText === preview.counts.textOverrides) &&
+    (!expectedAssets || expectedAssets === preview.counts.assetOverrides);
+  const ready = preview.isComplete && expectedMatches;
+  return metricCard(
+    metric.label || "Theme Preview",
+    tf("editorPrep.metrics.themeRetargetPreview.value", {
+      textCount: preview.counts.textOverrides,
+      assetCount: preview.counts.assetOverrides
+    }, `${preview.counts.textOverrides}/${preview.counts.assetOverrides}`),
+    ready
+      ? (metric.readyHint || "")
+      : tf("editorPrep.metrics.themeRetargetPreview.reviewHint", {
+          missingText: preview.counts.missingTextTargets,
+          missingAssets: preview.counts.missingAssetTargets,
+          mismatchedAssets: preview.counts.mismatchedAssetTargets
+        }, metric.hint || "")
   );
 }
 
