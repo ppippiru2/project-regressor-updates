@@ -1,4 +1,4 @@
-import { PLAYER_BASE_STAT_VALUE } from "../balance/playerGrowthBalance.js?v=350";
+import { PLAYER_BASE_STAT_VALUE } from "../balance/playerGrowthBalance.js?v=351";
 import { LEVEL_UP_AUTO_STATS } from "./rewards.js";
 
 export function minimumPlayerStatValue(player, stat) {

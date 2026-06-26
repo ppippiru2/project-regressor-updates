@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 350,
-  "displayVersion": "v3.50",
-  "cacheVersion": "project-regressor-mvp-v350",
+  "versionCode": 351,
+  "displayVersion": "v3.51",
+  "cacheVersion": "project-regressor-mvp-v351",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=350&cachebust=350",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=351&cachebust=351",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v350 keeps the active mobile tab centered when using the left and right tab step buttons.",
-    "v350 replaces mobile tab scrollIntoView with direct nav-scroll positioning for steadier tab changes.",
-    "v350 verifies combat, status, inventory, shop, and region tab stepping at a 390px mobile viewport.",
+    "v351 limits mobile swipe tab changes to the top tab bar to prevent accidental changes while dragging the main content.",
+    "v351 fixes the combat scene swipe-ignore selector and extends the guard to the shop layout.",
+    "v351 verifies main-content drag stays on the current tab while top-tab swipe still changes tabs at a 390px mobile viewport.",
     "v344 fixes mobile panel content drift by keeping collapse-button safe space on headers instead of shifting whole card bodies.",
     "v344 adds direct player-info portrait positioning and zoom controls to the status photo frame.",
     "v344 verifies profile image upload, preview crop adjustment, save persistence, and status portrait rendering on a 390px mobile viewport.",
@@ -105,13 +105,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v350-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v351-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v350-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v351-debug.apk"
   },
   "version": {
-    "code": 350,
-    "name": "3.50.0",
-    "displayName": "v350"
+    "code": 351,
+    "name": "3.51.0",
+    "displayName": "v351"
   }
 }

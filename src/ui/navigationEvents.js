@@ -1,4 +1,4 @@
-import { activateView, keepActiveTabInView } from "./viewNavigation.js?v=350";
+import { activateView, keepActiveTabInView } from "./viewNavigation.js?v=351";
 
 export function bindNavigationEvents({ onViewChange } = {}) {
   const buttons = [...document.querySelectorAll(".nav-button")];
@@ -31,7 +31,6 @@ export function bindNavigationEvents({ onViewChange } = {}) {
 function bindNavSwipe(stepTab) {
   const surfaces = [
     document.querySelector("[data-nav-shell]"),
-    document.querySelector(".main"),
   ].filter(Boolean);
   if (!surfaces.length) return;
 
@@ -98,10 +97,11 @@ function shouldIgnoreSwipeTarget(target) {
         "select",
         "textarea",
         "[role='button']",
-        ".combat-scene",
+        ".battle-scene",
         ".gate-map",
         ".region-list",
         ".inventory-layout",
+        ".shop-layout",
         ".save-slot-card",
         ".profile-portrait-editor",
         ".profile-edit-image-editor",
