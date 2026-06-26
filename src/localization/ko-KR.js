@@ -16,6 +16,77 @@ export const KO_KR_TEXT = {
       description: "한국 판타지 무협물 스타일 방치형 RPG 템플릿",
     },
   },
+  retargetSamples: {
+    murim: {
+      profile: {
+        title: "무림 회귀록",
+        description: "한국 판타지 무협물 스타일 방치형 RPG",
+        templateDescription: "문파와 강호를 오르는 무협 방치형 RPG 템플릿",
+      },
+      staticShell: {
+        characterCreationTitle: "무인 등록",
+        defaultName: "귀환자",
+        questionRules: "강호의 법도와 문파의 규율에 대해 어떻게 생각하는가?",
+        questionOrder: "소속 문파의 장문인이 부당한 명령을 내렸다.",
+        submit: "운명 동기화",
+        compactObjective: "5개 구역을 돌파하고 마교 관문의 수문장을 처치하세요.",
+        systemWindowTitle: "무공 시스템",
+        systemWindowMessage: "시스템이 귀환자의 기연 기록과 동기화 중입니다.",
+        defaultRegionLore: "첫 기운의 틈이 열린 나루터. 약한 요물이 떠밀려온다.",
+        nodeMapPanelTitle: "시련 노드맵",
+        nodeMapEyebrow: "강호 시련",
+        playerName: "귀환자",
+        statusWindowTitle: "무인 상태창",
+        defaultStatusWindow: "귀환자 상태창",
+        portraitLabel: "무인 이미지",
+      },
+      characterCreation: {
+        registrationName: "무인 등록명",
+        defaultImage: "기본 무인 이미지",
+        questionDescription: "당신의 성향을 파악하기 위해 시스템이 강호의 질문을 던집니다.",
+        completionMessage: "무인 등록이 끝났습니다. 기운의 틈이 열린 초입으로 이동합니다.",
+        start: "입문 시작",
+      },
+      runtimeUi: {
+        initialLog: "시스템이 귀환자의 기연 기록과 동기화되었습니다. 첫 비무를 시작하세요.",
+        idleMessage: "귀환자의 기연 기록을 동기화했습니다.",
+        riftWeakened: "기운의 틈 약화",
+        finalGateDetail: "마교 관문의 수문장을 쓰러뜨리면 초입 시련이 끝납니다.",
+      },
+      dataSkills: {
+        qiBurstName: "기탄",
+        qiBurstDescription: "응축한 내공을 적에게 쏘아 보낸다.",
+      },
+      dataEquipment: {
+        wanderingArcherBow: "유랑 궁수의 활",
+        demonicSaber: "마도 절혼도",
+        sectGuardArmor: "문파 호위 갑주",
+        qiFlowNecklace: "기맥 목걸이",
+        ironQiGauntlets: "철기 장갑",
+        returnerJadeTalisman: "귀환자의 옥패",
+        heavenlyCycleRing: "천환 반지",
+      },
+      dataMonsters: {
+        oreQiPuppet: "광맥 기갑목인",
+        demonicCultSwordsman: "마교 검수",
+        demonicCultWarden: "마교 관문 수문장",
+      },
+      dataRegions: {
+        spiritStoneMineName: "영석 광산",
+        spiritStoneMineDescription: "초입 성장을 가속하는 영석 광맥.",
+        demonicSectGateName: "마교 관문",
+        demonicSectGateDescription: "초입 시련의 마지막 관문. 수문장을 쓰러뜨리면 시련이 끝난다.",
+      },
+      dataGateMaps: {
+        sectRuinsTrial: "폐문파 시련",
+      },
+      dataShops: {
+        returnerCategoryName: "귀환자 기연품",
+        returnerCategoryDescription: "반복되는 운명을 통해 가치를 알아보게 되는 고가의 장비입니다.",
+        returnerJadeTalismanNote: "귀환자 전용 성장감을 확인하기 위한 고가 장비입니다.",
+      },
+    },
+  },
   staticHtml: {
     characterCreation: {
       ariaLabel: "캐릭터 생성",
