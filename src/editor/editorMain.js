@@ -1,8 +1,8 @@
-import { applyDomLocalization } from "../localization/domText.js?v=336";
-import { getLocaleText, tf } from "../localization/index.js?v=336";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=336";
+import { applyDomLocalization } from "../localization/domText.js?v=337";
+import { getLocaleText, tf } from "../localization/index.js?v=337";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=337";
 
-const EDITOR_VERSION = "336";
+const EDITOR_VERSION = "337";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -273,11 +273,11 @@ function renderRetargetPreviewDetail() {
       <div class="editor-retarget-grid">
         <section>
           <h4>${escapeHtml(tf("editorPrep.retargetDetail.textTitle", { count: preview.counts.textOverrides }, ""))}</h4>
-          <div class="editor-retarget-list">${textRows || emptyRetargetRows(detailText)}</div>
+          <div class="editor-retarget-list">${textRows || emptyRetargetRows(detailText, "text")}</div>
         </section>
         <section>
           <h4>${escapeHtml(tf("editorPrep.retargetDetail.assetTitle", { count: preview.counts.assetOverrides }, ""))}</h4>
-          <div class="editor-retarget-list">${assetRows || emptyRetargetRows(detailText)}</div>
+          <div class="editor-retarget-list">${assetRows || emptyRetargetRows(detailText, "asset")}</div>
         </section>
       </div>
     </section>
@@ -383,8 +383,25 @@ function retargetKindButton(kind, label) {
   `;
 }
 
-function emptyRetargetRows(detailText) {
-  return `<p class="editor-retarget-empty">${escapeHtml(detailText.empty || "")}</p>`;
+function emptyRetargetRows(detailText, sectionKind) {
+  const filterKind = normalizeRetargetKind(retargetDetailFilter.kind);
+  const query = String(retargetDetailFilter.query || "").trim();
+  const sectionLabel = sectionKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
+  const filterLabel = filterKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
+  let message = detailText.empty || "";
+
+  if (filterKind !== "all" && filterKind !== sectionKind) {
+    message = tf("editorPrep.retargetDetail.emptyByType", {
+      filter: filterLabel,
+      section: sectionLabel
+    }, message);
+  } else if (query) {
+    message = tf("editorPrep.retargetDetail.emptyBySearch", {
+      query
+    }, message);
+  }
+
+  return `<p class="editor-retarget-empty">${escapeHtml(message)}</p>`;
 }
 
 function renderAssets() {

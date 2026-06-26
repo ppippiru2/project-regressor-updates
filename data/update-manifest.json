@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 336,
-  "displayVersion": "v3.36",
-  "cacheVersion": "project-regressor-mvp-v336",
+  "versionCode": 337,
+  "displayVersion": "v3.37",
+  "cacheVersion": "project-regressor-mvp-v337",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=336&cachebust=336",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=337&cachebust=337",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v337 clarifies empty retarget preview lists by showing whether the current type filter or search query hid the rows.",
+    "v337 extends the editor retarget quick check to guard type/search empty-state copy.",
     "v336 adds an editor retarget preview reset button that clears saved search, filter, and expanded-row UI state.",
     "v336 extends the editor retarget quick check to guard the reset control, helper, style, and localization key.",
     "v335 persists the editor retarget preview filter, search query, and expanded rows as editor-only local UI state.",
@@ -86,13 +88,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v336-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v337-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v336-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v337-debug.apk"
   },
   "version": {
-    "code": 336,
-    "name": "3.36.0",
-    "displayName": "v336"
+    "code": 337,
+    "name": "3.37.0",
+    "displayName": "v337"
   }
 }

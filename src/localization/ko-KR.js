@@ -1436,6 +1436,8 @@ export const KO_KR_TEXT = {
       collapse: "접기",
       reset: "초기화",
       empty: "표시할 항목 없음",
+      emptyByType: "현재 {filter} 필터라 {section} 항목은 숨겨졌습니다.",
+      emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
     },
     assetTypes: {
       image: "이미지",
