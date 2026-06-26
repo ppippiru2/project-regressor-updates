@@ -162,6 +162,66 @@ export const CONTENT_RETARGET_MAPPING_TEMPLATES = {
   },
 };
 
+export const CONTENT_TEXT_RETARGET_CANDIDATES = {
+  profile: [
+    "contentProfile.projectRegressorHunter.title",
+    "contentProfile.projectRegressorHunter.description",
+    "contentProfile.koreanFantasyMurimTemplate.title",
+    "contentProfile.koreanFantasyMurimTemplate.description",
+  ],
+  staticShell: [
+    "staticHtml.characterCreation.title",
+    "staticHtml.characterCreation.defaultName",
+    "staticHtml.characterCreation.q2",
+    "staticHtml.characterCreation.q4",
+    "staticHtml.characterCreation.submit",
+    "staticHtml.app.compactObjective.description",
+    "staticHtml.app.systemWindow.title",
+    "staticHtml.app.systemWindow.message",
+    "staticHtml.app.region.defaultLore",
+    "staticHtml.app.region.nodeMapPanelTitle",
+    "staticHtml.app.region.nodeMapEyebrow",
+    "staticHtml.app.combat.playerName",
+    "staticHtml.app.status.systemWindowTitle",
+    "staticHtml.app.status.defaultStatusWindow",
+    "staticHtml.app.status.profileDefaultName",
+    "staticHtml.app.status.portraitLabel",
+  ],
+  characterCreation: [
+    "characterCreation.profile.hunterName",
+    "characterCreation.profile.defaultName",
+    "characterCreation.profile.defaultAwakenerImage",
+    "characterCreation.questions.description",
+    "characterCreation.result.completionMessage",
+    "characterCreation.result.awakeningStart",
+  ],
+  runtimeUi: [
+    "stateMessages.initialLog",
+    "systemWindow.fallbackName",
+    "systemWindow.notices.idleMessage",
+    "systemWindow.notices.riftWeakened",
+    "growthObjectiveMessages.finalGateDetail",
+  ],
+  dataSkills: [
+    "data.skills.mana_bolt.name",
+    "data.skills.mana_bolt.description",
+  ],
+  dataEquipment: CONTENT_ID_RETARGET_CANDIDATES.equipment.map((entry) => `data.equipmentNames.${entry.id}`),
+  dataMonsters: CONTENT_ID_RETARGET_CANDIDATES.monsters.map((entry) => `data.monsters.${entry.id}`),
+  dataRegions: CONTENT_ID_RETARGET_CANDIDATES.regions.flatMap((entry) => [
+    `data.regions.${entry.id}.name`,
+    `data.regions.${entry.id}.description`,
+  ]),
+  dataGateMaps: CONTENT_ID_RETARGET_CANDIDATES.gateMaps.map((entry) => `data.gateMaps.${entry.id}.name`),
+  dataShops: [
+    ...CONTENT_ID_RETARGET_CANDIDATES.shopCategories.flatMap((entry) => [
+      `data.shopCategories.${entry.id}.name`,
+      `data.shopCategories.${entry.id}.description`,
+    ]),
+    ...CONTENT_ID_RETARGET_CANDIDATES.shopCatalog.map((entry) => `data.shopCatalogNotes.${entry.id}`),
+  ],
+};
+
 export const CONTENT_PROFILE_TEMPLATES = {
   projectRegressorHunter: {
     id: "project-regressor-hunter",

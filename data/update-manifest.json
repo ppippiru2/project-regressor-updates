@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 326,
-  "displayVersion": "v3.26",
-  "cacheVersion": "project-regressor-mvp-v326",
+  "versionCode": 327,
+  "displayVersion": "v3.27",
+  "cacheVersion": "project-regressor-mvp-v327",
   "updatedAt": "2026-06-26",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=326&cachebust=326",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=327&cachebust=327",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v327 adds localization text retarget candidates for profile, static shell, character creation, runtime UI, data names, region descriptions, and shop notes.",
+    "v327 adds a quick-check guard that validates those text retarget paths against the ko-KR localization dictionary.",
     "v326 adds a hunter-to-murim id mapping template for retargeting content ids without changing live save keys yet.",
     "v326 adds a quick-check guard that validates retarget mapping coverage, target id format, and source profile alignment.",
     "v325 adds a content id retarget candidate list for hunter-to-murim equipment, skills, monsters, regions, gate maps, shop ids, and assets.",
@@ -66,13 +68,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v326-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v327-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v326-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v327-debug.apk"
   },
   "version": {
-    "code": 326,
-    "name": "3.26.0",
-    "displayName": "v326"
+    "code": 327,
+    "name": "3.27.0",
+    "displayName": "v327"
   }
 }
