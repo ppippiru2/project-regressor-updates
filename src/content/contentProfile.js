@@ -106,6 +106,62 @@ export const CONTENT_ID_RETARGET_CANDIDATES = {
   ],
 };
 
+export const CONTENT_RETARGET_MAPPING_TEMPLATES = {
+  koreanFantasyMurim: {
+    id: "hunter-to-murim-id-map-v1",
+    sourceProfileId: "project-regressor-hunter",
+    targetProfileId: "korean-fantasy-murim-template",
+    maps: {
+      equipment: {
+        hunter_bow: "wandering_archer_bow",
+        rift_blade: "demonic_saber",
+        tower_shield_armor: "sect_guard_armor",
+        mana_necklace: "qi_flow_necklace",
+        rift_gauntlets: "iron_qi_gauntlets",
+        regressor_charm: "returner_jade_talisman",
+        perfect_timeline_ring: "heavenly_cycle_ring",
+      },
+      skills: {
+        mana_bolt: "qi_burst",
+      },
+      monsters: {
+        mine_golem: "ore_qi_puppet",
+        rift_knight: "demonic_cult_swordsman",
+        rift_warden: "demonic_cult_warden",
+      },
+      regions: {
+        mana_mine: "spirit_stone_mine",
+        rift_gate: "demonic_sect_gate",
+      },
+      gateMaps: {
+        gate_tutorial_ruins_01: "sect_ruins_trial_01",
+      },
+      gateMapMemoryKeys: {
+        tutorial_ruins_gate: "tutorial_ruins_trial",
+      },
+      gateNodeOutcomeIds: {
+        old_altar_event: "old_shrine_event",
+        tutorial_ruins_merchant: "sect_ruins_merchant",
+        broken_mana_core: "cracked_spirit_core",
+        found_broken_mana_core: "found_cracked_spirit_core",
+      },
+      shopCategories: {
+        regressor: "returner",
+      },
+      shopCatalog: {
+        shop_regressor_charm: "shop_returner_jade_talisman",
+      },
+      assetIds: {
+        player_regressor_spear_idle_v1: "player_returner_spear_idle_v1",
+        region_mana_mine_card_v54_actual: "region_spirit_stone_mine_card_v1",
+        region_mana_mine_node_map_v54_actual: "region_spirit_stone_mine_node_map_v1",
+        region_rift_gate_card_v54_actual: "region_demonic_sect_gate_card_v1",
+        region_rift_gate_node_map_v54_actual: "region_demonic_sect_gate_node_map_v1",
+      },
+    },
+  },
+};
+
 export const CONTENT_PROFILE_TEMPLATES = {
   projectRegressorHunter: {
     id: "project-regressor-hunter",

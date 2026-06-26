@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 325,
-  "displayVersion": "v3.25",
-  "cacheVersion": "project-regressor-mvp-v325",
+  "versionCode": 326,
+  "displayVersion": "v3.26",
+  "cacheVersion": "project-regressor-mvp-v326",
   "updatedAt": "2026-06-26",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=325&cachebust=325",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=326&cachebust=326",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v326 adds a hunter-to-murim id mapping template for retargeting content ids without changing live save keys yet.",
+    "v326 adds a quick-check guard that validates retarget mapping coverage, target id format, and source profile alignment.",
     "v325 adds a content id retarget candidate list for hunter-to-murim equipment, skills, monsters, regions, gate maps, shop ids, and assets.",
     "v325 adds a quick-check guard that validates those retarget candidates against the live content data tables.",
     "v324 adds profile-level theme term sets for hunter and murim retargeting.",
@@ -64,13 +66,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v325-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v326-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v325-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v326-debug.apk"
   },
   "version": {
-    "code": 324,
-    "name": "3.25.0",
-    "displayName": "v325"
+    "code": 326,
+    "name": "3.26.0",
+    "displayName": "v326"
   }
 }
