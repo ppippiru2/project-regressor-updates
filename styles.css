@@ -272,7 +272,7 @@ select:focus {
 }
 
 .creation-profile-preview:active,
-.profile-edit-preview.has-image:active,
+.profile-edit-image-editor[data-profile-crop-open="true"] .profile-edit-preview.has-image:active,
 .profile-portrait-editor[data-status-crop-open="true"] .player-profile-portrait.has-image:active {
   cursor: grabbing;
 }
@@ -3879,13 +3879,18 @@ select:focus {
 }
 
 .profile-edit-preview.has-image {
-  touch-action: none;
+  touch-action: pan-y;
   user-select: none;
-  cursor: grab;
+  cursor: default;
   background:
     linear-gradient(180deg, rgba(2, 8, 20, 0.02), rgba(2, 8, 20, 0.4)),
     radial-gradient(circle at 50% 18%, rgba(163, 252, 255, 0.1), transparent 32%),
     linear-gradient(180deg, rgba(14, 58, 126, 0.56), rgba(2, 10, 28, 0.9));
+}
+
+.profile-edit-image-editor[data-profile-crop-open="true"] .profile-edit-preview.has-image {
+  cursor: grab;
+  touch-action: none;
 }
 
 .profile-edit-form,
@@ -3934,6 +3939,11 @@ select:focus {
 
 .profile-edit-save {
   justify-self: stretch;
+}
+
+.profile-edit-crop-toggle,
+.profile-edit-crop-confirm {
+  width: 100%;
 }
 
 .volume-settings {

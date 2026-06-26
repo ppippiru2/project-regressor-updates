@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=347";
-import { renderCombatLogLine } from "./combatLogFormatter.js?v=347";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=347";
+import { t } from "../localization/index.js?v=348";
+import { renderCombatLogLine } from "./combatLogFormatter.js?v=348";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=348";
 
 export function renderCharacterCreation(playerProfile) {
   const screen = document.getElementById("character-creation");
@@ -157,8 +157,17 @@ export function renderProfileEditSettings(playerProfile = {}) {
   }
 
   const cropControls = document.getElementById("profile-edit-crop-controls");
+  const cropToggle = document.getElementById("profile-edit-crop-toggle");
+  const editor = preview?.closest(".profile-edit-image-editor");
+  const hasImage = Boolean(preview?.classList.contains("has-image"));
+  const cropControlsOpen = hasImage && editor?.dataset.profileCropOpen === "true";
+  if (!hasImage && editor) editor.dataset.profileCropOpen = "false";
+  if (cropToggle) {
+    cropToggle.hidden = !hasImage;
+    cropToggle.setAttribute("aria-expanded", cropControlsOpen ? "true" : "false");
+  }
   if (cropControls) {
-    cropControls.hidden = !playerProfile.portraitDataUrl && preview?.dataset.profileDraftActive !== "true";
+    cropControls.hidden = !cropControlsOpen;
   }
 
   const fileName = document.getElementById("profile-edit-image-name");

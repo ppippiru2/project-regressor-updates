@@ -1,11 +1,11 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=347";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=347";
-import { t, tf } from "../localization/index.js?v=347";
+} from "./developerOptions.js?v=348";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=348";
+import { t, tf } from "../localization/index.js?v=348";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=347";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=348";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";

@@ -1,16 +1,16 @@
-import { t, tf } from "../localization/index.js?v=347";
-import { saveSlotLabel } from "../state/saveSlots.js?v=347";
+import { t, tf } from "../localization/index.js?v=348";
+import { saveSlotLabel } from "../state/saveSlots.js?v=348";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=347";
+} from "../state/portraitFrame.js?v=348";
 import {
   applyPortraitFrameToElement,
   readPortraitFrameFromElement,
   renderPortraitImagePreview,
-} from "./portraitFrameView.js?v=347";
+} from "./portraitFrameView.js?v=348";
 
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 const CLEAR_SLOT_HOLD_MS = 5000;
@@ -35,6 +35,7 @@ export function bindSaveLoadEvents({
   const profileImageClear = document.getElementById("profile-edit-image-clear");
   const profileSaveButton = document.getElementById("profile-edit-save");
   const profileEditPreview = document.getElementById("profile-edit-preview");
+  const profileCropToggle = document.getElementById("profile-edit-crop-toggle");
   const profileCropControls = document.getElementById("profile-edit-crop-controls");
   const statusProfilePortrait = document.getElementById("player-profile-portrait");
   const statusProfileCropToggle = document.getElementById("profile-status-crop-toggle");
@@ -88,6 +89,7 @@ export function bindSaveLoadEvents({
       pendingProfileImageFrame = normalizePortraitFrame(DEFAULT_PORTRAIT_FRAME);
       clearProfileImage = false;
       updateProfileImageDraft(file.name, pendingProfileImageDataUrl, pendingProfileImageFrame);
+      setProfileEditCropControlsOpen(false);
       profileImageInput.value = "";
     });
   }
@@ -98,6 +100,7 @@ export function bindSaveLoadEvents({
       pendingProfileImageFrame = normalizePortraitFrame(DEFAULT_PORTRAIT_FRAME);
       clearProfileImage = true;
       updateProfileImageDraft(t("saveSlots.defaultAwakenerImage"), "", pendingProfileImageFrame);
+      setProfileEditCropControlsOpen(false);
     });
   }
 
@@ -114,22 +117,39 @@ export function bindSaveLoadEvents({
       pendingProfileImageFrame = null;
       clearProfileImage = false;
       if (profileEditPreview) delete profileEditPreview.dataset.profileDraftActive;
+      setProfileEditCropControlsOpen(false);
     });
   }
 
   if (profileCropControls) {
     profileCropControls.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-profile-crop-move], [data-profile-crop-zoom], [data-profile-crop-reset]");
-      if (!button || !profileEditPreview?.classList.contains("has-image")) return;
+      const button = event.target.closest(
+        "[data-profile-crop-move], [data-profile-crop-zoom], [data-profile-crop-reset], [data-profile-crop-confirm]"
+      );
+      if (!button || !isProfileEditCropOpen()) return;
       event.preventDefault();
+      if (button.dataset.profileCropConfirm !== undefined) {
+        updateProfileFrameDraft(readProfileEditFrame());
+        setProfileEditCropControlsOpen(false);
+        return;
+      }
       const action = button.dataset.profileCropMove || button.dataset.profileCropZoom || "reset";
       updateProfileFrameDraft(nudgePortraitFrame(readProfileEditFrame(), action));
     });
   }
 
+  if (profileCropToggle) {
+    profileCropToggle.addEventListener("click", () => {
+      if (!hasAdjustableProfileEditImage()) return;
+      const editor = profileEditPreview?.closest(".profile-edit-image-editor");
+      const nextOpen = editor?.dataset.profileCropOpen !== "true";
+      setProfileEditCropControlsOpen(nextOpen);
+    });
+  }
+
   if (profileEditPreview) {
     profileEditPreview.addEventListener("pointerdown", (event) => {
-      if (!profileEditPreview.classList.contains("has-image")) return;
+      if (!isProfileEditCropOpen()) return;
       const rect = profileEditPreview.getBoundingClientRect();
       profileDragState = {
         pointerId: event.pointerId,
@@ -233,6 +253,23 @@ export function bindSaveLoadEvents({
     if (!profileEditPreview) return;
     pendingProfileImageFrame = applyPortraitFrameToElement(profileEditPreview, frame);
     profileEditPreview.dataset.profileDraftActive = "true";
+  }
+
+  function hasAdjustableProfileEditImage() {
+    return Boolean(profileEditPreview?.classList.contains("has-image"));
+  }
+
+  function isProfileEditCropOpen() {
+    const editor = profileEditPreview?.closest(".profile-edit-image-editor");
+    return Boolean(hasAdjustableProfileEditImage() && editor?.dataset.profileCropOpen === "true");
+  }
+
+  function setProfileEditCropControlsOpen(isOpen) {
+    const editor = profileEditPreview?.closest(".profile-edit-image-editor");
+    const open = Boolean(isOpen && hasAdjustableProfileEditImage());
+    if (editor) editor.dataset.profileCropOpen = open ? "true" : "false";
+    if (profileCropControls) profileCropControls.hidden = !open;
+    if (profileCropToggle) profileCropToggle.setAttribute("aria-expanded", open ? "true" : "false");
   }
 
   function hasAdjustableStatusPortrait() {
@@ -424,8 +461,15 @@ function updateProfileImageDraft(label, dataUrl, frame = DEFAULT_PORTRAIT_FRAME)
   if (!preview) return;
   preview.dataset.profileDraftActive = "true";
   renderPortraitImagePreview(preview, dataUrl, frame, { label });
+  const editor = preview.closest(".profile-edit-image-editor");
+  if (editor) editor.dataset.profileCropOpen = "false";
+  const cropToggle = document.getElementById("profile-edit-crop-toggle");
+  if (cropToggle) {
+    cropToggle.hidden = !dataUrl;
+    cropToggle.setAttribute("aria-expanded", "false");
+  }
   const cropControls = document.getElementById("profile-edit-crop-controls");
-  if (cropControls) cropControls.hidden = !dataUrl;
+  if (cropControls) cropControls.hidden = true;
 }
 
 function fileToDataUrl(file) {
