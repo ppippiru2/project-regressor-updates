@@ -1,8 +1,8 @@
-import { applyDomLocalization } from "../localization/domText.js?v=337";
-import { getLocaleText, tf } from "../localization/index.js?v=337";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=337";
+import { applyDomLocalization } from "../localization/domText.js?v=338";
+import { getLocaleText, tf } from "../localization/index.js?v=338";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=338";
 
-const EDITOR_VERSION = "337";
+const EDITOR_VERSION = "338";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -389,19 +389,27 @@ function emptyRetargetRows(detailText, sectionKind) {
   const sectionLabel = sectionKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
   const filterLabel = filterKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
   let message = detailText.empty || "";
+  let showResetHint = false;
 
   if (filterKind !== "all" && filterKind !== sectionKind) {
     message = tf("editorPrep.retargetDetail.emptyByType", {
       filter: filterLabel,
       section: sectionLabel
     }, message);
+    showResetHint = true;
   } else if (query) {
     message = tf("editorPrep.retargetDetail.emptyBySearch", {
       query
     }, message);
+    showResetHint = true;
   }
 
-  return `<p class="editor-retarget-empty">${escapeHtml(message)}</p>`;
+  return `
+    <p class="editor-retarget-empty">
+      <span>${escapeHtml(message)}</span>
+      ${showResetHint ? `<small>${escapeHtml(detailText.emptyResetHint || "")}</small>` : ""}
+    </p>
+  `;
 }
 
 function renderAssets() {

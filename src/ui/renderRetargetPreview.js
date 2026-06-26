@@ -1,14 +1,14 @@
 import {
   CONTENT_PROFILE_TEMPLATES,
   CONTENT_RETARGET_MAPPING_TEMPLATES,
-} from "../content/contentProfile.js?v=337";
-import { buildContentRetargetPreview, createDictionaryTextResolver } from "../content/contentRetargetPreview.js?v=337";
+} from "../content/contentProfile.js?v=338";
+import { buildContentRetargetPreview, createDictionaryTextResolver } from "../content/contentRetargetPreview.js?v=338";
 import {
   MURIM_ASSET_RETARGET_SAMPLE,
   MURIM_RETARGET_SAMPLE_PROFILE,
   MURIM_TEXT_RETARGET_SAMPLE,
-} from "../content/murimRetargetSample.js?v=337";
-import { getLocaleText, t, tf } from "../localization/index.js?v=337";
+} from "../content/murimRetargetSample.js?v=338";
+import { getLocaleText, t, tf } from "../localization/index.js?v=338";
 
 export function renderRetargetPreviewSummary() {
   const grid = document.querySelector(".build-info-grid");

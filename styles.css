@@ -3543,12 +3543,20 @@ select:focus {
 }
 
 .editor-retarget-empty {
+  display: grid;
+  gap: 0.25rem;
   margin: 0;
   border: 1px dashed rgba(108, 210, 255, 0.22);
   border-radius: 6px;
   color: var(--muted);
   font-weight: 800;
   padding: 0.75rem;
+}
+
+.editor-retarget-empty small {
+  color: rgba(244, 211, 94, 0.86);
+  font-size: 0.72rem;
+  font-weight: 900;
 }
 
 .editor-actions {
