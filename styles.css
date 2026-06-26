@@ -3513,9 +3513,11 @@ select:focus {
 .editor-retarget-list {
   display: grid;
   gap: 0.55rem;
-  max-height: 30rem;
+  max-height: min(30rem, 68vh);
   overflow: auto;
+  overscroll-behavior: contain;
   padding-right: 0.15rem;
+  scrollbar-gutter: stable;
 }
 
 .editor-retarget-row {
@@ -3541,6 +3543,21 @@ select:focus {
   max-height: 5.75rem;
   min-width: 0;
   overflow: hidden;
+}
+
+.editor-retarget-row:not(.is-expanded) .editor-retarget-body {
+  position: relative;
+}
+
+.editor-retarget-row:not(.is-expanded) .editor-retarget-body::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1.35rem;
+  background: linear-gradient(180deg, rgba(4, 16, 40, 0), rgba(4, 16, 40, 0.94));
+  pointer-events: none;
 }
 
 .editor-retarget-body > div {
@@ -5594,6 +5611,10 @@ body[data-info-tooltips="off"] .info-term {
 
   .editor-retarget-grid {
     grid-template-columns: 1fr;
+  }
+
+  .editor-retarget-list {
+    max-height: min(24rem, 54vh);
   }
 
   .editor-retarget-controls {
