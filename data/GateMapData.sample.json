@@ -1,0 +1,120 @@
+[
+  {
+    "id": "gate_tutorial_ruins_01",
+    "name": "무너진 유적 게이트",
+    "type": "Gate",
+    "rank": "D",
+    "collapseTurn": 20,
+    "memoryKey": "tutorial_ruins_gate",
+    "editor": {
+      "coordinateMode": "manual-grid",
+      "coordinateBounds": { "xMin": -2, "xMax": 2, "yMin": 0, "yMax": 5 },
+      "editableFields": ["id", "type", "x", "y", "connected", "monsterPool", "bossId", "rewardTable", "eventId", "hiddenPieceId", "shopId", "unlockCondition"],
+      "nodeTypeBudgets": {
+        "start": { "min": 1, "max": 1 },
+        "battle": { "min": 1, "max": 6 },
+        "elite": { "min": 0, "max": 3 },
+        "boss": { "min": 1, "max": 1 },
+        "hidden_boss": { "min": 0, "max": 1 },
+        "treasure": { "min": 0, "max": 3 },
+        "hidden_treasure": { "min": 0, "max": 2 },
+        "merchant": { "min": 0, "max": 2 },
+        "rest": { "min": 0, "max": 2 },
+        "event": { "min": 0, "max": 4 },
+        "mystery": { "min": 0, "max": 4 },
+        "hidden_piece": { "min": 0, "max": 3 }
+      }
+    },
+    "nodes": [
+      {
+        "id": "start_01",
+        "type": "start",
+        "x": 0,
+        "y": 0,
+        "connected": ["battle_01", "event_01"],
+        "revealedByDefault": true
+      },
+      {
+        "id": "battle_01",
+        "type": "battle",
+        "x": -1,
+        "y": 1,
+        "monsterPool": ["ruin_sentinel"],
+        "connected": ["elite_01", "treasure_01", "rest_01"]
+      },
+      {
+        "id": "event_01",
+        "type": "event",
+        "x": 1,
+        "y": 1,
+        "eventId": "old_altar_event",
+        "connected": ["hidden_piece_01", "merchant_01"]
+      },
+      {
+        "id": "elite_01",
+        "type": "elite",
+        "x": -1.35,
+        "y": 2,
+        "monsterPool": ["rift_knight"],
+        "connected": ["boss_01"]
+      },
+      {
+        "id": "treasure_01",
+        "type": "treasure",
+        "x": -0.25,
+        "y": 2,
+        "rewardTable": ["rusty_sword", "shore_ring"],
+        "connected": ["boss_01"]
+      },
+      {
+        "id": "rest_01",
+        "type": "rest",
+        "x": -0.9,
+        "y": 3,
+        "connected": ["boss_01"]
+      },
+      {
+        "id": "merchant_01",
+        "type": "merchant",
+        "x": 1.35,
+        "y": 2,
+        "shopId": "tutorial_ruins_merchant",
+        "connected": ["boss_01"]
+      },
+      {
+        "id": "hidden_piece_01",
+        "type": "hidden_piece",
+        "x": 0.75,
+        "y": 2,
+        "hiddenPieceId": "broken_mana_core",
+        "unlockCondition": "hp_below_30_percent",
+        "connected": ["hidden_treasure_01", "hidden_boss_01"]
+      },
+      {
+        "id": "hidden_treasure_01",
+        "type": "hidden_treasure",
+        "x": 0.45,
+        "y": 3,
+        "rewardTable": ["mana_necklace", "lucky_ring"],
+        "connected": ["boss_01"]
+      },
+      {
+        "id": "hidden_boss_01",
+        "type": "hidden_boss",
+        "x": 1.35,
+        "y": 3,
+        "bossId": "rift_warden",
+        "unlockCondition": "found_broken_mana_core",
+        "connected": ["boss_01"]
+      },
+      {
+        "id": "boss_01",
+        "type": "boss",
+        "x": 0,
+        "y": 4,
+        "bossId": "rift_warden",
+        "connected": []
+      }
+    ]
+  }
+]

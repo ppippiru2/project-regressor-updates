@@ -1,0 +1,45 @@
+{
+  "baseStats": [
+    {
+      "key": "STR",
+      "displayName": "근력",
+      "autoIncreaseOnLevelUp": true
+    },
+    {
+      "key": "AGI",
+      "displayName": "민첩",
+      "autoIncreaseOnLevelUp": true
+    },
+    {
+      "key": "VIT",
+      "displayName": "체력",
+      "autoIncreaseOnLevelUp": true
+    },
+    {
+      "key": "INT",
+      "displayName": "지능",
+      "autoIncreaseOnLevelUp": true
+    },
+    {
+      "key": "WIS",
+      "displayName": "정신",
+      "autoIncreaseOnLevelUp": true
+    },
+    {
+      "key": "LUK",
+      "displayName": "행운",
+      "autoIncreaseOnLevelUp": false
+    },
+    {
+      "key": "DIVINE",
+      "displayName": "신성",
+      "autoIncreaseOnLevelUp": false
+    },
+    {
+      "key": "CHA",
+      "displayName": "매력",
+      "autoIncreaseOnLevelUp": false
+    }
+  ],
+  "freeStatPointsPerLevel": 5
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "tutorial_beach",
+    "name": "초심자의 해안",
+    "type": "field"
+  },
+  {
+    "id": "tutorial_camp",
+    "name": "버려진 야영지",
+    "type": "rest"
+  },
+  {
+    "id": "mist_forest",
+    "name": "안개 숲",
+    "type": "field"
+  },
+  {
+    "id": "broken_mine",
+    "name": "버려진 광산",
+    "type": "dungeon"
+  },
+  {
+    "id": "collapsed_tower",
+    "name": "무너진 탑",
+    "type": "dungeon"
+  },
+  {
+    "id": "graveyard",
+    "name": "망자의 묘지",
+    "type": "field"
+  },
+  {
+    "id": "rift_altar",
+    "name": "균열 제단",
+    "type": "boss"
+  }
+]

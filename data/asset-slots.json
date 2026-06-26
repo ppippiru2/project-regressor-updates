@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "description": "Stable visual slots used by the game and future editor. Null means the default CSS/UI placeholder is used.",
+  "slots": {
+    "player": {
+      "profilePortrait": null,
+      "combatIdle": "player_regressor_spear_idle_v1",
+      "combatAttack": null,
+      "combatHit": null,
+      "combatDead": null
+    },
+    "monster": {
+      "defaultIdle": null,
+      "defaultAttack": null,
+      "defaultHit": null,
+      "defaultDead": null
+    },
+    "region": {
+      "cardImages": {
+        "tutorial_shore": "region_tutorial_shore_card_v54_actual",
+        "tutorial_forest": "region_tutorial_forest_card_v54_actual",
+        "broken_ruins": "region_broken_ruins_card_v54_actual",
+        "mana_mine": "region_mana_mine_card_v54_actual",
+        "rift_gate": "region_rift_gate_card_v54_actual"
+      },
+      "nodeMapImages": {
+        "tutorial_shore": "region_tutorial_shore_node_map_v54_actual",
+        "tutorial_forest": "region_tutorial_forest_node_map_v54_actual",
+        "broken_ruins": "region_broken_ruins_node_map_v54_actual",
+        "mana_mine": "region_mana_mine_node_map_v54_actual",
+        "rift_gate": "region_rift_gate_node_map_v54_actual"
+      },
+      "battleBackgrounds": {
+        "tutorial_shore": "region_tutorial_shore_card_v54_actual",
+        "tutorial_forest": "region_tutorial_forest_card_v54_actual",
+        "broken_ruins": "region_broken_ruins_card_v54_actual",
+        "mana_mine": "region_mana_mine_card_v54_actual",
+        "rift_gate": "region_rift_gate_card_v54_actual"
+      }
+    },
+    "item": {
+      "icons": {
+        "rusty_sword": "item_rusty_sword_icon_v1"
+      }
+    },
+    "skill": {
+      "icons": {}
+    },
+    "vfx": {
+      "basicAttackSlash": null,
+      "basicAttackHit": null,
+      "criticalFlash": null,
+      "missText": null,
+      "hyperReady": null,
+      "hyperActive": null
+    },
+    "ui": {
+      "appIcon": "app_icon_main",
+      "systemDiceRoll": "ui_system_dice_roll_sheet_v2"
+    },
+    "world": {
+      "tutorialIslandOverview": "world_tutorial_island_overview_v54_actual",
+      "tutorialIslandNodeMap": "world_tutorial_island_node_map_v54_actual"
+    }
+  }
+}

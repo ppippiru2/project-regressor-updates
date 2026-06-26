@@ -1,5 +1,7 @@
 # Project Regressor Updates
 
-Public update channel for installed Android/PWA shells.
+Hosted update payload for Project Regressor.
 
-The private development repository can stay private. This repository is intended to host public release/update metadata and lightweight launch guidance for Project Regressor builds.
+- Latest web build: v2.80
+- Update manifest: data/update-manifest.json
+- Android debug APK: releases/project-regressor-v280-debug.apk

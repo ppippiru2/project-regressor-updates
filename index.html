@@ -1,26 +1,585 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Project Regressor Updates</title>
-  <style>
-    :root { color-scheme: dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #06111f; color: #dff7ff; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: radial-gradient(circle at 50% 0%, rgba(24, 209, 255, .16), transparent 42%), #06111f; }
-    main { width: min(720px, calc(100% - 32px)); border: 1px solid rgba(34, 211, 238, .55); background: rgba(5, 20, 40, .82); padding: 28px; box-shadow: 0 0 28px rgba(34, 211, 238, .18); }
-    h1 { margin: 0 0 8px; color: #30eaff; font-size: 28px; }
-    p { line-height: 1.7; color: #b8d7e8; }
-    a { color: #78f7ff; font-weight: 700; }
-    code { background: rgba(120, 247, 255, .1); padding: 2px 6px; border-radius: 4px; }
-  </style>
-</head>
-<body>
-  <main>
-    <h1>Project Regressor Updates</h1>
-    <p>설치형 Android/PWA 셸이 업데이트 정보를 확인하는 공개 채널입니다.</p>
-    <p>현재 공개된 파일은 업데이트 메타데이터 중심이며, 개발 소스는 별도 비공개 저장소에서 관리됩니다.</p>
-    <p><a href="./data/update-manifest.json">update-manifest.json</a> · <a href="./data/android-update-config.sample.json">android-update-config.sample.json</a></p>
-    <p><code>v2.74</code></p>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071b3d" />
+    <title>Project Regressor</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="assets/icon.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css?v=280" />
+  </head>
+  <body>
+    <section class="creation-screen is-hidden" id="character-creation" aria-label="Character creation" data-i18n-attr="aria-label:staticHtml.characterCreation.ariaLabel">
+      <form class="creation-panel" id="character-create-form">
+        <span class="eyebrow">System Initialization</span>
+        <h2 data-i18n="staticHtml.characterCreation.title">Awakener Registration</h2>
+        <p class="muted" data-i18n="staticHtml.characterCreation.description">Enter the base profile for the first timeline.</p>
+
+        <div class="creation-grid">
+          <label>
+            <span data-i18n="staticHtml.characterCreation.name">Name</span>
+            <input name="name" type="text" value="Regressor" data-i18n-value="staticHtml.characterCreation.defaultName" maxlength="12" required />
+          </label>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.age">Age</span>
+            <input name="age" type="number" value="20" min="14" max="99" required />
+          </label>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.gender">Gender</span>
+            <select name="gender">
+              <option value="male" data-i18n="staticHtml.characterCreation.genderMale">Male</option>
+              <option value="female" data-i18n="staticHtml.characterCreation.genderFemale">Female</option>
+              <option value="private" data-i18n="staticHtml.characterCreation.genderPrivate">Private</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.country">Country</span>
+            <select name="country">
+              <option value="kr" data-i18n="staticHtml.characterCreation.countryKorea">Korea</option>
+              <option value="us" data-i18n="staticHtml.characterCreation.countryUsa">United States</option>
+              <option value="jp" data-i18n="staticHtml.characterCreation.countryJapan">Japan</option>
+              <option value="cn" data-i18n="staticHtml.characterCreation.countryChina">China</option>
+              <option value="other" data-i18n="staticHtml.characterCreation.countryOther">Other</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="quiz-block">
+          <span class="eyebrow" data-i18n="staticHtml.characterCreation.quizEyebrow">Alignment Analysis</span>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.q1">You found someone collapsed. What do you do?</span>
+            <select name="q1">
+              <option value="hero" data-i18n="staticHtml.characterCreation.q1Hero">Help immediately.</option>
+              <option value="pragmatic" data-i18n="staticHtml.characterCreation.q1Pragmatic">Check risks and rewards first.</option>
+              <option value="vengeful" data-i18n="staticHtml.characterCreation.q1Vengeful">Find the cause and prepare payback.</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.q2">How do you view laws and hunter association rules?</span>
+            <select name="q2">
+              <option value="lawful" data-i18n="staticHtml.characterCreation.q2Lawful">They must be kept.</option>
+              <option value="pragmatic" data-i18n="staticHtml.characterCreation.q2Pragmatic">They should be flexible.</option>
+              <option value="chaotic" data-i18n="staticHtml.characterCreation.q2Chaotic">Rules are excuses.</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.q3">If gaining power required sacrificing others?</span>
+            <select name="q3">
+              <option value="hero" data-i18n="staticHtml.characterCreation.q3Hero">Never sacrifice others.</option>
+              <option value="pragmatic" data-i18n="staticHtml.characterCreation.q3Pragmatic">Consider it to prevent worse harm.</option>
+              <option value="vengeful" data-i18n="staticHtml.characterCreation.q3Vengeful">Use it for my growth.</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.q4">Your guild master gives an unjust order.</span>
+            <select name="q4">
+              <option value="lawful" data-i18n="staticHtml.characterCreation.q4Lawful">Obey by principle.</option>
+              <option value="pragmatic" data-i18n="staticHtml.characterCreation.q4Pragmatic">Check my interests first.</option>
+              <option value="chaotic" data-i18n="staticHtml.characterCreation.q4Chaotic">Reject it immediately.</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="staticHtml.characterCreation.q5">What kind of world do you ultimately want?</span>
+            <select name="q5">
+              <option value="hero" data-i18n="staticHtml.characterCreation.q5Hero">A peaceful world without oppression.</option>
+              <option value="pragmatic" data-i18n="staticHtml.characterCreation.q5Pragmatic">A personal world without interference.</option>
+              <option value="chaotic" data-i18n="staticHtml.characterCreation.q5Chaotic">A world ruled by absolute power.</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="creation-actions">
+          <button class="primary-button" type="submit" data-i18n="staticHtml.characterCreation.submit">Synchronize Timeline</button>
+        </div>
+      </form>
+    </section>
+
+    <div id="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/icon.png" alt="" class="brand-mark" />
+          <div>
+            <h1>Project Regressor</h1>
+            <p data-i18n="staticHtml.app.tutorialIsland">Tutorial Island</p>
+          </div>
+        </div>
+
+        <div class="nav-shell" data-nav-shell>
+          <button class="nav-step-button" type="button" data-nav-step="-1" aria-label="Previous tab" data-i18n-attr="aria-label:staticHtml.app.previousTab">‹</button>
+          <nav class="nav" aria-label="Main menu" data-i18n-attr="aria-label:staticHtml.app.mainMenu">
+            <button class="nav-button active" data-view="combat" data-i18n="staticHtml.app.nav.combat">Combat</button>
+            <button class="nav-button" data-view="status" data-i18n="staticHtml.app.nav.status">Status</button>
+            <button class="nav-button" data-view="inventory" data-i18n="staticHtml.app.nav.inventory">Inventory</button>
+            <button class="nav-button" data-view="shop" data-i18n="staticHtml.app.nav.shop">Shop</button>
+            <button class="nav-button" data-view="regions" data-i18n="staticHtml.app.nav.regions">Regions</button>
+            <button class="nav-button" data-view="settings" data-i18n="staticHtml.app.nav.settings">Settings</button>
+          </nav>
+          <button class="nav-step-button" type="button" data-nav-step="1" aria-label="Next tab" data-i18n-attr="aria-label:staticHtml.app.nextTab">›</button>
+        </div>
+
+        <section class="compact-panel">
+          <span class="eyebrow" data-i18n="staticHtml.app.compactObjective.eyebrow">Objective</span>
+          <p data-i18n="staticHtml.app.compactObjective.description">Clear five regions and defeat the black rift gatekeeper.</p>
+        </section>
+      </aside>
+
+      <main class="main">
+        <section
+          class="system-window"
+          id="system-window"
+          data-system-type="notice"
+          data-panel-id="system-window-v1"
+          data-panel-title="Awakener System"
+          data-i18n-attr="data-panel-title:staticHtml.app.systemWindow.title"
+          aria-live="polite"
+        >
+          <div class="system-window-header">
+            <span class="eyebrow" data-i18n="staticHtml.app.systemWindow.title">Awakener System</span>
+            <strong id="system-window-type" data-i18n="staticHtml.app.systemWindow.notice">Notice</strong>
+          </div>
+          <p id="system-window-message" data-i18n="staticHtml.app.systemWindow.message">Synchronizing regressor records.</p>
+          <div class="system-window-meta" id="system-window-meta">
+            <span data-i18n="staticHtml.app.systemWindow.timeline">Timeline 1</span>
+            <span data-i18n="staticHtml.app.systemWindow.waiting">Waiting</span>
+          </div>
+        </section>
+
+        <section class="growth-objective" id="growth-objective" data-objective-state="locked">
+          <div>
+            <span class="eyebrow" id="growth-objective-eyebrow" data-i18n="staticHtml.app.objective.eyebrow">Next Objective</span>
+            <strong id="growth-objective-title" data-i18n="staticHtml.app.objective.loadingTitle">Checking objective</strong>
+            <p id="growth-objective-detail" data-i18n="staticHtml.app.objective.loadingDetail">Calculating growth objective.</p>
+          </div>
+          <div class="growth-objective-meter" aria-hidden="true">
+            <span id="growth-objective-bar"></span>
+          </div>
+          <div class="objective-rotation-controls" id="growth-objective-rotation-controls" aria-label="Objective display mode" data-i18n-attr="aria-label:staticHtml.app.objective.displayMode" hidden>
+            <button class="objective-nav-button" id="growth-objective-prev" type="button" aria-label="Previous objective" data-i18n-attr="aria-label:staticHtml.app.objective.previous">‹</button>
+            <button class="objective-mode-button" id="growth-objective-mode" type="button" aria-pressed="false" data-i18n="staticHtml.app.objective.auto">Auto</button>
+            <button class="objective-nav-button" id="growth-objective-next" type="button" aria-label="Next objective" data-i18n-attr="aria-label:staticHtml.app.objective.next">›</button>
+          </div>
+          <button class="collapse-toggle objective-collapse-button" id="growth-objective-toggle" type="button" aria-expanded="true" aria-label="Collapse objective" data-i18n-attr="aria-label:staticHtml.app.objective.collapse">−</button>
+        </section>
+
+        <header class="topbar">
+          <div>
+            <span class="eyebrow" data-i18n="staticHtml.app.region.eyebrow">Current Region</span>
+            <h2 id="region-title" data-i18n="staticHtml.app.region.defaultTitle">Beginner Coast</h2>
+            <p id="region-lore" class="muted" data-i18n="staticHtml.app.region.defaultLore">The first rift opened on this coast.</p>
+          </div>
+          <div class="resource-row">
+            <span><span data-i18n="staticHtml.app.region.level">Level</span> <strong id="player-level">1</strong></span>
+            <span><span data-i18n="staticHtml.app.region.rank">Rank</span> <strong id="hunter-rank">F-</strong></span>
+            <span><strong id="gold">0</strong> G</span>
+            <span><span data-i18n="staticHtml.app.region.power">Power</span> <strong id="power">0</strong></span>
+          </div>
+        </header>
+
+        <section class="view active" id="view-combat">
+          <div class="combat-layout">
+            <section class="panel battlefield" id="combat-battlefield" data-panel-id="combat-battlefield" data-panel-title="Combat" data-i18n-attr="data-panel-title:staticHtml.app.combat.panelTitle">
+              <div class="battle-scene" id="battle-scene">
+                <div class="battle-header">
+                  <div class="battle-heading">
+                    <span class="eyebrow" data-i18n="staticHtml.app.combat.panelTitle">Combat</span>
+                    <div class="battle-title-line">
+                      <h3 id="enemy-name" data-i18n="staticHtml.app.combat.enemyName">Combat Sync</h3>
+                      <p id="battle-state" class="battle-state-label" data-i18n="staticHtml.app.combat.waiting">Waiting</p>
+                    </div>
+                  </div>
+                  <div class="combat-controls">
+                    <button id="auto-toggle-button" class="auto-pill" type="button" data-combat-help="autoHunt" aria-label="Toggle auto combat" data-i18n="staticHtml.app.combat.auto" data-i18n-attr="aria-label:staticHtml.app.combat.autoToggle">Auto</button>
+                    <button id="rest-button" class="ghost-button rest-button" type="button" data-combat-help="rest" aria-label="Rest" data-i18n="staticHtml.app.combat.rest" data-i18n-attr="aria-label:staticHtml.app.combat.rest">Rest</button>
+                    <button id="hunt-button" class="primary-button" type="button" aria-label="Toggle combat" data-i18n="staticHtml.app.combat.hunt" data-i18n-attr="aria-label:staticHtml.app.combat.huntToggle">Fight</button>
+                  </div>
+                </div>
+
+                <div class="battle-stage" id="battle-stage" aria-label="Battle stage" data-i18n-attr="aria-label:staticHtml.app.combat.stage">
+                  <div class="duel" id="combat-duel">
+                    <div class="combatant player" id="player-combatant">
+                      <span class="hyper-edge-bloom" aria-hidden="true"></span>
+                      <div class="hit-counter" id="hit-counter" data-i18n="staticHtml.app.combat.combo">Combo 0</div>
+                      <button class="portrait hero-portrait hyper-trigger" id="player-portrait" type="button" data-hyper-trigger aria-label="Activate hyper mode" data-i18n-attr="aria-label:staticHtml.app.combat.hyper">
+                        <span class="aura-ring"></span>
+                        <span class="sprite-slot sprite-slot-player" id="player-sprite-slot" aria-hidden="true"></span>
+                        <span class="effect-layer" id="player-effect-layer"></span>
+                      </button>
+                      <h4 id="player-name">회귀자</h4>
+                      <div class="bar">
+                        <div class="bar-fill hp" id="player-hp-bar"></div>
+                        <span id="player-hp-text">0 / 0</span>
+                      </div>
+                      <div class="bar">
+                        <div class="bar-fill mp" id="player-mp-bar"></div>
+                        <span id="player-mp-text">MP 분석 중</span>
+                      </div>
+                      <div class="bar action-bar">
+                        <div class="bar-fill action" id="player-action-bar"></div>
+                        <span id="player-action-text">공격 준비</span>
+                      </div>
+                    </div>
+
+                    <div class="combatant enemy" id="enemy-combatant">
+                      <span class="hyper-edge-bloom" aria-hidden="true"></span>
+                      <div class="portrait enemy-portrait" id="enemy-portrait" aria-label="몬스터 상태">
+                        <span class="gate-core"></span>
+                        <span class="sprite-slot sprite-slot-enemy" id="enemy-sprite-slot" aria-hidden="true"></span>
+                        <span class="effect-layer" id="enemy-effect-layer"></span>
+                      </div>
+                      <h4 id="enemy-level">레벨 1</h4>
+                      <div class="bar">
+                        <div class="bar-fill danger" id="enemy-hp-bar"></div>
+                        <span id="enemy-hp-text">0 / 0</span>
+                      </div>
+                      <div class="bar">
+                        <div class="bar-fill mp enemy-mp" id="enemy-mp-bar"></div>
+                        <span id="enemy-mp-text">0 / 0</span>
+                      </div>
+                      <div class="bar action-bar enemy-action">
+                        <div class="bar-fill action danger-action" id="enemy-action-bar"></div>
+                        <span id="enemy-action-text">공격 준비</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="combat-slot-row">
+                    <div class="skill-strip" id="combat-skills" aria-label="전투 스킬 목록"></div>
+                    <div class="combat-system-row" aria-label="전술 선택">
+                      <div class="stance-control" aria-label="전술 자세">
+                        <button data-stance="conserve" data-combat-help="stance-conserve">보존</button>
+                        <button data-stance="power" data-combat-help="stance-power">전력</button>
+                        <button data-stance="berserk" data-combat-help="stance-berserk">폭주</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="combat-skill-info-slot" id="combat-skill-info" aria-live="polite"></div>
+
+              <div class="battle-actions">
+                <button id="boss-button" class="secondary-button" type="button" data-combat-help="boss">지역 보스 도전</button>
+              </div>
+
+              <section
+                class="readiness-panel"
+                id="readiness-panel"
+                data-readiness-state="locked"
+                data-panel-id="combat-readiness-panel-v1"
+                data-panel-title="준비도"
+                aria-live="polite"
+              >
+                <div>
+                  <span class="eyebrow" id="readiness-eyebrow">준비도</span>
+                  <strong id="readiness-title">준비도 확인 중</strong>
+                  <p id="readiness-detail">다음 성장 기준을 계산하고 있습니다.</p>
+                </div>
+                <div class="readiness-meter" aria-hidden="true">
+                  <span id="readiness-bar"></span>
+                </div>
+                <div class="readiness-meta" id="readiness-meta"></div>
+              </section>
+
+              <section
+                class="drop-preview"
+                data-panel-id="drop-preview-panel-v1"
+                data-panel-title="장비 후보"
+                data-panel-default-collapsed="true"
+                aria-label="획득 가능 장비"
+              >
+                <div>
+                  <span class="eyebrow">전리품</span>
+                  <strong>장비 후보</strong>
+                </div>
+                <div id="drop-preview-list" class="drop-preview-list"></div>
+              </section>
+            </section>
+
+            <section class="panel log-panel" data-panel-id="combat-log" data-panel-title="전투 기록">
+              <div class="panel-title">
+                <span class="eyebrow">전투 기록</span>
+                <button id="clear-log-button" class="ghost-button" type="button">정리</button>
+              </div>
+              <ol id="combat-log" class="combat-log"></ol>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-status">
+          <section class="panel status-system-window" data-panel-id="status-system-window-v1" data-panel-title="각성자 상태창">
+            <div class="status-system-header">
+              <div>
+                <span class="eyebrow">각성자 기록</span>
+                <h3 id="status-summary-name">회귀자 상태창</h3>
+              </div>
+              <strong id="status-summary-rank">랭크 F-</strong>
+            </div>
+            <div class="status-system-grid">
+              <div>
+                <span>레벨</span>
+                <strong id="status-summary-level">레벨 1</strong>
+              </div>
+              <div>
+                <span>전투력</span>
+                <strong id="status-summary-power">0</strong>
+              </div>
+              <div>
+                <span>경험치</span>
+                <strong id="status-summary-exp">0 / 0</strong>
+              </div>
+              <div>
+                <span>보유 포인트</span>
+                <strong id="status-summary-points">0</strong>
+              </div>
+            </div>
+          </section>
+
+          <div class="status-grid">
+            <section class="panel profile-panel" data-panel-id="status-profile-v1" data-panel-title="프로필">
+              <span class="eyebrow">플레이어 정보</span>
+              <h3 id="profile-name-title">회귀자</h3>
+              <div class="profile-panel-body">
+                <div class="player-profile-portrait" id="player-profile-portrait" aria-label="플레이어 초상">
+                  <span class="profile-portrait-scanline" aria-hidden="true"></span>
+                  <span class="profile-portrait-label">각성자 이미지</span>
+                </div>
+                <div class="profile-lines" id="profile-lines"></div>
+              </div>
+            </section>
+
+            <section class="panel" data-panel-id="status-primary-v2" data-panel-title="기본 스탯">
+              <div class="status-panel-heading">
+                <div>
+                  <span class="eyebrow">스탯 배분</span>
+                  <h3>기본 스탯</h3>
+                </div>
+                <div class="status-heading-actions">
+                  <button class="ghost-button" id="reset-free-stats-button" data-reset-free-stats type="button">임시 배분 초기화</button>
+                  <button class="secondary-button" id="confirm-free-stats-button" data-confirm-free-stats type="button">배분 확정</button>
+                  <button class="secondary-button" id="allocate-recommended-button" data-allocate-recommended type="button">추천 배분</button>
+                </div>
+              </div>
+              <div class="stat-lines" id="primary-stats"></div>
+              <div class="level-box">
+                <div>
+                  <span class="info-term" tabindex="0" role="button" data-info-key="derived:exp">경험치</span>
+                  <strong id="exp-text">0 / 0</strong>
+                </div>
+                <div class="bar">
+                  <div class="bar-fill exp" id="exp-bar"></div>
+                </div>
+              </div>
+              <div class="growth-summary">
+                <div class="point-row">
+                  <span class="info-term" tabindex="0" role="button" data-info-key="derived:freePoints">보유 포인트</span>
+                  <strong id="free-points">0</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel" data-panel-id="status-derived-v2" data-panel-title="전투 스탯">
+              <span class="eyebrow">파생 능력</span>
+              <h3>전투 스탯</h3>
+              <div class="stat-lines" id="derived-stats"></div>
+            </section>
+
+            <section class="panel" data-panel-id="status-resistance-v2" data-panel-title="저항">
+              <span class="eyebrow">방어 적성</span>
+              <h3>저항</h3>
+              <div class="stat-lines" id="resistance-stats"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-inventory">
+          <div class="inventory-layout">
+            <section class="panel" data-panel-id="inventory-equipment" data-panel-title="장착 현황">
+              <div class="inventory-panel-heading">
+                <div>
+                  <span class="eyebrow">장비</span>
+                  <h3>장착 현황</h3>
+                </div>
+                <p class="inventory-summary" id="equipment-summary">0 / 8 장착</p>
+              </div>
+              <div id="equipment-slots" class="equipment-slots"></div>
+            </section>
+
+            <section class="panel" data-panel-id="inventory-items" data-panel-title="보관 장비">
+              <div class="inventory-heading">
+                <div>
+                  <span class="eyebrow">전리품</span>
+                  <h3>보관 장비</h3>
+                  <p class="inventory-summary" id="inventory-summary">획득 장비 없음</p>
+                </div>
+                <button id="equip-recommended-button" class="secondary-button" data-equip-recommended type="button">추천 장착</button>
+              </div>
+              <div id="inventory-list" class="inventory-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-shop">
+          <div class="shop-layout">
+            <section class="panel" data-panel-id="shop-stock" data-panel-title="차원 보급소">
+              <div class="inventory-heading">
+                <div>
+                  <span class="eyebrow">차원 보급</span>
+                  <h3>차원 보급소</h3>
+                  <p class="inventory-summary" id="shop-summary">보유 골드 0 G</p>
+                </div>
+              </div>
+              <div id="shop-stock-list" class="shop-stock-list inventory-list"></div>
+            </section>
+
+            <section class="panel" data-panel-id="shop-sell" data-panel-title="장비 매각">
+              <div class="inventory-heading">
+                <div>
+                  <span class="eyebrow">정리</span>
+                  <h3>장비 매각</h3>
+                  <p class="inventory-summary">사용하지 않는 장비를 골드로 정리합니다.</p>
+                </div>
+              </div>
+              <div id="shop-sell-list" class="shop-sell-list inventory-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-regions">
+          <section class="panel" data-panel-id="region-list-panel-v2" data-panel-title="지역 이동">
+            <div class="region-panel-heading">
+              <div>
+                <span class="eyebrow">튜토리얼 섬</span>
+                <h3>지역 이동</h3>
+              </div>
+              <p class="region-summary" id="region-summary">진행 상황 계산 중</p>
+            </div>
+            <div id="region-list" class="region-list"></div>
+          </section>
+          <section class="panel gate-map-panel" data-panel-id="gate-map-panel-v2" data-panel-title="게이트 노드맵">
+            <span class="eyebrow">차원 게이트</span>
+            <h3 id="gate-map-title">노드맵 대기 중</h3>
+            <p class="muted" id="gate-map-state">노드맵이 연결된 지역에서 표시됩니다.</p>
+            <div id="gate-map" class="gate-map"></div>
+            <div id="gate-actions" class="gate-actions"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-settings">
+          <section class="panel build-info-panel" data-panel-id="settings-build-info-v1" data-panel-title="접속 정보">
+            <span class="eyebrow">개발 정보</span>
+            <h3>빌드/접속 정보</h3>
+            <div class="build-info-grid">
+              <div class="build-info-line">
+                <span>화면 버전</span>
+                <strong id="build-version-label">v2.64</strong>
+              </div>
+              <div class="build-info-line">
+                <span>캐시</span>
+                <strong id="build-cache-label">Cache v279</strong>
+              </div>
+              <div class="build-info-line wide">
+                <span>현재 주소</span>
+                <strong id="build-address-label">http://127.0.0.1:5173/?v=280</strong>
+              </div>
+              <div class="build-info-line wide">
+                <span>모바일 확인</span>
+                <strong id="build-mobile-label">PC LAN IP:5173/?v=280</strong>
+              </div>
+              <div class="build-info-line wide build-info-action">
+                <span>개발 도구</span>
+                <a class="editor-launch-button" href="editor.html?v=280&cachebust=280" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
+              </div>
+            </div>
+          </section>
+          <section class="panel" data-panel-id="settings-developer" data-panel-title="개발 테스트">
+            <span class="eyebrow">개발 테스트</span>
+            <h3>치트/테스트 옵션</h3>
+            <p class="muted">테스트 편의용 옵션입니다. 완성 후 치트 메뉴로 재사용합니다.</p>
+            <div class="settings-grid developer-settings" id="developer-settings"></div>
+          </section>
+          <section class="panel" data-panel-id="settings-save-load" data-panel-title="저장 관리">
+            <span class="eyebrow">차원 데이터</span>
+            <h3>저장 관리</h3>
+            <div class="save-slot-list" id="save-slot-list"></div>
+            <div class="save-actions">
+              <button class="secondary-button" id="export-save-button" type="button">데이터 백업 다운로드</button>
+              <button class="ghost-button" id="import-save-button" type="button">데이터 복원 업로드</button>
+              <input id="import-save-input" type="file" accept="application/json,.json" hidden />
+            </div>
+            <p class="muted save-status" id="save-status">저장 파일을 내보내거나 가져올 수 있습니다.</p>
+          </section>
+          <section class="panel" data-panel-id="settings-profile-edit" data-panel-title="플레이어 정보 변경">
+            <span class="eyebrow">플레이어</span>
+            <h3>플레이어 정보 변경</h3>
+            <div class="profile-edit-layout">
+              <div class="profile-edit-image-editor">
+                <div class="profile-edit-preview" id="profile-edit-preview" aria-label="플레이어 이미지 미리보기">
+                  <span>각성자</span>
+                </div>
+                <div class="profile-crop-controls" id="profile-edit-crop-controls" hidden>
+                  <small>이미지를 드래그하거나 버튼으로 위치와 확대를 조정하세요.</small>
+                  <div class="profile-crop-pad" aria-label="이미지 위치 조정">
+                    <button class="ghost-button" type="button" data-profile-crop-move="up">위</button>
+                    <button class="ghost-button" type="button" data-profile-crop-move="left">왼쪽</button>
+                    <button class="ghost-button" type="button" data-profile-crop-move="right">오른쪽</button>
+                    <button class="ghost-button" type="button" data-profile-crop-move="down">아래</button>
+                  </div>
+                  <div class="profile-crop-zoom">
+                    <button class="ghost-button" type="button" data-profile-crop-zoom="zoomOut">축소</button>
+                    <button class="ghost-button" type="button" data-profile-crop-reset>초기화</button>
+                    <button class="ghost-button" type="button" data-profile-crop-zoom="zoomIn">확대</button>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-edit-form">
+                <label class="settings-field">
+                  <span>이름</span>
+                  <input id="profile-edit-name" type="text" maxlength="12" autocomplete="off" />
+                </label>
+                <div class="settings-field">
+                  <span>사진</span>
+                  <div class="profile-image-actions">
+                    <button class="ghost-button" id="profile-edit-image-button" type="button">이미지 찾기</button>
+                    <button class="ghost-button" id="profile-edit-image-clear" type="button">기본 이미지</button>
+                    <span id="profile-edit-image-name">기본 각성자 이미지</span>
+                  </div>
+                  <input id="profile-edit-image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+                </div>
+                <button class="secondary-button profile-edit-save" id="profile-edit-save" type="button">변경 저장</button>
+              </div>
+            </div>
+          </section>
+          <section class="panel" data-panel-id="settings-audio" data-panel-title="사운드 설정">
+            <span class="eyebrow">사운드</span>
+            <h3>볼륨 설정</h3>
+            <div class="volume-settings">
+              <label class="volume-row">
+                <span>배경음악</span>
+                <input type="range" min="0" max="100" step="1" data-audio-volume="bgmVolume" />
+                <strong id="audio-bgmVolume-value">50%</strong>
+              </label>
+              <label class="volume-row">
+                <span>효과음</span>
+                <input type="range" min="0" max="100" step="1" data-audio-volume="sfxVolume" />
+                <strong id="audio-sfxVolume-value">70%</strong>
+              </label>
+            </div>
+          </section>
+          <section class="panel" data-panel-id="settings-feedback" data-panel-title="전투 표시 설정">
+            <span class="eyebrow">피드백</span>
+            <h3>전투 표시</h3>
+            <div class="settings-grid" id="feedback-settings"></div>
+          </section>
+          <section class="panel" data-panel-id="settings-combat-view" data-panel-title="전투 화면 설정">
+            <span class="eyebrow">전투 화면</span>
+            <h3>전투 화면 구성</h3>
+            <div class="settings-grid" id="combat-view-settings"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="src/main.js?v=280"></script>
+  </body>
 </html>

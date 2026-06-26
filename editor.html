@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Regressor Editor Prep</title>
+    <link rel="stylesheet" href="styles.css?v=280" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body class="editor-page">
+    <header class="editor-topbar">
+      <div class="editor-topbar-copy">
+        <span class="eyebrow" data-i18n="editorStatic.authority">SYSTEM AUTHORITY</span>
+        <h1 data-i18n="editorStatic.title">Project Regressor Editor Prep</h1>
+        <p data-i18n="editorStatic.description">Read-only preparation room for future editor links, file names, save keys, and backlog.</p>
+      </div>
+      <div class="editor-topbar-actions">
+        <a class="editor-link-button" href="index.html?v=250&cachebust=250" data-i18n="editorStatic.backToGame">Back To Game</a>
+      </div>
+    </header>
+
+    <main class="editor-shell">
+      <aside class="editor-sidebar" aria-label="Editor panel list" data-i18n-attr="aria-label:editorStatic.panelListAria">
+        <div>
+          <span class="eyebrow">EDITOR MAP</span>
+          <h2 data-i18n="editorStatic.preparedPanels">Prepared Panels</h2>
+        </div>
+        <nav class="editor-panel-nav" id="editor-panel-nav"></nav>
+      </aside>
+
+      <section class="editor-main">
+        <section class="panel editor-summary-panel">
+          <span class="eyebrow" data-i18n="editorStatic.connection">Connection</span>
+          <h2 id="editor-summary-title" data-i18n="editorStatic.loadingTitle">Loading editor data</h2>
+          <p class="muted" id="editor-summary-copy" data-i18n="editorStatic.loadingCopy">Checking manifest and backlog.</p>
+          <div class="editor-metric-grid" id="editor-metrics"></div>
+        </section>
+
+        <section class="panel editor-detail-panel">
+          <span class="eyebrow" data-i18n="editorStatic.panelDetails">Panel Details</span>
+          <div id="editor-panel-detail"></div>
+        </section>
+
+        <section class="panel">
+          <span class="eyebrow" data-i18n="editorStatic.assetEyebrow">Images / Sound</span>
+          <h2 data-i18n="editorStatic.fileSlots">File Slots</h2>
+          <p class="muted" data-i18n="editorStatic.fileSlotsCopy">Prepared slot list for future automatic file mapping.</p>
+          <div class="editor-asset-grid" id="editor-asset-grid"></div>
+        </section>
+
+        <section class="panel">
+          <span class="eyebrow" data-i18n="editorStatic.saveEyebrow">Timeline</span>
+          <h2 data-i18n="editorStatic.saveKeys">Browser Save Keys</h2>
+          <p class="muted" data-i18n="editorStatic.saveKeysCopy">This screen checks presence and size without changing saves.</p>
+          <div class="editor-save-grid" id="editor-save-grid"></div>
+          <div class="editor-actions">
+            <button class="secondary-button" id="editor-export-summary" type="button" data-i18n="editorStatic.downloadSaveSummary">Download Save Summary</button>
+            <button class="ghost-button" id="editor-refresh-saves" type="button" data-i18n="editorStatic.refresh">Refresh</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <span class="eyebrow" data-i18n="editorStatic.prototypeEyebrow">Prototype Memory</span>
+          <h2 data-i18n="editorStatic.prototypeTitle">Management List To Preserve</h2>
+          <p class="muted" data-i18n="editorStatic.prototypeCopy">Feature list distilled from prototype screens, not their UI.</p>
+          <div class="editor-prototype-list" id="editor-prototype-list"></div>
+        </section>
+
+        <section class="panel">
+          <span class="eyebrow" data-i18n="editorStatic.backlogEyebrow">Update Queue</span>
+          <h2 data-i18n="editorStatic.backlogTitle">Editor Backlog</h2>
+          <p class="muted" data-i18n="editorStatic.backlogCopy">Items to batch into the editor after the game feature lands first.</p>
+          <div class="editor-backlog-list" id="editor-backlog-list"></div>
+          <div class="editor-actions">
+            <button class="ghost-button" id="editor-download-manifest" type="button" data-i18n="editorStatic.downloadManifest">Download manifest</button>
+            <button class="ghost-button" id="editor-download-backlog" type="button" data-i18n="editorStatic.downloadBacklog">Download backlog</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="src/editor/editorMain.js?v=280"></script>
+  </body>
+</html>

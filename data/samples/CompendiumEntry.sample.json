@@ -1,0 +1,23 @@
+{
+  "id": "monster_goblin_scout",
+  "category": "monster",
+  "targetId": "goblin_scout",
+  "displayName": "고블린 정찰병",
+  "state": "analyzed",
+  "permanentKnowledge": {
+    "seen": true,
+    "defeated": true,
+    "killCount": 12,
+    "knownStats": true,
+    "knownResistances": true,
+    "knownDrops": false,
+    "knownWeakness": true
+  },
+  "runKnowledge": {
+    "encounteredThisRun": true,
+    "defeatedThisRun": true
+  },
+  "linkedScraps": [
+    "scrap_tutorial_forest_goblin_scout"
+  ]
+}

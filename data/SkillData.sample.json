@@ -1,0 +1,47 @@
+[
+  {
+    "id": "power_slash",
+    "name": "강타",
+    "type": "Active",
+    "mpCost": 10,
+    "cooldown": 4,
+    "damageType": "physical",
+    "element": "physical",
+    "multiplier": 1.5,
+    "effectType": "slash",
+    "breakPower": 1,
+    "stanceAllowed": ["power", "berserk"],
+    "triggerCondition": "always",
+    "description": "무기를 강하게 휘둘러 적을 베어낸다."
+  },
+  {
+    "id": "mana_bolt",
+    "name": "마력탄",
+    "type": "Active",
+    "mpCost": 12,
+    "cooldown": 5,
+    "damageType": "magic",
+    "element": "neutral",
+    "multiplier": 1.8,
+    "effectType": "magic",
+    "breakPower": 1,
+    "stanceAllowed": ["power", "berserk"],
+    "triggerCondition": "always",
+    "description": "압축한 마력을 적에게 쏘아 보낸다."
+  },
+  {
+    "id": "emergency_recovery",
+    "name": "응급 회복",
+    "type": "Active",
+    "mpCost": 15,
+    "cooldown": 12,
+    "damageType": "support",
+    "element": "light",
+    "multiplier": 0,
+    "effectType": "holy",
+    "breakPower": 0,
+    "stanceAllowed": ["conserve", "power", "berserk", "break_wait"],
+    "triggerCondition": "playerHpBelow30",
+    "description": "HP가 낮을 때 자신을 회복한다."
+  }
+]

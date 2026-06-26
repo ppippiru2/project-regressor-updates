@@ -1,0 +1,9 @@
+{
+  "showHitCounter": true,
+  "showDamageNumbers": true,
+  "showCriticalText": true,
+  "showMissText": true,
+  "enableHitShake": true,
+  "enableAttackEffects": true,
+  "showCompendiumNotifications": true
+}

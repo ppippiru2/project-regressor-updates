@@ -1,0 +1,57 @@
+[
+  {
+    "id": "tutorial_beach",
+    "name": "표류자의 해변",
+    "type": "Tutorial",
+    "recommendedLevel": 1,
+    "description": "튜토리얼 섬의 시작 지역. 작은 짐승과 약한 슬라임이 출현한다.",
+    "connectedRegions": ["tutorial_forest"],
+    "monsters": ["wild_rabbit"],
+    "boss": null,
+    "nodeMapId": null
+  },
+  {
+    "id": "tutorial_forest",
+    "name": "초심자의 숲",
+    "type": "Tutorial",
+    "recommendedLevel": 3,
+    "description": "초보 헌터가 첫 사냥을 익히는 숲.",
+    "connectedRegions": ["tutorial_beach", "tutorial_cave"],
+    "monsters": ["wild_rabbit", "green_slime"],
+    "boss": null,
+    "nodeMapId": null
+  },
+  {
+    "id": "tutorial_cave",
+    "name": "고블린 동굴",
+    "type": "Tutorial",
+    "recommendedLevel": 5,
+    "description": "고블린 무리가 숨어 있는 동굴.",
+    "connectedRegions": ["tutorial_forest", "tutorial_ruins"],
+    "monsters": ["goblin_scout", "goblin_warrior"],
+    "boss": null,
+    "nodeMapId": null
+  },
+  {
+    "id": "tutorial_ruins",
+    "name": "잊혀진 유적 입구",
+    "type": "Tutorial",
+    "recommendedLevel": 8,
+    "description": "낡은 제단과 붕괴한 마법 문명의 흔적이 남아 있다.",
+    "connectedRegions": ["tutorial_cave", "tutorial_altar"],
+    "monsters": ["goblin_warrior"],
+    "boss": null,
+    "nodeMapId": "gate_tutorial_ruins_01"
+  },
+  {
+    "id": "tutorial_altar",
+    "name": "봉인된 제단",
+    "type": "TutorialBoss",
+    "recommendedLevel": 10,
+    "description": "튜토리얼 섬의 최종 보스가 봉인된 장소.",
+    "connectedRegions": ["tutorial_ruins"],
+    "monsters": [],
+    "boss": "cursed_guardian",
+    "nodeMapId": null
+  }
+]
