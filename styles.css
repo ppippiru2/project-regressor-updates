@@ -1436,14 +1436,18 @@ select:focus {
 .profile-status-crop-controls {
   width: 100%;
   max-width: 12.5rem;
+  gap: 0.4rem;
+  padding: 0.5rem;
 }
 
-.profile-status-crop-controls small {
-  font-size: 0.72rem;
+.profile-status-crop-toggle {
+  width: min(100%, 12.5rem);
+  min-height: 2.15rem;
+  font-size: 0.78rem;
 }
 
 .profile-status-crop-controls button {
-  min-height: 2rem;
+  min-height: 1.9rem;
   font-size: 0.72rem;
 }
 

@@ -1,7 +1,7 @@
-import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=344";
-import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=344";
-import { t, tf } from "../localization/index.js?v=344";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=344";
+import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=345";
+import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=345";
+import { t, tf } from "../localization/index.js?v=345";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=345";
 
 const PROFILE_FIELDS = [
   ["statusUi.profileFields.name", "name", "profile:name"],
@@ -45,13 +45,21 @@ function renderProfilePortrait(playerProfile, playerSpritePath) {
   const customPortrait = playerProfile?.portraitDataUrl || "";
   const portraitImage = customPortrait || playerSpritePath;
   const hasSprite = Boolean(portraitImage);
+  const portraitEditor = portrait.closest(".profile-portrait-editor");
+  const cropToggle = byId("profile-status-crop-toggle");
   const cropControls = byId("profile-status-crop-controls");
+  const cropControlsOpen = hasSprite && portraitEditor?.dataset.statusCropOpen === "true";
   portrait.classList.toggle("has-sprite", hasSprite);
   portrait.classList.toggle("has-custom-portrait", Boolean(customPortrait));
   portrait.setAttribute("aria-label", tf("statusUi.portraitAria", {
     name: playerProfile?.name || t("statusUi.fallbackPortraitName"),
   }));
-  if (cropControls) cropControls.hidden = !hasSprite;
+  if (!hasSprite && portraitEditor) portraitEditor.dataset.statusCropOpen = "false";
+  if (cropToggle) {
+    cropToggle.hidden = !hasSprite;
+    cropToggle.setAttribute("aria-expanded", cropControlsOpen ? "true" : "false");
+  }
+  if (cropControls) cropControls.hidden = !cropControlsOpen;
 
   if (hasSprite) {
     portrait.style.removeProperty("--profile-sprite-image");

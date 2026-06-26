@@ -8,7 +8,7 @@
     <title>Project Regressor</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" href="assets/icon.png" type="image/png" />
-    <link rel="stylesheet" href="styles.css?v=344" />
+    <link rel="stylesheet" href="styles.css?v=345" />
   </head>
   <body>
     <section class="creation-screen is-hidden" id="character-creation" aria-label="Character creation" data-i18n-attr="aria-label:staticHtml.characterCreation.ariaLabel">
@@ -346,8 +346,16 @@
                     <span class="profile-portrait-scanline" aria-hidden="true"></span>
                     <span class="profile-portrait-label" data-i18n="staticHtml.app.status.portraitLabel">Player Image</span>
                   </div>
+                  <button
+                    class="ghost-button profile-status-crop-toggle"
+                    id="profile-status-crop-toggle"
+                    type="button"
+                    aria-controls="profile-status-crop-controls"
+                    aria-expanded="false"
+                    data-i18n="staticHtml.app.profileEdit.adjustImage"
+                    hidden
+                  >이미지 위치 조정</button>
                   <div class="profile-crop-controls profile-status-crop-controls" id="profile-status-crop-controls" aria-label="플레이어 정보 이미지 위치 조정" hidden>
-                    <small data-i18n="staticHtml.app.profileEdit.adjustImageHint">이미지를 드래그하거나 버튼으로 위치와 확대를 조정하세요.</small>
                     <div class="profile-crop-pad" aria-label="이미지 위치 이동">
                       <button class="ghost-button" type="button" data-status-crop-move="up" data-i18n="staticHtml.app.profileEdit.moveUp">위</button>
                       <button class="ghost-button" type="button" data-status-crop-move="left" data-i18n="staticHtml.app.profileEdit.moveLeft">왼쪽</button>
@@ -497,15 +505,15 @@
               </div>
               <div class="build-info-line wide">
                 <span>현재 주소</span>
-                <strong id="build-address-label">http://127.0.0.1:5173/?v=344</strong>
+                <strong id="build-address-label">http://127.0.0.1:5173/?v=345</strong>
               </div>
               <div class="build-info-line wide">
                 <span>모바일 확인</span>
-                <strong id="build-mobile-label">PC LAN IP:5173/?v=344</strong>
+                <strong id="build-mobile-label">PC LAN IP:5173/?v=345</strong>
               </div>
               <div class="build-info-line wide build-info-action">
                 <span>개발 도구</span>
-                <a class="editor-launch-button" href="editor.html?v=344&cachebust=344" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
+                <a class="editor-launch-button" href="editor.html?v=345&cachebust=345" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
               </div>
             </div>
           </section>
@@ -597,6 +605,6 @@
       </main>
     </div>
 
-    <script type="module" src="src/main.js?v=344"></script>
+    <script type="module" src="src/main.js?v=345"></script>
   </body>
 </html>

@@ -1,16 +1,16 @@
-import { t, tf } from "../localization/index.js?v=344";
-import { saveSlotLabel } from "../state/saveSlots.js?v=344";
+import { t, tf } from "../localization/index.js?v=345";
+import { saveSlotLabel } from "../state/saveSlots.js?v=345";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=344";
+} from "../state/portraitFrame.js?v=345";
 import {
   applyPortraitFrameToElement,
   readPortraitFrameFromElement,
   renderPortraitImagePreview,
-} from "./portraitFrameView.js?v=344";
+} from "./portraitFrameView.js?v=345";
 
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 const CLEAR_SLOT_HOLD_MS = 5000;
@@ -37,6 +37,7 @@ export function bindSaveLoadEvents({
   const profileEditPreview = document.getElementById("profile-edit-preview");
   const profileCropControls = document.getElementById("profile-edit-crop-controls");
   const statusProfilePortrait = document.getElementById("player-profile-portrait");
+  const statusProfileCropToggle = document.getElementById("profile-status-crop-toggle");
   const statusProfileCropControls = document.getElementById("profile-status-crop-controls");
   let pendingProfileImageDataUrl = null;
   let pendingProfileImageFrame = null;
@@ -167,6 +168,15 @@ export function bindSaveLoadEvents({
     });
   }
 
+  if (statusProfileCropToggle) {
+    statusProfileCropToggle.addEventListener("click", () => {
+      if (!hasAdjustableStatusPortrait()) return;
+      const editor = statusProfilePortrait?.closest(".profile-portrait-editor");
+      const nextOpen = editor?.dataset.statusCropOpen !== "true";
+      setStatusProfileCropControlsOpen(nextOpen);
+    });
+  }
+
   if (statusProfilePortrait) {
     statusProfilePortrait.addEventListener("pointerdown", (event) => {
       if (!hasAdjustableStatusPortrait()) return;
@@ -236,6 +246,14 @@ export function bindSaveLoadEvents({
         portraitFrame: normalizedFrame,
       });
     }
+  }
+
+  function setStatusProfileCropControlsOpen(isOpen) {
+    const editor = statusProfilePortrait?.closest(".profile-portrait-editor");
+    const open = Boolean(isOpen && hasAdjustableStatusPortrait());
+    if (editor) editor.dataset.statusCropOpen = open ? "true" : "false";
+    if (statusProfileCropControls) statusProfileCropControls.hidden = !open;
+    if (statusProfileCropToggle) statusProfileCropToggle.setAttribute("aria-expanded", open ? "true" : "false");
   }
 }
 
