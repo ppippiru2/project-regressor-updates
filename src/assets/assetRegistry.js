@@ -1,4 +1,4 @@
-import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=333";
+import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=334";
 
 const ASSET_DATA_VERSION = "236";
 

@@ -3417,6 +3417,68 @@ select:focus {
   font-weight: 900;
 }
 
+.editor-retarget-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content max-content;
+  gap: 0.65rem;
+  align-items: end;
+}
+
+.editor-retarget-search {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.editor-retarget-search span,
+.editor-retarget-count {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.editor-retarget-search input {
+  min-height: 2.35rem;
+}
+
+.editor-retarget-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+
+.editor-retarget-filter,
+.editor-retarget-toggle {
+  min-height: 2.2rem;
+  border: 1px solid rgba(108, 210, 255, 0.24);
+  border-radius: 6px;
+  background: rgba(4, 20, 48, 0.78);
+  color: var(--action-ready);
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 0 0.65rem;
+}
+
+.editor-retarget-filter.is-active,
+.editor-retarget-toggle[aria-expanded="true"] {
+  border-color: rgba(57, 228, 255, 0.86);
+  background: linear-gradient(180deg, rgba(20, 113, 172, 0.78), rgba(5, 38, 82, 0.9));
+  color: var(--text);
+  box-shadow: 0 0 12px rgba(57, 228, 255, 0.18);
+}
+
+.editor-retarget-count {
+  justify-self: end;
+  min-height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(4, 20, 48, 0.68);
+  padding: 0 0.65rem;
+  white-space: nowrap;
+}
+
 .editor-retarget-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -3444,6 +3506,24 @@ select:focus {
   padding: 0.7rem;
 }
 
+.editor-retarget-row-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.editor-retarget-body {
+  display: grid;
+  gap: 0.55rem;
+  max-height: 5.75rem;
+  overflow: hidden;
+}
+
+.editor-retarget-row.is-expanded .editor-retarget-body {
+  max-height: none;
+}
+
 .editor-retarget-row code {
   display: block;
   margin-top: 0.2rem;
@@ -3454,6 +3534,15 @@ select:focus {
   font-size: 0.76rem;
   overflow-wrap: anywhere;
   padding: 0.4rem 0.5rem;
+}
+
+.editor-retarget-empty {
+  margin: 0;
+  border: 1px dashed rgba(108, 210, 255, 0.22);
+  border-radius: 6px;
+  color: var(--muted);
+  font-weight: 800;
+  padding: 0.75rem;
 }
 
 .editor-actions {
@@ -5463,6 +5552,17 @@ body[data-info-tooltips="off"] .info-term {
   .editor-retarget-grid {
     grid-template-columns: 1fr;
   }
+
+  .editor-retarget-controls {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .editor-retarget-filter-buttons,
+  .editor-retarget-count {
+    justify-content: flex-start;
+    justify-self: start;
+  }
 }
 
 @media (max-width: 640px) {
@@ -5512,8 +5612,13 @@ body[data-info-tooltips="off"] .info-term {
   .editor-asset-card,
   .editor-retarget-head,
   .editor-retarget-summary,
+  .editor-retarget-row-head,
   .editor-topbar {
     grid-template-columns: 1fr;
+  }
+
+  .editor-retarget-row-head {
+    align-items: stretch;
   }
 
   .editor-shell,

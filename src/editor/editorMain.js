@@ -1,8 +1,8 @@
-import { applyDomLocalization } from "../localization/domText.js?v=333";
-import { getLocaleText, tf } from "../localization/index.js?v=333";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=333";
+import { applyDomLocalization } from "../localization/domText.js?v=334";
+import { getLocaleText, tf } from "../localization/index.js?v=334";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=334";
 
-const EDITOR_VERSION = "333";
+const EDITOR_VERSION = "334";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -17,6 +17,11 @@ const SAVE_KEYS = [
 let manifest = null;
 let backlog = null;
 let activePanelId = "";
+let retargetDetailFilter = {
+  kind: "all",
+  query: ""
+};
+const expandedRetargetRows = new Set();
 
 const elements = {
   nav: document.getElementById("editor-panel-nav"),
@@ -75,6 +80,42 @@ function bindEvents() {
   });
   elements.downloadBacklog?.addEventListener("click", () => {
     downloadJson("project-regressor-editor-backlog.json", backlog);
+  });
+  elements.panelDetail?.addEventListener("input", (event) => {
+    const input = event.target.closest("[data-retarget-search]");
+    if (!input) return;
+    const cursor = input.selectionStart ?? input.value.length;
+    retargetDetailFilter = {
+      ...retargetDetailFilter,
+      query: input.value
+    };
+    renderPanelDetail();
+    const nextInput = elements.panelDetail.querySelector("[data-retarget-search]");
+    if (nextInput) {
+      nextInput.focus();
+      nextInput.setSelectionRange(cursor, cursor);
+    }
+  });
+  elements.panelDetail?.addEventListener("click", (event) => {
+    const filterButton = event.target.closest("[data-retarget-kind]");
+    if (filterButton) {
+      retargetDetailFilter = {
+        ...retargetDetailFilter,
+        kind: filterButton.dataset.retargetKind || "all"
+      };
+      renderPanelDetail();
+      return;
+    }
+    const toggleButton = event.target.closest("[data-retarget-toggle]");
+    if (!toggleButton) return;
+    const rowId = toggleButton.dataset.retargetToggle;
+    if (!rowId) return;
+    if (expandedRetargetRows.has(rowId)) {
+      expandedRetargetRows.delete(rowId);
+    } else {
+      expandedRetargetRows.add(rowId);
+    }
+    renderPanelDetail();
   });
 }
 
@@ -166,37 +207,18 @@ function renderPanelDetail() {
 function renderRetargetPreviewDetail() {
   const preview = createMurimRetargetPreview();
   const detailText = EDITOR_TEXT.retargetDetail || {};
-  const textRows = preview.textOverrides.map((entry) => `
-    <article class="editor-retarget-row">
-      <div>
-        <span>${escapeHtml(detailText.sourcePath || "Source")}</span>
-        <code>${escapeHtml(entry.sourcePath)}</code>
-      </div>
-      <div>
-        <span>${escapeHtml(detailText.targetTextPath || "Target")}</span>
-        <code>${escapeHtml(entry.targetTextPath)}</code>
-      </div>
-      <p>${escapeHtml(entry.targetText || "")}</p>
-    </article>
-  `).join("");
-  const assetRows = preview.assetOverrides.map((entry) => `
-    <article class="editor-retarget-row">
-      <div>
-        <span>${escapeHtml(detailText.sourceAsset || "Source Asset")}</span>
-        <code>${escapeHtml(entry.sourceAssetId)}</code>
-      </div>
-      <div>
-        <span>${escapeHtml(detailText.targetAsset || "Target Asset")}</span>
-        <code>${escapeHtml(entry.targetAssetId)}</code>
-      </div>
-      <p>${escapeHtml(tf("editorPrep.retargetDetail.assetSummary", {
-        plannedFile: entry.plannedWebpFile || entry.plannedSourceFile || "-",
-        mappedTarget: entry.mappedTargetAssetId || "-",
-        slotCount: entry.slotPaths.length
-      }, ""))}</p>
-      <div class="editor-chip-list">${entry.slotPaths.map((slotPath) => chip(slotPath)).join("")}</div>
-    </article>
-  `).join("");
+  const textEntries = preview.textOverrides
+    .map((entry) => createRetargetTextRow(entry, detailText))
+    .filter((entry) => matchesRetargetFilter(entry));
+  const assetEntries = preview.assetOverrides
+    .map((entry) => createRetargetAssetRow(entry, detailText))
+    .filter((entry) => matchesRetargetFilter(entry));
+  const textRows = textEntries.map((entry) => entry.html).join("");
+  const assetRows = assetEntries.map((entry) => entry.html).join("");
+  const visibleTextCount = textEntries.length;
+  const visibleAssetCount = assetEntries.length;
+  const visibleCount = visibleTextCount + visibleAssetCount;
+  const totalCount = preview.counts.textOverrides + preview.counts.assetOverrides;
 
   return `
     <section class="editor-retarget-detail" aria-label="${escapeAttribute(detailText.title || "Retarget Preview Detail")}">
@@ -221,18 +243,136 @@ function renderRetargetPreviewDetail() {
           mismatchedAssets: preview.counts.mismatchedAssetTargets
         }, ""))}</span>
       </div>
+      <div class="editor-retarget-controls">
+        <label class="editor-retarget-search">
+          <span>${escapeHtml(detailText.searchLabel || "Search")}</span>
+          <input type="search" data-retarget-search value="${escapeAttribute(retargetDetailFilter.query)}" placeholder="${escapeAttribute(detailText.searchPlaceholder || "")}" />
+        </label>
+        <div class="editor-retarget-filter-buttons" role="group" aria-label="${escapeAttribute(detailText.typeFilter || "Type Filter")}">
+          ${retargetKindButton("all", detailText.all || "All")}
+          ${retargetKindButton("text", detailText.textOnly || "Text")}
+          ${retargetKindButton("asset", detailText.assetOnly || "Assets")}
+        </div>
+        <span class="editor-retarget-count">${escapeHtml(tf("editorPrep.retargetDetail.visibleCount", {
+          visible: visibleCount,
+          total: totalCount
+        }, `${visibleCount}/${totalCount}`))}</span>
+      </div>
       <div class="editor-retarget-grid">
         <section>
           <h4>${escapeHtml(tf("editorPrep.retargetDetail.textTitle", { count: preview.counts.textOverrides }, ""))}</h4>
-          <div class="editor-retarget-list">${textRows}</div>
+          <div class="editor-retarget-list">${textRows || emptyRetargetRows(detailText)}</div>
         </section>
         <section>
           <h4>${escapeHtml(tf("editorPrep.retargetDetail.assetTitle", { count: preview.counts.assetOverrides }, ""))}</h4>
-          <div class="editor-retarget-list">${assetRows}</div>
+          <div class="editor-retarget-list">${assetRows || emptyRetargetRows(detailText)}</div>
         </section>
       </div>
     </section>
   `;
+}
+
+function createRetargetTextRow(entry, detailText) {
+  const rowId = `text:${entry.sourcePath}`;
+  const expanded = expandedRetargetRows.has(rowId);
+  const searchText = [
+    "text",
+    entry.sourcePath,
+    entry.sourceText,
+    entry.targetTextPath,
+    entry.targetText
+  ].join(" ").toLowerCase();
+  return {
+    kind: "text",
+    searchText,
+    html: `
+      <article class="editor-retarget-row${expanded ? " is-expanded" : ""}" data-retarget-row-kind="text">
+        ${retargetRowHeader(rowId, expanded, detailText)}
+        <div class="editor-retarget-body">
+          <div>
+            <span>${escapeHtml(detailText.sourcePath || "Source")}</span>
+            <code>${escapeHtml(entry.sourcePath)}</code>
+          </div>
+          <div>
+            <span>${escapeHtml(detailText.targetTextPath || "Target")}</span>
+            <code>${escapeHtml(entry.targetTextPath)}</code>
+          </div>
+          <p>${escapeHtml(entry.targetText || "")}</p>
+        </div>
+      </article>
+    `
+  };
+}
+
+function createRetargetAssetRow(entry, detailText) {
+  const rowId = `asset:${entry.sourceAssetId}`;
+  const expanded = expandedRetargetRows.has(rowId);
+  const summary = tf("editorPrep.retargetDetail.assetSummary", {
+    plannedFile: entry.plannedWebpFile || entry.plannedSourceFile || "-",
+    mappedTarget: entry.mappedTargetAssetId || "-",
+    slotCount: entry.slotPaths.length
+  }, "");
+  const searchText = [
+    "asset",
+    entry.sourceAssetId,
+    entry.targetAssetId,
+    entry.plannedSourceFile,
+    entry.plannedWebpFile,
+    entry.mappedTargetAssetId,
+    ...entry.slotPaths
+  ].join(" ").toLowerCase();
+  return {
+    kind: "asset",
+    searchText,
+    html: `
+      <article class="editor-retarget-row${expanded ? " is-expanded" : ""}" data-retarget-row-kind="asset">
+        ${retargetRowHeader(rowId, expanded, detailText)}
+        <div class="editor-retarget-body">
+          <div>
+            <span>${escapeHtml(detailText.sourceAsset || "Source Asset")}</span>
+            <code>${escapeHtml(entry.sourceAssetId)}</code>
+          </div>
+          <div>
+            <span>${escapeHtml(detailText.targetAsset || "Target Asset")}</span>
+            <code>${escapeHtml(entry.targetAssetId)}</code>
+          </div>
+          <p>${escapeHtml(summary)}</p>
+          <div class="editor-chip-list">${entry.slotPaths.map((slotPath) => chip(slotPath)).join("")}</div>
+        </div>
+      </article>
+    `
+  };
+}
+
+function retargetRowHeader(rowId, expanded, detailText) {
+  return `
+    <div class="editor-retarget-row-head">
+      <span>${escapeHtml(rowId.startsWith("asset:") ? (detailText.assetRow || "Asset") : (detailText.textRow || "Text"))}</span>
+      <button class="editor-retarget-toggle" type="button" data-retarget-toggle="${escapeAttribute(rowId)}" aria-expanded="${expanded ? "true" : "false"}">
+        ${escapeHtml(expanded ? (detailText.collapse || "Collapse") : (detailText.expand || "Expand"))}
+      </button>
+    </div>
+  `;
+}
+
+function matchesRetargetFilter(entry) {
+  const kind = retargetDetailFilter.kind || "all";
+  const query = normalizeSearchText(retargetDetailFilter.query);
+  if (kind !== "all" && entry.kind !== kind) return false;
+  return !query || entry.searchText.includes(query);
+}
+
+function retargetKindButton(kind, label) {
+  const active = (retargetDetailFilter.kind || "all") === kind;
+  return `
+    <button class="editor-retarget-filter${active ? " is-active" : ""}" type="button" data-retarget-kind="${escapeAttribute(kind)}" aria-pressed="${active ? "true" : "false"}">
+      ${escapeHtml(label)}
+    </button>
+  `;
+}
+
+function emptyRetargetRows(detailText) {
+  return `<p class="editor-retarget-empty">${escapeHtml(detailText.empty || "")}</p>`;
 }
 
 function renderAssets() {
@@ -397,6 +537,10 @@ function chip(value) {
 
 function statusLabel(status = "planned") {
   return EDITOR_TEXT.status[status] || status;
+}
+
+function normalizeSearchText(value) {
+  return String(value || "").trim().toLowerCase();
 }
 
 function downloadJson(fileName, data) {
