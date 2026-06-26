@@ -3422,11 +3422,13 @@ select:focus {
   grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
   gap: 0.65rem;
   align-items: end;
+  min-width: 0;
 }
 
 .editor-retarget-search {
   display: grid;
   gap: 0.35rem;
+  min-width: 0;
 }
 
 .editor-retarget-search span,
@@ -3445,6 +3447,11 @@ select:focus {
   flex-wrap: wrap;
   gap: 0.35rem;
   justify-content: flex-end;
+  min-width: 0;
+}
+
+.editor-retarget-filter {
+  min-width: 3.5rem;
 }
 
 .editor-retarget-filter,
@@ -3471,6 +3478,8 @@ select:focus {
 .editor-retarget-reset {
   border-color: rgba(244, 211, 94, 0.36);
   color: var(--gold);
+  justify-self: start;
+  white-space: nowrap;
 }
 
 .editor-retarget-count {
@@ -5573,9 +5582,23 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .editor-retarget-filter-buttons,
+  .editor-retarget-reset,
   .editor-retarget-count {
     justify-content: flex-start;
     justify-self: start;
+  }
+
+  .editor-retarget-filter-buttons {
+    width: 100%;
+  }
+
+  .editor-retarget-filter {
+    flex: 1 1 5.2rem;
+  }
+
+  .editor-retarget-reset,
+  .editor-retarget-count {
+    max-width: 100%;
   }
 }
 
