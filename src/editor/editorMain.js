@@ -1,8 +1,8 @@
-import { applyDomLocalization } from "../localization/domText.js?v=334";
-import { getLocaleText, tf } from "../localization/index.js?v=334";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=334";
+import { applyDomLocalization } from "../localization/domText.js?v=335";
+import { getLocaleText, tf } from "../localization/index.js?v=335";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=335";
 
-const EDITOR_VERSION = "334";
+const EDITOR_VERSION = "335";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -11,17 +11,17 @@ const SAVE_KEYS = [
   "project_regressor_mvp_save",
   "project_regressor_save_slots",
   "project_regressor_active_save_slot",
-  "project_regressor_ui_state"
+  "project_regressor_ui_state",
+  "project_regressor_editor_retarget_filter"
 ];
+const RETARGET_FILTER_STORAGE_KEY = "project_regressor_editor_retarget_filter";
 
 let manifest = null;
 let backlog = null;
 let activePanelId = "";
-let retargetDetailFilter = {
-  kind: "all",
-  query: ""
-};
-const expandedRetargetRows = new Set();
+const storedRetargetDetailFilter = loadRetargetDetailFilter();
+let retargetDetailFilter = storedRetargetDetailFilter.filter;
+const expandedRetargetRows = new Set(storedRetargetDetailFilter.expandedRows);
 
 const elements = {
   nav: document.getElementById("editor-panel-nav"),
@@ -89,6 +89,7 @@ function bindEvents() {
       ...retargetDetailFilter,
       query: input.value
     };
+    persistRetargetDetailFilter();
     renderPanelDetail();
     const nextInput = elements.panelDetail.querySelector("[data-retarget-search]");
     if (nextInput) {
@@ -101,8 +102,9 @@ function bindEvents() {
     if (filterButton) {
       retargetDetailFilter = {
         ...retargetDetailFilter,
-        kind: filterButton.dataset.retargetKind || "all"
+        kind: normalizeRetargetKind(filterButton.dataset.retargetKind)
       };
+      persistRetargetDetailFilter();
       renderPanelDetail();
       return;
     }
@@ -115,6 +117,7 @@ function bindEvents() {
     } else {
       expandedRetargetRows.add(rowId);
     }
+    persistRetargetDetailFilter();
     renderPanelDetail();
   });
 }
@@ -541,6 +544,44 @@ function statusLabel(status = "planned") {
 
 function normalizeSearchText(value) {
   return String(value || "").trim().toLowerCase();
+}
+
+function normalizeRetargetKind(value) {
+  return ["all", "text", "asset"].includes(value) ? value : "all";
+}
+
+function loadRetargetDetailFilter() {
+  try {
+    const raw = window.localStorage.getItem(RETARGET_FILTER_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return {
+      filter: {
+        kind: normalizeRetargetKind(parsed?.kind),
+        query: typeof parsed?.query === "string" ? parsed.query : ""
+      },
+      expandedRows: Array.isArray(parsed?.expandedRows) ? parsed.expandedRows.filter((rowId) => typeof rowId === "string") : []
+    };
+  } catch {
+    return {
+      filter: {
+        kind: "all",
+        query: ""
+      },
+      expandedRows: []
+    };
+  }
+}
+
+function persistRetargetDetailFilter() {
+  try {
+    window.localStorage.setItem(RETARGET_FILTER_STORAGE_KEY, JSON.stringify({
+      kind: normalizeRetargetKind(retargetDetailFilter.kind),
+      query: String(retargetDetailFilter.query || ""),
+      expandedRows: [...expandedRetargetRows].slice(0, 160)
+    }));
+  } catch {
+    // Editor convenience state is optional; failed persistence should not block the read-only screen.
+  }
 }
 
 function downloadJson(fileName, data) {

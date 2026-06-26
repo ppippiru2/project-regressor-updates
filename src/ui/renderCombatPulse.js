@@ -1,5 +1,5 @@
 import { clamp } from "../combat/combatFormula.js";
-import { t, tf } from "../localization/index.js?v=334";
+import { t, tf } from "../localization/index.js?v=335";
 
 export function renderHitCounter(state) {
   const hitCounter = document.getElementById("hit-counter");
