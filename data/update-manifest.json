@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 329,
-  "displayVersion": "v3.29",
-  "cacheVersion": "project-regressor-mvp-v329",
+  "versionCode": 330,
+  "displayVersion": "v3.30",
+  "cacheVersion": "project-regressor-mvp-v330",
   "updatedAt": "2026-06-26",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=329&cachebust=329",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=330&cachebust=330",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v330 adds a generic content retarget preview helper that expands text and asset sample mappings without mutating live runtime data.",
+    "v330 adds a quick-check guard that builds the murim preview and validates counts, localization resolution, asset mappings, and slot paths.",
     "v329 adds a murim retarget sample module that references localization paths instead of embedding Korean UI text in runtime content metadata.",
     "v329 adds a quick-check guard that validates the murim sample against text candidates, asset candidates, target profile ids, and ko-KR sample strings.",
     "v328 adds detailed asset retarget candidates for player sprites, region cards, node maps, battle backgrounds, and source files.",
@@ -72,13 +74,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v329-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v330-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v329-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v330-debug.apk"
   },
   "version": {
-    "code": 329,
-    "name": "3.29.0",
-    "displayName": "v329"
+    "code": 330,
+    "name": "3.30.0",
+    "displayName": "v330"
   }
 }

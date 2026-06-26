@@ -1,5 +1,5 @@
-import { applyDomLocalization } from "../localization/domText.js?v=329";
-import { getLocaleText, tf } from "../localization/index.js?v=329";
+import { applyDomLocalization } from "../localization/domText.js?v=330";
+import { getLocaleText, tf } from "../localization/index.js?v=330";
 
 const EDITOR_VERSION = "250";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
