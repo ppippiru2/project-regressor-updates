@@ -1,15 +1,16 @@
 export const DEFAULT_PORTRAIT_FRAME = Object.freeze({
   x: 50,
-  y: 35,
-  scale: 1.3,
+  y: 50,
+  scale: 1,
 });
 
 const ABSOLUTE_MIN_FRAME_POSITION = 0;
 const ABSOLUTE_MAX_FRAME_POSITION = 100;
-const MIN_FRAME_SCALE = 1;
+const MIN_FRAME_SCALE = 0.7;
 const MAX_FRAME_SCALE = 2.4;
 const MOVE_STEP = 5;
 const SCALE_STEP = 0.1;
+const POSITION_BLEED = 22;
 
 export function normalizePortraitFrame(frame = {}) {
   const source = frame && typeof frame === "object" && !Array.isArray(frame) ? frame : {};
@@ -63,8 +64,14 @@ function roundFrameNumber(value) {
 function positionBoundsForScale(scale) {
   const lower = 100 - 50 * scale;
   const upper = 50 * scale;
+  if (lower > upper) {
+    return {
+      min: Math.max(ABSOLUTE_MIN_FRAME_POSITION, 50 - POSITION_BLEED),
+      max: Math.min(ABSOLUTE_MAX_FRAME_POSITION, 50 + POSITION_BLEED),
+    };
+  }
   return {
-    min: Math.max(ABSOLUTE_MIN_FRAME_POSITION, lower),
-    max: Math.min(ABSOLUTE_MAX_FRAME_POSITION, upper),
+    min: Math.max(ABSOLUTE_MIN_FRAME_POSITION, lower - POSITION_BLEED),
+    max: Math.min(ABSOLUTE_MAX_FRAME_POSITION, upper + POSITION_BLEED),
   };
 }

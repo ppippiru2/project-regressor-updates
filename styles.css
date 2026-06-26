@@ -309,11 +309,11 @@ select:focus {
 .portrait-crop-image {
   position: absolute;
   left: var(--portrait-frame-x, 50%);
-  top: var(--portrait-frame-y, 35%);
+  top: var(--portrait-frame-y, 50%);
   z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transform: translate(-50%, -50%) scale(var(--portrait-frame-scale, 1));
   pointer-events: none;
   user-select: none;
@@ -5834,6 +5834,69 @@ body[data-info-tooltips="off"] .info-term {
   .editor-link-button,
   .editor-launch-button {
     width: 100%;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .ghost-button,
+  .danger-button,
+  .editor-link-button,
+  .inventory-action-button {
+    line-height: 1.22;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+
+  .setting-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    align-items: center;
+  }
+
+  .setting-row > span,
+  .setting-row small {
+    min-width: 0;
+  }
+
+  .developer-action-row {
+    grid-template-columns: minmax(0, 1fr) minmax(5.8rem, max-content);
+  }
+
+  .developer-action-row .secondary-button {
+    min-width: 5.8rem;
+    padding-inline: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .save-actions,
+  .profile-image-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .save-actions > button,
+  .profile-image-actions > button {
+    min-width: 0;
+    width: 100%;
+    white-space: normal;
+  }
+
+  .profile-image-actions > span {
+    grid-column: 1 / -1;
+  }
+
+  .status-heading-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .status-heading-actions button {
+    min-width: 0;
+    padding-inline: 0.55rem;
+    width: 100%;
+    white-space: normal;
   }
 
   .growth-objective {

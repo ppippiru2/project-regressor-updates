@@ -1,6 +1,6 @@
-import { applyDomLocalization } from "../localization/domText.js?v=345";
-import { getLocaleText, tf } from "../localization/index.js?v=345";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=345";
+import { applyDomLocalization } from "../localization/domText.js?v=346";
+import { getLocaleText, tf } from "../localization/index.js?v=346";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=346";
 
 const EDITOR_VERSION = "338";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
