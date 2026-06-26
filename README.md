@@ -2,6 +2,6 @@
 
 Hosted update payload for Project Regressor.
 
-- Latest web build: v3.23
+- Latest web build: v3.25
 - Update manifest: data/update-manifest.json
-- Android debug APK: releases/project-regressor-v323-debug.apk
+- Android debug APK: releases/project-regressor-v325-debug.apk

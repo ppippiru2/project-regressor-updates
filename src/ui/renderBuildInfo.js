@@ -2,9 +2,9 @@ import {
   applyDeploymentUpdate,
   checkDeploymentUpdate,
   getDeploymentUpdateState,
-} from "../app/deploymentUpdate.js?v=323";
-import { t, tf } from "../localization/index.js?v=323";
-import { renderDeploymentUpdate } from "./renderDeploymentUpdate.js?v=323";
+} from "../app/deploymentUpdate.js?v=325";
+import { t, tf } from "../localization/index.js?v=325";
+import { renderDeploymentUpdate } from "./renderDeploymentUpdate.js?v=325";
 
 export function renderBuildInfo() {
   const info = createBuildInfo();
