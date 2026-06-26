@@ -1,7 +1,9 @@
-export const COMBAT_FRAME_MS = 100;
-export const AUTO_RESTART_DELAY_MS = 900;
-export const HIT_RESET_MS = 3000;
-export const HYP_MAX = 100;
+import { BREAK_GAUGE_BALANCE, COMBAT_RUNTIME_BALANCE } from "../balance/combatBalance.js?v=322";
+
+export const COMBAT_FRAME_MS = COMBAT_RUNTIME_BALANCE.frameMs;
+export const AUTO_RESTART_DELAY_MS = COMBAT_RUNTIME_BALANCE.autoRestartDelayMs;
+export const HIT_RESET_MS = COMBAT_RUNTIME_BALANCE.hitResetMs;
+export const HYP_MAX = COMBAT_RUNTIME_BALANCE.hyperMax;
 
 export function createCombatRuntime() {
   return {
@@ -36,6 +38,6 @@ export function createCombatTarget(monster, stats) {
     hp: stats.maxHp,
     mp: stats.maxMp,
     isBoss: Boolean(monster.isBoss),
-    breakGauge: monster.isBoss ? 100 : 0,
+    breakGauge: monster.isBoss ? BREAK_GAUGE_BALANCE.bossInitialGauge : BREAK_GAUGE_BALANCE.normalInitialGauge,
   };
 }

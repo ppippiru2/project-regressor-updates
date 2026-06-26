@@ -1,23 +1,23 @@
-import { getLocaleText, tf } from "../localization/index.js?v=280";
-import { resolveAlignment } from "../state/profile.js?v=280";
+import { getLocaleText, tf } from "../localization/index.js?v=322";
+import { resolveAlignment } from "../state/profile.js?v=322";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=280";
+} from "../state/portraitFrame.js?v=322";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=280";
+} from "./portraitFrameView.js?v=322";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=280";
+} from "./diceSpriteRenderer.js?v=322";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -145,6 +145,7 @@ export function bindCharacterCreationEvents(onCreateCharacter, onCancelCreation)
     if (!file.type.startsWith("image/") || file.size > MAX_PROFILE_IMAGE_BYTES) {
       draft.portraitDataUrl = "";
       draft.portraitFileName = CREATION_TEXT.profile.imageTooLarge;
+      event.target.value = "";
       renderCreationWizard(form, draft);
       return;
     }

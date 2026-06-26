@@ -7,16 +7,50 @@ export const ASSET_MANIFEST = {
     {
       "assetId": "app_icon_main",
       "category": "ui",
-      "sourceFile": "assets/icon.png",
+      "sourceFile": "assets/icon-dark.png",
       "cleanFile": "assets/icon.png",
       "webpFile": null,
       "approved": true,
       "useInGame": true,
       "tags": [
         "app-icon",
+        "representative",
+        "dark-background",
         "ui"
       ],
-      "notes": "Current PWA and header app icon."
+      "notes": "Current PWA, install, Android launcher, and header app icon. Dark-background variant copied to assets/icon.png."
+    },
+    {
+      "assetId": "app_icon_dark",
+      "category": "ui",
+      "sourceFile": "assets/icon-dark.png",
+      "cleanFile": "assets/icon-dark.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": false,
+      "tags": [
+        "app-icon",
+        "dark-background",
+        "source-variant",
+        "ui"
+      ],
+      "notes": "Preserved dark-background icon source from Desktop/icon33.png. This is the representative install icon source."
+    },
+    {
+      "assetId": "app_icon_light",
+      "category": "ui",
+      "sourceFile": "assets/icon-light.png",
+      "cleanFile": "assets/icon-light.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": false,
+      "tags": [
+        "app-icon",
+        "light-background",
+        "source-variant",
+        "ui"
+      ],
+      "notes": "Preserved light-background icon source from Desktop/icon31.png."
     },
     {
       "assetId": "world_tutorial_island_overview_v54_actual",
@@ -62,7 +96,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "shore"
       ],
-      "notes": "Region card and battle background for tutorial_shore."
+      "notes": "Region card and battle background for \uCD08\uC2EC\uC790\uC758 \uD574\uC548."
     },
     {
       "assetId": "region_tutorial_shore_node_map_v54_actual",
@@ -77,7 +111,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "shore"
       ],
-      "notes": "Node map background for tutorial_shore. N-marked source image."
+      "notes": "Node map background for \uCD08\uC2EC\uC790\uC758 \uD574\uC548. N-marked source image."
     },
     {
       "assetId": "region_tutorial_forest_card_v54_actual",
@@ -93,7 +127,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "forest"
       ],
-      "notes": "Region card and battle background for tutorial_forest."
+      "notes": "Region card and battle background for \uCD08\uC2EC\uC790\uC758 \uC232."
     },
     {
       "assetId": "region_tutorial_forest_node_map_v54_actual",
@@ -108,7 +142,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "forest"
       ],
-      "notes": "Node map background for tutorial_forest. N-marked source image."
+      "notes": "Node map background for \uCD08\uC2EC\uC790\uC758 \uC232. N-marked source image."
     },
     {
       "assetId": "region_broken_ruins_card_v54_actual",
@@ -124,7 +158,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "ruins"
       ],
-      "notes": "Region card and battle background for broken_ruins."
+      "notes": "Region card and battle background for \uBB34\uB108\uC9C4 \uD0D1\uC758 \uC794\uD574."
     },
     {
       "assetId": "region_broken_ruins_node_map_v54_actual",
@@ -139,7 +173,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "ruins"
       ],
-      "notes": "Node map background for broken_ruins. N-marked source image."
+      "notes": "Node map background for \uBB34\uB108\uC9C4 \uD0D1\uC758 \uC794\uD574. N-marked source image."
     },
     {
       "assetId": "region_mana_mine_card_v54_actual",
@@ -155,7 +189,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "mine"
       ],
-      "notes": "Region card and battle background for mana_mine."
+      "notes": "Region card and battle background for \uB9C8\uC11D \uAD11\uC0B0."
     },
     {
       "assetId": "region_mana_mine_node_map_v54_actual",
@@ -170,7 +204,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "mine"
       ],
-      "notes": "Node map background for mana_mine. N-marked source image."
+      "notes": "Node map background for \uB9C8\uC11D \uAD11\uC0B0. N-marked source image."
     },
     {
       "assetId": "region_rift_gate_card_v54_actual",
@@ -186,7 +220,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "rift-gate"
       ],
-      "notes": "Region card and battle background for rift_gate."
+      "notes": "Region card and battle background for \uAC80\uC740 \uADE0\uC5F4 \uAD00\uBB38."
     },
     {
       "assetId": "region_rift_gate_node_map_v54_actual",
@@ -201,7 +235,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "rift-gate"
       ],
-      "notes": "Node map background for rift_gate. N-marked source image."
+      "notes": "Node map background for \uAC80\uC740 \uADE0\uC5F4 \uAD00\uBB38. N-marked source image."
     },
     {
       "assetId": "player_regressor_spear_idle_v1",
@@ -256,6 +290,7 @@ export const ASSET_MANIFEST = {
     }
   ]
 };
+
 export const ASSET_SLOTS = {
   "version": 1,
   "description": "Stable visual slots used by the game and future editor. Null means the default CSS/UI placeholder is used.",

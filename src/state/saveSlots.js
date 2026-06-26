@@ -1,5 +1,5 @@
 import { normalizeSavedState, normalizeUiState } from "./save.js";
-import { t } from "../localization/index.js?v=280";
+import { t } from "../localization/index.js?v=322";
 
 const SAVE_SLOTS_KEY = "project_regressor_save_slots";
 const ACTIVE_SAVE_SLOT_KEY = "project_regressor_active_save_slot";
@@ -7,6 +7,7 @@ const NO_ACTIVE_SAVE_SLOT = "__none__";
 const SLOT_COUNT = 5;
 
 export const SAVE_SLOT_IDS = Array.from({ length: SLOT_COUNT }, (_, index) => `slot${index + 1}`);
+export const DEFAULT_SAVE_SLOT_ID = SAVE_SLOT_IDS[0];
 
 export function loadActiveSaveSlotId(storage = localStorage) {
   try {
@@ -37,7 +38,7 @@ export function readSaveSlotEntries(storage = localStorage) {
   return SAVE_SLOT_IDS.map((slotId, index) => ({
     id: slotId,
     index,
-    label: `${t("saveSlots.slotShort")} ${index + 1}`,
+    label: saveSlotLabel(slotId),
     snapshot: normalizeSaveSlotSnapshot(slots[slotId]),
   }));
 }
@@ -74,6 +75,11 @@ export function clearSaveSlot(slotId, storage = localStorage) {
 
 export function isSaveSlotId(slotId) {
   return SAVE_SLOT_IDS.includes(slotId);
+}
+
+export function saveSlotLabel(slotId, { prefixKey = "saveSlots.slotShort" } = {}) {
+  const index = SAVE_SLOT_IDS.indexOf(slotId);
+  return index >= 0 ? `${t(prefixKey)} ${index + 1}` : t("saveSlots.fallbackSlot");
 }
 
 function createSaveSlotSnapshot(slotId, state, uiState, { regionName = "" } = {}) {

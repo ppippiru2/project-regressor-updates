@@ -1,22 +1,13 @@
+import { activateView, keepActiveTabInView } from "./viewNavigation.js?v=322";
+
 export function bindNavigationEvents({ onViewChange } = {}) {
   const buttons = [...document.querySelectorAll(".nav-button")];
   if (!buttons.length) return;
 
   const activateButton = (button) => {
     if (!button) return;
-    const previousView = document.querySelector(".nav-button.active")?.dataset.view || null;
-    const nextView = button.dataset.view;
-    if (!nextView || previousView === nextView) {
-      keepActiveTabInView(button);
-      return;
-    }
-
-    document.querySelectorAll(".nav-button").forEach((item) => item.classList.remove("active"));
-    document.querySelectorAll(".view").forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-    document.getElementById(`view-${nextView}`)?.classList.add("active");
-    keepActiveTabInView(button);
-    onViewChange?.({ previousView, nextView });
+    const result = activateView(button.dataset.view, { scrollActiveTab: true });
+    if (result.changed) onViewChange?.({ previousView: result.previousView, nextView: result.nextView });
   };
 
   const stepTab = (direction) => {
@@ -35,11 +26,6 @@ export function bindNavigationEvents({ onViewChange } = {}) {
 
   bindNavSwipe(stepTab);
   keepActiveTabInView(document.querySelector(".nav-button.active"));
-}
-
-function keepActiveTabInView(button) {
-  if (!button) return;
-  button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
 }
 
 function bindNavSwipe(stepTab) {

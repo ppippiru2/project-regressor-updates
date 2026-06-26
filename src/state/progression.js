@@ -1,5 +1,10 @@
 import { clamp } from "../combat/combatFormula.js";
-import { applyResistanceOption, createEmptyResistances } from "./resistanceCatalog.js?v=280";
+import {
+  PLAYER_GEAR_BALANCE,
+  PLAYER_POWER_WEIGHTS,
+  PLAYER_STAT_FORMULA,
+} from "../balance/playerStatBalance.js?v=322";
+import { applyResistanceOption, createEmptyResistances } from "./resistanceCatalog.js?v=322";
 
 export function playerStats(player, equippedItems = []) {
   const total = { ...player.stats };
@@ -9,28 +14,41 @@ export function playerStats(player, equippedItems = []) {
 
   for (const item of equippedItems) {
     attackFromGear += item.attack || 0;
-    defenseFromGear += (item.defense || 0) * 0.35;
+    defenseFromGear += (item.defense || 0) * PLAYER_GEAR_BALANCE.defenseScale;
     for (const option of item.options || []) {
       if (applyResistanceOption(resistances, option.type, option.value)) continue;
       if (Number.isFinite(total[option.type])) total[option.type] += option.value;
     }
   }
 
-  const maxHp = Math.floor(4 + total.VIT * 1 + player.level * 1);
-  const maxMp = Math.floor(2 + total.WIS * 0.35 + total.INT * 0.15 + player.level * 1.25);
-  const hpRegen = Number((0.04 + total.VIT * 0.012 + player.level * 0.006).toFixed(2));
-  const mpRegen = Number((0.03 + total.WIS * 0.01 + total.INT * 0.004 + player.level * 0.004).toFixed(2));
-  const attack = Number((1 + total.STR * 0.35 + total.INT * 0.12 + attackFromGear + player.level * 0.4).toFixed(1));
-  const magicAttack = Number((0.8 + total.INT * 0.36 + total.WIS * 0.08 + player.level * 0.35).toFixed(1));
-  const defense = Number((total.VIT * 0.15 + total.WIS * 0.08 + defenseFromGear).toFixed(1));
-  const critRate = Math.min(45, 5 + total.LUK * 0.45);
-  const critDamage = 150 + Math.floor(total.LUK * 1.4);
-  const attackSpeed = clamp(0.25 + total.AGI * 0.0055 + player.level * 0.0028, 0.23, 1.55);
-  const evade = Math.min(45, 3 + total.AGI * 0.35);
-  const accuracy = Math.min(98, 86 + total.AGI * 0.42 + total.LUK * 0.15);
-  const statusResist = Math.min(75, total.WIS * 0.6 + total.VIT * 0.15);
-  const dropRate = 1 + total.LUK * 0.01;
-  const power = Math.floor(maxHp * 2 + maxMp * 1.5 + attack * 12 + magicAttack * 6 + defense * 8 + critRate * 4 + evade * 3);
+  const f = PLAYER_STAT_FORMULA;
+  const maxHp = Math.floor(f.maxHp.base + total.VIT * f.maxHp.vit + player.level * f.maxHp.level);
+  const maxMp = Math.floor(f.maxMp.base + total.WIS * f.maxMp.wis + total.INT * f.maxMp.int + player.level * f.maxMp.level);
+  const hpRegen = Number((f.hpRegen.base + total.VIT * f.hpRegen.vit + player.level * f.hpRegen.level).toFixed(f.hpRegen.precision));
+  const mpRegen = Number((f.mpRegen.base + total.WIS * f.mpRegen.wis + total.INT * f.mpRegen.int + player.level * f.mpRegen.level).toFixed(f.mpRegen.precision));
+  const attack = Number((f.attack.base + total.STR * f.attack.str + total.INT * f.attack.int + attackFromGear + player.level * f.attack.level).toFixed(f.attack.precision));
+  const magicAttack = Number((f.magicAttack.base + total.INT * f.magicAttack.int + total.WIS * f.magicAttack.wis + player.level * f.magicAttack.level).toFixed(f.magicAttack.precision));
+  const defense = Number((total.VIT * f.defense.vit + total.WIS * f.defense.wis + defenseFromGear).toFixed(f.defense.precision));
+  const critRate = Math.min(f.critRate.max, f.critRate.base + total.LUK * f.critRate.luk);
+  const critDamage = f.critDamage.base + Math.floor(total.LUK * f.critDamage.luk);
+  const attackSpeed = clamp(
+    f.attackSpeed.base + total.AGI * f.attackSpeed.agi + player.level * f.attackSpeed.level,
+    f.attackSpeed.min,
+    f.attackSpeed.max
+  );
+  const evade = Math.min(f.evade.max, f.evade.base + total.AGI * f.evade.agi);
+  const accuracy = Math.min(f.accuracy.max, f.accuracy.base + total.AGI * f.accuracy.agi + total.LUK * f.accuracy.luk);
+  const statusResist = Math.min(f.statusResist.max, total.WIS * f.statusResist.wis + total.VIT * f.statusResist.vit);
+  const dropRate = f.dropRate.base + total.LUK * f.dropRate.luk;
+  const power = Math.floor(
+    maxHp * PLAYER_POWER_WEIGHTS.maxHp +
+      maxMp * PLAYER_POWER_WEIGHTS.maxMp +
+      attack * PLAYER_POWER_WEIGHTS.attack +
+      magicAttack * PLAYER_POWER_WEIGHTS.magicAttack +
+      defense * PLAYER_POWER_WEIGHTS.defense +
+      critRate * PLAYER_POWER_WEIGHTS.critRate +
+      evade * PLAYER_POWER_WEIGHTS.evade
+  );
 
   return {
     total,

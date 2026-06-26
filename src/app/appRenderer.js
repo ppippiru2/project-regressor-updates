@@ -1,11 +1,11 @@
-import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=280";
-import { renderCombatEffects } from "../combat/combatEffects.js?v=280";
-import { createCombatFormationState } from "../combat/combatFormation.js?v=280";
+import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=322";
+import { renderCombatEffects } from "../combat/combatEffects.js?v=322";
+import { createCombatFormationState } from "../combat/combatFormation.js?v=322";
 import { rankFromPower } from "../combat/combatFormula.js";
-import { renderInventory } from "../ui/renderInventory.js?v=280";
-import { renderShop } from "../ui/renderShop.js?v=280";
-import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=280";
-import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=280";
+import { renderInventory } from "../ui/renderInventory.js?v=322";
+import { renderShop } from "../ui/renderShop.js?v=322";
+import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=322";
+import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=322";
 import {
   renderCharacterCreation,
   renderAudioSettings,
@@ -15,19 +15,20 @@ import {
   renderLog,
   renderProfileEditSettings,
   renderSaveSlots,
-} from "../ui/renderCommon.js?v=280";
-import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=280";
-import { renderCombatControls } from "../ui/renderCombatControls.js?v=280";
-import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=280";
-import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=280";
-import { renderSystemWindow } from "../ui/systemWindow.js?v=280";
-import { createGrowthObjective } from "../state/growthObjective.js?v=280";
-import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=280";
-import { renderDropPreview } from "../ui/renderDropPreview.js?v=280";
-import { createCombatReadiness } from "../state/combatReadiness.js?v=280";
-import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=280";
-import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=280";
-import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=280";
+} from "../ui/renderCommon.js?v=322";
+import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=322";
+import { renderCombatControls } from "../ui/renderCombatControls.js?v=322";
+import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=322";
+import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=322";
+import { renderSystemWindow } from "../ui/systemWindow.js?v=322";
+import { createGrowthObjective } from "../state/growthObjective.js?v=322";
+import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=322";
+import { renderDropPreview } from "../ui/renderDropPreview.js?v=322";
+import { createCombatReadiness } from "../state/combatReadiness.js?v=322";
+import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=322";
+import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=322";
+import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=322";
+import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=322";
 
 export function renderAppFrame(context) {
   const now = Date.now();
@@ -45,6 +46,7 @@ export function renderAppFrame(context) {
   const bossMonster = region.bossId ? context.getMonster(region.bossId) : null;
   const bossStats = bossMonster ? context.getMonsterStats(bossMonster) : null;
   const formation = createCombatFormationState(context.state);
+  const playerBattleSprite = resolvePlayerBattleSpritePreset(context.state.playerProfile);
 
   const { enemyHp } = renderCombatVitals({
     state: context.state,
@@ -55,7 +57,8 @@ export function renderAppFrame(context) {
     combatRuntime: context.combatRuntime,
     rankLabel: rankFromPower(player.power),
     battleBackgroundPath: context.resolveRegionBattleBackgroundPath?.(region, context.assetRegistry) || "",
-    playerSpritePath: context.resolvePlayerCombatSpritePath?.(context.assetRegistry) || "",
+    playerSpritePath: playerBattleSprite.path || context.resolvePlayerCombatSpritePath?.(context.assetRegistry) || "",
+    playerSpritePlacement: playerBattleSprite,
     enemySpritePath: context.resolveMonsterCombatSpritePath?.(targetMonster, context.assetRegistry) || "",
     formation,
   });
@@ -143,7 +146,9 @@ function renderSlowAppSections(context, { region, player }) {
   renderProfile(
     context.state.playerProfile,
     context.state.player.level,
-    context.resolvePlayerCombatSpritePath?.(context.assetRegistry) || ""
+    resolvePlayerBattleSpritePreset(context.state.playerProfile).path ||
+      context.resolvePlayerCombatSpritePath?.(context.assetRegistry) ||
+      ""
   );
   renderResistances(player);
   renderInventory(

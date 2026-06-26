@@ -1,19 +1,19 @@
-const OPTION_SCORE = {
-  STR: 4,
-  AGI: 3,
-  VIT: 3,
-  INT: 3,
-  WIS: 3,
-  LUK: 2,
-};
+import { EQUIPMENT_SCORE_BALANCE } from "../balance/equipmentValueBalance.js?v=322";
 
 export function equipmentScore(item) {
   if (!item) return 0;
   const optionScore = (item.options || []).reduce(
-    (sum, option) => sum + (OPTION_SCORE[option.type] || 2) * option.value,
+    (sum, option) =>
+      sum
+        + (EQUIPMENT_SCORE_BALANCE.optionWeights[option.type] || EQUIPMENT_SCORE_BALANCE.fallbackOptionWeight)
+          * option.value,
     0
   );
-  return Math.round((item.attack || 0) * 12 + (item.defense || 0) * 8 + optionScore);
+  return Math.round(
+    (item.attack || 0) * EQUIPMENT_SCORE_BALANCE.attackWeight
+      + (item.defense || 0) * EQUIPMENT_SCORE_BALANCE.defenseWeight
+      + optionScore,
+  );
 }
 
 export function equipmentScoreDelta(item, equipmentState, getItem) {

@@ -1,97 +1,15 @@
-import { getLocaleText } from "../localization/index.js?v=280";
+import { getLocaleText } from "../localization/index.js?v=322";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=322";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;
 const REGION_TEXT = WORLD_TEXT.regions;
 const GATE_MAP_TEXT = WORLD_TEXT.gateMaps;
 
-export const monsters = [
-  {
-    id: "shore_imp",
-    name: MONSTER_NAMES.shore_imp,
-    regionId: "tutorial_shore",
-    level: 1,
-    stats: { STR: 4, AGI: 4, VIT: 5, INT: 1, WIS: 1, LUK: 1 },
-    exp: 8,
-    gold: 3,
-    dropTable: [
-      { itemId: "rusty_sword", chance: 0.07 },
-      { itemId: "worn_gloves", chance: 0.06 },
-      { itemId: "shore_ring", chance: 0.025 },
-    ],
-  },
-  {
-    id: "forest_wolf",
-    name: MONSTER_NAMES.forest_wolf,
-    regionId: "tutorial_forest",
-    level: 3,
-    stats: { STR: 9, AGI: 12, VIT: 8, INT: 1, WIS: 2, LUK: 2 },
-    exp: 16,
-    gold: 7,
-    dropTable: [
-      { itemId: "wolf_leather_armor", chance: 0.065 },
-      { itemId: "swift_boots", chance: 0.045 },
-      { itemId: "hunter_bow", chance: 0.04 },
-    ],
-  },
-  {
-    id: "ruin_sentinel",
-    name: MONSTER_NAMES.ruin_sentinel,
-    regionId: "broken_ruins",
-    level: 6,
-    stats: { STR: 16, AGI: 8, VIT: 18, INT: 3, WIS: 5, LUK: 2 },
-    exp: 32,
-    gold: 14,
-    dropTable: [
-      { itemId: "sentinel_helmet", chance: 0.06 },
-      { itemId: "tower_shield_armor", chance: 0.035 },
-      { itemId: "mana_necklace", chance: 0.03 },
-    ],
-  },
-  {
-    id: "mine_golem",
-    name: MONSTER_NAMES.mine_golem,
-    regionId: "mana_mine",
-    level: 9,
-    stats: { STR: 26, AGI: 6, VIT: 34, INT: 4, WIS: 8, LUK: 2 },
-    exp: 58,
-    gold: 26,
-    dropTable: [
-      { itemId: "golem_fist", chance: 0.05 },
-      { itemId: "ore_plate", chance: 0.045 },
-      { itemId: "lucky_ring", chance: 0.025 },
-    ],
-  },
-  {
-    id: "rift_knight",
-    name: MONSTER_NAMES.rift_knight,
-    regionId: "rift_gate",
-    level: 13,
-    stats: { STR: 42, AGI: 22, VIT: 46, INT: 8, WIS: 13, LUK: 4 },
-    exp: 96,
-    gold: 46,
-    dropTable: [
-      { itemId: "rift_blade", chance: 0.04 },
-      { itemId: "rift_gauntlets", chance: 0.04 },
-      { itemId: "regressor_charm", chance: 0.02 },
-    ],
-  },
-  {
-    id: "rift_warden",
-    name: MONSTER_NAMES.rift_warden,
-    regionId: "rift_gate",
-    level: 16,
-    isBoss: true,
-    stats: { STR: 58, AGI: 28, VIT: 72, INT: 16, WIS: 22, LUK: 6 },
-    exp: 220,
-    gold: 125,
-    dropTable: [
-      { itemId: "warden_crown", chance: 0.175 },
-      { itemId: "perfect_timeline_ring", chance: 0.06 },
-      { itemId: "rift_blade", chance: 0.1 },
-    ],
-  },
-];
+export const monsters = MONSTER_BALANCE_DATA.map((monster) => ({
+  ...monster,
+  name: MONSTER_NAMES[monster.id],
+}));
 
 export const regions = [
   {

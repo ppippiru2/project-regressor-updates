@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="한국 판타지 헌터물 스타일 방치형 RPG" />
     <meta name="theme-color" content="#071b3d" />
     <title>Project Regressor</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" href="assets/icon.png" type="image/png" />
-    <link rel="stylesheet" href="styles.css?v=280" />
+    <link rel="stylesheet" href="styles.css?v=322" />
   </head>
   <body>
     <section class="creation-screen is-hidden" id="character-creation" aria-label="Character creation" data-i18n-attr="aria-label:staticHtml.characterCreation.ariaLabel">
@@ -205,7 +206,7 @@
                         <span class="sprite-slot sprite-slot-player" id="player-sprite-slot" aria-hidden="true"></span>
                         <span class="effect-layer" id="player-effect-layer"></span>
                       </button>
-                      <h4 id="player-name">회귀자</h4>
+                      <h4 id="player-name" data-i18n="staticHtml.app.combat.playerName">Player</h4>
                       <div class="bar">
                         <div class="bar-fill hp" id="player-hp-bar"></div>
                         <span id="player-hp-text">0 / 0</span>
@@ -307,11 +308,11 @@
         </section>
 
         <section class="view" id="view-status">
-          <section class="panel status-system-window" data-panel-id="status-system-window-v1" data-panel-title="각성자 상태창">
+          <section class="panel status-system-window" data-panel-id="status-system-window-v1" data-panel-title="Status Window" data-i18n-attr="data-panel-title:staticHtml.app.status.systemWindowTitle">
             <div class="status-system-header">
               <div>
-                <span class="eyebrow">각성자 기록</span>
-                <h3 id="status-summary-name">회귀자 상태창</h3>
+                <span class="eyebrow" data-i18n="staticHtml.app.status.recordEyebrow">Record</span>
+                <h3 id="status-summary-name" data-i18n="staticHtml.app.status.defaultStatusWindow">Status Window</h3>
               </div>
               <strong id="status-summary-rank">랭크 F-</strong>
             </div>
@@ -338,11 +339,11 @@
           <div class="status-grid">
             <section class="panel profile-panel" data-panel-id="status-profile-v1" data-panel-title="프로필">
               <span class="eyebrow">플레이어 정보</span>
-              <h3 id="profile-name-title">회귀자</h3>
+              <h3 id="profile-name-title" data-i18n="staticHtml.app.status.profileDefaultName">Player</h3>
               <div class="profile-panel-body">
                 <div class="player-profile-portrait" id="player-profile-portrait" aria-label="플레이어 초상">
                   <span class="profile-portrait-scanline" aria-hidden="true"></span>
-                  <span class="profile-portrait-label">각성자 이미지</span>
+                  <span class="profile-portrait-label" data-i18n="staticHtml.app.status.portraitLabel">Player Image</span>
                 </div>
                 <div class="profile-lines" id="profile-lines"></div>
               </div>
@@ -456,10 +457,10 @@
             </div>
             <div id="region-list" class="region-list"></div>
           </section>
-          <section class="panel gate-map-panel" data-panel-id="gate-map-panel-v2" data-panel-title="게이트 노드맵">
-            <span class="eyebrow">차원 게이트</span>
-            <h3 id="gate-map-title">노드맵 대기 중</h3>
-            <p class="muted" id="gate-map-state">노드맵이 연결된 지역에서 표시됩니다.</p>
+          <section class="panel gate-map-panel" data-panel-id="gate-map-panel-v2" data-panel-title="Node Map" data-i18n-attr="data-panel-title:staticHtml.app.region.nodeMapPanelTitle">
+            <span class="eyebrow" data-i18n="staticHtml.app.region.nodeMapEyebrow">Node Map</span>
+            <h3 id="gate-map-title" data-i18n="staticHtml.app.region.nodeMapWaiting">Node map waiting</h3>
+            <p class="muted" id="gate-map-state" data-i18n="staticHtml.app.region.nodeMapRegionOnly">Node map appears for connected regions.</p>
             <div id="gate-map" class="gate-map"></div>
             <div id="gate-actions" class="gate-actions"></div>
           </section>
@@ -480,15 +481,15 @@
               </div>
               <div class="build-info-line wide">
                 <span>현재 주소</span>
-                <strong id="build-address-label">http://127.0.0.1:5173/?v=280</strong>
+                <strong id="build-address-label">http://127.0.0.1:5173/?v=322</strong>
               </div>
               <div class="build-info-line wide">
                 <span>모바일 확인</span>
-                <strong id="build-mobile-label">PC LAN IP:5173/?v=280</strong>
+                <strong id="build-mobile-label">PC LAN IP:5173/?v=322</strong>
               </div>
               <div class="build-info-line wide build-info-action">
                 <span>개발 도구</span>
-                <a class="editor-launch-button" href="editor.html?v=280&cachebust=280" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
+                <a class="editor-launch-button" href="editor.html?v=322&cachebust=322" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
               </div>
             </div>
           </section>
@@ -509,44 +510,44 @@
             </div>
             <p class="muted save-status" id="save-status">저장 파일을 내보내거나 가져올 수 있습니다.</p>
           </section>
-          <section class="panel" data-panel-id="settings-profile-edit" data-panel-title="플레이어 정보 변경">
-            <span class="eyebrow">플레이어</span>
-            <h3>플레이어 정보 변경</h3>
+          <section class="panel" data-panel-id="settings-profile-edit" data-panel-title="Player Info" data-i18n-attr="data-panel-title:staticHtml.app.profileEdit.panelTitle">
+            <span class="eyebrow" data-i18n="staticHtml.app.profileEdit.eyebrow">Player</span>
+            <h3 data-i18n="staticHtml.app.profileEdit.panelTitle">Player Info</h3>
             <div class="profile-edit-layout">
               <div class="profile-edit-image-editor">
-                <div class="profile-edit-preview" id="profile-edit-preview" aria-label="플레이어 이미지 미리보기">
-                  <span>각성자</span>
+                <div class="profile-edit-preview" id="profile-edit-preview" aria-label="Player image preview" data-i18n-attr="aria-label:staticHtml.app.profileEdit.previewAria">
+                  <span data-i18n="staticHtml.app.profileEdit.previewLabel">Awakener</span>
                 </div>
                 <div class="profile-crop-controls" id="profile-edit-crop-controls" hidden>
-                  <small>이미지를 드래그하거나 버튼으로 위치와 확대를 조정하세요.</small>
-                  <div class="profile-crop-pad" aria-label="이미지 위치 조정">
-                    <button class="ghost-button" type="button" data-profile-crop-move="up">위</button>
-                    <button class="ghost-button" type="button" data-profile-crop-move="left">왼쪽</button>
-                    <button class="ghost-button" type="button" data-profile-crop-move="right">오른쪽</button>
-                    <button class="ghost-button" type="button" data-profile-crop-move="down">아래</button>
+                  <small data-i18n="staticHtml.app.profileEdit.adjustImageHint">Drag the image or use the buttons to adjust position and zoom.</small>
+                  <div class="profile-crop-pad" aria-label="Image position controls" data-i18n-attr="aria-label:staticHtml.app.profileEdit.adjustImage">
+                    <button class="ghost-button" type="button" data-profile-crop-move="up" data-i18n="staticHtml.app.profileEdit.moveUp">Up</button>
+                    <button class="ghost-button" type="button" data-profile-crop-move="left" data-i18n="staticHtml.app.profileEdit.moveLeft">Left</button>
+                    <button class="ghost-button" type="button" data-profile-crop-move="right" data-i18n="staticHtml.app.profileEdit.moveRight">Right</button>
+                    <button class="ghost-button" type="button" data-profile-crop-move="down" data-i18n="staticHtml.app.profileEdit.moveDown">Down</button>
                   </div>
                   <div class="profile-crop-zoom">
-                    <button class="ghost-button" type="button" data-profile-crop-zoom="zoomOut">축소</button>
-                    <button class="ghost-button" type="button" data-profile-crop-reset>초기화</button>
-                    <button class="ghost-button" type="button" data-profile-crop-zoom="zoomIn">확대</button>
+                    <button class="ghost-button" type="button" data-profile-crop-zoom="zoomOut" data-i18n="staticHtml.app.profileEdit.zoomOut">Zoom out</button>
+                    <button class="ghost-button" type="button" data-profile-crop-reset data-i18n="staticHtml.app.profileEdit.resetImageFrame">Reset</button>
+                    <button class="ghost-button" type="button" data-profile-crop-zoom="zoomIn" data-i18n="staticHtml.app.profileEdit.zoomIn">Zoom in</button>
                   </div>
                 </div>
               </div>
               <div class="profile-edit-form">
                 <label class="settings-field">
-                  <span>이름</span>
+                  <span data-i18n="staticHtml.app.profileEdit.name">Name</span>
                   <input id="profile-edit-name" type="text" maxlength="12" autocomplete="off" />
                 </label>
                 <div class="settings-field">
-                  <span>사진</span>
+                  <span data-i18n="staticHtml.app.profileEdit.photo">Photo</span>
                   <div class="profile-image-actions">
-                    <button class="ghost-button" id="profile-edit-image-button" type="button">이미지 찾기</button>
-                    <button class="ghost-button" id="profile-edit-image-clear" type="button">기본 이미지</button>
-                    <span id="profile-edit-image-name">기본 각성자 이미지</span>
+                    <button class="ghost-button" id="profile-edit-image-button" type="button" data-i18n="staticHtml.app.profileEdit.chooseImage">Choose image</button>
+                    <button class="ghost-button" id="profile-edit-image-clear" type="button" data-i18n="staticHtml.app.profileEdit.defaultImage">Default image</button>
+                    <span id="profile-edit-image-name" data-i18n="staticHtml.app.profileEdit.defaultAwakenerImage">Default awakener image</span>
                   </div>
                   <input id="profile-edit-image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
                 </div>
-                <button class="secondary-button profile-edit-save" id="profile-edit-save" type="button">변경 저장</button>
+                <button class="secondary-button profile-edit-save" id="profile-edit-save" type="button" data-i18n="staticHtml.app.profileEdit.save">Save changes</button>
               </div>
             </div>
           </section>
@@ -580,6 +581,6 @@
       </main>
     </div>
 
-    <script type="module" src="src/main.js?v=280"></script>
+    <script type="module" src="src/main.js?v=322"></script>
   </body>
 </html>

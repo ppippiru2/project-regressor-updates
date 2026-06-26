@@ -1,4 +1,5 @@
-import { t, tf } from "../localization/index.js?v=280";
+import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=322";
+import { t, tf } from "../localization/index.js?v=322";
 
 export function createCombatReadiness({
   region,
@@ -14,8 +15,10 @@ export function createCombatReadiness({
     const levelGap = bossMonster.level - playerState.level;
     const powerRatio = bossStats.power > 0 ? player.power / bossStats.power : 1;
     const progress = clampPercent(powerRatio * 100);
-    const ready = levelGap <= 0 && powerRatio >= 0.9;
-    const caution = levelGap <= 2 || powerRatio >= 0.65;
+    const ready = levelGap <= 0 && powerRatio >= COMBAT_READINESS_THRESHOLDS.readyPowerRatio;
+    const caution =
+      levelGap <= COMBAT_READINESS_THRESHOLDS.cautionLevelGap ||
+      powerRatio >= COMBAT_READINESS_THRESHOLDS.cautionPowerRatio;
     const state = ready ? "ready" : caution ? "caution" : "locked";
 
     return {

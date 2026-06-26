@@ -1,13 +1,6 @@
 import { addInventoryItem, consumeInventoryItem } from "./inventory.js";
-import { t, tf } from "../localization/index.js?v=280";
-
-const RARITY_SELL_BASE = {
-  common: 12,
-  uncommon: 24,
-  rare: 48,
-  heroic: 96,
-  legendary: 180,
-};
+import { t, tf } from "../localization/index.js?v=322";
+import { SHOP_PRICE_BALANCE } from "../balance/equipmentValueBalance.js?v=322";
 
 export function buyShopItem({ state, entry, item }) {
   if (!state || !entry || !item) {
@@ -46,12 +39,15 @@ export function sellInventoryItem({ state, itemId, item }) {
 export function shopBuyPrice(entry, item) {
   const explicitPrice = Number(entry?.price);
   if (Number.isFinite(explicitPrice) && explicitPrice >= 0) return Math.floor(explicitPrice);
-  return Math.max(10, Math.floor(itemSellPrice(item) * 3));
+  return Math.max(
+    SHOP_PRICE_BALANCE.minimumBuyPrice,
+    Math.floor(itemSellPrice(item) * SHOP_PRICE_BALANCE.fallbackBuyMultiplier),
+  );
 }
 
 export function itemSellPrice(item) {
   if (!item) return 0;
-  const rarityBase = RARITY_SELL_BASE[item.rarity] || RARITY_SELL_BASE.common;
+  const rarityBase = SHOP_PRICE_BALANCE.raritySellBase[item.rarity] || SHOP_PRICE_BALANCE.raritySellBase.common;
   const statValue = Object.values(item.stats || {}).reduce((sum, value) => sum + Math.max(0, Number(value) || 0), 0);
   const resistanceValue = Object.values(item.resistances || {}).reduce(
     (sum, value) => sum + Math.max(0, Number(value) || 0),
@@ -59,5 +55,15 @@ export function itemSellPrice(item) {
   );
   const attackValue = Math.max(0, Number(item.attack || 0) + Number(item.magicAttack || 0));
   const defenseValue = Math.max(0, Number(item.defense || 0));
-  return Math.max(5, Math.floor(rarityBase + statValue * 9 + resistanceValue * 4 + attackValue * 6 + defenseValue * 5));
+  const weights = SHOP_PRICE_BALANCE.sellValueWeights;
+  return Math.max(
+    SHOP_PRICE_BALANCE.minimumSellPrice,
+    Math.floor(
+      rarityBase
+        + statValue * weights.stat
+        + resistanceValue * weights.resistance
+        + attackValue * weights.attack
+        + defenseValue * weights.defense,
+    ),
+  );
 }

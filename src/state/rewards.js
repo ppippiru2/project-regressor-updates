@@ -1,4 +1,12 @@
-export const LEVEL_UP_AUTO_STATS = ["STR", "AGI", "VIT", "INT", "WIS"];
+import {
+  LEVEL_UP_AUTO_STATS,
+  REGION_EXP_MULTIPLIER_BY_OVERLEVEL,
+  REWARD_MULTIPLIER_MAX,
+  REWARD_MULTIPLIER_MIN,
+} from "../balance/rewardBalance.js?v=322";
+import { LEVEL_UP_FREE_POINTS } from "../balance/playerGrowthBalance.js?v=322";
+
+export { LEVEL_UP_AUTO_STATS };
 
 export function rollMonsterDrops(dropTable = [], dropRate = 1, random = Math.random) {
   return dropTable
@@ -12,7 +20,7 @@ export function applyLevelUps(player, expToNext, getResourceCaps, autoStats = LE
   while (player.exp >= expToNext(player.level)) {
     player.exp -= expToNext(player.level);
     player.level += 1;
-    player.freePoints += 5;
+    player.freePoints += LEVEL_UP_FREE_POINTS;
     for (const stat of autoStats) player.stats[stat] += 1;
     const caps = getResourceCaps();
     if (typeof caps === "number") {
@@ -52,11 +60,7 @@ export function markRegionCompleted(completedRegions, regionId) {
 
 export function regionExpMultiplier(playerLevel, recommendedLevel) {
   const overLevel = Number(playerLevel || 1) - Number(recommendedLevel || 1);
-  if (overLevel <= 2) return 1;
-  if (overLevel <= 4) return 0.55;
-  if (overLevel <= 7) return 0.25;
-  if (overLevel <= 11) return 0.1;
-  return 0.03;
+  return REGION_EXP_MULTIPLIER_BY_OVERLEVEL.find((step) => overLevel <= step.maxOverLevel)?.multiplier ?? 1;
 }
 
 function normalizeExpMultiplier(value) {
@@ -66,5 +70,5 @@ function normalizeExpMultiplier(value) {
 function normalizeRewardMultiplier(value) {
   const number = Number(value);
   if (!Number.isFinite(number)) return 1;
-  return Math.max(0, Math.min(100, number));
+  return Math.max(REWARD_MULTIPLIER_MIN, Math.min(REWARD_MULTIPLIER_MAX, number));
 }

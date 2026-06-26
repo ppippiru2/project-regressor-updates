@@ -1,4 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=280";
+import { getLocaleText } from "../localization/index.js?v=322";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=322";
 
 const DATA_TEXT = getLocaleText().data;
 const SKILL_TEXT = DATA_TEXT.skills;
@@ -18,50 +19,8 @@ export const slots = [
   "Ring2",
 ];
 
-export const skills = [
-  {
-    id: "power_slash",
-    name: SKILL_TEXT.power_slash.name,
-    type: "Active",
-    mpCost: 2,
-    cooldown: 4,
-    damageType: "physical",
-    element: "physical",
-    multiplier: 1.35,
-    effectType: "slash",
-    breakPower: 1,
-    stanceAllowed: ["power", "berserk"],
-    triggerCondition: "always",
-    description: SKILL_TEXT.power_slash.description,
-  },
-  {
-    id: "mana_bolt",
-    name: SKILL_TEXT.mana_bolt.name,
-    type: "Active",
-    mpCost: 3,
-    cooldown: 5,
-    damageType: "magic",
-    element: "neutral",
-    multiplier: 1.45,
-    effectType: "magic",
-    breakPower: 1,
-    stanceAllowed: ["power", "berserk"],
-    triggerCondition: "always",
-    description: SKILL_TEXT.mana_bolt.description,
-  },
-  {
-    id: "emergency_recovery",
-    name: SKILL_TEXT.emergency_recovery.name,
-    type: "Active",
-    mpCost: 4,
-    cooldown: 12,
-    damageType: "support",
-    element: "light",
-    multiplier: 0,
-    effectType: "holy",
-    breakPower: 0,
-    stanceAllowed: ["conserve", "power", "berserk", "break_wait"],
-    triggerCondition: "playerHpBelow30",
-    description: SKILL_TEXT.emergency_recovery.description,
-  },
-];
+export const skills = SKILL_BALANCE_DATA.map((skill) => ({
+  ...skill,
+  name: SKILL_TEXT[skill.id].name,
+  description: SKILL_TEXT[skill.id].description,
+}));

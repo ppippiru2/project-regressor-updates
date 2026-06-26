@@ -1,0 +1,4 @@
+export const SLOW_RENDER_INTERVAL_MS = 1000;
+export const OBJECTIVE_TICKER_INTERVAL_MS = 6000;
+export const ACTIVE_SLOT_SYNC_INTERVAL_MS = 3000;
+export const MAX_LOG_LINES = 35;

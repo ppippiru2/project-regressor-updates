@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=280";
+import { t, tf } from "../localization/index.js?v=322";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
@@ -19,12 +19,13 @@ export function renderCombatVitals({
   rankLabel,
   battleBackgroundPath = "",
   playerSpritePath = "",
+  playerSpritePlacement = null,
   enemySpritePath = "",
   formation,
 }) {
   renderBattlefieldBackground(battleBackgroundPath, formation);
   renderCombatViewMode(state.settings?.combatView);
-  renderActorSprite("player-portrait", playerSpritePath);
+  renderActorSprite("player-portrait", playerSpritePath, playerSpritePlacement);
   renderActorSprite("enemy-portrait", enemySpritePath);
   syncClearSpriteFrameBackground(battleBackgroundPath);
   byId("region-title").textContent = region.name;
@@ -101,7 +102,7 @@ function renderCombatViewMode(combatView = {}) {
   battlefield.dataset.spriteFramePreview = usesClearSpriteFrame() ? "clear" : "default";
 }
 
-function renderActorSprite(portraitId, spritePath) {
+function renderActorSprite(portraitId, spritePath, placement = null) {
   const portrait = byId(portraitId);
   if (!portrait) return;
 
@@ -111,6 +112,29 @@ function renderActorSprite(portraitId, spritePath) {
   } else {
     portrait.style.removeProperty("--actor-sprite-image");
   }
+  renderActorSpritePlacement(portrait, placement);
+}
+
+function renderActorSpritePlacement(portrait, placement) {
+  const combatant = portrait.closest(".combatant");
+  if (!placement) {
+    portrait.style.removeProperty("--actor-sprite-scale");
+    portrait.style.removeProperty("--actor-sprite-offset-x");
+    portrait.style.removeProperty("--actor-sprite-offset-y");
+    portrait.style.removeProperty("--actor-sprite-transform-origin");
+    combatant?.removeAttribute("data-runtime-sprite-class");
+    combatant?.removeAttribute("data-runtime-sprite-gender");
+    return;
+  }
+
+  const pivotX = clampValue(Number(placement.pivotX) || 0.5, 0, 1);
+  const pivotY = clampValue(Number(placement.pivotY) || 1, 0, 1);
+  portrait.style.setProperty("--actor-sprite-scale", String(Number(placement.defaultScale) || 1));
+  portrait.style.setProperty("--actor-sprite-offset-x", `${Number(placement.offsetX) || 0}%`);
+  portrait.style.setProperty("--actor-sprite-offset-y", `${Number(placement.offsetY) || 0}%`);
+  portrait.style.setProperty("--actor-sprite-transform-origin", `${(pivotX * 100).toFixed(2)}% ${(pivotY * 100).toFixed(2)}%`);
+  combatant?.setAttribute("data-runtime-sprite-class", placement.classId || "");
+  combatant?.setAttribute("data-runtime-sprite-gender", placement.gender || "");
 }
 
 function renderBattlefieldBackground(battleBackgroundPath, formation) {

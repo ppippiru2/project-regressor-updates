@@ -13,6 +13,8 @@ Use this workflow:
 
 Current important runtime icon:
 
-- `assets/icon.png`
+- `assets/icon.png`: representative install/header icon, copied from the dark-background icon.
+- `assets/icon-dark.png`: preserved dark-background icon source.
+- `assets/icon-light.png`: preserved light-background icon source.
 
 See `docs/ASSET_PIPELINE_PLAN_v1.0.md` for the full asset workflow.

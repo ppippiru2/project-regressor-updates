@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "sprites": [
+    {
+      "class_id": "warrior",
+      "gender": "male",
+      "asset_path": "assets/characters/player/classes/warrior_male_sprite.png",
+      "default_scale": 0.98,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.8373,
+      "pivot_y": 0.9743,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "1.Warrior Representative.png",
+      "source_side": "left",
+      "source_bbox": [
+        59,
+        53,
+        724,
+        1066
+      ],
+      "notes": "Shield and sword read clearly in the mobile card."
+    },
+    {
+      "class_id": "warrior",
+      "gender": "female",
+      "asset_path": "assets/characters/player/classes/warrior_female_sprite.png",
+      "default_scale": 0.98,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.7787,
+      "pivot_y": 0.9734,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "1.Warrior Representative.png",
+      "source_side": "right",
+      "source_bbox": [
+        724,
+        83,
+        1299,
+        1061
+      ],
+      "notes": "Shield and sword read clearly in the mobile card."
+    },
+    {
+      "class_id": "assassin",
+      "gender": "male",
+      "asset_path": "assets/characters/player/classes/assassin_male_sprite.png",
+      "default_scale": 1.02,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.8008,
+      "pivot_y": 0.9722,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "2.Assassin Representative.png",
+      "source_side": "left",
+      "source_bbox": [
+        148,
+        71,
+        681,
+        1006
+      ],
+      "notes": "Dual dagger silhouette stays inside the player card."
+    },
+    {
+      "class_id": "assassin",
+      "gender": "female",
+      "asset_path": "assets/characters/player/classes/assassin_female_sprite.png",
+      "default_scale": 1.02,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.7672,
+      "pivot_y": 0.9715,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "2.Assassin Representative.png",
+      "source_side": "right",
+      "source_bbox": [
+        770,
+        95,
+        1252,
+        1008
+      ],
+      "notes": "Dual dagger silhouette stays inside the player card."
+    },
+    {
+      "class_id": "fighter",
+      "gender": "male",
+      "asset_path": "assets/characters/player/classes/fighter_male_sprite.png",
+      "default_scale": 1.04,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.8764,
+      "pivot_y": 0.9729,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "3.Fighter Representative.png",
+      "source_side": "left",
+      "source_bbox": [
+        107,
+        84,
+        715,
+        1043
+      ],
+      "notes": "Unarmed silhouette benefits from a slightly larger scale."
+    },
+    {
+      "class_id": "fighter",
+      "gender": "female",
+      "asset_path": "assets/characters/player/classes/fighter_female_sprite.png",
+      "default_scale": 1.04,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.8917,
+      "pivot_y": 0.9716,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "3.Fighter Representative.png",
+      "source_side": "right",
+      "source_bbox": [
+        777,
+        132,
+        1323,
+        1049
+      ],
+      "notes": "Unarmed silhouette benefits from a slightly larger scale."
+    },
+    {
+      "class_id": "archer",
+      "gender": "male",
+      "asset_path": "assets/characters/player/classes/archer_male_sprite.png",
+      "default_scale": 0.94,
+      "offset_x": -1.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.7487,
+      "pivot_y": 0.9721,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "4.Archer Representative.png",
+      "source_side": "left",
+      "source_bbox": [
+        142,
+        80,
+        720,
+        1014
+      ],
+      "notes": "Bow span is the limiting width; keep the right tip visible."
+    },
+    {
+      "class_id": "archer",
+      "gender": "female",
+      "asset_path": "assets/characters/player/classes/archer_female_sprite.png",
+      "default_scale": 0.94,
+      "offset_x": -1.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.7172,
+      "pivot_y": 0.971,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "4.Archer Representative.png",
+      "source_side": "right",
+      "source_bbox": [
+        771,
+        118,
+        1313,
+        1016
+      ],
+      "notes": "Bow span is the limiting width; keep the right tip visible."
+    },
+    {
+      "class_id": "mage_wandbook",
+      "gender": "male",
+      "asset_path": "assets/characters/player/classes/mage_wandbook_male_sprite.png",
+      "default_scale": 0.98,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.7224,
+      "pivot_y": 0.9723,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "5.Mage Representative — Wand + Book.png",
+      "source_side": "left",
+      "source_bbox": [
+        143,
+        95,
+        724,
+        1035
+      ],
+      "notes": "Book and wand both remain readable at mobile size."
+    },
+    {
+      "class_id": "mage_wandbook",
+      "gender": "female",
+      "asset_path": "assets/characters/player/classes/mage_wandbook_female_sprite.png",
+      "default_scale": 0.98,
+      "offset_x": 0.0,
+      "offset_y": -1.0,
+      "pivot_x": 0.7107,
+      "pivot_y": 0.971,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "5.Mage Representative — Wand + Book.png",
+      "source_side": "right",
+      "source_bbox": [
+        784,
+        139,
+        1338,
+        1036
+      ],
+      "notes": "Book and wand both remain readable at mobile size."
+    },
+    {
+      "class_id": "mage_staff",
+      "gender": "male",
+      "asset_path": "assets/characters/player/classes/mage_staff_male_sprite.png",
+      "default_scale": 0.88,
+      "offset_x": 1.0,
+      "offset_y": 0.0,
+      "pivot_x": 0.761,
+      "pivot_y": 0.9743,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "6.Mage Representative — Staff.png",
+      "source_side": "left",
+      "source_bbox": [
+        145,
+        24,
+        669,
+        1035
+      ],
+      "notes": "Tall staff needs a smaller default scale to protect the top ornament."
+    },
+    {
+      "class_id": "mage_staff",
+      "gender": "female",
+      "asset_path": "assets/characters/player/classes/mage_staff_female_sprite.png",
+      "default_scale": 0.88,
+      "offset_x": 1.0,
+      "offset_y": 0.0,
+      "pivot_x": 0.7081,
+      "pivot_y": 0.9739,
+      "motion_safe_margin": {
+        "x": 0.08,
+        "y": 0.06
+      },
+      "source_sheet": "6.Mage Representative — Staff.png",
+      "source_side": "right",
+      "source_bbox": [
+        761,
+        40,
+        1317,
+        1037
+      ],
+      "notes": "Tall staff needs a smaller default scale to protect the top ornament."
+    }
+  ]
+}

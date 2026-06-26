@@ -5,16 +5,50 @@
     {
       "assetId": "app_icon_main",
       "category": "ui",
-      "sourceFile": "assets/icon.png",
+      "sourceFile": "assets/icon-dark.png",
       "cleanFile": "assets/icon.png",
       "webpFile": null,
       "approved": true,
       "useInGame": true,
       "tags": [
         "app-icon",
+        "representative",
+        "dark-background",
         "ui"
       ],
-      "notes": "Current PWA and header app icon."
+      "notes": "Current PWA, install, Android launcher, and header app icon. Dark-background variant copied to assets/icon.png."
+    },
+    {
+      "assetId": "app_icon_dark",
+      "category": "ui",
+      "sourceFile": "assets/icon-dark.png",
+      "cleanFile": "assets/icon-dark.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": false,
+      "tags": [
+        "app-icon",
+        "dark-background",
+        "source-variant",
+        "ui"
+      ],
+      "notes": "Preserved dark-background icon source from Desktop/icon33.png. This is the representative install icon source."
+    },
+    {
+      "assetId": "app_icon_light",
+      "category": "ui",
+      "sourceFile": "assets/icon-light.png",
+      "cleanFile": "assets/icon-light.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": false,
+      "tags": [
+        "app-icon",
+        "light-background",
+        "source-variant",
+        "ui"
+      ],
+      "notes": "Preserved light-background icon source from Desktop/icon31.png."
     },
     {
       "assetId": "world_tutorial_island_overview_v54_actual",

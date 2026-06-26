@@ -1,3 +1,5 @@
+import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=322";
+
 export function advanceHitCombo(state, now = Date.now()) {
   state.hitCount += 1;
   state.lastHitAt = now;
@@ -11,7 +13,7 @@ export function resetHitComboState(state) {
 }
 
 export function playerHyperChargeFromSuccessfulHit(critical) {
-  return critical ? 6 : 3;
+  return critical ? HYPER_CHARGE_BALANCE.playerSuccessfulHit.critical : HYPER_CHARGE_BALANCE.playerSuccessfulHit.normal;
 }
 
 export function applySkillBreakDamage(targetState, skill, clampValue) {
@@ -20,6 +22,10 @@ export function applySkillBreakDamage(targetState, skill, clampValue) {
   }
 
   const beforeBreak = targetState.breakGauge;
-  targetState.breakGauge = clampValue(targetState.breakGauge - skill.breakPower * 12, 0, 100);
+  targetState.breakGauge = clampValue(
+    targetState.breakGauge - skill.breakPower * BREAK_GAUGE_BALANCE.skillGaugeDamagePerPower,
+    0,
+    BREAK_GAUGE_BALANCE.bossInitialGauge
+  );
   return { triggered: beforeBreak > 0 && targetState.breakGauge === 0 };
 }

@@ -1,10 +1,9 @@
+import { PLAYER_BASE_STAT_VALUE } from "../balance/playerGrowthBalance.js?v=322";
 import { LEVEL_UP_AUTO_STATS } from "./rewards.js";
-
-const BASE_STAT_VALUE = 5;
 
 export function minimumPlayerStatValue(player, stat) {
   const autoLevelUps = Math.max(0, (player.level || 1) - 1);
-  return BASE_STAT_VALUE + (LEVEL_UP_AUTO_STATS.includes(stat) ? autoLevelUps : 0);
+  return PLAYER_BASE_STAT_VALUE + (LEVEL_UP_AUTO_STATS.includes(stat) ? autoLevelUps : 0);
 }
 
 export function allocatedFreeStatPoints(player, stat) {

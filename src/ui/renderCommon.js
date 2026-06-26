@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=280";
-import { renderCombatLogLine } from "./combatLogFormatter.js?v=280";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=280";
+import { t } from "../localization/index.js?v=322";
+import { renderCombatLogLine } from "./combatLogFormatter.js?v=322";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=322";
 
 export function renderCharacterCreation(playerProfile) {
   const screen = document.getElementById("character-creation");

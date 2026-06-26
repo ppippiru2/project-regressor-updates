@@ -1,3 +1,5 @@
+import { HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=322";
+
 export function applyHealAction(playerState, playerStats, action, clampValue) {
   playerState.hp = clampValue(playerState.hp + action.amount, 1, playerStats.maxHp);
   playerState.mp -= action.skill.mpCost;
@@ -57,15 +59,15 @@ export function applyResolvedEnemyAttack({ playerState, result, monster }) {
 
 export function enemyHyperChargeFromPlayerHit(monster, critical) {
   if (monster.isBoss) {
-    return critical ? 6 : 4;
+    return critical ? HYPER_CHARGE_BALANCE.enemyFromPlayerHit.bossCritical : HYPER_CHARGE_BALANCE.enemyFromPlayerHit.boss;
   }
-  return critical ? 4 : 2;
+  return critical ? HYPER_CHARGE_BALANCE.enemyFromPlayerHit.normalCritical : HYPER_CHARGE_BALANCE.enemyFromPlayerHit.normal;
 }
 
 export function playerHyperChargeFromEnemyHit(monster) {
-  return monster.isBoss ? 2 : 1;
+  return monster.isBoss ? HYPER_CHARGE_BALANCE.playerFromEnemyHit.boss : HYPER_CHARGE_BALANCE.playerFromEnemyHit.normal;
 }
 
 export function enemyHyperChargeFromEnemyHit(monster) {
-  return monster.isBoss ? 7 : 4;
+  return monster.isBoss ? HYPER_CHARGE_BALANCE.enemyFromEnemyHit.boss : HYPER_CHARGE_BALANCE.enemyFromEnemyHit.normal;
 }

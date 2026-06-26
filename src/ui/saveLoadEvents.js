@@ -1,15 +1,16 @@
-import { t, tf } from "../localization/index.js?v=280";
+import { t, tf } from "../localization/index.js?v=322";
+import { saveSlotLabel } from "../state/saveSlots.js?v=322";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=280";
+} from "../state/portraitFrame.js?v=322";
 import {
   applyPortraitFrameToElement,
   readPortraitFrameFromElement,
   renderPortraitImagePreview,
-} from "./portraitFrameView.js?v=280";
+} from "./portraitFrameView.js?v=322";
 
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 const CLEAR_SLOT_HOLD_MS = 5000;
@@ -177,7 +178,7 @@ function openClearSlotConfirm(slotId, onClearSlot) {
   if (!slotId) return;
   closeClearSlotConfirm();
 
-  const slotLabel = saveSlotLabel(slotId);
+  const slotLabel = saveSlotLabel(slotId, { prefixKey: "saveSlots.slot" });
   const overlay = document.createElement("div");
   overlay.className = "save-clear-confirm";
   overlay.setAttribute("role", "dialog");
@@ -319,11 +320,6 @@ function closeClearSlotConfirm() {
   clearSlotConfirmCleanup?.();
   document.querySelector(".save-clear-confirm")?.remove();
   window.removeEventListener("keydown", closeClearSlotConfirmOnEscape);
-}
-
-function saveSlotLabel(slotId) {
-  const index = ["slot1", "slot2", "slot3", "slot4", "slot5"].indexOf(slotId);
-  return index >= 0 ? `${t("saveSlots.slot")} ${index + 1}` : t("saveSlots.fallbackSlot");
 }
 
 function updateProfileImageDraft(label, dataUrl, frame = DEFAULT_PORTRAIT_FRAME) {

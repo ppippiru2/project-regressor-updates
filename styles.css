@@ -3930,11 +3930,24 @@ button:disabled {
   z-index: 2;
   pointer-events: none;
   opacity: 0;
+  filter: drop-shadow(0 0 16px rgba(57, 228, 255, 0.28));
+}
+
+.sprite-slot::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-image: var(--actor-sprite-image);
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: contain;
-  filter: drop-shadow(0 0 16px rgba(57, 228, 255, 0.28));
+  transform: translate(calc(-50% + var(--actor-sprite-offset-x, 0%)), var(--actor-sprite-offset-y, 0%))
+    scale(var(--actor-sprite-scale, 1));
+  transform-origin: var(--actor-sprite-transform-origin, 50% 100%);
+  will-change: transform;
 }
 
 .portrait.has-sprite .sprite-slot {
@@ -5331,9 +5344,16 @@ body[data-info-tooltips="off"] .info-term {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --page-pad: clamp(0.38rem, 1.8vw, 0.58rem);
+    --mobile-panel-pad: 0.5rem;
+  }
+
   .main,
   .sidebar {
     padding: var(--page-pad);
+    padding-left: max(var(--page-pad), env(safe-area-inset-left));
+    padding-right: max(var(--page-pad), env(safe-area-inset-right));
   }
 
   .panel,
@@ -5341,11 +5361,19 @@ body[data-info-tooltips="off"] .info-term {
     padding: var(--mobile-panel-pad);
   }
 
+  .system-window {
+    padding: 0.6rem 0.65rem;
+  }
+
   .panel[data-panel-id],
   .system-window[data-panel-id],
   .readiness-panel[data-panel-id],
   .drop-preview[data-panel-id] {
     padding-right: 2.75rem;
+  }
+
+  .battlefield.panel[data-panel-id] {
+    padding-right: var(--mobile-panel-pad);
   }
 
   .topbar,
@@ -5478,8 +5506,8 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .battlefield[data-card-layout="stage"] .battle-scene {
-    margin: 0.75rem -0.1rem 0.55rem;
-    padding: 0.62rem;
+    margin: 0.68rem -0.22rem 0.5rem;
+    padding: 0.42rem;
   }
 
   .battlefield[data-card-layout="stage"] .battle-stage {
@@ -5489,7 +5517,7 @@ body[data-info-tooltips="off"] .info-term {
 
   .battlefield[data-card-layout="stage"] .duel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.55rem;
+    gap: 0.36rem;
   }
 
   .battlefield[data-card-layout="stage"] .combatant.player {
@@ -5502,7 +5530,7 @@ body[data-info-tooltips="off"] .info-term {
 
   .battlefield[data-card-layout="stage"] .combatant {
     min-height: clamp(18.25rem, 74vw, 24rem);
-    padding: 0.52rem;
+    padding: 0.42rem;
     gap: 0.32rem;
   }
 
@@ -5524,8 +5552,8 @@ body[data-info-tooltips="off"] .info-term {
 
   .battlefield[data-card-layout="stage"] .combat-slot-row {
     --stance-button-height: 2.28rem;
-    grid-template-columns: minmax(0, 1fr) 3.25rem;
-    gap: 0.38rem;
+    grid-template-columns: 1fr;
+    gap: 0.42rem;
   }
 
   .battlefield[data-card-layout="stage"] .skill-buttons {
@@ -5542,18 +5570,29 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .battlefield[data-card-layout="stage"] .stance-control button {
-    min-width: 3rem;
-    padding: 0 0.28rem;
-    font-size: 0.72rem;
+    width: 100%;
+    min-width: 0;
+    min-height: var(--stance-button-height);
+    padding: 0 0.42rem;
+    font-size: 0.74rem;
   }
 
+  .battlefield[data-card-layout="stage"] .skill-strip,
+  .battlefield[data-card-layout="stage"] .combat-system-row,
+  .battlefield[data-card-layout="stage"] .stance-control {
+    min-height: 0;
+  }
+
+  .battlefield[data-card-layout="stage"] .combat-system-row,
   .combat-system-row {
     justify-content: stretch;
   }
 
+  .battlefield[data-card-layout="stage"] .stance-control,
   .stance-control {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
     width: 100%;
   }
 
@@ -5847,6 +5886,20 @@ body[data-info-tooltips="off"] .info-term {
 }
 
 @media (max-width: 520px) {
+  :root {
+    --page-pad: clamp(0.28rem, 1.5vw, 0.42rem);
+    --mobile-panel-pad: 0.42rem;
+  }
+
+  .battlefield[data-card-layout="stage"] .battle-scene {
+    margin-inline: -0.24rem;
+    padding: 0.34rem;
+  }
+
+  .battlefield[data-card-layout="stage"] .duel {
+    gap: 0.28rem;
+  }
+
   .battlefield[data-card-layout="stage"] .battle-header {
     align-items: stretch;
     flex-direction: column;
@@ -5862,6 +5915,7 @@ body[data-info-tooltips="off"] .info-term {
 
   .battlefield[data-card-layout="stage"] .combatant {
     min-height: clamp(17.25rem, 78vw, 22rem);
+    padding: 0.34rem;
   }
 
   .battlefield[data-card-layout="stage"] .portrait {

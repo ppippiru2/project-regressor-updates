@@ -1,11 +1,7 @@
 import { addInventoryItem } from "./inventory.js";
 import { rollMonsterDrops } from "./rewards.js";
-import { tf } from "../localization/index.js?v=280";
-
-const MIN_OFFLINE_MS = 60 * 1000;
-const MAX_OFFLINE_MS = 30 * 60 * 1000;
-const OFFLINE_KILL_MS = 45 * 1000;
-const OFFLINE_DROP_RATE_MULTIPLIER = 0.35;
+import { OFFLINE_REWARD_BALANCE } from "../balance/rewardBalance.js?v=322";
+import { tf } from "../localization/index.js?v=322";
 
 export function stampLastSeen(state, now = Date.now()) {
   state.lastSeenAt = now;
@@ -26,10 +22,10 @@ export function calculateOfflineReward({ state, region, monster, now = Date.now(
   if (!Number.isFinite(lastSeenAt)) return null;
 
   const elapsedMs = now - lastSeenAt;
-  if (elapsedMs < MIN_OFFLINE_MS) return null;
+  if (elapsedMs < OFFLINE_REWARD_BALANCE.minOfflineMs) return null;
 
-  const rewardedMs = Math.min(elapsedMs, MAX_OFFLINE_MS);
-  const kills = Math.floor(rewardedMs / OFFLINE_KILL_MS);
+  const rewardedMs = Math.min(elapsedMs, OFFLINE_REWARD_BALANCE.maxOfflineMs);
+  const kills = Math.floor(rewardedMs / OFFLINE_REWARD_BALANCE.killMs);
   if (kills <= 0) return null;
 
   return {
@@ -98,7 +94,7 @@ export function offlineRewardSummary(reward) {
 
 function rollOfflineDrops({ dropTable = [], kills = 0, dropRate = 1, random = Math.random }) {
   const drops = [];
-  const adjustedDropRate = dropRate * OFFLINE_DROP_RATE_MULTIPLIER;
+  const adjustedDropRate = dropRate * OFFLINE_REWARD_BALANCE.dropRateMultiplier;
   for (let index = 0; index < kills; index += 1) {
     drops.push(...rollMonsterDrops(dropTable, adjustedDropRate, random));
   }

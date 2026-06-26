@@ -1,7 +1,4 @@
-export const COMBAT_FORMATION_LIMITS = {
-  visibleActorsPerSide: 4,
-  compressedActorsPerSide: 8,
-};
+import { COMBAT_FORMATION_LIMITS } from "./combatDisplayConfig.js?v=322";
 
 export function createCombatFormationState(state) {
   return {

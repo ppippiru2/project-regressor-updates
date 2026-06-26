@@ -1,3 +1,5 @@
+import { t } from "../localization/index.js?v=322";
+
 export const DEFAULT_DEVELOPER_OPTIONS = {
   expMultiplier: 1,
   outgoingDamageInfinite: false,
@@ -7,6 +9,14 @@ export const DEFAULT_DEVELOPER_OPTIONS = {
 };
 
 export const DEVELOPER_MULTIPLIER_OPTIONS = [1, 2, 3, 5, 10, 25, 50, 100];
+
+const DEVELOPER_OPTION_LABEL_KEYS = {
+  expMultiplier: "developerSettings.expMultiplier.label",
+  outgoingDamageInfinite: "developerSettings.outgoingDamageInfinite.label",
+  incomingDamageZero: "developerSettings.incomingDamageZero.label",
+  itemDropMultiplier: "developerSettings.itemDropMultiplier.label",
+  goldDropMultiplier: "developerSettings.goldDropMultiplier.label",
+};
 
 export function normalizeDeveloperOptions(options = {}) {
   const source = options && typeof options === "object" && !Array.isArray(options) ? options : {};
@@ -35,6 +45,10 @@ export function developerOptionsActive(options = {}) {
     normalized.itemDropMultiplier !== 1 ||
     normalized.goldDropMultiplier !== 1
   );
+}
+
+export function developerOptionLabel(key) {
+  return DEVELOPER_OPTION_LABEL_KEYS[key] ? t(DEVELOPER_OPTION_LABEL_KEYS[key]) : key;
 }
 
 function normalizeMultiplier(value) {
