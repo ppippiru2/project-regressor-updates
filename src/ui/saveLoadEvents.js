@@ -1,16 +1,16 @@
-import { t, tf } from "../localization/index.js?v=346";
-import { saveSlotLabel } from "../state/saveSlots.js?v=346";
+import { t, tf } from "../localization/index.js?v=347";
+import { saveSlotLabel } from "../state/saveSlots.js?v=347";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=346";
+} from "../state/portraitFrame.js?v=347";
 import {
   applyPortraitFrameToElement,
   readPortraitFrameFromElement,
   renderPortraitImagePreview,
-} from "./portraitFrameView.js?v=346";
+} from "./portraitFrameView.js?v=347";
 
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 const CLEAR_SLOT_HOLD_MS = 5000;
@@ -160,9 +160,16 @@ export function bindSaveLoadEvents({
 
   if (statusProfileCropControls) {
     statusProfileCropControls.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-status-crop-move], [data-status-crop-zoom], [data-status-crop-reset]");
-      if (!button || !hasAdjustableStatusPortrait()) return;
+      const button = event.target.closest(
+        "[data-status-crop-move], [data-status-crop-zoom], [data-status-crop-reset], [data-status-crop-confirm]"
+      );
+      if (!button || !isStatusProfileCropOpen()) return;
       event.preventDefault();
+      if (button.dataset.statusCropConfirm !== undefined) {
+        updateStatusProfileFrame(readStatusProfileFrame(), { commit: true });
+        setStatusProfileCropControlsOpen(false);
+        return;
+      }
       const action = button.dataset.statusCropMove || button.dataset.statusCropZoom || "reset";
       updateStatusProfileFrame(nudgePortraitFrame(readStatusProfileFrame(), action), { commit: true });
     });
@@ -179,7 +186,7 @@ export function bindSaveLoadEvents({
 
   if (statusProfilePortrait) {
     statusProfilePortrait.addEventListener("pointerdown", (event) => {
-      if (!hasAdjustableStatusPortrait()) return;
+      if (!isStatusProfileCropOpen()) return;
       const rect = statusProfilePortrait.getBoundingClientRect();
       statusProfileDragState = {
         pointerId: event.pointerId,
@@ -230,6 +237,11 @@ export function bindSaveLoadEvents({
 
   function hasAdjustableStatusPortrait() {
     return Boolean(statusProfilePortrait?.classList.contains("has-image"));
+  }
+
+  function isStatusProfileCropOpen() {
+    const editor = statusProfilePortrait?.closest(".profile-portrait-editor");
+    return Boolean(hasAdjustableStatusPortrait() && editor?.dataset.statusCropOpen === "true");
   }
 
   function readStatusProfileFrame() {

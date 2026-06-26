@@ -1,4 +1,4 @@
-import { FALLBACK_DICE_SPRITE, loadDiceSpriteDefinition } from "../assets/diceSprite.js?v=346";
+import { FALLBACK_DICE_SPRITE, loadDiceSpriteDefinition } from "../assets/diceSprite.js?v=347";
 
 const DEFAULT_STAT_KEYS = ["STR", "AGI", "VIT", "INT", "WIS", "LUK"];
 const DICE_FACE_PIPS = {

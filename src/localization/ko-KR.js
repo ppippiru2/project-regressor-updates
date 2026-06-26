@@ -216,6 +216,7 @@ export const KO_KR_TEXT = {
         zoomIn: "확대",
         zoomOut: "축소",
         resetImageFrame: "초기화",
+        confirmImageFrame: "위치 확정",
         name: "이름",
         photo: "사진",
         chooseImage: "이미지 찾기",

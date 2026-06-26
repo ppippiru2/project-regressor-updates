@@ -273,7 +273,7 @@ select:focus {
 
 .creation-profile-preview:active,
 .profile-edit-preview.has-image:active,
-.player-profile-portrait.has-image:active {
+.profile-portrait-editor[data-status-crop-open="true"] .player-profile-portrait.has-image:active {
   cursor: grabbing;
 }
 
@@ -1395,13 +1395,14 @@ select:focus {
     0 0 22px rgba(57, 228, 255, 0.13);
   overflow: hidden;
   position: relative;
-  touch-action: none;
+  touch-action: pan-y;
   user-select: none;
   cursor: default;
 }
 
-.player-profile-portrait.has-image {
+.profile-portrait-editor[data-status-crop-open="true"] .player-profile-portrait.has-image {
   cursor: grab;
+  touch-action: none;
 }
 
 .player-profile-portrait::before {
@@ -1449,6 +1450,10 @@ select:focus {
 .profile-status-crop-controls button {
   min-height: 1.9rem;
   font-size: 0.72rem;
+}
+
+.profile-status-crop-confirm {
+  width: 100%;
 }
 
 .player-profile-portrait::after {
