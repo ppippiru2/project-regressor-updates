@@ -1,7 +1,8 @@
-import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=394";
-import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=394";
-import { t, tf } from "../localization/index.js?v=394";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=394";
+import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=395";
+import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=395";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=395";
+import { t, tf } from "../localization/index.js?v=395";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=395";
 
 const PROFILE_FIELDS = [
   ["statusUi.profileFields.name", "name", "profile:name"],
@@ -137,7 +138,9 @@ function renderStatusSummary(player, statePlayer, expNeed, rankLabel, playerProf
     name: playerProfile?.name || statePlayer.name || t("saveDefaults.playerName"),
   });
   byId("status-summary-level").textContent = tf("statusUi.level", { level: statePlayer.level });
-  byId("status-summary-rank").textContent = tf("statusUi.rank", { rank: rankLabel || t("statusUi.fallbackRank") });
+  byId("status-summary-rank").textContent = tf("statusUi.statusGrade", {
+    grade: statusGradeFromStats(player?.total || statePlayer?.stats || {}),
+  });
   byId("status-summary-power").textContent = Math.floor(player.power).toLocaleString();
   byId("status-summary-exp").textContent = `${statePlayer.exp} / ${expNeed}`;
   byId("status-summary-points").textContent = statePlayer.freePoints;

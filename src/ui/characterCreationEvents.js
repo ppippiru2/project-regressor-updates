@@ -1,24 +1,25 @@
-import { getLocaleText, tf } from "../localization/index.js?v=394";
-import { resolveAlignment } from "../state/profile.js?v=394";
+import { getLocaleText, tf } from "../localization/index.js?v=395";
+import { resolveAlignment } from "../state/profile.js?v=395";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=394";
+} from "../state/portraitFrame.js?v=395";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=394";
+} from "./portraitFrameView.js?v=395";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=394";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=394";
+} from "./diceSpriteRenderer.js?v=395";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=395";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=395";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -31,6 +32,10 @@ const QUESTIONS = CREATION_TEXT.questions.items;
 const STARTER_CARDS = CREATION_TEXT.starterCards.items;
 const DEFAULT_STARTER_CARD_ID = STARTER_CARDS[0]?.id || "";
 const INITIAL_STAT_TOTAL = INITIAL_CREATION_STAT_BALANCE.total;
+const INITIAL_STAT_TOTAL_RANGE = INITIAL_CREATION_STAT_BALANCE.totalRange || {
+  min: INITIAL_STAT_TOTAL,
+  max: INITIAL_STAT_TOTAL,
+};
 const INITIAL_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.startingStats;
 const MIN_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.minValues || INITIAL_STAT_VALUES;
 const MAX_STAT_VALUE = 10;
@@ -368,7 +373,10 @@ function renderStatsStep(draft) {
       <strong class="${draft.statRolled ? "creation-result-ready" : "creation-result-wait"}">
         ${escapeHtml(draft.statRolled ? CREATION_TEXT.stats.complete : CREATION_TEXT.stats.waiting)}
       </strong>
-      <small>${escapeHtml(CREATION_TEXT.stats.total)} ${total} / ${INITIAL_STAT_TOTAL}</small>
+      <small>${escapeHtml(tf("characterCreation.stats.totalWithBaseline", {
+        total,
+        baseline: INITIAL_STAT_TOTAL,
+      }))}</small>
     </div>
     <div class="creation-stat-grid">
       ${STAT_KEYS.map((stat) => `<div class="creation-stat-line">
@@ -432,6 +440,7 @@ function renderStarterCardStep(draft) {
 function renderResultStep(draft) {
   const alignment = resolveAlignment(Object.values(draft.answers));
   const selectedCard = selectedStarterCard(draft);
+  const statusGrade = statusGradeFromStats(draft.stats);
   return `<div class="creation-body creation-result-panel">
     <strong class="creation-result-title">${escapeHtml(CREATION_TEXT.result.analysisComplete)}</strong>
     <p>${tf("characterCreation.result.systemAlignment", { alignment: `<b>${escapeHtml(alignment)}</b>` })}</p>
@@ -440,6 +449,7 @@ function renderResultStep(draft) {
       <div><span>${escapeHtml(CREATION_TEXT.result.name)}</span><strong>${escapeHtml(draft.name)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.alignment)}</span><strong>${escapeHtml(alignment)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.statTotal)}</span><strong>${statTotal(draft.stats)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.result.statusGrade)}</span><strong>${escapeHtml(statusGrade)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.starterCard)}</span><strong>${escapeHtml(selectedCard.card)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.starterTrait)}</span><strong>${escapeHtml(selectedCard.trait)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.starterSkill)}</span><strong>${escapeHtml(selectedCard.skill)}</strong></div>
@@ -586,7 +596,8 @@ function createBalancedStats() {
 
 function rollInitialStats() {
   const stats = Object.fromEntries(STAT_KEYS.map((stat) => [stat, MIN_STAT_VALUES?.[stat] ?? 1]));
-  let remaining = INITIAL_STAT_TOTAL - statTotal(stats);
+  const targetTotal = randomInitialStatTotal();
+  let remaining = targetTotal - statTotal(stats);
   while (remaining > 0) {
     const candidates = STAT_KEYS.filter((stat) => stats[stat] < MAX_STAT_VALUE);
     if (!candidates.length) break;
@@ -595,6 +606,12 @@ function rollInitialStats() {
     remaining -= 1;
   }
   return stats;
+}
+
+function randomInitialStatTotal() {
+  const min = Math.max(statTotal(MIN_STAT_VALUES), Math.floor(Number(INITIAL_STAT_TOTAL_RANGE.min) || INITIAL_STAT_TOTAL));
+  const max = Math.max(min, Math.floor(Number(INITIAL_STAT_TOTAL_RANGE.max) || INITIAL_STAT_TOTAL));
+  return min + Math.floor(Math.random() * (max - min + 1));
 }
 
 function statTotal(stats) {

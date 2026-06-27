@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=394";
+import { formatText, getLocaleText } from "../localization/index.js?v=395";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6_FINAL";
 
@@ -200,7 +200,7 @@ const DISPOSITION_BY_ALIGNMENT_KEY = Object.freeze({
   chaotic: "freeSurvival",
 });
 
-export function buildTutorialIntroDialogueLogs(profile, { localeText = getLocaleText() } = {}) {
+export function buildTutorialIntroDialogueLogs(profile, { localeText = getLocaleText(), templateValues = {} } = {}) {
   const text = localeText.story?.tutorialDialogue;
   if (!text?.introLog) return [];
 
@@ -212,7 +212,7 @@ export function buildTutorialIntroDialogueLogs(profile, { localeText = getLocale
     messages.push(
       formatText(text.introLog.disposition, {
         disposition: disposition.name,
-        reaction: disposition.log,
+        reaction: formatText(disposition.log, templateValues),
       }),
     );
   }
@@ -221,7 +221,7 @@ export function buildTutorialIntroDialogueLogs(profile, { localeText = getLocale
     messages.push(
       formatText(text.introLog.starterCard, {
         cardName: starterCard.cardName,
-        reaction: starterCard.log,
+        reaction: formatText(starterCard.log, templateValues),
       }),
     );
   }

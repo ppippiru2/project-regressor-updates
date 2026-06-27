@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 394,
-  "displayVersion": "v3.94",
-  "cacheVersion": "project-regressor-mvp-v394",
+  "versionCode": 395,
+  "displayVersion": "v3.95",
+  "cacheVersion": "project-regressor-mvp-v395",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=394&cachebust=394",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=395&cachebust=395",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v395 applies ProjectRegressor_v2.6.2_FIX with dynamic initial stat summaries and status-grade placeholders.",
+    "v395 opens first-run stat totals to a guarded 10-13 range and derives F-/F/F+ status grades from the actual total.",
+    "v395 adds a dynamic status-grade quick-check so fixed STR 2 and hard-coded 상태창 등급 F tutorial copy cannot return.",
     "v394 adds the first non-equipment tutorial loot catalog for codex-card fragments, mana-crystal fragments, and skill fragments.",
     "v394 connects those loot items to early monster drop tables and shows them in drop previews and inventory without treating them as equipment.",
     "v394 adds a loot item catalog quick-check so monster drop ids must resolve through the combined item catalog.",
@@ -163,21 +166,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v394-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v395-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v394-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v395-debug.apk"
   },
   "version": {
-    "code": 394,
-    "name": "3.94.0",
-    "displayName": "v394"
+    "code": 395,
+    "name": "3.95.0",
+    "displayName": "v395"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v394-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v395-debug.apk"
   },
   "android": {
-    "code": 394,
-    "name": "3.94.0",
-    "displayName": "v394"
+    "code": 395,
+    "name": "3.95.0",
+    "displayName": "v395"
   }
 }

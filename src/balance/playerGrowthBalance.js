@@ -15,10 +15,54 @@ export const PLAYER_BASE_STAT_VALUE = 2;
 
 export const INITIAL_CREATION_STAT_BALANCE = {
   total: 11,
+  totalRange: {
+    min: 10,
+    max: 13,
+  },
   fallbackValue: PLAYER_BASE_STAT_VALUE,
   startingStats: { ...PLAYER_INITIAL_STATS },
-  minValues: { ...PLAYER_INITIAL_STATS },
+  minValues: {
+    STR: 1,
+    AGI: 1,
+    VIT: 1,
+    INT: 1,
+    WIS: 1,
+    LUK: 1,
+  },
 };
+
+export const STATUS_GRADE_ORDER = [
+  "F-",
+  "F",
+  "F+",
+  "E-",
+  "E",
+  "E+",
+  "D-",
+  "D",
+  "D+",
+  "C-",
+  "C",
+  "C+",
+  "B-",
+  "B",
+  "B+",
+  "A-",
+  "A",
+  "A+",
+  "S-",
+  "S",
+  "S+",
+  "SS-",
+  "SS",
+  "SS+",
+  "SSS-",
+  "SSS",
+  "SSS+",
+  "EX",
+  "\uCD08\uC6D4",
+  "God",
+];
 
 export const STARTER_TRAIT_BONUSES = {
   lower_weapon_mastery: {

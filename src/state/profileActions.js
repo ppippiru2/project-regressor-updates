@@ -1,9 +1,10 @@
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=394";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=395";
 import { normalizePlayerProfile } from "./save.js";
-import { buildPlayerProfileInput } from "./profile.js?v=394";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=394";
-import { t, tf } from "../localization/index.js?v=394";
-import { buildTutorialIntroDialogueLogs } from "../story/tutorialDialogueEvents.js?v=394";
+import { buildPlayerProfileInput } from "./profile.js?v=395";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=395";
+import { t, tf } from "../localization/index.js?v=395";
+import { buildTutorialIntroDialogueLogs } from "../story/tutorialDialogueEvents.js?v=395";
+import { statusGradeTemplateValues } from "./statusGrade.js?v=395";
 
 export function createCharacterProfile(formData, defaultPlayerProfile) {
   return normalizePlayerProfile(
@@ -22,13 +23,18 @@ export function applyCharacterProfile(state, profile) {
   });
 }
 
-export function characterIntroLogMessages(profile, { regionName = "" } = {}) {
-  const starterSkill = profile?.starterSkill || t("stateMessages.noStarterSkill");
+export function characterIntroLogMessages(profile, { regionName = "", stats = {}, bonusStats = {} } = {}) {
+  const starterSkillName = profile?.starterSkill || t("stateMessages.noStarterSkill");
+  const statusValues = statusGradeTemplateValues(stats, { bonusStats, starterSkillName });
   return [
     t("stateMessages.tutorialTransfer"),
-    ...buildTutorialIntroDialogueLogs(profile),
+    tf("stateMessages.tutorialStatAssignment", statusValues),
+    ...buildTutorialIntroDialogueLogs(profile, { templateValues: statusValues }),
     tf("stateMessages.tutorialLocation", { regionName }),
-    tf("stateMessages.tutorialStatusBriefing", { starterSkill }),
+    tf("stateMessages.tutorialStatusBriefing", {
+      ...statusValues,
+      starterSkill: starterSkillName,
+    }),
   ];
 }
 
@@ -38,6 +44,8 @@ export function applyInitialCreationStats(
   primaryStats,
   {
     initialStatTotal = INITIAL_CREATION_STAT_BALANCE.total,
+    initialStatMinTotal = INITIAL_CREATION_STAT_BALANCE.totalRange?.min ?? initialStatTotal,
+    initialStatMaxTotal = INITIAL_CREATION_STAT_BALANCE.totalRange?.max ?? initialStatTotal,
     fallbackStatValue = INITIAL_CREATION_STAT_BALANCE.fallbackValue,
     fallbackStats = INITIAL_CREATION_STAT_BALANCE.startingStats,
   } = {}
@@ -45,9 +53,11 @@ export function applyInitialCreationStats(
   const parsedStats = Object.fromEntries(
     primaryStats.map((stat) => [stat, Math.floor(Number(formData.get(`stat_${stat}`)))])
   );
+  const parsedTotal = primaryStats.reduce((total, stat) => total + parsedStats[stat], 0);
   const isValid =
     primaryStats.every((stat) => Number.isFinite(parsedStats[stat]) && parsedStats[stat] >= 1) &&
-    primaryStats.reduce((total, stat) => total + parsedStats[stat], 0) === initialStatTotal;
+    parsedTotal >= initialStatMinTotal &&
+    parsedTotal <= initialStatMaxTotal;
 
   state.player.level = 1;
   state.player.exp = 0;
