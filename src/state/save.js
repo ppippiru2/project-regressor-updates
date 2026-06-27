@@ -1,11 +1,11 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=382";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=382";
-import { t, tf } from "../localization/index.js?v=382";
+} from "./developerOptions.js?v=383";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=383";
+import { t, tf } from "../localization/index.js?v=383";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=382";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=383";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";
@@ -53,6 +53,10 @@ export const DEFAULT_PLAYER_PROFILE = {
   title: t("saveDefaults.title"),
   organization: t("saveDefaults.organization"),
   alignment: t("saveDefaults.alignment"),
+  starterCardId: "",
+  starterCardName: "",
+  starterTrait: "",
+  starterSkill: "",
   portraitDataUrl: "",
   portraitFrame: { ...DEFAULT_PORTRAIT_FRAME },
 };
@@ -182,6 +186,10 @@ export function normalizePlayerProfile(savedProfile, fallbackName = t("saveDefau
   profile.title = sanitizeProfileText(profile.title, t("saveDefaults.title"), 16);
   profile.organization = sanitizeProfileText(profile.organization, t("saveDefaults.organization"), 16);
   profile.alignment = sanitizeProfileText(profile.alignment, t("saveDefaults.alignment"), 12);
+  profile.starterCardId = sanitizeProfileText(profile.starterCardId, "", 40);
+  profile.starterCardName = sanitizeProfileText(profile.starterCardName, "", 20);
+  profile.starterTrait = sanitizeProfileText(profile.starterTrait, "", 20);
+  profile.starterSkill = sanitizeProfileText(profile.starterSkill, "", 20);
   profile.portraitDataUrl = sanitizeImageDataUrl(profile.portraitDataUrl);
   profile.portraitFrame = normalizePortraitFrame(profile.portraitFrame);
   profile.created = Boolean(profile.created);

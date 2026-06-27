@@ -675,6 +675,59 @@ select:focus {
   box-shadow: 0 0 16px rgba(51, 239, 255, 0.2);
 }
 
+.creation-starter-body {
+  text-align: left;
+}
+
+.creation-starter-card-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.creation-starter-card {
+  display: grid;
+  gap: 0.3rem;
+  width: 100%;
+  min-height: 6.2rem;
+  justify-items: start;
+  border: 1px solid rgba(57, 228, 255, 0.24);
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, rgba(20, 74, 126, 0.7), rgba(4, 14, 34, 0.82)),
+    rgba(7, 28, 58, 0.74);
+  color: var(--text);
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.creation-starter-card.selected,
+.creation-starter-card:hover,
+.creation-starter-card:focus-visible {
+  border-color: rgba(51, 239, 255, 0.95);
+  background:
+    linear-gradient(135deg, rgba(18, 104, 128, 0.82), rgba(7, 29, 63, 0.88)),
+    rgba(7, 28, 58, 0.9);
+  box-shadow: 0 0 18px rgba(51, 239, 255, 0.24);
+}
+
+.creation-starter-card-glow {
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.creation-starter-card strong {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.creation-starter-card small {
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .creation-result-panel {
   text-align: center;
 }
@@ -6798,6 +6851,7 @@ body[data-info-tooltips="off"] .info-term {
   .creation-stat-grid,
   .creation-stat-grid.compact,
   .creation-summary-grid,
+  .creation-starter-card-list,
   .creation-image-row,
   .creation-profile-editor {
     grid-template-columns: 1fr;

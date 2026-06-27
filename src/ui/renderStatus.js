@@ -1,7 +1,7 @@
-import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=382";
-import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=382";
-import { t, tf } from "../localization/index.js?v=382";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=382";
+import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=383";
+import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=383";
+import { t, tf } from "../localization/index.js?v=383";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=383";
 
 const PROFILE_FIELDS = [
   ["statusUi.profileFields.name", "name", "profile:name"],
@@ -12,6 +12,8 @@ const PROFILE_FIELDS = [
   ["statusUi.profileFields.country", "country", "profile:country"],
   ["statusUi.profileFields.organization", "organization", "profile:organization"],
   ["statusUi.profileFields.alignment", "alignment", "profile:alignment"],
+  ["statusUi.profileFields.starterCard", "starterCard", "profile:starterCard"],
+  ["statusUi.profileFields.starterSkill", "starterSkill", "profile:starterSkill"],
 ];
 
 const byId = (id) => document.getElementById(id);
@@ -27,6 +29,8 @@ export function renderProfile(playerProfile, playerLevel, playerSpritePath = "")
     country: playerProfile.country,
     organization: playerProfile.organization,
     alignment: playerProfile.alignment,
+    starterCard: playerProfile.starterCardName || t("statusUi.noStarterCard"),
+    starterSkill: playerProfile.starterSkill || t("statusUi.noStarterSkill"),
   };
 
   byId("profile-lines").innerHTML = PROFILE_FIELDS.map(

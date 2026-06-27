@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 382,
-  "displayVersion": "v3.82",
-  "cacheVersion": "project-regressor-mvp-v382",
+  "versionCode": 383,
+  "displayVersion": "v3.83",
+  "cacheVersion": "project-regressor-mvp-v383",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=382&cachebust=382",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=383&cachebust=383",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v382 applies the first ProjectRegressor_v2.3 integrated package pass to the live tutorial baseline.",
-    "v382 lowers new-character start stats to STR/AGI/VIT/INT/WIS 2 and LUK 1, with +2 free stat points per level.",
-    "v382 changes new default combat loadouts to basic attack only and retunes tutorial region levels and representative monster stats to the v2.3 curve.",
+    "v383 applies the first ProjectRegressor_v2.4.1 package pass to the new-game synchronization flow.",
+    "v383 changes the profile label to the tutorial-system temporary registration name and records a starter fate card after the abyss questions.",
+    "v383 stores the selected starter card, trait, and card skill on the player profile while keeping basic attack as the guaranteed live combat action.",
     "v373 shows the core export names directly on each editor balance domain card.",
     "v373 makes player growth, combat pressure, equipment/items, monster rewards, and theme retarget tuning easier to inspect before editing.",
     "v373 extends editor metadata checks so the domain export summary remains registered.",
@@ -129,13 +129,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v382-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v383-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v382-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v383-debug.apk"
   },
   "version": {
-    "code": 382,
-    "name": "3.82.0",
-    "displayName": "v382"
+    "code": 383,
+    "name": "3.83.0",
+    "displayName": "v383"
   }
 }

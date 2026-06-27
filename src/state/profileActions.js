@@ -1,8 +1,8 @@
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=382";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=383";
 import { normalizePlayerProfile } from "./save.js";
-import { buildPlayerProfileInput } from "./profile.js?v=382";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=382";
-import { t, tf } from "../localization/index.js?v=382";
+import { buildPlayerProfileInput } from "./profile.js?v=383";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=383";
+import { t, tf } from "../localization/index.js?v=383";
 
 export function createCharacterProfile(formData, defaultPlayerProfile) {
   return normalizePlayerProfile(
@@ -14,7 +14,11 @@ export function createCharacterProfile(formData, defaultPlayerProfile) {
 export function applyCharacterProfile(state, profile) {
   state.playerProfile = profile;
   state.player.name = profile.name;
-  return tf("stateMessages.firstSync", { name: profile.name, alignment: profile.alignment });
+  return tf("stateMessages.firstSync", {
+    name: profile.name,
+    alignment: profile.alignment,
+    starterCard: profile.starterCardName || t("stateMessages.noStarterCard"),
+  });
 }
 
 export function applyInitialCreationStats(

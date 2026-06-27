@@ -1,24 +1,24 @@
-import { getLocaleText, tf } from "../localization/index.js?v=382";
-import { resolveAlignment } from "../state/profile.js?v=382";
+import { getLocaleText, tf } from "../localization/index.js?v=383";
+import { resolveAlignment } from "../state/profile.js?v=383";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=382";
+} from "../state/portraitFrame.js?v=383";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=382";
+} from "./portraitFrameView.js?v=383";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=382";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=382";
+} from "./diceSpriteRenderer.js?v=383";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=383";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -28,6 +28,8 @@ const STAT_LABELS = CREATION_TEXT.statLabels;
 const GENDER_OPTIONS = CREATION_TEXT.profile.genderOptions;
 const COUNTRY_OPTIONS = CREATION_TEXT.profile.countryOptions;
 const QUESTIONS = CREATION_TEXT.questions.items;
+const STARTER_CARDS = CREATION_TEXT.starterCards.items;
+const DEFAULT_STARTER_CARD_ID = STARTER_CARDS[0]?.id || "";
 const INITIAL_STAT_TOTAL = INITIAL_CREATION_STAT_BALANCE.total;
 const INITIAL_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.startingStats;
 const MIN_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.minValues || INITIAL_STAT_VALUES;
@@ -132,6 +134,20 @@ export function bindCharacterCreationEvents(onCreateCharacter, onCancelCreation)
       return;
     }
 
+    if (button.dataset.starterCard) {
+      event.preventDefault();
+      draft.starterCardId = button.dataset.starterCard;
+      renderCreationWizard(form, draft);
+      return;
+    }
+
+    if (button.dataset.confirmStarterCard !== undefined) {
+      event.preventDefault();
+      draft.step = "result";
+      renderCreationWizard(form, draft);
+      return;
+    }
+
     if (button.dataset.submitCreation !== undefined) {
       event.preventDefault();
       syncHiddenFields(form, draft);
@@ -213,6 +229,7 @@ function createInitialDraft() {
     diceRollSequence: 0,
     questionIndex: 0,
     answers: {},
+    starterCardId: DEFAULT_STARTER_CARD_ID,
   };
 }
 
@@ -246,6 +263,7 @@ function renderStepHeader(draft) {
     profile: CREATION_TEXT.profile,
     stats: CREATION_TEXT.stats,
     questions: CREATION_TEXT.questions,
+    starterCards: CREATION_TEXT.starterCards,
     result: CREATION_TEXT.result,
   }[draft.step];
 
@@ -259,6 +277,7 @@ function renderStepHeader(draft) {
 function renderStepBody(draft) {
   if (draft.step === "stats") return renderStatsStep(draft);
   if (draft.step === "questions") return renderQuestionStep(draft);
+  if (draft.step === "starterCards") return renderStarterCardStep(draft);
   if (draft.step === "result") return renderResultStep(draft);
   return renderProfileStep(draft);
 }
@@ -380,8 +399,39 @@ function renderQuestionStep(draft) {
   </div>`;
 }
 
+function renderStarterCardStep(draft) {
+  const selectedCard = selectedStarterCard(draft);
+  return `<div class="creation-body creation-starter-body">
+    <p class="muted">${escapeHtml(CREATION_TEXT.starterCards.basicAttackGuaranteed)}</p>
+    <div class="creation-starter-card-list">
+      ${STARTER_CARDS.map((card) => {
+        const selected = card.id === selectedCard.id;
+        return `<button class="creation-starter-card ${selected ? "selected" : ""}" type="button" data-starter-card="${escapeAttr(card.id)}" aria-pressed="${selected ? "true" : "false"}">
+          <span class="creation-starter-card-glow">${escapeHtml(card.glow)}</span>
+          <strong>${escapeHtml(card.card)}</strong>
+          <small>${escapeHtml(tf("characterCreation.starterCards.traitSkill", {
+            trait: card.trait,
+            skill: card.skill,
+          }))}</small>
+        </button>`;
+      }).join("")}
+    </div>
+    <div class="creation-summary-grid">
+      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedCard)}</span><strong>${escapeHtml(selectedCard.card)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedTrait)}</span><strong>${escapeHtml(selectedCard.trait)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedSkill)}</span><strong>${escapeHtml(selectedCard.skill)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.starterCards.unlock)}</span><strong>${escapeHtml(selectedCard.unlock)}</strong></div>
+    </div>
+    <div class="creation-actions creation-actions-split">
+      <button class="ghost-button" type="button" data-creation-back>${escapeHtml(COMMON_TEXT.previous)}</button>
+      <button class="primary-button" type="button" data-confirm-starter-card>${escapeHtml(CREATION_TEXT.starterCards.confirmNext)}</button>
+    </div>
+  </div>`;
+}
+
 function renderResultStep(draft) {
   const alignment = resolveAlignment(Object.values(draft.answers));
+  const selectedCard = selectedStarterCard(draft);
   return `<div class="creation-body creation-result-panel">
     <strong class="creation-result-title">${escapeHtml(CREATION_TEXT.result.analysisComplete)}</strong>
     <p>${tf("characterCreation.result.systemAlignment", { alignment: `<b>${escapeHtml(alignment)}</b>` })}</p>
@@ -390,6 +440,9 @@ function renderResultStep(draft) {
       <div><span>${escapeHtml(CREATION_TEXT.result.name)}</span><strong>${escapeHtml(draft.name)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.alignment)}</span><strong>${escapeHtml(alignment)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.statTotal)}</span><strong>${statTotal(draft.stats)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.result.starterCard)}</span><strong>${escapeHtml(selectedCard.card)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.result.starterTrait)}</span><strong>${escapeHtml(selectedCard.trait)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.result.starterSkill)}</span><strong>${escapeHtml(selectedCard.skill)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.startRegion)}</span><strong>${escapeHtml(CREATION_TEXT.result.tutorialIsland)}</strong></div>
     </div>
     <div class="creation-stat-grid compact">
@@ -419,7 +472,7 @@ function answerQuestion(draft, value) {
   const question = QUESTIONS[draft.questionIndex];
   draft.answers[question.id] = value;
   if (draft.questionIndex >= QUESTIONS.length - 1) {
-    draft.step = "result";
+    draft.step = "starterCards";
     return;
   }
   draft.questionIndex += 1;
@@ -438,9 +491,13 @@ function moveBack(draft) {
     }
     return;
   }
-  if (draft.step === "result") {
+  if (draft.step === "starterCards") {
     draft.step = "questions";
     draft.questionIndex = QUESTIONS.length - 1;
+    return;
+  }
+  if (draft.step === "result") {
+    draft.step = "starterCards";
   }
 }
 
@@ -454,6 +511,7 @@ function renderHiddenFields(draft) {
     <input type="hidden" name="portraitFrameX" value="${escapeAttr(draft.portraitFrame.x)}" />
     <input type="hidden" name="portraitFrameY" value="${escapeAttr(draft.portraitFrame.y)}" />
     <input type="hidden" name="portraitFrameScale" value="${escapeAttr(draft.portraitFrame.scale)}" />
+    ${renderStarterCardHiddenFields(draft)}
     ${QUESTIONS.map((question) => `<input type="hidden" name="${question.id}" value="${escapeAttr(draft.answers[question.id] || "")}" />`).join("")}
     ${STAT_KEYS.map((stat) => `<input type="hidden" name="stat_${stat}" value="${draft.stats[stat]}" />`).join("")}
   `;
@@ -470,6 +528,7 @@ function syncHiddenFields(form, draft) {
     portraitFrameX: draft.portraitFrame.x,
     portraitFrameY: draft.portraitFrame.y,
     portraitFrameScale: draft.portraitFrame.scale,
+    ...starterCardFormValues(draft),
   })) {
     setHiddenValue(form, name, value);
   }
@@ -479,6 +538,33 @@ function syncHiddenFields(form, draft) {
   for (const stat of STAT_KEYS) {
     setHiddenValue(form, `stat_${stat}`, draft.stats[stat]);
   }
+}
+
+function selectedStarterCard(draft) {
+  return STARTER_CARDS.find((card) => card.id === draft.starterCardId) || STARTER_CARDS[0] || {
+    id: "",
+    card: "",
+    trait: "",
+    skill: "",
+    glow: "",
+    unlock: "",
+  };
+}
+
+function starterCardFormValues(draft) {
+  const card = selectedStarterCard(draft);
+  return {
+    starterCardId: card.id,
+    starterCardName: card.card,
+    starterTrait: card.trait,
+    starterSkill: card.skill,
+  };
+}
+
+function renderStarterCardHiddenFields(draft) {
+  return Object.entries(starterCardFormValues(draft))
+    .map(([name, value]) => `<input type="hidden" name="${name}" value="${escapeAttr(value)}" />`)
+    .join("");
 }
 
 function setHiddenValue(form, name, value) {

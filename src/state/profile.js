@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=382";
-import { portraitFrameFromFormData } from "./portraitFrame.js?v=382";
+import { getLocaleText } from "../localization/index.js?v=383";
+import { portraitFrameFromFormData } from "./portraitFrame.js?v=383";
 
 export function buildPlayerProfileInput(formData, defaultProfile) {
   return {
@@ -14,6 +14,10 @@ export function buildPlayerProfileInput(formData, defaultProfile) {
     title: defaultProfile.title,
     organization: defaultProfile.organization,
     alignment: resolveAlignment([...formData.entries()].filter(([key]) => key.startsWith("q")).map(([, value]) => value)),
+    starterCardId: formData.get("starterCardId") || "",
+    starterCardName: formData.get("starterCardName") || "",
+    starterTrait: formData.get("starterTrait") || "",
+    starterSkill: formData.get("starterSkill") || "",
     portraitDataUrl: formData.get("portraitDataUrl") || "",
     portraitFrame: portraitFrameFromFormData(formData),
   };
