@@ -1041,6 +1041,8 @@ export const KO_KR_TEXT = {
     devMultiplierBonus: " 개발 테스트 배율이 적용되었습니다.",
     monsterDefeated: "{monsterName} 처치. {expText}, 골드 {gold} 획득.{penaltyText}{bonusText}",
     itemAcquired: "{itemName} 획득.",
+    lootItemAcquired: "전리품 획득: {typeLabel} · {itemName}.",
+    lootItemFallbackType: "전리품",
     bossCleared: "{regionName}의 보스를 격파했습니다. 튜토리얼 섬의 균열이 약해집니다.",
   },
   combatMessages: {
@@ -1075,6 +1077,7 @@ export const KO_KR_TEXT = {
       warning: "오류|쓰러졌|실패|부족|잠김|위험|경고|비활성화",
     },
     tokenPatterns: {
+      lootItemAcquired: "^(전리품 획득:\\s)([^·.]+?)(\\s·\\s)([^.]+?)(\\.)$",
       itemQuantity: "(^|[:,]\\s)([\\p{Script=Hangul}A-Za-z][\\p{Script=Hangul}A-Za-z0-9·\\s-]*?)\\s(x\\d+)",
       gateRewardItem: "^(게이트 보상 노드에서\\s)([^:,.]+?)(\\s획득\\.)$",
       itemAcquired: "^([^:,.]+?)(\\s획득\\.)$",
@@ -1312,6 +1315,7 @@ export const KO_KR_TEXT = {
       levelUp: "레벨\\s(\\d+)\\s달성",
       unlockedRegion: "새 지역 개방:\\s(.+?)\\.",
       equipment: "장비 후보 감지:\\s(.+?)\\s장비 가치\\s\\+(\\d+)",
+      lootItem: "^전리품 획득:\\s(.+?)\\s·\\s(.+?)\\.",
       reward: "(.+?)\\s처치\\.\\s경험치\\s([\\d,]+),\\s골드\\s([\\d,]+)\\s획득\\.",
       item: "^(.+?)\\s획득\\.",
       bossClear: "보스를 격파했습니다",

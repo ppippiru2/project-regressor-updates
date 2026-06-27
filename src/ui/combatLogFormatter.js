@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=395";
+import { getLocaleText } from "../localization/index.js?v=396";
 
 const COMBAT_LOG_TEXT = getLocaleText().combatLogFormatter;
 const CLASS_PATTERNS = COMBAT_LOG_TEXT.classPatterns;
@@ -40,6 +40,10 @@ function highlightCombatLogTokens(value, category) {
           : "log-token-physical";
 
   const highlighted = value
+    .replace(
+      regex(TOKEN_PATTERNS.lootItemAcquired, "u"),
+      '<span class="log-token-system">$1</span><span class="log-token-system">$2</span>$3<span class="log-token-item">$4</span>$5'
+    )
     .replace(
       regex(TOKEN_PATTERNS.itemQuantity, "gu"),
       '$1<span class="log-token-item">$2</span> <span class="log-token-quantity">$3</span>'
