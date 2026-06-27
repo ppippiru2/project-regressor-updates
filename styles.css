@@ -1089,6 +1089,16 @@ select:focus {
   text-shadow: 0 0 10px rgba(244, 211, 94, 0.5);
 }
 
+.system-window[data-system-type="loot"] {
+  border-color: rgba(125, 235, 218, 0.64);
+  box-shadow: 0 0 28px rgba(125, 235, 218, 0.16), inset 0 0 28px rgba(125, 235, 218, 0.06);
+}
+
+.system-window[data-system-type="loot"] .system-window-header strong {
+  color: #9df3df;
+  text-shadow: 0 0 10px rgba(125, 235, 218, 0.42);
+}
+
 .system-window[data-system-type="warning"] {
   border-color: rgba(255, 77, 109, 0.7);
   box-shadow: 0 0 28px rgba(255, 77, 109, 0.16), inset 0 0 28px rgba(255, 77, 109, 0.06);
@@ -6404,6 +6414,7 @@ button:disabled {
 .combat-log li.log-magic,
 .combat-log li.log-critical,
 .combat-log li.log-poison,
+.combat-log li.log-loot,
 .combat-log li.log-reward,
 .combat-log li.log-growth {
   color: var(--log-muted-event);
@@ -6441,6 +6452,11 @@ button:disabled {
 .combat-log[data-color-mode="rich"] li.log-poison::after {
   background: linear-gradient(180deg, rgba(159, 230, 183, 0.9), rgba(159, 230, 183, 0.18));
   box-shadow: 0 0 8px rgba(159, 230, 183, 0.12);
+}
+
+.combat-log[data-color-mode="rich"] li.log-loot::after {
+  background: linear-gradient(180deg, rgba(125, 235, 218, 0.92), rgba(125, 235, 218, 0.18));
+  box-shadow: 0 0 8px rgba(125, 235, 218, 0.13);
 }
 
 .combat-log[data-color-mode="rich"] li.log-reward::after,

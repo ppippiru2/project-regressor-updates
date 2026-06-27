@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=431";
+import { getLocaleText } from "../localization/index.js?v=432";
 
 const COMBAT_LOG_TEXT = getLocaleText().combatLogFormatter;
 const CLASS_PATTERNS = COMBAT_LOG_TEXT.classPatterns;
@@ -16,6 +16,7 @@ export function combatLogClass(line) {
   if (regex(CLASS_PATTERNS.critical).test(text)) return "log-critical";
   if (regex(CLASS_PATTERNS.poisonNeedle).test(text) && regex(CLASS_PATTERNS.damageNeedle).test(text)) return "log-poison";
   if (regex(CLASS_PATTERNS.magicNeedle).test(text) && regex(CLASS_PATTERNS.damageNeedle).test(text)) return "log-magic";
+  if (regex(CLASS_PATTERNS.lootItem).test(text)) return "log-loot";
   if (regex(CLASS_PATTERNS.reward).test(text)) return "log-reward";
   if (regex(CLASS_PATTERNS.defeat).test(text)) return "log-defeat";
   if (regex(CLASS_PATTERNS.growth).test(text)) return "log-growth";
@@ -83,6 +84,7 @@ function wrapCombatLogToken(className, value) {
 
 function fallbackCombatLogTokenClass(category) {
   if (category === "log-reward") return "log-token-system";
+  if (category === "log-loot") return "log-token-item";
   if (category === "log-growth") return "log-token-growth";
   if (category === "log-lucky") return "log-token-gold";
   if (category === "log-critical") return "log-token-critical";
