@@ -35,6 +35,7 @@
         "panels": [
           "theme_retarget_preview",
           "balance_tuning_registry",
+          "combat_vfx_placement_preview",
           "sound",
           "save_data"
         ]
@@ -410,6 +411,48 @@
         "파일/export 누락 경고",
         "튜토리얼 섬 페이싱 검사 연결",
         "변경 전 읽기 전용 검증 리포트"
+      ]
+    },
+    {
+      "id": "combat_vfx_placement_preview",
+      "label": "전투 VFX 배치 미리보기",
+      "status": "partial",
+      "priority": "high",
+      "purpose": "플레이어와 몬스터 공격 효과의 위치, 크기, 하이퍼 상태 배치를 읽기 전용으로 비교해 전투 연출 튜닝 기준을 잡는다.",
+      "primaryDataTargets": [
+        "src/editor/combatVfxPlacementPreview.js",
+        "src/config/playerBattleSpritePresets.js",
+        "src/config/playerBattleSprites.js",
+        "src/config/monsterBattleSpritePresets.js",
+        "src/combat/combatEffects.js",
+        "styles.css",
+        "build-scripts/check-combat-vfx-placement-preview.mjs"
+      ],
+      "assetSlots": [
+        "player.combatIdle",
+        "monster.defaultIdle"
+      ],
+      "editorFields": [
+        "playerClass",
+        "playerGender",
+        "monsterId",
+        "effectType",
+        "sfxProfile",
+        "motionProfile",
+        "basePlacement",
+        "hyperPlacement",
+        "offsetX",
+        "offsetY",
+        "textOffsetY",
+        "slashWidth",
+        "expandedSlashWidth"
+      ],
+      "futureControls": [
+        "읽기 전용 플레이어 VFX 배치표",
+        "읽기 전용 몬스터 VFX 배치표",
+        "효과 타입별 배치 비교",
+        "하이퍼 상태 배치 비교",
+        "전투 화면 튜닝 전 점검용 요약"
       ]
     },
     {
@@ -865,6 +908,27 @@
     "editorHooks": [
       "data/editor-manifest.json:balance_tuning_registry",
       "data/editor-backlog.json:balance-tuning-registry-editor"
+    ]
+  },
+  "combatVfxPlacementPreview": {
+    "id": "combat-vfx-placement-preview-v1",
+    "sourceModule": "src/editor/combatVfxPlacementPreview.js",
+    "checkScript": "build-scripts/check-combat-vfx-placement-preview.mjs",
+    "expectedPlayerRows": 12,
+    "expectedMonsterRows": 6,
+    "expectedEffectTypes": 8,
+    "dataTargets": [
+      "src/editor/combatVfxPlacementPreview.js:createCombatVfxPlacementPreview",
+      "src/config/playerBattleSpritePresets.js:PLAYER_BATTLE_SPRITE_PRESETS",
+      "src/config/playerBattleSprites.js:resolvePlayerAttackEffectPlacement",
+      "src/config/monsterBattleSpritePresets.js:monsterAttackEffectPlacement",
+      "src/combat/combatEffects.js",
+      "styles.css"
+    ],
+    "editorHooks": [
+      "data/editor-manifest.json:combat_vfx_placement_preview",
+      "data/editor-backlog.json:combat-vfx-placement-preview-editor",
+      "src/editor/editorMain.js"
     ]
   },
   "prototypeListMemory": [

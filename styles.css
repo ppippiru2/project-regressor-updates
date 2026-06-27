@@ -4165,6 +4165,129 @@ select:focus {
   white-space: nowrap;
 }
 
+.editor-combat-vfx-detail {
+  background: rgba(3, 14, 35, 0.48);
+  border: 1px solid rgba(57, 228, 255, 0.26);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1rem;
+  min-width: 0;
+  padding: 0.85rem;
+}
+
+.editor-combat-vfx-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+}
+
+.editor-combat-vfx-head h3,
+.editor-combat-vfx-head p,
+.editor-combat-vfx-grid h4,
+.editor-combat-vfx-row h4 {
+  margin: 0;
+}
+
+.editor-combat-vfx-head > span {
+  align-items: center;
+  border: 1px solid rgba(57, 228, 255, 0.38);
+  border-radius: 999px;
+  color: var(--cyan);
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 900;
+  min-height: 1.9rem;
+  padding: 0 0.65rem;
+  white-space: nowrap;
+}
+
+.editor-combat-vfx-summary,
+.editor-combat-vfx-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.editor-combat-vfx-summary span {
+  background: rgba(4, 20, 48, 0.44);
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.22rem;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-combat-vfx-summary small,
+.editor-combat-vfx-row-head span,
+.editor-combat-vfx-chip-block > span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.editor-combat-vfx-summary b {
+  color: var(--text);
+  font-size: 0.94rem;
+}
+
+.editor-combat-vfx-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-combat-vfx-grid > section,
+.editor-combat-vfx-list,
+.editor-combat-vfx-row,
+.editor-combat-vfx-chip-block {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.editor-combat-vfx-grid h4 {
+  color: var(--cyan);
+  font-size: 0.92rem;
+}
+
+.editor-combat-vfx-row {
+  background: rgba(4, 20, 48, 0.62);
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  padding: 0.72rem;
+}
+
+.editor-combat-vfx-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+}
+
+.editor-combat-vfx-row-head h4 {
+  color: var(--text);
+  font-size: 0.96rem;
+}
+
+.editor-combat-vfx-row-head span {
+  display: block;
+  margin-top: 0.18rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-combat-vfx-row-head strong {
+  color: var(--gold);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.editor-combat-vfx-chip-block .editor-chip {
+  overflow-wrap: anywhere;
+}
+
 .editor-retarget-controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
@@ -6648,8 +6771,13 @@ body[data-info-tooltips="off"] .info-term {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .editor-balance-domain-list {
+  .editor-balance-domain-list,
+  .editor-combat-vfx-grid {
     grid-template-columns: 1fr;
+  }
+
+  .editor-combat-vfx-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -6730,9 +6858,11 @@ body[data-info-tooltips="off"] .info-term {
   .editor-backlog-head,
   .editor-asset-card,
   .editor-retarget-head,
-  .editor-retarget-summary,
-  .editor-retarget-row-head,
-  .editor-topbar {
+    .editor-retarget-summary,
+    .editor-retarget-row-head,
+    .editor-combat-vfx-head,
+    .editor-combat-vfx-row-head,
+    .editor-topbar {
     grid-template-columns: 1fr;
   }
 
@@ -6748,8 +6878,14 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .editor-balance-head > span,
-  .editor-balance-row-head strong {
+  .editor-balance-row-head strong,
+  .editor-combat-vfx-head > span,
+  .editor-combat-vfx-row-head strong {
     justify-self: start;
+  }
+
+  .editor-combat-vfx-summary {
+    grid-template-columns: 1fr;
   }
 
   .editor-shell,

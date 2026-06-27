@@ -51,6 +51,21 @@
       ]
     },
     {
+      "id": "combat-vfx-placement-preview-editor",
+      "title": "전투 VFX 배치 미리보기 에디터 연결",
+      "status": "partial",
+      "priority": "high",
+      "source": "v406",
+      "summary": "Expose player and monster combat VFX placement rows in the read-only editor so attack effect offsets can be compared before manual tuning.",
+      "editorHooks": [
+        "data/editor-manifest.json:combatVfxPlacementPreview",
+        "src/editor/combatVfxPlacementPreview.js",
+        "src/editor/editorMain.js",
+        "styles.css",
+        "build-scripts/check-combat-vfx-placement-preview.mjs"
+      ]
+    },
+    {
       "id": "save-slot-editor",
       "title": "세계선 저장 데이터 수동 편집",
       "status": "planned",

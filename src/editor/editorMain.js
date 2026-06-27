@@ -1,17 +1,64 @@
-import { applyDomLocalization } from "../localization/domText.js?v=405";
-import { getLocaleText, tf } from "../localization/index.js?v=405";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=405";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=405";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=405";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=405";
+import { applyDomLocalization } from "../localization/domText.js?v=406";
+import { getLocaleText, tf } from "../localization/index.js?v=406";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=406";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=406";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=406";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=406";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=406";
 
-const EDITOR_VERSION = "388";
+const EDITOR_VERSION = "406";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
 const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
   createBalanceTuningPreviewRows(BALANCE_TUNING_GROUPS).map((row) => [row.id, row])
 );
+const COMBAT_VFX_PLACEMENT_PREVIEW = createCombatVfxPlacementPreview();
+const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
+  title: "Combat VFX Placement Preview",
+  description: "Read-only placement summary for player and monster attack effects.",
+  summary: "Players {playerRows} / Monsters {monsterRows} / Effects {effectTypes}",
+  playerTitle: "Player Attack Effects",
+  monsterTitle: "Monster Attack Effects",
+  base: "Base",
+  hyper: "Hyper",
+  effects: "Effect Types",
+  motion: "Motion",
+  sfx: "SFX",
+  placement: "Placement",
+  sprite: "Sprite",
+  playerMetric: "Player VFX",
+  monsterMetric: "Monster VFX",
+  effectMetric: "Effect Types",
+  metricLabel: "Combat VFX",
+  metricValue: "Players {playerRows} ? Monsters {monsterRows}",
+  metricHint: "Attack effect placement preview ready",
+  classLabels: {},
+  genderLabels: {},
+  effectLabels: {}
+});
+const COMBAT_VFX_CLASS_LABELS = Object.freeze({
+  warrior: "Warrior",
+  assassin: "Assassin",
+  fighter: "Fighter",
+  archer: "Archer",
+  mage_wandbook: "Wand-book Mage",
+  mage_staff: "Staff Mage"
+});
+const COMBAT_VFX_GENDER_LABELS = Object.freeze({
+  male: "Male",
+  female: "Female"
+});
+const COMBAT_VFX_EFFECT_LABELS = Object.freeze({
+  slash: "Slash",
+  impact: "Impact",
+  pierce: "Pierce",
+  projectile: "Projectile",
+  magic: "Magic",
+  holy: "Holy",
+  dark: "Dark",
+  explosion: "Explosion"
+});
 
 const SAVE_KEYS = [
   "project_regressor_mvp_save",
@@ -208,7 +255,8 @@ function renderSummary() {
     localizedMetricCard("audioSlot", audioCount),
     localizedMetricCard("backlog", backlogCount),
     retargetPreviewMetricCard(retargetPreview),
-    balanceRegistryMetricCard()
+    balanceRegistryMetricCard(),
+    combatVfxPlacementMetricCard()
   ].join("");
 }
 
@@ -249,6 +297,7 @@ function renderPanelDetail() {
   }
   const retargetDetail = panel.id === "theme_retarget_preview" ? renderRetargetPreviewDetail() : "";
   const balanceDetail = panel.id === "balance_tuning_registry" ? renderBalanceTuningDetail() : "";
+  const combatVfxDetail = panel.id === "combat_vfx_placement_preview" ? renderCombatVfxPlacementDetail() : "";
 
   elements.panelDetail.innerHTML = `
     <div class="editor-detail-header">
@@ -267,7 +316,136 @@ function renderPanelDetail() {
     ${panel.nodeTypes ? `<div class="editor-chip-section"><strong>${escapeHtml(EDITOR_TEXT.detailTitles.nodeTypes)}</strong><div class="editor-chip-list">${panel.nodeTypes.map((type) => chip(type)).join("")}</div></div>` : ""}
     ${retargetDetail}
     ${balanceDetail}
+    ${combatVfxDetail}
   `;
+}
+
+function renderCombatVfxPlacementDetail() {
+  const detailText = {
+    ...COMBAT_VFX_DETAIL_TEXT,
+    ...(EDITOR_TEXT.combatVfxPlacementDetail || {})
+  };
+  const preview = COMBAT_VFX_PLACEMENT_PREVIEW;
+  const totals = preview.totals || {};
+  const playerRows = preview.playerRows || [];
+  const monsterRows = preview.monsterRows || [];
+
+  return `
+    <section class="editor-combat-vfx-detail" aria-label="${escapeAttribute(detailText.title)}">
+      <div class="editor-combat-vfx-head">
+        <div>
+          <h3>${escapeHtml(detailText.title)}</h3>
+          <p class="muted">${escapeHtml(detailText.description)}</p>
+        </div>
+        <span>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.summary", {
+          playerRows: totals.playerRows || playerRows.length,
+          monsterRows: totals.monsterRows || monsterRows.length,
+          effectTypes: totals.effectTypes || 0
+        }, detailText.summary))}</span>
+      </div>
+      <div class="editor-combat-vfx-summary">
+        ${combatVfxSummaryCard(detailText.playerMetric, String(totals.playerRows || playerRows.length))}
+        ${combatVfxSummaryCard(detailText.monsterMetric, String(totals.monsterRows || monsterRows.length))}
+        ${combatVfxSummaryCard(detailText.effectMetric, String(totals.effectTypes || 0))}
+      </div>
+      <div class="editor-combat-vfx-grid">
+        <section>
+          <h4>${escapeHtml(detailText.playerTitle)}</h4>
+          <div class="editor-combat-vfx-list">
+            ${playerRows.map((row) => renderPlayerVfxPreviewRow(row, detailText)).join("")}
+          </div>
+        </section>
+        <section>
+          <h4>${escapeHtml(detailText.monsterTitle)}</h4>
+          <div class="editor-combat-vfx-list">
+            ${monsterRows.map((row) => renderMonsterVfxPreviewRow(row, detailText)).join("")}
+          </div>
+        </section>
+      </div>
+    </section>
+  `;
+}
+
+function combatVfxSummaryCard(label, value) {
+  return `
+    <span>
+      <small>${escapeHtml(label)}</small>
+      <b>${escapeHtml(value)}</b>
+    </span>
+  `;
+}
+
+function renderPlayerVfxPreviewRow(row, detailText = COMBAT_VFX_DETAIL_TEXT) {
+  const classLabels = {
+    ...COMBAT_VFX_CLASS_LABELS,
+    ...(detailText.classLabels || {})
+  };
+  const genderLabels = {
+    ...COMBAT_VFX_GENDER_LABELS,
+    ...(detailText.genderLabels || {})
+  };
+  const effectLabels = {
+    ...COMBAT_VFX_EFFECT_LABELS,
+    ...(detailText.effectLabels || {})
+  };
+  const classLabel = classLabels[row.classId] || row.classId;
+  const genderLabel = genderLabels[row.gender] || row.gender;
+  const effectChips = Object.entries(row.effects || {})
+    .map(([effectType, placement]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`))
+    .join("");
+  return `
+    <article class="editor-combat-vfx-row">
+      <div class="editor-combat-vfx-row-head">
+        <div>
+          <h4>${escapeHtml(`${classLabel} / ${genderLabel}`)}</h4>
+          <span>${escapeHtml(row.spritePath || "")}</span>
+        </div>
+        <strong>${escapeHtml(row.id)}</strong>
+      </div>
+      ${combatVfxFieldBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)])}
+      ${combatVfxFieldBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)])}
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.effects)}</span>
+        <div class="editor-chip-list">${effectChips}</div>
+      </div>
+    </article>
+  `;
+}
+
+function renderMonsterVfxPreviewRow(row, detailText = COMBAT_VFX_DETAIL_TEXT) {
+  const effectLabels = {
+    ...COMBAT_VFX_EFFECT_LABELS,
+    ...(detailText.effectLabels || {})
+  };
+  const effectLabel = effectLabels[row.effectType] || row.effectType || "";
+  return `
+    <article class="editor-combat-vfx-row">
+      <div class="editor-combat-vfx-row-head">
+        <div>
+          <h4>${escapeHtml(row.name || row.id)}</h4>
+          <span>${escapeHtml(`${row.classId || ""} / ${effectLabel}`)}</span>
+        </div>
+        <strong>${escapeHtml(row.id)}</strong>
+      </div>
+      ${combatVfxFieldBlock(detailText.motion, [row.motionProfile])}
+      ${combatVfxFieldBlock(detailText.sfx, [row.sfxProfile])}
+      ${combatVfxFieldBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)])}
+      ${combatVfxFieldBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)])}
+    </article>
+  `;
+}
+
+function combatVfxFieldBlock(title, values = []) {
+  return `
+    <div class="editor-combat-vfx-chip-block">
+      <span>${escapeHtml(title)}</span>
+      <div class="editor-chip-list">${values.filter(Boolean).map((value) => chip(value)).join("")}</div>
+    </div>
+  `;
+}
+
+function formatCombatVfxPlacement(placement = {}) {
+  return `x ${Number(placement.offsetX || 0)} / y ${Number(placement.offsetY || 0)} / txt ${Number(placement.textOffsetY || 0)} / slash ${Number(placement.slashWidth || 0)}/${Number(placement.expandedSlashWidth || 0)}`;
 }
 
 function renderBalanceTuningDetail() {
@@ -1137,6 +1315,31 @@ function balanceRegistryMetricCard() {
         }, metric.readyHint || "")
       : tf("editorPrep.metrics.balanceTuningRegistry.reviewHint", {
           exportCount
+        }, metric.hint || "")
+  );
+}
+
+function combatVfxPlacementMetricCard() {
+  const metric = EDITOR_TEXT.metrics?.combatVfxPlacementPreview || {};
+  const manifestPreview = manifest.combatVfxPlacementPreview || {};
+  const totals = COMBAT_VFX_PLACEMENT_PREVIEW.totals || {};
+  const playerRows = Number(totals.playerRows || 0);
+  const monsterRows = Number(totals.monsterRows || 0);
+  const effectTypes = Number(totals.effectTypes || 0);
+  const expectedMatches =
+    (!manifestPreview.expectedPlayerRows || manifestPreview.expectedPlayerRows === playerRows) &&
+    (!manifestPreview.expectedMonsterRows || manifestPreview.expectedMonsterRows === monsterRows) &&
+    (!manifestPreview.expectedEffectTypes || manifestPreview.expectedEffectTypes === effectTypes);
+  return metricCard(
+    metric.label || COMBAT_VFX_DETAIL_TEXT.metricLabel,
+    tf("editorPrep.metrics.combatVfxPlacementPreview.value", {
+      playerRows,
+      monsterRows
+    }, COMBAT_VFX_DETAIL_TEXT.metricValue),
+    expectedMatches
+      ? (metric.readyHint || COMBAT_VFX_DETAIL_TEXT.metricHint)
+      : tf("editorPrep.metrics.combatVfxPlacementPreview.reviewHint", {
+          effectTypes
         }, metric.hint || "")
   );
 }
