@@ -1301,7 +1301,7 @@ export const KO_KR_TEXT = {
     statPointsDetail: "보유 포인트 {points}개. 알림을 눌러 상태창에서 배분하십시오.",
     statusAction: "상태 보기",
     tutorialStartTitle: "튜토리얼 섬 행동 지침",
-    tutorialStartDetail: "전투로 경험치와 장비 후보를 확보하고, 지역 탭에서 다음 개방 목표를 확인하십시오.",
+    tutorialStartDetail: "전투로 지역을 탐색하고, 장비·재료 확보 → 도감 기록 → 최종 관문 20% 피해량을 준비하십시오.",
     finalGateTitle: "최종 관문 공략 가능",
     finalGateDetail: "제한시간 피해량 평가로 검은 관문의 파수꾼에게 성장치를 증명하면 튜토리얼 섬 공략이 끝납니다.",
     regionAction: "지역 보기",

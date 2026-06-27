@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 388,
-  "displayVersion": "v3.88",
-  "cacheVersion": "project-regressor-mvp-v388",
+  "versionCode": 389,
+  "displayVersion": "v3.89",
+  "cacheVersion": "project-regressor-mvp-v389",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=388&cachebust=388",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=389&cachebust=389",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v389 aligns the starting objective with the v2.4.1 four-step tutorial guidance.",
+    "v389 names exploration, gear/material collection, codex recording, and final-gate 20% damage prep in the first objective.",
+    "v389 extends the tutorial guidance quick-check so those onboarding tokens cannot disappear.",
     "v388 reveals next-region combat readiness after the player gains early EXP progress.",
     "v388 keeps the first untouched tutorial screen focused on the starting objective instead of duplicating guidance.",
     "v388 adds a quick-check guard for combat-readiness visibility and boss-readiness behavior.",
@@ -145,21 +148,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v388-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v389-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v388-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v389-debug.apk"
   },
   "version": {
-    "code": 388,
-    "name": "3.88.0",
-    "displayName": "v388"
+    "code": 389,
+    "name": "3.89.0",
+    "displayName": "v389"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v388-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v389-debug.apk"
   },
   "android": {
-    "code": 388,
-    "name": "3.88.0",
-    "displayName": "v388"
+    "code": 389,
+    "name": "3.89.0",
+    "displayName": "v389"
   }
 }
