@@ -71,8 +71,8 @@
       "title": "몬스터 전투 스프라이트 슬롯 후보",
       "status": "partial",
       "priority": "high",
-      "source": "v427",
-      "summary": "Expose monster sprite readiness, file scanning, draft assetId candidates, asset manifest/slot patch export drafts, file-ready-only connection plans, review-only exports, grouped missing-file production handoffs, editor-visible summaries, and an apply-preview artifact that compares ready patches against the missing-file handoff before final monster WebP ingestion.",
+      "source": "v428",
+      "summary": "Expose monster sprite readiness, file scanning, draft assetId candidates, patch export drafts, ready connection plans, missing-file handoffs, and an editor-visible apply-preview summary that compares ready patches against the missing-file handoff before final monster WebP ingestion.",
       "editorHooks": [
         "data/editor-manifest.json:monsterBattleSpriteAssetSlots",
         "data/asset-slots.json:slots.monster.byMonsterId",
@@ -115,7 +115,11 @@
         "build-scripts/check-monster-sprite-apply-preview.mjs",
         "validation-output/monster-sprite-apply-preview.json",
         "data/editor-manifest.json:monsterSpriteSlotReadiness.applyPreviewArtifact",
-        "data/editor-manifest.json:monsterSpriteSlotReadiness.applyPreviewComparesMissingFileHandoff"
+        "data/editor-manifest.json:monsterSpriteSlotReadiness.applyPreviewComparesMissingFileHandoff",
+        "src/editor/editorMain.js:renderMonsterSpriteApplyPreview",
+        "styles.css:.editor-monster-sprite-apply-preview",
+        "src/localization/ko-KR.js:editorPrep.monsterSpriteSlotReport.applyPreviewTitle",
+        "data/editor-manifest.json:monsterSpriteSlotReadiness.applyPreviewEditorSummaryVisible"
       ]
     },
     {

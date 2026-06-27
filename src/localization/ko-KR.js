@@ -2047,6 +2047,17 @@ export const KO_KR_TEXT = {
         handoffScriptMetric: "스크립트",
         handoffMissingMetric: "누락 파일",
         handoffGroupsMetric: "몬스터 묶음",
+        applyPreviewTitle: "적용 전 미리보기",
+        applyPreviewDescription: "준비된 WebP 연결 후보가 누락 파일 인수인계와 맞는지 먼저 확인하는 검토용 산출물입니다.",
+        applyPreviewArtifactMetric: "산출물",
+        applyPreviewScriptMetric: "스크립트",
+        applyPreviewStatusMetric: "상태",
+        applyPreviewReadyPatchMetric: "연결 후보",
+        applyPreviewPolicyMetric: "보호 기준",
+        applyPreviewManualReviewRequired: "수동 검토 필요",
+        applyPreviewManualReviewOptional: "검토 선택",
+        applyPreviewCompareEnabled: "누락 인수인계 비교",
+        applyPreviewCompareDisabled: "비교 없음",
         expectedPath: "예상 파일",
         assignedAsset: "연결 에셋",
         suggestedAsset: "추천 에셋",
@@ -2072,7 +2083,9 @@ export const KO_KR_TEXT = {
           broken: "깨진 슬롯",
           "waiting-for-monster-files": "파일 대기 중",
           "ready-for-manual-review": "수동 검토 가능",
-          "blocked-broken-slots": "깨진 슬롯 차단"
+          "blocked-broken-slots": "깨진 슬롯 차단",
+          "ready-preview": "미리보기 준비",
+          "blocked-review": "검토 차단"
         },
         nextStepLabels: {
           "add-monster-files": "예상 WebP 파일을 먼저 추가하면 연결 후보가 자동으로 표시됩니다.",

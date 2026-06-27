@@ -1358,7 +1358,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v427",
+    "source": "v428",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1456,6 +1456,7 @@
     "applyPreviewInputArtifacts": [
       "validation-output/monster-sprite-ready-connection-plan.json",
       "validation-output/monster-sprite-missing-file-handoff.json"
-    ]
+    ],
+    "applyPreviewEditorSummaryVisible": true
   }
 }

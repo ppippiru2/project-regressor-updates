@@ -1,17 +1,17 @@
-import { applyDomLocalization } from "../localization/domText.js?v=427";
-import { getLocaleText, tf } from "../localization/index.js?v=427";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=427";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=427";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=427";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=427";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=427";
+import { applyDomLocalization } from "../localization/domText.js?v=428";
+import { getLocaleText, tf } from "../localization/index.js?v=428";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=428";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=428";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=428";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=428";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=428";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=427";
+} from "./monsterSpriteSlotReport.js?v=428";
 
-const EDITOR_VERSION = "427";
+const EDITOR_VERSION = "428";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -534,6 +534,7 @@ function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {}) {
         ${combatVfxSummaryCard(detailText.applyModeMetric || "Apply mode", applyMode)}
       </div>
       ${renderMonsterSpriteReviewChecks(review, detailText)}
+      ${renderMonsterSpriteApplyPreview(readiness, detailText)}
       ${renderMonsterSpriteMissingFileHandoff(readiness, detailText)}
     </div>
   `;
@@ -581,6 +582,34 @@ function renderMonsterSpriteMissingFileHandoff(readiness = {}, detailText = {}) 
         ${combatVfxFieldBlock(detailText.handoffScriptMetric || "Script", [readiness.missingFileHandoffExportScript || "-"])}
         ${combatVfxFieldBlock(detailText.handoffMissingMetric || "Missing files", [String(readiness.missingFileHandoffMissingFiles ?? "-")])}
         ${combatVfxFieldBlock(detailText.handoffGroupsMetric || "Monster groups", [String(readiness.missingFileHandoffMonsterGroups ?? "-")])}
+      </div>
+    </div>
+  `;
+}
+
+function renderMonsterSpriteApplyPreview(readiness = {}, detailText = {}) {
+  if (!readiness.applyPreviewArtifact) return "";
+  const status = readiness.applyPreviewStatus || "waiting-for-monster-files";
+  const statusLabel = detailText.statusLabels?.[status] || status;
+  const manualReviewLabel = readiness.applyPreviewManualReviewRequired
+    ? detailText.applyPreviewManualReviewRequired || "Manual review"
+    : detailText.applyPreviewManualReviewOptional || "Optional";
+  const compareLabel = readiness.applyPreviewComparesMissingFileHandoff
+    ? detailText.applyPreviewCompareEnabled || "Compared"
+    : detailText.applyPreviewCompareDisabled || "Not compared";
+
+  return `
+    <div class="editor-monster-sprite-apply-preview" data-apply-preview-status="${escapeAttribute(status)}">
+      <div class="editor-monster-sprite-apply-preview-copy">
+        <strong>${escapeHtml(detailText.applyPreviewTitle || "Apply Preview")}</strong>
+        <span>${escapeHtml(detailText.applyPreviewDescription || "")}</span>
+      </div>
+      <div class="editor-monster-sprite-apply-preview-grid">
+        ${combatVfxFieldBlock(detailText.applyPreviewArtifactMetric || "Artifact", [readiness.applyPreviewArtifact])}
+        ${combatVfxFieldBlock(detailText.applyPreviewScriptMetric || "Script", [readiness.applyPreviewExportScript || "-"])}
+        ${combatVfxFieldBlock(detailText.applyPreviewStatusMetric || "Status", [statusLabel])}
+        ${combatVfxFieldBlock(detailText.applyPreviewReadyPatchMetric || "Ready patches", [String(readiness.applyPreviewReadyPatchCount ?? "-")])}
+        ${combatVfxFieldBlock(detailText.applyPreviewPolicyMetric || "Policy", [manualReviewLabel, compareLabel])}
       </div>
     </div>
   `;
