@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=435";
+import { formatText, getLocaleText } from "../localization/index.js?v=436";
 
 export const TUTORIAL_CORE_EVENT_VERSION = "v2.5-region-core-events-v1";
 
@@ -41,6 +41,9 @@ export function resolveRegionCoreEvent(region, { localeText = getLocaleText() } 
     event,
     title: formatText(detail.title, { regionName: region.name }),
     log: formatText(detail.log, { regionName: region.name }),
+    completionLog: detail.completionLog
+      ? formatText(detail.completionLog, { regionName: region.name })
+      : "",
   };
 }
 

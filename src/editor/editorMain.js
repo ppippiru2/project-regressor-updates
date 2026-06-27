@@ -1,19 +1,19 @@
-import { applyDomLocalization } from "../localization/domText.js?v=435";
-import { getLocaleText, tf } from "../localization/index.js?v=435";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=435";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=435";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=435";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=435";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=435";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=435";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=435";
+import { applyDomLocalization } from "../localization/domText.js?v=436";
+import { getLocaleText, tf } from "../localization/index.js?v=436";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=436";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=436";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=436";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=436";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=436";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=436";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=436";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=435";
+} from "./monsterSpriteSlotReport.js?v=436";
 
-const EDITOR_VERSION = "435";
+const EDITOR_VERSION = "436";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;

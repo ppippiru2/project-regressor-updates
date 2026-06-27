@@ -914,22 +914,27 @@ export const KO_KR_TEXT = {
         tutorial_shore: {
           title: "첫 균열 기록",
           log: "[지역 기록] {regionName} · 첫 균열과 도감 카드 조각 수집이 시작됩니다.",
+          completionLog: "[지역 기록] {regionName} · 첫 균열 기록이 완료되어 해안 전리품 기준이 저장되었습니다.",
         },
         tutorial_forest: {
           title: "숲의 추적 기록",
           log: "[지역 기록] {regionName} · 속도형 몬스터와 황금 카드 후보 동선을 기록합니다.",
+          completionLog: "[지역 기록] {regionName} · 숲의 추적 기록이 완료되어 속도형 몬스터 동선이 정리되었습니다.",
         },
         broken_ruins: {
           title: "무너진 탑 기록",
           log: "[지역 기록] {regionName} · 모의 게이트 노드맵과 룬형 적 정보를 기록합니다.",
+          completionLog: "[지역 기록] {regionName} · 무너진 탑 기록이 완료되어 게이트 노드 단서가 보존되었습니다.",
         },
         mana_mine: {
           title: "마석 광맥 기록",
           log: "[지역 기록] {regionName} · 마정석 재료와 봉인 상자 후보를 기록합니다.",
+          completionLog: "[지역 기록] {regionName} · 마석 광맥 기록이 완료되어 마정석 보상 기준이 저장되었습니다.",
         },
         rift_gate: {
           title: "균열 관문 기록",
           log: "[지역 기록] {regionName} · 최종 피해량 평가와 파수꾼 패턴을 기록합니다.",
+          completionLog: "[지역 기록] {regionName} · 균열 관문 기록이 완료되어 파수꾼 패턴과 피해량 평가가 저장되었습니다.",
         },
       },
     },

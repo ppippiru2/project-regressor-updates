@@ -1,8 +1,9 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=435";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=435";
-import { claimFirstCodexRecordGuide } from "./tutorialGuidance.js?v=435";
-import { t, tf } from "../localization/index.js?v=435";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=436";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=436";
+import { claimFirstCodexRecordGuide } from "./tutorialGuidance.js?v=436";
+import { t, tf } from "../localization/index.js?v=436";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=436";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
@@ -50,6 +51,8 @@ export function applyMonsterDefeatRewards(state, monster, context) {
 
   if (monster.isBoss && region && markRegionCompleted(state.completedRegions, region.id)) {
     messages.push(tf("combatRewards.bossCleared", { regionName: region.name }));
+    const resolved = resolveRegionCoreEvent(region);
+    if (resolved?.completionLog) messages.push(resolved.completionLog);
   }
 
   return messages;
