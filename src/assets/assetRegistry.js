@@ -1,4 +1,5 @@
-import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=354";
+import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=355";
+import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=355";
 
 const ASSET_DATA_VERSION = "236";
 
@@ -51,7 +52,7 @@ export function resolvePlayerCombatSpritePath(registry, pose = "combatIdle") {
 export function resolveMonsterCombatSpritePath(monster, registry, pose = "idle") {
   const monsterSlots = registry?.slots?.slots?.monster || {};
   const actorAssetId = monsterSlots.byMonsterId?.[monster?.id]?.[pose];
-  const defaultAssetId = monsterSlots[`default${capitalize(pose)}`];
+  const defaultAssetId = monsterSlots[monsterSpriteSlotKeyForPose(pose)];
   return resolveAssetPath(actorAssetId || defaultAssetId, registry);
 }
 
@@ -72,9 +73,4 @@ async function fetchJson(fetcher, path) {
   const response = await fetcher(path);
   if (!response.ok) throw new Error(`Failed to load ${path}`);
   return response.json();
-}
-
-function capitalize(value) {
-  const text = String(value || "");
-  return text ? text[0].toUpperCase() + text.slice(1) : "";
 }
