@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 445,
-  "displayVersion": "v445",
-  "cacheVersion": "project-regressor-mvp-v445",
-  "updatedAt": "2026-06-28T06:36:00.000+09:00",
+  "versionCode": 446,
+  "displayVersion": "v446",
+  "cacheVersion": "project-regressor-mvp-v446",
+  "updatedAt": "2026-06-28T06:52:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=445&cachebust=445",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=446&cachebust=446",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v445 promotes mine_core_golem into live mana mine alternate encounters while preserving mine_golem as the representative.",
-    "v445 connects mine core codex, mana crystal, and guard stance rune drops to live reward tables and preview checks.",
-    "v445 registers core golem sprite slots plus a dedicated heavy core VFX motion profile for runtime/editor checks."
+    "v446 promotes rift_squire and rift_shieldbearer into live rift gate alternate encounters while preserving rift_knight and rift_warden roles.",
+    "v446 connects rift codex fragments, rift mana crystal fragments, and skill fragment/rune drops to live reward tables and preview checks.",
+    "v446 registers rift squire and shieldbearer sprite slots plus dedicated rift VFX motion profiles for runtime/editor checks."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v445-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v446-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v445-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v446-debug.apk"
   },
   "version": {
-    "code": 445,
-    "name": "4.45.0",
-    "displayName": "v445"
+    "code": 446,
+    "name": "4.46.0",
+    "displayName": "v446"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v445-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v446-debug.apk"
   },
   "android": {
-    "code": 445,
-    "name": "4.45.0",
-    "displayName": "v445",
+    "code": 446,
+    "name": "4.46.0",
+    "displayName": "v446",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v445-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v446-debug.apk"
     },
     "version": {
-      "code": 445,
-      "name": "4.45.0",
-      "displayName": "v445"
+      "code": 446,
+      "name": "4.46.0",
+      "displayName": "v446"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v445-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v446-debug.apk"
   }
 }

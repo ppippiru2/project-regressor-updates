@@ -113,6 +113,32 @@ export const MONSTER_BALANCE_DATA = [
     ],
   },
   {
+    id: "rift_squire",
+    regionId: "rift_gate",
+    level: 7,
+    stats: { STR: 15, AGI: 9, VIT: 17, INT: 3, WIS: 6, LUK: 2 },
+    exp: 260,
+    gold: 46,
+    dropTable: [
+      { itemId: "rift_squire_codex_fragment", chance: 0.06 },
+      { itemId: "rift_mana_crystal_fragment", chance: 0.041 },
+      { itemId: "power_slash_skill_fragment", chance: 0.025 },
+    ],
+  },
+  {
+    id: "rift_shieldbearer",
+    regionId: "rift_gate",
+    level: 8,
+    stats: { STR: 17, AGI: 6, VIT: 25, INT: 4, WIS: 8, LUK: 2 },
+    exp: 260,
+    gold: 46,
+    dropTable: [
+      { itemId: "rift_shieldbearer_codex_fragment", chance: 0.06 },
+      { itemId: "rift_mana_crystal_fragment", chance: 0.041 },
+      { itemId: "guard_stance_skill_rune", chance: 0.025 },
+    ],
+  },
+  {
     id: "rift_knight",
     regionId: "rift_gate",
     level: 9,

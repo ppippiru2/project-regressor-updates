@@ -6496,6 +6496,23 @@ button:disabled {
   --runtime-sprite-cast-y: -3px;
 }
 
+.combatant.enemy[data-runtime-sprite-class="enemy_rift_squire"] {
+  --runtime-sprite-attack-x: -19px;
+  --runtime-sprite-impact-x: -25px;
+  --runtime-sprite-attack-rotation: -2deg;
+  --runtime-sprite-hit-x: 10px;
+  --runtime-sprite-down-x: 4px;
+}
+
+.combatant.enemy[data-runtime-sprite-class="enemy_rift_shield"] {
+  --runtime-sprite-attack-x: -13px;
+  --runtime-sprite-impact-x: -19px;
+  --runtime-sprite-attack-rotation: -1deg;
+  --runtime-sprite-hit-x: 6px;
+  --runtime-sprite-down-x: 3px;
+  --runtime-sprite-down-rotation: 3deg;
+}
+
 .combatant.enemy[data-runtime-sprite-class="enemy_knight"] {
   --runtime-sprite-attack-x: -18px;
   --runtime-sprite-impact-x: -24px;
