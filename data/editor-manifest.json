@@ -609,6 +609,7 @@
         "monsterSpriteFileMissingSlots",
         "monsterSpriteRuntimeFallbackMode",
         "monsterSpriteCssPlaceholderFallback",
+        "monsterSpriteFallbackModeSummary",
         "monsterSpriteAssetManifestPatchDraft",
         "monsterSpriteAssetSlotPatchDraft",
         "monsterSpriteNestedSlotPatchObject",
@@ -627,7 +628,8 @@
         "Monster sprite file-existence readiness scan",
         "Monster sprite asset manifest and slot patch export draft",
         "Monster sprite file-ready connection patch plan",
-        "Monster sprite ready connection review gate"
+        "Monster sprite ready connection review gate",
+        "Monster sprite runtime fallback mode summary"
       ]
     },
     {
@@ -1352,7 +1354,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v422",
+    "source": "v423",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1384,7 +1386,14 @@
       "default-slot",
       "css-placeholder"
     ],
+    "runtimeFallbackModeCounts": {
+      "assigned-asset": 0,
+      "broken-asset": 0,
+      "default-slot": 0,
+      "css-placeholder": 24
+    },
     "runtimeFallbackPreviewVisible": true,
+    "runtimeFallbackSummaryVisible": true,
     "fileScanMode": "build-time-optional",
     "fileStatusValues": [
       "not-scanned",

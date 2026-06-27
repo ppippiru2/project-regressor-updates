@@ -4578,6 +4578,96 @@ select:focus {
   color: #95ffb9;
 }
 
+.editor-monster-sprite-fallback-summary {
+  background: rgba(6, 25, 56, 0.4);
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.65rem;
+}
+
+.editor-monster-sprite-fallback-summary > div:first-child {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+}
+
+.editor-monster-sprite-fallback-summary strong {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-fallback-summary span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-fallback-chips,
+.editor-monster-sprite-group-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.editor-monster-sprite-fallback-chips span,
+.editor-monster-sprite-group-modes span {
+  align-items: center;
+  background: rgba(3, 14, 35, 0.58);
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 0.35rem;
+  min-height: 1.75rem;
+  min-width: 0;
+  padding: 0.18rem 0.52rem;
+}
+
+.editor-monster-sprite-fallback-chips span[data-count="0"],
+.editor-monster-sprite-group-modes span[data-count="0"] {
+  opacity: 0.52;
+}
+
+.editor-monster-sprite-fallback-chips span[data-fallback-mode="css-placeholder"],
+.editor-monster-sprite-group-modes span[data-fallback-mode="css-placeholder"] {
+  border-color: rgba(244, 211, 94, 0.36);
+}
+
+.editor-monster-sprite-fallback-chips span[data-fallback-mode="assigned-asset"],
+.editor-monster-sprite-group-modes span[data-fallback-mode="assigned-asset"],
+.editor-monster-sprite-fallback-chips span[data-fallback-mode="default-slot"],
+.editor-monster-sprite-group-modes span[data-fallback-mode="default-slot"] {
+  border-color: rgba(149, 255, 185, 0.32);
+}
+
+.editor-monster-sprite-fallback-chips span[data-fallback-mode="broken-asset"],
+.editor-monster-sprite-group-modes span[data-fallback-mode="broken-asset"] {
+  border-color: rgba(255, 105, 135, 0.45);
+}
+
+.editor-monster-sprite-fallback-chips b,
+.editor-monster-sprite-group-modes b {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-fallback-chips em,
+.editor-monster-sprite-group-modes em {
+  color: var(--cyan);
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
 .editor-monster-sprite-list {
   display: grid;
   gap: 0.65rem;

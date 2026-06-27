@@ -1,6 +1,6 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=422";
-import { MONSTER_COMBAT_POSES, monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=422";
-import { monsters } from "../data/worldData.js?v=422";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=423";
+import { MONSTER_COMBAT_POSES, monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=423";
+import { monsters } from "../data/worldData.js?v=423";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
 const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";
@@ -9,6 +9,7 @@ const FILE_STATUS = Object.freeze({
   ready: "file-ready",
   missing: "file-missing",
 });
+const RUNTIME_FALLBACK_MODES = Object.freeze(["assigned-asset", "broken-asset", "default-slot", "css-placeholder"]);
 
 export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY, options = {}) {
   const assetsById = new Map((registry?.manifest?.assets || []).map((asset) => [asset.assetId, asset]));
@@ -31,6 +32,8 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY, 
   const cssPlaceholderRows = rows.filter((row) => row.runtimeFallbackMode === "css-placeholder");
   const draftRows = rows.filter((row) => !row.assetId);
 
+  const runtimeFallbackModeCounts = countRowsByValue(rows, "runtimeFallbackMode", RUNTIME_FALLBACK_MODES);
+
   return {
     version: 3,
     poses: [...MONSTER_COMBAT_POSES],
@@ -49,7 +52,10 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY, 
       cssPlaceholderSlots: cssPlaceholderRows.length,
       expectedPathMatches: expectedPathMatches.length,
       draftAssetCandidates: draftRows.length,
+      runtimeFallbackModeCounts,
     },
+    runtimeFallbackModeCounts,
+    fallbackModeSummary: createFallbackModeSummary(rows),
     rows,
     connectableRows,
     missingRows,
@@ -280,13 +286,36 @@ function groupRowsByMonster(rows) {
     }
     grouped.get(row.monsterId).rows.push(row);
   }
-  return Array.from(grouped.values()).map((group) => ({
-    ...group,
-    assignedSlots: group.rows.filter((row) => row.status === "assigned").length,
-    connectableSlots: group.rows.filter((row) => row.status === "connectable").length,
-    missingSlots: group.rows.filter((row) => row.status === "missing").length,
-    brokenSlots: group.rows.filter((row) => row.status === "broken").length,
+  return Array.from(grouped.values()).map((group) => {
+    const fallbackModeSummary = createFallbackModeSummary(group.rows);
+    return {
+      ...group,
+      assignedSlots: group.rows.filter((row) => row.status === "assigned").length,
+      connectableSlots: group.rows.filter((row) => row.status === "connectable").length,
+      missingSlots: group.rows.filter((row) => row.status === "missing").length,
+      brokenSlots: group.rows.filter((row) => row.status === "broken").length,
+      runtimeFallbackModeCounts: countRowsByValue(group.rows, "runtimeFallbackMode", RUNTIME_FALLBACK_MODES),
+      fallbackModeSummary,
+      dominantFallbackMode: fallbackModeSummary.find((entry) => entry.count > 0)?.mode || "css-placeholder",
+    };
+  });
+}
+
+function createFallbackModeSummary(rows) {
+  const counts = countRowsByValue(rows, "runtimeFallbackMode", RUNTIME_FALLBACK_MODES);
+  return RUNTIME_FALLBACK_MODES.map((mode) => ({
+    mode,
+    count: counts[mode] || 0,
   }));
+}
+
+function countRowsByValue(rows, field, values) {
+  const counts = Object.fromEntries(values.map((value) => [value, 0]));
+  for (const row of rows) {
+    const value = row?.[field];
+    if (Object.hasOwn(counts, value)) counts[value] += 1;
+  }
+  return counts;
 }
 
 function expectedFileStatus(expectedPath, existingFilePaths) {

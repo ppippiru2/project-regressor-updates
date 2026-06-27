@@ -1,17 +1,17 @@
-import { applyDomLocalization } from "../localization/domText.js?v=422";
-import { getLocaleText, tf } from "../localization/index.js?v=422";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=422";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=422";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=422";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=422";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=422";
+import { applyDomLocalization } from "../localization/domText.js?v=423";
+import { getLocaleText, tf } from "../localization/index.js?v=423";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=423";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=423";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=423";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=423";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=423";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=422";
+} from "./monsterSpriteSlotReport.js?v=423";
 
-const EDITOR_VERSION = "422";
+const EDITOR_VERSION = "423";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -126,6 +126,9 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   runtimePath: "Runtime path",
   runtimePreview: "Runtime preview",
   fallbackMode: "Fallback",
+  fallbackSummaryTitle: "Fallback summary",
+  fallbackSummaryDescription: "Runtime fallback distribution before final monster art is assigned.",
+  monsterFallbackSummary: "Monster fallback states",
   defaultSlot: "Default slot",
   fallbackModeLabels: {
     "assigned-asset": "Assigned asset",
@@ -485,6 +488,7 @@ function renderMonsterSpriteSlotReport() {
         ${combatVfxSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
       </div>
       ${renderMonsterSpriteConnectionPlan(readiness, detailText)}
+      ${renderMonsterSpriteFallbackSummary(report, detailText)}
       <div class="editor-monster-sprite-list">
         ${(report.byMonster || []).map((group) => renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels)).join("")}
       </div>
@@ -559,7 +563,7 @@ function renderMonsterSpriteReviewChecks(review = {}, detailText = {}) {
 
 function renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels) {
   return `
-    <article class="editor-monster-sprite-group">
+    <article class="editor-monster-sprite-group" data-fallback-mode="${escapeAttribute(group.dominantFallbackMode || "")}">
       <div class="editor-monster-sprite-group-head">
         <div>
           <h4>${escapeHtml(group.monsterName || group.monsterId)}</h4>
@@ -567,10 +571,39 @@ function renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatu
         </div>
         <strong>${escapeHtml(`${group.assignedSlots}/${group.rows.length}`)}</strong>
       </div>
+      ${renderMonsterSpriteFallbackChips(group.fallbackModeSummary, detailText, "editor-monster-sprite-group-modes")}
       <div class="editor-monster-sprite-pose-grid">
         ${group.rows.map((row) => renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLabels)).join("")}
       </div>
     </article>
+  `;
+}
+
+function renderMonsterSpriteFallbackSummary(report = {}, detailText = {}) {
+  const summary = report.fallbackModeSummary || [];
+  if (!summary.length) return "";
+  return `
+    <div class="editor-monster-sprite-fallback-summary">
+      <div>
+        <strong>${escapeHtml(detailText.fallbackSummaryTitle || "Fallback summary")}</strong>
+        <span>${escapeHtml(detailText.fallbackSummaryDescription || "")}</span>
+      </div>
+      ${renderMonsterSpriteFallbackChips(summary, detailText, "editor-monster-sprite-fallback-chips")}
+    </div>
+  `;
+}
+
+function renderMonsterSpriteFallbackChips(summary = [], detailText = {}, className = "editor-monster-sprite-fallback-chips") {
+  const labels = detailText.fallbackModeLabels || {};
+  return `
+    <div class="${escapeAttribute(className)}">
+      ${summary.map((entry) => `
+        <span data-fallback-mode="${escapeAttribute(entry.mode)}" data-count="${escapeAttribute(String(entry.count || 0))}">
+          <b>${escapeHtml(labels[entry.mode] || entry.mode)}</b>
+          <em>${escapeHtml(String(entry.count || 0))}</em>
+        </span>
+      `).join("")}
+    </div>
   `;
 }
 

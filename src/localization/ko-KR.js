@@ -2049,6 +2049,9 @@ export const KO_KR_TEXT = {
         runtimePath: "런타임 경로",
         runtimePreview: "런타임 미리보기",
         fallbackMode: "대체 표시",
+        fallbackSummaryTitle: "대체 표시 요약",
+        fallbackSummaryDescription: "최종 몬스터 이미지가 연결되기 전 런타임이 어떤 방식으로 표시되는지 한눈에 확인합니다.",
+        monsterFallbackSummary: "몬스터별 대체 상태",
         defaultSlot: "기본 슬롯",
         fallbackModeLabels: {
           "assigned-asset": "연결 에셋",
