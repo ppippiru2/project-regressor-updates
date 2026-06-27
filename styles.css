@@ -4981,6 +4981,89 @@ select:focus {
   white-space: nowrap;
 }
 
+.editor-combat-vfx-profile-summary {
+  background: rgba(4, 22, 46, 0.5);
+  border: 1px solid rgba(91, 229, 132, 0.24);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+  padding: 0.7rem;
+}
+
+.editor-combat-vfx-profile-head,
+.editor-combat-vfx-profile-card-head {
+  align-items: start;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-combat-vfx-profile-head h4,
+.editor-combat-vfx-profile-head p,
+.editor-combat-vfx-profile-card h4 {
+  margin: 0;
+}
+
+.editor-combat-vfx-profile-head strong {
+  align-items: center;
+  border: 1px solid rgba(91, 229, 132, 0.42);
+  border-radius: 999px;
+  color: var(--green);
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 900;
+  min-height: 1.8rem;
+  padding: 0 0.6rem;
+  white-space: nowrap;
+}
+
+.editor-combat-vfx-profile-list {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.editor-combat-vfx-profile-card {
+  background: rgba(3, 14, 35, 0.58);
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.65rem;
+}
+
+.editor-combat-vfx-profile-card[data-priority="1"] {
+  border-color: rgba(255, 105, 135, 0.46);
+}
+
+.editor-combat-vfx-profile-card[data-priority="2"] {
+  border-color: rgba(244, 211, 94, 0.42);
+}
+
+.editor-combat-vfx-profile-card-head h4 {
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.editor-combat-vfx-profile-card-head span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.editor-combat-vfx-profile-card-head strong {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 900;
+  max-width: 11rem;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
 .editor-monster-sprite-report {
   background: rgba(3, 14, 35, 0.48);
   border: 1px solid rgba(57, 228, 255, 0.26);
@@ -8156,6 +8239,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-monster-candidate-live-patch-draft-grid,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
+  .editor-combat-vfx-profile-list,
   .editor-monster-sprite-pose-grid {
     grid-template-columns: 1fr;
   }
@@ -8260,7 +8344,9 @@ body[data-info-tooltips="off"] .info-term {
     .editor-retarget-row-head,
     .editor-combat-vfx-head,
     .editor-combat-vfx-tuning-head,
+    .editor-combat-vfx-profile-head,
     .editor-combat-vfx-tuning-card > div:first-child,
+    .editor-combat-vfx-profile-card-head,
     .editor-combat-vfx-row-head,
     .editor-monster-sprite-head,
     .editor-monster-sprite-group-head,
@@ -8286,7 +8372,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-balance-active-candidate-head strong,
   .editor-combat-vfx-head > span,
   .editor-combat-vfx-tuning-head strong,
+  .editor-combat-vfx-profile-head strong,
   .editor-combat-vfx-tuning-card > div:first-child span,
+  .editor-combat-vfx-profile-card-head strong,
   .editor-combat-vfx-row-head strong,
   .editor-monster-sprite-head > span,
   .editor-monster-sprite-group-head strong,

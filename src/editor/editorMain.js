@@ -1,21 +1,21 @@
-import { applyDomLocalization } from "../localization/domText.js?v=450";
-import { getLocaleText, tf } from "../localization/index.js?v=450";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=450";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=450";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=450";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=450";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=450";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=450";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=450";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=450";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=450";
+import { applyDomLocalization } from "../localization/domText.js?v=451";
+import { getLocaleText, tf } from "../localization/index.js?v=451";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=451";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=451";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=451";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=451";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=451";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=451";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=451";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=451";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=451";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=450";
+} from "./monsterSpriteSlotReport.js?v=451";
 
-const EDITOR_VERSION = "450";
+const EDITOR_VERSION = "451";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -42,10 +42,23 @@ const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
   sprite: "Sprite",
   playerMetric: "Player VFX",
   monsterMetric: "Monster VFX",
+  profileMetric: "Motion Profiles",
+  profileTuningMetric: "Profile Signals",
   effectMetric: "Effect Types",
   tuningMetric: "Tuning Signals",
   tuningTitle: "Tuning Signal Summary",
   tuningDescription: "Review wide or offset-heavy placements first before manual VFX tuning.",
+  profileTitle: "Monster Motion Profile Summary",
+  profileDescription: "Compare monster VFX ranges by runtime motion profile before editing placement values.",
+  profileCount: "{count} profiles",
+  profileMonsterCount: "{count} monsters",
+  profileBaseRange: "Base range",
+  profileHyperRange: "Hyper range",
+  profileDefaultEffects: "Default effects",
+  profileModifiers: "Profile modifiers",
+  profileEffects: "Effect ranges",
+  profileSignals: "Profile signals",
+  noProfileSignals: "Stable range",
   candidateCount: "{count} candidates",
   candidatePriority: "Priority {priority}",
   candidateSignals: "Signals",
@@ -705,6 +718,7 @@ function renderCombatVfxPlacementDetail() {
   const totals = preview.totals || {};
   const playerRows = preview.playerRows || [];
   const monsterRows = preview.monsterRows || [];
+  const monsterMotionProfileRows = preview.monsterMotionProfileRows || [];
   const visiblePlayerRows = playerRows.filter((row) => matchesCombatVfxFilter("player", combatVfxPlayerSearchText(row)));
   const visibleMonsterRows = monsterRows.filter((row) => matchesCombatVfxFilter("monster", combatVfxMonsterSearchText(row)));
   const visibleCount = visiblePlayerRows.length + visibleMonsterRows.length;
@@ -727,10 +741,13 @@ function renderCombatVfxPlacementDetail() {
       <div class="editor-combat-vfx-summary">
         ${combatVfxSummaryCard(detailText.playerMetric, String(totals.playerRows || playerRows.length))}
         ${combatVfxSummaryCard(detailText.monsterMetric, String(totals.monsterRows || monsterRows.length))}
+        ${combatVfxSummaryCard(detailText.profileMetric || "Motion Profiles", String(totals.monsterMotionProfiles || monsterMotionProfileRows.length))}
+        ${combatVfxSummaryCard(detailText.profileTuningMetric || "Profile Signals", String(totals.monsterProfileTuningRows || 0))}
         ${combatVfxSummaryCard(detailText.effectMetric, String(totals.effectTypes || 0))}
         ${combatVfxSummaryCard(detailText.tuningMetric, String(totals.tuningCandidates || tuningCandidates.length))}
       </div>
       ${renderCombatVfxTuningSignals(tuningCandidates, detailText)}
+      ${renderMonsterMotionProfileSummary(monsterMotionProfileRows, detailText)}
       ${renderCombatVfxFilterControls(detailText, visibleCount, totalCount)}
       <div class="editor-combat-vfx-grid">
         <section>
@@ -789,6 +806,90 @@ function renderCombatVfxTuningCandidate(candidate = {}, detailText = {}, signalL
         <div class="editor-chip-list">${signalChips}</div>
       </div>
       ${combatVfxFieldBlock(detailText.candidatePlacement || "Placement", [formatCombatVfxPlacement(candidate.placement)])}
+    </article>
+  `;
+}
+
+function renderMonsterMotionProfileSummary(rows = [], detailText = {}) {
+  const signalLabels = {
+    ...COMBAT_VFX_SIGNAL_LABELS,
+    ...(detailText.signalLabels || {})
+  };
+  return `
+    <section class="editor-combat-vfx-profile-summary" aria-label="${escapeAttribute(detailText.profileTitle || "Monster Motion Profile Summary")}">
+      <div class="editor-combat-vfx-profile-head">
+        <div>
+          <h4>${escapeHtml(detailText.profileTitle || "Monster Motion Profile Summary")}</h4>
+          <p class="muted">${escapeHtml(detailText.profileDescription || "")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.profileCount", {
+          count: rows.length
+        }, `${rows.length}`))}</strong>
+      </div>
+      <div class="editor-combat-vfx-profile-list">
+        ${rows.map((row) => renderMonsterMotionProfileCard(row, detailText, signalLabels)).join("") || `<p class="editor-combat-vfx-empty"><span>${escapeHtml(detailText.empty || "No rows")}</span></p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderMonsterMotionProfileCard(row = {}, detailText = {}, signalLabels = COMBAT_VFX_SIGNAL_LABELS) {
+  const effectLabels = {
+    ...COMBAT_VFX_EFFECT_LABELS,
+    ...(detailText.effectLabels || {})
+  };
+  const monsterChips = (row.monsterNames || []).map((name) => chip(name)).join("");
+  const classChips = (row.classIds || []).map((classId) => chip(classId)).join("");
+  const sfxChips = (row.sfxProfiles || []).map((sfxProfile) => chip(sfxProfile)).join("");
+  const defaultEffectChips = (row.defaultEffectTypes || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
+  const modifierChips = (row.effectModifiers || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
+  const signalChips = (row.signals || []).length
+    ? row.signals.map((signal) => chip(signalLabels[signal] || signal)).join("")
+    : chip(detailText.noProfileSignals || "Stable range");
+  const effectRangeChips = Object.entries(row.effectRanges || {})
+    .map(([effectType, range]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacementRange(range)}`))
+    .join("");
+  return `
+    <article class="editor-combat-vfx-profile-card" data-priority="${escapeAttribute(String(row.priority || 0))}">
+      <div class="editor-combat-vfx-profile-card-head">
+        <div>
+          <h4>${escapeHtml(row.motionProfile || row.id || "")}</h4>
+          <span>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.profileMonsterCount", {
+            count: row.monsterCount || 0
+          }, `${row.monsterCount || 0}`))}</span>
+        </div>
+        <strong>${escapeHtml(row.id || "")}</strong>
+      </div>
+      ${combatVfxFieldBlock(detailText.profileBaseRange || "Base range", [formatCombatVfxPlacementRange(row.baseRange)])}
+      ${combatVfxFieldBlock(detailText.profileHyperRange || "Hyper range", [formatCombatVfxPlacementRange(row.hyperRange)])}
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.monsterOnly || "Monster")}</span>
+        <div class="editor-chip-list">${monsterChips}</div>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.sprite || "Sprite")}</span>
+        <div class="editor-chip-list">${classChips}</div>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.sfx || "SFX")}</span>
+        <div class="editor-chip-list">${sfxChips}</div>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.profileDefaultEffects || "Default effects")}</span>
+        <div class="editor-chip-list">${defaultEffectChips}</div>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.profileModifiers || "Profile modifiers")}</span>
+        <div class="editor-chip-list">${modifierChips}</div>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.profileSignals || "Profile signals")}</span>
+        <div class="editor-chip-list">${signalChips}</div>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.profileEffects || "Effect ranges")}</span>
+        <div class="editor-chip-list">${effectRangeChips}</div>
+      </div>
     </article>
   `;
 }
@@ -1014,6 +1115,15 @@ function combatVfxFieldBlock(title, values = []) {
 
 function formatCombatVfxPlacement(placement = {}) {
   return `x ${Number(placement.offsetX || 0)} / y ${Number(placement.offsetY || 0)} / txt ${Number(placement.textOffsetY || 0)} / slash ${Number(placement.slashWidth || 0)}/${Number(placement.expandedSlashWidth || 0)}`;
+}
+
+function formatCombatVfxPlacementRange(range = {}) {
+  const rangeValue = (entry = {}) => {
+    const min = Number(entry.min || 0);
+    const max = Number(entry.max || 0);
+    return min === max ? String(min) : `${min}..${max}`;
+  };
+  return `x ${rangeValue(range.offsetX)} / y ${rangeValue(range.offsetY)} / txt ${rangeValue(range.textOffsetY)} / slash ${rangeValue(range.slashWidth)}/${rangeValue(range.expandedSlashWidth)}`;
 }
 
 function renderBalanceTuningDetail() {

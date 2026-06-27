@@ -1,17 +1,17 @@
-import { monsters } from "../data/worldData.js?v=450";
+import { monsters } from "../data/worldData.js?v=451";
 import {
   MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
   MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
   monsterAttackEffectPlacement,
   monsterAttackEffectType,
   resolveMonsterBattleSpritePreset,
-} from "../config/monsterBattleSpritePresets.js?v=450";
+} from "../config/monsterBattleSpritePresets.js?v=451";
 import {
   PLAYER_BATTLE_SPRITE_CLASSES,
   PLAYER_BATTLE_SPRITE_GENDERS,
   PLAYER_BATTLE_SPRITE_PRESETS,
-} from "../config/playerBattleSpritePresets.js?v=450";
-import { resolvePlayerAttackEffectPlacement } from "../config/playerBattleSprites.js?v=450";
+} from "../config/playerBattleSpritePresets.js?v=451";
+import { resolvePlayerAttackEffectPlacement } from "../config/playerBattleSprites.js?v=451";
 
 export const COMBAT_VFX_PREVIEW_EFFECT_TYPES = Object.freeze([
   "slash",
@@ -27,18 +27,21 @@ export const COMBAT_VFX_PREVIEW_EFFECT_TYPES = Object.freeze([
 export function createCombatVfxPlacementPreview() {
   const playerRows = createPlayerVfxRows();
   const monsterRows = createMonsterVfxRows();
+  const monsterMotionProfileRows = createMonsterMotionProfileRows(monsterRows);
   const tuningCandidates = createCombatVfxTuningCandidates(playerRows, monsterRows);
   return {
     version: 1,
     playerRows,
     monsterRows,
+    monsterMotionProfileRows,
     tuningCandidates,
     totals: {
       playerRows: playerRows.length,
       monsterRows: monsterRows.length,
       playerClasses: PLAYER_BATTLE_SPRITE_CLASSES.length,
       playerGenders: PLAYER_BATTLE_SPRITE_GENDERS.length,
-      monsterMotionProfiles: new Set(monsterRows.map((row) => row.motionProfile)).size,
+      monsterMotionProfiles: monsterMotionProfileRows.length,
+      monsterProfileTuningRows: monsterMotionProfileRows.filter((row) => row.signals.length).length,
       monsterEffectModifierProfiles: Object.keys(MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE).length,
       effectTypes: COMBAT_VFX_PREVIEW_EFFECT_TYPES.length,
       tuningCandidates: tuningCandidates.length,
@@ -96,6 +99,45 @@ function createMonsterVfxRows() {
   });
 }
 
+function createMonsterMotionProfileRows(monsterRows) {
+  const profileGroups = new Map();
+  for (const row of monsterRows) {
+    const motionProfile = row.motionProfile || "unknown";
+    const group = profileGroups.get(motionProfile) || [];
+    group.push(row);
+    profileGroups.set(motionProfile, group);
+  }
+
+  return [...profileGroups.entries()]
+    .map(([motionProfile, rows]) => {
+      const effectRanges = Object.fromEntries(
+        COMBAT_VFX_PREVIEW_EFFECT_TYPES.map((effectType) => [
+          effectType,
+          summarizePlacementRange(rows.map((row) => row.effects?.[effectType])),
+        ]),
+      );
+      const signals = uniqueValues(rows.flatMap((row) => placementTuningSignals(row.hyperPlacement)));
+      return {
+        id: motionProfile,
+        motionProfile,
+        monsterCount: rows.length,
+        monsterIds: rows.map((row) => row.id),
+        monsterNames: rows.map((row) => row.name || row.id),
+        classIds: uniqueValues(rows.map((row) => row.classId)),
+        sfxProfiles: uniqueValues(rows.map((row) => row.sfxProfile)),
+        defaultEffectTypes: uniqueValues(rows.map((row) => row.effectType)),
+        effectModifiers: uniqueValues(rows.flatMap((row) => row.effectModifiers || [])),
+        profileRange: summarizePlacementRange(rows.map((row) => row.profilePlacement)),
+        baseRange: summarizePlacementRange(rows.map((row) => row.basePlacement)),
+        hyperRange: summarizePlacementRange(rows.map((row) => row.hyperPlacement)),
+        effectRanges,
+        signals,
+        priority: signals.length ? tuningPriority(signals) : 0,
+      };
+    })
+    .sort((left, right) => left.motionProfile.localeCompare(right.motionProfile));
+}
+
 function summarizePlacement(placement = {}) {
   return {
     offsetX: Number(placement.offsetX || 0),
@@ -106,6 +148,33 @@ function summarizePlacement(placement = {}) {
     expandedSlashWidth: Number(placement.expandedSlashWidth || 0),
     expandedSlashHeight: String(placement.expandedSlashHeight || ""),
   };
+}
+
+function summarizePlacementRange(placements = []) {
+  const validPlacements = placements.filter((placement) => placement && typeof placement === "object");
+  const numbers = (key) => validPlacements.map((placement) => Number(placement[key] || 0)).filter(Number.isFinite);
+  const strings = (key) => uniqueValues(validPlacements.map((placement) => String(placement[key] || "")).filter(Boolean));
+  return {
+    offsetX: numericRange(numbers("offsetX")),
+    offsetY: numericRange(numbers("offsetY")),
+    textOffsetY: numericRange(numbers("textOffsetY")),
+    slashWidth: numericRange(numbers("slashWidth")),
+    expandedSlashWidth: numericRange(numbers("expandedSlashWidth")),
+    slashHeight: strings("slashHeight"),
+    expandedSlashHeight: strings("expandedSlashHeight"),
+  };
+}
+
+function numericRange(values = []) {
+  if (!values.length) return { min: 0, max: 0 };
+  return {
+    min: Math.min(...values),
+    max: Math.max(...values),
+  };
+}
+
+function uniqueValues(values = []) {
+  return [...new Set(values.filter((value) => value !== undefined && value !== null && String(value).length > 0))];
 }
 
 function createCombatVfxTuningCandidates(playerRows, monsterRows) {

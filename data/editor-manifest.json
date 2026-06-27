@@ -547,11 +547,17 @@
         "tuningCandidates",
         "tuningSignals",
         "candidatePriority",
-        "candidatePlacementSummary"
+        "candidatePlacementSummary",
+        "monsterMotionProfileRows",
+        "profilePlacementRange",
+        "profileEffectRanges",
+        "profileTuningSignals"
       ],
       "futureControls": [
         "읽기 전용 플레이어 VFX 배치표",
         "읽기 전용 몬스터 VFX 배치표",
+        "모션 프로필별 VFX 범위 요약",
+        "프로필별 튜닝 신호 카드",
         "효과 타입별 배치 비교",
         "하이퍼 상태 배치 비교",
         "전투 화면 튜닝 전 점검용 요약",
@@ -1423,7 +1429,7 @@
     ],
     "monsterCandidateRewardPreview": {
       "id": "monster-candidate-reward-preview-v1",
-      "source": "v450",
+      "source": "v451",
       "sourceModule": "src/editor/monsterCandidateRewardPreview.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 15,
@@ -1563,7 +1569,7 @@
     ],
     "monsterCandidatePromotionChecklist": {
       "id": "monster-candidate-promotion-checklist-v1",
-      "source": "v450",
+      "source": "v451",
       "sourceModule": "src/editor/monsterCandidatePromotionChecklist.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedPendingCandidateCount": 0,
@@ -1578,7 +1584,7 @@
     },
     "monsterCandidateLivePromotionPlan": {
       "id": "monster-candidate-live-promotion-plan-v1",
-      "source": "v450",
+      "source": "v451",
       "sourceModule": "src/editor/monsterCandidateLivePromotionPlan.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 0,
@@ -1590,7 +1596,7 @@
     },
     "monsterCandidateLivePatchDraft": {
       "id": "monster-candidate-live-patch-draft-v1",
-      "source": "v450",
+      "source": "v451",
       "sourceModule": "src/editor/monsterCandidateLivePatchDraft.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedDraftCount": 0,
@@ -1609,6 +1615,8 @@
     "expectedMonsterRows": 15,
     "expectedEffectTypes": 8,
     "expectedMonsterMotionProfiles": 15,
+    "expectedMonsterMotionProfileRows": 15,
+    "expectedProfileTuningRows": 10,
     "dataTargets": [
       "src/editor/combatVfxPlacementPreview.js:createCombatVfxPlacementPreview",
       "src/config/playerBattleSpritePresets.js:PLAYER_BATTLE_SPRITE_PRESETS",
@@ -1773,7 +1781,7 @@
   ],
   "monsterBattleSpriteAssetSlots": {
     "version": 1,
-    "source": "v450",
+    "source": "v451",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,
@@ -1788,7 +1796,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v450",
+    "source": "v451",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,
