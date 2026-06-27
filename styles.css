@@ -2057,6 +2057,26 @@ select:focus {
   color: #9dffd7;
 }
 
+.drop-chip.is-loot-type-codex_fragment,
+.item.is-loot-type-codex_fragment {
+  border-color: rgba(125, 235, 218, 0.34);
+}
+
+.drop-chip.is-loot-type-mana_crystal,
+.item.is-loot-type-mana_crystal {
+  border-color: rgba(108, 210, 255, 0.36);
+}
+
+.drop-chip.is-loot-type-skill_fragment,
+.item.is-loot-type-skill_fragment {
+  border-color: rgba(157, 238, 184, 0.34);
+}
+
+.drop-chip.is-loot-type-skill_rune,
+.item.is-loot-type-skill_rune {
+  border-color: rgba(216, 195, 255, 0.36);
+}
+
 .battlefield.has-battle-background {
   background:
     linear-gradient(180deg, rgba(4, 15, 32, 0.62), rgba(4, 15, 42, 0.92)),
@@ -6831,6 +6851,22 @@ body[data-info-tooltips="off"] .info-term {
 
 .item.is-upgrade::before {
   background: linear-gradient(180deg, transparent, rgba(91, 229, 132, 0.78), transparent);
+}
+
+.item.is-loot-type-codex_fragment::before {
+  background: linear-gradient(180deg, transparent, rgba(125, 235, 218, 0.7), transparent);
+}
+
+.item.is-loot-type-mana_crystal::before {
+  background: linear-gradient(180deg, transparent, rgba(108, 210, 255, 0.68), transparent);
+}
+
+.item.is-loot-type-skill_fragment::before {
+  background: linear-gradient(180deg, transparent, rgba(157, 238, 184, 0.68), transparent);
+}
+
+.item.is-loot-type-skill_rune::before {
+  background: linear-gradient(180deg, transparent, rgba(216, 195, 255, 0.68), transparent);
 }
 
 .codex-progress-item {

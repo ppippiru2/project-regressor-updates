@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=433";
-import { portraitFrameFromFormData } from "./portraitFrame.js?v=433";
+import { getLocaleText } from "../localization/index.js?v=434";
+import { portraitFrameFromFormData } from "./portraitFrame.js?v=434";
 
 export function buildPlayerProfileInput(formData, defaultProfile) {
   return {

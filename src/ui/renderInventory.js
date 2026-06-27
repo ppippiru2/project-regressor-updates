@@ -1,6 +1,6 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=433";
-import { buildCodexRecordProgress } from "../state/codexProgress.js?v=433";
-import { getLocaleText, t, tf } from "../localization/index.js?v=433";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=434";
+import { buildCodexRecordProgress } from "../state/codexProgress.js?v=434";
+import { getLocaleText, t, tf } from "../localization/index.js?v=434";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -113,6 +113,8 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
     .sort(
       (left, right) =>
         right.scoreDelta - left.scoreDelta ||
+        Number(right.isEquipment) - Number(left.isEquipment) ||
+        lootSortOrder(left.item) - lootSortOrder(right.item) ||
         right.rarityScore - left.rarityScore ||
         left.item.name.localeCompare(right.item.name, "ko")
     )
@@ -121,7 +123,7 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
       const metaText = isEquipment
         ? `${displayName(item.slot)}${t("inventoryUi.separator")}${optionText(item)}`
         : `${item.typeLabel || t("inventoryUi.lootItem")}${item.description ? `${t("inventoryUi.separator")}${item.description}` : ""}`;
-      return `<div class="item ${scoreClass}">
+      return `<div class="item ${scoreClass}${isEquipment ? " is-equipment-item" : ` is-loot-item ${lootTypeClass(item)}`}">
         ${itemIconSlot({ item, iconPath, label: tf("inventoryUi.itemIcon", { name: item.name }) })}
         <div class="item-main">
           <div class="item-title-row">
@@ -175,6 +177,15 @@ function renderCodexProgress(rows) {
       </div>`;
     })
     .join("");
+}
+
+function lootSortOrder(item) {
+  return Number.isFinite(item?.lootSortOrder) ? item.lootSortOrder : 99;
+}
+
+function lootTypeClass(item) {
+  const type = String(item?.lootCategory || item?.type || "unknown").replace(/[^a-z0-9_-]/gi, "-");
+  return `is-loot-type-${type}`;
 }
 
 function itemIconSlot({ item, iconPath, label }) {
