@@ -1,4 +1,4 @@
-import { normalizePortraitFrame } from "../state/portraitFrame.js?v=367";
+import { normalizePortraitFrame } from "../state/portraitFrame.js?v=368";
 
 export function applyPortraitFrameToElement(element, frame) {
   if (!element) return normalizePortraitFrame(frame);

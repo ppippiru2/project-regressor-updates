@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=367";
+import { t } from "../localization/index.js?v=368";
 
 export function createInitialState({
   slots,

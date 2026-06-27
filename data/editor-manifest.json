@@ -388,6 +388,7 @@
         "tutorialPacingSnapshot",
         "tuningCandidates",
         "candidateFilter",
+        "candidateImpactSummary",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"

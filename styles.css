@@ -3732,6 +3732,31 @@ select:focus {
   line-height: 1.5;
 }
 
+.editor-balance-candidate-impact {
+  align-items: center;
+  background: rgba(1, 10, 28, 0.28);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 0.45rem 0.55rem;
+}
+
+.editor-balance-candidate-impact span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.editor-balance-candidate-impact strong {
+  color: var(--cyan-soft);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
 .editor-balance-candidate .editor-chip {
   overflow-wrap: anywhere;
 }

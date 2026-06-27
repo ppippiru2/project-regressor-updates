@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=367";
-import { getLocaleText, tf } from "../localization/index.js?v=367";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=367";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=367";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=367";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=367";
+import { applyDomLocalization } from "../localization/domText.js?v=368";
+import { getLocaleText, tf } from "../localization/index.js?v=368";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=368";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=368";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=368";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=368";
 
-const EDITOR_VERSION = "367";
+const EDITOR_VERSION = "368";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -316,12 +316,38 @@ function renderBalanceTuningCandidates(candidates = [], detailText = {}) {
             <h4>${escapeHtml(candidate.label || candidate.id || "")}</h4>
             <p>${escapeHtml(candidate.purpose || "")}</p>
           </div>
+          ${balanceCandidateImpactBlock(balanceCandidateImpactSummary(candidate), detailText)}
           ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
           ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", candidate.checks || [])}
         </button>
       `).join("")}
     </section>
   `;
+}
+
+function balanceCandidateImpactBlock(summary, detailText = {}) {
+  return `
+    <div class="editor-balance-candidate-impact">
+      <span>${escapeHtml(detailText.candidateImpact || "Impact")}</span>
+      <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidateImpactSummary", {
+        groups: summary.groupCount,
+        files: summary.fileCount,
+        exports: summary.exportCount
+      }, `${summary.groupCount} · ${summary.fileCount} · ${summary.exportCount}`))}</strong>
+    </div>
+  `;
+}
+
+function balanceCandidateImpactSummary(candidate = {}) {
+  const groupIds = new Set(normalizeBalanceCandidateGroups(candidate.groups));
+  const groups = BALANCE_TUNING_GROUPS.filter((group) => groupIds.has(group.id));
+  const files = new Set(groups.flatMap((group) => group.files || []));
+  const exports = new Set(groups.flatMap((group) => group.exports || []));
+  return {
+    groupCount: groups.length,
+    fileCount: files.size,
+    exportCount: exports.size
+  };
 }
 
 function renderBalancePacingSnapshot(snapshot, detailText = {}) {
