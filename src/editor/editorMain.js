@@ -1,19 +1,19 @@
-import { applyDomLocalization } from "../localization/domText.js?v=437";
-import { getLocaleText, tf } from "../localization/index.js?v=437";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=437";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=437";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=437";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=437";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=437";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=437";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=437";
+import { applyDomLocalization } from "../localization/domText.js?v=438";
+import { getLocaleText, tf } from "../localization/index.js?v=438";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=438";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=438";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=438";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=438";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=438";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=438";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=438";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=437";
+} from "./monsterSpriteSlotReport.js?v=438";
 
-const EDITOR_VERSION = "437";
+const EDITOR_VERSION = "438";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -318,6 +318,7 @@ function bindEvents() {
     if (balanceCandidateButton) {
       applyBalanceCandidateFilter(balanceCandidateButton.dataset.balanceCandidate);
       renderPanelDetail();
+      scrollBalanceCandidateSummaryIntoView();
       return;
     }
     const balanceResetButton = event.target.closest("[data-balance-reset]");
@@ -1036,7 +1037,7 @@ function renderBalanceTuningDetail() {
         }, ""))}</span>
       </div>
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
-      ${renderActiveBalanceCandidateSummary(detailText, relatedChecks)}
+      ${renderActiveBalanceCandidateSummary(detailText, relatedChecks, tuningCandidates)}
       ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderMonsterCandidateRewardPreview(MONSTER_CANDIDATE_REWARD_PREVIEW, detailText)}
@@ -1050,14 +1051,44 @@ function renderBalanceTuningDetail() {
   `;
 }
 
-function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = []) {
+function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = [], candidates = []) {
   const candidate = selectedBalanceTuningCandidate();
-  if (!candidate) return "";
+  if (!candidate) {
+    const overview = balanceCandidateOverviewSummary(candidates, relatedChecks);
+    return `
+      <section class="editor-balance-active-candidate" data-balance-active-summary data-state="overview" aria-label="${escapeAttribute(detailText.candidatePinnedOverview || "Tuning candidate summary")}">
+        <div class="editor-balance-active-candidate-head">
+          <div>
+            <span>${escapeHtml(detailText.candidatePinnedOverview || "")}</span>
+            <h4>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidateOverviewCount", {
+              count: overview.candidateCount
+            }, `${overview.candidateCount}`))}</h4>
+            <p>${escapeHtml(detailText.candidatePinnedOverviewDescription || "")}</p>
+          </div>
+          <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidatePriorityValue", {
+            priority: overview.topPriority || "-"
+          }, `#${overview.topPriority || "-"}`))}</strong>
+        </div>
+        <div class="editor-balance-active-candidate-metrics">
+          ${balanceActiveCandidateMetric(detailText.candidatePriority || "Priority", tf("editorPrep.balanceTuningDetail.candidateOverviewPriority", {
+            priority: overview.topPriority || "-"
+          }, `#${overview.topPriority || "-"}`))}
+          ${balanceActiveCandidateMetric(detailText.candidateGroups || "Groups", tf("editorPrep.balanceTuningDetail.candidateOverviewGroups", {
+            count: overview.groupCount
+          }, `${overview.groupCount}`))}
+          ${balanceActiveCandidateMetric(detailText.candidateChecks || "Checks", tf("editorPrep.balanceTuningDetail.candidateOverviewChecks", {
+            count: overview.checkCount
+          }, `${overview.checkCount}`))}
+        </div>
+        ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", overview.signals)}
+      </section>
+    `;
+  }
   const impact = balanceCandidateImpactSummary(candidate);
   const valueRanges = balanceCandidateValueRangeLabels(candidate, detailText);
   const checkLabels = balanceCandidateCheckLabels(candidate, relatedChecks);
   return `
-    <section class="editor-balance-active-candidate" aria-label="${escapeAttribute(detailText.activeCandidateSummary || "Selected tuning candidate")}">
+    <section class="editor-balance-active-candidate" data-balance-active-summary data-state="selected" aria-label="${escapeAttribute(detailText.activeCandidateSummary || "Selected tuning candidate")}">
       <div class="editor-balance-active-candidate-head">
         <div>
           <span>${escapeHtml(detailText.activeCandidateSummary || "")}</span>
@@ -1083,6 +1114,32 @@ function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = []
   `;
 }
 
+function balanceCandidateOverviewSummary(candidates = [], relatedChecks = []) {
+  const candidateList = Array.isArray(candidates) ? candidates : [];
+  const groups = new Set(candidateList.flatMap((candidate) => normalizeBalanceCandidateGroups(candidate.groups)));
+  const checkIds = new Set((relatedChecks || []).map((check) => check.id));
+  const checks = new Set();
+  const signals = new Set();
+  const priorities = [];
+  for (const candidate of candidateList) {
+    if (Number.isFinite(Number(candidate.priority))) priorities.push(Number(candidate.priority));
+    for (const checkId of candidate.checks || []) {
+      if (!checkIds.size || checkIds.has(checkId)) checks.add(checkId);
+    }
+    for (const signal of candidate.signals || []) {
+      signals.add(signal);
+    }
+  }
+  return {
+    candidateCount: candidateList.length,
+    groupCount: groups.size,
+    checkCount: checks.size,
+    signalCount: signals.size,
+    topPriority: priorities.length ? Math.min(...priorities) : 0,
+    signals: [...signals].slice(0, 6)
+  };
+}
+
 function balanceActiveCandidateMetric(label, value) {
   return `
     <span>
@@ -1090,6 +1147,13 @@ function balanceActiveCandidateMetric(label, value) {
       <b>${escapeHtml(value || "-")}</b>
     </span>
   `;
+}
+
+function scrollBalanceCandidateSummaryIntoView() {
+  window.requestAnimationFrame(() => {
+    const summary = elements.panelDetail?.querySelector("[data-balance-active-summary]");
+    summary?.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
 }
 
 function renderBalanceDomainSummaries(domains = [], detailText = {}, relatedChecks = []) {

@@ -427,6 +427,8 @@
         "tuningCandidates",
         "candidateFilter",
         "candidatePinnedSummary",
+        "candidateOverviewSummary",
+        "candidateScrollTarget",
         "candidateImpactSummary",
         "candidatePrioritySummary",
         "candidateSignalSummary",

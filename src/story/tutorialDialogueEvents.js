@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=437";
+import { formatText, getLocaleText } from "../localization/index.js?v=438";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 

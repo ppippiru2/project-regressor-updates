@@ -3883,6 +3883,17 @@ select:focus {
   z-index: 2;
 }
 
+.editor-balance-active-candidate[data-state="overview"] {
+  border-color: rgba(108, 210, 255, 0.22);
+  background:
+    linear-gradient(180deg, rgba(10, 42, 78, 0.34), rgba(3, 16, 39, 0.68)),
+    rgba(3, 14, 35, 0.48);
+}
+
+.editor-balance-active-candidate[data-state="selected"] {
+  box-shadow: 0 0 24px rgba(57, 228, 255, 0.12);
+}
+
 .editor-balance-active-candidate-head {
   align-items: start;
   display: grid;
