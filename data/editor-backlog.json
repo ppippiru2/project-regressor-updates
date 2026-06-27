@@ -68,7 +68,7 @@
     },
     {
       "id": "monster-battle-sprite-slot-candidates",
-      "title": "??? ?? ????? ?? ?? ??",
+      "title": "몬스터 전투 스프라이트 슬롯 후보",
       "status": "partial",
       "priority": "high",
       "source": "v420",

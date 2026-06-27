@@ -177,7 +177,7 @@
         "드랍 테이블 연결",
         "스프라이트 슬롯 선택",
         "전투 미리보기",
-        "???? ?? ????? ?? ?? ??"
+        "몬스터 전투 스프라이트 포즈 슬롯 점검"
       ]
     },
     {
@@ -486,9 +486,9 @@
         "효과 타입별 배치 비교",
         "하이퍼 상태 배치 비교",
         "전투 화면 튜닝 전 점검용 요약",
-        "????/??? ?? ??",
-        "VFX ?? ??",
-        "VFX ?? ??? ?? ?? ??"
+        "플레이어/몬스터 범위 필터",
+        "VFX 검색 필터",
+        "VFX 튜닝 후보 우선순위"
       ]
     },
     {
@@ -619,7 +619,7 @@
         "예상 파일명 복사",
         "이미지 크롭 영역",
         "폴더별 누락 파일 확인",
-        "???? idle/attack/hit/dead ?? ?? ??",
+        "몬스터 idle/attack/hit/dead 슬롯 점검",
         "Monster sprite missing-slot readiness report",
         "Monster sprite assetId draft generator",
         "Monster sprite file-existence readiness scan",
@@ -729,7 +729,7 @@
       },
       {
         "slotId": "monster.byMonsterId.shore_imp.idle",
-        "label": "??? shore_imp ?? ?????",
+        "label": "몬스터 shore_imp 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "shore_imp_idle.webp",
         "cropPreset": "combatSpriteTall",
@@ -737,7 +737,7 @@
       },
       {
         "slotId": "monster.byMonsterId.shore_imp.attack",
-        "label": "??? shore_imp ?? ?????",
+        "label": "몬스터 shore_imp 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "shore_imp_attack.webp",
         "cropPreset": "combatSpriteTall",
@@ -745,7 +745,7 @@
       },
       {
         "slotId": "monster.byMonsterId.shore_imp.hit",
-        "label": "??? shore_imp ?? ?????",
+        "label": "몬스터 shore_imp 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "shore_imp_hit.webp",
         "cropPreset": "combatSpriteTall",
@@ -753,7 +753,7 @@
       },
       {
         "slotId": "monster.byMonsterId.shore_imp.dead",
-        "label": "??? shore_imp ?? ?????",
+        "label": "몬스터 shore_imp 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "shore_imp_dead.webp",
         "cropPreset": "combatSpriteTall",
@@ -761,7 +761,7 @@
       },
       {
         "slotId": "monster.byMonsterId.forest_wolf.idle",
-        "label": "??? forest_wolf ?? ?????",
+        "label": "몬스터 forest_wolf 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "forest_wolf_idle.webp",
         "cropPreset": "combatSpriteTall",
@@ -769,7 +769,7 @@
       },
       {
         "slotId": "monster.byMonsterId.forest_wolf.attack",
-        "label": "??? forest_wolf ?? ?????",
+        "label": "몬스터 forest_wolf 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "forest_wolf_attack.webp",
         "cropPreset": "combatSpriteTall",
@@ -777,7 +777,7 @@
       },
       {
         "slotId": "monster.byMonsterId.forest_wolf.hit",
-        "label": "??? forest_wolf ?? ?????",
+        "label": "몬스터 forest_wolf 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "forest_wolf_hit.webp",
         "cropPreset": "combatSpriteTall",
@@ -785,7 +785,7 @@
       },
       {
         "slotId": "monster.byMonsterId.forest_wolf.dead",
-        "label": "??? forest_wolf ?? ?????",
+        "label": "몬스터 forest_wolf 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "forest_wolf_dead.webp",
         "cropPreset": "combatSpriteTall",
@@ -793,7 +793,7 @@
       },
       {
         "slotId": "monster.byMonsterId.ruin_sentinel.idle",
-        "label": "??? ruin_sentinel ?? ?????",
+        "label": "몬스터 ruin_sentinel 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "ruin_sentinel_idle.webp",
         "cropPreset": "combatSpriteTall",
@@ -801,7 +801,7 @@
       },
       {
         "slotId": "monster.byMonsterId.ruin_sentinel.attack",
-        "label": "??? ruin_sentinel ?? ?????",
+        "label": "몬스터 ruin_sentinel 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "ruin_sentinel_attack.webp",
         "cropPreset": "combatSpriteTall",
@@ -809,7 +809,7 @@
       },
       {
         "slotId": "monster.byMonsterId.ruin_sentinel.hit",
-        "label": "??? ruin_sentinel ?? ?????",
+        "label": "몬스터 ruin_sentinel 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "ruin_sentinel_hit.webp",
         "cropPreset": "combatSpriteTall",
@@ -817,7 +817,7 @@
       },
       {
         "slotId": "monster.byMonsterId.ruin_sentinel.dead",
-        "label": "??? ruin_sentinel ?? ?????",
+        "label": "몬스터 ruin_sentinel 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "ruin_sentinel_dead.webp",
         "cropPreset": "combatSpriteTall",
@@ -825,7 +825,7 @@
       },
       {
         "slotId": "monster.byMonsterId.mine_golem.idle",
-        "label": "??? mine_golem ?? ?????",
+        "label": "몬스터 mine_golem 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "mine_golem_idle.webp",
         "cropPreset": "combatSpriteTall",
@@ -833,7 +833,7 @@
       },
       {
         "slotId": "monster.byMonsterId.mine_golem.attack",
-        "label": "??? mine_golem ?? ?????",
+        "label": "몬스터 mine_golem 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "mine_golem_attack.webp",
         "cropPreset": "combatSpriteTall",
@@ -841,7 +841,7 @@
       },
       {
         "slotId": "monster.byMonsterId.mine_golem.hit",
-        "label": "??? mine_golem ?? ?????",
+        "label": "몬스터 mine_golem 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "mine_golem_hit.webp",
         "cropPreset": "combatSpriteTall",
@@ -849,7 +849,7 @@
       },
       {
         "slotId": "monster.byMonsterId.mine_golem.dead",
-        "label": "??? mine_golem ?? ?????",
+        "label": "몬스터 mine_golem 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "mine_golem_dead.webp",
         "cropPreset": "combatSpriteTall",
@@ -857,7 +857,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_knight.idle",
-        "label": "??? rift_knight ?? ?????",
+        "label": "몬스터 rift_knight 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_knight_idle.webp",
         "cropPreset": "combatSpriteTall",
@@ -865,7 +865,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_knight.attack",
-        "label": "??? rift_knight ?? ?????",
+        "label": "몬스터 rift_knight 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_knight_attack.webp",
         "cropPreset": "combatSpriteTall",
@@ -873,7 +873,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_knight.hit",
-        "label": "??? rift_knight ?? ?????",
+        "label": "몬스터 rift_knight 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_knight_hit.webp",
         "cropPreset": "combatSpriteTall",
@@ -881,7 +881,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_knight.dead",
-        "label": "??? rift_knight ?? ?????",
+        "label": "몬스터 rift_knight 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_knight_dead.webp",
         "cropPreset": "combatSpriteTall",
@@ -889,7 +889,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_warden.idle",
-        "label": "??? rift_warden ?? ?????",
+        "label": "몬스터 rift_warden 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_warden_idle.webp",
         "cropPreset": "combatSpriteTall",
@@ -897,7 +897,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_warden.attack",
-        "label": "??? rift_warden ?? ?????",
+        "label": "몬스터 rift_warden 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_warden_attack.webp",
         "cropPreset": "combatSpriteTall",
@@ -905,7 +905,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_warden.hit",
-        "label": "??? rift_warden ?? ?????",
+        "label": "몬스터 rift_warden 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_warden_hit.webp",
         "cropPreset": "combatSpriteTall",
@@ -913,7 +913,7 @@
       },
       {
         "slotId": "monster.byMonsterId.rift_warden.dead",
-        "label": "??? rift_warden ?? ?????",
+        "label": "몬스터 rift_warden 전투 스프라이트",
         "folder": "assets/monsters/",
         "expectedFileName": "rift_warden_dead.webp",
         "cropPreset": "combatSpriteTall",
