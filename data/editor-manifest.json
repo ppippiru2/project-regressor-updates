@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-06-23",
+  "updatedAt": "2026-06-27",
   "description": "Project Regressor future editor manifest. The editor is prepared separately from the game runtime so MVP gameplay work can continue without maintaining every editor screen at the same time.",
   "maintenancePolicy": {
     "gameFirst": true,
@@ -34,6 +34,7 @@
         "label": "SYSTEM CONFIG",
         "panels": [
           "theme_retarget_preview",
+          "balance_tuning_registry",
           "sound",
           "save_data"
         ]
@@ -360,6 +361,36 @@
       ]
     },
     {
+      "id": "balance_tuning_registry",
+      "label": "밸런스 조정 표면",
+      "status": "partial",
+      "priority": "high",
+      "purpose": "스탯, 데미지, 아이템, 몬스터, 플레이어 성장, 보상 조정 파일과 영향 범위를 읽기 전용으로 확인한다.",
+      "primaryDataTargets": [
+        "src/balance/balanceTuningRegistry.js",
+        "build-scripts/check-balance-tuning-registry.mjs",
+        "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES"
+      ],
+      "assetSlots": [],
+      "editorFields": [
+        "groupId",
+        "scope",
+        "files",
+        "exports",
+        "affects",
+        "swapBoundaryCoverage",
+        "missingFileWarnings",
+        "missingExportWarnings"
+      ],
+      "futureControls": [
+        "밸런스 그룹 목록",
+        "영향 범위 필터",
+        "파일/export 누락 경고",
+        "튜토리얼 섬 페이싱 검사 연결",
+        "변경 전 읽기 전용 검증 리포트"
+      ]
+    },
+    {
       "id": "sound",
       "label": "사운드/음향 설정",
       "status": "planned",
@@ -679,6 +710,24 @@
       "src/ui/renderRetargetPreview.js",
       "src/editor/editorMain.js",
       "data/editor-backlog.json:theme-retarget-preview-editor"
+    ]
+  },
+  "balanceTuningRegistry": {
+    "id": "balance-tuning-registry-v1",
+    "sourceModule": "src/balance/balanceTuningRegistry.js",
+    "checkScript": "build-scripts/check-balance-tuning-registry.mjs",
+    "expectedGroupCount": 11,
+    "expectedFileCount": 11,
+    "expectedExportCount": 33,
+    "dataTargets": [
+      "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_GROUPS",
+      "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_GROUP_IDS",
+      "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
+      "build-scripts/check-tutorial-island-pacing.mjs"
+    ],
+    "editorHooks": [
+      "data/editor-manifest.json:balance_tuning_registry",
+      "data/editor-backlog.json:balance-tuning-registry-editor"
     ]
   },
   "prototypeListMemory": [

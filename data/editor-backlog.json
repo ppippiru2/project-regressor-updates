@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-23",
+  "updatedAt": "2026-06-27",
   "policy": "Normal gameplay work records editor hooks here. The editor UI itself is updated in batches when the user explicitly asks to update the editor.",
   "items": [
     {
@@ -30,6 +30,20 @@
         "src/ui/renderRetargetPreview.js",
         "src/editor/editorMain.js",
         "build-scripts/check-editor-retarget-preview.mjs"
+      ]
+    },
+    {
+      "id": "balance-tuning-registry-editor",
+      "title": "밸런스 조정 표면 읽기 전용 연결",
+      "status": "partial",
+      "priority": "high",
+      "source": "v359",
+      "summary": "Expose the balance tuning registry as a read-only editor metadata surface before building full balance editing controls.",
+      "editorHooks": [
+        "data/editor-manifest.json:balanceTuningRegistry",
+        "src/balance/balanceTuningRegistry.js",
+        "build-scripts/check-balance-tuning-registry.mjs",
+        "build-scripts/check-editor-balance-tuning-metadata.mjs"
       ]
     },
     {
