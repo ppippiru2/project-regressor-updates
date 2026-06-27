@@ -1,4 +1,4 @@
-import { HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=396";
+import { HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=397";
 
 export function applyHealAction(playerState, playerStats, action, clampValue) {
   playerState.hp = clampValue(playerState.hp + action.amount, 1, playerStats.maxHp);

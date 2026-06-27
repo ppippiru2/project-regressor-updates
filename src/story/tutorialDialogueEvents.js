@@ -1,6 +1,32 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=396";
+import { formatText, getLocaleText } from "../localization/index.js?v=397";
 
-export const TUTORIAL_DIALOGUE_VERSION = "v2.6_FINAL";
+export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
+
+export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
+  "playerName",
+  "dispositionName",
+  "statSummary",
+  "statTotal",
+  "statusGrade",
+  "STR",
+  "AGI",
+  "VIT",
+  "INT",
+  "WIS",
+  "LUK",
+  "starterTraitName",
+  "starterSkillName",
+]);
+
+export const TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS = Object.freeze([
+  "hunterAssociation",
+  "hunterAssociationSpaced",
+  "hunterRegistrationName",
+  "hunterGrade",
+  "guildAffiliation",
+  "guildMaster",
+  "hunterFreeBoard",
+]);
 
 export const TUTORIAL_FINAL_NEW_GAME_FLOW = Object.freeze([
   "system_sync_profile",
@@ -42,6 +68,20 @@ export const TUTORIAL_DIALOGUE_PHASES = Object.freeze([
 ]);
 
 export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
+  {
+    id: "tutorial_1st_shore_02_status_help",
+    phase: "tutorial_shore_run1",
+    run: 1,
+    policy: "dynamic_status_recheck",
+    textKey: "shoreStatusHelp",
+  },
+  {
+    id: "tutorial_1st_shore_05_drift_slime_mana_variant",
+    phase: "tutorial_shore_run1",
+    run: 1,
+    policy: "generic_weapon_sense",
+    textKey: "driftSlimeManaVariant",
+  },
   {
     id: "tutorial_1st_shore_06_nameless_scrap",
     phase: "tutorial_shore_run1",
@@ -275,6 +315,8 @@ export function getTutorialDialogueEventCatalog() {
     version: TUTORIAL_DIALOGUE_VERSION,
     newGameFlow: TUTORIAL_FINAL_NEW_GAME_FLOW,
     phases: TUTORIAL_DIALOGUE_PHASES,
+    dynamicPlaceholders: TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS,
+    preRealityForbiddenTermKeys: TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS,
     keyFlags: TUTORIAL_FINAL_KEY_FLAGS,
     keyEvents: TUTORIAL_DIALOGUE_KEY_EVENTS,
     loopDialogue: {

@@ -901,6 +901,33 @@ export const KO_KR_TEXT = {
   },
   story: {
     tutorialDialogue: {
+      rules: {
+        version: "v2.6.3_FINAL",
+        dynamicPlaceholders: [
+          "playerName",
+          "dispositionName",
+          "statSummary",
+          "statTotal",
+          "statusGrade",
+          "STR",
+          "AGI",
+          "VIT",
+          "INT",
+          "WIS",
+          "LUK",
+          "starterTraitName",
+          "starterSkillName",
+        ],
+        preRealityForbiddenTerms: {
+          hunterAssociation: "헌터협회",
+          hunterAssociationSpaced: "헌터 협회",
+          hunterRegistrationName: "헌터 등록명",
+          hunterGrade: "헌터 등급",
+          guildAffiliation: "소속 길드",
+          guildMaster: "길드 마스터",
+          hunterFreeBoard: "헌터 자유게시판",
+        },
+      },
       introLog: {
         disposition: "[성향 반응] {disposition}. {reaction}",
         starterCard: "[운명 카드] {cardName}. {reaction}",
@@ -955,6 +982,39 @@ export const KO_KR_TEXT = {
         run2GoldenCard: "2회차 이후 황금 카드가 회귀자의 기록으로 실체화됩니다.",
         run2SealedBox: "2회차 이후 봉인 상자가 기록 조건으로 열립니다.",
         run4WardenClear: "최종 관문 파수꾼은 누적 성장으로 완전 돌파합니다.",
+      },
+      keyEventDetails: {
+        shoreStatusHelp: {
+          title: "상태창 재확인",
+          systemLines: [
+            "[상태창] 기본 정보가 활성화됩니다.",
+            "레벨: 1. 상태창 등급: {statusGrade}. 능력치: {statSummary}. 확정 스킬: 기본 공격. 카드 스킬: {starterSkillName}.",
+            "[안내] 본 시험의 목표는 생존과 최종 관문 평가 조건 달성입니다.",
+            "[주의] 본 시험은 생명 활동의 안전을 보장하지 않습니다.",
+          ],
+          protagonistLines: [
+            "숫자가 낮다는 건 알겠다.",
+            "기본 공격 하나와 카드로 받은 스킬 하나.",
+            "이걸로 버텨야 한다는 거군.",
+          ],
+        },
+        driftSlimeManaVariant: {
+          title: "표류 점액체",
+          commonLines: [
+            "[미확인 몬스터] 표류 점액체.",
+            "[위협 태그 후보] 점액형 / 마법취약.",
+          ],
+          manaIgniteLines: [
+            "저건 물리로 때리면 잘 안 먹힐 것 같은데.",
+            "[스킬 안내] 마력 점화는 약한 마력 피해를 줍니다.",
+            "좋아. 카드로 고른 게 여기서 의미가 있나 보자.",
+          ],
+          noManaIgniteLines: [
+            "무기로 공격하는 감각이 이상하다.",
+            "물리 공격이 전부 정답은 아니라는 뜻인가.",
+            "[패턴 기록] 표류 점액체는 마력 계열 공격에 취약할 가능성이 있습니다.",
+          ],
+        },
       },
       loop5Plus: {
         optimization: {
