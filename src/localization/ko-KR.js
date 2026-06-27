@@ -1546,6 +1546,9 @@ export const KO_KR_TEXT = {
           "content-id-reuse-risk": "콘텐츠 ID 재사용 위험"
         },
         tuningCandidates: "튜닝 후보",
+        candidatePriority: "조절 우선순위",
+        candidatePriorityValue: "#{priority}",
+        candidateSignals: "주의 신호",
         candidateImpact: "영향 요약",
         candidateImpactSummary: "그룹 {groups} · 파일 {files} · export {exports}",
         candidateValueRanges: "현재 값 범위",

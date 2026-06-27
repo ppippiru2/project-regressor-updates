@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=379";
-import { getLocaleText, tf } from "../localization/index.js?v=379";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=379";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=379";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=379";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=379";
+import { applyDomLocalization } from "../localization/domText.js?v=380";
+import { getLocaleText, tf } from "../localization/index.js?v=380";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=380";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=380";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=380";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=380";
 
-const EDITOR_VERSION = "379";
+const EDITOR_VERSION = "380";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -441,13 +441,26 @@ function renderBalanceTuningCandidates(candidates = [], detailText = {}, related
             <h4>${escapeHtml(candidate.label || candidate.id || "")}</h4>
             <p>${escapeHtml(candidate.purpose || "")}</p>
           </div>
+          ${balanceCandidatePriorityBlock(candidate, detailText)}
           ${balanceCandidateImpactBlock(balanceCandidateImpactSummary(candidate), detailText)}
+          ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [])}
           ${balanceDetailChipBlock(detailText.candidateValueRanges || "Value Ranges", balanceCandidateValueRangeLabels(candidate, detailText))}
           ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
           ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", balanceCandidateCheckLabels(candidate, relatedChecks))}
         </button>
       `).join("")}
     </section>
+  `;
+}
+
+function balanceCandidatePriorityBlock(candidate = {}, detailText = {}) {
+  return `
+    <div class="editor-balance-candidate-impact">
+      <span>${escapeHtml(detailText.candidatePriority || "Priority")}</span>
+      <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidatePriorityValue", {
+        priority: candidate.priority || "-"
+      }, `#${candidate.priority || "-"}`))}</strong>
+    </div>
   `;
 }
 
