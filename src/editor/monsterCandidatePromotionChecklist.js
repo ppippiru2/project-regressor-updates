@@ -1,4 +1,4 @@
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=430";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=431";
 
 export const MONSTER_CANDIDATE_PROMOTION_CHECKLIST_VERSION = "monster-candidate-promotion-checklist-v1";
 
@@ -53,6 +53,7 @@ export function createMonsterCandidatePromotionChecklist(preview = createMonster
   const uniqueMaterialItems = new Set(rows.flatMap((row) => row.materialItemIds));
   const uniqueSkillItems = new Set(rows.flatMap((row) => row.skillItemIds));
   const uniqueRewardItems = new Set(rows.flatMap((row) => row.rewardItemIds));
+  const codexRecordTargets = rows.filter((row) => row.codexRecord?.state === "read-only-target");
   const riskSignalIds = new Set(rows.flatMap((row) => row.riskSignalIds));
 
   return {
@@ -67,6 +68,7 @@ export function createMonsterCandidatePromotionChecklist(preview = createMonster
       requiredActionCount: MONSTER_CANDIDATE_PROMOTION_ACTIONS.length,
       uniqueRewardItemCount: uniqueRewardItems.size,
       codexFragmentCount: uniqueCodexItems.size,
+      codexRecordTargetCount: codexRecordTargets.length,
       materialLinkCount: uniqueMaterialItems.size,
       skillLinkCount: uniqueSkillItems.size,
       riskSignalCount: riskSignalIds.size,
@@ -85,6 +87,14 @@ function createPromotionRow(row, actionIds) {
     ...materialItemIds,
     ...skillItemIds,
   ].filter(Boolean);
+  const codexRecord = row.codexFragment?.id
+    ? {
+        itemId: row.codexFragment.id,
+        itemName: row.codexFragment.name || row.codexFragment.id,
+        target: Math.max(1, Number(row.codexFragment.recordTarget) || 5),
+        state: "read-only-target",
+      }
+    : null;
   const riskSignalIds = [
     row.codexFragment?.id ? "" : "missing-codex-fragment",
     materialItemIds.length ? "" : "no-material-link",
@@ -104,6 +114,7 @@ function createPromotionRow(row, actionIds) {
     isBoss: row.isBoss,
     isRepresentative: row.isRepresentative,
     codexFragmentId: row.codexFragment?.id || "",
+    codexRecord,
     materialItemIds,
     skillItemIds,
     rewardItemIds,

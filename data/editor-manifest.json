@@ -439,6 +439,7 @@
         "candidateMonsterRewardItemTypes",
         "candidateMonsterPromotionRiskSignals",
         "candidateMonsterPromotionActions",
+        "candidateMonsterPromotionCodexRecord",
         "candidateMonsterPromotionRows",
         "candidateMonsterPromotionGroups",
         "monsterCandidatePromotionChecklist",
@@ -1220,7 +1221,7 @@
     ],
     "monsterCandidatePromotionChecklist": {
       "id": "monster-candidate-promotion-checklist-v1",
-      "source": "v430",
+      "source": "v431",
       "sourceModule": "src/editor/monsterCandidatePromotionChecklist.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedPendingCandidateCount": 9,
@@ -1228,7 +1229,8 @@
       "expectedRequiredActionCount": 5,
       "expectedGroupCount": 5,
       "editorSummaryVisible": true,
-      "writesGameData": false
+      "writesGameData": false,
+      "expectedCodexRecordTargetCount": 9
     }
   },
   "combatVfxPlacementPreview": {

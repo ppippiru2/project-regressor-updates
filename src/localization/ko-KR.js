@@ -1975,6 +1975,7 @@ export const KO_KR_TEXT = {
           ready: "검토 가능",
           actions: "작업 수",
           rewardLinks: "보상 링크",
+          codexRecord: "도감 기록",
           risks: "주의 신호",
           actionPlan: "승격 전 작업",
           readyForReview: "검토 가능",
@@ -1985,6 +1986,8 @@ export const KO_KR_TEXT = {
           rowMeta: "레벨 {level} · 기준 {source}",
           empty: "대기 후보 없음",
           emptyReward: "없음",
+          codexRecordTarget: "{item} · 목표 {target}개",
+          codexRecordMissing: "도감 기록 목표 없음",
           noRisks: "차단 신호 없음",
           actionLabels: {
             "add-monster-balance-row": "몬스터 데이터 추가",

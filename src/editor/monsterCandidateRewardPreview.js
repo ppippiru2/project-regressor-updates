@@ -1,7 +1,7 @@
-import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_POOL_REGIONS, TUTORIAL_MONSTER_POOL_VERSION, candidateMonsterRewardLinkFor } from "../balance/monsterCandidatePool.js?v=430";
-import { lootItems } from "../data/itemData.js?v=430";
-import { monsters, regions } from "../data/worldData.js?v=430";
-import { getLocaleText } from "../localization/index.js?v=430";
+import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_POOL_REGIONS, TUTORIAL_MONSTER_POOL_VERSION, candidateMonsterRewardLinkFor } from "../balance/monsterCandidatePool.js?v=431";
+import { lootItems } from "../data/itemData.js?v=431";
+import { monsters, regions } from "../data/worldData.js?v=431";
+import { getLocaleText } from "../localization/index.js?v=431";
 
 const DATA_TEXT = getLocaleText().data || {};
 const MONSTER_NAMES = DATA_TEXT.monsters || {};
@@ -98,6 +98,7 @@ function resolveRewardItem(itemId, itemById, unresolvedItemIds) {
       name: item.name || item.id,
       type: item.type || "unknown",
       typeLabel: item.typeLabel || item.type || "unknown",
+      recordTarget: Number.isFinite(item.recordTarget) ? item.recordTarget : null,
     };
   }
   unresolvedItemIds.add(itemId);

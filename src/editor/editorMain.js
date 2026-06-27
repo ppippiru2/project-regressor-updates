@@ -1,19 +1,19 @@
-import { applyDomLocalization } from "../localization/domText.js?v=430";
-import { getLocaleText, tf } from "../localization/index.js?v=430";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=430";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=430";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=430";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=430";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=430";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=430";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=430";
+import { applyDomLocalization } from "../localization/domText.js?v=431";
+import { getLocaleText, tf } from "../localization/index.js?v=431";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=431";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=431";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=431";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=431";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=431";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=431";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=431";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=430";
+} from "./monsterSpriteSlotReport.js?v=431";
 
-const EDITOR_VERSION = "430";
+const EDITOR_VERSION = "431";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -1427,6 +1427,7 @@ function renderMonsterCandidatePromotionChecklist(checklist, detailText = {}) {
     [text.ready || "Ready", `${summary.readyReviewCount || 0}`],
     [text.actions || "Actions", `${summary.requiredActionCount || 0}`],
     [text.rewardLinks || "Reward links", `${summary.uniqueRewardItemCount || 0}`],
+    [text.codexRecord || "Codex record", `${summary.codexRecordTargetCount || 0}`],
     [text.risks || "Signals", `${summary.riskSignalCount || 0}`],
   ];
 
@@ -1519,6 +1520,7 @@ function renderMonsterCandidatePromotionRow(row, text = {}) {
       <div class="editor-monster-candidate-promotion-grid">
         ${balanceDetailChipBlock(text.actionPlan || "Actions", actionLabels)}
         ${balanceDetailChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
+        ${balanceDetailChipBlock(text.codexRecord || "Codex record", monsterCandidatePromotionCodexRecordValues(row, text))}
         ${balanceDetailChipBlock(text.risks || "Signals", riskLabels.length ? riskLabels : [text.noRisks || "No blocking signals"])}
       </div>
     </article>
@@ -1531,6 +1533,16 @@ function monsterCandidatePromotionActionLabel(actionId, text = {}) {
 
 function monsterCandidatePromotionRiskLabel(signalId, text = {}) {
   return text.riskLabels?.[signalId] || signalId;
+}
+
+function monsterCandidatePromotionCodexRecordValues(row, text = {}) {
+  if (!row.codexRecord) return [text.codexRecordMissing || "No codex record target"];
+  return [
+    tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.codexRecordTarget", {
+      item: row.codexRecord.itemName || row.codexRecord.itemId || "-",
+      target: row.codexRecord.target || 0
+    }, `${row.codexRecord.itemName || row.codexRecord.itemId || "-"} / ${row.codexRecord.target || 0}`),
+  ];
 }
 
 function renderBalanceGroupRow(group, detailText = {}) {

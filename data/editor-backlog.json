@@ -37,8 +37,8 @@
       "title": "밸런스 조정 표면 읽기 전용 연결",
       "status": "partial",
       "priority": "high",
-      "source": "v430",
-      "summary": "Expose the balance tuning registry, tutorial pacing, pinned tuning candidates, monster candidate reward preview, and pending candidate promotion checklist as read-only editor metadata surfaces before building full balance editing controls.",
+      "source": "v431",
+      "summary": "Expose the balance tuning registry, tutorial pacing, pinned tuning candidates, monster candidate reward preview, pending candidate promotion checklist, and codex record targets as read-only editor metadata surfaces before building full balance editing controls.",
       "editorHooks": [
         "data/editor-manifest.json:balanceTuningRegistry",
         "src/balance/balanceTuningRegistry.js",
