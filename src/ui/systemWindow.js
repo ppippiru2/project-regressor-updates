@@ -1,4 +1,4 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=425";
+import { getLocaleText, t, tf } from "../localization/index.js?v=426";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));
@@ -14,17 +14,30 @@ export function renderSystemWindow({ log, player, playerProfile, region, inComba
   const statusText = systemStatusText(inCombat);
   const displayName = playerProfile?.name || player?.name || t("systemWindow.fallbackName");
   const meta = notice.meta || [playerMeta(displayName, player?.level || 1), region?.name || t("systemWindow.unknownRegion"), statusText];
-  const signature = [notice.type, notice.label, notice.message, ...meta].join("|");
+  const targetView = notice.targetView || "";
+  const signature = [notice.type, notice.label, targetView, notice.message, ...meta].join("|");
   if (signature === lastSignature) return;
   lastSignature = signature;
 
   windowElement.dataset.systemType = notice.type;
-  setText("system-window-type", notice.label);
+  windowElement.dataset.systemLabel = notice.label;
+  if (targetView) {
+    windowElement.dataset.systemTargetView = targetView;
+    windowElement.setAttribute("role", "button");
+    windowElement.setAttribute("tabindex", "0");
+    windowElement.setAttribute("aria-label", `${notice.label}: ${notice.message}`);
+  } else {
+    delete windowElement.dataset.systemTargetView;
+    windowElement.removeAttribute("role");
+    windowElement.removeAttribute("tabindex");
+    windowElement.removeAttribute("aria-label");
+  }
   setText("system-window-message", notice.message);
 
   const metaElement = document.getElementById("system-window-meta");
   if (metaElement) {
-    metaElement.innerHTML = meta.map((line) => `<span>${escapeHtml(line)}</span>`).join("");
+    const targetAttribute = targetView ? ` data-system-target-view="${escapeHtml(targetView)}"` : "";
+    metaElement.innerHTML = meta.map((line) => `<span${targetAttribute}>${escapeHtml(line)}</span>`).join("");
   }
 }
 
@@ -42,6 +55,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
         ? t("systemWindow.notices.combatMessage")
         : t("systemWindow.notices.idleMessage"),
       meta: baseMeta,
+      targetView: "combat",
     };
   }
 
@@ -55,6 +69,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
         t("systemWindow.notices.cardSkillReady"),
         statusText,
       ],
+      targetView: "combat",
     };
   }
 
@@ -65,6 +80,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.tutorialLocationLabel"),
       message: t("systemWindow.notices.tutorialLocationMessage"),
       meta: [tutorialLocation[1], t("systemWindow.notices.checkCombatTab"), statusText],
+      targetView: "combat",
     };
   }
 
@@ -74,6 +90,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.tutorialTransferLabel"),
       message: t("systemWindow.notices.tutorialTransferMessage"),
       meta: baseMeta,
+      targetView: "combat",
     };
   }
 
@@ -84,6 +101,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.growthLabel"),
       message: t("systemWindow.notices.levelUpMessage"),
       meta: [playerMeta("", levelUp[1]).replace(/^ · /, ""), t("systemWindow.notices.statUp"), t("systemWindow.notices.freeStatPlus")],
+      targetView: "status",
     };
   }
 
@@ -94,6 +112,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.routeLabel"),
       message: t("systemWindow.notices.routeMessage"),
       meta: [unlockedRegion[1], t("systemWindow.notices.checkRegionTab"), statusText],
+      targetView: "regions",
     };
   }
 
@@ -104,6 +123,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.lootCandidateLabel"),
       message: t("systemWindow.notices.lootCandidateMessage"),
       meta: [equipment[1], tf("systemWindow.notices.valuePlus", { value: equipment[2] }), t("systemWindow.notices.checkInventory")],
+      targetView: "inventory",
     };
   }
 
@@ -114,6 +134,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.lootLabel"),
       message: t("systemWindow.notices.lootMessage"),
       meta: [lootItem[1], lootItem[2], t("systemWindow.notices.checkInventory")],
+      targetView: "inventory",
     };
   }
 
@@ -124,6 +145,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.codexRecordLabel"),
       message: t("systemWindow.notices.codexRecordMessage"),
       meta: [codexRecord[1], codexRecord[2], t("systemWindow.notices.checkCodexProgress")],
+      targetView: "inventory",
     };
   }
 
@@ -134,6 +156,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.regionRecordLabel"),
       message: t("systemWindow.notices.regionRecordMessage"),
       meta: [regionRecord[1], regionRecord[2], t("systemWindow.notices.checkRegionProgress")],
+      targetView: "regions",
     };
   }
 
@@ -148,6 +171,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
         tf("systemWindow.notices.expMeta", { value: reward[2] }),
         tf("systemWindow.notices.goldMeta", { value: reward[3] }),
       ],
+      targetView: "combat",
     };
   }
 
@@ -158,6 +182,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.lootLabel"),
       message: t("systemWindow.notices.lootMessage"),
       meta: [item[1], region?.name || t("systemWindow.unknownRegion"), statusText],
+      targetView: "inventory",
     };
   }
 
@@ -167,6 +192,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.clearLabel"),
       message: t("systemWindow.notices.clearMessage"),
       meta: [region?.name || t("systemWindow.currentRegion"), t("systemWindow.notices.riftWeakened"), statusText],
+      targetView: "regions",
     };
   }
 
@@ -184,6 +210,7 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
     label: t("systemWindow.notices.systemLabel"),
     message,
     meta: baseMeta,
+    targetView: "combat",
   };
 }
 

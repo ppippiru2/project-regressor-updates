@@ -1047,6 +1047,15 @@ select:focus {
   line-height: 1.45;
 }
 
+.system-window[data-system-target-view] {
+  cursor: pointer;
+}
+
+.system-window[data-system-target-view]:focus-visible {
+  outline: 2px solid rgba(57, 228, 255, 0.9);
+  outline-offset: 2px;
+}
+
 .system-window-meta {
   position: relative;
   z-index: 1;
@@ -1064,6 +1073,10 @@ select:focus {
   font-size: 0.78rem;
   font-weight: 800;
   padding: 0.25rem 0.55rem;
+}
+
+.system-window-meta span[data-system-target-view] {
+  cursor: pointer;
 }
 
 .system-window[data-system-type="reward"] {

@@ -16,7 +16,7 @@
         "dark-background",
         "ui"
       ],
-      "notes": "Current PWA, install, Android launcher, and header app icon. The 2026-06-27 uploaded blue crystal emblem is copied to assets/icon.png and kept in sync with assets/icon-dark.png."
+      "notes": "Current PWA, install, Android launcher, and header app icon. The 2026-06-28 provided purple-blue emblem is copied to assets/icon.png and kept in sync with assets/icon-dark.png."
     },
     {
       "assetId": "app_icon_dark",
@@ -32,7 +32,7 @@
         "source-variant",
         "ui"
       ],
-      "notes": "Preserved dark-background icon source from the 2026-06-27 uploaded blue crystal emblem. This is the representative install icon source."
+      "notes": "Preserved dark-background representative icon source from the 2026-06-28 provided purple-blue emblem."
     },
     {
       "assetId": "app_icon_light",
@@ -94,7 +94,7 @@
         "tutorial-island",
         "shore"
       ],
-      "notes": "Region card and battle background for 초심자의 해안."
+      "notes": "Region card and battle background for tutorial_shore."
     },
     {
       "assetId": "region_tutorial_shore_node_map_v54_actual",
@@ -109,7 +109,7 @@
         "tutorial-island",
         "shore"
       ],
-      "notes": "Node map background for 초심자의 해안. N-marked source image."
+      "notes": "Node map background for tutorial_shore. N-marked source image."
     },
     {
       "assetId": "region_tutorial_forest_card_v54_actual",
@@ -125,7 +125,7 @@
         "tutorial-island",
         "forest"
       ],
-      "notes": "Region card and battle background for 초심자의 숲."
+      "notes": "Region card and battle background for tutorial_forest."
     },
     {
       "assetId": "region_tutorial_forest_node_map_v54_actual",
@@ -140,7 +140,7 @@
         "tutorial-island",
         "forest"
       ],
-      "notes": "Node map background for 초심자의 숲. N-marked source image."
+      "notes": "Node map background for tutorial_forest. N-marked source image."
     },
     {
       "assetId": "region_broken_ruins_card_v54_actual",
@@ -156,7 +156,7 @@
         "tutorial-island",
         "ruins"
       ],
-      "notes": "Region card and battle background for 무너진 탑의 잔해."
+      "notes": "Region card and battle background for broken_ruins."
     },
     {
       "assetId": "region_broken_ruins_node_map_v54_actual",
@@ -171,7 +171,7 @@
         "tutorial-island",
         "ruins"
       ],
-      "notes": "Node map background for 무너진 탑의 잔해. N-marked source image."
+      "notes": "Node map background for broken_ruins. N-marked source image."
     },
     {
       "assetId": "region_mana_mine_card_v54_actual",
@@ -187,7 +187,7 @@
         "tutorial-island",
         "mine"
       ],
-      "notes": "Region card and battle background for 마석 광산."
+      "notes": "Region card and battle background for mana_mine."
     },
     {
       "assetId": "region_mana_mine_node_map_v54_actual",
@@ -202,7 +202,7 @@
         "tutorial-island",
         "mine"
       ],
-      "notes": "Node map background for 마석 광산. N-marked source image."
+      "notes": "Node map background for mana_mine. N-marked source image."
     },
     {
       "assetId": "region_rift_gate_card_v54_actual",
@@ -218,7 +218,7 @@
         "tutorial-island",
         "rift-gate"
       ],
-      "notes": "Region card and battle background for 검은 균열 관문."
+      "notes": "Region card and battle background for rift_gate."
     },
     {
       "assetId": "region_rift_gate_node_map_v54_actual",
@@ -233,7 +233,7 @@
         "tutorial-island",
         "rift-gate"
       ],
-      "notes": "Node map background for 검은 균열 관문. N-marked source image."
+      "notes": "Node map background for rift_gate. N-marked source image."
     },
     {
       "assetId": "player_regressor_spear_idle_v1",

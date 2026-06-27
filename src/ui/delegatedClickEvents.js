@@ -22,6 +22,7 @@ export function bindDelegatedClickEvents({
   onSellShopItem,
   onDeveloperAction,
   onDeveloperOptionChange,
+  onNavigateToView,
 } = {}) {
   root.addEventListener("click", (event) => {
     const equip = event.target.closest("[data-equip]");
@@ -45,7 +46,11 @@ export function bindDelegatedClickEvents({
     const shopBuy = event.target.closest("[data-shop-buy]");
     const shopSell = event.target.closest("[data-shop-sell]");
     const developerAction = event.target.closest("[data-developer-action]");
+    const systemTarget = event.target.closest("[data-system-target-view]");
 
+    if (systemTarget && !event.target.closest(".collapse-toggle")) {
+      onNavigateToView?.(systemTarget.dataset.systemTargetView);
+    }
     if (equip) onEquip(equip.dataset.equip);
     if (equipRecommended) onEquipRecommended();
     if (unequip) onUnequip(unequip.dataset.unequip);
@@ -74,6 +79,14 @@ export function bindDelegatedClickEvents({
     if (shopBuy) onBuyShopItem(shopBuy.dataset.shopBuy);
     if (shopSell) onSellShopItem(shopSell.dataset.shopSell);
     if (developerAction) onDeveloperAction(developerAction.dataset.developerAction);
+  });
+
+  root.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const systemTarget = event.target.closest("[data-system-target-view]");
+    if (!systemTarget || event.target.closest(".collapse-toggle")) return;
+    event.preventDefault();
+    onNavigateToView?.(systemTarget.dataset.systemTargetView);
   });
 
   root.addEventListener("change", (event) => {

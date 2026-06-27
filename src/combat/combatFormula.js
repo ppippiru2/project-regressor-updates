@@ -13,8 +13,8 @@ import {
   RANK_DAMAGE_MULTIPLIER_PER_GAP,
   RANK_ORDER,
   RANK_POWER_THRESHOLDS,
-} from "../balance/combatBalance.js?v=425";
-import { MONSTER_POWER_WEIGHTS, MONSTER_STAT_FORMULA } from "../balance/monsterStatBalance.js?v=425";
+} from "../balance/combatBalance.js?v=426";
+import { MONSTER_POWER_WEIGHTS, MONSTER_STAT_FORMULA } from "../balance/monsterStatBalance.js?v=426";
 
 export function expToNext(level) {
   return Math.floor(60 * Math.pow(level, 1.45));

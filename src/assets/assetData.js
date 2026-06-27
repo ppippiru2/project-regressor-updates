@@ -18,7 +18,7 @@ export const ASSET_MANIFEST = {
         "dark-background",
         "ui"
       ],
-      "notes": "Current PWA, install, Android launcher, and header app icon. The 2026-06-27 uploaded blue crystal emblem is copied to assets/icon.png and kept in sync with assets/icon-dark.png."
+      "notes": "Current PWA, install, Android launcher, and header app icon. The 2026-06-28 provided purple-blue emblem is copied to assets/icon.png and kept in sync with assets/icon-dark.png."
     },
     {
       "assetId": "app_icon_dark",
@@ -34,7 +34,7 @@ export const ASSET_MANIFEST = {
         "source-variant",
         "ui"
       ],
-      "notes": "Preserved dark-background icon source from the 2026-06-27 uploaded blue crystal emblem. This is the representative install icon source."
+      "notes": "Preserved dark-background representative icon source from the 2026-06-28 provided purple-blue emblem."
     },
     {
       "assetId": "app_icon_light",
@@ -96,7 +96,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "shore"
       ],
-      "notes": "Region card and battle background for \uCD08\uC2EC\uC790\uC758 \uD574\uC548."
+      "notes": "Region card and battle background for tutorial_shore."
     },
     {
       "assetId": "region_tutorial_shore_node_map_v54_actual",
@@ -111,7 +111,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "shore"
       ],
-      "notes": "Node map background for \uCD08\uC2EC\uC790\uC758 \uD574\uC548. N-marked source image."
+      "notes": "Node map background for tutorial_shore. N-marked source image."
     },
     {
       "assetId": "region_tutorial_forest_card_v54_actual",
@@ -127,7 +127,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "forest"
       ],
-      "notes": "Region card and battle background for \uCD08\uC2EC\uC790\uC758 \uC232."
+      "notes": "Region card and battle background for tutorial_forest."
     },
     {
       "assetId": "region_tutorial_forest_node_map_v54_actual",
@@ -142,7 +142,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "forest"
       ],
-      "notes": "Node map background for \uCD08\uC2EC\uC790\uC758 \uC232. N-marked source image."
+      "notes": "Node map background for tutorial_forest. N-marked source image."
     },
     {
       "assetId": "region_broken_ruins_card_v54_actual",
@@ -158,7 +158,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "ruins"
       ],
-      "notes": "Region card and battle background for \uBB34\uB108\uC9C4 \uD0D1\uC758 \uC794\uD574."
+      "notes": "Region card and battle background for broken_ruins."
     },
     {
       "assetId": "region_broken_ruins_node_map_v54_actual",
@@ -173,7 +173,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "ruins"
       ],
-      "notes": "Node map background for \uBB34\uB108\uC9C4 \uD0D1\uC758 \uC794\uD574. N-marked source image."
+      "notes": "Node map background for broken_ruins. N-marked source image."
     },
     {
       "assetId": "region_mana_mine_card_v54_actual",
@@ -189,7 +189,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "mine"
       ],
-      "notes": "Region card and battle background for \uB9C8\uC11D \uAD11\uC0B0."
+      "notes": "Region card and battle background for mana_mine."
     },
     {
       "assetId": "region_mana_mine_node_map_v54_actual",
@@ -204,7 +204,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "mine"
       ],
-      "notes": "Node map background for \uB9C8\uC11D \uAD11\uC0B0. N-marked source image."
+      "notes": "Node map background for mana_mine. N-marked source image."
     },
     {
       "assetId": "region_rift_gate_card_v54_actual",
@@ -220,7 +220,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "rift-gate"
       ],
-      "notes": "Region card and battle background for \uAC80\uC740 \uADE0\uC5F4 \uAD00\uBB38."
+      "notes": "Region card and battle background for rift_gate."
     },
     {
       "assetId": "region_rift_gate_node_map_v54_actual",
@@ -235,7 +235,7 @@ export const ASSET_MANIFEST = {
         "tutorial-island",
         "rift-gate"
       ],
-      "notes": "Node map background for \uAC80\uC740 \uADE0\uC5F4 \uAD00\uBB38. N-marked source image."
+      "notes": "Node map background for rift_gate. N-marked source image."
     },
     {
       "assetId": "player_regressor_spear_idle_v1",

@@ -1,10 +1,10 @@
-import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=425";
-import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=425";
-import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=425";
-import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=425";
-import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=425";
-import { bindNavigationEvents } from "../ui/navigationEvents.js?v=425";
-import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=425";
+import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=426";
+import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=426";
+import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=426";
+import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=426";
+import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=426";
+import { bindNavigationEvents } from "../ui/navigationEvents.js?v=426";
+import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=426";
 
 export function bindAppEvents(handlers) {
   bindCharacterCreationEvents(handlers.onCreateCharacter, handlers.onCancelCharacterCreation);
@@ -41,6 +41,7 @@ export function bindAppEvents(handlers) {
     onSellShopItem: handlers.onSellShopItem,
     onDeveloperAction: handlers.onDeveloperAction,
     onDeveloperOptionChange: handlers.onDeveloperOptionChange,
+    onNavigateToView: handlers.onNavigateToView,
   });
 
   bindCombatInfoEvents({
