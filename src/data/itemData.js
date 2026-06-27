@@ -1,6 +1,6 @@
-import { getLocaleText } from "../localization/index.js?v=409";
-import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=409";
-import { equipment } from "./equipmentData.js?v=409";
+import { getLocaleText } from "../localization/index.js?v=410";
+import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=410";
+import { equipment } from "./equipmentData.js?v=410";
 
 const ITEM_TEXT = getLocaleText().data;
 const ITEM_NAMES = ITEM_TEXT.itemNames || {};

@@ -473,7 +473,11 @@
         "offsetY",
         "textOffsetY",
         "slashWidth",
-        "expandedSlashWidth"
+        "expandedSlashWidth",
+        "tuningCandidates",
+        "tuningSignals",
+        "candidatePriority",
+        "candidatePlacementSummary"
       ],
       "futureControls": [
         "읽기 전용 플레이어 VFX 배치표",
@@ -482,7 +486,8 @@
         "하이퍼 상태 배치 비교",
         "전투 화면 튜닝 전 점검용 요약",
         "????/??? ?? ??",
-        "VFX ?? ??"
+        "VFX ?? ??",
+        "VFX ?? ??? ?? ?? ??"
       ]
     },
     {
@@ -1154,6 +1159,15 @@
       "data/editor-manifest.json:combat_vfx_placement_preview",
       "data/editor-backlog.json:combat-vfx-placement-preview-editor",
       "src/editor/editorMain.js"
+    ],
+    "expectedTuningCandidates": 7,
+    "tuningSignals": [
+      "expanded-width-critical",
+      "expanded-width-wide",
+      "slash-width-wide",
+      "vertical-offset-high",
+      "horizontal-offset-high",
+      "text-offset-high"
     ]
   },
   "prototypeListMemory": [

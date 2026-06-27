@@ -55,14 +55,15 @@
       "title": "전투 VFX 배치 미리보기 에디터 연결",
       "status": "partial",
       "priority": "high",
-      "source": "v407",
+      "source": "v410",
       "summary": "Expose player and monster combat VFX placement rows in the read-only editor so attack effect offsets can be compared before manual tuning.",
       "editorHooks": [
         "data/editor-manifest.json:combatVfxPlacementPreview",
         "src/editor/combatVfxPlacementPreview.js",
         "src/editor/editorMain.js",
         "styles.css",
-        "build-scripts/check-combat-vfx-placement-preview.mjs"
+        "build-scripts/check-combat-vfx-placement-preview.mjs",
+        "src/editor/combatVfxPlacementPreview.js:tuningCandidates"
       ]
     },
     {

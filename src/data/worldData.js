@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=409";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=409";
+import { getLocaleText } from "../localization/index.js?v=410";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=410";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;

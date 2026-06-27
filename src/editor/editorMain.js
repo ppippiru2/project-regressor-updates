@@ -1,12 +1,12 @@
-import { applyDomLocalization } from "../localization/domText.js?v=409";
-import { getLocaleText, tf } from "../localization/index.js?v=409";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=409";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=409";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=409";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=409";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=409";
+import { applyDomLocalization } from "../localization/domText.js?v=410";
+import { getLocaleText, tf } from "../localization/index.js?v=410";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=410";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=410";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=410";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=410";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=410";
 
-const EDITOR_VERSION = "409";
+const EDITOR_VERSION = "410";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -30,12 +30,21 @@ const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
   playerMetric: "Player VFX",
   monsterMetric: "Monster VFX",
   effectMetric: "Effect Types",
+  tuningMetric: "Tuning Signals",
+  tuningTitle: "Tuning Signal Summary",
+  tuningDescription: "Review wide or offset-heavy placements first before manual VFX tuning.",
+  candidateCount: "{count} candidates",
+  candidatePriority: "Priority {priority}",
+  candidateSignals: "Signals",
+  candidatePlacement: "Placement",
+  noTuningCandidates: "No tuning signals",
   metricLabel: "Combat VFX",
   metricValue: "Players {playerRows} ? Monsters {monsterRows}",
   metricHint: "Attack effect placement preview ready",
   classLabels: {},
   genderLabels: {},
-  effectLabels: {}
+  effectLabels: {},
+  signalLabels: {}
 });
 const COMBAT_VFX_CLASS_LABELS = Object.freeze({
   warrior: "Warrior",
@@ -58,6 +67,14 @@ const COMBAT_VFX_EFFECT_LABELS = Object.freeze({
   holy: "Holy",
   dark: "Dark",
   explosion: "Explosion"
+});
+const COMBAT_VFX_SIGNAL_LABELS = Object.freeze({
+  "expanded-width-critical": "Expanded slash critical",
+  "expanded-width-wide": "Expanded slash wide",
+  "slash-width-wide": "Slash width wide",
+  "vertical-offset-high": "Vertical offset high",
+  "horizontal-offset-high": "Horizontal offset high",
+  "text-offset-high": "Text offset high"
 });
 
 const SAVE_KEYS = [
@@ -368,6 +385,7 @@ function renderCombatVfxPlacementDetail() {
   const visibleMonsterRows = monsterRows.filter((row) => matchesCombatVfxFilter("monster", combatVfxMonsterSearchText(row)));
   const visibleCount = visiblePlayerRows.length + visibleMonsterRows.length;
   const totalCount = playerRows.length + monsterRows.length;
+  const tuningCandidates = preview.tuningCandidates || [];
 
   return `
     <section class="editor-combat-vfx-detail" aria-label="${escapeAttribute(detailText.title)}">
@@ -386,7 +404,9 @@ function renderCombatVfxPlacementDetail() {
         ${combatVfxSummaryCard(detailText.playerMetric, String(totals.playerRows || playerRows.length))}
         ${combatVfxSummaryCard(detailText.monsterMetric, String(totals.monsterRows || monsterRows.length))}
         ${combatVfxSummaryCard(detailText.effectMetric, String(totals.effectTypes || 0))}
+        ${combatVfxSummaryCard(detailText.tuningMetric, String(totals.tuningCandidates || tuningCandidates.length))}
       </div>
+      ${renderCombatVfxTuningSignals(tuningCandidates, detailText)}
       ${renderCombatVfxFilterControls(detailText, visibleCount, totalCount)}
       <div class="editor-combat-vfx-grid">
         <section>
@@ -403,6 +423,49 @@ function renderCombatVfxPlacementDetail() {
         </section>
       </div>
     </section>
+  `;
+}
+
+function renderCombatVfxTuningSignals(candidates = [], detailText = {}) {
+  const signalLabels = {
+    ...COMBAT_VFX_SIGNAL_LABELS,
+    ...(detailText.signalLabels || {})
+  };
+  return `
+    <section class="editor-combat-vfx-tuning" aria-label="${escapeAttribute(detailText.tuningTitle || "Tuning Signals")}">
+      <div class="editor-combat-vfx-tuning-head">
+        <div>
+          <h4>${escapeHtml(detailText.tuningTitle || "Tuning Signals")}</h4>
+          <p class="muted">${escapeHtml(detailText.tuningDescription || "")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.candidateCount", {
+          count: candidates.length
+        }, `${candidates.length}`))}</strong>
+      </div>
+      <div class="editor-combat-vfx-tuning-list">
+        ${candidates.map((candidate) => renderCombatVfxTuningCandidate(candidate, detailText, signalLabels)).join("") || `<p class="editor-combat-vfx-empty"><span>${escapeHtml(detailText.noTuningCandidates || "No tuning signals")}</span></p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderCombatVfxTuningCandidate(candidate = {}, detailText = {}, signalLabels = COMBAT_VFX_SIGNAL_LABELS) {
+  const kindLabel = candidate.kind === "monster" ? (detailText.monsterOnly || "Monster") : (detailText.playerOnly || "Player");
+  const signalChips = (candidate.signals || []).map((signal) => chip(signalLabels[signal] || signal)).join("");
+  return `
+    <article class="editor-combat-vfx-tuning-card" data-priority="${escapeAttribute(String(candidate.priority || 3))}">
+      <div>
+        <strong>${escapeHtml(`${kindLabel} · ${candidate.label || candidate.targetId || ""}`)}</strong>
+        <span>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.candidatePriority", {
+          priority: candidate.priority || "-"
+        }, `Priority ${candidate.priority || "-"}`))}</span>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.candidateSignals || "Signals")}</span>
+        <div class="editor-chip-list">${signalChips}</div>
+      </div>
+      ${combatVfxFieldBlock(detailText.candidatePlacement || "Placement", [formatCombatVfxPlacement(candidate.placement)])}
+    </article>
   `;
 }
 

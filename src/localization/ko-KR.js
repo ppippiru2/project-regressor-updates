@@ -1865,6 +1865,14 @@ export const KO_KR_TEXT = {
         playerMetric: "???? VFX",
         monsterMetric: "??? VFX",
         effectMetric: "?? ??",
+        tuningMetric: "?? ??",
+        tuningTitle: "튜닝 신호 요약",
+        tuningDescription: "폭이 넓거나 위치 보정이 큰 VFX 배치를 먼저 확인합니다.",
+        candidateCount: "후보 {count}개",
+        candidatePriority: "우선순위 {priority}",
+        candidateSignals: "주의 신호",
+        candidatePlacement: "배치값",
+        noTuningCandidates: "현재 튜닝 신호 없음",
         searchLabel: "??",
         searchPlaceholder: "??, ??, ???, SFX, ?? ??",
         kindFilter: "?? VFX ?? ??",
@@ -1901,6 +1909,14 @@ export const KO_KR_TEXT = {
           holy: "??",
           dark: "??",
           explosion: "??",
+        },
+        signalLabels: {
+          "expanded-width-critical": "확장 폭 매우 큼",
+          "expanded-width-wide": "확장 폭 큼",
+          "slash-width-wide": "기본 폭 큼",
+          "vertical-offset-high": "세로 보정 큼",
+          "horizontal-offset-high": "가로 보정 큼",
+          "text-offset-high": "피해 글자 보정 큼",
         },
       },
       assetTypes: {
@@ -1951,4 +1967,3 @@ export const KO_KR_TEXT = {
     regionSkippedNoNext: "개발 테스트: {currentRegion} 지역을 완료 처리했습니다. 다음 지역은 아직 없습니다.",
   },
 };
-
