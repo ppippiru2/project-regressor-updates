@@ -1,13 +1,16 @@
-import { applyDomLocalization } from "../localization/domText.js?v=415";
-import { getLocaleText, tf } from "../localization/index.js?v=415";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=415";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=415";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=415";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=415";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=415";
-import { createMonsterSpriteSlotReport } from "./monsterSpriteSlotReport.js?v=415";
+import { applyDomLocalization } from "../localization/domText.js?v=416";
+import { getLocaleText, tf } from "../localization/index.js?v=416";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=416";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=416";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=416";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=416";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=416";
+import {
+  createMonsterSpriteReadyConnectionPatchPlan,
+  createMonsterSpriteSlotReport,
+} from "./monsterSpriteSlotReport.js?v=416";
 
-const EDITOR_VERSION = "415";
+const EDITOR_VERSION = "416";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -86,6 +89,13 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   missingMetric: "Missing",
   brokenMetric: "Broken",
   fileScanMetric: "File-ready",
+  connectionPlanTitle: "Ready Connection Plan",
+  connectionPlanDescription: "Only file-ready monster sprites become connection patch candidates.",
+  readyPatchMetric: "Ready patches",
+  readyManifestMetric: "Manifest entries",
+  readyFileMetric: "Ready files",
+  missingFileMetric: "Missing files",
+  applyModeMetric: "Apply mode",
   expectedPath: "Expected file",
   assignedAsset: "Assigned asset",
   suggestedAsset: "Suggested asset",
@@ -127,6 +137,7 @@ const expandedRetargetRows = new Set(storedRetargetDetailFilter.expandedRows);
 let balanceDetailFilter = loadBalanceDetailFilter();
 let combatVfxDetailFilter = loadCombatVfxDetailFilter();
 const MONSTER_SPRITE_SLOT_REPORT = createMonsterSpriteSlotReport();
+const MONSTER_SPRITE_READY_CONNECTION_PLAN = createMonsterSpriteReadyConnectionPatchPlan(MONSTER_SPRITE_SLOT_REPORT);
 
 const elements = {
   nav: document.getElementById("editor-panel-nav"),
@@ -418,6 +429,7 @@ function renderMonsterSpriteSlotReport() {
     ...MONSTER_SPRITE_REPORT_TEXT.fileStatusLabels,
     ...(detailText.fileStatusLabels || {})
   };
+  const readiness = manifest?.monsterSpriteSlotReadiness || {};
 
   return `
     <section class="editor-monster-sprite-report" aria-label="${escapeAttribute(detailText.title)}">
@@ -436,11 +448,42 @@ function renderMonsterSpriteSlotReport() {
         ${combatVfxSummaryCard(detailText.fileScanMetric, String(totals.fileReadySlots || 0))}
         ${combatVfxSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
       </div>
+      ${renderMonsterSpriteConnectionPlan(readiness, detailText)}
       <div class="editor-monster-sprite-list">
         ${(report.byMonster || []).map((group) => renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels)).join("")}
       </div>
     </section>
   `;
+}
+
+function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {}) {
+  const plan = MONSTER_SPRITE_READY_CONNECTION_PLAN;
+  const readySlotPatches = numberOrFallback(readiness.readyAssetSlotPatchEntries, plan.assetSlotPatches.length);
+  const readyManifestEntries = numberOrFallback(readiness.readyAssetManifestPatchEntries, plan.assetManifestEntries.length);
+  const readyFiles = numberOrFallback(readiness.fileReadySlots, plan.summary?.fileReadySlots || 0);
+  const missingFiles = numberOrFallback(readiness.fileMissingSlots, plan.summary?.fileMissingSlots || 0);
+  const applyMode = readiness.readyConnectionApplyMode || plan.applyMode || "file-ready-only";
+
+  return `
+    <div class="editor-monster-sprite-plan" data-ready-patches="${escapeAttribute(String(readySlotPatches))}">
+      <div class="editor-monster-sprite-plan-copy">
+        <strong>${escapeHtml(detailText.connectionPlanTitle || "Ready Connection Plan")}</strong>
+        <span>${escapeHtml(detailText.connectionPlanDescription || "")}</span>
+      </div>
+      <div class="editor-monster-sprite-plan-grid">
+        ${combatVfxSummaryCard(detailText.readyPatchMetric || "Ready patches", String(readySlotPatches))}
+        ${combatVfxSummaryCard(detailText.readyManifestMetric || "Manifest entries", String(readyManifestEntries))}
+        ${combatVfxSummaryCard(detailText.readyFileMetric || "Ready files", String(readyFiles))}
+        ${combatVfxSummaryCard(detailText.missingFileMetric || "Missing files", String(missingFiles))}
+        ${combatVfxSummaryCard(detailText.applyModeMetric || "Apply mode", applyMode)}
+      </div>
+    </div>
+  `;
+}
+
+function numberOrFallback(value, fallback) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : fallback;
 }
 
 function renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels) {

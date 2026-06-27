@@ -1347,7 +1347,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v415",
+    "source": "v416",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1384,6 +1384,14 @@
     "readyConnectionPatchPlanVersion": 1,
     "readyConnectionApplyMode": "file-ready-only",
     "readyAssetManifestPatchEntries": 0,
-    "readyAssetSlotPatchEntries": 0
+    "readyAssetSlotPatchEntries": 0,
+    "readyConnectionPlanVisible": true,
+    "readyConnectionPlanMetrics": [
+      "readyAssetSlotPatchEntries",
+      "readyAssetManifestPatchEntries",
+      "fileReadySlots",
+      "fileMissingSlots",
+      "readyConnectionApplyMode"
+    ]
   }
 }

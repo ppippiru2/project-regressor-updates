@@ -4363,6 +4363,43 @@ select:focus {
   min-width: 0;
 }
 
+.editor-monster-sprite-plan {
+  background: rgba(6, 25, 56, 0.52);
+  border: 1px solid rgba(57, 228, 255, 0.22);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.72rem;
+}
+
+.editor-monster-sprite-plan-copy {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.editor-monster-sprite-plan-copy strong {
+  color: var(--text);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-plan-copy span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-plan-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(7.2rem, 1fr));
+  min-width: 0;
+}
+
 .editor-monster-sprite-list {
   display: grid;
   gap: 0.65rem;
