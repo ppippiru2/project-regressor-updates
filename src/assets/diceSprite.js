@@ -31,7 +31,7 @@ const IMAGE_LOAD_TIMEOUT_MS = 2200;
 
 export async function loadDiceSpriteDefinition() {
   try {
-    const response = await fetch("./data/dice-sprite.json?v=370", { cache: "no-store" });
+    const response = await fetch("./data/dice-sprite.json?v=371", { cache: "no-store" });
     if (!response.ok) return FALLBACK_DICE_SPRITE;
     const definition = await response.json();
     const normalized = normalizeDiceSpriteDefinition(definition);
