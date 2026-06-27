@@ -1,5 +1,5 @@
 import { clamp, rankCombatModifier } from "./combatFormula.js";
-import { ENEMY_DAMAGE_BALANCE, PLAYER_DAMAGE_BALANCE } from "../balance/damageBalance.js?v=384";
+import { ENEMY_DAMAGE_BALANCE, PLAYER_DAMAGE_BALANCE } from "../balance/damageBalance.js?v=385";
 
 export function resolvePlayerAttack(player, enemy, action, hyperActive, random = Math.random) {
   const rankModifier = rankCombatModifier(player.power, enemy.power);

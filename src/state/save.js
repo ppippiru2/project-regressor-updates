@@ -1,11 +1,12 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=384";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=384";
-import { t, tf } from "../localization/index.js?v=384";
+} from "./developerOptions.js?v=385";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=385";
+import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=385";
+import { t, tf } from "../localization/index.js?v=385";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=384";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=385";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";
@@ -137,6 +138,9 @@ export function normalizeSavedState(saved, createInitialState) {
     },
     gateProgress:
       savedState.gateProgress && typeof savedState.gateProgress === "object" ? savedState.gateProgress : base.gateProgress,
+    tutorialFlags: normalizeTutorialFlags(savedState.tutorialFlags, {
+      assumeSeen: !Object.prototype.hasOwnProperty.call(savedState, "tutorialFlags"),
+    }),
   };
 }
 

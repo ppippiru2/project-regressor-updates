@@ -884,6 +884,9 @@ export const KO_KR_TEXT = {
     tutorialTransfer: "[전송] 개별 튜토리얼 시험 공간으로 좌표를 고정합니다.",
     tutorialLocation: "[지역] {regionName}. 첫 균열이 열린 해안. 약한 마물이 떠밀려옵니다.",
     tutorialStatusBriefing: "[상태창] 기본 정보가 활성화되었습니다. 확정 스킬: 기본 공격. 카드 스킬: {starterSkill}.",
+    firstCombatWarning: "[경고] 적성 개체가 접근합니다.",
+    firstCombatBasicGuide: "[전투 도움말] 기본 공격은 MP를 소모하지 않습니다.",
+    firstCombatSkillGuide: "[전투 도움말] 카드 스킬은 조건과 MP를 확인한 뒤 자동으로 사용됩니다.",
     profileUpdated: "플레이어 정보 변경사항을 저장했습니다.",
   },
   profile: {
@@ -978,7 +981,7 @@ export const KO_KR_TEXT = {
       defeat: "처치\\.|격파|사망",
       growth: "레벨|새 지역 개방|스탯|전투력|성장|달성",
       physical: "피해|강타|기본 공격",
-      warning: "오류|쓰러졌|실패|부족|잠김|위험|비활성화",
+      warning: "오류|쓰러졌|실패|부족|잠김|위험|경고|비활성화",
     },
     tokenPatterns: {
       itemQuantity: "(^|[:,]\\s)([\\p{Script=Hangul}A-Za-z][\\p{Script=Hangul}A-Za-z0-9·\\s-]*?)\\s(x\\d+)",
@@ -988,7 +991,7 @@ export const KO_KR_TEXT = {
       defeated: "^(.*?)( 처치\\.)",
       enemyAction: "^(.*?)(의 반격|의 폭주 공격)",
       targetName: "(으로\\s)(.*?)(에게)",
-      systemTokens: "오프라인 자동 전투 추가 획득|오프라인 자동 전투 보상|전투를 시작|전투를 종료|자동 전투 모듈|토벌 보상|전리품|장비 후보|드랍|추천 장착 완료|보상",
+      systemTokens: "오프라인 자동 전투 추가 획득|오프라인 자동 전투 보상|전투 도움말|카드 스킬|전투를 시작|전투를 종료|자동 전투 모듈|토벌 보상|전리품|장비 후보|드랍|추천 장착 완료|보상",
       skillTokens: "기본 공격|강타|마력탄|응급 회복|빠른 발놀림|방어 자세|마력 점화",
       criticalToken: "치명타!",
       damage: "(\\d[\\d,]*\\s피해)",
@@ -1212,7 +1215,7 @@ export const KO_KR_TEXT = {
       reward: "(.+?)\\s처치\\.\\s경험치\\s([\\d,]+),\\s골드\\s([\\d,]+)\\s획득\\.",
       item: "^(.+?)\\s획득\\.",
       bossClear: "보스를 격파했습니다",
-      warning: "쓰러졌|실패|위험|부족|잠김",
+      warning: "쓰러졌|실패|위험|경고|부족|잠김",
     },
   },
   combatReadiness: {

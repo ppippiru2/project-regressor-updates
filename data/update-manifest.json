@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 384,
-  "displayVersion": "v3.84",
-  "cacheVersion": "project-regressor-mvp-v384",
+  "versionCode": 385,
+  "displayVersion": "v3.85",
+  "cacheVersion": "project-regressor-mvp-v385",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=384&cachebust=384",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=385&cachebust=385",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v385 adds a one-time first-combat tutorial guidance flag for newly created characters only.",
+    "v385 shows first-combat warning, basic attack, and card-skill guide lines without mutating existing saves.",
+    "v385 adds a tutorial guidance quick-check so the first-combat guide cannot repeat.",
     "v384 connects the v2.4.1 transfer, tutorial location, and status-window briefing lines to new-character combat logs.",
     "v384 highlights all first-run starter skill names with the same combat-log skill token style.",
     "v384 expands the combat-log guard so starter skill samples cannot leak replacement placeholders such as $1.",
@@ -133,21 +136,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v384-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v385-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v384-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v385-debug.apk"
   },
   "version": {
-    "code": 384,
-    "name": "3.84.0",
-    "displayName": "v384"
+    "code": 385,
+    "name": "3.85.0",
+    "displayName": "v385"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v384-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v385-debug.apk"
   },
   "android": {
-    "code": 384,
-    "name": "3.84.0",
-    "displayName": "v384"
+    "code": 385,
+    "name": "3.85.0",
+    "displayName": "v385"
   }
 }

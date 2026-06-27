@@ -1,5 +1,6 @@
-import { t } from "../localization/index.js?v=384";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=384";
+import { t } from "../localization/index.js?v=385";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=385";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=385";
 
 export function createInitialState({
   slots,
@@ -48,6 +49,7 @@ export function createInitialState({
       developer: { ...defaultDeveloperOptions },
     },
     gateProgress: {},
+    tutorialFlags: createTutorialFlags(),
     log: [t("stateMessages.initialLog")],
     lastSeenAt: Date.now(),
     offlineAutoHuntEligible: false,
