@@ -4,8 +4,8 @@ import {
   gateNodeTypeIcon,
   gateNodeTypeIconKey,
   gateNodeTypeLabel,
-} from "../config/gateNodeTypes.js?v=419";
-import { t, tf } from "../localization/index.js?v=419";
+} from "../config/gateNodeTypes.js?v=420";
+import { t, tf } from "../localization/index.js?v=420";
 
 const stableHtmlCache = new WeakMap();
 

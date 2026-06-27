@@ -1,16 +1,17 @@
-import { applyDomLocalization } from "../localization/domText.js?v=419";
-import { getLocaleText, tf } from "../localization/index.js?v=419";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=419";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=419";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=419";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=419";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=419";
+import { applyDomLocalization } from "../localization/domText.js?v=420";
+import { getLocaleText, tf } from "../localization/index.js?v=420";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=420";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=420";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=420";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=420";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=420";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
+  createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=419";
+} from "./monsterSpriteSlotReport.js?v=420";
 
-const EDITOR_VERSION = "419";
+const EDITOR_VERSION = "420";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -96,6 +97,26 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   readyFileMetric: "Ready files",
   missingFileMetric: "Missing files",
   applyModeMetric: "Apply mode",
+  reviewStatusMetric: "Review status",
+  reviewChecklistTitle: "Review gate",
+  reviewCheckPassed: "OK",
+  reviewCheckPending: "Pending",
+  statusLabels: {
+    "waiting-for-monster-files": "Waiting for monster files",
+    "ready-for-manual-review": "Ready for manual review",
+    "blocked-broken-slots": "Blocked by broken slots"
+  },
+  nextStepLabels: {
+    "add-monster-files": "Add the expected WebP files before applying sprite slot patches.",
+    "review-ready-patch": "Review art, manifest entries, and slot patches before applying.",
+    "fix-broken-slots": "Fix broken assigned sprite slots before adding new ready patches."
+  },
+  reviewCheckLabels: {
+    "file-ready-only": "Only file-ready rows can become patches",
+    "has-ready-files": "At least one monster sprite file is ready",
+    "no-broken-slots": "No broken assigned monster sprite slots",
+    "ready-patches-match-connectable": "Ready patch count matches connectable rows"
+  },
   expectedPath: "Expected file",
   assignedAsset: "Assigned asset",
   suggestedAsset: "Suggested asset",
@@ -138,6 +159,10 @@ let balanceDetailFilter = loadBalanceDetailFilter();
 let combatVfxDetailFilter = loadCombatVfxDetailFilter();
 const MONSTER_SPRITE_SLOT_REPORT = createMonsterSpriteSlotReport();
 const MONSTER_SPRITE_READY_CONNECTION_PLAN = createMonsterSpriteReadyConnectionPatchPlan(MONSTER_SPRITE_SLOT_REPORT);
+const MONSTER_SPRITE_READY_CONNECTION_REVIEW = createMonsterSpriteReadyConnectionReview(
+  MONSTER_SPRITE_SLOT_REPORT,
+  MONSTER_SPRITE_READY_CONNECTION_PLAN,
+);
 
 const elements = {
   nav: document.getElementById("editor-panel-nav"),
@@ -458,18 +483,28 @@ function renderMonsterSpriteSlotReport() {
 
 function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {}) {
   const plan = MONSTER_SPRITE_READY_CONNECTION_PLAN;
+  const review = MONSTER_SPRITE_READY_CONNECTION_REVIEW;
   const readySlotPatches = numberOrFallback(readiness.readyAssetSlotPatchEntries, plan.assetSlotPatches.length);
   const readyManifestEntries = numberOrFallback(readiness.readyAssetManifestPatchEntries, plan.assetManifestEntries.length);
   const readyFiles = numberOrFallback(readiness.fileReadySlots, plan.summary?.fileReadySlots || 0);
   const missingFiles = numberOrFallback(readiness.fileMissingSlots, plan.summary?.fileMissingSlots || 0);
   const applyMode = readiness.readyConnectionApplyMode || plan.applyMode || "file-ready-only";
+  const status = readiness.readyConnectionReviewStatus || review.status || "waiting-for-monster-files";
+  const statusLabel = detailText.statusLabels?.[status] || status;
+  const nextStepKey = review.nextStep || "add-monster-files";
+  const nextStepLabel = detailText.nextStepLabels?.[nextStepKey] || nextStepKey;
 
   return `
-    <div class="editor-monster-sprite-plan" data-ready-patches="${escapeAttribute(String(readySlotPatches))}">
+    <div class="editor-monster-sprite-plan" data-ready-patches="${escapeAttribute(String(readySlotPatches))}" data-review-status="${escapeAttribute(status)}">
       <div class="editor-monster-sprite-plan-copy">
         <strong>${escapeHtml(detailText.connectionPlanTitle || "Ready Connection Plan")}</strong>
         <span>${escapeHtml(detailText.connectionPlanDescription || "")}</span>
       </div>
+      <div class="editor-monster-sprite-plan-state">
+        <span>${escapeHtml(detailText.reviewStatusMetric || "Review status")}</span>
+        <strong>${escapeHtml(statusLabel)}</strong>
+      </div>
+      <p class="editor-monster-sprite-plan-next">${escapeHtml(nextStepLabel)}</p>
       <div class="editor-monster-sprite-plan-grid">
         ${combatVfxSummaryCard(detailText.readyPatchMetric || "Ready patches", String(readySlotPatches))}
         ${combatVfxSummaryCard(detailText.readyManifestMetric || "Manifest entries", String(readyManifestEntries))}
@@ -477,6 +512,7 @@ function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {}) {
         ${combatVfxSummaryCard(detailText.missingFileMetric || "Missing files", String(missingFiles))}
         ${combatVfxSummaryCard(detailText.applyModeMetric || "Apply mode", applyMode)}
       </div>
+      ${renderMonsterSpriteReviewChecks(review, detailText)}
     </div>
   `;
 }
@@ -484,6 +520,30 @@ function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {}) {
 function numberOrFallback(value, fallback) {
   const number = Number(value);
   return Number.isFinite(number) ? number : fallback;
+}
+
+function renderMonsterSpriteReviewChecks(review = {}, detailText = {}) {
+  const checks = Array.isArray(review.checks) ? review.checks : [];
+  if (!checks.length) return "";
+  const passedLabel = detailText.reviewCheckPassed || "OK";
+  const pendingLabel = detailText.reviewCheckPending || "Pending";
+
+  return `
+    <div class="editor-monster-sprite-review">
+      <strong>${escapeHtml(detailText.reviewChecklistTitle || "Review gate")}</strong>
+      <div class="editor-monster-sprite-review-list">
+        ${checks.map((check) => {
+          const label = detailText.reviewCheckLabels?.[check.id] || check.id;
+          return `
+            <span data-passed="${escapeAttribute(check.passed ? "true" : "false")}">
+              ${escapeHtml(label)}
+              <b>${escapeHtml(check.passed ? passedLabel : pendingLabel)}</b>
+            </span>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
 }
 
 function renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels) {

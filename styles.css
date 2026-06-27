@@ -4479,11 +4479,103 @@ select:focus {
   overflow-wrap: anywhere;
 }
 
+.editor-monster-sprite-plan-state {
+  align-items: center;
+  background: rgba(4, 16, 38, 0.62);
+  border: 1px solid rgba(57, 228, 255, 0.2);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.35rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+  padding: 0.55rem 0.62rem;
+}
+
+.editor-monster-sprite-plan-state span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-plan-state strong {
+  color: var(--cyan);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-plan[data-review-status="ready-for-manual-review"] .editor-monster-sprite-plan-state strong {
+  color: #95ffb9;
+}
+
+.editor-monster-sprite-plan[data-review-status="blocked-broken-slots"] .editor-monster-sprite-plan-state strong {
+  color: #ff6b87;
+}
+
+.editor-monster-sprite-plan-next {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.45;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
 .editor-monster-sprite-plan-grid {
   display: grid;
   gap: 0.55rem;
   grid-template-columns: repeat(auto-fit, minmax(7.2rem, 1fr));
   min-width: 0;
+}
+
+.editor-monster-sprite-review {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.editor-monster-sprite-review > strong {
+  color: var(--text);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-review-list {
+  display: grid;
+  gap: 0.42rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  min-width: 0;
+}
+
+.editor-monster-sprite-review-list span {
+  align-items: center;
+  background: rgba(3, 14, 35, 0.55);
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 999px;
+  color: var(--muted);
+  display: flex;
+  font-size: 0.72rem;
+  font-weight: 900;
+  gap: 0.35rem;
+  justify-content: space-between;
+  min-height: 1.9rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  padding: 0.25rem 0.55rem;
+}
+
+.editor-monster-sprite-review-list span[data-passed="true"] {
+  border-color: rgba(149, 255, 185, 0.3);
+}
+
+.editor-monster-sprite-review-list b {
+  color: var(--cyan);
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+}
+
+.editor-monster-sprite-review-list span[data-passed="true"] b {
+  color: #95ffb9;
 }
 
 .editor-monster-sprite-list {

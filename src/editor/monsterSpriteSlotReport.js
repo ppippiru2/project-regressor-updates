@@ -1,6 +1,6 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=419";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=419";
-import { monsters } from "../data/worldData.js?v=419";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=420";
+import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=420";
+import { monsters } from "../data/worldData.js?v=420";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
 const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";
@@ -100,7 +100,7 @@ export function createMonsterSpriteReadyConnectionPatchPlan(report = createMonst
     ...report,
     draftRows: report.connectableRows || [],
   });
-  return {
+  const plan = {
     version: 1,
     applyMode: "file-ready-only",
     summary: {
@@ -122,6 +122,51 @@ export function createMonsterSpriteReadyConnectionPatchPlan(report = createMonst
         },
       },
     },
+  };
+  return {
+    ...plan,
+    reviewGate: createMonsterSpriteReadyConnectionReview(report, plan),
+  };
+}
+
+export function createMonsterSpriteReadyConnectionReview(report = createMonsterSpriteSlotReport(), plan = null) {
+  const readyPlan = plan || createMonsterSpriteReadyConnectionPatchPlan(report);
+  const readyPatchCount = readyPlan.assetSlotPatches?.length || 0;
+  const brokenSlotCount = report.totals?.brokenSlots || 0;
+  const missingFileCount = report.totals?.fileMissingSlots || 0;
+  const status = monsterSpriteReadyReviewStatus({ readyPatchCount, brokenSlotCount });
+  const checks = [
+    {
+      id: "file-ready-only",
+      passed: readyPlan.applyMode === "file-ready-only",
+      blocking: true,
+    },
+    {
+      id: "has-ready-files",
+      passed: readyPatchCount > 0,
+      blocking: false,
+    },
+    {
+      id: "no-broken-slots",
+      passed: brokenSlotCount === 0,
+      blocking: true,
+    },
+    {
+      id: "ready-patches-match-connectable",
+      passed: readyPatchCount === (report.connectableRows || []).length,
+      blocking: true,
+    },
+  ];
+
+  return {
+    version: 1,
+    status,
+    canApplyAfterReview: status === "ready-for-manual-review",
+    readyPatchCount,
+    missingFileCount,
+    brokenSlotCount,
+    nextStep: monsterSpriteReadyReviewNextStep(status),
+    checks,
   };
 }
 
@@ -163,6 +208,18 @@ function monsterSpriteSlotStatus(assetId, resolvedPath, fileStatus) {
 
 function monsterSpriteDraftAssetId(monsterId, pose) {
   return `monster_${monsterId}_${pose}_v1`;
+}
+
+function monsterSpriteReadyReviewStatus({ readyPatchCount, brokenSlotCount }) {
+  if (brokenSlotCount > 0) return "blocked-broken-slots";
+  if (readyPatchCount > 0) return "ready-for-manual-review";
+  return "waiting-for-monster-files";
+}
+
+function monsterSpriteReadyReviewNextStep(status) {
+  if (status === "ready-for-manual-review") return "review-ready-patch";
+  if (status === "blocked-broken-slots") return "fix-broken-slots";
+  return "add-monster-files";
 }
 
 function createMonsterSpriteDraftAssetEntry(monster, pose, expectedPath, draftAssetId) {

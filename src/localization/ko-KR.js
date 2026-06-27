@@ -2020,6 +2020,58 @@ export const KO_KR_TEXT = {
           "text-offset-high": "피해 글자 보정 큼",
         },
       },
+      monsterSpriteSlotReport: {
+        title: "몬스터 전투 스프라이트 준비도",
+        description: "최종 WebP 파일 투입 전 몬스터 idle, attack, hit, dead 슬롯을 읽기 전용으로 점검합니다.",
+        slotMetric: "전체 슬롯",
+        assignedMetric: "연결됨",
+        connectableMetric: "연결 가능",
+        missingMetric: "파일 대기",
+        brokenMetric: "깨진 슬롯",
+        fileScanMetric: "파일 준비",
+        connectionPlanTitle: "Ready 연결 검토",
+        connectionPlanDescription: "실제 파일이 존재하는 몬스터 스프라이트만 연결 후보가 됩니다.",
+        readyPatchMetric: "연결 후보",
+        readyManifestMetric: "manifest 후보",
+        readyFileMetric: "준비 파일",
+        missingFileMetric: "대기 파일",
+        applyModeMetric: "적용 방식",
+        reviewStatusMetric: "검토 상태",
+        reviewChecklistTitle: "적용 전 확인",
+        reviewCheckPassed: "통과",
+        reviewCheckPending: "대기",
+        expectedPath: "예상 파일",
+        assignedAsset: "연결 에셋",
+        suggestedAsset: "추천 에셋",
+        slotPatch: "슬롯 패치",
+        fileStatus: "파일 상태",
+        runtimePath: "런타임 경로",
+        statusLabels: {
+          assigned: "연결됨",
+          connectable: "연결 가능",
+          missing: "파일 대기",
+          broken: "깨진 슬롯",
+          "waiting-for-monster-files": "파일 대기 중",
+          "ready-for-manual-review": "수동 검토 가능",
+          "blocked-broken-slots": "깨진 슬롯 차단"
+        },
+        nextStepLabels: {
+          "add-monster-files": "예상 WebP 파일을 먼저 추가하면 연결 후보가 자동으로 표시됩니다.",
+          "review-ready-patch": "적용 전 이미지, manifest 후보, 슬롯 패치를 함께 검토하십시오.",
+          "fix-broken-slots": "새 연결 후보를 적용하기 전 깨진 몬스터 스프라이트 슬롯을 먼저 수정하십시오."
+        },
+        reviewCheckLabels: {
+          "file-ready-only": "파일 준비 슬롯만 패치 후보가 됩니다.",
+          "has-ready-files": "준비된 몬스터 스프라이트 파일이 있습니다.",
+          "no-broken-slots": "깨진 몬스터 스프라이트 슬롯이 없습니다.",
+          "ready-patches-match-connectable": "연결 후보 수와 연결 가능 슬롯 수가 일치합니다."
+        },
+        fileStatusLabels: {
+          "not-scanned": "스캔 전",
+          "file-ready": "파일 준비",
+          "file-missing": "파일 대기"
+        }
+      },
       assetTypes: {
         image: "이미지",
         audio: "사운드",

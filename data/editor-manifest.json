@@ -611,7 +611,8 @@
         "monsterSpriteAssetSlotPatchDraft",
         "monsterSpriteNestedSlotPatchObject",
         "monsterSpritePatchExportSummary",
-        "monsterSpriteReadyConnectionPatchPlan"
+        "monsterSpriteReadyConnectionPatchPlan",
+        "monsterSpriteReadyConnectionReviewGate"
       ],
       "futureControls": [
         "슬롯 검색",
@@ -623,7 +624,8 @@
         "Monster sprite assetId draft generator",
         "Monster sprite file-existence readiness scan",
         "Monster sprite asset manifest and slot patch export draft",
-        "Monster sprite file-ready connection patch plan"
+        "Monster sprite file-ready connection patch plan",
+        "Monster sprite ready connection review gate"
       ]
     },
     {
@@ -1348,7 +1350,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v418",
+    "source": "v420",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1386,13 +1388,24 @@
     "readyConnectionApplyMode": "file-ready-only",
     "readyAssetManifestPatchEntries": 0,
     "readyAssetSlotPatchEntries": 0,
+    "readyConnectionReviewGateVersion": 1,
+    "readyConnectionReviewStatus": "waiting-for-monster-files",
+    "readyConnectionCanApplyAfterReview": false,
+    "readyConnectionNextStep": "add-monster-files",
+    "readyConnectionReviewChecks": [
+      "file-ready-only",
+      "has-ready-files",
+      "no-broken-slots",
+      "ready-patches-match-connectable"
+    ],
     "readyConnectionPlanVisible": true,
     "readyConnectionPlanMetrics": [
       "readyAssetSlotPatchEntries",
       "readyAssetManifestPatchEntries",
       "fileReadySlots",
       "fileMissingSlots",
-      "readyConnectionApplyMode"
+      "readyConnectionApplyMode",
+      "readyConnectionReviewStatus"
     ],
     "readyConnectionExportScript": "build-scripts/export-monster-sprite-ready-connection-plan.mjs",
     "readyConnectionExportArtifact": "validation-output/monster-sprite-ready-connection-plan.json",
