@@ -1,9 +1,9 @@
-import { applyDomLocalization } from "../localization/domText.js?v=361";
-import { getLocaleText, tf } from "../localization/index.js?v=361";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=361";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=361";
+import { applyDomLocalization } from "../localization/domText.js?v=362";
+import { getLocaleText, tf } from "../localization/index.js?v=362";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=362";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=362";
 
-const EDITOR_VERSION = "359";
+const EDITOR_VERSION = "362";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -219,6 +219,8 @@ function renderPanelDetail() {
 
 function renderBalanceTuningDetail() {
   const detailText = EDITOR_TEXT.balanceTuningDetail || {};
+  const registryMeta = manifest.balanceTuningRegistry || {};
+  const relatedChecks = Array.isArray(registryMeta.relatedChecks) ? registryMeta.relatedChecks : [];
   const fileCount = new Set(BALANCE_TUNING_GROUPS.flatMap((group) => group.files)).size;
   const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
   const rows = BALANCE_TUNING_GROUPS.map((group) => `
@@ -249,10 +251,33 @@ function renderBalanceTuningDetail() {
           exportCount
         }, ""))}</span>
       </div>
+      ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
         ${rows}
       </div>
     </section>
+  `;
+}
+
+function renderBalanceRelatedChecks(checks = [], detailText = {}) {
+  if (!checks.length) return "";
+  const rows = checks.map((check) => {
+    const guards = Array.isArray(check.guards) ? check.guards : [];
+    return `
+      <article class="editor-balance-check">
+        <div>
+          <h4>${escapeHtml(check.label || check.id || "")}</h4>
+          <span>${escapeHtml(check.script || "")}</span>
+        </div>
+        ${balanceDetailChipBlock(detailText.guards || "Guards", guards)}
+      </article>
+    `;
+  }).join("");
+  return `
+    <div class="editor-balance-check-list" aria-label="${escapeAttribute(detailText.relatedChecks || "Related checks")}">
+      <strong>${escapeHtml(detailText.relatedChecks || "")}</strong>
+      ${rows}
+    </div>
   `;
 }
 

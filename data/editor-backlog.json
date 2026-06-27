@@ -43,6 +43,8 @@
         "data/editor-manifest.json:balanceTuningRegistry",
         "src/balance/balanceTuningRegistry.js",
         "build-scripts/check-balance-tuning-registry.mjs",
+        "build-scripts/check-tutorial-island-pacing.mjs",
+        "build-scripts/check-equipment-value-balance.mjs",
         "build-scripts/check-editor-balance-tuning-metadata.mjs"
       ]
     },

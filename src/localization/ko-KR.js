@@ -1462,6 +1462,8 @@ export const KO_KR_TEXT = {
         files: "파일",
         exports: "내보내기",
         affects: "영향 범위",
+        relatedChecks: "자동 검사 연결",
+        guards: "보호 범위",
       },
       assetTypes: {
         image: "이미지",

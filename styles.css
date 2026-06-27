@@ -3518,6 +3518,43 @@ select:focus {
   gap: 0.65rem;
 }
 
+.editor-balance-check-list {
+  display: grid;
+  gap: 0.65rem;
+  border: 1px solid rgba(149, 255, 185, 0.18);
+  border-radius: 6px;
+  background: rgba(6, 34, 42, 0.38);
+  padding: 0.75rem;
+}
+
+.editor-balance-check-list > strong {
+  color: var(--cyan);
+  font-size: 0.82rem;
+}
+
+.editor-balance-check {
+  display: grid;
+  gap: 0.55rem;
+  border-top: 1px solid rgba(108, 210, 255, 0.16);
+  min-width: 0;
+  padding-top: 0.65rem;
+}
+
+.editor-balance-check h4 {
+  color: var(--text);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.editor-balance-check > div > span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-top: 0.2rem;
+  overflow-wrap: anywhere;
+}
+
 .editor-balance-row {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;

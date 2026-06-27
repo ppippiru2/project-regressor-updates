@@ -369,6 +369,8 @@
       "primaryDataTargets": [
         "src/balance/balanceTuningRegistry.js",
         "build-scripts/check-balance-tuning-registry.mjs",
+        "build-scripts/check-tutorial-island-pacing.mjs",
+        "build-scripts/check-equipment-value-balance.mjs",
         "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES"
       ],
       "assetSlots": [],
@@ -723,7 +725,37 @@
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_GROUPS",
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_GROUP_IDS",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
-      "build-scripts/check-tutorial-island-pacing.mjs"
+      "build-scripts/check-tutorial-island-pacing.mjs",
+      "build-scripts/check-equipment-value-balance.mjs"
+    ],
+    "relatedChecks": [
+      {
+        "id": "balance-registry-structure",
+        "label": "레지스트리 구조 검사",
+        "script": "build-scripts/check-balance-tuning-registry.mjs",
+        "guards": [
+          "그룹/파일/export 연결",
+          "테마 교체 경계 포함"
+        ]
+      },
+      {
+        "id": "tutorial-island-pacing",
+        "label": "튜토리얼 섬 페이싱 검사",
+        "script": "build-scripts/check-tutorial-island-pacing.mjs",
+        "guards": [
+          "30분 MVP 진행 속도",
+          "킬 수/골드/드랍 범위"
+        ]
+      },
+      {
+        "id": "equipment-value-balance",
+        "label": "장비 가격/점수 검사",
+        "script": "build-scripts/check-equipment-value-balance.mjs",
+        "guards": [
+          "상점 가격 계수",
+          "추천 장비 점수"
+        ]
+      }
     ],
     "editorHooks": [
       "data/editor-manifest.json:balance_tuning_registry",
