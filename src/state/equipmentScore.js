@@ -1,4 +1,4 @@
-import { EQUIPMENT_SCORE_BALANCE } from "../balance/equipmentValueBalance.js?v=374";
+import { EQUIPMENT_SCORE_BALANCE } from "../balance/equipmentValueBalance.js?v=375";
 
 export function equipmentScore(item) {
   if (!item) return 0;

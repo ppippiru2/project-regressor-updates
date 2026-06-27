@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=374";
-import { getLocaleText, tf } from "../localization/index.js?v=374";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=374";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=374";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=374";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=374";
+import { applyDomLocalization } from "../localization/domText.js?v=375";
+import { getLocaleText, tf } from "../localization/index.js?v=375";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=375";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=375";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=375";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=375";
 
-const EDITOR_VERSION = "374";
+const EDITOR_VERSION = "375";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -295,7 +295,7 @@ function renderBalanceTuningDetail() {
         }, ""))}</span>
       </div>
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
-      ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText)}
+      ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
@@ -306,7 +306,7 @@ function renderBalanceTuningDetail() {
   `;
 }
 
-function renderBalanceDomainSummaries(domains = [], detailText = {}) {
+function renderBalanceDomainSummaries(domains = [], detailText = {}, relatedChecks = []) {
   if (!domains.length) return "";
   const labels = detailText.domainLabels || {};
   const descriptions = detailText.domainDescriptions || {};
@@ -335,6 +335,7 @@ function renderBalanceDomainSummaries(domains = [], detailText = {}) {
             ${balanceDetailChipBlock(detailText.domainGroups || "Groups", domain.groups || [])}
             ${balanceDetailChipBlock(detailText.domainExports || "Exports", balanceDomainExportNames(domain))}
             ${balanceDetailChipBlock(detailText.domainValueShapes || "Value Shapes", balanceDomainValueShapeLabels(domain, detailText))}
+            ${balanceDetailChipBlock(detailText.domainChecks || "Checks", balanceDomainCheckLabels(domain, relatedChecks))}
             ${balanceDetailChipBlock(detailText.domainWatch || "Watch", domain.watch || [])}
           </article>
         `;
@@ -370,6 +371,11 @@ function balanceDomainValueShapeLabels(domain = {}, detailText = {}) {
       type: balanceValueTypeLabel(type, detailText),
       count
     }, `${type} ${count}`));
+}
+
+function balanceDomainCheckLabels(domain = {}, relatedChecks = []) {
+  const checkLabels = new Map((relatedChecks || []).map((check) => [check.id, check.label || check.id]));
+  return (domain.checks || []).map((checkId) => checkLabels.get(checkId) || checkId);
 }
 
 function balanceValueTypeLabel(type, detailText = {}) {

@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 374,
-  "displayVersion": "v3.74",
-  "cacheVersion": "project-regressor-mvp-v374",
+  "versionCode": 375,
+  "displayVersion": "v3.75",
+  "cacheVersion": "project-regressor-mvp-v375",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=374&cachebust=374",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=375&cachebust=375",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v374 adds value-shape chips to editor balance domain cards.",
-    "v374 lets tuning domains show whether their linked exports are objects, arrays, numbers, strings, or other shapes.",
-    "v374 extends editor metadata checks so value-shape summaries stay registered and localized.",
+    "v375 adds linked-check chips to editor balance domain cards.",
+    "v375 shows which quick guards should be reviewed before changing player, combat, equipment, monster, reward, or theme-retarget balance areas.",
+    "v375 extends balance registry and editor metadata checks so domain check links stay registered and localized.",
     "v373 shows the core export names directly on each editor balance domain card.",
     "v373 makes player growth, combat pressure, equipment/items, monster rewards, and theme retarget tuning easier to inspect before editing.",
     "v373 extends editor metadata checks so the domain export summary remains registered.",
@@ -129,13 +129,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v374-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v375-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v374-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v375-debug.apk"
   },
   "version": {
     "code": 374,
-    "name": "3.74.0",
-    "displayName": "v374"
+    "name": "3.75.0",
+    "displayName": "v375"
   }
 }

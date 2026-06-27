@@ -1494,6 +1494,7 @@ export const KO_KR_TEXT = {
         domainExports: "핵심 export",
         domainValueShapes: "값 형태",
         domainValueShapeItem: "{type} {count}개",
+        domainChecks: "연결 검사",
         valueTypeLabels: {
           array: "배열",
           boolean: "불리언",
