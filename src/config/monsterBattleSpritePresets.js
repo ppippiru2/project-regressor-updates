@@ -86,10 +86,26 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
   },
 });
 
+const MONSTER_SFX_EFFECT_TYPES = Object.freeze({
+  short_claw: "slash",
+  bite_swipe: "pierce",
+  stone_impact: "impact",
+  heavy_impact: "explosion",
+  dark_slash: "dark",
+  dark_burst: "dark",
+  impact_near: "impact",
+});
+
 export function resolveMonsterBattleSpritePreset(monster) {
   const preset = MONSTER_BATTLE_SPRITE_PRESETS[monster?.id];
   return preset || {
     ...DEFAULT_MONSTER_BATTLE_SPRITE_PRESET,
     monsterId: monster?.id || DEFAULT_MONSTER_BATTLE_SPRITE_PRESET.monsterId,
   };
+}
+
+export function monsterAttackEffectType(monster, { hyperActive = false } = {}) {
+  if (hyperActive) return "dark";
+  const preset = resolveMonsterBattleSpritePreset(monster);
+  return MONSTER_SFX_EFFECT_TYPES[preset.sfxProfile] || MONSTER_SFX_EFFECT_TYPES.impact_near;
 }
