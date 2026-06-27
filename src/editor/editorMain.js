@@ -1,21 +1,21 @@
-import { applyDomLocalization } from "../localization/domText.js?v=446";
-import { getLocaleText, tf } from "../localization/index.js?v=446";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=446";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=446";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=446";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=446";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=446";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=446";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=446";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=446";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=446";
+import { applyDomLocalization } from "../localization/domText.js?v=447";
+import { getLocaleText, tf } from "../localization/index.js?v=447";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=447";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=447";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=447";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=447";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=447";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=447";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=447";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=447";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=447";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=446";
+} from "./monsterSpriteSlotReport.js?v=447";
 
-const EDITOR_VERSION = "446";
+const EDITOR_VERSION = "447";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;

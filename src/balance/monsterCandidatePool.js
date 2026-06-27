@@ -49,14 +49,14 @@ export const TUTORIAL_MONSTER_POOL_DATA = Object.freeze([
 
 export const TUTORIAL_MONSTER_REWARD_LINKS = Object.freeze([
   rewardLink("shore_imp", "imp_codex_fragment", ["low_mana_crystal_fragment"], ["power_slash_skill_fragment"]),
-  rewardLink("shore_claw_crab", "shore_claw_crab_codex_fragment", ["low_mana_crystal_fragment"], []),
+  rewardLink("shore_claw_crab", "shore_claw_crab_codex_fragment", ["low_mana_crystal_fragment"], ["guard_stance_skill_rune"]),
   rewardLink("shore_drift_slime", "shore_drift_slime_codex_fragment", ["low_mana_crystal_fragment"], ["mana_ignite_skill_rune"]),
   rewardLink("forest_wolf", "forest_wolf_codex_fragment", [], ["quick_step_skill_fragment"]),
-  rewardLink("forest_goblin_scout", "forest_goblin_scout_codex_fragment", [], ["power_slash_skill_fragment"]),
+  rewardLink("forest_goblin_scout", "forest_goblin_scout_codex_fragment", ["low_mana_crystal_fragment"], ["power_slash_skill_fragment"]),
   rewardLink("forest_alpha_wolf", "forest_alpha_wolf_codex_fragment", ["unstable_mana_crystal_fragment"], ["quick_step_skill_fragment"]),
   rewardLink("ruin_sentinel", "ruin_sentinel_codex_fragment", [], ["guard_stance_skill_rune"]),
   rewardLink("ruin_rune_doll", "ruin_rune_doll_codex_fragment", ["unstable_mana_crystal_fragment"], ["mana_bolt_skill_rune"]),
-  rewardLink("mine_crystal_bug", "mine_crystal_bug_codex_fragment", ["mine_core_mana_crystal_fragment"], []),
+  rewardLink("mine_crystal_bug", "mine_crystal_bug_codex_fragment", ["mine_core_mana_crystal_fragment"], ["mana_bolt_skill_rune"]),
   rewardLink("mine_golem", "mine_golem_codex_fragment", ["low_mana_crystal_fragment", "unstable_mana_crystal_fragment"], []),
   rewardLink("mine_core_golem", "mine_core_golem_codex_fragment", ["mine_core_mana_crystal_fragment"], ["guard_stance_skill_rune"]),
   rewardLink("rift_squire", "rift_squire_codex_fragment", ["rift_mana_crystal_fragment"], ["power_slash_skill_fragment"]),
@@ -89,4 +89,3 @@ function rewardLink(monsterId, codexFragmentId, materialItemIds, skillItemIds) {
     skillItemIds,
   };
 }
-

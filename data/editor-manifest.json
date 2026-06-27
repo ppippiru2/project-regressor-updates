@@ -1455,7 +1455,7 @@
     ],
     "monsterCandidatePromotionChecklist": {
       "id": "monster-candidate-promotion-checklist-v1",
-      "source": "v431",
+      "source": "v447",
       "sourceModule": "src/editor/monsterCandidatePromotionChecklist.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedPendingCandidateCount": 3,
@@ -1465,29 +1465,29 @@
       "editorSummaryVisible": true,
       "writesGameData": false,
       "expectedCodexRecordTargetCount": 3,
-      "expectedFullRewardLinkCount": 0,
-      "expectedPartialRewardLinkCount": 3
+      "expectedFullRewardLinkCount": 3,
+      "expectedPartialRewardLinkCount": 0
     },
     "monsterCandidateLivePromotionPlan": {
       "id": "monster-candidate-live-promotion-plan-v1",
-      "source": "v441",
+      "source": "v447",
       "sourceModule": "src/editor/monsterCandidateLivePromotionPlan.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
-      "expectedCandidateCount": 0,
-      "expectedPhaseCount": 0,
-      "expectedRegionCount": 0,
-      "expectedDeferredCandidateCount": 3,
+      "expectedCandidateCount": 3,
+      "expectedPhaseCount": 3,
+      "expectedRegionCount": 3,
+      "expectedDeferredCandidateCount": 0,
       "editorSummaryVisible": true,
       "writesGameData": false
     },
     "monsterCandidateLivePatchDraft": {
       "id": "monster-candidate-live-patch-draft-v1",
-      "source": "v441",
+      "source": "v447",
       "sourceModule": "src/editor/monsterCandidateLivePatchDraft.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
-      "expectedDraftCount": 0,
-      "expectedTargetPhaseId": "",
-      "expectedTargetRegionCount": 0,
+      "expectedDraftCount": 1,
+      "expectedTargetPhaseId": "phase-1-shore-first",
+      "expectedTargetRegionCount": 1,
       "expectedBlockingSignalCount": 0,
       "editorSummaryVisible": true,
       "writesGameData": false
@@ -1665,7 +1665,7 @@
   ],
   "monsterBattleSpriteAssetSlots": {
     "version": 1,
-    "source": "v446",
+    "source": "v447",
     "monsterCount": 12,
     "poseCount": 4,
     "slotCount": 48,
@@ -1680,7 +1680,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v446",
+    "source": "v447",
     "monsterCount": 12,
     "poseCount": 4,
     "slotCount": 48,
