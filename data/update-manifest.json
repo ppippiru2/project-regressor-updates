@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 436,
-  "displayVersion": "v436",
-  "cacheVersion": "project-regressor-mvp-v436",
-  "updatedAt": "2026-06-28T04:13:52.000+09:00",
+  "versionCode": 437,
+  "displayVersion": "v437",
+  "cacheVersion": "project-regressor-mvp-v437",
+  "updatedAt": "2026-06-28T04:23:25.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=436&cachebust=436",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=437&cachebust=437",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v436 adds core-event completion logs to region clear reward flow.",
-    "v436 lets the v2.5 region core-event resolver return nonblocking completion records.",
-    "v436 extends guidance and reward checks so boss clears keep story progress logs connected."
+    "v437 adds remaining-fragment guidance to the first codex-card drop log.",
+    "v437 shows first/next/ready guidance hints in the read-only codex progress rows.",
+    "v437 extends codex progress and tutorial dialogue checks around first-drop guidance."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v436-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v437-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v436-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v437-debug.apk"
   },
   "version": {
-    "code": 436,
-    "name": "4.36.0",
-    "displayName": "v436"
+    "code": 437,
+    "name": "4.37.0",
+    "displayName": "v437"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v436-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v437-debug.apk"
   },
   "android": {
-    "code": 436,
-    "name": "4.36.0",
-    "displayName": "v436",
+    "code": 437,
+    "name": "4.37.0",
+    "displayName": "v437",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v436-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v437-debug.apk"
     },
     "version": {
-      "code": 436,
-      "name": "4.36.0",
-      "displayName": "v436"
+      "code": 437,
+      "name": "4.37.0",
+      "displayName": "v437"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v436-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v437-debug.apk"
   }
 }

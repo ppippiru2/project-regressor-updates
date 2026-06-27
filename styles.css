@@ -6890,6 +6890,12 @@ body[data-info-tooltips="off"] .info-term {
   box-shadow: 0 0 12px rgba(57, 228, 255, 0.18);
 }
 
+.codex-progress-hint {
+  color: rgba(184, 236, 255, 0.82);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
 .rarity-frame-uncommon {
   border-color: rgba(91, 229, 132, 0.42);
   box-shadow:

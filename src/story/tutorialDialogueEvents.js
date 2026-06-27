@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=436";
+import { formatText, getLocaleText } from "../localization/index.js?v=437";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 
@@ -19,6 +19,7 @@ export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
   "itemName",
   "count",
   "target",
+  "remaining",
 ]);
 
 export const TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS = Object.freeze([

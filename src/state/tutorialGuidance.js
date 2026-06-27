@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=436";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=436";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=436";
+import { t } from "../localization/index.js?v=437";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=437";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=437";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,
@@ -43,11 +43,13 @@ export function claimFirstCodexRecordGuide(state, { item, count = 0 } = {}) {
 
   state.tutorialFlags.firstCodexRecordGuideShown = true;
   const target = Math.max(1, Number(item.recordTarget) || 5);
+  const currentCount = Math.max(0, Number(count) || 0);
   const resolved = resolveTutorialKeyEventDialogue("tutorial_1st_shore_06_nameless_scrap", {
     templateValues: {
       itemName: item.name,
-      count: Math.max(0, Number(count) || 0),
+      count: currentCount,
       target,
+      remaining: Math.max(0, target - currentCount),
     },
   });
   return [resolved?.detail?.log || t("stateMessages.firstCodexRecordGuide")].filter(Boolean);

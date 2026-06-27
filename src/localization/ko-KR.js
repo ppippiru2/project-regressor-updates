@@ -810,6 +810,9 @@ export const KO_KR_TEXT = {
     codexProgressRecording: "기록 중",
     codexProgressReady: "기록 가능",
     codexProgressDetail: "{count} / {target} 조각",
+    codexProgressFirstHint: "첫 기록 완료 · 남은 조각 {remaining}개",
+    codexProgressNextHint: "다음 기록까지 {remaining}개 필요",
+    codexProgressReadyHint: "기록 목표 충족 · 후속 도감 확장 대기",
     readOnly: "읽기 전용",
     shopItemInfoFallback: "자세한 설명은 추후 장비 도감 확장 때 추가됩니다.",
     shopGoldSummary: "보유 골드 {gold} G",
@@ -1058,7 +1061,7 @@ export const KO_KR_TEXT = {
         },
         firstCodexRecord: {
           title: "도감 기록",
-          log: "[도감 기록] {itemName} 확보. 기록 진행도 {count}/{target}. 소지품의 도감 기록 진행도에 읽기 전용으로 반영됩니다.",
+          log: "[도감 기록] {itemName} 확보. 기록 진행도 {count}/{target}. 목표까지 {remaining}개 남았습니다. 소지품의 도감 기록 진행도에 읽기 전용으로 반영됩니다.",
         },
       },
       loop5Plus: {

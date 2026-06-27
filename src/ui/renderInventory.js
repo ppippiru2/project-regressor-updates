@@ -1,6 +1,6 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=436";
-import { buildCodexRecordProgress } from "../state/codexProgress.js?v=436";
-import { getLocaleText, t, tf } from "../localization/index.js?v=436";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=437";
+import { buildCodexRecordProgress } from "../state/codexProgress.js?v=437";
+import { getLocaleText, t, tf } from "../localization/index.js?v=437";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -159,8 +159,9 @@ function renderCodexProgress(rows) {
   }
 
   list.innerHTML = rows
-    .map(({ item, count, target, percent, isReady }) => {
+    .map(({ item, count, target, remaining, percent, isReady, hintState }) => {
       const statusText = isReady ? t("inventoryUi.codexProgressReady") : t("inventoryUi.codexProgressRecording");
+      const hintText = codexProgressHint({ remaining, hintState });
       return `<div class="item codex-progress-item ${isReady ? "is-upgrade" : "is-sidegrade"}">
         ${itemIconSlot({ item, iconPath: "", label: tf("inventoryUi.itemIcon", { name: item.name }) })}
         <div class="item-main">
@@ -170,6 +171,7 @@ function renderCodexProgress(rows) {
           </div>
           <div class="codex-progress-meter" aria-hidden="true"><span style="width: ${percent}%"></span></div>
           <div class="muted">${escapeHtml(tf("inventoryUi.codexProgressDetail", { count, target }))}</div>
+          <div class="codex-progress-hint">${escapeHtml(hintText)}</div>
         </div>
         <div class="item-actions">
           <span class="item-score">${escapeHtml(t("inventoryUi.readOnly"))}</span>
@@ -177,6 +179,12 @@ function renderCodexProgress(rows) {
       </div>`;
     })
     .join("");
+}
+
+function codexProgressHint({ remaining = 0, hintState = "next" } = {}) {
+  if (hintState === "ready") return t("inventoryUi.codexProgressReadyHint");
+  if (hintState === "first") return tf("inventoryUi.codexProgressFirstHint", { remaining });
+  return tf("inventoryUi.codexProgressNextHint", { remaining });
 }
 
 function lootSortOrder(item) {
