@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=377";
-import { getLocaleText, tf } from "../localization/index.js?v=377";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=377";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=377";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=377";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=377";
+import { applyDomLocalization } from "../localization/domText.js?v=378";
+import { getLocaleText, tf } from "../localization/index.js?v=378";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=378";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=378";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=378";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=378";
 
-const EDITOR_VERSION = "377";
+const EDITOR_VERSION = "378";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -341,6 +341,7 @@ function renderBalanceDomainSummaries(domains = [], detailText = {}, relatedChec
             ${balanceDetailChipBlock(detailText.domainGroups || "Groups", domain.groups || [])}
             ${balanceDetailChipBlock(detailText.domainExports || "Exports", balanceDomainExportNames(domain))}
             ${balanceDetailChipBlock(detailText.domainValueShapes || "Value Shapes", balanceDomainValueShapeLabels(domain, detailText))}
+            ${balanceDetailChipBlock(detailText.domainValueRanges || "Value Ranges", balanceDomainValueRangeLabels(domain, detailText))}
             ${balanceDetailChipBlock(detailText.domainChecks || "Checks", balanceDomainCheckLabels(domain, relatedChecks))}
             ${balanceDetailChipBlock(detailText.domainSignals || "Signals", balanceDomainSignalLabels(domain, detailText))}
             ${balanceDetailChipBlock(detailText.domainWatch || "Watch", domain.watch || [])}
@@ -378,6 +379,38 @@ function balanceDomainValueShapeLabels(domain = {}, detailText = {}) {
       type: balanceValueTypeLabel(type, detailText),
       count
     }, `${type} ${count}`));
+}
+
+function balanceDomainValueRangeLabels(domain = {}, detailText = {}) {
+  const groupIds = new Set(domain.groups || []);
+  const numericValues = [];
+  let objectFieldCount = 0;
+  let arrayItemCount = 0;
+  for (const group of BALANCE_TUNING_GROUPS.filter((entry) => groupIds.has(entry.id))) {
+    const preview = BALANCE_TUNING_PREVIEW_BY_ID.get(group.id);
+    for (const item of preview?.items || []) {
+      if (item.type === "number") {
+        const value = Number(item.value);
+        if (Number.isFinite(value)) numericValues.push(value);
+      }
+      if (item.type === "object") objectFieldCount += Number(item.count || 0);
+      if (item.type === "array") arrayItemCount += Number(item.count || 0);
+    }
+  }
+  const labels = [];
+  if (numericValues.length) {
+    labels.push(tf("editorPrep.balanceTuningDetail.domainValueRangeNumber", {
+      min: Math.min(...numericValues),
+      max: Math.max(...numericValues)
+    }, `${Math.min(...numericValues)}~${Math.max(...numericValues)}`));
+  }
+  if (objectFieldCount) {
+    labels.push(tf("editorPrep.balanceTuningDetail.domainValueRangeObject", { count: objectFieldCount }, `${objectFieldCount} fields`));
+  }
+  if (arrayItemCount) {
+    labels.push(tf("editorPrep.balanceTuningDetail.domainValueRangeArray", { count: arrayItemCount }, `${arrayItemCount} items`));
+  }
+  return labels.length ? labels : [detailText.domainValueRangeEmpty || "No range"];
 }
 
 function balanceDomainCheckLabels(domain = {}, relatedChecks = []) {

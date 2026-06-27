@@ -1496,6 +1496,11 @@ export const KO_KR_TEXT = {
         domainExports: "핵심 export",
         domainValueShapes: "값 형태",
         domainValueShapeItem: "{type} {count}개",
+        domainValueRanges: "현재 값 범위",
+        domainValueRangeNumber: "숫자 {min}~{max}",
+        domainValueRangeObject: "객체 필드 {count}개",
+        domainValueRangeArray: "배열 항목 {count}개",
+        domainValueRangeEmpty: "범위 없음",
         domainChecks: "연결 검사",
         domainSignals: "주의 신호",
         valueTypeLabels: {
