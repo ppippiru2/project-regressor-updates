@@ -1,4 +1,6 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=432";
+import { getLocaleText, t, tf } from "../localization/index.js?v=433";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=433";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=433";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));
@@ -140,10 +142,20 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
 
   const codexRecord = message.match(regex(SYSTEM_MATCHERS.codexRecord));
   if (codexRecord) {
+    const progress = parseProgress(codexRecord[2]);
+    const resolved = resolveTutorialKeyEventDialogue("tutorial_1st_shore_06_nameless_scrap", {
+      templateValues: {
+        itemName: codexRecord[1],
+        count: progress.count,
+        target: progress.target,
+      },
+    });
     return {
       type: "growth",
       label: t("systemWindow.notices.codexRecordLabel"),
-      message: t("systemWindow.notices.codexRecordMessage"),
+      message: resolved?.title
+        ? tf("systemWindow.notices.codexEventMessage", { title: resolved.title })
+        : t("systemWindow.notices.codexRecordMessage"),
       meta: [codexRecord[1], codexRecord[2], t("systemWindow.notices.checkCodexProgress")],
       targetView: "inventory",
     };
@@ -151,10 +163,13 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
 
   const regionRecord = message.match(regex(SYSTEM_MATCHERS.regionRecord));
   if (regionRecord) {
+    const resolved = resolveRegionCoreEvent(region);
     return {
       type: "quest",
       label: t("systemWindow.notices.regionRecordLabel"),
-      message: t("systemWindow.notices.regionRecordMessage"),
+      message: resolved?.title
+        ? tf("systemWindow.notices.regionEventMessage", { title: resolved.title })
+        : t("systemWindow.notices.regionRecordMessage"),
       meta: [regionRecord[1], regionRecord[2], t("systemWindow.notices.checkRegionProgress")],
       targetView: "regions",
     };
@@ -224,6 +239,14 @@ function systemStatusText(inCombat) {
 
 function regex(pattern) {
   return new RegExp(pattern, "u");
+}
+
+function parseProgress(value) {
+  const match = String(value || "").match(/^(\d+)\s*\/\s*(\d+)/u);
+  return {
+    count: match ? Number(match[1]) : 0,
+    target: match ? Number(match[2]) : 0,
+  };
 }
 
 function findImportantLog(log = []) {

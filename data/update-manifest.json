@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 432,
-  "displayVersion": "v432",
-  "cacheVersion": "project-regressor-mvp-v432",
-  "updatedAt": "2026-06-28T03:28:00.000+09:00",
+  "versionCode": 433,
+  "displayVersion": "v433",
+  "cacheVersion": "project-regressor-mvp-v433",
+  "updatedAt": "2026-06-28T03:36:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=432&cachebust=432",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=433&cachebust=433",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v432 separates non-equipment loot acquisition from equipment candidate reward notices.",
-    "v432 adds a dedicated combat log class and system-window type for material/codex/skill loot.",
-    "v432 extends guards so loot logs and system notices stay distinct from equipment upgrade candidates."
+    "v433 connects event dialogue resolvers to system-window codex and region record notices.",
+    "v433 shows resolver-backed event titles for codex progress and region core-event records.",
+    "v433 extends system-window guards so resolver titles stay connected to non-blocking story notices."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v432-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v433-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v432-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v433-debug.apk"
   },
   "version": {
-    "code": 432,
-    "name": "4.32.0",
-    "displayName": "v432"
+    "code": 433,
+    "name": "4.33.0",
+    "displayName": "v433"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v432-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v433-debug.apk"
   },
   "android": {
-    "code": 432,
-    "name": "4.32.0",
-    "displayName": "v432",
+    "code": 433,
+    "name": "4.33.0",
+    "displayName": "v433",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v432-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v433-debug.apk"
     },
     "version": {
-      "code": 432,
-      "name": "4.32.0",
-      "displayName": "v432"
+      "code": 433,
+      "name": "4.33.0",
+      "displayName": "v433"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v432-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v433-debug.apk"
   }
 }
