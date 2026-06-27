@@ -6058,6 +6058,11 @@ body[data-info-tooltips="off"] .info-term {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .battlefield[data-card-layout="stage"] .combat-controls button {
+    min-height: 2.75rem;
+    padding-inline: 0.42rem;
+  }
+
   .battlefield[data-card-layout="stage"] .battle-header {
     align-items: flex-start;
     flex-direction: row;
@@ -6116,7 +6121,7 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .battlefield[data-card-layout="stage"] .combat-slot-row {
-    --stance-button-height: 2.28rem;
+    --stance-button-height: 2.75rem;
     grid-template-columns: 1fr;
     gap: 0.42rem;
   }
@@ -6126,8 +6131,8 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .battlefield[data-card-layout="stage"] .skill-button {
-    min-height: 2.48rem;
-    padding: 0.24rem 0.28rem;
+    min-height: 2.75rem;
+    padding: 0.3rem 0.28rem;
   }
 
   .battlefield[data-card-layout="stage"] .skill-button span {
@@ -6516,7 +6521,7 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .battlefield[data-card-layout="stage"] .combat-slot-row {
-    --stance-button-height: 2.2rem;
+    --stance-button-height: 2.75rem;
     grid-template-columns: 1fr;
     gap: 0.42rem;
   }
