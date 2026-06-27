@@ -2023,6 +2023,8 @@ export const KO_KR_TEXT = {
         hyper: "하이퍼",
         effects: "효과 유형",
         motion: "모션",
+        motionBase: "모션 기본값",
+        motionModifiers: "모션별 보정",
         sfx: "SFX",
         placement: "배치",
         sprite: "스프라이트",

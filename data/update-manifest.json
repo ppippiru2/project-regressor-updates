@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 434,
-  "displayVersion": "v434",
-  "cacheVersion": "project-regressor-mvp-v434",
-  "updatedAt": "2026-06-28T03:47:00.000+09:00",
+  "versionCode": 435,
+  "displayVersion": "v435",
+  "cacheVersion": "project-regressor-mvp-v435",
+  "updatedAt": "2026-06-28T04:01:44.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=434&cachebust=434",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=435&cachebust=435",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v434 separates codex, mana-crystal, skill-fragment, and skill-rune loot categories in runtime item metadata.",
-    "v434 marks inventory rows and drop-preview chips with stable non-equipment loot type classes.",
-    "v434 extends loot catalog guards so future v2.3 monster and reward promotion keeps item categories separated."
+    "v435 adds motion-profile effect-type modifiers for enemy combat VFX placement.",
+    "v435 routes enemy attacks through effect-type-aware VFX placement before hyper scaling.",
+    "v435 extends the editor VFX preview and checks with monster motion-profile placement coverage."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v434-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v435-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v434-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v435-debug.apk"
   },
   "version": {
-    "code": 434,
-    "name": "4.34.0",
-    "displayName": "v434"
+    "code": 435,
+    "name": "4.35.0",
+    "displayName": "v435"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v434-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v435-debug.apk"
   },
   "android": {
-    "code": 434,
-    "name": "4.34.0",
-    "displayName": "v434",
+    "code": 435,
+    "name": "4.35.0",
+    "displayName": "v435",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v434-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v435-debug.apk"
     },
     "version": {
-      "code": 434,
-      "name": "4.34.0",
-      "displayName": "v434"
+      "code": 435,
+      "name": "4.35.0",
+      "displayName": "v435"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v434-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v435-debug.apk"
   }
 }

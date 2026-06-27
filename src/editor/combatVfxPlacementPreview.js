@@ -1,15 +1,17 @@
-import { monsters } from "../data/worldData.js?v=434";
+import { monsters } from "../data/worldData.js?v=435";
 import {
+  MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
+  MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
   monsterAttackEffectPlacement,
   monsterAttackEffectType,
   resolveMonsterBattleSpritePreset,
-} from "../config/monsterBattleSpritePresets.js?v=434";
+} from "../config/monsterBattleSpritePresets.js?v=435";
 import {
   PLAYER_BATTLE_SPRITE_CLASSES,
   PLAYER_BATTLE_SPRITE_GENDERS,
   PLAYER_BATTLE_SPRITE_PRESETS,
-} from "../config/playerBattleSpritePresets.js?v=434";
-import { resolvePlayerAttackEffectPlacement } from "../config/playerBattleSprites.js?v=434";
+} from "../config/playerBattleSpritePresets.js?v=435";
+import { resolvePlayerAttackEffectPlacement } from "../config/playerBattleSprites.js?v=435";
 
 export const COMBAT_VFX_PREVIEW_EFFECT_TYPES = Object.freeze([
   "slash",
@@ -36,6 +38,8 @@ export function createCombatVfxPlacementPreview() {
       monsterRows: monsterRows.length,
       playerClasses: PLAYER_BATTLE_SPRITE_CLASSES.length,
       playerGenders: PLAYER_BATTLE_SPRITE_GENDERS.length,
+      monsterMotionProfiles: new Set(monsterRows.map((row) => row.motionProfile)).size,
+      monsterEffectModifierProfiles: Object.keys(MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE).length,
       effectTypes: COMBAT_VFX_PREVIEW_EFFECT_TYPES.length,
       tuningCandidates: tuningCandidates.length,
     },
@@ -68,15 +72,26 @@ function createPlayerVfxRows() {
 function createMonsterVfxRows() {
   return monsters.map((monster) => {
     const preset = resolveMonsterBattleSpritePreset(monster);
+    const effectType = monsterAttackEffectType(monster);
+    const profileModifiers = MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE[preset.motionProfile] || {};
+    const effects = Object.fromEntries(
+      COMBAT_VFX_PREVIEW_EFFECT_TYPES.map((previewEffectType) => [
+        previewEffectType,
+        summarizePlacement(monsterAttackEffectPlacement(monster, { effectType: previewEffectType })),
+      ]),
+    );
     return {
       id: monster.id,
       name: monster.name,
       classId: preset.classId,
       motionProfile: preset.motionProfile,
       sfxProfile: preset.sfxProfile,
-      effectType: monsterAttackEffectType(monster),
-      basePlacement: summarizePlacement(monsterAttackEffectPlacement(monster)),
-      hyperPlacement: summarizePlacement(monsterAttackEffectPlacement(monster, { hyperActive: true })),
+      effectType,
+      effectModifiers: Object.keys(profileModifiers),
+      profilePlacement: summarizePlacement(MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE[preset.motionProfile] || preset.effectPlacement),
+      basePlacement: summarizePlacement(monsterAttackEffectPlacement(monster, { effectType })),
+      hyperPlacement: summarizePlacement(monsterAttackEffectPlacement(monster, { effectType: "dark", hyperActive: true })),
+      effects,
     };
   });
 }

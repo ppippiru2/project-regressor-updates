@@ -144,6 +144,44 @@ export const MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE = Object.freeze({
   },
 });
 
+export const MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE = Object.freeze({
+  default_enemy_runtime: {
+    impact: { offsetY: 1, slashWidthMultiplier: 1.02, expandedSlashWidthMultiplier: 1.02 },
+    slash: { offsetX: -2, offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 0.96, expandedSlashWidthMultiplier: 0.97 },
+    dark: { offsetY: -3, textOffsetY: -2, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.06 },
+  },
+  small_fiend_runtime: {
+    slash: { offsetX: -3, offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 0.96, expandedSlashWidthMultiplier: 0.96 },
+    pierce: { offsetX: 2, offsetY: -1, slashWidthMultiplier: 0.98, expandedSlashWidthMultiplier: 0.98 },
+    dark: { offsetX: -1, offsetY: -5, textOffsetY: -2, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
+  },
+  beast_lunge_runtime: {
+    pierce: { offsetX: 7, offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
+    slash: { offsetX: 3, offsetY: -3, slashWidthMultiplier: 1.03, expandedSlashWidthMultiplier: 1.03 },
+    dark: { offsetX: 5, offsetY: -6, textOffsetY: -3, slashWidthMultiplier: 1.1, expandedSlashWidthMultiplier: 1.08 },
+  },
+  construct_slam_runtime: {
+    impact: { offsetY: 4, textOffsetY: 2, slashWidthMultiplier: 1.04, expandedSlashWidthMultiplier: 1.04 },
+    explosion: { offsetY: 7, textOffsetY: 4, slashWidthMultiplier: 1.12, expandedSlashWidthMultiplier: 1.1 },
+    dark: { offsetY: 2, textOffsetY: 1, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.08 },
+  },
+  heavy_golem_runtime: {
+    impact: { offsetY: 4, textOffsetY: 2, slashWidthMultiplier: 1.05, expandedSlashWidthMultiplier: 1.05 },
+    explosion: { offsetY: 7, textOffsetY: 4, slashWidthMultiplier: 1.1, expandedSlashWidthMultiplier: 1.08 },
+    dark: { offsetY: 2, textOffsetY: 1, slashWidthMultiplier: 1.07, expandedSlashWidthMultiplier: 1.06 },
+  },
+  rift_knight_runtime: {
+    slash: { offsetX: 5, offsetY: -4, textOffsetY: -2, slashWidthMultiplier: 1.05, expandedSlashWidthMultiplier: 1.04 },
+    pierce: { offsetX: 8, offsetY: -3, textOffsetY: -1, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.06 },
+    dark: { offsetX: 6, offsetY: -7, textOffsetY: -4, slashWidthMultiplier: 1.1, expandedSlashWidthMultiplier: 1.08 },
+  },
+  boss_warden_runtime: {
+    dark: { offsetY: -2, textOffsetY: -2, slashWidthMultiplier: 1.07, expandedSlashWidthMultiplier: 1.06 },
+    explosion: { offsetY: 5, textOffsetY: 3, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.06 },
+    impact: { offsetY: 2, textOffsetY: 1, slashWidthMultiplier: 1.04, expandedSlashWidthMultiplier: 1.04 },
+  },
+});
+
 export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
   shore_imp: {
     monsterId: "shore_imp",
@@ -249,18 +287,55 @@ export function monsterAttackEffectType(monster, { hyperActive = false } = {}) {
   return MONSTER_SFX_EFFECT_TYPES[preset.sfxProfile] || MONSTER_SFX_EFFECT_TYPES.impact_near;
 }
 
-export function monsterAttackEffectPlacement(monster, { hyperActive = false } = {}) {
+export function monsterAttackEffectPlacement(monster, { hyperActive = false, effectType = "" } = {}) {
   const preset = resolveMonsterBattleSpritePreset(monster);
   const basePlacement =
     preset.effectPlacement ||
     MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE[preset.motionProfile] ||
     MONSTER_EFFECT_PLACEMENTS_BY_SFX[preset.sfxProfile] ||
     DEFAULT_MONSTER_BATTLE_SPRITE_PRESET.effectPlacement;
-  if (!hyperActive) return basePlacement;
-  return {
+  const resolvedEffectType = effectType || monsterAttackEffectType(monster, { hyperActive });
+  const profileModifiers = MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE[preset.motionProfile] || {};
+  const effectPlacement = applyEffectPlacementModifier(basePlacement, profileModifiers[resolvedEffectType]);
+  if (!hyperActive) return effectPlacement;
+  return normalizeEffectPlacement({
+    ...effectPlacement,
+    slashWidth: Math.round(Number(effectPlacement.slashWidth || 136) * 1.18),
+    expandedSlashWidth: Math.round(Number(effectPlacement.expandedSlashWidth || 260) * 1.14),
+    textOffsetY: Number(effectPlacement.textOffsetY || 0) - 2,
+  });
+}
+
+function applyEffectPlacementModifier(basePlacement, modifier) {
+  if (!modifier || typeof modifier !== "object") return normalizeEffectPlacement(basePlacement);
+  return normalizeEffectPlacement({
     ...basePlacement,
-    slashWidth: Math.round(Number(basePlacement.slashWidth || 136) * 1.18),
-    expandedSlashWidth: Math.round(Number(basePlacement.expandedSlashWidth || 260) * 1.14),
-    textOffsetY: Number(basePlacement.textOffsetY || 0) - 2,
+    offsetX: Number(basePlacement.offsetX || 0) + Number(modifier.offsetX || 0),
+    offsetY: Number(basePlacement.offsetY || 0) + Number(modifier.offsetY || 0),
+    textOffsetY: Number(basePlacement.textOffsetY || 0) + Number(modifier.textOffsetY || 0),
+    slashWidth: Math.round(Number(basePlacement.slashWidth || 136) * Number(modifier.slashWidthMultiplier || 1) + Number(modifier.slashWidthDelta || 0)),
+    expandedSlashWidth: Math.round(
+      Number(basePlacement.expandedSlashWidth || 260) * Number(modifier.expandedSlashWidthMultiplier || 1) +
+        Number(modifier.expandedSlashWidthDelta || 0),
+    ),
+    slashHeight: modifier.slashHeight || basePlacement.slashHeight,
+    expandedSlashHeight: modifier.expandedSlashHeight || basePlacement.expandedSlashHeight,
+  });
+}
+
+function normalizeEffectPlacement(placement = {}) {
+  return {
+    ...placement,
+    offsetX: boundedNumber(placement.offsetX, -18, 18, 0),
+    offsetY: boundedNumber(placement.offsetY, -18, 18, 0),
+    textOffsetY: boundedNumber(placement.textOffsetY, -12, 12, 0),
+    slashWidth: boundedNumber(placement.slashWidth, 80, 260, 136),
+    expandedSlashWidth: boundedNumber(placement.expandedSlashWidth, 170, 430, 260),
   };
+}
+
+function boundedNumber(value, min, max, fallback) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return fallback;
+  return Math.min(max, Math.max(min, numeric));
 }

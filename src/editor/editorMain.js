@@ -1,19 +1,19 @@
-import { applyDomLocalization } from "../localization/domText.js?v=434";
-import { getLocaleText, tf } from "../localization/index.js?v=434";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=434";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=434";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=434";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=434";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=434";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=434";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=434";
+import { applyDomLocalization } from "../localization/domText.js?v=435";
+import { getLocaleText, tf } from "../localization/index.js?v=435";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=435";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=435";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=435";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=435";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=435";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=435";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=435";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=434";
+} from "./monsterSpriteSlotReport.js?v=435";
 
-const EDITOR_VERSION = "434";
+const EDITOR_VERSION = "435";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -889,8 +889,12 @@ function combatVfxMonsterSearchText(row) {
     row.motionProfile,
     row.sfxProfile,
     row.effectType,
+    ...(row.effectModifiers || []),
+    formatCombatVfxPlacement(row.profilePlacement),
     formatCombatVfxPlacement(row.basePlacement),
-    formatCombatVfxPlacement(row.hyperPlacement)
+    formatCombatVfxPlacement(row.hyperPlacement),
+    ...Object.keys(row.effects || {}),
+    ...Object.values(row.effects || {}).map(formatCombatVfxPlacement)
   ].join(" ").toLowerCase();
 }
 
@@ -964,6 +968,10 @@ function renderMonsterVfxPreviewRow(row, detailText = COMBAT_VFX_DETAIL_TEXT) {
     ...(detailText.effectLabels || {})
   };
   const effectLabel = effectLabels[row.effectType] || row.effectType || "";
+  const effectChips = Object.entries(row.effects || {})
+    .map(([effectType, placement]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`))
+    .join("");
+  const modifierChips = (row.effectModifiers || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
   return `
     <article class="editor-combat-vfx-row">
       <div class="editor-combat-vfx-row-head">
@@ -975,8 +983,17 @@ function renderMonsterVfxPreviewRow(row, detailText = COMBAT_VFX_DETAIL_TEXT) {
       </div>
       ${combatVfxFieldBlock(detailText.motion, [row.motionProfile])}
       ${combatVfxFieldBlock(detailText.sfx, [row.sfxProfile])}
+      ${combatVfxFieldBlock(detailText.motionBase || "Motion base", [formatCombatVfxPlacement(row.profilePlacement)])}
       ${combatVfxFieldBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)])}
       ${combatVfxFieldBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)])}
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.motionModifiers || "Motion modifiers")}</span>
+        <div class="editor-chip-list">${modifierChips}</div>
+      </div>
+      <div class="editor-combat-vfx-chip-block">
+        <span>${escapeHtml(detailText.effects)}</span>
+        <div class="editor-chip-list">${effectChips}</div>
+      </div>
     </article>
   `;
 }
@@ -2158,10 +2175,12 @@ function combatVfxPlacementMetricCard() {
   const playerRows = Number(totals.playerRows || 0);
   const monsterRows = Number(totals.monsterRows || 0);
   const effectTypes = Number(totals.effectTypes || 0);
+  const monsterMotionProfiles = Number(totals.monsterMotionProfiles || 0);
   const expectedMatches =
     (!manifestPreview.expectedPlayerRows || manifestPreview.expectedPlayerRows === playerRows) &&
     (!manifestPreview.expectedMonsterRows || manifestPreview.expectedMonsterRows === monsterRows) &&
-    (!manifestPreview.expectedEffectTypes || manifestPreview.expectedEffectTypes === effectTypes);
+    (!manifestPreview.expectedEffectTypes || manifestPreview.expectedEffectTypes === effectTypes) &&
+    (!manifestPreview.expectedMonsterMotionProfiles || manifestPreview.expectedMonsterMotionProfiles === monsterMotionProfiles);
   return metricCard(
     metric.label || COMBAT_VFX_DETAIL_TEXT.metricLabel,
     tf("editorPrep.metrics.combatVfxPlacementPreview.value", {

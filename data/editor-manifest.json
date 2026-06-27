@@ -1240,11 +1240,13 @@
     "expectedPlayerRows": 12,
     "expectedMonsterRows": 6,
     "expectedEffectTypes": 8,
+    "expectedMonsterMotionProfiles": 6,
     "dataTargets": [
       "src/editor/combatVfxPlacementPreview.js:createCombatVfxPlacementPreview",
       "src/config/playerBattleSpritePresets.js:PLAYER_BATTLE_SPRITE_PRESETS",
       "src/config/playerBattleSprites.js:resolvePlayerAttackEffectPlacement",
       "src/config/monsterBattleSpritePresets.js:monsterAttackEffectPlacement",
+      "src/config/monsterBattleSpritePresets.js:MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE",
       "src/combat/combatEffects.js",
       "styles.css"
     ],
