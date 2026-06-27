@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, COMBAT_RUNTIME_BALANCE } from "../balance/combatBalance.js?v=398";
+import { BREAK_GAUGE_BALANCE, COMBAT_RUNTIME_BALANCE } from "../balance/combatBalance.js?v=399";
 
 export const COMBAT_FRAME_MS = COMBAT_RUNTIME_BALANCE.frameMs;
 export const AUTO_RESTART_DELAY_MS = COMBAT_RUNTIME_BALANCE.autoRestartDelayMs;
@@ -23,6 +23,14 @@ export function createCombatRuntime() {
     flashUntil: 0,
     hyperEndFlashUntil: 0,
     enemyHyperEndFlashUntil: 0,
+    playerSpriteMotionId: null,
+    playerSpriteMotionUntil: 0,
+    playerSpriteMotionSequence: 0,
+    playerSpriteMotionSfx: null,
+    enemySpriteMotionId: null,
+    enemySpriteMotionUntil: 0,
+    enemySpriteMotionSequence: 0,
+    enemySpriteMotionSfx: null,
   };
 }
 
