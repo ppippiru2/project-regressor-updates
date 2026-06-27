@@ -368,6 +368,7 @@
       "purpose": "스탯, 데미지, 아이템, 몬스터, 플레이어 성장, 보상 조정 파일과 영향 범위를 읽기 전용으로 확인한다.",
       "primaryDataTargets": [
         "src/balance/balanceTuningRegistry.js",
+        "src/editor/balanceTuningPreview.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
         "build-scripts/check-equipment-value-balance.mjs",
@@ -382,6 +383,7 @@
         "affects",
         "searchQuery",
         "scopeFilter",
+        "exportPreviewSummary",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"

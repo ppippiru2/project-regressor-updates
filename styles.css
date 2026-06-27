@@ -3486,7 +3486,8 @@ select:focus {
 
 .editor-balance-head,
 .editor-balance-row,
-.editor-balance-chip-block {
+.editor-balance-chip-block,
+.editor-balance-preview-block {
   display: grid;
   gap: 0.55rem;
 }
@@ -3658,10 +3659,15 @@ select:focus {
 }
 
 .editor-balance-row-head span,
-.editor-balance-chip-block > span {
+.editor-balance-chip-block > span,
+.editor-balance-preview-block > span {
   color: var(--muted);
   font-size: 0.75rem;
   font-weight: 900;
+}
+
+.editor-balance-preview-block .editor-chip {
+  overflow-wrap: anywhere;
 }
 
 .editor-balance-row-head strong {

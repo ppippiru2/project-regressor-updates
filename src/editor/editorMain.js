@@ -1,12 +1,16 @@
-import { applyDomLocalization } from "../localization/domText.js?v=363";
-import { getLocaleText, tf } from "../localization/index.js?v=363";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=363";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=363";
+import { applyDomLocalization } from "../localization/domText.js?v=364";
+import { getLocaleText, tf } from "../localization/index.js?v=364";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=364";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=364";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=364";
 
-const EDITOR_VERSION = "362";
+const EDITOR_VERSION = "364";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
+const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
+  createBalanceTuningPreviewRows(BALANCE_TUNING_GROUPS).map((row) => [row.id, row])
+);
 
 const SAVE_KEYS = [
   "project_regressor_mvp_save",
@@ -285,6 +289,7 @@ function renderBalanceTuningDetail() {
 }
 
 function renderBalanceGroupRow(group, detailText = {}) {
+  const preview = BALANCE_TUNING_PREVIEW_BY_ID.get(group.id);
   return `
     <article class="editor-balance-row">
       <div class="editor-balance-row-head">
@@ -297,6 +302,7 @@ function renderBalanceGroupRow(group, detailText = {}) {
       ${balanceDetailChipBlock(detailText.files || "Files", group.files)}
       ${balanceDetailChipBlock(detailText.exports || "Exports", group.exports)}
       ${balanceDetailChipBlock(detailText.affects || "Affects", group.affects)}
+      ${balanceDetailPreviewBlock(detailText.preview || "Preview", preview?.items || [], detailText)}
     </article>
   `;
 }
@@ -357,6 +363,40 @@ function balanceDetailChipBlock(title, values = []) {
       <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
     </div>
   `;
+}
+
+function balanceDetailPreviewBlock(title, items = [], detailText = {}) {
+  if (!items.length) return "";
+  return `
+    <div class="editor-balance-preview-block">
+      <span>${escapeHtml(title)}</span>
+      <div class="editor-chip-list">
+        ${items.map((item) => chip(`${item.exportName}: ${formatBalancePreviewSummary(item, detailText)}`)).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function formatBalancePreviewSummary(item, detailText = {}) {
+  const sample = Array.isArray(item.sample) ? item.sample.join(", ") : "";
+  if (item.type === "array") {
+    return tf("editorPrep.balanceTuningDetail.previewArray", {
+      count: item.count || 0,
+      sample: sample || "-"
+    }, `${item.count || 0}`);
+  }
+  if (item.type === "object") {
+    return tf("editorPrep.balanceTuningDetail.previewObject", {
+      count: item.count || 0,
+      sample: sample || "-"
+    }, `${item.count || 0}`);
+  }
+  if (item.type === "missing") {
+    return detailText.previewMissing || "Missing";
+  }
+  return tf("editorPrep.balanceTuningDetail.previewValue", {
+    value: item.value || ""
+  }, item.value || "");
 }
 
 function matchesBalanceDetailFilter(group) {

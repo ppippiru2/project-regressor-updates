@@ -42,6 +42,7 @@
       "editorHooks": [
         "data/editor-manifest.json:balanceTuningRegistry",
         "src/balance/balanceTuningRegistry.js",
+        "src/editor/balanceTuningPreview.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
         "build-scripts/check-equipment-value-balance.mjs",
