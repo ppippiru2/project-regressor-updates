@@ -398,6 +398,7 @@
         "src/editor/balanceTuningPreview.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
+        "src/editor/monsterCandidatePromotionChecklist.js",
         "src/balance/monsterCandidatePool.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
@@ -436,6 +437,11 @@
         "candidateMonsterRewardRows",
         "candidateMonsterRewardCoverage",
         "candidateMonsterRewardItemTypes",
+        "candidateMonsterPromotionRiskSignals",
+        "candidateMonsterPromotionActions",
+        "candidateMonsterPromotionRows",
+        "candidateMonsterPromotionGroups",
+        "monsterCandidatePromotionChecklist",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
@@ -446,6 +452,7 @@
         "파일/export 누락 경고",
         "튜토리얼 섬 페이싱 검사 연결",
         "후보 몬스터 보상 미리보기",
+        "후보 몬스터 승격 체크리스트",
         "변경 전 읽기 전용 검증 리포트"
       ]
     },
@@ -1067,6 +1074,7 @@
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_REWARD_LINKS",
       "src/editor/monsterCandidateRewardPreview.js:createMonsterCandidateRewardPreview",
+      "src/editor/monsterCandidatePromotionChecklist.js:createMonsterCandidatePromotionChecklist",
       "build-scripts/check-monster-candidate-pool.mjs",
       "build-scripts/check-equipment-value-balance.mjs"
     ],
@@ -1209,7 +1217,19 @@
     "editorHooks": [
       "data/editor-manifest.json:balance_tuning_registry",
       "data/editor-backlog.json:balance-tuning-registry-editor"
-    ]
+    ],
+    "monsterCandidatePromotionChecklist": {
+      "id": "monster-candidate-promotion-checklist-v1",
+      "source": "v430",
+      "sourceModule": "src/editor/monsterCandidatePromotionChecklist.js",
+      "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
+      "expectedPendingCandidateCount": 9,
+      "expectedReadyReviewCount": 9,
+      "expectedRequiredActionCount": 5,
+      "expectedGroupCount": 5,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    }
   },
   "combatVfxPlacementPreview": {
     "id": "combat-vfx-placement-preview-v1",

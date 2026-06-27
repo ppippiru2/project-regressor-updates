@@ -1,18 +1,19 @@
-import { applyDomLocalization } from "../localization/domText.js?v=429";
-import { getLocaleText, tf } from "../localization/index.js?v=429";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=429";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=429";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=429";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=429";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=429";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=429";
+import { applyDomLocalization } from "../localization/domText.js?v=430";
+import { getLocaleText, tf } from "../localization/index.js?v=430";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=430";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=430";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=430";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=430";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=430";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=430";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=430";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=429";
+} from "./monsterSpriteSlotReport.js?v=430";
 
-const EDITOR_VERSION = "429";
+const EDITOR_VERSION = "430";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -20,6 +21,7 @@ const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
   createBalanceTuningPreviewRows(BALANCE_TUNING_GROUPS).map((row) => [row.id, row])
 );
 const MONSTER_CANDIDATE_REWARD_PREVIEW = createMonsterCandidateRewardPreview();
+const MONSTER_CANDIDATE_PROMOTION_CHECKLIST = createMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_REWARD_PREVIEW);
 const COMBAT_VFX_PLACEMENT_PREVIEW = createCombatVfxPlacementPreview();
 const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
   title: "Combat VFX Placement Preview",
@@ -1021,6 +1023,7 @@ function renderBalanceTuningDetail() {
       ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderMonsterCandidateRewardPreview(MONSTER_CANDIDATE_REWARD_PREVIEW, detailText)}
+      ${renderMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_PROMOTION_CHECKLIST, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
@@ -1414,6 +1417,120 @@ function monsterCandidateDropCoverageLabel(row, text = {}) {
     material: `${row.liveDropCoverage?.materialCount || 0}/${materialTotal}`,
     skill: `${row.liveDropCoverage?.skillCount || 0}/${skillTotal}`,
   }, `${row.liveDropCoverage?.codex ? "Connected" : "Candidate"} / ${row.liveDropCoverage?.materialCount || 0}/${materialTotal} / ${row.liveDropCoverage?.skillCount || 0}/${skillTotal}`);
+}
+
+function renderMonsterCandidatePromotionChecklist(checklist, detailText = {}) {
+  const text = detailText.monsterCandidatePromotion || {};
+  const summary = checklist.summary || {};
+  const metrics = [
+    [text.pending || "Pending", `${summary.pendingCandidateCount || 0}`],
+    [text.ready || "Ready", `${summary.readyReviewCount || 0}`],
+    [text.actions || "Actions", `${summary.requiredActionCount || 0}`],
+    [text.rewardLinks || "Reward links", `${summary.uniqueRewardItemCount || 0}`],
+    [text.risks || "Signals", `${summary.riskSignalCount || 0}`],
+  ];
+
+  return `
+    <section class="editor-monster-candidate-promotion" data-readonly="${checklist.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Promotion Checklist")}">
+      <div class="editor-monster-candidate-promotion-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Monster Candidate Promotion Checklist")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only checklist before moving pending candidates into live drops.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.version", {
+          version: checklist.version || "-"
+        }, checklist.version || "-"))}</strong>
+      </div>
+      <div class="editor-monster-candidate-promotion-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      ${renderMonsterCandidatePromotionActions(checklist.requiredActions || [], text)}
+      <div class="editor-monster-candidate-promotion-groups">
+        ${(checklist.groups || []).map((group) => renderMonsterCandidatePromotionGroup(group, text)).join("") || `<p class="muted">${escapeHtml(text.empty || "No pending candidates.")}</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderMonsterCandidatePromotionActions(actions = [], text = {}) {
+  if (!actions.length) return "";
+  return `
+    <div class="editor-monster-candidate-promotion-actions">
+      <strong>${escapeHtml(text.actionPlan || "Promotion action plan")}</strong>
+      <div>
+        ${actions.map((action) => `
+          <span>
+            <b>${escapeHtml(monsterCandidatePromotionActionLabel(action.id, text))}</b>
+            <small>${escapeHtml(action.file || "")}</small>
+          </span>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderMonsterCandidatePromotionGroup(group, text = {}) {
+  return `
+    <article class="editor-monster-candidate-promotion-group">
+      <div class="editor-monster-candidate-promotion-group-head">
+        <div>
+          <h5>${escapeHtml(group.regionName || group.regionId || "")}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.representative", {
+            monster: group.representativeMonsterName || group.representativeMonsterId || "-"
+          }, `Representative ${group.representativeMonsterName || group.representativeMonsterId || "-"}`))}</p>
+        </div>
+        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.groupSummary", {
+          pending: group.pendingCount || 0,
+          ready: group.readyReviewCount || 0
+        }, `${group.readyReviewCount || 0}/${group.pendingCount || 0}`))}</span>
+      </div>
+      <div class="editor-monster-candidate-promotion-row-list">
+        ${(group.rows || []).map((row) => renderMonsterCandidatePromotionRow(row, text)).join("")}
+      </div>
+    </article>
+  `;
+}
+
+function renderMonsterCandidatePromotionRow(row, text = {}) {
+  const roles = [
+    row.readyForReview ? (text.readyForReview || "Ready for review") : (text.blocked || "Blocked"),
+    row.isBoss ? (text.boss || "Boss") : "",
+  ].filter(Boolean);
+  const actionLabels = (row.requiredActionIds || []).map((actionId) => monsterCandidatePromotionActionLabel(actionId, text));
+  const riskLabels = (row.riskSignalIds || []).map((signalId) => monsterCandidatePromotionRiskLabel(signalId, text));
+
+  return `
+    <article class="editor-monster-candidate-promotion-row" data-state="${row.readyForReview ? "ready" : "blocked"}">
+      <div class="editor-monster-candidate-promotion-row-head">
+        <div>
+          <h6>${escapeHtml(row.name || row.id || "")}</h6>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.rowMeta", {
+            level: row.level || 0,
+            source: row.sourceMonsterName || row.sourceMonsterId || "-"
+          }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
+        </div>
+        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+      </div>
+      <div class="editor-monster-candidate-promotion-grid">
+        ${balanceDetailChipBlock(text.actionPlan || "Actions", actionLabels)}
+        ${balanceDetailChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
+        ${balanceDetailChipBlock(text.risks || "Signals", riskLabels.length ? riskLabels : [text.noRisks || "No blocking signals"])}
+      </div>
+    </article>
+  `;
+}
+
+function monsterCandidatePromotionActionLabel(actionId, text = {}) {
+  return text.actionLabels?.[actionId] || actionId;
+}
+
+function monsterCandidatePromotionRiskLabel(signalId, text = {}) {
+  return text.riskLabels?.[signalId] || signalId;
 }
 
 function renderBalanceGroupRow(group, detailText = {}) {

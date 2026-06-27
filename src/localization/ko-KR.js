@@ -1967,6 +1967,39 @@ export const KO_KR_TEXT = {
           dropCoverageValue: "도감 {codex} · 재료 {material} · 스킬 {skill}",
           unresolved: "누락 아이템: {items}"
         },
+        monsterCandidatePromotion: {
+          title: "후보 승격 체크리스트",
+          description: "대기 몬스터를 실제 전투/드랍 테이블로 옮기기 전에 필요한 작업과 보상 연결을 읽기 전용으로 점검합니다.",
+          version: "{version}",
+          pending: "대기 후보",
+          ready: "검토 가능",
+          actions: "작업 수",
+          rewardLinks: "보상 링크",
+          risks: "주의 신호",
+          actionPlan: "승격 전 작업",
+          readyForReview: "검토 가능",
+          blocked: "보류",
+          boss: "보스",
+          representative: "대표 {monster}",
+          groupSummary: "검토 {ready} / 대기 {pending}",
+          rowMeta: "레벨 {level} · 기준 {source}",
+          empty: "대기 후보 없음",
+          emptyReward: "없음",
+          noRisks: "차단 신호 없음",
+          actionLabels: {
+            "add-monster-balance-row": "몬스터 데이터 추가",
+            "choose-region-role": "지역 역할 결정",
+            "wire-drop-table": "드랍 테이블 연결",
+            "check-codex-progress": "도감 진행도 확인",
+            "run-balance-checks": "밸런스 검사 실행"
+          },
+          riskLabels: {
+            "missing-codex-fragment": "도감 조각 누락",
+            "no-material-link": "마정석 보상 없음",
+            "no-skill-link": "스킬 보상 없음",
+            "boss-role-review": "보스 역할 검토"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
