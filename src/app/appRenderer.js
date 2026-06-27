@@ -1,11 +1,11 @@
-import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=441";
-import { renderCombatEffects } from "../combat/combatEffects.js?v=441";
-import { createCombatFormationState } from "../combat/combatFormation.js?v=441";
+import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=442";
+import { renderCombatEffects } from "../combat/combatEffects.js?v=442";
+import { createCombatFormationState } from "../combat/combatFormation.js?v=442";
 import { rankFromPower } from "../combat/combatFormula.js";
-import { renderInventory } from "../ui/renderInventory.js?v=441";
-import { renderShop } from "../ui/renderShop.js?v=441";
-import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=441";
-import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=441";
+import { renderInventory } from "../ui/renderInventory.js?v=442";
+import { renderShop } from "../ui/renderShop.js?v=442";
+import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=442";
+import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=442";
 import {
   renderCharacterCreation,
   renderAudioSettings,
@@ -15,22 +15,22 @@ import {
   renderLog,
   renderProfileEditSettings,
   renderSaveSlots,
-} from "../ui/renderCommon.js?v=441";
-import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=441";
-import { renderCombatControls } from "../ui/renderCombatControls.js?v=441";
-import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=441";
-import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=441";
-import { renderSystemWindow } from "../ui/systemWindow.js?v=441";
-import { createGrowthObjective } from "../state/growthObjective.js?v=441";
-import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=441";
-import { renderDropPreview } from "../ui/renderDropPreview.js?v=441";
-import { createCombatReadiness } from "../state/combatReadiness.js?v=441";
-import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=441";
-import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=441";
-import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=441";
-import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=441";
-import { resolveMonsterBattleSpritePreset } from "../config/monsterBattleSpritePresets.js?v=441";
-import { syncBattleSpriteMotions } from "../ui/battleSpriteMotion.js?v=441";
+} from "../ui/renderCommon.js?v=442";
+import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=442";
+import { renderCombatControls } from "../ui/renderCombatControls.js?v=442";
+import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=442";
+import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=442";
+import { renderSystemWindow } from "../ui/systemWindow.js?v=442";
+import { createGrowthObjective } from "../state/growthObjective.js?v=442";
+import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=442";
+import { renderDropPreview } from "../ui/renderDropPreview.js?v=442";
+import { createCombatReadiness } from "../state/combatReadiness.js?v=442";
+import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=442";
+import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=442";
+import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=442";
+import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=442";
+import { resolveMonsterBattleSpritePreset } from "../config/monsterBattleSpritePresets.js?v=442";
+import { syncBattleSpriteMotions } from "../ui/battleSpriteMotion.js?v=442";
 
 export function renderAppFrame(context) {
   const now = Date.now();
@@ -43,7 +43,7 @@ export function renderAppFrame(context) {
   const player = context.derivePlayer();
   const targetMonster = context.state.target
     ? context.getMonster(context.state.target.monsterId)
-    : context.getMonster(region.monsterId);
+    : context.resolveRegionMonster?.(region)?.monster || context.getMonster(region.monsterId);
   const targetStats = targetMonster ? context.getMonsterStats(targetMonster) : null;
   const bossMonster = region.bossId ? context.getMonster(region.bossId) : null;
   const bossStats = bossMonster ? context.getMonsterStats(bossMonster) : null;

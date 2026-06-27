@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=441";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=441";
-import { createTutorialFlags } from "./tutorialGuidance.js?v=441";
+import { t } from "../localization/index.js?v=442";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=442";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=442";
 
 export function createInitialState({
   slots,
@@ -29,6 +29,7 @@ export function createInitialState({
     inventory: [],
     regionId: regions[0].id,
     completedRegions: [],
+    regionEncounterCounts: {},
     skillLoadouts: defaultSkillLoadouts.map((loadout) => ({ ...loadout, actionIds: [...loadout.actionIds] })),
     activeSkillLoadoutId: defaultActiveSkillLoadoutId,
     target: null,

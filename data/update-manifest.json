@@ -1,46 +1,46 @@
 {
     "schemaVersion":  1,
     "project":  "Project Regressor",
-    "versionCode":  441,
-    "displayVersion":  "v441",
-    "cacheVersion":  "project-regressor-mvp-v441",
-    "updatedAt":  "2026-06-28T05:33:14.000+09:00",
+    "versionCode":  442,
+    "displayVersion":  "v442",
+    "cacheVersion":  "project-regressor-mvp-v442",
+    "updatedAt":  "2026-06-28T05:44:00.000+09:00",
     "repositoryUrl":  "https://github.com/ppippiru2/project-regressor-updates",
     "pagesUrl":  "https://ppippiru2.github.io/project-regressor-updates/",
-    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=441\u0026cachebust=441",
+    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=442\u0026cachebust=442",
     "recommendedAndroidShell":  "Trusted Web Activity",
     "notes":  [
-                  "v441 adds a read-only phase-1 live patch draft for shore_drift_slime.",
-                  "v441 previews monster balance, drop table, and world-data pool changes before writes.",
-                  "v441 keeps shore_imp as the representative while drafting an alternate encounter pool."
+                  "v442 adds a safe runtime resolver for regional alternate monster pools.",
+                  "v442 keeps representative monsters first while allowing future pooled encounters.",
+                  "v442 wires combat start, auto restart, drop preview, and offline reward lookup through the same region monster resolver."
               ],
-    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v441-debug.apk",
+    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v442-debug.apk",
     "downloads":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v441-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v442-debug.apk"
                   },
     "version":  {
-                    "code":  441,
-                    "name":  "4.41.0",
-                    "displayName":  "v441"
+                    "code":  442,
+                    "name":  "4.42.0",
+                    "displayName":  "v442"
                 },
     "artifacts":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v441-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v442-debug.apk"
                   },
     "android":  {
-                    "code":  441,
-                    "name":  "4.41.0",
-                    "displayName":  "v441",
+                    "code":  442,
+                    "name":  "4.42.0",
+                    "displayName":  "v442",
                     "artifacts":  {
-                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v441-debug.apk"
+                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v442-debug.apk"
                                   },
                     "version":  {
-                                    "code":  441,
-                                    "name":  "4.41.0",
-                                    "displayName":  "v441"
+                                    "code":  442,
+                                    "name":  "4.42.0",
+                                    "displayName":  "v442"
                                 }
                 },
     "apk":  {
-                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v441-debug.apk"
+                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v442-debug.apk"
             }
 }
 
