@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 402,
-  "displayVersion": "v4.02",
-  "cacheVersion": "project-regressor-mvp-v402",
+  "versionCode": 403,
+  "displayVersion": "v4.03",
+  "cacheVersion": "project-regressor-mvp-v403",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=402&cachebust=402",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=403&cachebust=403",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v403 adds monster-specific attack VFX placement profiles for the tutorial island enemy roster.",
+    "v403 lets enemy attack effects carry offset and slash-size variables so small, beast, construct, heavy, knight, and boss attacks read differently.",
+    "v403 extends the monster display guard so VFX placement metadata and CSS variables remain connected.",
     "v402 replaces the Project Regressor representative icon with the newly provided blue crystal emblem.",
     "v402 syncs the web header, PWA install icon, manifest icon, and Android launcher icons to the same source image.",
     "v402 bumps the cache and update channel so installed apps receive the refreshed icon package.",
@@ -187,21 +190,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v402-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v403-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v402-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v403-debug.apk"
   },
   "version": {
-    "code": 402,
-    "name": "4.02.0",
-    "displayName": "v402"
+    "code": 403,
+    "name": "4.03.0",
+    "displayName": "v403"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v402-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v403-debug.apk"
   },
   "android": {
-    "code": 402,
-    "name": "4.02.0",
-    "displayName": "v402"
+    "code": 403,
+    "name": "4.03.0",
+    "displayName": "v403"
   }
 }

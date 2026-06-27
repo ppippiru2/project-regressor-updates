@@ -41,11 +41,12 @@ function syncEffectLayer(target, effects, combatFeedback) {
 }
 
 function renderEffect(effect, combatFeedback) {
+  const style = effectPlacementStyle(effect);
   const slash =
     shouldRenderSlash(effect, combatFeedback)
-      ? `<span class="${slashEffectClass(effect)}" data-effect-id="${effect.id}" aria-hidden="true"></span>`
+      ? `<span class="${slashEffectClass(effect)}" data-effect-id="${effect.id}"${style} aria-hidden="true"></span>`
       : "";
-  return `${slash}<span class="damage-pop ${combatEffectClass(effect, combatFeedback)} type-${effect.type} ${effect.critical ? "critical" : ""}" data-effect-id="${effect.id}">
+  return `${slash}<span class="damage-pop ${combatEffectClass(effect, combatFeedback)} type-${effect.type} ${effect.critical ? "critical" : ""}" data-effect-id="${effect.id}"${style}>
     ${combatTextValue(effect)}
   </span>`;
 }
@@ -75,6 +76,33 @@ function combatTextValue(effect) {
   if (effect.type === "critical" || effect.type === "miss" || effect.type === "break") return effect.value;
   if (effect.type === "heal") return `+${effect.value}`;
   return effect.value;
+}
+
+function effectPlacementStyle(effect) {
+  const placement = effect.placement;
+  if (!placement || typeof placement !== "object") return "";
+
+  const declarations = [];
+  appendPercentDeclaration(declarations, "--combat-effect-offset-x", placement.offsetX);
+  appendPercentDeclaration(declarations, "--combat-effect-offset-y", placement.offsetY);
+  appendPercentDeclaration(declarations, "--combat-effect-text-offset-y", placement.textOffsetY);
+  appendPercentDeclaration(declarations, "--combat-effect-slash-width", placement.slashWidth);
+  appendPercentDeclaration(declarations, "--combat-effect-slash-width-expanded", placement.expandedSlashWidth);
+  appendCssLengthDeclaration(declarations, "--combat-effect-slash-height", placement.slashHeight);
+  appendCssLengthDeclaration(declarations, "--combat-effect-slash-height-expanded", placement.expandedSlashHeight);
+
+  return declarations.length ? ` style="${declarations.join("; ")}"` : "";
+}
+
+function appendPercentDeclaration(declarations, name, value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return;
+  declarations.push(`${name}: ${numeric}%`);
+}
+
+function appendCssLengthDeclaration(declarations, name, value) {
+  if (typeof value !== "string" || !/^[a-z0-9().,%\s+-]+$/i.test(value)) return;
+  declarations.push(`${name}: ${value}`);
 }
 
 function applyHitShake(target, effects, combatFeedback, now) {

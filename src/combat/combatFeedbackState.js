@@ -1,4 +1,4 @@
-import { MAX_COMBAT_EFFECTS } from "./combatDisplayConfig.js?v=402";
+import { MAX_COMBAT_EFFECTS } from "./combatDisplayConfig.js?v=403";
 
 export function shouldShowCombatText(feedbackSettings, type) {
   if (type === "damage" && !feedbackSettings.damage) return false;
@@ -7,7 +7,7 @@ export function shouldShowCombatText(feedbackSettings, type) {
   return true;
 }
 
-export function addCombatEffect(effects, { target, effectType, value, critical = false, type = "damage", hyper = false }) {
+export function addCombatEffect(effects, { target, effectType, value, critical = false, type = "damage", hyper = false, placement = null }) {
   const now = Date.now();
   const id = `${now}_${Math.random().toString(16).slice(2)}`;
   return [
@@ -19,13 +19,19 @@ export function addCombatEffect(effects, { target, effectType, value, critical =
       critical,
       type,
       hyper,
+      placement,
       createdAt: now,
     },
     ...effects,
   ].slice(0, MAX_COMBAT_EFFECTS);
 }
 
-export function queueCombatTextEffect(effects, feedbackSettings, combatState, { type, value, target, effectType = "impact", critical = false }) {
+export function queueCombatTextEffect(
+  effects,
+  feedbackSettings,
+  combatState,
+  { type, value, target, effectType = "impact", critical = false, placement = null },
+) {
   if (!shouldShowCombatText(feedbackSettings, type)) {
     return effects;
   }
@@ -37,5 +43,6 @@ export function queueCombatTextEffect(effects, feedbackSettings, combatState, { 
     critical,
     type,
     hyper: combatState.hyperActiveTicks > 0,
+    placement,
   });
 }
