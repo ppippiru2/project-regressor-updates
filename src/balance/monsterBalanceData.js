@@ -110,6 +110,19 @@ export const MONSTER_BALANCE_DATA = [
     ],
   },
   {
+    id: "mine_crystal_bug",
+    regionId: "mana_mine",
+    level: 5,
+    stats: { STR: 5, AGI: 4, VIT: 8, INT: 2, WIS: 3, LUK: 2 },
+    exp: 160,
+    gold: 26,
+    dropTable: [
+      { itemId: "mine_crystal_bug_codex_fragment", chance: 0.068 },
+      { itemId: "mine_core_mana_crystal_fragment", chance: 0.041 },
+      { itemId: "mana_bolt_skill_rune", chance: 0.025 },
+    ],
+  },
+  {
     id: "mine_golem",
     regionId: "mana_mine",
     level: 6,

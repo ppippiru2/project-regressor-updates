@@ -6494,6 +6494,14 @@ button:disabled {
   --runtime-sprite-down-rotation: 4deg;
 }
 
+.combatant.enemy[data-runtime-sprite-class="enemy_crystal_bug"] {
+  --runtime-sprite-attack-x: -15px;
+  --runtime-sprite-impact-x: -21px;
+  --runtime-sprite-attack-rotation: -2deg;
+  --runtime-sprite-hit-x: 8px;
+  --runtime-sprite-down-x: 3px;
+}
+
 .combatant.enemy[data-runtime-sprite-class="enemy_heavy"] {
   --runtime-sprite-attack-x: -10px;
   --runtime-sprite-impact-x: -16px;

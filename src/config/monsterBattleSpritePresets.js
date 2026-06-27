@@ -160,6 +160,15 @@ export const MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE = Object.freeze({
     expandedSlashWidth: 268,
     expandedSlashHeight: "clamp(4.55rem, 38vw, 8.35rem)",
   },
+  crystal_bug_runtime: {
+    offsetX: -2,
+    offsetY: -5,
+    textOffsetY: -2,
+    slashWidth: 128,
+    slashHeight: "clamp(2.7rem, 24vw, 5.45rem)",
+    expandedSlashWidth: 238,
+    expandedSlashHeight: "clamp(3.75rem, 33vw, 7.2rem)",
+  },
   heavy_golem_runtime: {
     offsetX: 0,
     offsetY: 8,
@@ -261,6 +270,11 @@ export const MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE = Object.
     impact: { offsetY: 2, textOffsetY: 1, slashWidthMultiplier: 1.04, expandedSlashWidthMultiplier: 1.04 },
     magic: { offsetX: 1, offsetY: -1, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.06 },
     dark: { offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.06 },
+  },
+  crystal_bug_runtime: {
+    slash: { offsetX: -2, offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 0.98, expandedSlashWidthMultiplier: 0.98 },
+    magic: { offsetX: 0, offsetY: -3, textOffsetY: -1, slashWidthMultiplier: 1.07, expandedSlashWidthMultiplier: 1.06 },
+    dark: { offsetX: -1, offsetY: -6, textOffsetY: -3, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
   },
   heavy_golem_runtime: {
     impact: { offsetY: 4, textOffsetY: 2, slashWidthMultiplier: 1.05, expandedSlashWidthMultiplier: 1.05 },
@@ -398,6 +412,19 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotY: 1,
     motionSafeMargin: { x: 0.09, y: 0.1 },
     effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.rune_construct_runtime,
+  },
+  mine_crystal_bug: {
+    monsterId: "mine_crystal_bug",
+    classId: "enemy_crystal_bug",
+    motionProfile: "crystal_bug_runtime",
+    sfxProfile: "short_claw",
+    defaultScale: 0.9,
+    offsetX: 0,
+    offsetY: 4,
+    pivotX: 0.5,
+    pivotY: 0.97,
+    motionSafeMargin: { x: 0.12, y: 0.09 },
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.crystal_bug_runtime,
   },
   mine_golem: {
     monsterId: "mine_golem",

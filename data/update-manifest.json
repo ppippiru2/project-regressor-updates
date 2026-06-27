@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 449,
-  "displayVersion": "v449",
-  "cacheVersion": "project-regressor-mvp-v449",
-  "updatedAt": "2026-06-28T07:28:00.000+09:00",
+  "versionCode": 450,
+  "displayVersion": "v450",
+  "cacheVersion": "project-regressor-mvp-v450",
+  "updatedAt": "2026-06-28T07:43:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=449&cachebust=449",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=450&cachebust=450",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v449 promotes forest_goblin_scout into live forest alternate encounters while preserving forest_wolf as the representative monster.",
-    "v449 connects forest_goblin_scout codex, low mana crystal, and power slash skill-fragment drops to live reward checks.",
-    "v449 registers forest_goblin_scout sprite slots and a goblin_scout_runtime VFX motion profile for runtime/editor checks."
+    "v450 promotes mine_crystal_bug into live mana mine alternate encounters while preserving mine_golem as the representative monster.",
+    "v450 connects mine_crystal_bug codex, mine core mana crystal, and mana bolt skill-rune drops to live reward checks.",
+    "v450 completes the v2.3 15-monster candidate pool live promotion and leaves no pending live patch draft rows."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v450-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v450-debug.apk"
   },
   "version": {
-    "code": 449,
-    "name": "4.49.0",
-    "displayName": "v449"
+    "code": 450,
+    "name": "4.50.0",
+    "displayName": "v450"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v450-debug.apk"
   },
   "android": {
-    "code": 449,
-    "name": "4.49.0",
-    "displayName": "v449",
+    "code": 450,
+    "name": "4.50.0",
+    "displayName": "v450",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v450-debug.apk"
     },
     "version": {
-      "code": 449,
-      "name": "4.49.0",
-      "displayName": "v449"
+      "code": 450,
+      "name": "4.50.0",
+      "displayName": "v450"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v450-debug.apk"
   }
 }
