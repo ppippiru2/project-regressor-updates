@@ -43,6 +43,19 @@ export const MONSTER_BALANCE_DATA = [
     ],
   },
   {
+    id: "forest_alpha_wolf",
+    regionId: "tutorial_forest",
+    level: 4,
+    stats: { STR: 7, AGI: 9, VIT: 7, INT: 0, WIS: 2, LUK: 2 },
+    exp: 77,
+    gold: 11,
+    dropTable: [
+      { itemId: "forest_alpha_wolf_codex_fragment", chance: 0.076 },
+      { itemId: "unstable_mana_crystal_fragment", chance: 0.041 },
+      { itemId: "quick_step_skill_fragment", chance: 0.025 },
+    ],
+  },
+  {
     id: "ruin_sentinel",
     regionId: "broken_ruins",
     level: 4,
@@ -55,6 +68,19 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "mana_necklace", chance: 0.03 },
       { itemId: "ruin_sentinel_codex_fragment", chance: 0.085 },
       { itemId: "guard_stance_skill_rune", chance: 0.025 },
+    ],
+  },
+  {
+    id: "ruin_rune_doll",
+    regionId: "broken_ruins",
+    level: 5,
+    stats: { STR: 4, AGI: 5, VIT: 7, INT: 6, WIS: 5, LUK: 1 },
+    exp: 122,
+    gold: 18,
+    dropTable: [
+      { itemId: "ruin_rune_doll_codex_fragment", chance: 0.072 },
+      { itemId: "unstable_mana_crystal_fragment", chance: 0.041 },
+      { itemId: "mana_bolt_skill_rune", chance: 0.025 },
     ],
   },
   {

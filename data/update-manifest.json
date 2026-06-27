@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 443,
-  "displayVersion": "v443",
-  "cacheVersion": "project-regressor-mvp-v443",
-  "updatedAt": "2026-06-28T06:10:00.000+09:00",
+  "versionCode": 444,
+  "displayVersion": "v444",
+  "cacheVersion": "project-regressor-mvp-v444",
+  "updatedAt": "2026-06-28T06:22:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=443&cachebust=443",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=444&cachebust=444",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v443 promotes shore_drift_slime into tutorial_shore alternate encounters while keeping shore_imp as the representative monster.",
-    "v443 connects the live slime drops to codex fragment, mana crystal fragment, and skill rune reward preview data.",
-    "v443 registers slime sprite slots and a slime drift VFX preset so runtime/editor checks stay aligned."
+    "v444 promotes forest_alpha_wolf and ruin_rune_doll into live alternate encounters while preserving regional representatives.",
+    "v444 connects phase-2 codex fragments, mana crystal fragments, and skill rune/fragment drops to live reward tables.",
+    "v444 registers alpha beast and rune doll sprite slots plus dedicated VFX motion presets for runtime/editor checks."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v443-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v444-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v443-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v444-debug.apk"
   },
   "version": {
-    "code": 443,
-    "name": "4.43.0",
-    "displayName": "v443"
+    "code": 444,
+    "name": "4.44.0",
+    "displayName": "v444"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v443-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v444-debug.apk"
   },
   "android": {
-    "code": 443,
-    "name": "4.43.0",
-    "displayName": "v443",
+    "code": 444,
+    "name": "4.44.0",
+    "displayName": "v444",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v443-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v444-debug.apk"
     },
     "version": {
-      "code": 443,
-      "name": "4.43.0",
-      "displayName": "v443"
+      "code": 444,
+      "name": "4.44.0",
+      "displayName": "v444"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v443-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v444-debug.apk"
   }
 }

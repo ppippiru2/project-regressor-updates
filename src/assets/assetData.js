@@ -311,7 +311,9 @@ export const ASSET_SLOTS = {
         "shore_imp": {},
         "shore_drift_slime": {},
         "forest_wolf": {},
+        "forest_alpha_wolf": {},
         "ruin_sentinel": {},
+        "ruin_rune_doll": {},
         "mine_golem": {},
         "rift_knight": {},
         "rift_warden": {}
