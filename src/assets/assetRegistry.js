@@ -1,5 +1,5 @@
-import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=426";
-import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=426";
+import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=427";
+import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=427";
 
 const ASSET_DATA_VERSION = "236";
 

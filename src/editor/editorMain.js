@@ -1,17 +1,17 @@
-import { applyDomLocalization } from "../localization/domText.js?v=426";
-import { getLocaleText, tf } from "../localization/index.js?v=426";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=426";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=426";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=426";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=426";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=426";
+import { applyDomLocalization } from "../localization/domText.js?v=427";
+import { getLocaleText, tf } from "../localization/index.js?v=427";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=427";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=427";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=427";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=427";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=427";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=426";
+} from "./monsterSpriteSlotReport.js?v=427";
 
-const EDITOR_VERSION = "426";
+const EDITOR_VERSION = "427";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;

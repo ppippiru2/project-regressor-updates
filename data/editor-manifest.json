@@ -1358,7 +1358,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v425",
+    "source": "v427",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1436,12 +1436,26 @@
       "fileReadySlots",
       "fileMissingSlots",
       "readyConnectionApplyMode",
-      "readyConnectionReviewStatus"
+      "readyConnectionReviewStatus",
+      "applyPreviewReadyPatchCount",
+      "applyPreviewStatus"
     ],
     "readyConnectionExportScript": "build-scripts/export-monster-sprite-ready-connection-plan.mjs",
     "readyConnectionExportArtifact": "validation-output/monster-sprite-ready-connection-plan.json",
     "readyConnectionExportWritesGameData": false,
     "readyConnectionExportReviewSummary": true,
-    "readyConnectionExportReviewChecklist": true
+    "readyConnectionExportReviewChecklist": true,
+    "applyPreviewExportScript": "build-scripts/export-monster-sprite-apply-preview.mjs",
+    "applyPreviewArtifact": "validation-output/monster-sprite-apply-preview.json",
+    "applyPreviewWritesGameData": false,
+    "applyPreviewManualReviewRequired": true,
+    "applyPreviewComparesMissingFileHandoff": true,
+    "applyPreviewReadyPatchCount": 0,
+    "applyPreviewStatus": "waiting-for-monster-files",
+    "applyPreviewReviewChecklist": true,
+    "applyPreviewInputArtifacts": [
+      "validation-output/monster-sprite-ready-connection-plan.json",
+      "validation-output/monster-sprite-missing-file-handoff.json"
+    ]
   }
 }

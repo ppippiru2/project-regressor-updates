@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 426,
-  "displayVersion": "v426",
-  "cacheVersion": "project-regressor-mvp-v426",
-  "updatedAt": "2026-06-27T16:19:08.915Z",
+  "versionCode": 427,
+  "displayVersion": "v427",
+  "cacheVersion": "project-regressor-mvp-v427",
+  "updatedAt": "2026-06-27T17:00:48.648Z",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=426&cachebust=426",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=427&cachebust=427",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v427 adds a monster sprite apply-preview artifact that compares file-ready patches against the missing-file handoff.",
+    "v427 keeps the monster WebP ingestion path review-only until ready patches pass manual review checks.",
+    "v427 extends quick checks and editor metadata so future assets/monsters/{monsterId}_{pose}.webp drops report ready patch counts safely.",
     "v426 replaces the web header, PWA install, and Android launcher icon with the newly provided purple-blue emblem.",
     "v426 keeps assets/icon.png and assets/icon-dark.png synchronized from the same approved 1280px source image.",
     "v426 refreshes the cache and APK channel so installed apps receive the updated representative icon package.",
@@ -259,32 +262,32 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v426-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v427-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v426-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v427-debug.apk"
   },
   "version": {
-    "code": 426,
-    "name": "4.26.0",
-    "displayName": "v426"
+    "code": 427,
+    "name": "4.27.0",
+    "displayName": "v427"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v426-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v427-debug.apk"
   },
   "android": {
-    "code": 426,
-    "name": "4.26.0",
-    "displayName": "v426",
+    "code": 427,
+    "name": "4.27.0",
+    "displayName": "v427",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v426-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v427-debug.apk"
     },
     "version": {
-      "code": 426,
-      "name": "4.26.0",
-      "displayName": "v426"
+      "code": 427,
+      "name": "4.27.0",
+      "displayName": "v427"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v426-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v427-debug.apk"
   }
 }

@@ -2,7 +2,7 @@
   "name": "Project Regressor",
   "short_name": "Regressor",
   "description": "한국 판타지 스타일 방치형 RPG",
-  "start_url": "./index.html?v=426",
+  "start_url": "./index.html?v=427",
   "scope": "./",
   "display": "standalone",
   "background_color": "#050b18",
