@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 381,
-  "displayVersion": "v3.81",
-  "cacheVersion": "project-regressor-mvp-v381",
+  "versionCode": 382,
+  "displayVersion": "v3.82",
+  "cacheVersion": "project-regressor-mvp-v382",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=381&cachebust=381",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=382&cachebust=382",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v381 replaces the representative Project Regressor game icon with the Desktop/icon_fix.png blue star emblem.",
-    "v381 updates the PWA/header icon source and regenerates Android launcher icons from assets/icon.png.",
-    "v381 keeps assets/icon.png and assets/icon-dark.png synchronized for the app install icon pipeline.",
+    "v382 applies the first ProjectRegressor_v2.3 integrated package pass to the live tutorial baseline.",
+    "v382 lowers new-character start stats to STR/AGI/VIT/INT/WIS 2 and LUK 1, with +2 free stat points per level.",
+    "v382 changes new default combat loadouts to basic attack only and retunes tutorial region levels and representative monster stats to the v2.3 curve.",
     "v373 shows the core export names directly on each editor balance domain card.",
     "v373 makes player growth, combat pressure, equipment/items, monster rewards, and theme retarget tuning easier to inspect before editing.",
     "v373 extends editor metadata checks so the domain export summary remains registered.",
@@ -129,13 +129,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v381-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v382-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v381-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v382-debug.apk"
   },
   "version": {
-    "code": 381,
-    "name": "3.81.0",
-    "displayName": "v381"
+    "code": 382,
+    "name": "3.82.0",
+    "displayName": "v382"
   }
 }

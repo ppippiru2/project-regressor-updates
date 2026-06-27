@@ -32,7 +32,14 @@ export const BALANCE_TUNING_GROUPS = [
     id: "player-growth",
     scope: "engine-balance",
     files: ["src/balance/playerGrowthBalance.js"],
-    exports: ["LEVEL_UP_FREE_POINTS", "PLAYER_BASE_STAT_VALUE", "INITIAL_CREATION_STAT_BALANCE", "BULK_STAT_DEALLOCATE_AMOUNT"],
+    exports: [
+      "LEVEL_UP_FREE_POINTS",
+      "PLAYER_INITIAL_STATS",
+      "PLAYER_BASE_STAT_VALUES",
+      "PLAYER_BASE_STAT_VALUE",
+      "INITIAL_CREATION_STAT_BALANCE",
+      "BULK_STAT_DEALLOCATE_AMOUNT",
+    ],
     affects: ["level-up", "stat-allocation", "character-creation"],
   },
   {

@@ -740,7 +740,7 @@
     "checkScript": "build-scripts/check-balance-tuning-registry.mjs",
     "expectedGroupCount": 11,
     "expectedFileCount": 11,
-    "expectedExportCount": 33,
+    "expectedExportCount": 35,
     "expectedDomainCount": 5,
     "dataTargets": [
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_GROUPS",

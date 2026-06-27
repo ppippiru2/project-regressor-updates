@@ -3,7 +3,7 @@ export const MONSTER_BALANCE_DATA = [
     id: "shore_imp",
     regionId: "tutorial_shore",
     level: 1,
-    stats: { STR: 4, AGI: 4, VIT: 5, INT: 1, WIS: 1, LUK: 1 },
+    stats: { STR: 1, AGI: 2, VIT: 2, INT: 0, WIS: 0, LUK: 0 },
     exp: 16,
     gold: 3,
     dropTable: [
@@ -15,8 +15,8 @@ export const MONSTER_BALANCE_DATA = [
   {
     id: "forest_wolf",
     regionId: "tutorial_forest",
-    level: 3,
-    stats: { STR: 9, AGI: 12, VIT: 8, INT: 1, WIS: 2, LUK: 2 },
+    level: 2,
+    stats: { STR: 4, AGI: 6, VIT: 4, INT: 0, WIS: 1, LUK: 1 },
     exp: 45,
     gold: 7,
     dropTable: [
@@ -28,8 +28,8 @@ export const MONSTER_BALANCE_DATA = [
   {
     id: "ruin_sentinel",
     regionId: "broken_ruins",
-    level: 6,
-    stats: { STR: 16, AGI: 8, VIT: 18, INT: 3, WIS: 5, LUK: 2 },
+    level: 4,
+    stats: { STR: 8, AGI: 3, VIT: 11, INT: 1, WIS: 3, LUK: 1 },
     exp: 90,
     gold: 14,
     dropTable: [
@@ -41,8 +41,8 @@ export const MONSTER_BALANCE_DATA = [
   {
     id: "mine_golem",
     regionId: "mana_mine",
-    level: 9,
-    stats: { STR: 26, AGI: 6, VIT: 34, INT: 4, WIS: 8, LUK: 2 },
+    level: 6,
+    stats: { STR: 11, AGI: 3, VIT: 18, INT: 2, WIS: 5, LUK: 1 },
     exp: 160,
     gold: 26,
     dropTable: [
@@ -54,8 +54,8 @@ export const MONSTER_BALANCE_DATA = [
   {
     id: "rift_knight",
     regionId: "rift_gate",
-    level: 13,
-    stats: { STR: 42, AGI: 22, VIT: 46, INT: 8, WIS: 13, LUK: 4 },
+    level: 9,
+    stats: { STR: 22, AGI: 12, VIT: 27, INT: 5, WIS: 10, LUK: 3 },
     exp: 260,
     gold: 46,
     dropTable: [
@@ -67,9 +67,9 @@ export const MONSTER_BALANCE_DATA = [
   {
     id: "rift_warden",
     regionId: "rift_gate",
-    level: 16,
+    level: 10,
     isBoss: true,
-    stats: { STR: 58, AGI: 28, VIT: 72, INT: 16, WIS: 22, LUK: 6 },
+    stats: { STR: 28, AGI: 14, VIT: 44, INT: 8, WIS: 14, LUK: 4 },
     exp: 620,
     gold: 125,
     dropTable: [

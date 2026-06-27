@@ -1,8 +1,8 @@
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=381";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=382";
 import { normalizePlayerProfile } from "./save.js";
-import { buildPlayerProfileInput } from "./profile.js?v=381";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=381";
-import { t, tf } from "../localization/index.js?v=381";
+import { buildPlayerProfileInput } from "./profile.js?v=382";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=382";
+import { t, tf } from "../localization/index.js?v=382";
 
 export function createCharacterProfile(formData, defaultPlayerProfile) {
   return normalizePlayerProfile(
@@ -24,6 +24,7 @@ export function applyInitialCreationStats(
   {
     initialStatTotal = INITIAL_CREATION_STAT_BALANCE.total,
     fallbackStatValue = INITIAL_CREATION_STAT_BALANCE.fallbackValue,
+    fallbackStats = INITIAL_CREATION_STAT_BALANCE.startingStats,
   } = {}
 ) {
   const parsedStats = Object.fromEntries(
@@ -39,7 +40,7 @@ export function applyInitialCreationStats(
   state.player.pendingStatAllocations = {};
   state.player.stats = isValid
     ? parsedStats
-    : Object.fromEntries(primaryStats.map((stat) => [stat, fallbackStatValue]));
+    : Object.fromEntries(primaryStats.map((stat) => [stat, fallbackStats?.[stat] ?? fallbackStatValue]));
   state.player.hp = 0;
   state.player.mp = null;
 }

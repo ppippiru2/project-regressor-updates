@@ -150,7 +150,7 @@ export const KO_KR_TEXT = {
       },
       compactObjective: {
         eyebrow: "목표",
-        description: "5개 지역을 돌파하고 검은 균열 관문의 문지기를 처치하세요.",
+        description: "5개 지역을 돌파하고 검은 균열 관문의 피해량 평가에 도전하세요.",
       },
       systemWindow: {
         title: "각성자 시스템",
@@ -292,11 +292,11 @@ export const KO_KR_TEXT = {
       countryOptions: ["대한민국", "미국", "일본", "중국", "기타"],
     },
     stats: {
-      title: "초기 능력치 부여",
-      description: "초기 총합 30 안에서 운명의 주사위가 능력치를 배분합니다.",
-      rollDice: "운명의 주사위 굴리기",
-      waiting: "결과 대기 중",
-      complete: "보너스 분배 완료",
+      title: "기본 능력치 동기화",
+      description: "STR/AGI/VIT/INT/WIS 2, LUK 1 기준으로 첫 각성자 프로필을 동기화합니다.",
+      rollDice: "기본 능력치 확인",
+      waiting: "동기화 대기 중",
+      complete: "기본 스탯 확정",
       confirmNext: "확정하고 다음으로",
       total: "총합",
     },
@@ -1113,7 +1113,7 @@ export const KO_KR_TEXT = {
       growthLabel: "성장 알림",
       levelUpMessage: "레벨이 상승했습니다.",
       statUp: "능력치 상승",
-      freeStatPlus: "자유 스탯 +5",
+      freeStatPlus: "자유 스탯 +2",
       routeLabel: "경로 개방",
       routeMessage: "새 지역 이동 권한이 열렸습니다.",
       checkRegionTab: "지역 탭 확인",
@@ -1209,7 +1209,7 @@ export const KO_KR_TEXT = {
     statPointsDetail: "보유 포인트 {points}개. 알림을 눌러 상태창에서 배분하십시오.",
     statusAction: "상태 보기",
     finalGateTitle: "최종 관문 공략 가능",
-    finalGateDetail: "검은 균열의 문지기를 쓰러뜨리면 튜토리얼 섬 공략이 끝납니다.",
+    finalGateDetail: "제한시간 피해량 평가로 검은 관문의 파수꾼에게 성장치를 증명하면 튜토리얼 섬 공략이 끝납니다.",
     regionAction: "지역 보기",
     nextRegionTitle: "다음 개방: {regionName}",
     nextRegionDetail: "레벨 {targetLevel}까지 경험치 {remaining} 필요",
@@ -1314,11 +1314,11 @@ export const KO_KR_TEXT = {
     },
     monsters: {
       shore_imp: "균열 임프",
-      forest_wolf: "그림자 늑대",
-      ruin_sentinel: "무너진 탑의 파수병",
+      forest_wolf: "그늘 늑대",
+      ruin_sentinel: "고장난 탑 파수병",
       mine_golem: "마석 광산 골렘",
       rift_knight: "균열 기사",
-      rift_warden: "검은 균열의 문지기",
+      rift_warden: "검은 관문의 파수꾼",
     },
     regions: {
       tutorial_shore: {
@@ -1339,7 +1339,7 @@ export const KO_KR_TEXT = {
       },
       rift_gate: {
         name: "검은 균열 관문",
-        description: "섬의 마지막 관문. 문지기를 쓰러뜨리면 튜토리얼이 끝난다.",
+        description: "섬의 마지막 관문. 제한시간 동안 파수꾼에게 누적 피해량을 증명한다.",
       },
     },
     gateMaps: {

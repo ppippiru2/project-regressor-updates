@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=381";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=381";
+import { getLocaleText } from "../localization/index.js?v=382";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=382";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;
@@ -26,7 +26,7 @@ export const regions = [
     image: "",
     imagePosition: "center",
     name: REGION_TEXT.tutorial_forest.name,
-    recommendedLevel: 3,
+    recommendedLevel: 2,
     monsterId: "forest_wolf",
     description: REGION_TEXT.tutorial_forest.description,
   },
@@ -35,7 +35,7 @@ export const regions = [
     image: "",
     imagePosition: "center",
     name: REGION_TEXT.broken_ruins.name,
-    recommendedLevel: 6,
+    recommendedLevel: 4,
     monsterId: "ruin_sentinel",
     nodeMapId: "gate_tutorial_ruins_01",
     description: REGION_TEXT.broken_ruins.description,
@@ -45,7 +45,7 @@ export const regions = [
     image: "",
     imagePosition: "center",
     name: REGION_TEXT.mana_mine.name,
-    recommendedLevel: 9,
+    recommendedLevel: 6,
     monsterId: "mine_golem",
     description: REGION_TEXT.mana_mine.description,
   },
@@ -54,7 +54,7 @@ export const regions = [
     image: "",
     imagePosition: "center",
     name: REGION_TEXT.rift_gate.name,
-    recommendedLevel: 13,
+    recommendedLevel: 8,
     monsterId: "rift_knight",
     bossId: "rift_warden",
     description: REGION_TEXT.rift_gate.description,

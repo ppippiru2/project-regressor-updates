@@ -1,23 +1,24 @@
-import { expToNext, monsterStats, rankCombatModifier, clamp } from "../combat/combatFormula.js?v=381";
-import { primaryStats, skills } from "../data/coreData.js?v=381";
-import { equipment } from "../data/equipmentData.js?v=381";
-import { regions, monsters } from "../data/worldData.js?v=381";
-import { playerStats } from "../state/progression.js?v=381";
-import { regionExpMultiplier } from "../state/rewards.js?v=381";
+import { expToNext, monsterStats, rankCombatModifier, clamp } from "../combat/combatFormula.js?v=382";
+import { primaryStats, skills } from "../data/coreData.js?v=382";
+import { equipment } from "../data/equipmentData.js?v=382";
+import { regions, monsters } from "../data/worldData.js?v=382";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=382";
+import { playerStats } from "../state/progression.js?v=382";
+import { regionExpMultiplier } from "../state/rewards.js?v=382";
 
 export const TUTORIAL_ISLAND_PACING_LIMITS = {
   bossLevelTargetOffset: 3,
   targetWindowMinutes: 30,
   reservedBossMinutes: 3,
   expectedRegionCount: 5,
-  minLevelingKills: 150,
-  maxLevelingKills: 185,
-  minRequiredKillSeconds: 8,
-  maxRequiredKillSeconds: 12,
-  minTotalGold: 3000,
-  maxTotalGold: 4500,
-  maxPowerSlashMinutes: 30,
-  maxBasicAttackMinutes: 45,
+  minLevelingKills: 60,
+  maxLevelingKills: 90,
+  minRequiredKillSeconds: 18,
+  maxRequiredKillSeconds: 28,
+  minTotalGold: 1500,
+  maxTotalGold: 2500,
+  maxPowerSlashMinutes: 20,
+  maxBasicAttackMinutes: 30,
   minMonsterDropCount: 3,
   minNonBossTotalDropChance: 0.1,
   minBossTotalDropChance: 0.25,
@@ -193,7 +194,9 @@ function createNoGearPlayer(level) {
   const autoLevels = Math.max(0, level - 1);
   return {
     level,
-    stats: Object.fromEntries(primaryStats.map((stat) => [stat, 5 + (stat === "LUK" ? 0 : autoLevels)])),
+    stats: Object.fromEntries(
+      primaryStats.map((stat) => [stat, (PLAYER_INITIAL_STATS?.[stat] ?? 1) + (stat === "LUK" ? 0 : autoLevels)])
+    ),
   };
 }
 

@@ -1,23 +1,24 @@
-import { getLocaleText, tf } from "../localization/index.js?v=381";
-import { resolveAlignment } from "../state/profile.js?v=381";
+import { getLocaleText, tf } from "../localization/index.js?v=382";
+import { resolveAlignment } from "../state/profile.js?v=382";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=381";
+} from "../state/portraitFrame.js?v=382";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=381";
+} from "./portraitFrameView.js?v=382";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=381";
+} from "./diceSpriteRenderer.js?v=382";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=382";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -27,8 +28,9 @@ const STAT_LABELS = CREATION_TEXT.statLabels;
 const GENDER_OPTIONS = CREATION_TEXT.profile.genderOptions;
 const COUNTRY_OPTIONS = CREATION_TEXT.profile.countryOptions;
 const QUESTIONS = CREATION_TEXT.questions.items;
-const INITIAL_STAT_TOTAL = 30;
-const MIN_STAT_VALUE = 1;
+const INITIAL_STAT_TOTAL = INITIAL_CREATION_STAT_BALANCE.total;
+const INITIAL_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.startingStats;
+const MIN_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.minValues || INITIAL_STAT_VALUES;
 const MAX_STAT_VALUE = 10;
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 
@@ -491,14 +493,15 @@ function setHiddenValue(form, name, value) {
 }
 
 function createBalancedStats() {
-  return Object.fromEntries(STAT_KEYS.map((stat) => [stat, 5]));
+  return Object.fromEntries(STAT_KEYS.map((stat) => [stat, INITIAL_STAT_VALUES?.[stat] ?? 1]));
 }
 
 function rollInitialStats() {
-  const stats = Object.fromEntries(STAT_KEYS.map((stat) => [stat, MIN_STAT_VALUE]));
-  let remaining = INITIAL_STAT_TOTAL - STAT_KEYS.length * MIN_STAT_VALUE;
+  const stats = Object.fromEntries(STAT_KEYS.map((stat) => [stat, MIN_STAT_VALUES?.[stat] ?? 1]));
+  let remaining = INITIAL_STAT_TOTAL - statTotal(stats);
   while (remaining > 0) {
     const candidates = STAT_KEYS.filter((stat) => stats[stat] < MAX_STAT_VALUE);
+    if (!candidates.length) break;
     const stat = candidates[Math.floor(Math.random() * candidates.length)];
     stats[stat] += 1;
     remaining -= 1;

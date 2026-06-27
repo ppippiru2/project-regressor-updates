@@ -1,4 +1,5 @@
-import { t } from "../localization/index.js?v=381";
+import { t } from "../localization/index.js?v=382";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=382";
 
 export function createInitialState({
   slots,
@@ -18,7 +19,7 @@ export function createInitialState({
       gold: 0,
       freePoints: 0,
       pendingStatAllocations: {},
-      stats: { STR: 5, AGI: 5, VIT: 5, INT: 5, WIS: 5, LUK: 5 },
+      stats: { ...PLAYER_INITIAL_STATS },
       hp: 0,
       mp: null,
     },

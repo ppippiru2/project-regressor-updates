@@ -1,11 +1,11 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=381";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=381";
-import { t, tf } from "../localization/index.js?v=381";
+} from "./developerOptions.js?v=382";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=382";
+import { t, tf } from "../localization/index.js?v=382";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=381";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=382";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";
@@ -65,12 +65,7 @@ export const DEFAULT_SKILL_LOADOUTS = [
   {
     id: "slot1",
     name: t("saveDefaults.skillLoadouts.slot1"),
-    actionIds: ["basic_attack", "power_slash", "mana_bolt", "emergency_recovery"],
-  },
-  {
-    id: "slot2",
-    name: t("saveDefaults.skillLoadouts.slot2"),
-    actionIds: ["basic_attack", "mana_bolt", "emergency_recovery", "power_slash"],
+    actionIds: ["basic_attack"],
   },
 ];
 
