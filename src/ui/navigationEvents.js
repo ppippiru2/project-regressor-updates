@@ -1,4 +1,4 @@
-import { activateView, keepActiveTabInView } from "./viewNavigation.js?v=439";
+import { activateView, keepActiveTabInView } from "./viewNavigation.js?v=440";
 
 export function bindNavigationEvents({ onViewChange } = {}) {
   const buttons = [...document.querySelectorAll(".nav-button")];
@@ -112,3 +112,4 @@ function shouldIgnoreSwipeTarget(target) {
     )
   );
 }
+

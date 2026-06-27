@@ -1,4 +1,4 @@
-import { HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=439";
+import { HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=440";
 
 export function applyHealAction(playerState, playerStats, action, clampValue) {
   playerState.hp = clampValue(playerState.hp + action.amount, 1, playerStats.maxHp);
@@ -71,3 +71,4 @@ export function playerHyperChargeFromEnemyHit(monster) {
 export function enemyHyperChargeFromEnemyHit(monster) {
   return monster.isBoss ? HYPER_CHARGE_BALANCE.enemyFromEnemyHit.boss : HYPER_CHARGE_BALANCE.enemyFromEnemyHit.normal;
 }
+

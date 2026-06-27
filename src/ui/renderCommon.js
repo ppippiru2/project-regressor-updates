@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=439";
-import { renderCombatLogLine } from "./combatLogFormatter.js?v=439";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=439";
+import { t } from "../localization/index.js?v=440";
+import { renderCombatLogLine } from "./combatLogFormatter.js?v=440";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=440";
 
 export function renderCharacterCreation(playerProfile) {
   const screen = document.getElementById("character-creation");
@@ -223,3 +223,4 @@ function escapeHtml(value) {
     return entities[char];
   });
 }
+

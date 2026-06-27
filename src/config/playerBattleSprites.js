@@ -3,7 +3,7 @@ import {
   PLAYER_BATTLE_SPRITE_GENDERS,
   PLAYER_BATTLE_SPRITE_PRESETS,
   DEFAULT_PLAYER_ATTACK_EFFECT_PLACEMENT,
-} from "./playerBattleSpritePresets.js?v=439";
+} from "./playerBattleSpritePresets.js?v=440";
 
 export { PLAYER_BATTLE_SPRITE_CLASSES, PLAYER_BATTLE_SPRITE_GENDERS, PLAYER_BATTLE_SPRITE_PRESETS };
 
@@ -76,3 +76,4 @@ function scaleClampLength(value, multiplier) {
     return `${rounded}${unit}`;
   });
 }
+

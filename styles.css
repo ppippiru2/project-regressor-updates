@@ -4439,6 +4439,131 @@ select:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.editor-monster-candidate-live-promotion {
+  background: rgba(5, 20, 48, 0.48);
+  border: 1px solid rgba(244, 211, 94, 0.18);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-monster-candidate-live-promotion-head,
+.editor-monster-candidate-live-promotion-phase-head,
+.editor-monster-candidate-live-promotion-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-monster-candidate-live-promotion-head h4,
+.editor-monster-candidate-live-promotion-head p,
+.editor-monster-candidate-live-promotion-phase-head h5,
+.editor-monster-candidate-live-promotion-phase-head p,
+.editor-monster-candidate-live-promotion-row-head h6,
+.editor-monster-candidate-live-promotion-row-head p {
+  margin: 0;
+}
+
+.editor-monster-candidate-live-promotion-head h4 {
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+.editor-monster-candidate-live-promotion-head strong,
+.editor-monster-candidate-live-promotion-phase-head > span {
+  border: 1px solid rgba(244, 211, 94, 0.22);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-monster-candidate-live-promotion-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.editor-monster-candidate-live-promotion-metrics span,
+.editor-monster-candidate-live-promotion-phase,
+.editor-monster-candidate-live-promotion-deferred {
+  background: rgba(1, 10, 28, 0.28);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-monster-candidate-live-promotion-metrics span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.editor-monster-candidate-live-promotion-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-monster-candidate-live-promotion-metrics b {
+  color: var(--text);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-live-promotion-phases,
+.editor-monster-candidate-live-promotion-phase,
+.editor-monster-candidate-live-promotion-row-list,
+.editor-monster-candidate-live-promotion-row,
+.editor-monster-candidate-live-promotion-deferred {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-monster-candidate-live-promotion-phase-head h5,
+.editor-monster-candidate-live-promotion-row-head h6,
+.editor-monster-candidate-live-promotion-deferred strong {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-live-promotion-phase-head p,
+.editor-monster-candidate-live-promotion-row-head p,
+.editor-monster-candidate-live-promotion-deferred p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-live-promotion-row {
+  border-top: 1px solid rgba(108, 210, 255, 0.14);
+  padding-top: 0.65rem;
+}
+
+.editor-monster-candidate-live-promotion-row[data-state="ready-for-live-data-plan"] {
+  border-top-color: rgba(244, 211, 94, 0.34);
+}
+
+.editor-monster-candidate-live-promotion-row[data-state="deferred-reward-link"] {
+  border-top-color: rgba(255, 111, 151, 0.3);
+}
+
+.editor-monster-candidate-live-promotion-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -7847,6 +7972,10 @@ body[data-info-tooltips="off"] .info-term {
   .editor-monster-candidate-promotion-row-head,
   .editor-monster-candidate-promotion-actions > div,
   .editor-monster-candidate-promotion-grid,
+  .editor-monster-candidate-live-promotion-head,
+  .editor-monster-candidate-live-promotion-phase-head,
+  .editor-monster-candidate-live-promotion-row-head,
+  .editor-monster-candidate-live-promotion-grid,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-monster-sprite-pose-grid {
@@ -7856,6 +7985,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-combat-vfx-summary,
   .editor-monster-candidate-reward-metrics,
   .editor-monster-candidate-promotion-metrics,
+  .editor-monster-candidate-live-promotion-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

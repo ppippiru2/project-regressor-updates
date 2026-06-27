@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=439";
+import { t } from "../localization/index.js?v=440";
 
 const byId = (id) => document.getElementById(id);
 const COMPACT_COMBAT_BUTTON_LABELS = true;
@@ -57,3 +57,4 @@ export function renderCombatControls({ state, region }) {
     battleState.dataset.status = status;
   }
 }
+

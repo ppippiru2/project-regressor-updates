@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=439";
+import { tf } from "../localization/index.js?v=440";
 
 const ALLOWED_STANCES = new Set(["conserve", "power", "berserk", "break_wait"]);
 
@@ -17,3 +17,4 @@ export function applyStanceSelection(state, stance, stanceLabel) {
     message: tf("equipmentActions.stanceChanged", { stanceLabel }),
   };
 }
+

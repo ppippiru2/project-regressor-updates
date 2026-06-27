@@ -1,19 +1,20 @@
-import { applyDomLocalization } from "../localization/domText.js?v=439";
-import { getLocaleText, tf } from "../localization/index.js?v=439";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=439";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=439";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=439";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=439";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=439";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=439";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=439";
+import { applyDomLocalization } from "../localization/domText.js?v=440";
+import { getLocaleText, tf } from "../localization/index.js?v=440";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=440";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=440";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=440";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=440";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=440";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=440";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=440";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=440";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=439";
+} from "./monsterSpriteSlotReport.js?v=440";
 
-const EDITOR_VERSION = "439";
+const EDITOR_VERSION = "440";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -22,6 +23,7 @@ const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
 );
 const MONSTER_CANDIDATE_REWARD_PREVIEW = createMonsterCandidateRewardPreview();
 const MONSTER_CANDIDATE_PROMOTION_CHECKLIST = createMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_REWARD_PREVIEW);
+const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN = createMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_PROMOTION_CHECKLIST);
 const COMBAT_VFX_PLACEMENT_PREVIEW = createCombatVfxPlacementPreview();
 const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
   title: "Combat VFX Placement Preview",
@@ -1042,6 +1044,7 @@ function renderBalanceTuningDetail() {
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderMonsterCandidateRewardPreview(MONSTER_CANDIDATE_REWARD_PREVIEW, detailText)}
       ${renderMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_PROMOTION_CHECKLIST, detailText)}
+      ${renderMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
@@ -1643,6 +1646,158 @@ function monsterCandidatePromotionRewardCoverageValues(row, text = {}) {
 
 function monsterCandidatePromotionStageLabel(stageId, text = {}) {
   return text.stageLabels?.[stageId] || stageId || "unknown";
+}
+
+function renderMonsterCandidateLivePromotionPlan(plan, detailText = {}) {
+  const text = detailText.monsterCandidateLivePromotion || {};
+  const summary = plan.summary || {};
+  const metrics = [
+    [text.candidates || "Candidates", `${summary.candidateCount || 0}`],
+    [text.phases || "Phases", `${summary.phaseCount || 0}`],
+    [text.regions || "Regions", `${summary.regionCount || 0}`],
+    [text.deferred || "Deferred", `${summary.deferredCandidateCount || 0}`],
+    [text.writes || "Writes", plan.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+
+  return `
+    <section class="editor-monster-candidate-live-promotion" data-readonly="${plan.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Live Promotion Plan")}">
+      <div class="editor-monster-candidate-live-promotion-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Monster Candidate Live Promotion Plan")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only live-data promotion phases for complete reward candidates.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.version", {
+          version: plan.version || "-"
+        }, plan.version || "-"))}</strong>
+      </div>
+      <div class="editor-monster-candidate-live-promotion-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-monster-candidate-live-promotion-phases">
+        ${(plan.phases || []).map((phase) => renderMonsterCandidateLivePromotionPhase(phase, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No promotion-ready candidates.")}</p>`}
+      </div>
+      ${renderMonsterCandidateLivePromotionDeferred(plan.deferredRows || [], text)}
+    </section>
+  `;
+}
+
+function renderMonsterCandidateLivePromotionPhase(phase, text = {}) {
+  return `
+    <article class="editor-monster-candidate-live-promotion-phase" data-phase="${escapeAttribute(phase.id || "")}">
+      <div class="editor-monster-candidate-live-promotion-phase-head">
+        <div>
+          <h5>${escapeHtml(monsterCandidateLivePromotionPhaseTitle(phase, text))}</h5>
+          <p>${escapeHtml(monsterCandidateLivePromotionPriorityLabel(phase.priority, text))}</p>
+        </div>
+        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.phaseCandidateCount", {
+          count: phase.candidateCount || 0
+        }, `${phase.candidateCount || 0}`))}</span>
+      </div>
+      <div class="editor-monster-candidate-live-promotion-row-list">
+        ${(phase.rows || []).map((row) => renderMonsterCandidateLivePromotionRow(row, text)).join("")}
+      </div>
+    </article>
+  `;
+}
+
+function renderMonsterCandidateLivePromotionRow(row, text = {}) {
+  const roles = [
+    monsterCandidateLivePromotionStateLabel(row.planState, text),
+    monsterCandidatePromotionStageLabel(row.promotionStageId, detailTextForPromotion(text)),
+    row.regionName || row.regionId || "",
+  ].filter(Boolean);
+  const actionLabels = (row.nextActionIds || []).map((actionId) => monsterCandidatePromotionActionLabel(actionId, detailTextForPromotion(text)));
+
+  return `
+    <article class="editor-monster-candidate-live-promotion-row" data-state="${escapeAttribute(row.planState || "unknown")}">
+      <div class="editor-monster-candidate-live-promotion-row-head">
+        <div>
+          <h6>${escapeHtml(row.name || row.id || "")}</h6>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.rowMeta", {
+            level: row.level || 0,
+            source: row.sourceMonsterName || row.sourceMonsterId || "-"
+          }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
+        </div>
+        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+      </div>
+      <div class="editor-monster-candidate-live-promotion-grid">
+        ${balanceDetailChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
+        ${balanceDetailChipBlock(text.targetFiles || "Target files", row.targetFiles || [])}
+        ${balanceDetailChipBlock(text.nextActions || "Next actions", actionLabels)}
+      </div>
+    </article>
+  `;
+}
+
+function renderMonsterCandidateLivePromotionDeferred(rows = [], text = {}) {
+  if (!rows.length) {
+    return `<p class="muted">${escapeHtml(text.noDeferred || "No deferred candidates.")}</p>`;
+  }
+  return `
+    <div class="editor-monster-candidate-live-promotion-deferred">
+      <div>
+        <strong>${escapeHtml(text.deferredTitle || "Deferred candidates")}</strong>
+        <p>${escapeHtml(text.deferredDescription || "Candidates with partial reward links stay outside live-data promotion.")}</p>
+      </div>
+      <div class="editor-monster-candidate-live-promotion-row-list">
+        ${rows.map((row) => renderMonsterCandidateLivePromotionDeferredRow(row, text)).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderMonsterCandidateLivePromotionDeferredRow(row, text = {}) {
+  const promotionText = detailTextForPromotion(text);
+  const roles = [
+    monsterCandidateLivePromotionStateLabel(row.planState, text),
+    monsterCandidatePromotionStageLabel(row.promotionStageId, promotionText),
+  ].filter(Boolean);
+  const missingLabels = (row.missingRewardTypes || []).map((type) => text.rewardTypeLabels?.[type] || type);
+
+  return `
+    <article class="editor-monster-candidate-live-promotion-row" data-state="${escapeAttribute(row.planState || "deferred")}">
+      <div class="editor-monster-candidate-live-promotion-row-head">
+        <div>
+          <h6>${escapeHtml(row.name || row.id || "")}</h6>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.rowMeta", {
+            level: row.level || 0,
+            source: row.sourceMonsterName || row.sourceMonsterId || "-"
+          }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
+        </div>
+        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+      </div>
+      <div class="editor-monster-candidate-live-promotion-grid">
+        ${balanceDetailChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
+        ${balanceDetailChipBlock(text.deferredMissing || "Missing reward links", missingLabels.length ? missingLabels : [text.noMissing || "None"])}
+      </div>
+    </article>
+  `;
+}
+
+function monsterCandidateLivePromotionPhaseTitle(phase, text = {}) {
+  return text.phaseLabels?.[phase.id] || tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.phaseLabel", {
+    order: phase.order || 0
+  }, `Phase ${phase.order || 0}`);
+}
+
+function monsterCandidateLivePromotionPriorityLabel(priorityId, text = {}) {
+  return text.priorityLabels?.[priorityId] || priorityId || "";
+}
+
+function monsterCandidateLivePromotionStateLabel(stateId, text = {}) {
+  return text.stateLabels?.[stateId] || stateId || "unknown";
+}
+
+function detailTextForPromotion(text = {}) {
+  return {
+    ...(EDITOR_TEXT.balanceTuningDetail?.monsterCandidatePromotion || {}),
+    ...(text.promotionLabels || {}),
+  };
 }
 
 function renderBalanceGroupRow(group, detailText = {}) {
@@ -2513,3 +2668,4 @@ function escapeHtml(value) {
 function escapeAttribute(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
 }
+

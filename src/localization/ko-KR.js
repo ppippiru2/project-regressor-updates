@@ -2037,6 +2037,51 @@ export const KO_KR_TEXT = {
               missing: "미연결"
             }
           },
+        monsterCandidateLivePromotion: {
+          title: "후보 실전 승격 계획",
+          description: "완전 보상 연결 후보만 실제 몬스터/지역 데이터 적용 전 단계로 묶어 봅니다.",
+          version: "{version}",
+          candidates: "승격 후보",
+          phases: "단계",
+          regions: "지역",
+          deferred: "보류",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          phaseLabel: "{order}단계",
+          phaseCandidateCount: "{count}종",
+          rowMeta: "레벨 {level} · 기준 {source}",
+          rewardLinks: "보상 링크",
+          targetFiles: "적용 대상",
+          nextActions: "다음 작업",
+          deferredTitle: "보류 후보",
+          deferredDescription: "마정석/스킬 보상 연결이 모자란 후보는 실제 데이터 적용 전 보강 대상으로 남깁니다.",
+          deferredMissing: "부족한 연결",
+          noRows: "승격 준비 후보 없음",
+          noDeferred: "보류 후보 없음",
+          noMissing: "부족 없음",
+          emptyReward: "없음",
+          stateLabels: {
+            "ready-for-live-data-plan": "실전 적용 계획 가능",
+            "deferred-reward-link": "보상 보강 후 진행"
+          },
+          phaseLabels: {
+            "phase-1-shore-first": "1단계 · 해안 후보",
+            "phase-2-forest-ruins": "2단계 · 숲/잔해 후보",
+            "phase-3-mana-mine": "3단계 · 마석 광산 후보",
+            "phase-4-rift-gate": "4단계 · 관문 후보"
+          },
+          priorityLabels: {
+            "low-risk-first-region": "첫 지역에서 가장 낮은 위험으로 적용 흐름을 검증합니다.",
+            "early-mid-region-alternates": "초중반 지역의 대체 몬스터 역할을 함께 점검합니다.",
+            "economy-material-check": "마정석 경제와 처치 보상 흐름을 함께 확인합니다.",
+            "late-region-role-review": "후반 관문 역할과 보스 전 단계 압박을 함께 검토합니다."
+          },
+          rewardTypeLabels: {
+            codex: "도감 조각",
+            material: "마정석",
+            skill: "스킬/룬"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",

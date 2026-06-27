@@ -1,4 +1,4 @@
-import { EQUIPMENT_SCORE_BALANCE } from "../balance/equipmentValueBalance.js?v=439";
+import { EQUIPMENT_SCORE_BALANCE } from "../balance/equipmentValueBalance.js?v=440";
 
 export function equipmentScore(item) {
   if (!item) return 0;
@@ -30,3 +30,4 @@ function getComparisonItem(item, equipmentState, getItem) {
   if (ringItems.length < 2) return null;
   return ringItems.sort((left, right) => equipmentScore(left) - equipmentScore(right))[0];
 }
+

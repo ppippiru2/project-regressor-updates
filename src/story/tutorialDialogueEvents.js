@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=439";
+import { formatText, getLocaleText } from "../localization/index.js?v=440";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 
@@ -360,3 +360,4 @@ function formatTextValue(value, templateValues) {
   }
   return value;
 }
+

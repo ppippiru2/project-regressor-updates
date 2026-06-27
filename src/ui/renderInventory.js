@@ -1,6 +1,6 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=439";
-import { buildCodexRecordProgress } from "../state/codexProgress.js?v=439";
-import { getLocaleText, t, tf } from "../localization/index.js?v=439";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=440";
+import { buildCodexRecordProgress } from "../state/codexProgress.js?v=440";
+import { getLocaleText, t, tf } from "../localization/index.js?v=440";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -246,3 +246,4 @@ function escapeHtml(value) {
     return entities[char];
   });
 }
+

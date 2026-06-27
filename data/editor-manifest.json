@@ -399,6 +399,7 @@
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
+        "src/editor/monsterCandidateLivePromotionPlan.js",
         "src/balance/monsterCandidatePool.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
@@ -447,6 +448,10 @@
         "candidateMonsterPromotionRows",
         "candidateMonsterPromotionGroups",
         "monsterCandidatePromotionChecklist",
+        "monsterCandidateLivePromotionPlan",
+        "candidateMonsterLivePromotionPhases",
+        "candidateMonsterLivePromotionRows",
+        "candidateMonsterLivePromotionDeferredRows",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
@@ -458,6 +463,7 @@
         "튜토리얼 섬 페이싱 검사 연결",
         "후보 몬스터 보상 미리보기",
         "후보 몬스터 승격 체크리스트",
+        "후보 몬스터 실전 승격 계획",
         "변경 전 읽기 전용 검증 리포트"
       ]
     },
@@ -1080,6 +1086,7 @@
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_REWARD_LINKS",
       "src/editor/monsterCandidateRewardPreview.js:createMonsterCandidateRewardPreview",
       "src/editor/monsterCandidatePromotionChecklist.js:createMonsterCandidatePromotionChecklist",
+      "src/editor/monsterCandidateLivePromotionPlan.js:createMonsterCandidateLivePromotionPlan",
       "build-scripts/check-monster-candidate-pool.mjs",
       "build-scripts/check-equipment-value-balance.mjs"
     ],
@@ -1237,6 +1244,18 @@
       "expectedCodexRecordTargetCount": 9,
       "expectedFullRewardLinkCount": 6,
       "expectedPartialRewardLinkCount": 3
+    },
+    "monsterCandidateLivePromotionPlan": {
+      "id": "monster-candidate-live-promotion-plan-v1",
+      "source": "v440",
+      "sourceModule": "src/editor/monsterCandidateLivePromotionPlan.js",
+      "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
+      "expectedCandidateCount": 6,
+      "expectedPhaseCount": 4,
+      "expectedRegionCount": 5,
+      "expectedDeferredCandidateCount": 3,
+      "editorSummaryVisible": true,
+      "writesGameData": false
     }
   },
   "combatVfxPlacementPreview": {

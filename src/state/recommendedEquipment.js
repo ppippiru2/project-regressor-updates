@@ -1,6 +1,6 @@
-import { equipInventoryItem } from "./equipmentActions.js?v=439";
-import { equipmentScore } from "./equipmentScore.js?v=439";
-import { t, tf } from "../localization/index.js?v=439";
+import { equipInventoryItem } from "./equipmentActions.js?v=440";
+import { equipmentScore } from "./equipmentScore.js?v=440";
+import { t, tf } from "../localization/index.js?v=440";
 
 export function equipRecommendedItems({ equipmentState, inventory, getItem }) {
   let nextInventory = inventory;
@@ -66,3 +66,4 @@ function resolveRecommendedSlot(item, equipmentState, getItem) {
   }));
   return ringScores.sort((left, right) => left.score - right.score)[0].slot;
 }
+

@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=439";
+import { t } from "../localization/index.js?v=440";
 
 function defaultClamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -53,3 +53,4 @@ export function shouldResetHitCombo(state, options = {}) {
   const now = options.now || Date.now();
   return now - (state.lastHitAt || 0) > options.hitResetMs && state.hitCount > 0;
 }
+

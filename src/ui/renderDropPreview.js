@@ -1,5 +1,5 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=439";
-import { t, tf } from "../localization/index.js?v=439";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=440";
+import { t, tf } from "../localization/index.js?v=440";
 
 export function renderDropPreview(monster, getItem, equipmentState) {
   const container = document.getElementById("drop-preview-list");
@@ -31,3 +31,4 @@ function lootTypeClass(item) {
   const type = String(item?.lootCategory || item?.type || "unknown").replace(/[^a-z0-9_-]/gi, "-");
   return `is-loot-type-${type}`;
 }
+

@@ -1,6 +1,6 @@
 import { applyLevelUps } from "./rewards.js";
-import { newlyUnlockedRegions } from "./regionSelection.js?v=439";
-import { tf } from "../localization/index.js?v=439";
+import { newlyUnlockedRegions } from "./regionSelection.js?v=440";
+import { tf } from "../localization/index.js?v=440";
 
 export function applyPendingLevelUps(player, context) {
   const { expToNext, getResourceCaps } = context;
@@ -21,3 +21,4 @@ export function applyPendingLevelProgression({ player, regions, expToNext, getRe
 export function formatLevelUpMessage(level) {
   return tf("stateMessages.levelReached", { level });
 }
+

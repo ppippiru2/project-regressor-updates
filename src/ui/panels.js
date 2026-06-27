@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=439";
+import { t, tf } from "../localization/index.js?v=440";
 
 export function setupCollapsiblePanels(uiState, saveUiState) {
   ensurePanelUiState(uiState);
@@ -80,3 +80,4 @@ function ensurePanelUiState(uiState) {
   if (!Array.isArray(uiState.collapsedPanels)) uiState.collapsedPanels = [];
   if (!Array.isArray(uiState.expandedDefaultPanels)) uiState.expandedDefaultPanels = [];
 }
+

@@ -1,4 +1,4 @@
-import { INFO_TEXT } from "../config/infoText.js?v=439";
+import { INFO_TEXT } from "../config/infoText.js?v=440";
 
 const INFO_SELECTOR = "[data-info-key], [data-info-title]";
 
@@ -140,3 +140,4 @@ function escapeHtml(value) {
     return entities[char];
   });
 }
+

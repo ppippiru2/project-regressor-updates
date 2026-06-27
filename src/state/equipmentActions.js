@@ -1,5 +1,5 @@
 import { addInventoryItem, consumeInventoryItem } from "./inventory.js";
-import { tf } from "../localization/index.js?v=439";
+import { tf } from "../localization/index.js?v=440";
 
 export function equipInventoryItem({ equipmentState, inventory, itemId, item, slot }) {
   const inventoryEntry = inventory.find((entry) => entry.itemId === itemId);
@@ -34,3 +34,4 @@ export function resolveEquipmentSlot(item, equipped) {
   if (!equipped.Ring2) return "Ring2";
   return "Ring1";
 }
+

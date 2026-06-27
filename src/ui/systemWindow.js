@@ -1,6 +1,6 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=439";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=439";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=439";
+import { getLocaleText, t, tf } from "../localization/index.js?v=440";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=440";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=440";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));
@@ -270,3 +270,4 @@ function escapeHtml(value) {
     return entities[char];
   });
 }
+

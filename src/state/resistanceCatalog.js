@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=439";
+import { getLocaleText } from "../localization/index.js?v=440";
 
 const RESISTANCE_LABELS = getLocaleText().resistances.labels;
 
@@ -29,3 +29,4 @@ export function applyResistanceOption(resistances, optionType, value) {
   resistances[key] += Number(value) || 0;
   return true;
 }
+

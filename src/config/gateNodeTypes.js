@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=439";
+import { getLocaleText } from "../localization/index.js?v=440";
 
 const NODE_TEXT = getLocaleText().gateNodeTypes;
 
@@ -133,3 +133,4 @@ export function gateNodeTypeSummary(nodes = []) {
     .map(([type, count]) => `${gateNodeTypeLabel(type)} ${count}`)
     .join(" · ");
 }
+
