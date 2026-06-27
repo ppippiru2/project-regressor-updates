@@ -246,24 +246,24 @@
     "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v420-debug.apk"
   },
   "version": {
-    "code": 419,
+    "code": 420,
     "name": "4.20.0",
-    "displayName": "v419"
+    "displayName": "v420"
   },
   "artifacts": {
     "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v420-debug.apk"
   },
   "android": {
-    "code": 419,
+    "code": 420,
     "name": "4.20.0",
-    "displayName": "v419",
+    "displayName": "v420",
     "artifacts": {
       "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v420-debug.apk"
     },
     "version": {
-      "code": 419,
+      "code": 420,
       "name": "4.20.0",
-      "displayName": "v419"
+      "displayName": "v420"
     }
   },
   "apk": {
