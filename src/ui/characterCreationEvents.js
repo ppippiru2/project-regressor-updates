@@ -1,25 +1,25 @@
-import { getLocaleText, tf } from "../localization/index.js?v=428";
-import { resolveAlignment } from "../state/profile.js?v=428";
+import { getLocaleText, tf } from "../localization/index.js?v=429";
+import { resolveAlignment } from "../state/profile.js?v=429";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=428";
+} from "../state/portraitFrame.js?v=429";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=428";
+} from "./portraitFrameView.js?v=429";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=428";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=428";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=428";
+} from "./diceSpriteRenderer.js?v=429";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=429";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=429";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

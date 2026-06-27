@@ -397,8 +397,11 @@
         "src/balance/balanceTuningRegistry.js",
         "src/editor/balanceTuningPreview.js",
         "src/editor/tutorialIslandPacingPreview.js",
+        "src/editor/monsterCandidateRewardPreview.js",
+        "src/balance/monsterCandidatePool.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
+        "build-scripts/check-monster-candidate-pool.mjs",
         "build-scripts/check-equipment-value-balance.mjs",
         "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES"
       ],
@@ -428,6 +431,11 @@
         "candidateSignalSummary",
         "candidateValueRangeSummary",
         "candidateCheckLabelSummary",
+        "monsterCandidateRewardPreview",
+        "candidateMonsterRewardGroups",
+        "candidateMonsterRewardRows",
+        "candidateMonsterRewardCoverage",
+        "candidateMonsterRewardItemTypes",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
@@ -437,6 +445,7 @@
         "영향 범위 필터",
         "파일/export 누락 경고",
         "튜토리얼 섬 페이싱 검사 연결",
+        "후보 몬스터 보상 미리보기",
         "변경 전 읽기 전용 검증 리포트"
       ]
     },
@@ -1055,8 +1064,27 @@
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_DOMAIN_IDS",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
+      "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
+      "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_REWARD_LINKS",
+      "src/editor/monsterCandidateRewardPreview.js:createMonsterCandidateRewardPreview",
+      "build-scripts/check-monster-candidate-pool.mjs",
       "build-scripts/check-equipment-value-balance.mjs"
     ],
+    "monsterCandidateRewardPreview": {
+      "id": "monster-candidate-reward-preview-v1",
+      "source": "v429",
+      "sourceModule": "src/editor/monsterCandidateRewardPreview.js",
+      "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
+      "expectedCandidateCount": 15,
+      "expectedRegionGroupCount": 5,
+      "expectedLiveCandidateCount": 6,
+      "expectedPendingCandidateCount": 9,
+      "expectedCodexFragmentCount": 15,
+      "expectedSkillRuneCount": 3,
+      "expectedUnresolvedItemCount": 0,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
     "relatedChecks": [
       {
         "id": "balance-registry-structure",
@@ -1083,6 +1111,15 @@
         "guards": [
           "상점 가격 계수",
           "추천 장비 점수"
+        ]
+      },
+      {
+        "id": "monster-candidate-pool",
+        "label": "몬스터 후보 보상 검사",
+        "script": "build-scripts/check-monster-candidate-pool.mjs",
+        "guards": [
+          "후보 15종/지역 대표 연결",
+          "도감 조각/마정석/스킬룬 보상 미리보기"
         ]
       }
     ],
@@ -1144,6 +1181,7 @@
         ],
         "checks": [
           "tutorial-island-pacing",
+          "monster-candidate-pool",
           "equipment-value-balance"
         ]
       },

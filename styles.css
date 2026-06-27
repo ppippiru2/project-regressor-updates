@@ -4094,6 +4094,152 @@ select:focus {
   margin: 0;
 }
 
+.editor-monster-candidate-rewards {
+  background: rgba(5, 20, 48, 0.48);
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-monster-candidate-rewards[data-valid="false"] {
+  border-color: rgba(255, 111, 151, 0.42);
+}
+
+.editor-monster-candidate-rewards-head,
+.editor-monster-candidate-reward-group-head,
+.editor-monster-candidate-reward-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-monster-candidate-rewards-head h4,
+.editor-monster-candidate-rewards-head p,
+.editor-monster-candidate-reward-group-head h5,
+.editor-monster-candidate-reward-group-head p,
+.editor-monster-candidate-reward-row-head h6,
+.editor-monster-candidate-reward-row-head p {
+  margin: 0;
+}
+
+.editor-monster-candidate-rewards-head h4 {
+  color: var(--cyan);
+  font-size: 0.95rem;
+}
+
+.editor-monster-candidate-rewards-head strong,
+.editor-monster-candidate-reward-group-head > span {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 999px;
+  color: var(--cyan-soft);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-monster-candidate-reward-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.editor-monster-candidate-reward-metrics span,
+.editor-monster-candidate-reward-coverage {
+  background: rgba(1, 10, 28, 0.28);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.45rem 0.55rem;
+}
+
+.editor-monster-candidate-reward-metrics span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.editor-monster-candidate-reward-metrics small,
+.editor-monster-candidate-reward-coverage span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-monster-candidate-reward-metrics b,
+.editor-monster-candidate-reward-coverage strong {
+  color: var(--text);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-reward-warning {
+  color: var(--pink);
+  font-size: 0.76rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.editor-monster-candidate-reward-groups,
+.editor-monster-candidate-reward-row-list {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-monster-candidate-reward-group {
+  background: rgba(1, 10, 28, 0.24);
+  border: 1px solid rgba(108, 210, 255, 0.15);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+  padding: 0.65rem;
+}
+
+.editor-monster-candidate-reward-group-head h5,
+.editor-monster-candidate-reward-row-head h6 {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.editor-monster-candidate-reward-group-head p,
+.editor-monster-candidate-reward-row-head p {
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.editor-monster-candidate-reward-row {
+  border-top: 1px solid rgba(108, 210, 255, 0.14);
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding-top: 0.65rem;
+}
+
+.editor-monster-candidate-reward-row[data-state="pending"] {
+  opacity: 0.82;
+}
+
+.editor-monster-candidate-reward-item-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-monster-candidate-reward-coverage {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  justify-content: space-between;
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -7465,6 +7611,10 @@ body[data-info-tooltips="off"] .info-term {
 
   .editor-balance-domain-list,
   .editor-balance-active-candidate-metrics,
+  .editor-monster-candidate-rewards-head,
+  .editor-monster-candidate-reward-group-head,
+  .editor-monster-candidate-reward-row-head,
+  .editor-monster-candidate-reward-item-grid,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-monster-sprite-pose-grid {
@@ -7472,6 +7622,7 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .editor-combat-vfx-summary,
+  .editor-monster-candidate-reward-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

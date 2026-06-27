@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 428,
-  "displayVersion": "v428",
-  "cacheVersion": "project-regressor-mvp-v428",
-  "updatedAt": "2026-06-27T17:11:54.534Z",
+  "versionCode": 429,
+  "displayVersion": "v429",
+  "cacheVersion": "project-regressor-mvp-v429",
+  "updatedAt": "2026-06-28T02:41:14.040+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=428&cachebust=428",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=429&cachebust=429",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v429 adds a read-only monster candidate reward preview to the balance editor surface.",
+    "v429 groups the v2.3/v2.6 candidate monsters by live region and shows codex fragments, mana crystals, skill fragments, and skill runes before any live drop changes.",
+    "v429 extends editor and monster-candidate guards so reward preview counts, item resolution, localization, styles, and cache entries stay connected.",
     "v428 surfaces the monster sprite apply-preview summary inside the editor asset registry panel.",
     "v428 shows apply-preview artifact, script, status, ready patch count, and review policy without opening JSON.",
     "v428 extends the apply-preview guard to protect editor render hooks, localization copy, and summary styles.",
@@ -265,32 +268,32 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v428-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v429-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v428-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v429-debug.apk"
   },
   "version": {
-    "code": 428,
-    "name": "4.28.0",
-    "displayName": "v428"
+    "code": 429,
+    "name": "4.29.0",
+    "displayName": "v429"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v428-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v429-debug.apk"
   },
   "android": {
-    "code": 428,
-    "name": "4.28.0",
-    "displayName": "v428",
+    "code": 429,
+    "name": "4.29.0",
+    "displayName": "v429",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v428-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v429-debug.apk"
     },
     "version": {
-      "code": 428,
-      "name": "4.28.0",
-      "displayName": "v428"
+      "code": 429,
+      "name": "4.29.0",
+      "displayName": "v429"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v428-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v429-debug.apk"
   }
 }
