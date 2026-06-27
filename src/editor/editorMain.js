@@ -1,7 +1,7 @@
-import { applyDomLocalization } from "../localization/domText.js?v=360";
-import { getLocaleText, tf } from "../localization/index.js?v=360";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=360";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=360";
+import { applyDomLocalization } from "../localization/domText.js?v=361";
+import { getLocaleText, tf } from "../localization/index.js?v=361";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=361";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=361";
 
 const EDITOR_VERSION = "359";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
@@ -195,6 +195,7 @@ function renderPanelDetail() {
     return;
   }
   const retargetDetail = panel.id === "theme_retarget_preview" ? renderRetargetPreviewDetail() : "";
+  const balanceDetail = panel.id === "balance_tuning_registry" ? renderBalanceTuningDetail() : "";
 
   elements.panelDetail.innerHTML = `
     <div class="editor-detail-header">
@@ -212,6 +213,55 @@ function renderPanelDetail() {
     </div>
     ${panel.nodeTypes ? `<div class="editor-chip-section"><strong>${escapeHtml(EDITOR_TEXT.detailTitles.nodeTypes)}</strong><div class="editor-chip-list">${panel.nodeTypes.map((type) => chip(type)).join("")}</div></div>` : ""}
     ${retargetDetail}
+    ${balanceDetail}
+  `;
+}
+
+function renderBalanceTuningDetail() {
+  const detailText = EDITOR_TEXT.balanceTuningDetail || {};
+  const fileCount = new Set(BALANCE_TUNING_GROUPS.flatMap((group) => group.files)).size;
+  const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
+  const rows = BALANCE_TUNING_GROUPS.map((group) => `
+    <article class="editor-balance-row">
+      <div class="editor-balance-row-head">
+        <div>
+          <h4>${escapeHtml(group.id)}</h4>
+          <span>${escapeHtml(group.scope)}</span>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.exportCount", { count: group.exports.length }, `${group.exports.length}`))}</strong>
+      </div>
+      ${balanceDetailChipBlock(detailText.files || "Files", group.files)}
+      ${balanceDetailChipBlock(detailText.exports || "Exports", group.exports)}
+      ${balanceDetailChipBlock(detailText.affects || "Affects", group.affects)}
+    </article>
+  `).join("");
+
+  return `
+    <section class="editor-balance-detail" aria-label="${escapeAttribute(detailText.title || "Balance Tuning Detail")}">
+      <div class="editor-balance-head">
+        <div>
+          <h3>${escapeHtml(detailText.title || "")}</h3>
+          <p class="muted">${escapeHtml(detailText.description || "")}</p>
+        </div>
+        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.summary", {
+          groupCount: BALANCE_TUNING_GROUPS.length,
+          fileCount,
+          exportCount
+        }, ""))}</span>
+      </div>
+      <div class="editor-balance-list">
+        ${rows}
+      </div>
+    </section>
+  `;
+}
+
+function balanceDetailChipBlock(title, values = []) {
+  return `
+    <div class="editor-balance-chip-block">
+      <span>${escapeHtml(title)}</span>
+      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
+    </div>
   `;
 }
 

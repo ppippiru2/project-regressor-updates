@@ -1421,8 +1421,8 @@ export const KO_KR_TEXT = {
       futureControls: "미래 컨트롤",
       nodeTypes: "노드 타입",
     },
-    retargetDetail: {
-      title: "테마 전환 상세 미리보기",
+      retargetDetail: {
+        title: "테마 전환 상세 미리보기",
       ready: "준비 완료",
       review: "검토 필요",
       route: "{source} → {target}",
@@ -1452,11 +1452,20 @@ export const KO_KR_TEXT = {
       empty: "표시할 항목 없음",
       emptyByType: "현재 {filter} 필터라 {section} 항목은 숨겨졌습니다.",
       emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
-      emptyResetHint: "초기화를 누르면 전체 목록으로 돌아갑니다.",
-    },
-    assetTypes: {
-      image: "이미지",
-      audio: "사운드",
+        emptyResetHint: "초기화를 누르면 전체 목록으로 돌아갑니다.",
+      },
+      balanceTuningDetail: {
+        title: "밸런스 조정 표면",
+        description: "수치 편집 전 확인하는 읽기 전용 레지스트리입니다.",
+        summary: "그룹 {groupCount} · 파일 {fileCount} · export {exportCount}",
+        exportCount: "export {count}",
+        files: "파일",
+        exports: "내보내기",
+        affects: "영향 범위",
+      },
+      assetTypes: {
+        image: "이미지",
+        audio: "사운드",
       slotTitle: "{title} 슬롯",
     },
     save: {

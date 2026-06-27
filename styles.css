@@ -3474,6 +3474,83 @@ select:focus {
   font-weight: 900;
 }
 
+.editor-balance-detail {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(57, 228, 255, 0.26);
+  border-radius: 8px;
+  background: rgba(3, 14, 35, 0.48);
+  padding: 0.85rem;
+}
+
+.editor-balance-head,
+.editor-balance-row,
+.editor-balance-chip-block {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.editor-balance-head {
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: start;
+}
+
+.editor-balance-head p,
+.editor-balance-row h4 {
+  margin: 0;
+}
+
+.editor-balance-head > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.9rem;
+  border: 1px solid rgba(57, 228, 255, 0.38);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-size: 0.76rem;
+  font-weight: 900;
+  padding: 0 0.65rem;
+}
+
+.editor-balance-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.editor-balance-row {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 20, 48, 0.62);
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-balance-row-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.editor-balance-row-head h4 {
+  color: var(--cyan);
+  font-size: 1rem;
+}
+
+.editor-balance-row-head span,
+.editor-balance-chip-block > span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.editor-balance-row-head strong {
+  color: var(--gold);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
 .editor-retarget-controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
@@ -5834,6 +5911,16 @@ body[data-info-tooltips="off"] .info-term {
     align-items: center;
     display: grid;
     grid-template-columns: minmax(0, 1fr) max-content;
+  }
+
+  .editor-balance-head,
+  .editor-balance-row-head {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-balance-head > span,
+  .editor-balance-row-head strong {
+    justify-self: start;
   }
 
   .editor-shell,
