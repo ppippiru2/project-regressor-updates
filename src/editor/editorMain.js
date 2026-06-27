@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=375";
-import { getLocaleText, tf } from "../localization/index.js?v=375";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=375";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=375";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=375";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=375";
+import { applyDomLocalization } from "../localization/domText.js?v=376";
+import { getLocaleText, tf } from "../localization/index.js?v=376";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=376";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=376";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=376";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=376";
 
-const EDITOR_VERSION = "375";
+const EDITOR_VERSION = "376";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -297,7 +297,7 @@ function renderBalanceTuningDetail() {
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
       ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
-      ${renderBalanceTuningCandidates(tuningCandidates, detailText)}
+      ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
         ${rows || emptyBalanceRows(detailText)}
@@ -374,15 +374,14 @@ function balanceDomainValueShapeLabels(domain = {}, detailText = {}) {
 }
 
 function balanceDomainCheckLabels(domain = {}, relatedChecks = []) {
-  const checkLabels = new Map((relatedChecks || []).map((check) => [check.id, check.label || check.id]));
-  return (domain.checks || []).map((checkId) => checkLabels.get(checkId) || checkId);
+  return balanceCheckLabels(domain.checks || [], relatedChecks);
 }
 
 function balanceValueTypeLabel(type, detailText = {}) {
   return detailText.valueTypeLabels?.[type] || type;
 }
 
-function renderBalanceTuningCandidates(candidates = [], detailText = {}) {
+function renderBalanceTuningCandidates(candidates = [], detailText = {}, relatedChecks = []) {
   if (!candidates.length) return "";
   return `
     <section class="editor-balance-candidate-list" aria-label="${escapeAttribute(detailText.tuningCandidates || "Tuning candidates")}">
@@ -395,11 +394,20 @@ function renderBalanceTuningCandidates(candidates = [], detailText = {}) {
           </div>
           ${balanceCandidateImpactBlock(balanceCandidateImpactSummary(candidate), detailText)}
           ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
-          ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", candidate.checks || [])}
+          ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", balanceCandidateCheckLabels(candidate, relatedChecks))}
         </button>
       `).join("")}
     </section>
   `;
+}
+
+function balanceCandidateCheckLabels(candidate = {}, relatedChecks = []) {
+  return balanceCheckLabels(candidate.checks || [], relatedChecks);
+}
+
+function balanceCheckLabels(checkIds = [], relatedChecks = []) {
+  const checkLabels = new Map((relatedChecks || []).map((check) => [check.id, check.label || check.id]));
+  return (checkIds || []).map((checkId) => checkLabels.get(checkId) || checkId);
 }
 
 function balanceCandidateImpactBlock(summary, detailText = {}) {

@@ -393,6 +393,7 @@
         "tuningCandidates",
         "candidateFilter",
         "candidateImpactSummary",
+        "candidateCheckLabelSummary",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
