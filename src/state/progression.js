@@ -6,11 +6,15 @@ import {
 } from "../balance/playerStatBalance.js?v=383";
 import { applyResistanceOption, createEmptyResistances } from "./resistanceCatalog.js?v=383";
 
-export function playerStats(player, equippedItems = []) {
+export function playerStats(player, equippedItems = [], bonusStats = {}) {
   const total = { ...player.stats };
   const resistances = createEmptyResistances();
   let attackFromGear = 0;
   let defenseFromGear = 0;
+
+  for (const [stat, value] of Object.entries(bonusStats || {})) {
+    if (Number.isFinite(total[stat]) && Number.isFinite(value)) total[stat] += value;
+  }
 
   for (const item of equippedItems) {
     attackFromGear += item.attack || 0;

@@ -20,4 +20,19 @@ export const INITIAL_CREATION_STAT_BALANCE = {
   minValues: { ...PLAYER_INITIAL_STATS },
 };
 
+export const STARTER_TRAIT_BONUSES = {
+  lower_weapon_mastery: {
+    stats: { STR: 1 },
+  },
+  lower_mobility_sense: {
+    stats: { AGI: 1 },
+  },
+  lower_survival_sense: {
+    stats: { VIT: 1 },
+  },
+  lower_mana_sense: {
+    stats: { INT: 1 },
+  },
+};
+
 export const BULK_STAT_DEALLOCATE_AMOUNT = 10;

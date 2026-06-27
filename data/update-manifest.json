@@ -13,6 +13,7 @@
     "v383 applies the first ProjectRegressor_v2.4.1 package pass to the new-game synchronization flow.",
     "v383 changes the profile label to the tutorial-system temporary registration name and records a starter fate card after the abyss questions.",
     "v383 stores the selected starter card, trait, and card skill on the player profile and adds the selected starter skill beside guaranteed basic attack in slot 1.",
+    "v383 adds small starter trait stat bonuses so each first-run card has an immediate growth identity.",
     "v373 shows the core export names directly on each editor balance domain card.",
     "v373 makes player growth, combat pressure, equipment/items, monster rewards, and theme retarget tuning easier to inspect before editing.",
     "v373 extends editor metadata checks so the domain export summary remains registered.",

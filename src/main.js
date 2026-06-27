@@ -126,6 +126,7 @@ import {
 import { createInitialState } from "./state/initialState.js?v=383";
 import { applyImportedUiState, exportSavePayloadSnapshot, importSavePayloadText } from "./state/saveLoadActions.js?v=383";
 import { playerStats } from "./state/progression.js?v=383";
+import { starterTraitStatBonuses } from "./state/starterTraitEffects.js?v=383";
 import { addInventoryItem } from "./state/inventory.js";
 import { equipInventoryItem, resolveEquipmentSlot, unequipEquipmentSlot } from "./state/equipmentActions.js?v=383";
 import { equipRecommendedItems } from "./state/recommendedEquipment.js?v=383";
@@ -337,7 +338,7 @@ function getEquippedItems() {
 }
 
 function derivedPlayer() {
-  return playerStats(state.player, getEquippedItems());
+  return playerStats(state.player, getEquippedItems(), starterTraitStatBonuses(state.playerProfile));
 }
 
 function addLog(message) {

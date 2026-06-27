@@ -16,6 +16,7 @@ export function buildPlayerProfileInput(formData, defaultProfile) {
     alignment: resolveAlignment([...formData.entries()].filter(([key]) => key.startsWith("q")).map(([, value]) => value)),
     starterCardId: formData.get("starterCardId") || "",
     starterCardName: formData.get("starterCardName") || "",
+    starterTraitId: formData.get("starterTraitId") || "",
     starterTrait: formData.get("starterTrait") || "",
     starterSkill: formData.get("starterSkill") || "",
     starterSkillActionId: formData.get("starterSkillActionId") || "",

@@ -157,6 +157,8 @@ const ASSETS = [
   "./src/state/saveSlotSession.js?v=383",
   "./src/state/skillLoadout.js",
   "./src/state/skillLoadout.js?v=383",
+  "./src/state/starterTraitEffects.js",
+  "./src/state/starterTraitEffects.js?v=383",
   "./src/state/gateNodeActions.js",
   "./src/state/gateNodeActions.js?v=383",
   "./src/state/growthObjectiveConfig.js",

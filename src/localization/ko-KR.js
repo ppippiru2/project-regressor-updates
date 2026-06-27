@@ -366,6 +366,7 @@ export const KO_KR_TEXT = {
         {
           id: "starter_weapon_sense",
           card: "낡은 무기 감각",
+          traitId: "lower_weapon_mastery",
           trait: "하급 무기 숙련",
           skill: "강타",
           actionId: "power_slash",
@@ -375,6 +376,7 @@ export const KO_KR_TEXT = {
         {
           id: "starter_light_step",
           card: "가벼운 발걸음",
+          traitId: "lower_mobility_sense",
           trait: "하급 기동 감각",
           skill: "빠른 발놀림",
           actionId: "quick_step",
@@ -384,6 +386,7 @@ export const KO_KR_TEXT = {
         {
           id: "starter_enduring_body",
           card: "버티는 몸",
+          traitId: "lower_survival_sense",
           trait: "하급 생존 감각",
           skill: "방어 자세",
           actionId: "guard_stance",
@@ -393,6 +396,7 @@ export const KO_KR_TEXT = {
         {
           id: "starter_faint_mana",
           card: "흐릿한 마력 감각",
+          traitId: "lower_mana_sense",
           trait: "하급 마력 감각",
           skill: "마력 점화",
           actionId: "mana_ignite",

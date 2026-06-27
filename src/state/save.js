@@ -55,6 +55,7 @@ export const DEFAULT_PLAYER_PROFILE = {
   alignment: t("saveDefaults.alignment"),
   starterCardId: "",
   starterCardName: "",
+  starterTraitId: "",
   starterTrait: "",
   starterSkill: "",
   starterSkillActionId: "",
@@ -189,6 +190,7 @@ export function normalizePlayerProfile(savedProfile, fallbackName = t("saveDefau
   profile.alignment = sanitizeProfileText(profile.alignment, t("saveDefaults.alignment"), 12);
   profile.starterCardId = sanitizeProfileText(profile.starterCardId, "", 40);
   profile.starterCardName = sanitizeProfileText(profile.starterCardName, "", 20);
+  profile.starterTraitId = sanitizeProfileText(profile.starterTraitId, "", 40);
   profile.starterTrait = sanitizeProfileText(profile.starterTrait, "", 20);
   profile.starterSkill = sanitizeProfileText(profile.starterSkill, "", 20);
   profile.starterSkillActionId = sanitizeProfileText(profile.starterSkillActionId, "", 40);

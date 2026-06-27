@@ -38,6 +38,7 @@ export const BALANCE_TUNING_GROUPS = [
       "PLAYER_BASE_STAT_VALUES",
       "PLAYER_BASE_STAT_VALUE",
       "INITIAL_CREATION_STAT_BALANCE",
+      "STARTER_TRAIT_BONUSES",
       "BULK_STAT_DEALLOCATE_AMOUNT",
     ],
     affects: ["level-up", "stat-allocation", "character-creation"],

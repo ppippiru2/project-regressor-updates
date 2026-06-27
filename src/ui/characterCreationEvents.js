@@ -556,6 +556,7 @@ function starterCardFormValues(draft) {
   return {
     starterCardId: card.id,
     starterCardName: card.card,
+    starterTraitId: card.traitId || "",
     starterTrait: card.trait,
     starterSkill: card.skill,
     starterSkillActionId: card.actionId || "",
