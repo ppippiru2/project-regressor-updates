@@ -1491,6 +1491,7 @@ export const KO_KR_TEXT = {
         domainImpact: "연결 규모",
         domainImpactSummary: "그룹 {groups} · 파일 {files} · export {exports}",
         domainGroups: "연결 그룹",
+        domainExports: "핵심 export",
         domainWatch: "확인 포인트",
         domainLabels: {
           "player-foundation": "플레이어 성장 기반",

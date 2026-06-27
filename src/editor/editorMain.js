@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=372";
-import { getLocaleText, tf } from "../localization/index.js?v=372";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=372";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=372";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=372";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=372";
+import { applyDomLocalization } from "../localization/domText.js?v=373";
+import { getLocaleText, tf } from "../localization/index.js?v=373";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=373";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=373";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=373";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=373";
 
-const EDITOR_VERSION = "372";
+const EDITOR_VERSION = "373";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -333,6 +333,7 @@ function renderBalanceDomainSummaries(domains = [], detailText = {}) {
               }, `${summary.groupCount} · ${summary.fileCount} · ${summary.exportCount}`))}</strong>
             </div>
             ${balanceDetailChipBlock(detailText.domainGroups || "Groups", domain.groups || [])}
+            ${balanceDetailChipBlock(detailText.domainExports || "Exports", balanceDomainExportNames(domain))}
             ${balanceDetailChipBlock(detailText.domainWatch || "Watch", domain.watch || [])}
           </article>
         `;
@@ -343,6 +344,13 @@ function renderBalanceDomainSummaries(domains = [], detailText = {}) {
 
 function balanceDomainImpactSummary(domain = {}) {
   return balanceLinkedGroupSummary(domain.groups || []);
+}
+
+function balanceDomainExportNames(domain = {}) {
+  const groupIds = new Set(domain.groups || []);
+  return [...new Set(BALANCE_TUNING_GROUPS
+    .filter((group) => groupIds.has(group.id))
+    .flatMap((group) => group.exports || []))];
 }
 
 function renderBalanceTuningCandidates(candidates = [], detailText = {}) {
