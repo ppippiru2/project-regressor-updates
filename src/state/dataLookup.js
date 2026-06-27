@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=380";
+import { t } from "../localization/index.js?v=381";
 
 export function findById(collection, id) {
   return collection.find((item) => item.id === id);
