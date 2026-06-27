@@ -610,7 +610,7 @@ export const KO_KR_TEXT = {
     ],
     "derived:exp": [
       "경험치",
-      "필요 경험치에 도달하면 레벨업합니다. 레벨업 시 근력/민첩/체력/지능/정신 +1, 자유 스탯 +5를 획득합니다."
+      "필요 경험치에 도달하면 레벨업합니다. 레벨업 시 근력/민첩/체력/지능/정신 +1, 자유 스탯 +2를 획득합니다."
     ],
     "derived:freePoints": [
       "보유 포인트",
@@ -864,7 +864,7 @@ export const KO_KR_TEXT = {
   },
   stateMessages: {
     restRecovered: "짧은 휴식으로 HP를 회복했습니다.",
-    levelReached: "레벨 {level} 달성. 근력/민첩/체력/지능/정신 +1, HP/MP 회복, 자유 스탯 +5.",
+    levelReached: "레벨 {level} 달성. 근력/민첩/체력/지능/정신 +1, HP/MP 회복, 자유 스탯 +2.",
     noRecommendedEquipment: "추천 장착할 더 좋은 장비가 없습니다.",
     recommendedEquipmentMore: " 외 {count}개",
     recommendedEquipmentDone: "추천 장착 완료: {items}{suffix}.",
@@ -1287,6 +1287,8 @@ export const KO_KR_TEXT = {
     statPointsTitle: "스탯 포인트 사용 가능",
     statPointsDetail: "보유 포인트 {points}개. 알림을 눌러 상태창에서 배분하십시오.",
     statusAction: "상태 보기",
+    tutorialStartTitle: "튜토리얼 섬 행동 지침",
+    tutorialStartDetail: "전투로 경험치와 장비 후보를 확보하고, 지역 탭에서 다음 개방 목표를 확인하십시오.",
     finalGateTitle: "최종 관문 공략 가능",
     finalGateDetail: "제한시간 피해량 평가로 검은 관문의 파수꾼에게 성장치를 증명하면 튜토리얼 섬 공략이 끝납니다.",
     regionAction: "지역 보기",

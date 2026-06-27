@@ -1,5 +1,5 @@
-import { MAX_NOTICE_DETAIL_LENGTH, OBJECTIVE_ROTATE_MS } from "./growthObjectiveConfig.js?v=385";
-import { t, tf } from "../localization/index.js?v=385";
+import { MAX_NOTICE_DETAIL_LENGTH, OBJECTIVE_ROTATE_MS } from "./growthObjectiveConfig.js?v=386";
+import { t, tf } from "../localization/index.js?v=386";
 
 export function createGrowthObjective(regions, player, expToNext, options = {}) {
   const objectives = createGrowthObjectives(regions, player, expToNext, options);
@@ -33,6 +33,9 @@ export function createGrowthObjectives(regions, player, expToNext, options = {})
     });
   }
 
+  const tutorialStartObjective = createTutorialStartObjective(regions, player, options);
+  if (tutorialStartObjective) objectives.push(tutorialStartObjective);
+
   const progressionObjective = createProgressionObjective(regions, player, expToNext);
   if (progressionObjective) objectives.push(progressionObjective);
 
@@ -42,6 +45,25 @@ export function createGrowthObjectives(regions, player, expToNext, options = {})
   }
 
   return objectives;
+}
+
+function createTutorialStartObjective(regions, player, options = {}) {
+  const firstRegion = regions[0];
+  if (!firstRegion) return null;
+  if (options.regionId && options.regionId !== firstRegion.id) return null;
+  if (Array.isArray(options.completedRegions) && options.completedRegions.length > 0) return null;
+  if (Number(player.level || 1) > 1) return null;
+  if (Number(player.exp || 0) > 0) return null;
+
+  return {
+    id: "tutorial-start",
+    state: "notice",
+    title: t("growthObjectiveMessages.tutorialStartTitle"),
+    detail: t("growthObjectiveMessages.tutorialStartDetail"),
+    progress: null,
+    showMeter: false,
+    action: { label: t("growthObjectiveMessages.combatAction"), view: "combat" },
+  };
 }
 
 function createProgressionObjective(regions, player, expToNext) {

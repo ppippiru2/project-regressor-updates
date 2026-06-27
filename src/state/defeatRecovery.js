@@ -1,5 +1,5 @@
-import { DEFEAT_RECOVERY_BALANCE } from "../balance/recoveryBalance.js?v=385";
-import { t } from "../localization/index.js?v=385";
+import { DEFEAT_RECOVERY_BALANCE } from "../balance/recoveryBalance.js?v=386";
+import { t } from "../localization/index.js?v=386";
 
 export function applyPlayerDefeatRecovery(state, player, monster) {
   const shouldAutoRecover = state.autoHunt && !monster.isBoss;
