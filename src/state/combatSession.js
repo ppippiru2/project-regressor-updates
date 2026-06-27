@@ -1,5 +1,5 @@
 import { createCombatTarget } from "../combat/combatState.js";
-import { t } from "../localization/index.js?v=386";
+import { t } from "../localization/index.js?v=387";
 
 export function startCombatSession(state, monster, stats) {
   if (state.inCombat) return false;

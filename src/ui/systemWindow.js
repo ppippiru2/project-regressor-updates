@@ -1,4 +1,4 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=386";
+import { getLocaleText, t, tf } from "../localization/index.js?v=387";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));
@@ -28,7 +28,7 @@ export function renderSystemWindow({ log, player, playerProfile, region, inComba
   }
 }
 
-function createSystemNotice({ log, player, playerProfile, region, inCombat }) {
+export function createSystemNotice({ log, player, playerProfile, region, inCombat }) {
   const displayName = playerProfile?.name || player?.name || t("systemWindow.fallbackName");
   const statusText = systemStatusText(inCombat);
   const baseMeta = [playerMeta(displayName, player?.level || 1), region?.name || t("systemWindow.unknownRegion"), statusText];
@@ -41,6 +41,38 @@ function createSystemNotice({ log, player, playerProfile, region, inCombat }) {
       message: inCombat
         ? t("systemWindow.notices.combatMessage")
         : t("systemWindow.notices.idleMessage"),
+      meta: baseMeta,
+    };
+  }
+
+  if (regex(SYSTEM_MATCHERS.tutorialStatus).test(message)) {
+    return {
+      type: "notice",
+      label: t("systemWindow.notices.tutorialStatusLabel"),
+      message: t("systemWindow.notices.tutorialStatusMessage"),
+      meta: [
+        t("systemWindow.notices.basicAttackReady"),
+        t("systemWindow.notices.cardSkillReady"),
+        statusText,
+      ],
+    };
+  }
+
+  const tutorialLocation = message.match(regex(SYSTEM_MATCHERS.tutorialLocation));
+  if (tutorialLocation) {
+    return {
+      type: "quest",
+      label: t("systemWindow.notices.tutorialLocationLabel"),
+      message: t("systemWindow.notices.tutorialLocationMessage"),
+      meta: [tutorialLocation[1], t("systemWindow.notices.checkCombatTab"), statusText],
+    };
+  }
+
+  if (regex(SYSTEM_MATCHERS.tutorialTransfer).test(message)) {
+    return {
+      type: "notice",
+      label: t("systemWindow.notices.tutorialTransferLabel"),
+      message: t("systemWindow.notices.tutorialTransferMessage"),
       meta: baseMeta,
     };
   }

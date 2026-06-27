@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 386,
-  "displayVersion": "v3.86",
-  "cacheVersion": "project-regressor-mvp-v386",
+  "versionCode": 387,
+  "displayVersion": "v3.87",
+  "cacheVersion": "project-regressor-mvp-v387",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=386&cachebust=386",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=387&cachebust=387",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v387 classifies tutorial transfer, location, and status briefing logs into dedicated system-window notices.",
+    "v387 keeps the v2.4.1 opening guidance visible without adding a blocking dialogue screen.",
+    "v387 adds a quick-check guard for the system-window tutorial notice routing.",
     "v386 adds a starting objective for newly created tutorial characters.",
     "v386 removes that starting objective after early progress or outside the first tutorial region.",
     "v386 aligns level-up help and log text with the v2.4.1 +2 free-stat balance.",
@@ -139,21 +142,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v386-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v387-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v386-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v387-debug.apk"
   },
   "version": {
-    "code": 386,
-    "name": "3.86.0",
-    "displayName": "v386"
+    "code": 387,
+    "name": "3.87.0",
+    "displayName": "v387"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v386-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v387-debug.apk"
   },
   "android": {
-    "code": 386,
-    "name": "3.86.0",
-    "displayName": "v386"
+    "code": 387,
+    "name": "3.87.0",
+    "displayName": "v387"
   }
 }
