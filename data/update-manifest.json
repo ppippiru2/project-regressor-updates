@@ -19,24 +19,24 @@
     "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v431-debug.apk"
   },
   "version": {
-    "code": 429,
+    "code": 431,
     "name": "4.31.0",
-    "displayName": "v429"
+    "displayName": "v431"
   },
   "artifacts": {
     "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v431-debug.apk"
   },
   "android": {
-    "code": 429,
+    "code": 431,
     "name": "4.31.0",
-    "displayName": "v429",
+    "displayName": "v431",
     "artifacts": {
       "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v431-debug.apk"
     },
     "version": {
-      "code": 429,
+      "code": 431,
       "name": "4.31.0",
-      "displayName": "v429"
+      "displayName": "v431"
     }
   },
   "apk": {
