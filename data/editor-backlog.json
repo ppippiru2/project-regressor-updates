@@ -71,8 +71,8 @@
       "title": "??? ?? ????? ?? ?? ??",
       "status": "partial",
       "priority": "high",
-      "source": "v417",
-      "summary": "Expose monster sprite readiness, file scanning, draft assetId candidates, asset manifest/slot patch export drafts, file-ready-only connection plans, editor-visible ready plan metrics, and review-only export artifacts before final monster PNG/WebP production.",
+      "source": "v418",
+      "summary": "Expose monster sprite readiness, file scanning, draft assetId candidates, asset manifest/slot patch export drafts, file-ready-only connection plans, editor-visible ready plan metrics, review-only export artifacts, and export review checklists before final monster PNG/WebP production.",
       "editorHooks": [
         "data/editor-manifest.json:monsterBattleSpriteAssetSlots",
         "data/asset-slots.json:slots.monster.byMonsterId",
@@ -94,7 +94,8 @@
         "src/editor/editorMain.js:renderMonsterSpriteConnectionPlan",
         "data/editor-manifest.json:monsterSpriteSlotReadiness.readyConnectionPlanVisible",
         "build-scripts/export-monster-sprite-ready-connection-plan.mjs",
-        "data/editor-manifest.json:monsterSpriteSlotReadiness.readyConnectionExportArtifact"
+        "data/editor-manifest.json:monsterSpriteSlotReadiness.readyConnectionExportArtifact",
+        "validation-output/monster-sprite-ready-connection-plan.json:reviewChecklist"
       ]
     },
     {

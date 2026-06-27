@@ -1,4 +1,4 @@
-import { PASSIVE_RECOVERY_BALANCE } from "../balance/recoveryBalance.js?v=417";
+import { PASSIVE_RECOVERY_BALANCE } from "../balance/recoveryBalance.js?v=418";
 
 export const IDLE_RECOVERY_FRAME_MS = PASSIVE_RECOVERY_BALANCE.idleFrameMs;
 

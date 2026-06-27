@@ -1347,7 +1347,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v417",
+    "source": "v418",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1395,6 +1395,8 @@
     ],
     "readyConnectionExportScript": "build-scripts/export-monster-sprite-ready-connection-plan.mjs",
     "readyConnectionExportArtifact": "validation-output/monster-sprite-ready-connection-plan.json",
-    "readyConnectionExportWritesGameData": false
+    "readyConnectionExportWritesGameData": false,
+    "readyConnectionExportReviewSummary": true,
+    "readyConnectionExportReviewChecklist": true
   }
 }
