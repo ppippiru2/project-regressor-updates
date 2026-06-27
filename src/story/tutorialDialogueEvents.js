@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=397";
+import { formatText, getLocaleText } from "../localization/index.js?v=398";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 
@@ -310,6 +310,24 @@ export function resolveTutorialLoopDialogue(regressionCount, { scene = "wake", l
   };
 }
 
+export function resolveTutorialKeyEventDialogue(
+  eventId,
+  { localeText = getLocaleText(), templateValues = {} } = {},
+) {
+  const event = TUTORIAL_DIALOGUE_KEY_EVENTS.find((entry) => entry.id === eventId);
+  if (!event?.textKey) return null;
+
+  const detail = localeText.story?.tutorialDialogue?.keyEventDetails?.[event.textKey];
+  if (!detail) return null;
+
+  return {
+    event,
+    textKey: event.textKey,
+    title: formatTextValue(detail.title, templateValues),
+    detail: formatTextValue(detail, templateValues),
+  };
+}
+
 export function getTutorialDialogueEventCatalog() {
   return {
     version: TUTORIAL_DIALOGUE_VERSION,
@@ -325,4 +343,15 @@ export function getTutorialDialogueEventCatalog() {
     },
     starterSkillAliases: TUTORIAL_FINAL_STARTER_SKILL_ALIASES,
   };
+}
+
+function formatTextValue(value, templateValues) {
+  if (typeof value === "string") return formatText(value, templateValues);
+  if (Array.isArray(value)) return value.map((entry) => formatTextValue(entry, templateValues));
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entry]) => [key, formatTextValue(entry, templateValues)]),
+    );
+  }
+  return value;
 }
