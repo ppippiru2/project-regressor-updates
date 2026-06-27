@@ -3671,6 +3671,49 @@ select:focus {
   margin: 0;
 }
 
+.editor-balance-candidate-list {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(5, 20, 48, 0.48);
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-balance-candidate-list > strong {
+  color: var(--cyan);
+  font-size: 0.82rem;
+}
+
+.editor-balance-candidate {
+  border-top: 1px solid rgba(108, 210, 255, 0.14);
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding-top: 0.65rem;
+}
+
+.editor-balance-candidate h4,
+.editor-balance-candidate p {
+  margin: 0;
+}
+
+.editor-balance-candidate h4 {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.editor-balance-candidate p {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.editor-balance-candidate .editor-chip {
+  overflow-wrap: anywhere;
+}
+
 .editor-balance-list {
   display: grid;
   gap: 0.65rem;

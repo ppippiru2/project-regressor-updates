@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 365,
-  "displayVersion": "v3.65",
-  "cacheVersion": "project-regressor-mvp-v365",
+  "versionCode": 366,
+  "displayVersion": "v3.66",
+  "cacheVersion": "project-regressor-mvp-v366",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=365&cachebust=365",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=366&cachebust=366",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v365 adds a read-only tutorial island pacing snapshot to the editor balance tuning detail panel.",
-    "v365 shares the pacing calculation between the editor screen and the quick-check guard.",
-    "v365 verifies pacing snapshot validity, service-worker caching, styles, localization, and mobile editor rendering.",
+    "v366 adds read-only balance tuning candidate cards to the editor balance detail panel.",
+    "v366 links early combat pace, survival, reward/drop economy, and equipment progression goals to their balance groups and guards.",
+    "v366 verifies tuning candidate metadata, group/check links, styles, localization, and mobile editor rendering.",
     "v354 adds a quick-check guard for all player battle-sprite class and gender presets.",
     "v354 verifies runtime sprite preset JSON, code presets, PNG paths, and mobile-safe placement ranges stay in sync.",
     "v354 samples all 12 player battle-sprite class/gender combinations in the browser with zero page-level horizontal overflow.",
@@ -117,13 +117,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v365-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v366-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v365-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v366-debug.apk"
   },
   "version": {
-    "code": 365,
-    "name": "3.65.0",
-    "displayName": "v365"
+    "code": 366,
+    "name": "3.66.0",
+    "displayName": "v366"
   }
 }

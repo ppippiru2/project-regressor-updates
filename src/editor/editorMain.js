@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=365";
-import { getLocaleText, tf } from "../localization/index.js?v=365";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=365";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=365";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=365";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=365";
+import { applyDomLocalization } from "../localization/domText.js?v=366";
+import { getLocaleText, tf } from "../localization/index.js?v=366";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=366";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=366";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=366";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=366";
 
-const EDITOR_VERSION = "365";
+const EDITOR_VERSION = "366";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -262,6 +262,7 @@ function renderBalanceTuningDetail() {
   const detailText = EDITOR_TEXT.balanceTuningDetail || {};
   const registryMeta = manifest.balanceTuningRegistry || {};
   const relatedChecks = Array.isArray(registryMeta.relatedChecks) ? registryMeta.relatedChecks : [];
+  const tuningCandidates = Array.isArray(registryMeta.tuningCandidates) ? registryMeta.tuningCandidates : [];
   const pacingSnapshot = createTutorialIslandPacingSnapshot();
   const fileCount = new Set(BALANCE_TUNING_GROUPS.flatMap((group) => group.files)).size;
   const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
@@ -283,10 +284,30 @@ function renderBalanceTuningDetail() {
       </div>
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
+      ${renderBalanceTuningCandidates(tuningCandidates, detailText)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
         ${rows || emptyBalanceRows(detailText)}
       </div>
+    </section>
+  `;
+}
+
+function renderBalanceTuningCandidates(candidates = [], detailText = {}) {
+  if (!candidates.length) return "";
+  return `
+    <section class="editor-balance-candidate-list" aria-label="${escapeAttribute(detailText.tuningCandidates || "Tuning candidates")}">
+      <strong>${escapeHtml(detailText.tuningCandidates || "")}</strong>
+      ${candidates.map((candidate) => `
+        <article class="editor-balance-candidate">
+          <div>
+            <h4>${escapeHtml(candidate.label || candidate.id || "")}</h4>
+            <p>${escapeHtml(candidate.purpose || "")}</p>
+          </div>
+          ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
+          ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", candidate.checks || [])}
+        </article>
+      `).join("")}
     </section>
   `;
 }

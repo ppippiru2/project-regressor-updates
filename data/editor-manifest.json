@@ -386,6 +386,7 @@
         "scopeFilter",
         "exportPreviewSummary",
         "tutorialPacingSnapshot",
+        "tuningCandidates",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
@@ -760,6 +761,64 @@
         "guards": [
           "상점 가격 계수",
           "추천 장비 점수"
+        ]
+      }
+    ],
+    "tuningCandidates": [
+      {
+        "id": "early-combat-pace",
+        "label": "초반 전투 속도",
+        "purpose": "튜토리얼 섬 처치 속도와 전투 체감을 조정할 때 먼저 확인한다.",
+        "groups": [
+          "combat-damage",
+          "combat-rank-hyper",
+          "monster-stats",
+          "skills"
+        ],
+        "checks": [
+          "tutorial-island-pacing",
+          "balance-registry-structure"
+        ]
+      },
+      {
+        "id": "early-survival",
+        "label": "초반 생존 안정성",
+        "purpose": "플레이어가 너무 빨리 쓰러지거나 회복이 과하면 먼저 확인한다.",
+        "groups": [
+          "player-stats",
+          "combat-damage",
+          "recovery"
+        ],
+        "checks": [
+          "tutorial-island-pacing"
+        ]
+      },
+      {
+        "id": "reward-drop-economy",
+        "label": "보상과 드랍 경제",
+        "purpose": "골드, 경험치, 드랍 목표가 너무 빠르거나 느릴 때 확인한다.",
+        "groups": [
+          "monsters",
+          "rewards",
+          "items"
+        ],
+        "checks": [
+          "tutorial-island-pacing",
+          "equipment-value-balance"
+        ]
+      },
+      {
+        "id": "equipment-progression",
+        "label": "장비 성장 체감",
+        "purpose": "장비 구매/추천/전투력 상승 체감을 조정할 때 확인한다.",
+        "groups": [
+          "equipment-values",
+          "items",
+          "player-stats"
+        ],
+        "checks": [
+          "equipment-value-balance",
+          "balance-registry-structure"
         ]
       }
     ],
