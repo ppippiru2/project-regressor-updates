@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 357,
-  "displayVersion": "v3.57",
-  "cacheVersion": "project-regressor-mvp-v357",
+  "versionCode": 358,
+  "displayVersion": "v3.58",
+  "cacheVersion": "project-regressor-mvp-v358",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=357&cachebust=357",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=358&cachebust=358",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v357 adds a balance tuning registry for player stats, growth, damage, equipment, items, monsters, skills, rewards, and recovery.",
-    "v357 adds a quick-check guard that validates balance registry files, exports, required groups, and content swap boundary coverage.",
-    "v357 keeps future stat, damage, item, monster, player, and reward tuning easier to audit before larger balance passes.",
+    "v358 strengthens the balance tuning registry guard so every src/balance tuning file must be registered.",
+    "v358 catches duplicate balance file registration and balance swap-boundary files missing from the registry.",
+    "v358 keeps future balance-file additions from slipping past quick checks without an audit trail.",
     "v354 adds a quick-check guard for all player battle-sprite class and gender presets.",
     "v354 verifies runtime sprite preset JSON, code presets, PNG paths, and mobile-safe placement ranges stay in sync.",
     "v354 samples all 12 player battle-sprite class/gender combinations in the browser with zero page-level horizontal overflow.",
@@ -117,13 +117,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v357-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v358-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v357-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v358-debug.apk"
   },
   "version": {
-    "code": 357,
-    "name": "3.57.0",
-    "displayName": "v357"
+    "code": 358,
+    "name": "3.58.0",
+    "displayName": "v358"
   }
 }
