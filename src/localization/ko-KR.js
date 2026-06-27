@@ -2082,6 +2082,44 @@ export const KO_KR_TEXT = {
             skill: "스킬/룬"
           }
         },
+        monsterCandidateLivePatchDraft: {
+          title: "1단계 실전 패치 초안",
+          description: "해안 후보를 실제 데이터에 쓰기 전, 몬스터/지역/드랍 변경안을 읽기 전용으로 확인합니다.",
+          version: "{version}",
+          drafts: "초안",
+          phase: "대상 단계",
+          regions: "지역",
+          files: "파일",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          rowMeta: "기준 {source} · 레벨 {level} · 경험치 {exp} · 골드 {gold}",
+          stats: "제안 스탯",
+          dropTable: "제안 드랍",
+          worldPatch: "지역 적용 초안",
+          worldPatchAction: "방식",
+          representative: "대표 유지",
+          proposedPool: "출현 풀",
+          targetFiles: "적용 대상",
+          rewardLinks: "보상 링크",
+          blockingSignals: "차단 신호",
+          noRows: "패치 초안 없음",
+          noBlockingSignals: "차단 신호 없음",
+          stateLabels: {
+            "draft-ready": "초안 검토 가능",
+            "draft-blocked": "초안 차단"
+          },
+          actionLabels: {
+            "add-alternate-encounter-pool": "대체 출현 풀 추가"
+          },
+          signalLabels: {
+            "monster-already-live": "이미 실전 몬스터",
+            "candidate-region-mismatch": "후보 지역 불일치",
+            "source-region-mismatch": "기준 몬스터 지역 불일치",
+            "representative-mismatch": "현재 대표 몬스터 불일치",
+            "missing-codex-item": "도감 조각 아이템 누락",
+            "missing-drop-item": "드랍 아이템 누락"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",

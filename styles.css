@@ -4564,6 +4564,104 @@ select:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.editor-monster-candidate-live-patch-draft {
+  background: rgba(5, 20, 48, 0.48);
+  border: 1px solid rgba(108, 210, 255, 0.2);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-monster-candidate-live-patch-draft-head,
+.editor-monster-candidate-live-patch-draft-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-monster-candidate-live-patch-draft-head h4,
+.editor-monster-candidate-live-patch-draft-head p,
+.editor-monster-candidate-live-patch-draft-row-head h5,
+.editor-monster-candidate-live-patch-draft-row-head p {
+  margin: 0;
+}
+
+.editor-monster-candidate-live-patch-draft-head h4 {
+  color: var(--cyan);
+  font-size: 0.95rem;
+}
+
+.editor-monster-candidate-live-patch-draft-head strong {
+  border: 1px solid rgba(108, 210, 255, 0.22);
+  border-radius: 999px;
+  color: var(--cyan-soft);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-monster-candidate-live-patch-draft-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.editor-monster-candidate-live-patch-draft-metrics span,
+.editor-monster-candidate-live-patch-draft-row {
+  background: rgba(1, 10, 28, 0.28);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-monster-candidate-live-patch-draft-metrics span,
+.editor-monster-candidate-live-patch-draft-list,
+.editor-monster-candidate-live-patch-draft-row {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-monster-candidate-live-patch-draft-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-monster-candidate-live-patch-draft-metrics b,
+.editor-monster-candidate-live-patch-draft-row-head h5 {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-live-patch-draft-row-head p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-live-patch-draft-row[data-state="draft-ready"] {
+  border-color: rgba(108, 210, 255, 0.24);
+}
+
+.editor-monster-candidate-live-patch-draft-row[data-state="draft-blocked"] {
+  border-color: rgba(255, 111, 151, 0.34);
+}
+
+.editor-monster-candidate-live-patch-draft-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -7976,6 +8074,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-monster-candidate-live-promotion-phase-head,
   .editor-monster-candidate-live-promotion-row-head,
   .editor-monster-candidate-live-promotion-grid,
+  .editor-monster-candidate-live-patch-draft-head,
+  .editor-monster-candidate-live-patch-draft-row-head,
+  .editor-monster-candidate-live-patch-draft-grid,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-monster-sprite-pose-grid {
@@ -7986,6 +8087,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-monster-candidate-reward-metrics,
   .editor-monster-candidate-promotion-metrics,
   .editor-monster-candidate-live-promotion-metrics,
+  .editor-monster-candidate-live-patch-draft-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

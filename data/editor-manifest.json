@@ -400,6 +400,7 @@
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
         "src/editor/monsterCandidateLivePromotionPlan.js",
+        "src/editor/monsterCandidateLivePatchDraft.js",
         "src/balance/monsterCandidatePool.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
@@ -452,6 +453,10 @@
         "candidateMonsterLivePromotionPhases",
         "candidateMonsterLivePromotionRows",
         "candidateMonsterLivePromotionDeferredRows",
+        "monsterCandidateLivePatchDraft",
+        "candidateMonsterLivePatchRows",
+        "candidateMonsterLivePatchDropTable",
+        "candidateMonsterLivePatchWorldPatch",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
@@ -464,6 +469,7 @@
         "후보 몬스터 보상 미리보기",
         "후보 몬스터 승격 체크리스트",
         "후보 몬스터 실전 승격 계획",
+        "후보 몬스터 실전 패치 초안",
         "변경 전 읽기 전용 검증 리포트"
       ]
     },
@@ -1087,6 +1093,7 @@
       "src/editor/monsterCandidateRewardPreview.js:createMonsterCandidateRewardPreview",
       "src/editor/monsterCandidatePromotionChecklist.js:createMonsterCandidatePromotionChecklist",
       "src/editor/monsterCandidateLivePromotionPlan.js:createMonsterCandidateLivePromotionPlan",
+      "src/editor/monsterCandidateLivePatchDraft.js:createMonsterCandidateLivePatchDraft",
       "build-scripts/check-monster-candidate-pool.mjs",
       "build-scripts/check-equipment-value-balance.mjs"
     ],
@@ -1247,13 +1254,25 @@
     },
     "monsterCandidateLivePromotionPlan": {
       "id": "monster-candidate-live-promotion-plan-v1",
-      "source": "v440",
+      "source": "v441",
       "sourceModule": "src/editor/monsterCandidateLivePromotionPlan.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 6,
       "expectedPhaseCount": 4,
       "expectedRegionCount": 5,
       "expectedDeferredCandidateCount": 3,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "monsterCandidateLivePatchDraft": {
+      "id": "monster-candidate-live-patch-draft-v1",
+      "source": "v441",
+      "sourceModule": "src/editor/monsterCandidateLivePatchDraft.js",
+      "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
+      "expectedDraftCount": 1,
+      "expectedTargetPhaseId": "phase-1-shore-first",
+      "expectedTargetRegionCount": 1,
+      "expectedBlockingSignalCount": 0,
       "editorSummaryVisible": true,
       "writesGameData": false
     }
