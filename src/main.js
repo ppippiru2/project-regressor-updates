@@ -111,6 +111,7 @@ import {
   DEFAULT_DEVELOPER_OPTIONS,
   DEFAULT_PLAYER_PROFILE,
   DEFAULT_SKILL_LOADOUTS,
+  MAX_SKILL_LOADOUT_ACTIONS,
   loadState,
   loadUiState,
   normalizeUiState,
@@ -302,6 +303,21 @@ function activeLoadoutActions() {
 
 function activeLoadoutSkills() {
   return resolveActiveLoadoutSkills(activeLoadoutActions(), skills);
+}
+
+function resetSkillLoadoutsForNewCharacter(profile) {
+  state.skillLoadouts = DEFAULT_SKILL_LOADOUTS.map((loadout) => ({
+    ...loadout,
+    actionIds: [...loadout.actionIds],
+  }));
+  state.activeSkillLoadoutId = DEFAULT_ACTIVE_SKILL_LOADOUT_ID;
+
+  const starterActionId = profile?.starterSkillActionId || "";
+  if (!starterActionId || !getSkill(starterActionId)) return;
+  const loadout = activeSkillLoadout();
+  if (!loadout || loadout.actionIds.includes(starterActionId)) return;
+  if (loadout.actionIds.length >= MAX_SKILL_LOADOUT_ACTIONS) return;
+  loadout.actionIds.push(starterActionId);
 }
 
 function getGateMap(mapId) {
@@ -1026,6 +1042,7 @@ function createCharacter(form) {
   state.hyp = 0;
   state.hyperActiveTicks = 0;
   state.effects = [];
+  resetSkillLoadoutsForNewCharacter(profile);
   combatRuntime = resetCombatRuntime();
   addLog(applyCharacterProfile(state, profile));
   addLog(t("gameLog.characterCreated"));

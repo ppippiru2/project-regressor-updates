@@ -57,6 +57,7 @@ export const DEFAULT_PLAYER_PROFILE = {
   starterCardName: "",
   starterTrait: "",
   starterSkill: "",
+  starterSkillActionId: "",
   portraitDataUrl: "",
   portraitFrame: { ...DEFAULT_PORTRAIT_FRAME },
 };
@@ -190,6 +191,7 @@ export function normalizePlayerProfile(savedProfile, fallbackName = t("saveDefau
   profile.starterCardName = sanitizeProfileText(profile.starterCardName, "", 20);
   profile.starterTrait = sanitizeProfileText(profile.starterTrait, "", 20);
   profile.starterSkill = sanitizeProfileText(profile.starterSkill, "", 20);
+  profile.starterSkillActionId = sanitizeProfileText(profile.starterSkillActionId, "", 40);
   profile.portraitDataUrl = sanitizeImageDataUrl(profile.portraitDataUrl);
   profile.portraitFrame = normalizePortraitFrame(profile.portraitFrame);
   profile.created = Boolean(profile.created);

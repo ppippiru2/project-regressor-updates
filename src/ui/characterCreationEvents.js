@@ -558,6 +558,7 @@ function starterCardFormValues(draft) {
     starterCardName: card.card,
     starterTrait: card.trait,
     starterSkill: card.skill,
+    starterSkillActionId: card.actionId || "",
   };
 }
 

@@ -2,8 +2,14 @@ import { t, tf } from "../localization/index.js?v=383";
 
 export function choosePlayerAction(player, state, skills, getSkill, hypMax) {
   const hpRate = state.player.hp / player.maxHp;
-  const recovery = skills.find((skill) => skill.id === "emergency_recovery");
-  if (recovery && hpRate <= recovery.triggerHpRatio && state.player.mp >= recovery.mpCost) {
+  const recovery = skills.find((skill) => (
+    skill.damageType === "support"
+    && Number.isFinite(skill.triggerHpRatio)
+    && hpRate <= skill.triggerHpRatio
+    && state.player.mp >= skill.mpCost
+    && skill.stanceAllowed.includes(state.stance)
+  ));
+  if (recovery) {
     return { kind: "heal", skill: recovery, amount: skillHealAmount(recovery, player) };
   }
 
@@ -25,7 +31,7 @@ export function skillAvailability(skill, player, state, requireCombat, hypMax) {
   if (!skill.stanceAllowed.includes(state.stance)) {
     return { available: false, reason: tf("combatActionAvailability.wrongStance", { stanceName: stanceName(state.stance) }) };
   }
-  if (skill.damageType === "support" && skill.triggerCondition === "playerHpBelow30" && state.player.hp / player.maxHp > skill.triggerHpRatio) {
+  if (skill.damageType === "support" && Number.isFinite(skill.triggerHpRatio) && state.player.hp / player.maxHp > skill.triggerHpRatio) {
     return { available: false, reason: t("combatActionAvailability.lowHp") };
   }
   if (state.stance === "berserk" && skill.damageType !== "support" && state.hyp < hypMax && state.hyperActiveTicks <= 0) {

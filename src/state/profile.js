@@ -18,6 +18,7 @@ export function buildPlayerProfileInput(formData, defaultProfile) {
     starterCardName: formData.get("starterCardName") || "",
     starterTrait: formData.get("starterTrait") || "",
     starterSkill: formData.get("starterSkill") || "",
+    starterSkillActionId: formData.get("starterSkillActionId") || "",
     portraitDataUrl: formData.get("portraitDataUrl") || "",
     portraitFrame: portraitFrameFromFormData(formData),
   };

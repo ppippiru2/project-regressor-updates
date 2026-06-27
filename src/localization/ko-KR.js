@@ -354,8 +354,8 @@ export const KO_KR_TEXT = {
     },
     starterCards: {
       title: "운명 카드",
-      description: "기본 공격은 확정 등록되고, 추가로 스타터 특성과 스타터 스킬 기록을 선택합니다.",
-      basicAttackGuaranteed: "기본 공격은 확정 등록됩니다. 카드 스킬은 추후 스킬 확장과 연결할 스타터 기록으로 보관됩니다.",
+      description: "기본 공격은 확정 등록되고, 추가로 스타터 특성과 스타터 스킬을 선택합니다.",
+      basicAttackGuaranteed: "기본 공격은 확정 등록됩니다. 선택한 카드 스킬은 슬롯 1에 함께 등록됩니다.",
       confirmNext: "카드 확정",
       selectedCard: "선택 카드",
       selectedTrait: "특성",
@@ -368,6 +368,7 @@ export const KO_KR_TEXT = {
           card: "낡은 무기 감각",
           trait: "하급 무기 숙련",
           skill: "강타",
+          actionId: "power_slash",
           glow: "푸른빛",
           unlock: "1회차",
         },
@@ -376,6 +377,7 @@ export const KO_KR_TEXT = {
           card: "가벼운 발걸음",
           trait: "하급 기동 감각",
           skill: "빠른 발놀림",
+          actionId: "quick_step",
           glow: "푸른빛",
           unlock: "1회차",
         },
@@ -384,6 +386,7 @@ export const KO_KR_TEXT = {
           card: "버티는 몸",
           trait: "하급 생존 감각",
           skill: "방어 자세",
+          actionId: "guard_stance",
           glow: "푸른빛",
           unlock: "1회차",
         },
@@ -392,6 +395,7 @@ export const KO_KR_TEXT = {
           card: "흐릿한 마력 감각",
           trait: "하급 마력 감각",
           skill: "마력 점화",
+          actionId: "mana_ignite",
           glow: "푸른빛",
           unlock: "1회차",
         },
@@ -514,7 +518,7 @@ export const KO_KR_TEXT = {
     ],
     "profile:starterCard": [
       "기본 카드",
-      "심연의 질문 이후 선택한 스타터 카드 기록입니다. 현재는 프로필 기록으로 보관하고, 스킬 확장 단계에서 실제 카드 스킬과 연결합니다."
+      "심연의 질문 이후 선택한 스타터 카드 기록입니다. 새 게임 생성 시 선택한 카드 스킬이 슬롯 1에 함께 등록됩니다."
     ],
     "profile:starterSkill": [
       "카드 스킬",
@@ -758,6 +762,7 @@ export const KO_KR_TEXT = {
     },
     actionTriggerText: {
       basicAttack: "공격 게이지 100% 도달 시",
+      playerHpBelow45: "체력 45% 이하일 때 자동 사용",
       playerHpBelow30: "체력 30% 이하일 때 자동 사용",
       stanceAutoSuffix: "전술에서 조건 충족 시 자동 사용",
     },
@@ -1345,6 +1350,18 @@ export const KO_KR_TEXT = {
       mana_bolt: {
         name: "마력탄",
         description: "압축한 마력을 적에게 쏘아 보낸다.",
+      },
+      quick_step: {
+        name: "빠른 발놀림",
+        description: "짧게 파고들어 적의 빈틈을 찌른다.",
+      },
+      guard_stance: {
+        name: "방어 자세",
+        description: "위험할 때 자세를 낮춰 호흡을 회복한다.",
+      },
+      mana_ignite: {
+        name: "마력 점화",
+        description: "흐릿한 마력을 순간적으로 점화해 적에게 터뜨린다.",
       },
       emergency_recovery: {
         name: "응급 회복",

@@ -11,6 +11,7 @@ export function findCombatAction(actionId, actions) {
 
 export function combatActionTriggerText(action, { basicAttackAction, triggerText, stanceLabel }) {
   if (action.id === basicAttackAction.id) return triggerText.basicAttack;
+  if (action.triggerCondition === "playerHpBelow45") return triggerText.playerHpBelow45;
   if (action.triggerCondition === "playerHpBelow30") return triggerText.playerHpBelow30;
   return `${stanceLabel} ${triggerText.stanceAutoSuffix}`;
 }
