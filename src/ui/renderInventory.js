@@ -1,5 +1,5 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=387";
-import { getLocaleText, t, tf } from "../localization/index.js?v=387";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=388";
+import { getLocaleText, t, tf } from "../localization/index.js?v=388";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;

@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=387";
-import { getLocaleText, tf } from "../localization/index.js?v=387";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=387";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=387";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=387";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=387";
+import { applyDomLocalization } from "../localization/domText.js?v=388";
+import { getLocaleText, tf } from "../localization/index.js?v=388";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=388";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=388";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=388";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=388";
 
-const EDITOR_VERSION = "387";
+const EDITOR_VERSION = "388";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
