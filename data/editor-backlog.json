@@ -66,6 +66,20 @@
       ]
     },
     {
+      "id": "monster-battle-sprite-slot-candidates",
+      "title": "??? ?? ????? ?? ?? ??",
+      "status": "partial",
+      "priority": "high",
+      "source": "v409",
+      "summary": "Expose per-monster idle, attack, hit, and dead sprite slot targets in the editor asset registry before final monster PNG production.",
+      "editorHooks": [
+        "data/editor-manifest.json:monsterBattleSpriteAssetSlots",
+        "data/asset-slots.json:slots.monster.byMonsterId",
+        "src/assets/assetRegistry.js:resolveMonsterCombatSpritePath",
+        "build-scripts/check-monster-combat-display-slots.mjs"
+      ]
+    },
+    {
       "id": "save-slot-editor",
       "title": "세계선 저장 데이터 수동 편집",
       "status": "planned",

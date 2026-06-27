@@ -1,12 +1,12 @@
-import { applyDomLocalization } from "../localization/domText.js?v=408";
-import { getLocaleText, tf } from "../localization/index.js?v=408";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=408";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=408";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=408";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=408";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=408";
+import { applyDomLocalization } from "../localization/domText.js?v=409";
+import { getLocaleText, tf } from "../localization/index.js?v=409";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=409";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=409";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=409";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=409";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=409";
 
-const EDITOR_VERSION = "407";
+const EDITOR_VERSION = "409";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;

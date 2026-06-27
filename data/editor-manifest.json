@@ -116,7 +116,31 @@
         "monster.defaultDead",
         "audio.sfx.monsterAttack",
         "audio.sfx.monsterHit",
-        "audio.sfx.monsterDefeat"
+        "audio.sfx.monsterDefeat",
+        "monster.byMonsterId.shore_imp.idle",
+        "monster.byMonsterId.shore_imp.attack",
+        "monster.byMonsterId.shore_imp.hit",
+        "monster.byMonsterId.shore_imp.dead",
+        "monster.byMonsterId.forest_wolf.idle",
+        "monster.byMonsterId.forest_wolf.attack",
+        "monster.byMonsterId.forest_wolf.hit",
+        "monster.byMonsterId.forest_wolf.dead",
+        "monster.byMonsterId.ruin_sentinel.idle",
+        "monster.byMonsterId.ruin_sentinel.attack",
+        "monster.byMonsterId.ruin_sentinel.hit",
+        "monster.byMonsterId.ruin_sentinel.dead",
+        "monster.byMonsterId.mine_golem.idle",
+        "monster.byMonsterId.mine_golem.attack",
+        "monster.byMonsterId.mine_golem.hit",
+        "monster.byMonsterId.mine_golem.dead",
+        "monster.byMonsterId.rift_knight.idle",
+        "monster.byMonsterId.rift_knight.attack",
+        "monster.byMonsterId.rift_knight.hit",
+        "monster.byMonsterId.rift_knight.dead",
+        "monster.byMonsterId.rift_warden.idle",
+        "monster.byMonsterId.rift_warden.attack",
+        "monster.byMonsterId.rift_warden.hit",
+        "monster.byMonsterId.rift_warden.dead"
       ],
       "editorFields": [
         "id",
@@ -139,7 +163,8 @@
         "spriteSlot",
         "soundSet",
         "imageAttachment",
-        "monsterBestiaryEntry"
+        "monsterBestiaryEntry",
+        "battleSpritePoseSlots"
       ],
       "futureControls": [
         "몬스터 목록",
@@ -151,7 +176,8 @@
         "9대 저항력 입력",
         "드랍 테이블 연결",
         "스프라이트 슬롯 선택",
-        "전투 미리보기"
+        "전투 미리보기",
+        "???? ?? ????? ?? ?? ??"
       ]
     },
     {
@@ -560,13 +586,16 @@
         "expectedFileName",
         "cropPreset",
         "fallback",
-        "connectedDataTarget"
+        "connectedDataTarget",
+        "monsterSpritePoseSlotSummary",
+        "monsterSpecificSpriteSlotTargets"
       ],
       "futureControls": [
         "슬롯 검색",
         "예상 파일명 복사",
         "이미지 크롭 영역",
-        "폴더별 누락 파일 확인"
+        "폴더별 누락 파일 확인",
+        "???? idle/attack/hit/dead ?? ?? ??"
       ]
     },
     {
@@ -667,6 +696,198 @@
         "expectedFileName": "{itemId}.png",
         "cropPreset": "itemIconSquare",
         "dataTarget": "data/asset-slots.json:slots.item.icons"
+      },
+      {
+        "slotId": "monster.byMonsterId.shore_imp.idle",
+        "label": "??? shore_imp ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "shore_imp_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.shore_imp.idle"
+      },
+      {
+        "slotId": "monster.byMonsterId.shore_imp.attack",
+        "label": "??? shore_imp ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "shore_imp_attack.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.shore_imp.attack"
+      },
+      {
+        "slotId": "monster.byMonsterId.shore_imp.hit",
+        "label": "??? shore_imp ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "shore_imp_hit.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.shore_imp.hit"
+      },
+      {
+        "slotId": "monster.byMonsterId.shore_imp.dead",
+        "label": "??? shore_imp ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "shore_imp_dead.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.shore_imp.dead"
+      },
+      {
+        "slotId": "monster.byMonsterId.forest_wolf.idle",
+        "label": "??? forest_wolf ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "forest_wolf_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.forest_wolf.idle"
+      },
+      {
+        "slotId": "monster.byMonsterId.forest_wolf.attack",
+        "label": "??? forest_wolf ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "forest_wolf_attack.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.forest_wolf.attack"
+      },
+      {
+        "slotId": "monster.byMonsterId.forest_wolf.hit",
+        "label": "??? forest_wolf ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "forest_wolf_hit.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.forest_wolf.hit"
+      },
+      {
+        "slotId": "monster.byMonsterId.forest_wolf.dead",
+        "label": "??? forest_wolf ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "forest_wolf_dead.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.forest_wolf.dead"
+      },
+      {
+        "slotId": "monster.byMonsterId.ruin_sentinel.idle",
+        "label": "??? ruin_sentinel ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "ruin_sentinel_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.ruin_sentinel.idle"
+      },
+      {
+        "slotId": "monster.byMonsterId.ruin_sentinel.attack",
+        "label": "??? ruin_sentinel ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "ruin_sentinel_attack.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.ruin_sentinel.attack"
+      },
+      {
+        "slotId": "monster.byMonsterId.ruin_sentinel.hit",
+        "label": "??? ruin_sentinel ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "ruin_sentinel_hit.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.ruin_sentinel.hit"
+      },
+      {
+        "slotId": "monster.byMonsterId.ruin_sentinel.dead",
+        "label": "??? ruin_sentinel ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "ruin_sentinel_dead.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.ruin_sentinel.dead"
+      },
+      {
+        "slotId": "monster.byMonsterId.mine_golem.idle",
+        "label": "??? mine_golem ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "mine_golem_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.mine_golem.idle"
+      },
+      {
+        "slotId": "monster.byMonsterId.mine_golem.attack",
+        "label": "??? mine_golem ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "mine_golem_attack.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.mine_golem.attack"
+      },
+      {
+        "slotId": "monster.byMonsterId.mine_golem.hit",
+        "label": "??? mine_golem ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "mine_golem_hit.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.mine_golem.hit"
+      },
+      {
+        "slotId": "monster.byMonsterId.mine_golem.dead",
+        "label": "??? mine_golem ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "mine_golem_dead.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.mine_golem.dead"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_knight.idle",
+        "label": "??? rift_knight ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_knight_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_knight.idle"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_knight.attack",
+        "label": "??? rift_knight ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_knight_attack.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_knight.attack"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_knight.hit",
+        "label": "??? rift_knight ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_knight_hit.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_knight.hit"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_knight.dead",
+        "label": "??? rift_knight ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_knight_dead.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_knight.dead"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_warden.idle",
+        "label": "??? rift_warden ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_warden_idle.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_warden.idle"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_warden.attack",
+        "label": "??? rift_warden ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_warden_attack.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_warden.attack"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_warden.hit",
+        "label": "??? rift_warden ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_warden_hit.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_warden.hit"
+      },
+      {
+        "slotId": "monster.byMonsterId.rift_warden.dead",
+        "label": "??? rift_warden ?? ?????",
+        "folder": "assets/monsters/",
+        "expectedFileName": "rift_warden_dead.webp",
+        "cropPreset": "combatSpriteTall",
+        "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId.rift_warden.dead"
       }
     ],
     "audio": [
@@ -1072,5 +1293,20 @@
     "게임 런타임에 직접 필요한 데이터와 에디터 편의용 메타데이터를 분리한다.",
     "에디터에서 실제 저장/내보내기를 만들기 전에는 읽기 중심 화면으로 유지한다.",
     "세이브 수정 기능은 검증 단계와 되돌리기 스냅샷을 함께 설계한다."
-  ]
+  ],
+  "monsterBattleSpriteAssetSlots": {
+    "version": 1,
+    "source": "v409",
+    "monsterCount": 6,
+    "poseCount": 4,
+    "slotCount": 24,
+    "poses": [
+      "idle",
+      "attack",
+      "hit",
+      "dead"
+    ],
+    "slotPrefix": "monster.byMonsterId",
+    "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId"
+  }
 }

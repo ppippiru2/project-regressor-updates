@@ -1,6 +1,6 @@
-import { equipInventoryItem } from "./equipmentActions.js?v=408";
-import { equipmentScore } from "./equipmentScore.js?v=408";
-import { t, tf } from "../localization/index.js?v=408";
+import { equipInventoryItem } from "./equipmentActions.js?v=409";
+import { equipmentScore } from "./equipmentScore.js?v=409";
+import { t, tf } from "../localization/index.js?v=409";
 
 export function equipRecommendedItems({ equipmentState, inventory, getItem }) {
   let nextInventory = inventory;
