@@ -309,6 +309,7 @@ export const ASSET_SLOTS = {
       "defaultDead": null,
       "byMonsterId": {
         "shore_imp": {},
+        "shore_drift_slime": {},
         "forest_wolf": {},
         "ruin_sentinel": {},
         "mine_golem": {},

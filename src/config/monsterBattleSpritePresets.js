@@ -97,6 +97,15 @@ export const MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE = Object.freeze({
     expandedSlashWidth: 208,
     expandedSlashHeight: "clamp(3.3rem, 29vw, 6.45rem)",
   },
+  slime_drift_runtime: {
+    offsetX: -2,
+    offsetY: -6,
+    textOffsetY: -3,
+    slashWidth: 126,
+    slashHeight: "clamp(2.75rem, 24vw, 5.35rem)",
+    expandedSlashWidth: 232,
+    expandedSlashHeight: "clamp(3.7rem, 32vw, 7.05rem)",
+  },
   beast_lunge_runtime: {
     offsetX: 4,
     offsetY: -4,
@@ -155,6 +164,11 @@ export const MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE = Object.
     pierce: { offsetX: 2, offsetY: -1, slashWidthMultiplier: 0.98, expandedSlashWidthMultiplier: 0.98 },
     dark: { offsetX: -1, offsetY: -5, textOffsetY: -2, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
   },
+  slime_drift_runtime: {
+    impact: { offsetX: -1, offsetY: 1, textOffsetY: 0, slashWidthMultiplier: 1.01, expandedSlashWidthMultiplier: 1.01 },
+    magic: { offsetX: 0, offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 1.06, expandedSlashWidthMultiplier: 1.05 },
+    dark: { offsetX: -1, offsetY: -4, textOffsetY: -2, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.06 },
+  },
   beast_lunge_runtime: {
     pierce: { offsetX: 7, offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
     slash: { offsetX: 3, offsetY: -3, slashWidthMultiplier: 1.03, expandedSlashWidthMultiplier: 1.03 },
@@ -195,6 +209,19 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotY: 0.98,
     motionSafeMargin: { x: 0.1, y: 0.08 },
     effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.small_fiend_runtime,
+  },
+  shore_drift_slime: {
+    monsterId: "shore_drift_slime",
+    classId: "enemy_slime",
+    motionProfile: "slime_drift_runtime",
+    sfxProfile: "impact_near",
+    defaultScale: 0.96,
+    offsetX: 0,
+    offsetY: 3,
+    pivotX: 0.5,
+    pivotY: 0.97,
+    motionSafeMargin: { x: 0.12, y: 0.09 },
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.slime_drift_runtime,
   },
   forest_wolf: {
     monsterId: "forest_wolf",

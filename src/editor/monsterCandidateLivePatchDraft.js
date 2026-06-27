@@ -1,11 +1,11 @@
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=442";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=443";
 import {
   candidateMonsterRewardLinkFor,
   TUTORIAL_MONSTER_POOL_DATA,
-} from "../balance/monsterCandidatePool.js?v=442";
-import { lootItems } from "../data/itemData.js?v=442";
-import { regions } from "../data/worldData.js?v=442";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=442";
+} from "../balance/monsterCandidatePool.js?v=443";
+import { lootItems } from "../data/itemData.js?v=443";
+import { regions } from "../data/worldData.js?v=443";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=443";
 
 export const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT_VERSION = "monster-candidate-live-patch-draft-v1";
 
@@ -15,7 +15,7 @@ export const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT_TARGET_FILES = Object.freeze([
 ]);
 
 export function createMonsterCandidateLivePatchDraft(plan = createMonsterCandidateLivePromotionPlan()) {
-  const targetPhase = (plan.phases || []).find((phase) => phase.id === "phase-1-shore-first") || null;
+  const targetPhase = (plan.phases || []).find((phase) => (phase.rows || []).length > 0) || null;
   const candidateRows = targetPhase?.rows || [];
   const rows = candidateRows.map(createPatchDraftRow).filter(Boolean);
 
@@ -65,8 +65,8 @@ function createPatchDraftRow(row) {
       action: "add-alternate-encounter-pool",
       regionId: liveRegion.id,
       keepsRepresentativeMonsterId: liveRegion.monsterId,
-      targetField: "future:regions[].monsterPool",
-      proposedMonsterPool: [liveRegion.monsterId, candidate.id],
+      targetField: "regions[].monsterPool",
+      proposedMonsterPool: proposedMonsterPoolFor(liveRegion, candidate.id),
     },
     rewardLink: {
       codexFragmentId: rewardLink.codexFragmentId,
@@ -75,6 +75,14 @@ function createPatchDraftRow(row) {
     },
     blockingSignalIds,
   };
+}
+
+function proposedMonsterPoolFor(region, candidateId) {
+  return [...new Set([
+    region?.monsterId,
+    ...(Array.isArray(region?.monsterPool) ? region.monsterPool : []),
+    candidateId,
+  ].filter((monsterId) => typeof monsterId === "string" && monsterId))];
 }
 
 function createSuggestedDropTable(rewardLink, sourceMonster) {

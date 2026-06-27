@@ -1,6 +1,6 @@
 import { applyLevelUps } from "./rewards.js";
-import { newlyUnlockedRegions } from "./regionSelection.js?v=442";
-import { tf } from "../localization/index.js?v=442";
+import { newlyUnlockedRegions } from "./regionSelection.js?v=443";
+import { tf } from "../localization/index.js?v=443";
 
 export function applyPendingLevelUps(player, context) {
   const { expToNext, getResourceCaps } = context;

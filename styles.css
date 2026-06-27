@@ -6435,6 +6435,14 @@ button:disabled {
   --runtime-sprite-down-x: 3px;
 }
 
+.combatant.enemy[data-runtime-sprite-class="enemy_slime"] {
+  --runtime-sprite-attack-x: -13px;
+  --runtime-sprite-impact-x: -19px;
+  --runtime-sprite-attack-rotation: -2deg;
+  --runtime-sprite-hit-x: 8px;
+  --runtime-sprite-down-x: 3px;
+}
+
 .combatant.enemy[data-runtime-sprite-class="enemy_beast"] {
   --runtime-sprite-attack-x: -20px;
   --runtime-sprite-impact-x: -28px;

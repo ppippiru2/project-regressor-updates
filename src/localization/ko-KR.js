@@ -2083,8 +2083,8 @@ export const KO_KR_TEXT = {
           }
         },
         monsterCandidateLivePatchDraft: {
-          title: "1단계 실전 패치 초안",
-          description: "해안 후보를 실제 데이터에 쓰기 전, 몬스터/지역/드랍 변경안을 읽기 전용으로 확인합니다.",
+          title: "다음 실전 패치 초안",
+          description: "남은 첫 적용 단계를 실제 데이터에 쓰기 전, 몬스터/지역/드랍 변경안을 읽기 전용으로 확인합니다.",
           version: "{version}",
           drafts: "초안",
           phase: "대상 단계",

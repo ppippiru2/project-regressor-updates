@@ -15,6 +15,19 @@ export const MONSTER_BALANCE_DATA = [
     ],
   },
   {
+    id: "shore_drift_slime",
+    regionId: "tutorial_shore",
+    level: 2,
+    stats: { STR: 1, AGI: 1, VIT: 3, INT: 2, WIS: 1, LUK: 0 },
+    exp: 22,
+    gold: 4,
+    dropTable: [
+      { itemId: "shore_drift_slime_codex_fragment", chance: 0.102 },
+      { itemId: "low_mana_crystal_fragment", chance: 0.054 },
+      { itemId: "mana_ignite_skill_rune", chance: 0.025 },
+    ],
+  },
+  {
     id: "forest_wolf",
     regionId: "tutorial_forest",
     level: 2,
