@@ -2305,11 +2305,13 @@ select:focus {
 
 .skill-button span {
   font-weight: 800;
+  pointer-events: none;
 }
 
 .skill-button small {
   color: var(--muted);
   font-size: 0.72rem;
+  pointer-events: none;
 }
 
 .skill-button:hover,
@@ -6107,6 +6109,10 @@ body[data-info-tooltips="off"] .info-term {
   .battlefield[data-card-layout="stage"] .portrait {
     min-height: clamp(10.25rem, 43vw, 15rem);
     margin-top: -0.2rem;
+  }
+
+  .battlefield[data-card-layout="stage"] .hero-portrait .sprite-slot {
+    inset: -0.28rem -3% -0.12rem;
   }
 
   .battlefield[data-card-layout="stage"] .aura-ring,

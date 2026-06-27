@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 352,
-  "displayVersion": "v3.52",
-  "cacheVersion": "project-regressor-mvp-v352",
+  "versionCode": 353,
+  "displayVersion": "v3.53",
+  "cacheVersion": "project-regressor-mvp-v353",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=352&cachebust=352",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=353&cachebust=353",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v353 makes combat skill-button labels ignore pointer events so mobile taps resolve to the full button surface.",
+    "v353 trims the mobile player battle-sprite slot side bleed while preserving the widened battle-card layout.",
+    "v353 verifies skill-button center hits resolve to buttons and page-level horizontal overflow remains zero at a 390px viewport.",
     "v352 raises mobile combat skill and stance buttons to a steadier 44px touch target.",
     "v352 keeps the widened battle-card layout while improving lower combat control tap comfort.",
     "v352 verifies combat controls at a 390px mobile viewport with zero page-level horizontal overflow.",
@@ -108,13 +111,13 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v352-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v353-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v352-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v353-debug.apk"
   },
   "version": {
-    "code": 352,
-    "name": "3.52.0",
-    "displayName": "v352"
+    "code": 353,
+    "name": "3.53.0",
+    "displayName": "v353"
   }
 }
