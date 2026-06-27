@@ -3596,6 +3596,91 @@ select:focus {
   color: rgba(190, 213, 239, 0.72);
 }
 
+.editor-balance-domain-list {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(5, 20, 48, 0.48);
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-balance-domain-list > strong {
+  color: var(--cyan);
+  font-size: 0.82rem;
+  grid-column: 1 / -1;
+}
+
+.editor-balance-domain {
+  border: 1px solid rgba(108, 210, 255, 0.15);
+  border-radius: 6px;
+  background: rgba(1, 10, 28, 0.24);
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.65rem;
+}
+
+.editor-balance-domain-head {
+  align-items: start;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+}
+
+.editor-balance-domain-head h4,
+.editor-balance-domain-head p {
+  margin: 0;
+}
+
+.editor-balance-domain-head h4 {
+  color: var(--text);
+  font-size: 0.94rem;
+}
+
+.editor-balance-domain-head p {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.editor-balance-domain-head > span {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 999px;
+  color: var(--cyan-soft);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-balance-domain-impact {
+  align-items: center;
+  background: rgba(4, 20, 48, 0.34);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 0.42rem 0.5rem;
+}
+
+.editor-balance-domain-impact span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.editor-balance-domain-impact strong {
+  color: var(--mint);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
 .editor-balance-pacing {
   border: 1px solid rgba(149, 255, 185, 0.22);
   border-radius: 6px;
@@ -6150,6 +6235,10 @@ body[data-info-tooltips="off"] .info-term {
 
   .editor-balance-pacing-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .editor-balance-domain-list {
+    grid-template-columns: 1fr;
   }
 }
 

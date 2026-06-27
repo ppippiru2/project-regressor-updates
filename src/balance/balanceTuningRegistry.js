@@ -12,6 +12,14 @@ export const BALANCE_TUNING_REQUIRED_GROUP_IDS = [
   "recovery",
 ];
 
+export const BALANCE_TUNING_REQUIRED_DOMAIN_IDS = [
+  "player-foundation",
+  "combat-pressure",
+  "equipment-items",
+  "monster-reward-loop",
+  "theme-content-retarget",
+];
+
 export const BALANCE_TUNING_GROUPS = [
   {
     id: "player-stats",
@@ -100,5 +108,38 @@ export const BALANCE_TUNING_GROUPS = [
     files: ["src/balance/recoveryBalance.js"],
     exports: ["PASSIVE_RECOVERY_BALANCE", "DEFEAT_RECOVERY_BALANCE"],
     affects: ["passive-recovery", "defeat-recovery"],
+  },
+];
+
+export const BALANCE_TUNING_DOMAIN_SUMMARIES = [
+  {
+    id: "player-foundation",
+    scope: "engine-balance",
+    groups: ["player-stats", "player-growth"],
+    watch: ["base-stats", "derived-stat-formula", "free-stat-points", "character-creation"],
+  },
+  {
+    id: "combat-pressure",
+    scope: "engine-balance",
+    groups: ["combat-damage", "combat-rank-hyper", "skills", "recovery"],
+    watch: ["damage-window", "mp-costs", "hyper-break-gauge", "survival-recovery"],
+  },
+  {
+    id: "equipment-items",
+    scope: "mixed-balance",
+    groups: ["equipment-values", "items", "player-stats"],
+    watch: ["shop-price", "equipment-score", "item-stat-budget", "gear-power-scaling"],
+  },
+  {
+    id: "monster-reward-loop",
+    scope: "mixed-balance",
+    groups: ["monsters", "monster-stats", "rewards"],
+    watch: ["monster-level-stats", "exp-gold-reward", "drop-table", "offline-reward"],
+  },
+  {
+    id: "theme-content-retarget",
+    scope: "content-balance",
+    groups: ["items", "monsters", "skills"],
+    watch: ["theme-content-boundary", "content-id-swap", "localized-data", "asset-swap"],
   },
 ];

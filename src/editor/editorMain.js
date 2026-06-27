@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=371";
-import { getLocaleText, tf } from "../localization/index.js?v=371";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=371";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=371";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=371";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=371";
+import { applyDomLocalization } from "../localization/domText.js?v=372";
+import { getLocaleText, tf } from "../localization/index.js?v=372";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=372";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=372";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=372";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=372";
 
-const EDITOR_VERSION = "371";
+const EDITOR_VERSION = "372";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -295,6 +295,7 @@ function renderBalanceTuningDetail() {
         }, ""))}</span>
       </div>
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
+      ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
@@ -303,6 +304,45 @@ function renderBalanceTuningDetail() {
       </div>
     </section>
   `;
+}
+
+function renderBalanceDomainSummaries(domains = [], detailText = {}) {
+  if (!domains.length) return "";
+  const labels = detailText.domainLabels || {};
+  const descriptions = detailText.domainDescriptions || {};
+  return `
+    <section class="editor-balance-domain-list" aria-label="${escapeAttribute(detailText.domainSummaries || "Balance domains")}">
+      <strong>${escapeHtml(detailText.domainSummaries || "")}</strong>
+      ${domains.map((domain) => {
+        const summary = balanceDomainImpactSummary(domain);
+        return `
+          <article class="editor-balance-domain">
+            <div class="editor-balance-domain-head">
+              <div>
+                <h4>${escapeHtml(labels[domain.id] || domain.id || "")}</h4>
+                <p>${escapeHtml(descriptions[domain.id] || "")}</p>
+              </div>
+              <span>${escapeHtml(domain.scope || "")}</span>
+            </div>
+            <div class="editor-balance-domain-impact">
+              <span>${escapeHtml(detailText.domainImpact || "Impact")}</span>
+              <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.domainImpactSummary", {
+                groups: summary.groupCount,
+                files: summary.fileCount,
+                exports: summary.exportCount
+              }, `${summary.groupCount} · ${summary.fileCount} · ${summary.exportCount}`))}</strong>
+            </div>
+            ${balanceDetailChipBlock(detailText.domainGroups || "Groups", domain.groups || [])}
+            ${balanceDetailChipBlock(detailText.domainWatch || "Watch", domain.watch || [])}
+          </article>
+        `;
+      }).join("")}
+    </section>
+  `;
+}
+
+function balanceDomainImpactSummary(domain = {}) {
+  return balanceLinkedGroupSummary(domain.groups || []);
 }
 
 function renderBalanceTuningCandidates(candidates = [], detailText = {}) {
@@ -339,12 +379,16 @@ function balanceCandidateImpactBlock(summary, detailText = {}) {
 }
 
 function balanceCandidateImpactSummary(candidate = {}) {
-  const groupIds = new Set(normalizeBalanceCandidateGroups(candidate.groups));
-  const groups = BALANCE_TUNING_GROUPS.filter((group) => groupIds.has(group.id));
-  const files = new Set(groups.flatMap((group) => group.files || []));
-  const exports = new Set(groups.flatMap((group) => group.exports || []));
+  return balanceLinkedGroupSummary(normalizeBalanceCandidateGroups(candidate.groups));
+}
+
+function balanceLinkedGroupSummary(groupLinks = []) {
+  const groupIds = new Set(groupLinks);
+  const linkedGroups = BALANCE_TUNING_GROUPS.filter((group) => groupIds.has(group.id));
+  const files = new Set(linkedGroups.flatMap((group) => group.files || []));
+  const exports = new Set(linkedGroups.flatMap((group) => group.exports || []));
   return {
-    groupCount: groups.length,
+    groupCount: linkedGroups.length,
     fileCount: files.size,
     exportCount: exports.size
   };

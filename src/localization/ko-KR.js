@@ -1487,6 +1487,25 @@ export const KO_KR_TEXT = {
         pacingRequiredKillSeconds: "필요 평균",
         pacingPowerSlashMinutes: "강타 예상",
         pacingGold: "기본 골드",
+        domainSummaries: "조절 영역 요약",
+        domainImpact: "연결 규모",
+        domainImpactSummary: "그룹 {groups} · 파일 {files} · export {exports}",
+        domainGroups: "연결 그룹",
+        domainWatch: "확인 포인트",
+        domainLabels: {
+          "player-foundation": "플레이어 성장 기반",
+          "combat-pressure": "전투 압박감",
+          "equipment-items": "장비와 아이템",
+          "monster-reward-loop": "몬스터와 보상 루프",
+          "theme-content-retarget": "테마 교체 콘텐츠"
+        },
+        domainDescriptions: {
+          "player-foundation": "기본 스탯, 파생 스탯, 자유 포인트 흐름을 함께 본다.",
+          "combat-pressure": "피해량, 스킬 비용, 하이퍼/브레이크, 회복 압박을 함께 본다.",
+          "equipment-items": "상점 가격, 장비 점수, 아이템 스탯 예산과 전투력 체감을 함께 본다.",
+          "monster-reward-loop": "몬스터 스탯, 경험치, 골드, 드랍과 오프라인 보상을 함께 본다.",
+          "theme-content-retarget": "헌터물에서 무협 등 다른 테마로 바꿀 때 교체할 콘텐츠 경계를 본다."
+        },
         tuningCandidates: "튜닝 후보",
         candidateImpact: "영향 요약",
         candidateImpactSummary: "그룹 {groups} · 파일 {files} · export {exports}",
