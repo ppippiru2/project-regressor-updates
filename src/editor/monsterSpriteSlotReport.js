@@ -1,6 +1,6 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=413";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=413";
-import { monsters } from "../data/worldData.js?v=413";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=414";
+import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=414";
+import { monsters } from "../data/worldData.js?v=414";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
 const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";
@@ -60,11 +60,39 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY, 
 
 export function createMonsterSpriteAssignmentDrafts(report = createMonsterSpriteSlotReport()) {
   return (report.draftRows || []).map((row) => ({
+    monsterId: row.monsterId,
+    pose: row.pose,
     slotId: row.slotId,
     slotPatchPath: row.slotPatchPath,
     assetId: row.draftAssetId,
     assetEntry: row.draftAssetEntry,
   }));
+}
+
+export function createMonsterSpriteAssignmentPatchDraft(report = createMonsterSpriteSlotReport()) {
+  const drafts = createMonsterSpriteAssignmentDrafts(report);
+  return {
+    version: 1,
+    summary: {
+      slots: report.totals?.slots || 0,
+      draftAssetCandidates: drafts.length,
+      connectableSlots: report.totals?.connectableSlots || 0,
+      fileReadySlots: report.totals?.fileReadySlots || 0,
+      fileMissingSlots: report.totals?.fileMissingSlots || 0,
+    },
+    assetManifestEntries: drafts.map((draft) => draft.assetEntry),
+    assetSlotPatches: drafts.map((draft) => ({
+      path: draft.slotPatchPath,
+      value: draft.assetId,
+    })),
+    assetSlotPatchObject: {
+      slots: {
+        monster: {
+          byMonsterId: createMonsterSpriteSlotPatchObject(drafts),
+        },
+      },
+    },
+  };
 }
 
 function createMonsterSpriteSlotRow(monster, pose, byMonsterId, assetsById, registry, existingFilePaths) {
@@ -119,6 +147,15 @@ function createMonsterSpriteDraftAssetEntry(monster, pose, expectedPath, draftAs
     tags: ["monster", "combat-sprite", monster.id, pose, "draft"],
     notes: `Draft monster combat sprite entry for ${monster.id} ${pose}. Approve and connect it after the final file is added.`,
   };
+}
+
+function createMonsterSpriteSlotPatchObject(drafts) {
+  const byMonsterId = {};
+  for (const draft of drafts) {
+    if (!byMonsterId[draft.monsterId]) byMonsterId[draft.monsterId] = {};
+    byMonsterId[draft.monsterId][draft.pose] = draft.assetId;
+  }
+  return byMonsterId;
 }
 
 function groupRowsByMonster(rows) {
