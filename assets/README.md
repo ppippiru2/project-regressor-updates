@@ -14,7 +14,7 @@ Use this workflow:
 Current important runtime icon:
 
 - `assets/icon.png`: representative install/header icon, copied from the dark-background icon.
-- `assets/icon-dark.png`: preserved dark-background icon source, currently copied from Desktop/icon_fix.png.
+- `assets/icon-dark.png`: preserved dark-background icon source, currently copied from the 2026-06-27 uploaded blue crystal emblem.
 - `assets/icon-light.png`: preserved light-background icon source.
 
 See `docs/ASSET_PIPELINE_PLAN_v1.0.md` for the full asset workflow.

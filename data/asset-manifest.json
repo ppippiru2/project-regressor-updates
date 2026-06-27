@@ -16,7 +16,7 @@
         "dark-background",
         "ui"
       ],
-      "notes": "Current PWA, install, Android launcher, and header app icon. Desktop/icon_fix.png is copied to assets/icon.png and kept in sync with assets/icon-dark.png."
+      "notes": "Current PWA, install, Android launcher, and header app icon. The 2026-06-27 uploaded blue crystal emblem is copied to assets/icon.png and kept in sync with assets/icon-dark.png."
     },
     {
       "assetId": "app_icon_dark",
@@ -32,7 +32,7 @@
         "source-variant",
         "ui"
       ],
-      "notes": "Preserved dark-background icon source from Desktop/icon_fix.png. This is the representative install icon source."
+      "notes": "Preserved dark-background icon source from the 2026-06-27 uploaded blue crystal emblem. This is the representative install icon source."
     },
     {
       "assetId": "app_icon_light",
