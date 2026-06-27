@@ -71,13 +71,16 @@
       "title": "??? ?? ????? ?? ?? ??",
       "status": "partial",
       "priority": "high",
-      "source": "v409",
-      "summary": "Expose per-monster idle, attack, hit, and dead sprite slot targets in the editor asset registry before final monster PNG production.",
+      "source": "v411-prep",
+      "summary": "Expose per-monster idle, attack, hit, and dead sprite slot targets plus a read-only readiness report before final monster PNG/WebP production.",
       "editorHooks": [
         "data/editor-manifest.json:monsterBattleSpriteAssetSlots",
         "data/asset-slots.json:slots.monster.byMonsterId",
         "src/assets/assetRegistry.js:resolveMonsterCombatSpritePath",
-        "build-scripts/check-monster-combat-display-slots.mjs"
+        "build-scripts/check-monster-combat-display-slots.mjs",
+        "src/editor/monsterSpriteSlotReport.js",
+        "src/editor/editorMain.js:renderMonsterSpriteSlotReport",
+        "data/editor-manifest.json:monsterSpriteSlotReadiness"
       ]
     },
     {

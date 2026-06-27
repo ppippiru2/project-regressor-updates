@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 410,
-  "displayVersion": "v4.10",
-  "cacheVersion": "project-regressor-mvp-v410",
-  "updatedAt": "2026-06-27",
+  "versionCode": 411,
+  "displayVersion": "v4.11",
+  "cacheVersion": "project-regressor-mvp-v411",
+  "updatedAt": "2026-06-27T11:49:24.796Z",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=410&cachebust=410",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=411&cachebust=411",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v411 adds a monster battle sprite slot readiness report to the editor asset registry panel.",
+    "v411 lists every tutorial monster idle, attack, hit, and dead expected file path before final PNG/WebP assignment.",
+    "v411 extends the monster sprite slot guard to cover readiness totals, editor wiring, cache entries, and report styles.",
     "v410 adds a tuning signal summary to the combat VFX placement editor preview.",
     "v410 ranks wide or offset-heavy VFX placements so manual tuning can start from the highest-risk player and monster rows.",
     "v410 extends the combat VFX placement guard to cover tuning candidates, signal labels, renderer wiring, and responsive styles.",
@@ -211,29 +214,32 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v410-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v411-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v410-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v411-debug.apk"
   },
   "version": {
-    "code": 410,
-    "name": "4.10.0",
-    "displayName": "v410"
+    "code": 411,
+    "name": "4.11.0",
+    "displayName": "v411"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v410-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v411-debug.apk"
   },
   "android": {
-    "code": 410,
-    "name": "4.10.0",
-    "displayName": "v410",
+    "code": 411,
+    "name": "4.11.0",
+    "displayName": "v411",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v410-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v411-debug.apk"
     },
     "version": {
-      "code": 410,
-      "name": "4.10.0",
-      "displayName": "v410"
+      "code": 411,
+      "name": "4.11.0",
+      "displayName": "v411"
     }
+  },
+  "apk": {
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v411-debug.apk"
   }
 }

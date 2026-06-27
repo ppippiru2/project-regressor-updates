@@ -4314,6 +4314,110 @@ select:focus {
   white-space: nowrap;
 }
 
+.editor-monster-sprite-report {
+  background: rgba(3, 14, 35, 0.48);
+  border: 1px solid rgba(57, 228, 255, 0.26);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1rem;
+  min-width: 0;
+  padding: 0.85rem;
+}
+
+.editor-monster-sprite-head,
+.editor-monster-sprite-group-head,
+.editor-monster-sprite-pose > div:first-child {
+  align-items: start;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-monster-sprite-head h3,
+.editor-monster-sprite-head p,
+.editor-monster-sprite-group h4 {
+  margin: 0;
+}
+
+.editor-monster-sprite-head > span,
+.editor-monster-sprite-group-head strong,
+.editor-monster-sprite-pose > div:first-child span {
+  align-items: center;
+  border: 1px solid rgba(57, 228, 255, 0.32);
+  border-radius: 999px;
+  color: var(--cyan);
+  display: inline-flex;
+  font-size: 0.74rem;
+  font-weight: 900;
+  min-height: 1.75rem;
+  padding: 0 0.58rem;
+  white-space: nowrap;
+}
+
+.editor-monster-sprite-summary {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.editor-monster-sprite-list {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-monster-sprite-group {
+  background: rgba(4, 20, 48, 0.44);
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+  padding: 0.7rem;
+}
+
+.editor-monster-sprite-group-head h4 {
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-group-head span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 900;
+  margin-top: 0.18rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-pose-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.editor-monster-sprite-pose {
+  background: rgba(3, 14, 35, 0.58);
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.62rem;
+}
+
+.editor-monster-sprite-pose[data-status="missing"] {
+  border-color: rgba(244, 211, 94, 0.34);
+}
+
+.editor-monster-sprite-pose[data-status="broken"] {
+  border-color: rgba(255, 105, 135, 0.48);
+}
+
 .editor-combat-vfx-controls {
   align-items: end;
   display: grid;
@@ -6936,11 +7040,13 @@ body[data-info-tooltips="off"] .info-term {
 
   .editor-balance-domain-list,
   .editor-combat-vfx-grid,
-  .editor-combat-vfx-tuning-list {
+  .editor-combat-vfx-tuning-list,
+  .editor-monster-sprite-pose-grid {
     grid-template-columns: 1fr;
   }
 
-  .editor-combat-vfx-summary {
+  .editor-combat-vfx-summary,
+  .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -7037,6 +7143,9 @@ body[data-info-tooltips="off"] .info-term {
     .editor-combat-vfx-tuning-head,
     .editor-combat-vfx-tuning-card > div:first-child,
     .editor-combat-vfx-row-head,
+    .editor-monster-sprite-head,
+    .editor-monster-sprite-group-head,
+    .editor-monster-sprite-pose > div:first-child,
     .editor-topbar {
     grid-template-columns: 1fr;
   }
@@ -7057,11 +7166,15 @@ body[data-info-tooltips="off"] .info-term {
   .editor-combat-vfx-head > span,
   .editor-combat-vfx-tuning-head strong,
   .editor-combat-vfx-tuning-card > div:first-child span,
-  .editor-combat-vfx-row-head strong {
+  .editor-combat-vfx-row-head strong,
+  .editor-monster-sprite-head > span,
+  .editor-monster-sprite-group-head strong,
+  .editor-monster-sprite-pose > div:first-child span {
     justify-self: start;
   }
 
-  .editor-combat-vfx-summary {
+  .editor-combat-vfx-summary,
+  .editor-monster-sprite-summary {
     grid-template-columns: 1fr;
   }
 

@@ -1,12 +1,13 @@
-import { applyDomLocalization } from "../localization/domText.js?v=410";
-import { getLocaleText, tf } from "../localization/index.js?v=410";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=410";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=410";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=410";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=410";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=410";
+import { applyDomLocalization } from "../localization/domText.js?v=411";
+import { getLocaleText, tf } from "../localization/index.js?v=411";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=411";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=411";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=411";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=411";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=411";
+import { createMonsterSpriteSlotReport } from "./monsterSpriteSlotReport.js?v=411";
 
-const EDITOR_VERSION = "410";
+const EDITOR_VERSION = "411";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -76,6 +77,22 @@ const COMBAT_VFX_SIGNAL_LABELS = Object.freeze({
   "horizontal-offset-high": "Horizontal offset high",
   "text-offset-high": "Text offset high"
 });
+const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
+  title: "Monster Battle Sprite Slot Readiness",
+  description: "Read-only checklist for monster idle, attack, hit, and dead sprite files before final PNG/WebP production.",
+  slotMetric: "Total Slots",
+  assignedMetric: "Assigned",
+  missingMetric: "Missing",
+  brokenMetric: "Broken",
+  expectedPath: "Expected file",
+  assignedAsset: "Assigned asset",
+  runtimePath: "Runtime path",
+  statusLabels: {
+    assigned: "Assigned",
+    missing: "Missing",
+    broken: "Broken"
+  }
+});
 
 const SAVE_KEYS = [
   "project_regressor_mvp_save",
@@ -98,6 +115,7 @@ let retargetDetailFilter = storedRetargetDetailFilter.filter;
 const expandedRetargetRows = new Set(storedRetargetDetailFilter.expandedRows);
 let balanceDetailFilter = loadBalanceDetailFilter();
 let combatVfxDetailFilter = loadCombatVfxDetailFilter();
+const MONSTER_SPRITE_SLOT_REPORT = createMonsterSpriteSlotReport();
 
 const elements = {
   nav: document.getElementById("editor-panel-nav"),
@@ -350,6 +368,7 @@ function renderPanelDetail() {
   const retargetDetail = panel.id === "theme_retarget_preview" ? renderRetargetPreviewDetail() : "";
   const balanceDetail = panel.id === "balance_tuning_registry" ? renderBalanceTuningDetail() : "";
   const combatVfxDetail = panel.id === "combat_vfx_placement_preview" ? renderCombatVfxPlacementDetail() : "";
+  const monsterSpriteReport = panel.id === "asset_registry" ? renderMonsterSpriteSlotReport() : "";
 
   elements.panelDetail.innerHTML = `
     <div class="editor-detail-header">
@@ -369,6 +388,75 @@ function renderPanelDetail() {
     ${retargetDetail}
     ${balanceDetail}
     ${combatVfxDetail}
+    ${monsterSpriteReport}
+  `;
+}
+
+function renderMonsterSpriteSlotReport() {
+  const detailText = {
+    ...MONSTER_SPRITE_REPORT_TEXT,
+    ...(EDITOR_TEXT.monsterSpriteSlotReport || {})
+  };
+  const report = MONSTER_SPRITE_SLOT_REPORT;
+  const totals = report.totals || {};
+  const statusLabels = {
+    ...MONSTER_SPRITE_REPORT_TEXT.statusLabels,
+    ...(detailText.statusLabels || {})
+  };
+
+  return `
+    <section class="editor-monster-sprite-report" aria-label="${escapeAttribute(detailText.title)}">
+      <div class="editor-monster-sprite-head">
+        <div>
+          <h3>${escapeHtml(detailText.title)}</h3>
+          <p class="muted">${escapeHtml(detailText.description)}</p>
+        </div>
+        <span>${escapeHtml(`${totals.monsters || 0} monsters / ${totals.poses || 0} poses`)}</span>
+      </div>
+      <div class="editor-monster-sprite-summary">
+        ${combatVfxSummaryCard(detailText.slotMetric, String(totals.slots || 0))}
+        ${combatVfxSummaryCard(detailText.assignedMetric, String(totals.assignedSlots || 0))}
+        ${combatVfxSummaryCard(detailText.missingMetric, String(totals.missingSlots || 0))}
+        ${combatVfxSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
+      </div>
+      <div class="editor-monster-sprite-list">
+        ${(report.byMonster || []).map((group) => renderMonsterSpriteSlotGroup(group, detailText, statusLabels)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderMonsterSpriteSlotGroup(group, detailText, statusLabels) {
+  return `
+    <article class="editor-monster-sprite-group">
+      <div class="editor-monster-sprite-group-head">
+        <div>
+          <h4>${escapeHtml(group.monsterName || group.monsterId)}</h4>
+          <span>${escapeHtml(group.monsterId)}</span>
+        </div>
+        <strong>${escapeHtml(`${group.assignedSlots}/${group.rows.length}`)}</strong>
+      </div>
+      <div class="editor-monster-sprite-pose-grid">
+        ${group.rows.map((row) => renderMonsterSpriteSlotPose(row, detailText, statusLabels)).join("")}
+      </div>
+    </article>
+  `;
+}
+
+function renderMonsterSpriteSlotPose(row, detailText, statusLabels) {
+  const status = statusLabels[row.status] || row.status;
+  const assetValue = row.assetId || "-";
+  const runtimePath = row.resolvedPath || "-";
+  return `
+    <div class="editor-monster-sprite-pose" data-status="${escapeAttribute(row.status)}">
+      <div>
+        <strong>${escapeHtml(row.pose)}</strong>
+        <span>${escapeHtml(status)}</span>
+      </div>
+      ${combatVfxFieldBlock(detailText.expectedPath, [row.expectedPath])}
+      ${combatVfxFieldBlock(detailText.assignedAsset, [assetValue])}
+      ${row.resolvedPath ? combatVfxFieldBlock(detailText.runtimePath, [runtimePath]) : ""}
+    </div>
   `;
 }
 
