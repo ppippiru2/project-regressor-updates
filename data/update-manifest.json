@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 404,
-  "displayVersion": "v4.04",
-  "cacheVersion": "project-regressor-mvp-v404",
+  "versionCode": 405,
+  "displayVersion": "v4.05",
+  "cacheVersion": "project-regressor-mvp-v405",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=404&cachebust=404",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=405&cachebust=405",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v405 adds a read-only combat VFX placement preview helper for future editor inspection.",
+    "v405 summarizes player class/gender attack VFX placements and tutorial monster attack VFX placements in one preview contract.",
+    "v405 adds a quick-check guard so VFX placement preview metadata stays complete and service-worker cached.",
     "v404 adds class-aware player attack VFX placement profiles for warrior, assassin, fighter, archer, wand-book mage, and staff mage sprites.",
     "v404 tunes player attack VFX by effect type so pierce, projectile, magic, dark, explosion, slash, and impact hits read differently.",
     "v404 extends the player battle sprite guard so attack VFX placement metadata stays connected to combat rendering.",
@@ -193,21 +196,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v404-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v405-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v404-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v405-debug.apk"
   },
   "version": {
-    "code": 404,
-    "name": "4.04.0",
-    "displayName": "v404"
+    "code": 405,
+    "name": "4.05.0",
+    "displayName": "v405"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v404-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v405-debug.apk"
   },
   "android": {
-    "code": 404,
-    "name": "4.04.0",
-    "displayName": "v404"
+    "code": 405,
+    "name": "4.05.0",
+    "displayName": "v405"
   }
 }
