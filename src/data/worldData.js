@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=389";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=389";
+import { getLocaleText } from "../localization/index.js?v=390";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=390";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;
@@ -57,6 +57,8 @@ export const regions = [
     recommendedLevel: 8,
     monsterId: "rift_knight",
     bossId: "rift_warden",
+    bossMode: "damage_threshold",
+    bossDamageThresholdPercent: 20,
     description: REGION_TEXT.rift_gate.description,
   },
 ];

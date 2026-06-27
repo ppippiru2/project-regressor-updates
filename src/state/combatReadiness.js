@@ -1,5 +1,5 @@
-import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=389";
-import { t, tf } from "../localization/index.js?v=389";
+import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=390";
+import { t, tf } from "../localization/index.js?v=390";
 
 export function createCombatReadiness({
   region,
@@ -12,6 +12,8 @@ export function createCombatReadiness({
   rankFromPower,
 }) {
   if (bossMonster && bossStats) {
+    const damageThresholdPercent = Number(region?.bossDamageThresholdPercent || 0);
+    const isDamageThresholdBoss = damageThresholdPercent > 0;
     const levelGap = bossMonster.level - playerState.level;
     const powerRatio = bossStats.power > 0 ? player.power / bossStats.power : 1;
     const progress = clampPercent(powerRatio * 100);
@@ -26,12 +28,21 @@ export function createCombatReadiness({
       kind: "boss",
       hidden: false,
       eyebrow: t("combatReadiness.eyebrow"),
-      title: t("combatReadiness.bossTitle"),
-      detail: ready
-        ? t("combatReadiness.bossReadyDetail")
-        : t("combatReadiness.bossLockedDetail"),
+      title: isDamageThresholdBoss
+        ? t("combatReadiness.damageThresholdBossTitle")
+        : t("combatReadiness.bossTitle"),
+      detail: isDamageThresholdBoss
+        ? tf(ready ? "combatReadiness.damageThresholdReadyDetail" : "combatReadiness.damageThresholdLockedDetail", {
+            percent: damageThresholdPercent,
+          })
+        : ready
+          ? t("combatReadiness.bossReadyDetail")
+          : t("combatReadiness.bossLockedDetail"),
       progress,
       meta: [
+        ...(isDamageThresholdBoss
+          ? [tf("combatReadiness.damageThreshold", { percent: damageThresholdPercent })]
+          : []),
         tf("combatReadiness.recommendedLevel", { level: bossMonster.level }),
         tf("combatReadiness.recommendedRank", { rank: rankFromPower(bossStats.power) }),
         tf("combatReadiness.powerPercent", { percent: progress }),
