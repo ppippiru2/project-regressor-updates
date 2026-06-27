@@ -610,6 +610,7 @@
         "monsterSpriteRuntimeFallbackMode",
         "monsterSpriteCssPlaceholderFallback",
         "monsterSpriteFallbackModeSummary",
+        "monsterSpriteMissingFileHandoff",
         "monsterSpriteAssetManifestPatchDraft",
         "monsterSpriteAssetSlotPatchDraft",
         "monsterSpriteNestedSlotPatchObject",
@@ -629,7 +630,8 @@
         "Monster sprite asset manifest and slot patch export draft",
         "Monster sprite file-ready connection patch plan",
         "Monster sprite ready connection review gate",
-        "Monster sprite runtime fallback mode summary"
+        "Monster sprite runtime fallback mode summary",
+        "Monster sprite missing-file production handoff"
       ]
     },
     {
@@ -1354,7 +1356,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v423",
+    "source": "v424",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1394,6 +1396,12 @@
     },
     "runtimeFallbackPreviewVisible": true,
     "runtimeFallbackSummaryVisible": true,
+    "missingFileHandoffExportScript": "build-scripts/export-monster-sprite-missing-file-handoff.mjs",
+    "missingFileHandoffArtifact": "validation-output/monster-sprite-missing-file-handoff.json",
+    "missingFileHandoffWritesGameData": false,
+    "missingFileHandoffMonsterGroups": 6,
+    "missingFileHandoffMissingFiles": 24,
+    "missingFileHandoffProductionChecklist": true,
     "fileScanMode": "build-time-optional",
     "fileStatusValues": [
       "not-scanned",

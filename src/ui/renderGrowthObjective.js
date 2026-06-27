@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=423";
+import { t, tf } from "../localization/index.js?v=424";
 
 export function renderGrowthObjective(objective, uiState = {}, handlers = {}) {
   const container = document.getElementById("growth-objective");
