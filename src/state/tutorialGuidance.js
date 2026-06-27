@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=392";
+import { t } from "../localization/index.js?v=393";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,

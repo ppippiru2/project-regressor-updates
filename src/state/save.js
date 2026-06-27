@@ -1,12 +1,12 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=392";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=392";
-import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=392";
-import { t, tf } from "../localization/index.js?v=392";
+} from "./developerOptions.js?v=393";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=393";
+import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=393";
+import { t, tf } from "../localization/index.js?v=393";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=392";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=393";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";
@@ -141,7 +141,33 @@ export function normalizeSavedState(saved, createInitialState) {
     tutorialFlags: normalizeTutorialFlags(savedState.tutorialFlags, {
       assumeSeen: !Object.prototype.hasOwnProperty.call(savedState, "tutorialFlags"),
     }),
+    log: normalizePreTutorialLog(savedState.log, base.log),
   };
+}
+
+const PRE_TUTORIAL_LOG_REPLACEMENTS = [
+  ["\uAC01\uC131\uC790 \uB4F1\uB85D\uC774 \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4", "\uC2DC\uC2A4\uD15C \uB4F1\uB85D\uC774 \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4"],
+  ["\uAC01\uC131\uC790 \uB4F1\uB85D \uC644\uB8CC", "\uC2DC\uC2A4\uD15C \uB4F1\uB85D \uC644\uB8CC"],
+  ["\uD5CC\uD130 \uD611\uD68C", "\uB0AF\uC120 \uC2DC\uD5D8"],
+  ["\uD5CC\uD130\uD611\uD68C", "\uB0AF\uC120 \uC2DC\uD5D8"],
+  ["\uD5CC\uD130 \uB4F1\uB85D\uBA85", "\uC2DC\uC2A4\uD15C \uB4F1\uB85D\uBA85"],
+  ["\uD5CC\uD130 \uB4F1\uAE09", "\uB4F1\uAE09"],
+  ["\uC18C\uC18D \uAE38\uB4DC\uC758 \uB9C8\uC2A4\uD130", "\uD568\uAED8 \uC6C0\uC9C1\uC774\uB358 \uBB34\uB9AC\uC758 \uC9C0\uD718\uC790"],
+  ["\uC18C\uC18D \uAE38\uB4DC", "\uD568\uAED8 \uC6C0\uC9C1\uC774\uB358 \uBB34\uB9AC"],
+  ["\uAE38\uB4DC \uB9C8\uC2A4\uD130", "\uBB34\uB9AC\uC758 \uC9C0\uD718\uC790"],
+  ["\uD5CC\uD130 \uC790\uC720\uAC8C\uC2DC\uD310", "\uD604\uC2E4 \uAC8C\uC2DC\uD310"],
+  ["\uD611\uD68C \uC9C0\uAE09", "\uD6C8\uB828"],
+];
+
+function normalizePreTutorialLog(savedLog, fallbackLog = []) {
+  const source = Array.isArray(savedLog) ? savedLog : fallbackLog;
+  return source.map((entry) => {
+    if (typeof entry !== "string") return entry;
+    return PRE_TUTORIAL_LOG_REPLACEMENTS.reduce(
+      (message, [from, to]) => message.replaceAll(from, to),
+      entry
+    );
+  });
 }
 
 function normalizeSkillLoadouts(savedLoadouts, fallbackLoadouts = DEFAULT_SKILL_LOADOUTS) {

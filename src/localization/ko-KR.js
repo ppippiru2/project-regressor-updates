@@ -97,7 +97,7 @@ export const KO_KR_TEXT = {
   staticHtml: {
     characterCreation: {
       ariaLabel: "캐릭터 생성",
-      title: "각성자 등록",
+      title: "시스템 등록",
       description: "첫 세계선에 기록할 기본 정보를 입력합니다.",
       name: "이름",
       defaultName: "회귀자",
@@ -106,7 +106,7 @@ export const KO_KR_TEXT = {
       genderMale: "남성",
       genderFemale: "여성",
       genderPrivate: "비공개",
-      country: "소속 국가",
+      country: "국가",
       countryKorea: "대한민국",
       countryUsa: "미국",
       countryJapan: "일본",
@@ -117,7 +117,7 @@ export const KO_KR_TEXT = {
       q1Hero: "대가 없이 즉시 돕는다.",
       q1Pragmatic: "위험과 보상을 확인하고 돕는다.",
       q1Vengeful: "원인을 찾아 대가를 치르게 할 준비를 한다.",
-      q2: "사회의 법과 헌터 협회의 규칙에 대해 어떻게 생각하는가?",
+      q2: "공동체의 규칙과 낯선 시험의 규칙에 대해 어떻게 생각하는가?",
       q2Lawful: "사회 유지를 위해 반드시 지켜야 한다.",
       q2Pragmatic: "상황에 따라 융통성 있게 적용해야 한다.",
       q2Chaotic: "규칙은 약자들의 핑계일 뿐이다.",
@@ -125,7 +125,7 @@ export const KO_KR_TEXT = {
       q3Hero: "어떤 경우에도 타인을 희생시킬 수 없다.",
       q3Pragmatic: "더 큰 피해를 막기 위한 선택이라면 검토한다.",
       q3Vengeful: "나의 성장을 위해서라면 기꺼이 밟고 올라선다.",
-      q4: "소속 길드의 마스터가 부당한 명령을 내렸다.",
+      q4: "함께 움직이던 무리의 지휘자가 부당한 지시를 내렸다.",
       q4Lawful: "원칙에 따라 명령에 복종한다.",
       q4Pragmatic: "내 이익에 부합하는지 먼저 따져본다.",
       q4Chaotic: "즉각 반발하고 독자적으로 행동한다.",
@@ -316,7 +316,7 @@ export const KO_KR_TEXT = {
         },
         {
           id: "q2",
-          question: "사회의 법과 헌터 협회의 규칙에 대해 어떻게 생각하는가?",
+          question: "공동체의 규칙과 낯선 시험의 규칙에 대해 어떻게 생각하는가?",
           options: [
             ["lawful", "사회 유지를 위해 반드시 지켜야 한다."],
             ["pragmatic", "상황에 따라 융통성 있게 적용해야 한다."],
@@ -334,7 +334,7 @@ export const KO_KR_TEXT = {
         },
         {
           id: "q4",
-          question: "소속 길드의 마스터가 부당한 명령을 내렸다.",
+          question: "함께 움직이던 무리의 지휘자가 부당한 지시를 내렸다.",
           options: [
             ["lawful", "원칙에 따라 명령에 복종한다."],
             ["pragmatic", "내 이익에 부합하는지 먼저 따져본다."],
@@ -410,7 +410,7 @@ export const KO_KR_TEXT = {
       description: "등록 정보와 기본 카드가 기록되었습니다. 이제 튜토리얼 섬으로 소환됩니다.",
       analysisComplete: "성향 분석 완료",
       systemAlignment: "[ 시스템 ] 동기화 완료. 당신의 성향은 {alignment}입니다.",
-      completionMessage: "각성자 등록이 완료되었습니다. 개별 튜토리얼 시험 공간으로 전송됩니다.",
+      completionMessage: "시스템 등록이 완료되었습니다. 개별 튜토리얼 시험 공간으로 전송됩니다.",
       name: "이름",
       alignment: "성향",
       statTotal: "능력치 총합",
@@ -509,12 +509,12 @@ export const KO_KR_TEXT = {
       "캐릭터 생성 정보입니다. 현재 전투 공식에는 사용하지 않습니다."
     ],
     "profile:country": [
-      "소속 국가",
-      "캐릭터의 출신/소속 국가 정보입니다. 현재 전투 공식에는 사용하지 않습니다."
+      "국가",
+      "캐릭터 생성 때 입력한 국가 정보입니다. 현재 전투 공식에는 사용하지 않습니다."
     ],
     "profile:organization": [
-      "소속 단체",
-      "길드, 협회, 파티 같은 소속을 표시할 자리입니다. MVP 이후 확장 예정입니다."
+      "단체",
+      "현재는 무소속으로 표시되는 확장용 자리입니다. 공식 조직 정보는 튜토리얼 이후에 열립니다."
     ],
     "profile:alignment": [
       "성향",
@@ -1340,8 +1340,8 @@ export const KO_KR_TEXT = {
       job: "직업",
       title: "칭호",
       ageGender: "나이/성별",
-      country: "소속 국가",
-      organization: "소속 단체",
+      country: "국가",
+      organization: "단체",
       alignment: "성향",
       starterCard: "기본 카드",
       starterSkill: "카드 스킬",
@@ -1482,7 +1482,7 @@ export const KO_KR_TEXT = {
       },
     },
     equipmentNames: {
-      rusty_sword: "녹슨 협회 지급검",
+      rusty_sword: "녹슨 훈련검",
       hunter_bow: "견습 헌터의 활",
       golem_fist: "골렘 핵 철퇴",
       rift_blade: "균열 절단검",
@@ -1782,7 +1782,7 @@ export const KO_KR_TEXT = {
     completedGateReplay: "{regionName}의 확인된 게이트 경로를 재탐사합니다. 이전에 실제로 이동했던 노드 순서로만 반복 파밍할 수 있습니다.",
     restFinished: "휴식을 마치고 전투 대기 상태로 돌아왔습니다.",
     restStarted: "전투 지역에서 완전히 이탈해 휴식을 시작했습니다. HP와 MP 회복 속도가 증가합니다.",
-    characterCreated: "각성자 등록이 완료되었습니다. 튜토리얼 섬으로 소환됩니다.",
+    characterCreated: "시스템 등록이 완료되었습니다. 튜토리얼 섬으로 소환됩니다.",
   },
   statLog: {
     recommendedAllocated: "추천 배분 완료. {details}.",

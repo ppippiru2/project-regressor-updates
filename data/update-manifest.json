@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 392,
-  "displayVersion": "v3.92",
-  "cacheVersion": "project-regressor-mvp-v392",
+  "versionCode": 393,
+  "displayVersion": "v3.93",
+  "cacheVersion": "project-regressor-mvp-v393",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=392&cachebust=392",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=393&cachebust=393",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v393 applies ProjectRegressor_v2.6.1_FIX so pre-tutorial screens no longer imply a Hunter Association or guild society already exists.",
+    "v393 changes early registration, abyss question, completion, status-tooltip, and rusty starter weapon copy to system/test-neutral wording.",
+    "v393 adds a pre-tutorial hunter-association boundary quick-check so forbidden early terms cannot return.",
     "v392 applies the first ProjectRegressor_v2.6_FINAL package pass as a guarded final contract.",
     "v392 upgrades the tutorial dialogue catalog to v2.6_FINAL with new-game flow, key flags, starter-skill aliases, and 5-plus loop dialogue metadata.",
     "v392 adds a final-package quick-check for initial stats, basic attack start, starter card skill aliases, damage-threshold boss evaluation, and loop dialogue cycling.",
@@ -157,21 +160,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v392-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v393-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v392-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v393-debug.apk"
   },
   "version": {
-    "code": 392,
-    "name": "3.92.0",
-    "displayName": "v392"
+    "code": 393,
+    "name": "3.93.0",
+    "displayName": "v393"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v392-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v393-debug.apk"
   },
   "android": {
-    "code": 392,
-    "name": "3.92.0",
-    "displayName": "v392"
+    "code": 393,
+    "name": "3.93.0",
+    "displayName": "v393"
   }
 }
