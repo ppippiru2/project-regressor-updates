@@ -441,6 +441,8 @@
         "motionProfile",
         "basePlacement",
         "hyperPlacement",
+        "searchQuery",
+        "kindFilter",
         "offsetX",
         "offsetY",
         "textOffsetY",
@@ -452,7 +454,9 @@
         "읽기 전용 몬스터 VFX 배치표",
         "효과 타입별 배치 비교",
         "하이퍼 상태 배치 비교",
-        "전투 화면 튜닝 전 점검용 요약"
+        "전투 화면 튜닝 전 점검용 요약",
+        "????/??? ?? ??",
+        "VFX ?? ??"
       ]
     },
     {

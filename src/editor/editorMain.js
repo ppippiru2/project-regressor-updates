@@ -1,12 +1,12 @@
-import { applyDomLocalization } from "../localization/domText.js?v=406";
-import { getLocaleText, tf } from "../localization/index.js?v=406";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=406";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=406";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=406";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=406";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=406";
+import { applyDomLocalization } from "../localization/domText.js?v=407";
+import { getLocaleText, tf } from "../localization/index.js?v=407";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=407";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=407";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=407";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=407";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=407";
 
-const EDITOR_VERSION = "406";
+const EDITOR_VERSION = "407";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -66,10 +66,12 @@ const SAVE_KEYS = [
   "project_regressor_active_save_slot",
   "project_regressor_ui_state",
   "project_regressor_editor_retarget_filter",
-  "project_regressor_editor_balance_filter"
+  "project_regressor_editor_balance_filter",
+  "project_regressor_editor_combat_vfx_filter"
 ];
 const RETARGET_FILTER_STORAGE_KEY = "project_regressor_editor_retarget_filter";
 const BALANCE_FILTER_STORAGE_KEY = "project_regressor_editor_balance_filter";
+const COMBAT_VFX_FILTER_STORAGE_KEY = "project_regressor_editor_combat_vfx_filter";
 
 let manifest = null;
 let backlog = null;
@@ -78,6 +80,7 @@ const storedRetargetDetailFilter = loadRetargetDetailFilter();
 let retargetDetailFilter = storedRetargetDetailFilter.filter;
 const expandedRetargetRows = new Set(storedRetargetDetailFilter.expandedRows);
 let balanceDetailFilter = loadBalanceDetailFilter();
+let combatVfxDetailFilter = loadCombatVfxDetailFilter();
 
 const elements = {
   nav: document.getElementById("editor-panel-nav"),
@@ -171,9 +174,41 @@ function bindEvents() {
         nextInput.focus();
         nextInput.setSelectionRange(cursor, cursor);
       }
+      return;
+    }
+    const combatVfxInput = event.target.closest("[data-combat-vfx-search]");
+    if (combatVfxInput) {
+      const cursor = combatVfxInput.selectionStart ?? combatVfxInput.value.length;
+      combatVfxDetailFilter = {
+        ...combatVfxDetailFilter,
+        query: combatVfxInput.value
+      };
+      persistCombatVfxDetailFilter();
+      renderPanelDetail();
+      const nextInput = elements.panelDetail.querySelector("[data-combat-vfx-search]");
+      if (nextInput) {
+        nextInput.focus();
+        nextInput.setSelectionRange(cursor, cursor);
+      }
     }
   });
   elements.panelDetail?.addEventListener("click", (event) => {
+    const combatVfxResetButton = event.target.closest("[data-combat-vfx-reset]");
+    if (combatVfxResetButton) {
+      resetCombatVfxDetailFilter();
+      renderPanelDetail();
+      return;
+    }
+    const combatVfxKindButton = event.target.closest("[data-combat-vfx-kind]");
+    if (combatVfxKindButton) {
+      combatVfxDetailFilter = {
+        ...combatVfxDetailFilter,
+        kind: normalizeCombatVfxKind(combatVfxKindButton.dataset.combatVfxKind)
+      };
+      persistCombatVfxDetailFilter();
+      renderPanelDetail();
+      return;
+    }
     const balanceCandidateButton = event.target.closest("[data-balance-candidate]");
     if (balanceCandidateButton) {
       applyBalanceCandidateFilter(balanceCandidateButton.dataset.balanceCandidate);
@@ -329,6 +364,10 @@ function renderCombatVfxPlacementDetail() {
   const totals = preview.totals || {};
   const playerRows = preview.playerRows || [];
   const monsterRows = preview.monsterRows || [];
+  const visiblePlayerRows = playerRows.filter((row) => matchesCombatVfxFilter("player", combatVfxPlayerSearchText(row)));
+  const visibleMonsterRows = monsterRows.filter((row) => matchesCombatVfxFilter("monster", combatVfxMonsterSearchText(row)));
+  const visibleCount = visiblePlayerRows.length + visibleMonsterRows.length;
+  const totalCount = playerRows.length + monsterRows.length;
 
   return `
     <section class="editor-combat-vfx-detail" aria-label="${escapeAttribute(detailText.title)}">
@@ -348,22 +387,87 @@ function renderCombatVfxPlacementDetail() {
         ${combatVfxSummaryCard(detailText.monsterMetric, String(totals.monsterRows || monsterRows.length))}
         ${combatVfxSummaryCard(detailText.effectMetric, String(totals.effectTypes || 0))}
       </div>
+      ${renderCombatVfxFilterControls(detailText, visibleCount, totalCount)}
       <div class="editor-combat-vfx-grid">
         <section>
           <h4>${escapeHtml(detailText.playerTitle)}</h4>
           <div class="editor-combat-vfx-list">
-            ${playerRows.map((row) => renderPlayerVfxPreviewRow(row, detailText)).join("")}
+            ${visiblePlayerRows.map((row) => renderPlayerVfxPreviewRow(row, detailText)).join("") || emptyCombatVfxRows(detailText, "player")}
           </div>
         </section>
         <section>
           <h4>${escapeHtml(detailText.monsterTitle)}</h4>
           <div class="editor-combat-vfx-list">
-            ${monsterRows.map((row) => renderMonsterVfxPreviewRow(row, detailText)).join("")}
+            ${visibleMonsterRows.map((row) => renderMonsterVfxPreviewRow(row, detailText)).join("") || emptyCombatVfxRows(detailText, "monster")}
           </div>
         </section>
       </div>
     </section>
   `;
+}
+
+function renderCombatVfxFilterControls(detailText = {}, visibleCount = 0, totalCount = 0) {
+  const filterSummary = combatVfxFilterSummary(detailText);
+  return `
+    <div class="editor-combat-vfx-controls">
+      <label class="editor-combat-vfx-search">
+        <span>${escapeHtml(detailText.searchLabel || "Search")}</span>
+        <input type="search" data-combat-vfx-search value="${escapeAttribute(combatVfxDetailFilter.query)}" placeholder="${escapeAttribute(detailText.searchPlaceholder || "")}" />
+      </label>
+      <div class="editor-combat-vfx-filter-buttons" role="group" aria-label="${escapeAttribute(detailText.kindFilter || "Kind Filter")}">
+        ${combatVfxKindButton("all", detailText.all || "All")}
+        ${combatVfxKindButton("player", detailText.playerOnly || "Player")}
+        ${combatVfxKindButton("monster", detailText.monsterOnly || "Monster")}
+      </div>
+      <button class="editor-combat-vfx-reset" type="button" data-combat-vfx-reset>
+        ${escapeHtml(detailText.reset || "Reset")}
+      </button>
+      <span class="editor-combat-vfx-count">
+        <strong>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.visibleCount", {
+          visible: visibleCount,
+          total: totalCount
+        }, `${visibleCount}/${totalCount}`))}</strong>
+        ${filterSummary ? `<small>${escapeHtml(filterSummary)}</small>` : ""}
+      </span>
+    </div>
+  `;
+}
+
+function combatVfxKindButton(kind, label) {
+  const active = normalizeCombatVfxKind(combatVfxDetailFilter.kind) === kind;
+  return `
+    <button class="editor-combat-vfx-filter${active ? " is-active" : ""}" type="button" data-combat-vfx-kind="${escapeAttribute(kind)}" aria-pressed="${active ? "true" : "false"}">
+      ${escapeHtml(label)}
+    </button>
+  `;
+}
+
+function combatVfxFilterSummary(detailText = {}) {
+  const kind = normalizeCombatVfxKind(combatVfxDetailFilter.kind);
+  const query = String(combatVfxDetailFilter.query || "").trim();
+  const filterLabel = kind === "player"
+    ? (detailText.playerOnly || "Player")
+    : kind === "monster"
+      ? (detailText.monsterOnly || "Monster")
+      : "";
+
+  if (kind !== "all" && query) {
+    return tf("editorPrep.combatVfxPlacementDetail.activeFilterAndSearch", {
+      filter: filterLabel,
+      query
+    }, `${filterLabel} / ${query}`);
+  }
+  if (kind !== "all") {
+    return tf("editorPrep.combatVfxPlacementDetail.activeFilter", {
+      filter: filterLabel
+    }, filterLabel);
+  }
+  if (query) {
+    return tf("editorPrep.combatVfxPlacementDetail.activeSearch", {
+      query
+    }, query);
+  }
+  return "";
 }
 
 function combatVfxSummaryCard(label, value) {
@@ -372,6 +476,66 @@ function combatVfxSummaryCard(label, value) {
       <small>${escapeHtml(label)}</small>
       <b>${escapeHtml(value)}</b>
     </span>
+  `;
+}
+
+function matchesCombatVfxFilter(kind, searchText) {
+  const filterKind = normalizeCombatVfxKind(combatVfxDetailFilter.kind);
+  const query = normalizeSearchText(combatVfxDetailFilter.query);
+  if (filterKind !== "all" && filterKind !== kind) return false;
+  return !query || searchText.includes(query);
+}
+
+function combatVfxPlayerSearchText(row) {
+  return [
+    "player",
+    row.id,
+    row.classId,
+    row.gender,
+    row.spritePath,
+    ...Object.keys(row.effects || {}),
+    ...Object.values(row.effects || {}).map(formatCombatVfxPlacement)
+  ].join(" ").toLowerCase();
+}
+
+function combatVfxMonsterSearchText(row) {
+  return [
+    "monster",
+    row.id,
+    row.name,
+    row.classId,
+    row.motionProfile,
+    row.sfxProfile,
+    row.effectType,
+    formatCombatVfxPlacement(row.basePlacement),
+    formatCombatVfxPlacement(row.hyperPlacement)
+  ].join(" ").toLowerCase();
+}
+
+function emptyCombatVfxRows(detailText = {}, sectionKind = "player") {
+  const kind = normalizeCombatVfxKind(combatVfxDetailFilter.kind);
+  const query = String(combatVfxDetailFilter.query || "").trim();
+  const sectionLabel = sectionKind === "monster" ? (detailText.monsterOnly || "Monster") : (detailText.playerOnly || "Player");
+  const filterLabel = kind === "monster" ? (detailText.monsterOnly || "Monster") : (detailText.playerOnly || "Player");
+  let message = detailText.empty || "No rows";
+  let showResetHint = false;
+  if (kind !== "all" && kind !== sectionKind) {
+    message = tf("editorPrep.combatVfxPlacementDetail.emptyByType", {
+      filter: filterLabel,
+      section: sectionLabel
+    }, message);
+    showResetHint = true;
+  } else if (query) {
+    message = tf("editorPrep.combatVfxPlacementDetail.emptyBySearch", {
+      query
+    }, message);
+    showResetHint = true;
+  }
+  return `
+    <p class="editor-combat-vfx-empty">
+      <span>${escapeHtml(message)}</span>
+      ${showResetHint ? `<small>${escapeHtml(detailText.emptyResetHint || "")}</small>` : ""}
+    </p>
   `;
 }
 
@@ -1374,6 +1538,10 @@ function normalizeBalanceScope(value) {
   return ["all", "engine-balance", "content-balance"].includes(value) ? value : "all";
 }
 
+function normalizeCombatVfxKind(value) {
+  return ["all", "player", "monster"].includes(value) ? value : "all";
+}
+
 function normalizeBalanceCandidateGroups(value) {
   if (!Array.isArray(value)) return [];
   const groupIds = new Set(BALANCE_TUNING_GROUPS.map((group) => group.id));
@@ -1446,6 +1614,45 @@ function resetBalanceDetailFilter() {
   };
   try {
     window.localStorage.removeItem(BALANCE_FILTER_STORAGE_KEY);
+  } catch {
+    // Editor convenience state is optional; failed reset should not block the read-only screen.
+  }
+}
+
+function loadCombatVfxDetailFilter() {
+  try {
+    const raw = window.localStorage.getItem(COMBAT_VFX_FILTER_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return {
+      kind: normalizeCombatVfxKind(parsed?.kind),
+      query: typeof parsed?.query === "string" ? parsed.query : ""
+    };
+  } catch {
+    return {
+      kind: "all",
+      query: ""
+    };
+  }
+}
+
+function persistCombatVfxDetailFilter() {
+  try {
+    window.localStorage.setItem(COMBAT_VFX_FILTER_STORAGE_KEY, JSON.stringify({
+      kind: normalizeCombatVfxKind(combatVfxDetailFilter.kind),
+      query: String(combatVfxDetailFilter.query || "")
+    }));
+  } catch {
+    // Editor convenience state is optional; failed persistence should not block the read-only screen.
+  }
+}
+
+function resetCombatVfxDetailFilter() {
+  combatVfxDetailFilter = {
+    kind: "all",
+    query: ""
+  };
+  try {
+    window.localStorage.removeItem(COMBAT_VFX_FILTER_STORAGE_KEY);
   } catch {
     // Editor convenience state is optional; failed reset should not block the read-only screen.
   }

@@ -4234,6 +4234,73 @@ select:focus {
   font-size: 0.94rem;
 }
 
+.editor-combat-vfx-controls {
+  align-items: end;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
+  min-width: 0;
+}
+
+.editor-combat-vfx-search {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.editor-combat-vfx-search span,
+.editor-combat-vfx-count {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.editor-combat-vfx-search input {
+  background: rgba(1, 11, 27, 0.78);
+  border: 1px solid rgba(108, 210, 255, 0.28);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  min-height: 2.4rem;
+  min-width: 0;
+  padding: 0.45rem 0.65rem;
+}
+
+.editor-combat-vfx-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.editor-combat-vfx-filter,
+.editor-combat-vfx-reset {
+  border: 1px solid rgba(108, 210, 255, 0.28);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  min-height: 2.4rem;
+  padding: 0.4rem 0.65rem;
+}
+
+.editor-combat-vfx-filter.is-active {
+  border-color: rgba(57, 228, 255, 0.76);
+  color: var(--cyan);
+}
+
+.editor-combat-vfx-count {
+  display: grid;
+  gap: 0.12rem;
+  justify-items: end;
+  min-width: max-content;
+}
+
+.editor-combat-vfx-count strong {
+  color: var(--text);
+}
+
 .editor-combat-vfx-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -4286,6 +4353,20 @@ select:focus {
 
 .editor-combat-vfx-chip-block .editor-chip {
   overflow-wrap: anywhere;
+}
+
+.editor-combat-vfx-empty {
+  border: 1px dashed rgba(108, 210, 255, 0.24);
+  border-radius: 6px;
+  color: var(--muted);
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0.85rem;
+}
+
+.editor-combat-vfx-empty small {
+  color: rgba(190, 213, 239, 0.72);
 }
 
 .editor-retarget-controls {
@@ -6754,7 +6835,9 @@ body[data-info-tooltips="off"] .info-term {
   }
 
   .editor-balance-reset,
-  .editor-balance-count {
+  .editor-balance-count,
+  .editor-combat-vfx-reset,
+  .editor-combat-vfx-count {
     max-width: 100%;
     min-width: 0;
   }
@@ -6778,6 +6861,15 @@ body[data-info-tooltips="off"] .info-term {
 
   .editor-combat-vfx-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .editor-combat-vfx-controls {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .editor-combat-vfx-filter-buttons {
+    justify-content: flex-start;
   }
 }
 
