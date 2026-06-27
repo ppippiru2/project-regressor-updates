@@ -1,5 +1,5 @@
-import { equipmentScoreDelta } from "./equipmentScore.js?v=353";
-import { t, tf } from "../localization/index.js?v=353";
+import { equipmentScoreDelta } from "./equipmentScore.js?v=354";
+import { t, tf } from "../localization/index.js?v=354";
 
 export function droppedEquipmentInsight(item, equipmentState, getItem) {
   if (!item || !equipmentState || typeof getItem !== "function") return null;

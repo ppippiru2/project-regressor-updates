@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=353";
+import { t, tf } from "../localization/index.js?v=354";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
