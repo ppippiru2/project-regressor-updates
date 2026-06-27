@@ -315,6 +315,7 @@ export const ASSET_SLOTS = {
         "ruin_sentinel": {},
         "ruin_rune_doll": {},
         "mine_golem": {},
+        "mine_core_golem": {},
         "rift_knight": {},
         "rift_warden": {}
       }

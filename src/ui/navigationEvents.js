@@ -1,4 +1,4 @@
-import { activateView, keepActiveTabInView } from "./viewNavigation.js?v=444";
+import { activateView, keepActiveTabInView } from "./viewNavigation.js?v=445";
 
 export function bindNavigationEvents({ onViewChange } = {}) {
   const buttons = [...document.querySelectorAll(".nav-button")];

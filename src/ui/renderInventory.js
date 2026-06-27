@@ -1,6 +1,6 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=444";
-import { buildCodexRecordProgress } from "../state/codexProgress.js?v=444";
-import { getLocaleText, t, tf } from "../localization/index.js?v=444";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=445";
+import { buildCodexRecordProgress } from "../state/codexProgress.js?v=445";
+import { getLocaleText, t, tf } from "../localization/index.js?v=445";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;

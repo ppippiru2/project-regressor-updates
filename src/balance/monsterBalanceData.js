@@ -100,6 +100,19 @@ export const MONSTER_BALANCE_DATA = [
     ],
   },
   {
+    id: "mine_core_golem",
+    regionId: "mana_mine",
+    level: 7,
+    stats: { STR: 14, AGI: 4, VIT: 24, INT: 3, WIS: 6, LUK: 1 },
+    exp: 216,
+    gold: 33,
+    dropTable: [
+      { itemId: "mine_core_golem_codex_fragment", chance: 0.068 },
+      { itemId: "mine_core_mana_crystal_fragment", chance: 0.041 },
+      { itemId: "guard_stance_skill_rune", chance: 0.025 },
+    ],
+  },
+  {
     id: "rift_knight",
     regionId: "rift_gate",
     level: 9,

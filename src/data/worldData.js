@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=444";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=444";
+import { getLocaleText } from "../localization/index.js?v=445";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=445";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;
@@ -50,6 +50,7 @@ export const regions = [
     name: REGION_TEXT.mana_mine.name,
     recommendedLevel: 6,
     monsterId: "mine_golem",
+    monsterPool: ["mine_golem", "mine_core_golem"],
     description: REGION_TEXT.mana_mine.description,
   },
   {

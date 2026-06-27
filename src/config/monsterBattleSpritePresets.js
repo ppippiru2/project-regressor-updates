@@ -151,6 +151,15 @@ export const MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE = Object.freeze({
     expandedSlashWidth: 316,
     expandedSlashHeight: "clamp(5.5rem, 46vw, 10.1rem)",
   },
+  core_golem_runtime: {
+    offsetX: 1,
+    offsetY: 4,
+    textOffsetY: 2,
+    slashWidth: 178,
+    slashHeight: "clamp(4.45rem, 38vw, 8rem)",
+    expandedSlashWidth: 328,
+    expandedSlashHeight: "clamp(5.75rem, 48vw, 10.45rem)",
+  },
   rift_knight_runtime: {
     offsetX: 5,
     offsetY: -7,
@@ -211,6 +220,11 @@ export const MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE = Object.
     impact: { offsetY: 4, textOffsetY: 2, slashWidthMultiplier: 1.05, expandedSlashWidthMultiplier: 1.05 },
     explosion: { offsetY: 7, textOffsetY: 4, slashWidthMultiplier: 1.1, expandedSlashWidthMultiplier: 1.08 },
     dark: { offsetY: 2, textOffsetY: 1, slashWidthMultiplier: 1.07, expandedSlashWidthMultiplier: 1.06 },
+  },
+  core_golem_runtime: {
+    impact: { offsetY: 3, textOffsetY: 1, slashWidthMultiplier: 1.05, expandedSlashWidthMultiplier: 1.05 },
+    explosion: { offsetX: 1, offsetY: 6, textOffsetY: 3, slashWidthMultiplier: 1.11, expandedSlashWidthMultiplier: 1.09 },
+    dark: { offsetY: 0, textOffsetY: -1, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
   },
   rift_knight_runtime: {
     slash: { offsetX: 5, offsetY: -4, textOffsetY: -2, slashWidthMultiplier: 1.05, expandedSlashWidthMultiplier: 1.04 },
@@ -315,6 +329,19 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotY: 1,
     motionSafeMargin: { x: 0.07, y: 0.1 },
     effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.heavy_golem_runtime,
+  },
+  mine_core_golem: {
+    monsterId: "mine_core_golem",
+    classId: "enemy_core_golem",
+    motionProfile: "core_golem_runtime",
+    sfxProfile: "heavy_impact",
+    defaultScale: 0.88,
+    offsetX: 0,
+    offsetY: -1,
+    pivotX: 0.5,
+    pivotY: 1,
+    motionSafeMargin: { x: 0.06, y: 0.11 },
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.core_golem_runtime,
   },
   rift_knight: {
     monsterId: "rift_knight",
