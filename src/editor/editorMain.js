@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=373";
-import { getLocaleText, tf } from "../localization/index.js?v=373";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=373";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=373";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=373";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=373";
+import { applyDomLocalization } from "../localization/domText.js?v=374";
+import { getLocaleText, tf } from "../localization/index.js?v=374";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=374";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=374";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=374";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=374";
 
-const EDITOR_VERSION = "373";
+const EDITOR_VERSION = "374";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -334,6 +334,7 @@ function renderBalanceDomainSummaries(domains = [], detailText = {}) {
             </div>
             ${balanceDetailChipBlock(detailText.domainGroups || "Groups", domain.groups || [])}
             ${balanceDetailChipBlock(detailText.domainExports || "Exports", balanceDomainExportNames(domain))}
+            ${balanceDetailChipBlock(detailText.domainValueShapes || "Value Shapes", balanceDomainValueShapeLabels(domain, detailText))}
             ${balanceDetailChipBlock(detailText.domainWatch || "Watch", domain.watch || [])}
           </article>
         `;
@@ -351,6 +352,28 @@ function balanceDomainExportNames(domain = {}) {
   return [...new Set(BALANCE_TUNING_GROUPS
     .filter((group) => groupIds.has(group.id))
     .flatMap((group) => group.exports || []))];
+}
+
+function balanceDomainValueShapeLabels(domain = {}, detailText = {}) {
+  const groupIds = new Set(domain.groups || []);
+  const counts = new Map();
+  for (const group of BALANCE_TUNING_GROUPS.filter((entry) => groupIds.has(entry.id))) {
+    const preview = BALANCE_TUNING_PREVIEW_BY_ID.get(group.id);
+    for (const item of preview?.items || []) {
+      const type = item.type || "unknown";
+      counts.set(type, (counts.get(type) || 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .sort(([leftType], [rightType]) => leftType.localeCompare(rightType))
+    .map(([type, count]) => tf("editorPrep.balanceTuningDetail.domainValueShapeItem", {
+      type: balanceValueTypeLabel(type, detailText),
+      count
+    }, `${type} ${count}`));
+}
+
+function balanceValueTypeLabel(type, detailText = {}) {
+  return detailText.valueTypeLabels?.[type] || type;
 }
 
 function renderBalanceTuningCandidates(candidates = [], detailText = {}) {

@@ -387,6 +387,7 @@
         "exportPreviewSummary",
         "domainSummary",
         "domainExportSummary",
+        "domainValueShapeSummary",
         "tutorialPacingSnapshot",
         "tuningCandidates",
         "candidateFilter",

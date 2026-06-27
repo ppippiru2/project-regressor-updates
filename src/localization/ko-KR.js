@@ -1492,6 +1492,18 @@ export const KO_KR_TEXT = {
         domainImpactSummary: "그룹 {groups} · 파일 {files} · export {exports}",
         domainGroups: "연결 그룹",
         domainExports: "핵심 export",
+        domainValueShapes: "값 형태",
+        domainValueShapeItem: "{type} {count}개",
+        valueTypeLabels: {
+          array: "배열",
+          boolean: "불리언",
+          missing: "누락",
+          null: "null",
+          number: "숫자",
+          object: "객체",
+          string: "문자열",
+          unknown: "알 수 없음"
+        },
         domainWatch: "확인 포인트",
         domainLabels: {
           "player-foundation": "플레이어 성장 기반",
