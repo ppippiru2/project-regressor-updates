@@ -1,8 +1,8 @@
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=383";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=384";
 import { normalizePlayerProfile } from "./save.js";
-import { buildPlayerProfileInput } from "./profile.js?v=383";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=383";
-import { t, tf } from "../localization/index.js?v=383";
+import { buildPlayerProfileInput } from "./profile.js?v=384";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=384";
+import { t, tf } from "../localization/index.js?v=384";
 
 export function createCharacterProfile(formData, defaultPlayerProfile) {
   return normalizePlayerProfile(
@@ -19,6 +19,15 @@ export function applyCharacterProfile(state, profile) {
     alignment: profile.alignment,
     starterCard: profile.starterCardName || t("stateMessages.noStarterCard"),
   });
+}
+
+export function characterIntroLogMessages(profile, { regionName = "" } = {}) {
+  const starterSkill = profile?.starterSkill || t("stateMessages.noStarterSkill");
+  return [
+    t("stateMessages.tutorialTransfer"),
+    tf("stateMessages.tutorialLocation", { regionName }),
+    tf("stateMessages.tutorialStatusBriefing", { starterSkill }),
+  ];
 }
 
 export function applyInitialCreationStats(

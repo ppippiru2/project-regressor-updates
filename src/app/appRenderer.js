@@ -1,11 +1,11 @@
-import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=383";
-import { renderCombatEffects } from "../combat/combatEffects.js?v=383";
-import { createCombatFormationState } from "../combat/combatFormation.js?v=383";
+import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=384";
+import { renderCombatEffects } from "../combat/combatEffects.js?v=384";
+import { createCombatFormationState } from "../combat/combatFormation.js?v=384";
 import { rankFromPower } from "../combat/combatFormula.js";
-import { renderInventory } from "../ui/renderInventory.js?v=383";
-import { renderShop } from "../ui/renderShop.js?v=383";
-import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=383";
-import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=383";
+import { renderInventory } from "../ui/renderInventory.js?v=384";
+import { renderShop } from "../ui/renderShop.js?v=384";
+import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=384";
+import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=384";
 import {
   renderCharacterCreation,
   renderAudioSettings,
@@ -15,20 +15,20 @@ import {
   renderLog,
   renderProfileEditSettings,
   renderSaveSlots,
-} from "../ui/renderCommon.js?v=383";
-import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=383";
-import { renderCombatControls } from "../ui/renderCombatControls.js?v=383";
-import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=383";
-import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=383";
-import { renderSystemWindow } from "../ui/systemWindow.js?v=383";
-import { createGrowthObjective } from "../state/growthObjective.js?v=383";
-import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=383";
-import { renderDropPreview } from "../ui/renderDropPreview.js?v=383";
-import { createCombatReadiness } from "../state/combatReadiness.js?v=383";
-import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=383";
-import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=383";
-import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=383";
-import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=383";
+} from "../ui/renderCommon.js?v=384";
+import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=384";
+import { renderCombatControls } from "../ui/renderCombatControls.js?v=384";
+import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=384";
+import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=384";
+import { renderSystemWindow } from "../ui/systemWindow.js?v=384";
+import { createGrowthObjective } from "../state/growthObjective.js?v=384";
+import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=384";
+import { renderDropPreview } from "../ui/renderDropPreview.js?v=384";
+import { createCombatReadiness } from "../state/combatReadiness.js?v=384";
+import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=384";
+import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=384";
+import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=384";
+import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=384";
 
 export function renderAppFrame(context) {
   const now = Date.now();

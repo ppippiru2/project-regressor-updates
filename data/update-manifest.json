@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 383,
-  "displayVersion": "v3.83",
-  "cacheVersion": "project-regressor-mvp-v383",
+  "versionCode": 384,
+  "displayVersion": "v3.84",
+  "cacheVersion": "project-regressor-mvp-v384",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=383&cachebust=383",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=384&cachebust=384",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v384 connects the v2.4.1 transfer, tutorial location, and status-window briefing lines to new-character combat logs.",
+    "v384 highlights all first-run starter skill names with the same combat-log skill token style.",
+    "v384 expands the combat-log guard so starter skill samples cannot leak replacement placeholders such as $1.",
     "v383 applies the first ProjectRegressor_v2.4.1 package pass to the new-game synchronization flow.",
     "v383 changes the profile label to the tutorial-system temporary registration name and records a starter fate card after the abyss questions.",
     "v383 stores the selected starter card, trait, and card skill on the player profile and adds the selected starter skill beside guaranteed basic attack in slot 1.",
@@ -130,13 +133,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v383-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v384-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v383-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v384-debug.apk"
   },
   "version": {
-    "code": 383,
-    "name": "3.83.0",
-    "displayName": "v383"
+    "code": 384,
+    "name": "3.84.0",
+    "displayName": "v384"
+  },
+  "artifacts": {
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v384-debug.apk"
+  },
+  "android": {
+    "code": 384,
+    "name": "3.84.0",
+    "displayName": "v384"
   }
 }

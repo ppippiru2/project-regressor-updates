@@ -1,5 +1,5 @@
-import { t } from "../localization/index.js?v=383";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=383";
+import { t } from "../localization/index.js?v=384";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=384";
 
 export function createInitialState({
   slots,
