@@ -56,6 +56,19 @@ export const MONSTER_BALANCE_DATA = [
     ],
   },
   {
+    id: "forest_goblin_scout",
+    regionId: "tutorial_forest",
+    level: 3,
+    stats: { STR: 4, AGI: 4, VIT: 4, INT: 1, WIS: 1, LUK: 1 },
+    exp: 61,
+    gold: 9,
+    dropTable: [
+      { itemId: "forest_goblin_scout_codex_fragment", chance: 0.076 },
+      { itemId: "low_mana_crystal_fragment", chance: 0.041 },
+      { itemId: "power_slash_skill_fragment", chance: 0.025 },
+    ],
+  },
+  {
     id: "forest_alpha_wolf",
     regionId: "tutorial_forest",
     level: 4,

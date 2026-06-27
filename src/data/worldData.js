@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=448";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=448";
+import { getLocaleText } from "../localization/index.js?v=449";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=449";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;
@@ -29,7 +29,7 @@ export const regions = [
     name: REGION_TEXT.tutorial_forest.name,
     recommendedLevel: 2,
     monsterId: "forest_wolf",
-    monsterPool: ["forest_wolf", "forest_alpha_wolf"],
+    monsterPool: ["forest_wolf", "forest_goblin_scout", "forest_alpha_wolf"],
     description: REGION_TEXT.tutorial_forest.description,
   },
   {

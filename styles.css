@@ -6460,6 +6460,14 @@ button:disabled {
   --runtime-sprite-down-x: 5px;
 }
 
+.combatant.enemy[data-runtime-sprite-class="enemy_goblin_scout"] {
+  --runtime-sprite-attack-x: -18px;
+  --runtime-sprite-impact-x: -25px;
+  --runtime-sprite-attack-rotation: -2deg;
+  --runtime-sprite-hit-x: 10px;
+  --runtime-sprite-down-x: 4px;
+}
+
 .combatant.enemy[data-runtime-sprite-class="enemy_alpha_beast"] {
   --runtime-sprite-attack-x: -24px;
   --runtime-sprite-impact-x: -32px;

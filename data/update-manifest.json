@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 448,
-  "displayVersion": "v448",
-  "cacheVersion": "project-regressor-mvp-v448",
-  "updatedAt": "2026-06-28T07:14:00.000+09:00",
+  "versionCode": 449,
+  "displayVersion": "v449",
+  "cacheVersion": "project-regressor-mvp-v449",
+  "updatedAt": "2026-06-28T07:28:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=448&cachebust=448",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=449&cachebust=449",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v448 promotes shore_claw_crab into live shore alternate encounters while preserving shore_imp as the representative monster.",
-    "v448 connects shore_claw_crab codex, low mana crystal, and guard stance skill-rune drops to live reward checks.",
-    "v448 registers shore_claw_crab sprite slots and a shell_guard_runtime VFX motion profile for runtime/editor checks."
+    "v449 promotes forest_goblin_scout into live forest alternate encounters while preserving forest_wolf as the representative monster.",
+    "v449 connects forest_goblin_scout codex, low mana crystal, and power slash skill-fragment drops to live reward checks.",
+    "v449 registers forest_goblin_scout sprite slots and a goblin_scout_runtime VFX motion profile for runtime/editor checks."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
   },
   "version": {
-    "code": 448,
-    "name": "4.48.0",
-    "displayName": "v448"
+    "code": 449,
+    "name": "4.49.0",
+    "displayName": "v449"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
   },
   "android": {
-    "code": 448,
-    "name": "4.48.0",
-    "displayName": "v448",
+    "code": 449,
+    "name": "4.49.0",
+    "displayName": "v449",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
     },
     "version": {
-      "code": 448,
-      "name": "4.48.0",
-      "displayName": "v448"
+      "code": 449,
+      "name": "4.49.0",
+      "displayName": "v449"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v449-debug.apk"
   }
 }

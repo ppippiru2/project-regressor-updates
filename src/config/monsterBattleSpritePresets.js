@@ -124,6 +124,15 @@ export const MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE = Object.freeze({
     expandedSlashWidth: 284,
     expandedSlashHeight: "clamp(3.9rem, 35vw, 7.7rem)",
   },
+  goblin_scout_runtime: {
+    offsetX: 2,
+    offsetY: -6,
+    textOffsetY: -3,
+    slashWidth: 138,
+    slashHeight: "clamp(2.6rem, 24vw, 5.35rem)",
+    expandedSlashWidth: 254,
+    expandedSlashHeight: "clamp(3.65rem, 33vw, 7.25rem)",
+  },
   alpha_beast_runtime: {
     offsetX: 6,
     offsetY: -8,
@@ -233,6 +242,11 @@ export const MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE = Object.
     slash: { offsetX: 3, offsetY: -3, slashWidthMultiplier: 1.03, expandedSlashWidthMultiplier: 1.03 },
     dark: { offsetX: 5, offsetY: -6, textOffsetY: -3, slashWidthMultiplier: 1.1, expandedSlashWidthMultiplier: 1.08 },
   },
+  goblin_scout_runtime: {
+    slash: { offsetX: 2, offsetY: -2, textOffsetY: -1, slashWidthMultiplier: 1.02, expandedSlashWidthMultiplier: 1.02 },
+    pierce: { offsetX: 5, offsetY: -1, slashWidthMultiplier: 1.04, expandedSlashWidthMultiplier: 1.04 },
+    dark: { offsetX: 3, offsetY: -6, textOffsetY: -3, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
+  },
   alpha_beast_runtime: {
     pierce: { offsetX: 8, offsetY: -3, textOffsetY: -2, slashWidthMultiplier: 1.08, expandedSlashWidthMultiplier: 1.07 },
     slash: { offsetX: 5, offsetY: -4, textOffsetY: -1, slashWidthMultiplier: 1.04, expandedSlashWidthMultiplier: 1.04 },
@@ -332,6 +346,19 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotY: 0.96,
     motionSafeMargin: { x: 0.12, y: 0.08 },
     effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.beast_lunge_runtime,
+  },
+  forest_goblin_scout: {
+    monsterId: "forest_goblin_scout",
+    classId: "enemy_goblin_scout",
+    motionProfile: "goblin_scout_runtime",
+    sfxProfile: "short_claw",
+    defaultScale: 0.96,
+    offsetX: 0,
+    offsetY: 2,
+    pivotX: 0.5,
+    pivotY: 0.98,
+    motionSafeMargin: { x: 0.11, y: 0.08 },
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.goblin_scout_runtime,
   },
   forest_alpha_wolf: {
     monsterId: "forest_alpha_wolf",
