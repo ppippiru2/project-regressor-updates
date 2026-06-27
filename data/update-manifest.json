@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 424,
-  "displayVersion": "v424",
-  "cacheVersion": "project-regressor-mvp-v424",
-  "updatedAt": "2026-06-27T15:56:26.524Z",
+  "versionCode": 425,
+  "displayVersion": "v425",
+  "cacheVersion": "project-regressor-mvp-v425",
+  "updatedAt": "2026-06-27T16:04:19.712Z",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=424&cachebust=424",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=425&cachebust=425",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v425 surfaces the monster sprite missing-file handoff summary inside the editor asset registry panel.",
+    "v425 shows the handoff artifact path, export script, missing file count, and monster group count without opening JSON.",
+    "v425 extends the missing-file handoff guard to protect the editor summary hook and styles.",
     "v424 adds a monster sprite missing-file production handoff export.",
     "v424 lists expected assets/monsters/{monsterId}_{pose}.webp files by monster and pose for WebP ingestion.",
     "v424 extends quick checks so the missing-file handoff stays output-only and aligned with editor metadata.",
@@ -253,32 +256,32 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v424-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v425-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v424-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v425-debug.apk"
   },
   "version": {
-    "code": 424,
-    "name": "4.24.0",
-    "displayName": "v424"
+    "code": 425,
+    "name": "4.25.0",
+    "displayName": "v425"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v424-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v425-debug.apk"
   },
   "android": {
-    "code": 424,
-    "name": "4.24.0",
-    "displayName": "v424",
+    "code": 425,
+    "name": "4.25.0",
+    "displayName": "v425",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v424-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v425-debug.apk"
     },
     "version": {
-      "code": 424,
-      "name": "4.24.0",
-      "displayName": "v424"
+      "code": 425,
+      "name": "4.25.0",
+      "displayName": "v425"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v424-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v425-debug.apk"
   }
 }

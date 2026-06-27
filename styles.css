@@ -4578,6 +4578,43 @@ select:focus {
   color: #95ffb9;
 }
 
+.editor-monster-sprite-handoff {
+  background: rgba(3, 14, 35, 0.56);
+  border: 1px solid rgba(244, 211, 94, 0.22);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.58rem;
+  min-width: 0;
+  padding: 0.62rem;
+}
+
+.editor-monster-sprite-handoff-copy {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.editor-monster-sprite-handoff-copy strong {
+  color: var(--gold);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-handoff-copy span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-sprite-handoff-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  min-width: 0;
+}
+
 .editor-monster-sprite-fallback-summary {
   background: rgba(6, 25, 56, 0.4);
   border: 1px solid rgba(108, 210, 255, 0.18);

@@ -1,17 +1,17 @@
-import { applyDomLocalization } from "../localization/domText.js?v=424";
-import { getLocaleText, tf } from "../localization/index.js?v=424";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=424";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=424";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=424";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=424";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=424";
+import { applyDomLocalization } from "../localization/domText.js?v=425";
+import { getLocaleText, tf } from "../localization/index.js?v=425";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=425";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=425";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=425";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=425";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=425";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=424";
+} from "./monsterSpriteSlotReport.js?v=425";
 
-const EDITOR_VERSION = "424";
+const EDITOR_VERSION = "425";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -102,6 +102,12 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   reviewChecklistTitle: "Review gate",
   reviewCheckPassed: "OK",
   reviewCheckPending: "Pending",
+  handoffTitle: "Missing File Handoff",
+  handoffDescription: "Output-only production handoff for the exact monster WebP files that are still missing.",
+  handoffArtifactMetric: "Artifact",
+  handoffScriptMetric: "Script",
+  handoffMissingMetric: "Missing files",
+  handoffGroupsMetric: "Monster groups",
   statusLabels: {
     "waiting-for-monster-files": "Waiting for monster files",
     "ready-for-manual-review": "Ready for manual review",
@@ -528,6 +534,7 @@ function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {}) {
         ${combatVfxSummaryCard(detailText.applyModeMetric || "Apply mode", applyMode)}
       </div>
       ${renderMonsterSpriteReviewChecks(review, detailText)}
+      ${renderMonsterSpriteMissingFileHandoff(readiness, detailText)}
     </div>
   `;
 }
@@ -556,6 +563,24 @@ function renderMonsterSpriteReviewChecks(review = {}, detailText = {}) {
             </span>
           `;
         }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderMonsterSpriteMissingFileHandoff(readiness = {}, detailText = {}) {
+  if (!readiness.missingFileHandoffArtifact) return "";
+  return `
+    <div class="editor-monster-sprite-handoff">
+      <div class="editor-monster-sprite-handoff-copy">
+        <strong>${escapeHtml(detailText.handoffTitle || "Missing File Handoff")}</strong>
+        <span>${escapeHtml(detailText.handoffDescription || "")}</span>
+      </div>
+      <div class="editor-monster-sprite-handoff-grid">
+        ${combatVfxFieldBlock(detailText.handoffArtifactMetric || "Artifact", [readiness.missingFileHandoffArtifact])}
+        ${combatVfxFieldBlock(detailText.handoffScriptMetric || "Script", [readiness.missingFileHandoffExportScript || "-"])}
+        ${combatVfxFieldBlock(detailText.handoffMissingMetric || "Missing files", [String(readiness.missingFileHandoffMissingFiles ?? "-")])}
+        ${combatVfxFieldBlock(detailText.handoffGroupsMetric || "Monster groups", [String(readiness.missingFileHandoffMonsterGroups ?? "-")])}
       </div>
     </div>
   `;

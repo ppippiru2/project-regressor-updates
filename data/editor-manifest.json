@@ -611,6 +611,7 @@
         "monsterSpriteCssPlaceholderFallback",
         "monsterSpriteFallbackModeSummary",
         "monsterSpriteMissingFileHandoff",
+        "monsterSpriteMissingFileHandoffEditorSummary",
         "monsterSpriteAssetManifestPatchDraft",
         "monsterSpriteAssetSlotPatchDraft",
         "monsterSpriteNestedSlotPatchObject",
@@ -631,7 +632,8 @@
         "Monster sprite file-ready connection patch plan",
         "Monster sprite ready connection review gate",
         "Monster sprite runtime fallback mode summary",
-        "Monster sprite missing-file production handoff"
+        "Monster sprite missing-file production handoff",
+        "Monster sprite missing-file handoff editor summary"
       ]
     },
     {
@@ -1356,7 +1358,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v424",
+    "source": "v425",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1402,6 +1404,7 @@
     "missingFileHandoffMonsterGroups": 6,
     "missingFileHandoffMissingFiles": 24,
     "missingFileHandoffProductionChecklist": true,
+    "missingFileHandoffEditorSummaryVisible": true,
     "fileScanMode": "build-time-optional",
     "fileStatusValues": [
       "not-scanned",
