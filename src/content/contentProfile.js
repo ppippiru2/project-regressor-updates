@@ -18,6 +18,7 @@ export const CONTENT_SWAP_BOUNDARIES = {
   contentData: [
     "src/balance/itemBalanceData.js",
     "src/balance/monsterBalanceData.js",
+    "src/balance/monsterCandidatePool.js",
     "src/balance/skillBalanceData.js",
     "src/data/worldData.js",
     "src/data/shopData.js",

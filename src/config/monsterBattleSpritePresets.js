@@ -86,6 +86,64 @@ const MONSTER_EFFECT_PLACEMENTS_BY_SFX = Object.freeze({
   },
 });
 
+export const MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE = Object.freeze({
+  default_enemy_runtime: MONSTER_EFFECT_PLACEMENTS_BY_SFX.impact_near,
+  small_fiend_runtime: {
+    offsetX: -4,
+    offsetY: -11,
+    textOffsetY: -6,
+    slashWidth: 112,
+    slashHeight: "clamp(2.35rem, 21vw, 4.55rem)",
+    expandedSlashWidth: 208,
+    expandedSlashHeight: "clamp(3.3rem, 29vw, 6.45rem)",
+  },
+  beast_lunge_runtime: {
+    offsetX: 4,
+    offsetY: -4,
+    textOffsetY: -3,
+    slashWidth: 152,
+    slashHeight: "clamp(2.75rem, 25vw, 5.75rem)",
+    expandedSlashWidth: 284,
+    expandedSlashHeight: "clamp(3.9rem, 35vw, 7.7rem)",
+  },
+  construct_slam_runtime: {
+    offsetX: 0,
+    offsetY: 5,
+    textOffsetY: 2,
+    slashWidth: 136,
+    slashHeight: "clamp(3.45rem, 30vw, 6.55rem)",
+    expandedSlashWidth: 250,
+    expandedSlashHeight: "clamp(4.7rem, 39vw, 8.7rem)",
+  },
+  heavy_golem_runtime: {
+    offsetX: 0,
+    offsetY: 8,
+    textOffsetY: 5,
+    slashWidth: 168,
+    slashHeight: "clamp(4.25rem, 36vw, 7.75rem)",
+    expandedSlashWidth: 316,
+    expandedSlashHeight: "clamp(5.5rem, 46vw, 10.1rem)",
+  },
+  rift_knight_runtime: {
+    offsetX: 5,
+    offsetY: -7,
+    textOffsetY: -4,
+    slashWidth: 160,
+    slashHeight: "clamp(3.7rem, 31vw, 7rem)",
+    expandedSlashWidth: 300,
+    expandedSlashHeight: "clamp(4.9rem, 41vw, 9.3rem)",
+  },
+  boss_warden_runtime: {
+    offsetX: 0,
+    offsetY: -3,
+    textOffsetY: -1,
+    slashWidth: 190,
+    slashHeight: "clamp(4.8rem, 39vw, 8.6rem)",
+    expandedSlashWidth: 350,
+    expandedSlashHeight: "clamp(5.95rem, 50vw, 10.9rem)",
+  },
+});
+
 export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
   shore_imp: {
     monsterId: "shore_imp",
@@ -98,7 +156,7 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotX: 0.5,
     pivotY: 0.98,
     motionSafeMargin: { x: 0.1, y: 0.08 },
-    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_SFX.short_claw,
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.small_fiend_runtime,
   },
   forest_wolf: {
     monsterId: "forest_wolf",
@@ -111,7 +169,7 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotX: 0.5,
     pivotY: 0.96,
     motionSafeMargin: { x: 0.12, y: 0.08 },
-    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_SFX.bite_swipe,
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.beast_lunge_runtime,
   },
   ruin_sentinel: {
     monsterId: "ruin_sentinel",
@@ -124,7 +182,7 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotX: 0.5,
     pivotY: 1,
     motionSafeMargin: { x: 0.08, y: 0.1 },
-    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_SFX.stone_impact,
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.construct_slam_runtime,
   },
   mine_golem: {
     monsterId: "mine_golem",
@@ -137,7 +195,7 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotX: 0.5,
     pivotY: 1,
     motionSafeMargin: { x: 0.07, y: 0.1 },
-    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_SFX.heavy_impact,
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.heavy_golem_runtime,
   },
   rift_knight: {
     monsterId: "rift_knight",
@@ -150,7 +208,7 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotX: 0.5,
     pivotY: 1,
     motionSafeMargin: { x: 0.09, y: 0.08 },
-    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_SFX.dark_slash,
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.rift_knight_runtime,
   },
   rift_warden: {
     monsterId: "rift_warden",
@@ -163,7 +221,7 @@ export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
     pivotX: 0.5,
     pivotY: 1,
     motionSafeMargin: { x: 0.06, y: 0.12 },
-    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_SFX.dark_burst,
+    effectPlacement: MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.boss_warden_runtime,
   },
 });
 
@@ -195,6 +253,7 @@ export function monsterAttackEffectPlacement(monster, { hyperActive = false } = 
   const preset = resolveMonsterBattleSpritePreset(monster);
   const basePlacement =
     preset.effectPlacement ||
+    MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE[preset.motionProfile] ||
     MONSTER_EFFECT_PLACEMENTS_BY_SFX[preset.sfxProfile] ||
     DEFAULT_MONSTER_BATTLE_SPRITE_PRESET.effectPlacement;
   if (!hyperActive) return basePlacement;

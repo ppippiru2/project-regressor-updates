@@ -422,6 +422,7 @@
         "tutorialPacingSnapshot",
         "tuningCandidates",
         "candidateFilter",
+        "candidatePinnedSummary",
         "candidateImpactSummary",
         "candidatePrioritySummary",
         "candidateSignalSummary",
@@ -1033,9 +1034,9 @@
     "id": "balance-tuning-registry-v1",
     "sourceModule": "src/balance/balanceTuningRegistry.js",
     "checkScript": "build-scripts/check-balance-tuning-registry.mjs",
-    "expectedGroupCount": 11,
-    "expectedFileCount": 11,
-    "expectedExportCount": 36,
+    "expectedGroupCount": 12,
+    "expectedFileCount": 12,
+    "expectedExportCount": 39,
     "expectedDomainCount": 5,
     "dataTargets": [
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_GROUPS",
@@ -1182,7 +1183,7 @@
       "data/editor-backlog.json:combat-vfx-placement-preview-editor",
       "src/editor/editorMain.js"
     ],
-    "expectedTuningCandidates": 7,
+    "expectedTuningCandidates": 8,
     "tuningSignals": [
       "expanded-width-critical",
       "expanded-width-wide",

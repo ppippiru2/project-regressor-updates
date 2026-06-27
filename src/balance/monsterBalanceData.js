@@ -25,6 +25,7 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "wolf_leather_armor", chance: 0.065 },
       { itemId: "swift_boots", chance: 0.045 },
       { itemId: "hunter_bow", chance: 0.04 },
+      { itemId: "forest_wolf_codex_fragment", chance: 0.09 },
       { itemId: "quick_step_skill_fragment", chance: 0.035 },
     ],
   },
@@ -39,6 +40,8 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "sentinel_helmet", chance: 0.06 },
       { itemId: "tower_shield_armor", chance: 0.035 },
       { itemId: "mana_necklace", chance: 0.03 },
+      { itemId: "ruin_sentinel_codex_fragment", chance: 0.085 },
+      { itemId: "guard_stance_skill_rune", chance: 0.025 },
     ],
   },
   {
@@ -52,7 +55,9 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "golem_fist", chance: 0.05 },
       { itemId: "ore_plate", chance: 0.045 },
       { itemId: "lucky_ring", chance: 0.025 },
+      { itemId: "mine_golem_codex_fragment", chance: 0.08 },
       { itemId: "low_mana_crystal_fragment", chance: 0.12 },
+      { itemId: "unstable_mana_crystal_fragment", chance: 0.04 },
     ],
   },
   {
@@ -66,6 +71,8 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "rift_blade", chance: 0.04 },
       { itemId: "rift_gauntlets", chance: 0.04 },
       { itemId: "regressor_charm", chance: 0.02 },
+      { itemId: "rift_knight_codex_fragment", chance: 0.07 },
+      { itemId: "rift_mana_crystal_fragment", chance: 0.045 },
     ],
   },
   {
@@ -80,6 +87,9 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "warden_crown", chance: 0.175 },
       { itemId: "perfect_timeline_ring", chance: 0.06 },
       { itemId: "rift_blade", chance: 0.1 },
+      { itemId: "rift_warden_codex_fragment", chance: 0.16 },
+      { itemId: "mana_ignite_skill_rune", chance: 0.07 },
+      { itemId: "rift_mana_crystal_fragment", chance: 0.12 },
     ],
   },
 ];

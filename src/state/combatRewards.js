@@ -1,7 +1,8 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=418";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=418";
-import { t, tf } from "../localization/index.js?v=418";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=419";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=419";
+import { claimFirstCodexRecordGuide } from "./tutorialGuidance.js?v=419";
+import { t, tf } from "../localization/index.js?v=419";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
@@ -32,11 +33,13 @@ export function applyMonsterDefeatRewards(state, monster, context) {
   for (const itemId of rollMonsterDrops(monster.dropTable, player.dropRate * dropMultiplier)) {
     const item = getItem?.(itemId);
     state.inventory = addInventoryItem(state.inventory, itemId);
+    const inventoryEntry = state.inventory.find((entry) => entry.itemId === itemId);
     if (item && !item.slot) {
       messages.push(tf("combatRewards.lootItemAcquired", {
         itemName: item.name || getItemName(itemId),
         typeLabel: item.typeLabel || t("combatRewards.lootItemFallbackType"),
       }));
+      messages.push(...claimFirstCodexRecordGuide(state, { item, count: inventoryEntry?.count || 1 }));
       continue;
     }
 

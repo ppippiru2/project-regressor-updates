@@ -1,7 +1,11 @@
-import { t } from "../localization/index.js?v=418";
+import { t } from "../localization/index.js?v=419";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=419";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=419";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,
+  firstCodexRecordGuideShown: false,
+  shownRegionCoreEventIds: [],
 });
 
 export function createTutorialFlags(overrides = {}) {
@@ -32,11 +36,44 @@ export function claimFirstCombatGuide(state, { regionId = "", firstRegionId = ""
   ];
 }
 
+export function claimFirstCodexRecordGuide(state, { item, count = 0 } = {}) {
+  state.tutorialFlags = normalizeTutorialFlags(state.tutorialFlags);
+  if (state.tutorialFlags.firstCodexRecordGuideShown) return [];
+  if (!item || item.type !== "codex_fragment") return [];
+
+  state.tutorialFlags.firstCodexRecordGuideShown = true;
+  const target = Math.max(1, Number(item.recordTarget) || 5);
+  const resolved = resolveTutorialKeyEventDialogue("tutorial_1st_shore_06_nameless_scrap", {
+    templateValues: {
+      itemName: item.name,
+      count: Math.max(0, Number(count) || 0),
+      target,
+    },
+  });
+  return [resolved?.detail?.log || t("stateMessages.firstCodexRecordGuide")].filter(Boolean);
+}
+
+export function claimRegionCoreEventGuide(state, region) {
+  state.tutorialFlags = normalizeTutorialFlags(state.tutorialFlags);
+  const resolved = resolveRegionCoreEvent(region);
+  if (!resolved?.event?.id || !resolved.log) return [];
+
+  const shownIds = new Set(state.tutorialFlags.shownRegionCoreEventIds || []);
+  if (shownIds.has(resolved.event.id)) return [];
+
+  shownIds.add(resolved.event.id);
+  state.tutorialFlags.shownRegionCoreEventIds = [...shownIds];
+  return [resolved.log];
+}
+
 function validTutorialFlagOverrides(source) {
   return Object.fromEntries(
-    Object.entries(DEFAULT_TUTORIAL_FLAGS).map(([key, fallback]) => [
-      key,
-      typeof source[key] === "boolean" ? source[key] : fallback,
-    ])
+    Object.entries(DEFAULT_TUTORIAL_FLAGS).map(([key, fallback]) => {
+      if (Array.isArray(fallback)) {
+        const values = Array.isArray(source[key]) ? source[key] : fallback;
+        return [key, [...new Set(values.filter(Boolean).map(String))]];
+      }
+      return [key, typeof source[key] === "boolean" ? source[key] : fallback];
+    })
   );
 }

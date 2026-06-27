@@ -1,16 +1,16 @@
-import { applyDomLocalization } from "../localization/domText.js?v=418";
-import { getLocaleText, tf } from "../localization/index.js?v=418";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=418";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=418";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=418";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=418";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=418";
+import { applyDomLocalization } from "../localization/domText.js?v=419";
+import { getLocaleText, tf } from "../localization/index.js?v=419";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=419";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=419";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=419";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=419";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=419";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=418";
+} from "./monsterSpriteSlotReport.js?v=419";
 
-const EDITOR_VERSION = "418";
+const EDITOR_VERSION = "419";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -852,6 +852,7 @@ function renderBalanceTuningDetail() {
         }, ""))}</span>
       </div>
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
+      ${renderActiveBalanceCandidateSummary(detailText, relatedChecks)}
       ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
@@ -860,6 +861,48 @@ function renderBalanceTuningDetail() {
         ${rows || emptyBalanceRows(detailText)}
       </div>
     </section>
+  `;
+}
+
+function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = []) {
+  const candidate = selectedBalanceTuningCandidate();
+  if (!candidate) return "";
+  const impact = balanceCandidateImpactSummary(candidate);
+  const valueRanges = balanceCandidateValueRangeLabels(candidate, detailText);
+  const checkLabels = balanceCandidateCheckLabels(candidate, relatedChecks);
+  return `
+    <section class="editor-balance-active-candidate" aria-label="${escapeAttribute(detailText.activeCandidateSummary || "Selected tuning candidate")}">
+      <div class="editor-balance-active-candidate-head">
+        <div>
+          <span>${escapeHtml(detailText.activeCandidateSummary || "")}</span>
+          <h4>${escapeHtml(candidate.label || candidate.id || "")}</h4>
+          <p>${escapeHtml(candidate.purpose || "")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidatePriorityValue", {
+          priority: candidate.priority || "-"
+        }, `#${candidate.priority || "-"}`))}</strong>
+      </div>
+      <div class="editor-balance-active-candidate-metrics">
+        ${balanceActiveCandidateMetric(detailText.candidateImpact || "Impact", tf("editorPrep.balanceTuningDetail.candidateImpactSummary", {
+          groups: impact.groupCount,
+          files: impact.fileCount,
+          exports: impact.exportCount
+        }, `${impact.groupCount} · ${impact.fileCount} · ${impact.exportCount}`))}
+        ${balanceActiveCandidateMetric(detailText.candidateValueRanges || "Value Ranges", valueRanges.join(" / "))}
+        ${balanceActiveCandidateMetric(detailText.candidateChecks || "Checks", checkLabels.join(" / ") || "-")}
+      </div>
+      ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [])}
+      ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
+    </section>
+  `;
+}
+
+function balanceActiveCandidateMetric(label, value) {
+  return `
+    <span>
+      <small>${escapeHtml(label)}</small>
+      <b>${escapeHtml(value || "-")}</b>
+    </span>
   `;
 }
 
@@ -1768,6 +1811,10 @@ function findBalanceTuningCandidate(candidateId) {
   const registryMeta = manifest.balanceTuningRegistry || {};
   const candidates = Array.isArray(registryMeta.tuningCandidates) ? registryMeta.tuningCandidates : [];
   return candidates.find((candidate) => candidate.id === candidateId) || null;
+}
+
+function selectedBalanceTuningCandidate() {
+  return findBalanceTuningCandidate(balanceDetailFilter.candidateId);
 }
 
 function applyBalanceCandidateFilter(candidateId) {

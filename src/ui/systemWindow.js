@@ -1,4 +1,4 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=418";
+import { getLocaleText, t, tf } from "../localization/index.js?v=419";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));
@@ -114,6 +114,26 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
       label: t("systemWindow.notices.lootLabel"),
       message: t("systemWindow.notices.lootMessage"),
       meta: [lootItem[1], lootItem[2], t("systemWindow.notices.checkInventory")],
+    };
+  }
+
+  const codexRecord = message.match(regex(SYSTEM_MATCHERS.codexRecord));
+  if (codexRecord) {
+    return {
+      type: "growth",
+      label: t("systemWindow.notices.codexRecordLabel"),
+      message: t("systemWindow.notices.codexRecordMessage"),
+      meta: [codexRecord[1], codexRecord[2], t("systemWindow.notices.checkCodexProgress")],
+    };
+  }
+
+  const regionRecord = message.match(regex(SYSTEM_MATCHERS.regionRecord));
+  if (regionRecord) {
+    return {
+      type: "quest",
+      label: t("systemWindow.notices.regionRecordLabel"),
+      message: t("systemWindow.notices.regionRecordMessage"),
+      meta: [regionRecord[1], regionRecord[2], t("systemWindow.notices.checkRegionProgress")],
     };
   }
 

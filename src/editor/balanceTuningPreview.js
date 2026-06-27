@@ -1,14 +1,15 @@
-import * as combatBalance from "../balance/combatBalance.js?v=418";
-import * as damageBalance from "../balance/damageBalance.js?v=418";
-import * as equipmentValueBalance from "../balance/equipmentValueBalance.js?v=418";
-import * as itemBalanceData from "../balance/itemBalanceData.js?v=418";
-import * as monsterBalanceData from "../balance/monsterBalanceData.js?v=418";
-import * as monsterStatBalance from "../balance/monsterStatBalance.js?v=418";
-import * as playerGrowthBalance from "../balance/playerGrowthBalance.js?v=418";
-import * as playerStatBalance from "../balance/playerStatBalance.js?v=418";
-import * as recoveryBalance from "../balance/recoveryBalance.js?v=418";
-import * as rewardBalance from "../balance/rewardBalance.js?v=418";
-import * as skillBalanceData from "../balance/skillBalanceData.js?v=418";
+import * as combatBalance from "../balance/combatBalance.js?v=419";
+import * as damageBalance from "../balance/damageBalance.js?v=419";
+import * as equipmentValueBalance from "../balance/equipmentValueBalance.js?v=419";
+import * as itemBalanceData from "../balance/itemBalanceData.js?v=419";
+import * as monsterBalanceData from "../balance/monsterBalanceData.js?v=419";
+import * as monsterCandidatePool from "../balance/monsterCandidatePool.js?v=419";
+import * as monsterStatBalance from "../balance/monsterStatBalance.js?v=419";
+import * as playerGrowthBalance from "../balance/playerGrowthBalance.js?v=419";
+import * as playerStatBalance from "../balance/playerStatBalance.js?v=419";
+import * as recoveryBalance from "../balance/recoveryBalance.js?v=419";
+import * as rewardBalance from "../balance/rewardBalance.js?v=419";
+import * as skillBalanceData from "../balance/skillBalanceData.js?v=419";
 
 const BALANCE_MODULE_BY_FILE = new Map([
   ["src/balance/combatBalance.js", combatBalance],
@@ -16,6 +17,7 @@ const BALANCE_MODULE_BY_FILE = new Map([
   ["src/balance/equipmentValueBalance.js", equipmentValueBalance],
   ["src/balance/itemBalanceData.js", itemBalanceData],
   ["src/balance/monsterBalanceData.js", monsterBalanceData],
+  ["src/balance/monsterCandidatePool.js", monsterCandidatePool],
   ["src/balance/monsterStatBalance.js", monsterStatBalance],
   ["src/balance/playerGrowthBalance.js", playerGrowthBalance],
   ["src/balance/playerStatBalance.js", playerStatBalance],

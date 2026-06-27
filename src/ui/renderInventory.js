@@ -1,5 +1,6 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=418";
-import { getLocaleText, t, tf } from "../localization/index.js?v=418";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=419";
+import { buildCodexRecordProgress } from "../state/codexProgress.js?v=419";
+import { getLocaleText, t, tf } from "../localization/index.js?v=419";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -38,6 +39,7 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
     (count, row) => count + (row.isEquipment && row.scoreDelta > 0 ? row.entry.count : 0),
     0
   );
+  renderCodexProgress(buildCodexRecordProgress(inventory, getItem));
 
   const equipmentSummary = byId("equipment-summary");
   if (equipmentSummary) {
@@ -131,6 +133,44 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
         <div class="item-actions">
           <span class="item-score">${escapeHtml(scoreText)}</span>
           ${isEquipment ? `<button class="inventory-action-button inventory-action-button-equip" data-equip="${item.id}">${escapeHtml(actionLabel)}</button>` : ""}
+        </div>
+      </div>`;
+    })
+    .join("");
+}
+
+function renderCodexProgress(rows) {
+  const summary = byId("codex-progress-summary");
+  const list = byId("codex-progress-list");
+  if (!summary || !list) return;
+
+  const totalCount = rows.reduce((sum, row) => sum + row.count, 0);
+  const readyCount = rows.reduce((sum, row) => sum + (row.isReady ? 1 : 0), 0);
+  summary.textContent =
+    rows.length > 0
+      ? tf("inventoryUi.codexProgressSummary", { types: rows.length, total: totalCount, ready: readyCount })
+      : t("inventoryUi.codexProgressEmptySummary");
+
+  if (rows.length === 0) {
+    list.innerHTML = `<p class="muted empty-list">${escapeHtml(t("inventoryUi.codexProgressEmptyList"))}</p>`;
+    return;
+  }
+
+  list.innerHTML = rows
+    .map(({ item, count, target, percent, isReady }) => {
+      const statusText = isReady ? t("inventoryUi.codexProgressReady") : t("inventoryUi.codexProgressRecording");
+      return `<div class="item codex-progress-item ${isReady ? "is-upgrade" : "is-sidegrade"}">
+        ${itemIconSlot({ item, iconPath: "", label: tf("inventoryUi.itemIcon", { name: item.name }) })}
+        <div class="item-main">
+          <div class="item-title-row">
+            <strong class="rarity-${item.rarity} info-term" tabindex="0" role="button" ${itemInfoAttrs(item, (slot) => slot, () => "")}>${escapeHtml(item.name)}</strong>
+            <span class="item-count">${escapeHtml(statusText)}</span>
+          </div>
+          <div class="codex-progress-meter" aria-hidden="true"><span style="width: ${percent}%"></span></div>
+          <div class="muted">${escapeHtml(tf("inventoryUi.codexProgressDetail", { count, target }))}</div>
+        </div>
+        <div class="item-actions">
+          <span class="item-score">${escapeHtml(t("inventoryUi.readOnly"))}</span>
         </div>
       </div>`;
     })

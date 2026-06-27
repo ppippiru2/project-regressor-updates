@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=418";
+import { formatText, getLocaleText } from "../localization/index.js?v=419";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 
@@ -16,6 +16,9 @@ export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
   "LUK",
   "starterTraitName",
   "starterSkillName",
+  "itemName",
+  "count",
+  "target",
 ]);
 
 export const TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS = Object.freeze([
@@ -87,6 +90,7 @@ export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
     phase: "tutorial_shore_run1",
     run: 1,
     policy: "first_run_material",
+    textKey: "firstCodexRecord",
   },
   {
     id: "tutorial_1st_shore_07_buried_cache_hint",

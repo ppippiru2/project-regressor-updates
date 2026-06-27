@@ -8,7 +8,7 @@
     <title>Project Regressor</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" href="assets/icon.png" type="image/png" />
-    <link rel="stylesheet" href="styles.css?v=418" />
+    <link rel="stylesheet" href="styles.css?v=419" />
   </head>
   <body>
     <section class="creation-screen is-hidden" id="character-creation" aria-label="Character creation" data-i18n-attr="aria-label:staticHtml.characterCreation.ariaLabel">
@@ -442,6 +442,17 @@
               </div>
               <div id="inventory-list" class="inventory-list"></div>
             </section>
+
+            <section class="panel inventory-codex-panel" data-panel-id="inventory-codex-progress" data-panel-title="도감 기록 진행도">
+              <div class="inventory-panel-heading">
+                <div>
+                  <span class="eyebrow">도감 기록</span>
+                  <h3>도감 기록 진행도</h3>
+                  <p class="inventory-summary" id="codex-progress-summary">도감 카드 조각 없음</p>
+                </div>
+              </div>
+              <div id="codex-progress-list" class="codex-progress-list inventory-list"></div>
+            </section>
           </div>
         </section>
 
@@ -506,15 +517,15 @@
               </div>
               <div class="build-info-line wide">
                 <span>현재 주소</span>
-                <strong id="build-address-label">http://127.0.0.1:5173/?v=418</strong>
+                <strong id="build-address-label">http://127.0.0.1:5173/?v=419</strong>
               </div>
               <div class="build-info-line wide">
                 <span>모바일 확인</span>
-                <strong id="build-mobile-label">PC LAN IP:5173/?v=418</strong>
+                <strong id="build-mobile-label">PC LAN IP:5173/?v=419</strong>
               </div>
               <div class="build-info-line wide build-info-action">
                 <span>개발 도구</span>
-                <a class="editor-launch-button" href="editor.html?v=418&cachebust=418" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
+                <a class="editor-launch-button" href="editor.html?v=419&cachebust=419" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
               </div>
             </div>
           </section>
@@ -616,6 +627,6 @@
       </main>
     </div>
 
-    <script type="module" src="src/main.js?v=418"></script>
+    <script type="module" src="src/main.js?v=419"></script>
   </body>
 </html>
