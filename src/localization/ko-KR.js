@@ -1548,6 +1548,7 @@ export const KO_KR_TEXT = {
         tuningCandidates: "튜닝 후보",
         candidateImpact: "영향 요약",
         candidateImpactSummary: "그룹 {groups} · 파일 {files} · export {exports}",
+        candidateValueRanges: "현재 값 범위",
         candidateGroups: "관련 그룹",
         candidateChecks: "연결 검사",
         empty: "표시할 밸런스 그룹 없음",

@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=378";
-import { getLocaleText, tf } from "../localization/index.js?v=378";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=378";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=378";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=378";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=378";
+import { applyDomLocalization } from "../localization/domText.js?v=379";
+import { getLocaleText, tf } from "../localization/index.js?v=379";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=379";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=379";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=379";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=379";
 
-const EDITOR_VERSION = "378";
+const EDITOR_VERSION = "379";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -382,7 +382,11 @@ function balanceDomainValueShapeLabels(domain = {}, detailText = {}) {
 }
 
 function balanceDomainValueRangeLabels(domain = {}, detailText = {}) {
-  const groupIds = new Set(domain.groups || []);
+  return balanceGroupValueRangeLabels(domain.groups || [], detailText);
+}
+
+function balanceGroupValueRangeLabels(groupLinks = [], detailText = {}) {
+  const groupIds = new Set(groupLinks || []);
   const numericValues = [];
   let objectFieldCount = 0;
   let arrayItemCount = 0;
@@ -438,6 +442,7 @@ function renderBalanceTuningCandidates(candidates = [], detailText = {}, related
             <p>${escapeHtml(candidate.purpose || "")}</p>
           </div>
           ${balanceCandidateImpactBlock(balanceCandidateImpactSummary(candidate), detailText)}
+          ${balanceDetailChipBlock(detailText.candidateValueRanges || "Value Ranges", balanceCandidateValueRangeLabels(candidate, detailText))}
           ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
           ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", balanceCandidateCheckLabels(candidate, relatedChecks))}
         </button>
@@ -448,6 +453,10 @@ function renderBalanceTuningCandidates(candidates = [], detailText = {}, related
 
 function balanceCandidateCheckLabels(candidate = {}, relatedChecks = []) {
   return balanceCheckLabels(candidate.checks || [], relatedChecks);
+}
+
+function balanceCandidateValueRangeLabels(candidate = {}, detailText = {}) {
+  return balanceGroupValueRangeLabels(normalizeBalanceCandidateGroups(candidate.groups), detailText);
 }
 
 function balanceCheckLabels(checkIds = [], relatedChecks = []) {
