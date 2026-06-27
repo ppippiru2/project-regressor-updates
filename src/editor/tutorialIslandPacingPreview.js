@@ -1,10 +1,10 @@
-import { expToNext, monsterStats, rankCombatModifier, clamp } from "../combat/combatFormula.js?v=393";
-import { primaryStats, skills } from "../data/coreData.js?v=393";
-import { equipment } from "../data/equipmentData.js?v=393";
-import { regions, monsters } from "../data/worldData.js?v=393";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=393";
-import { playerStats } from "../state/progression.js?v=393";
-import { regionExpMultiplier } from "../state/rewards.js?v=393";
+import { expToNext, monsterStats, rankCombatModifier, clamp } from "../combat/combatFormula.js?v=394";
+import { primaryStats, skills } from "../data/coreData.js?v=394";
+import { items } from "../data/itemData.js?v=394";
+import { regions, monsters } from "../data/worldData.js?v=394";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=394";
+import { playerStats } from "../state/progression.js?v=394";
+import { regionExpMultiplier } from "../state/rewards.js?v=394";
 
 export const TUTORIAL_ISLAND_PACING_LIMITS = {
   bossLevelTargetOffset: 3,
@@ -27,7 +27,7 @@ export const TUTORIAL_ISLAND_PACING_LIMITS = {
 
 export function createTutorialIslandPacingSnapshot() {
   const errors = [];
-  const equipmentIds = new Set(equipment.map((item) => item.id));
+  const itemIds = new Set(items.map((item) => item.id));
   const monsterById = new Map(monsters.map((monster) => [monster.id, monster]));
   const powerSlashMultiplier = skills.find((skill) => skill.id === "power_slash")?.multiplier || 1.35;
 
@@ -79,7 +79,7 @@ export function createTutorialIslandPacingSnapshot() {
   collect(errors, Boolean(bossMonster), "Tutorial island must include one boss monster.");
 
   for (const monster of monsters) {
-    validateDropTable(monster, equipmentIds, errors);
+    validateDropTable(monster, itemIds, errors);
   }
 
   const totalKills = rows.reduce((sum, row) => sum + row.killsToTarget, 0);
@@ -127,7 +127,7 @@ export function createTutorialIslandPacingSnapshot() {
   };
 }
 
-function validateDropTable(monster, equipmentIds, errors) {
+function validateDropTable(monster, itemIds, errors) {
   const dropTable = Array.isArray(monster.dropTable) ? monster.dropTable : [];
   const totalChance = Number(dropTable.reduce((sum, drop) => sum + Number(drop.chance || 0), 0).toFixed(3));
   const commonChance = dropTable.reduce((max, drop) => Math.max(max, Number(drop.chance || 0)), 0);
@@ -141,7 +141,7 @@ function validateDropTable(monster, equipmentIds, errors) {
   collect(errors, commonChance >= TUTORIAL_ISLAND_PACING_LIMITS.minCommonDropChance, `${monster.id} needs at least one common drop at ${TUTORIAL_ISLAND_PACING_LIMITS.minCommonDropChance} or higher.`);
 
   for (const drop of dropTable) {
-    collect(errors, equipmentIds.has(drop.itemId), `${monster.id} drops unknown item ${drop.itemId}.`);
+    collect(errors, itemIds.has(drop.itemId), `${monster.id} drops unknown item ${drop.itemId}.`);
     collect(errors, Number(drop.chance) > 0 && Number(drop.chance) <= 1, `${monster.id} drop ${drop.itemId} has invalid chance ${drop.chance}.`);
   }
 }

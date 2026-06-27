@@ -10,6 +10,8 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "rusty_sword", chance: 0.07 },
       { itemId: "worn_gloves", chance: 0.06 },
       { itemId: "shore_ring", chance: 0.025 },
+      { itemId: "imp_codex_fragment", chance: 0.12 },
+      { itemId: "low_mana_crystal_fragment", chance: 0.06 },
     ],
   },
   {
@@ -23,6 +25,7 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "wolf_leather_armor", chance: 0.065 },
       { itemId: "swift_boots", chance: 0.045 },
       { itemId: "hunter_bow", chance: 0.04 },
+      { itemId: "quick_step_skill_fragment", chance: 0.035 },
     ],
   },
   {
@@ -49,6 +52,7 @@ export const MONSTER_BALANCE_DATA = [
       { itemId: "golem_fist", chance: 0.05 },
       { itemId: "ore_plate", chance: 0.045 },
       { itemId: "lucky_ring", chance: 0.025 },
+      { itemId: "low_mana_crystal_fragment", chance: 0.12 },
     ],
   },
   {

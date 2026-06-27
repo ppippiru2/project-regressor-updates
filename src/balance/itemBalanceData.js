@@ -20,3 +20,9 @@ export const ITEM_BALANCE_DATA = [
   { id: "iron_gloves", slot: "Gloves", rarity: "common", defense: 1, options: [{ type: "STR", value: 1 }] },
   { id: "novice_helmet", slot: "Helmet", rarity: "common", defense: 1, options: [{ type: "VIT", value: 1 }] },
 ];
+
+export const LOOT_ITEM_BALANCE_DATA = [
+  { id: "imp_codex_fragment", type: "codex_fragment", rarity: "common", stackable: true },
+  { id: "low_mana_crystal_fragment", type: "mana_crystal", rarity: "common", stackable: true },
+  { id: "quick_step_skill_fragment", type: "skill_fragment", rarity: "uncommon", stackable: true, skillId: "quick_step" },
+];

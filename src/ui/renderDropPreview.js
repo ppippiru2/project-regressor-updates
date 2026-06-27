@@ -1,5 +1,5 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=393";
-import { t, tf } from "../localization/index.js?v=393";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=394";
+import { t, tf } from "../localization/index.js?v=394";
 
 export function renderDropPreview(monster, getItem, equipmentState) {
   const container = document.getElementById("drop-preview-list");
@@ -16,11 +16,12 @@ export function renderDropPreview(monster, getItem, equipmentState) {
 
   container.innerHTML = drops
     .map((drop) => {
-      const delta = equipmentScoreDelta(drop.item, equipmentState, getItem);
+      const delta = drop.item.slot ? equipmentScoreDelta(drop.item, equipmentState, getItem) : 0;
       const upgradeText = delta > 0 ? tf("dropPreview.valueUpgrade", { delta }) : "";
+      const typeText = drop.item.slot ? "" : tf("dropPreview.lootType", { type: drop.item.typeLabel || t("inventoryUi.lootItem") });
       return `<span class="drop-chip${delta > 0 ? " is-upgrade" : ""}">
         <strong class="rarity-${drop.item.rarity}">${drop.item.name}</strong>
-        <small>${Math.round(drop.chance * 1000) / 10}%${upgradeText}</small>
+        <small>${Math.round(drop.chance * 1000) / 10}%${upgradeText}${typeText}</small>
       </span>`;
     })
     .join("");

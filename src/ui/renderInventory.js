@@ -1,5 +1,5 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=393";
-import { getLocaleText, t, tf } from "../localization/index.js?v=393";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=394";
+import { getLocaleText, t, tf } from "../localization/index.js?v=394";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -17,22 +17,25 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
     .map((entry) => {
       const item = getItem(entry.itemId);
       if (!item) return null;
-      const scoreDelta = equipmentScoreDelta(item, equipmentState, getItem);
+      const isEquipment = Boolean(item.slot);
+      const scoreDelta = isEquipment ? equipmentScoreDelta(item, equipmentState, getItem) : 0;
       const scoreClass = scoreDelta > 0 ? "is-upgrade" : scoreDelta < 0 ? "is-downgrade" : "is-sidegrade";
       const scoreText =
-        scoreDelta > 0
+        !isEquipment
+          ? (item.typeLabel || t("inventoryUi.lootItem"))
+          : scoreDelta > 0
           ? tf("inventoryUi.valuePositive", { value: scoreDelta })
           : scoreDelta < 0
             ? tf("inventoryUi.valueNegative", { value: scoreDelta })
             : t("inventoryUi.sameValue");
       const rarityScore = RARITY_ORDER[item.rarity] || 0;
-      const actionLabel = isFilledTargetSlot(item, equipmentState) ? t("inventoryUi.replace") : t("inventoryUi.equip");
-      return { entry, item, scoreDelta, scoreClass, scoreText, rarityScore, actionLabel };
+      const actionLabel = isEquipment && isFilledTargetSlot(item, equipmentState) ? t("inventoryUi.replace") : t("inventoryUi.equip");
+      return { entry, item, isEquipment, scoreDelta, scoreClass, scoreText, rarityScore, actionLabel };
     })
     .filter(Boolean);
   const totalInventoryCount = inventoryRows.reduce((sum, row) => sum + row.entry.count, 0);
   const upgradeCount = inventoryRows.reduce(
-    (count, row) => count + (row.scoreDelta > 0 ? row.entry.count : 0),
+    (count, row) => count + (row.isEquipment && row.scoreDelta > 0 ? row.entry.count : 0),
     0
   );
 
@@ -111,8 +114,11 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
         right.rarityScore - left.rarityScore ||
         left.item.name.localeCompare(right.item.name, "ko")
     )
-    .map(({ entry, item, scoreClass, scoreText, actionLabel }) => {
+    .map(({ entry, item, isEquipment, scoreClass, scoreText, actionLabel }) => {
       const iconPath = getItemIconPath(item);
+      const metaText = isEquipment
+        ? `${displayName(item.slot)}${t("inventoryUi.separator")}${optionText(item)}`
+        : `${item.typeLabel || t("inventoryUi.lootItem")}${item.description ? `${t("inventoryUi.separator")}${item.description}` : ""}`;
       return `<div class="item ${scoreClass}">
         ${itemIconSlot({ item, iconPath, label: tf("inventoryUi.itemIcon", { name: item.name }) })}
         <div class="item-main">
@@ -120,11 +126,11 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
             <strong class="rarity-${item.rarity} info-term" tabindex="0" role="button" ${itemInfoAttrs(item, displayName, optionText)}>${escapeHtml(item.name)}</strong>
             <span class="item-count">x${entry.count}</span>
           </div>
-          <div class="muted">${displayName(item.slot)}${t("inventoryUi.separator")}${optionText(item)}</div>
+          <div class="muted">${escapeHtml(metaText)}</div>
         </div>
         <div class="item-actions">
-          <span class="item-score">${scoreText}</span>
-          <button class="inventory-action-button inventory-action-button-equip" data-equip="${item.id}">${actionLabel}</button>
+          <span class="item-score">${escapeHtml(scoreText)}</span>
+          ${isEquipment ? `<button class="inventory-action-button inventory-action-button-equip" data-equip="${item.id}">${escapeHtml(actionLabel)}</button>` : ""}
         </div>
       </div>`;
     })
@@ -140,7 +146,7 @@ function itemIconSlot({ item, iconPath, label }) {
 
 function itemTypeMark(item) {
   const marks = INVENTORY_TEXT.slotMarks || {};
-  return marks[item?.slot] || "";
+  return marks[item?.slot] || marks[item?.type] || "";
 }
 
 function isFilledTargetSlot(item, equipmentState) {
@@ -152,11 +158,16 @@ function isFilledTargetSlot(item, equipmentState) {
 function itemInfoAttrs(item, displayName, optionText) {
   const title = item.name;
   const rarity = rarityLabel(item.rarity);
-  const bodyParts = [
-    tf("inventoryUi.itemInfoSummary", { rarity, slotName: displayName(item.slot) }),
-    optionText(item) ? tf("inventoryUi.itemInfoEffect", { effect: optionText(item) }) : "",
-    item.description || t("inventoryUi.itemInfoFallback"),
-  ].filter(Boolean);
+  const bodyParts = item.slot
+    ? [
+        tf("inventoryUi.itemInfoSummary", { rarity, slotName: displayName(item.slot) }),
+        optionText(item) ? tf("inventoryUi.itemInfoEffect", { effect: optionText(item) }) : "",
+        item.description || t("inventoryUi.itemInfoFallback"),
+      ]
+    : [
+        tf("inventoryUi.lootItemInfoSummary", { rarity, type: item.typeLabel || t("inventoryUi.lootItem") }),
+        item.description || t("inventoryUi.lootItemInfoFallback"),
+      ];
   return `data-info-title="${escapeHtml(title)}" data-info-body="${escapeHtml(bodyParts.join(" "))}"`;
 }
 

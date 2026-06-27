@@ -1,5 +1,5 @@
-import { itemSellPrice, shopBuyPrice } from "../state/shop.js?v=393";
-import { getLocaleText, t, tf } from "../localization/index.js?v=393";
+import { itemSellPrice, shopBuyPrice } from "../state/shop.js?v=394";
+import { getLocaleText, t, tf } from "../localization/index.js?v=394";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -86,7 +86,7 @@ function renderShopSellList({ inventory, getItem, displayName, optionText, getIt
   const rows = inventory
     .map((entry) => {
       const item = getItem(entry.itemId);
-      if (!item) return null;
+      if (!item?.slot) return null;
       return { entry, item, price: itemSellPrice(item) };
     })
     .filter(Boolean)
