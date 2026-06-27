@@ -609,7 +609,8 @@
         "monsterSpriteAssetManifestPatchDraft",
         "monsterSpriteAssetSlotPatchDraft",
         "monsterSpriteNestedSlotPatchObject",
-        "monsterSpritePatchExportSummary"
+        "monsterSpritePatchExportSummary",
+        "monsterSpriteReadyConnectionPatchPlan"
       ],
       "futureControls": [
         "슬롯 검색",
@@ -620,7 +621,8 @@
         "Monster sprite missing-slot readiness report",
         "Monster sprite assetId draft generator",
         "Monster sprite file-existence readiness scan",
-        "Monster sprite asset manifest and slot patch export draft"
+        "Monster sprite asset manifest and slot patch export draft",
+        "Monster sprite file-ready connection patch plan"
       ]
     },
     {
@@ -1345,7 +1347,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v414",
+    "source": "v415",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1378,6 +1380,10 @@
     "assignmentPatchDraftVersion": 1,
     "assetManifestPatchEntries": 24,
     "assetSlotPatchEntries": 24,
-    "nestedSlotPatchObject": true
+    "nestedSlotPatchObject": true,
+    "readyConnectionPatchPlanVersion": 1,
+    "readyConnectionApplyMode": "file-ready-only",
+    "readyAssetManifestPatchEntries": 0,
+    "readyAssetSlotPatchEntries": 0
   }
 }

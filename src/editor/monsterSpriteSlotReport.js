@@ -1,6 +1,6 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=414";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=414";
-import { monsters } from "../data/worldData.js?v=414";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=415";
+import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=415";
+import { monsters } from "../data/worldData.js?v=415";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
 const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";
@@ -79,6 +79,36 @@ export function createMonsterSpriteAssignmentPatchDraft(report = createMonsterSp
       connectableSlots: report.totals?.connectableSlots || 0,
       fileReadySlots: report.totals?.fileReadySlots || 0,
       fileMissingSlots: report.totals?.fileMissingSlots || 0,
+    },
+    assetManifestEntries: drafts.map((draft) => draft.assetEntry),
+    assetSlotPatches: drafts.map((draft) => ({
+      path: draft.slotPatchPath,
+      value: draft.assetId,
+    })),
+    assetSlotPatchObject: {
+      slots: {
+        monster: {
+          byMonsterId: createMonsterSpriteSlotPatchObject(drafts),
+        },
+      },
+    },
+  };
+}
+
+export function createMonsterSpriteReadyConnectionPatchPlan(report = createMonsterSpriteSlotReport()) {
+  const drafts = createMonsterSpriteAssignmentDrafts({
+    ...report,
+    draftRows: report.connectableRows || [],
+  });
+  return {
+    version: 1,
+    applyMode: "file-ready-only",
+    summary: {
+      slots: report.totals?.slots || 0,
+      connectableSlots: report.totals?.connectableSlots || 0,
+      fileReadySlots: report.totals?.fileReadySlots || 0,
+      fileMissingSlots: report.totals?.fileMissingSlots || 0,
+      readyPatchCandidates: drafts.length,
     },
     assetManifestEntries: drafts.map((draft) => draft.assetEntry),
     assetSlotPatches: drafts.map((draft) => ({
