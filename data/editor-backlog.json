@@ -71,8 +71,8 @@
       "title": "??? ?? ????? ?? ?? ??",
       "status": "partial",
       "priority": "high",
-      "source": "v411-prep",
-      "summary": "Expose per-monster idle, attack, hit, and dead sprite slot targets plus a read-only readiness report before final monster PNG/WebP production.",
+      "source": "v412",
+      "summary": "Expose per-monster idle, attack, hit, and dead sprite slot targets plus readiness and draft assetId/slot patch candidates before final monster PNG/WebP production.",
       "editorHooks": [
         "data/editor-manifest.json:monsterBattleSpriteAssetSlots",
         "data/asset-slots.json:slots.monster.byMonsterId",
@@ -80,7 +80,9 @@
         "build-scripts/check-monster-combat-display-slots.mjs",
         "src/editor/monsterSpriteSlotReport.js",
         "src/editor/editorMain.js:renderMonsterSpriteSlotReport",
-        "data/editor-manifest.json:monsterSpriteSlotReadiness"
+        "data/editor-manifest.json:monsterSpriteSlotReadiness",
+        "src/editor/monsterSpriteSlotReport.js:createMonsterSpriteAssignmentDrafts",
+        "data/editor-manifest.json:monsterSpriteSlotReadiness.draftAssetCandidates"
       ]
     },
     {

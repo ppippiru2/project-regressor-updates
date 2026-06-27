@@ -1,13 +1,13 @@
-import { applyDomLocalization } from "../localization/domText.js?v=411";
-import { getLocaleText, tf } from "../localization/index.js?v=411";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=411";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=411";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=411";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=411";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=411";
-import { createMonsterSpriteSlotReport } from "./monsterSpriteSlotReport.js?v=411";
+import { applyDomLocalization } from "../localization/domText.js?v=412";
+import { getLocaleText, tf } from "../localization/index.js?v=412";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=412";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=412";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=412";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=412";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=412";
+import { createMonsterSpriteSlotReport } from "./monsterSpriteSlotReport.js?v=412";
 
-const EDITOR_VERSION = "411";
+const EDITOR_VERSION = "412";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -86,6 +86,8 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   brokenMetric: "Broken",
   expectedPath: "Expected file",
   assignedAsset: "Assigned asset",
+  suggestedAsset: "Suggested asset",
+  slotPatch: "Slot patch",
   runtimePath: "Runtime path",
   statusLabels: {
     assigned: "Assigned",
@@ -455,6 +457,8 @@ function renderMonsterSpriteSlotPose(row, detailText, statusLabels) {
       </div>
       ${combatVfxFieldBlock(detailText.expectedPath, [row.expectedPath])}
       ${combatVfxFieldBlock(detailText.assignedAsset, [assetValue])}
+      ${!row.assetId ? combatVfxFieldBlock(detailText.suggestedAsset, [row.draftAssetId]) : ""}
+      ${!row.assetId ? combatVfxFieldBlock(detailText.slotPatch, [row.slotPatchPath]) : ""}
       ${row.resolvedPath ? combatVfxFieldBlock(detailText.runtimePath, [runtimePath]) : ""}
     </div>
   `;

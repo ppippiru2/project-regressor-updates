@@ -1,8 +1,9 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=411";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=411";
-import { monsters } from "../data/worldData.js?v=411";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=412";
+import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=412";
+import { monsters } from "../data/worldData.js?v=412";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
+const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";
 
 export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY) {
   const assetsById = new Map((registry?.manifest?.assets || []).map((asset) => [asset.assetId, asset]));
@@ -15,9 +16,10 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY) 
   const assignedRows = rows.filter((row) => row.status === "assigned");
   const brokenRows = rows.filter((row) => row.status === "broken");
   const expectedPathMatches = rows.filter((row) => row.expectedPathMatch);
+  const draftRows = rows.filter((row) => !row.assetId);
 
   return {
-    version: 1,
+    version: 2,
     poses: [...MONSTER_COMBAT_POSES],
     totals: {
       monsters: monsters.length,
@@ -27,13 +29,24 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY) 
       missingSlots: missingRows.length,
       brokenSlots: brokenRows.length,
       expectedPathMatches: expectedPathMatches.length,
+      draftAssetCandidates: draftRows.length,
     },
     rows,
     missingRows,
     assignedRows,
     brokenRows,
+    draftRows,
     byMonster: groupRowsByMonster(rows),
   };
+}
+
+export function createMonsterSpriteAssignmentDrafts(report = createMonsterSpriteSlotReport()) {
+  return (report.draftRows || []).map((row) => ({
+    slotId: row.slotId,
+    slotPatchPath: row.slotPatchPath,
+    assetId: row.draftAssetId,
+    assetEntry: row.draftAssetEntry,
+  }));
 }
 
 function createMonsterSpriteSlotRow(monster, pose, byMonsterId, assetsById, registry) {
@@ -43,6 +56,8 @@ function createMonsterSpriteSlotRow(monster, pose, byMonsterId, assetsById, regi
   const asset = assetId ? assetsById.get(assetId) : null;
   const resolvedPath = normalizeAssetPath(resolveAssetPath(assetId, registry));
   const status = assetId ? (resolvedPath ? "assigned" : "broken") : "missing";
+  const draftAssetId = monsterSpriteDraftAssetId(monster.id, pose);
+  const slotPatchPath = `slots.monster.byMonsterId.${monster.id}.${pose}`;
 
   return {
     monsterId: monster.id,
@@ -51,10 +66,31 @@ function createMonsterSpriteSlotRow(monster, pose, byMonsterId, assetsById, regi
     slotId,
     expectedPath,
     assetId,
+    draftAssetId,
+    slotPatchPath,
+    draftAssetEntry: createMonsterSpriteDraftAssetEntry(monster, pose, expectedPath, draftAssetId),
     resolvedPath,
     status,
     expectedPathMatch: Boolean(resolvedPath && resolvedPath === expectedPath),
     assetCategory: asset?.category || "",
+  };
+}
+
+function monsterSpriteDraftAssetId(monsterId, pose) {
+  return `monster_${monsterId}_${pose}_v1`;
+}
+
+function createMonsterSpriteDraftAssetEntry(monster, pose, expectedPath, draftAssetId) {
+  return {
+    assetId: draftAssetId,
+    category: MONSTER_SPRITE_DRAFT_CATEGORY,
+    sourceFile: expectedPath,
+    cleanFile: expectedPath,
+    webpFile: expectedPath,
+    approved: false,
+    useInGame: false,
+    tags: ["monster", "combat-sprite", monster.id, pose, "draft"],
+    notes: `Draft monster combat sprite entry for ${monster.id} ${pose}. Approve and connect it after the final file is added.`,
   };
 }
 
