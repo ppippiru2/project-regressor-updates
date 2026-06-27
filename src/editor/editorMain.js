@@ -1,9 +1,9 @@
-import { applyDomLocalization } from "../localization/domText.js?v=391";
-import { getLocaleText, tf } from "../localization/index.js?v=391";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=391";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=391";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=391";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=391";
+import { applyDomLocalization } from "../localization/domText.js?v=392";
+import { getLocaleText, tf } from "../localization/index.js?v=392";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=392";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=392";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=392";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=392";
 
 const EDITOR_VERSION = "388";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;

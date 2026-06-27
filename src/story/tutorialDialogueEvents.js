@@ -1,6 +1,30 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=391";
+import { formatText, getLocaleText } from "../localization/index.js?v=392";
 
-export const TUTORIAL_DIALOGUE_VERSION = "v2.5";
+export const TUTORIAL_DIALOGUE_VERSION = "v2.6_FINAL";
+
+export const TUTORIAL_FINAL_NEW_GAME_FLOW = Object.freeze([
+  "system_sync_profile",
+  "initial_stat_assignment",
+  "abyss_questions",
+  "starter_card_draw",
+  "sync_complete_summon_tutorial",
+  "tutorial_shore_start",
+]);
+
+export const TUTORIAL_FINAL_KEY_FLAGS = Object.freeze([
+  "regressionCount",
+  "hasCorruptedRecordTrait",
+  "hasRegressorRecord",
+  "hasSeenGoldenCardNews",
+  "hasGoldenCard",
+  "hasOpenedShoreCache",
+  "hasFoundNorthRockHint",
+  "hasOpenedGoldenCardSpace",
+  "hasFoundMineSealedBoxHint",
+  "hasOpenedMineSealedBox",
+  "guardianPatternProgress",
+  "tutorialBossBestDamageRate",
+]);
 
 export const TUTORIAL_DIALOGUE_PHASES = Object.freeze([
   "system_initialization",
@@ -14,9 +38,22 @@ export const TUTORIAL_DIALOGUE_PHASES = Object.freeze([
   "post_tutorial_reality",
   "tutorial_run2",
   "tutorial_run3_4",
+  "tutorial_loop_5_plus",
 ]);
 
 export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
+  {
+    id: "tutorial_1st_shore_06_nameless_scrap",
+    phase: "tutorial_shore_run1",
+    run: 1,
+    policy: "first_run_material",
+  },
+  {
+    id: "tutorial_1st_shore_07_buried_cache_hint",
+    phase: "tutorial_shore_run1",
+    run: 1,
+    policy: "hint_only",
+  },
   {
     id: "tutorial_1st_forest_04_north_rock_gold_card_hint",
     phase: "tutorial_forest_run1",
@@ -28,6 +65,12 @@ export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
     phase: "tutorial_forest_run1",
     run: 1,
     policy: "elite_retry_or_avoid",
+  },
+  {
+    id: "tutorial_1st_ruins_02_mock_gate_node_map",
+    phase: "broken_ruins_run1",
+    run: 1,
+    policy: "tutorial_node_map",
   },
   {
     id: "tutorial_1st_ruins_05_hidden_stair_locked",
@@ -54,6 +97,30 @@ export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
     policy: "regression_origin_hint",
   },
   {
+    id: "tutorial_1st_gate_04_warden_intro",
+    phase: "rift_gate_run1",
+    run: 1,
+    policy: "damage_threshold_intro",
+  },
+  {
+    id: "tutorial_1st_gate_06_warden_20_clear",
+    phase: "rift_gate_run1",
+    run: 1,
+    policy: "damage_threshold_pass",
+  },
+  {
+    id: "tutorial_2nd_01_regressor_record",
+    phase: "tutorial_run2",
+    run: 2,
+    policy: "regressor_record_unlock",
+  },
+  {
+    id: "tutorial_2nd_02_buried_cache_return",
+    phase: "tutorial_run2",
+    run: 2,
+    policy: "record_compare_return",
+  },
+  {
     id: "tutorial_2nd_03_golden_card",
     phase: "tutorial_run2",
     run: 2,
@@ -64,6 +131,18 @@ export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
     phase: "tutorial_run2",
     run: 2,
     policy: "record_unlock",
+  },
+  {
+    id: "tutorial_2nd_05_warden_50",
+    phase: "tutorial_run2",
+    run: 2,
+    policy: "damage_threshold_good",
+  },
+  {
+    id: "tutorial_3rd_warden_80",
+    phase: "tutorial_run3_4",
+    run: 3,
+    policy: "damage_threshold_semi_ranker",
   },
   {
     id: "tutorial_4th_warden_100",
@@ -79,6 +158,34 @@ const STARTER_CARD_DIALOGUE_IDS = Object.freeze({
   starter_enduring_body: "enduringBody",
   starter_faint_mana: "faintMana",
 });
+
+export const TUTORIAL_FINAL_STARTER_SKILL_ALIASES = Object.freeze({
+  starter_weapon_sense: {
+    packageSkillId: "power_slash",
+    runtimeSkillId: "power_slash",
+  },
+  starter_light_step: {
+    packageSkillId: "quick_step_basic",
+    runtimeSkillId: "quick_step",
+  },
+  starter_enduring_body: {
+    packageSkillId: "guard_stance",
+    runtimeSkillId: "guard_stance",
+  },
+  starter_faint_mana: {
+    packageSkillId: "mana_spark",
+    runtimeSkillId: "mana_ignite",
+  },
+});
+
+export const TUTORIAL_LOOP_START_RUN = 5;
+
+export const TUTORIAL_LOOP_DIALOGUE_VARIANTS = Object.freeze([
+  { id: "A_optimization", textKey: "optimization" },
+  { id: "B_fatigue", textKey: "fatigue" },
+  { id: "C_records", textKey: "records" },
+  { id: "D_variables", textKey: "variables" },
+]);
 
 const DISPOSITION_BY_ALIGNMENT_KEY = Object.freeze({
   neutral: "inquiryRecord",
@@ -146,10 +253,34 @@ export function resolveTutorialStarterCardDialogue(profile, { localeText = getLo
   return entry ? { id: dialogueId, ...entry } : null;
 }
 
+export function resolveTutorialLoopDialogue(regressionCount, { scene = "wake", localeText = getLocaleText() } = {}) {
+  const numericCount = Math.floor(Number(regressionCount));
+  if (!Number.isFinite(numericCount) || numericCount < TUTORIAL_LOOP_START_RUN) return null;
+
+  const index = (numericCount - TUTORIAL_LOOP_START_RUN) % TUTORIAL_LOOP_DIALOGUE_VARIANTS.length;
+  const variant = TUTORIAL_LOOP_DIALOGUE_VARIANTS[index];
+  const text = localeText.story?.tutorialDialogue?.loop5Plus?.[variant.textKey] || {};
+  const lines = Array.isArray(text[scene]) ? text[scene] : [];
+  return {
+    index,
+    id: variant.id,
+    name: text.name || variant.id,
+    scene,
+    lines,
+  };
+}
+
 export function getTutorialDialogueEventCatalog() {
   return {
     version: TUTORIAL_DIALOGUE_VERSION,
+    newGameFlow: TUTORIAL_FINAL_NEW_GAME_FLOW,
     phases: TUTORIAL_DIALOGUE_PHASES,
+    keyFlags: TUTORIAL_FINAL_KEY_FLAGS,
     keyEvents: TUTORIAL_DIALOGUE_KEY_EVENTS,
+    loopDialogue: {
+      startRun: TUTORIAL_LOOP_START_RUN,
+      variants: TUTORIAL_LOOP_DIALOGUE_VARIANTS,
+    },
+    starterSkillAliases: TUTORIAL_FINAL_STARTER_SKILL_ALIASES,
   };
 }
