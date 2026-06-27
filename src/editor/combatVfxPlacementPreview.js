@@ -1,15 +1,15 @@
-import { monsters } from "../data/worldData.js?v=407";
+import { monsters } from "../data/worldData.js?v=408";
 import {
   monsterAttackEffectPlacement,
   monsterAttackEffectType,
   resolveMonsterBattleSpritePreset,
-} from "../config/monsterBattleSpritePresets.js?v=407";
+} from "../config/monsterBattleSpritePresets.js?v=408";
 import {
   PLAYER_BATTLE_SPRITE_CLASSES,
   PLAYER_BATTLE_SPRITE_GENDERS,
   PLAYER_BATTLE_SPRITE_PRESETS,
-} from "../config/playerBattleSpritePresets.js?v=407";
-import { resolvePlayerAttackEffectPlacement } from "../config/playerBattleSprites.js?v=407";
+} from "../config/playerBattleSpritePresets.js?v=408";
+import { resolvePlayerAttackEffectPlacement } from "../config/playerBattleSprites.js?v=408";
 
 export const COMBAT_VFX_PREVIEW_EFFECT_TYPES = Object.freeze([
   "slash",

@@ -13,7 +13,15 @@
       "defaultIdle": null,
       "defaultAttack": null,
       "defaultHit": null,
-      "defaultDead": null
+      "defaultDead": null,
+      "byMonsterId": {
+        "shore_imp": {},
+        "forest_wolf": {},
+        "ruin_sentinel": {},
+        "mine_golem": {},
+        "rift_knight": {},
+        "rift_warden": {}
+      }
     },
     "region": {
       "cardImages": {

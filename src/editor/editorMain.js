@@ -1,10 +1,10 @@
-import { applyDomLocalization } from "../localization/domText.js?v=407";
-import { getLocaleText, tf } from "../localization/index.js?v=407";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=407";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=407";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=407";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=407";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=407";
+import { applyDomLocalization } from "../localization/domText.js?v=408";
+import { getLocaleText, tf } from "../localization/index.js?v=408";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=408";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=408";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=408";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=408";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=408";
 
 const EDITOR_VERSION = "407";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
