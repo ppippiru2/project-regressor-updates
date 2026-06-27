@@ -889,6 +889,65 @@ export const KO_KR_TEXT = {
     firstCombatSkillGuide: "[전투 도움말] 카드 스킬은 조건과 MP를 확인한 뒤 자동으로 사용됩니다.",
     profileUpdated: "플레이어 정보 변경사항을 저장했습니다.",
   },
+  story: {
+    tutorialDialogue: {
+      introLog: {
+        disposition: "[성향 반응] {disposition}. {reaction}",
+        starterCard: "[운명 카드] {cardName}. {reaction}",
+      },
+      dispositions: {
+        devotedOrder: {
+          name: "헌신 질서",
+          log: "시스템이 보호와 질서를 우선하는 판단 패턴을 기록했습니다.",
+        },
+        practicalBalance: {
+          name: "실용 균형",
+          log: "시스템이 위험과 보상을 함께 계산하는 판단 패턴을 기록했습니다.",
+        },
+        coldCalculation: {
+          name: "냉정 계산",
+          log: "시스템이 감정보다 생존 확률을 앞세우는 판단 패턴을 기록했습니다.",
+        },
+        freeSurvival: {
+          name: "자율 생존",
+          log: "시스템이 규칙보다 현장 생존을 우선하는 판단 패턴을 기록했습니다.",
+        },
+        inquiryRecord: {
+          name: "탐구 기록",
+          log: "시스템이 관찰과 기록을 우선하는 판단 패턴을 기록했습니다.",
+        },
+      },
+      starterCards: {
+        weaponSense: {
+          cardName: "낡은 무기 감각",
+          log: "손에 익은 무게가 먼저 반응합니다. 슬롯 1에 강타가 연결됩니다.",
+        },
+        lightStep: {
+          cardName: "가벼운 발걸음",
+          log: "균열 지형을 읽는 감각이 깨어납니다. 슬롯 1에 빠른 발놀림이 연결됩니다.",
+        },
+        enduringBody: {
+          cardName: "버티는 몸",
+          log: "첫 시험의 충격을 받아낼 준비가 끝났습니다. 슬롯 1에 방어 자세가 연결됩니다.",
+        },
+        faintMana: {
+          cardName: "흐릿한 마력 감각",
+          log: "희미한 마력 회로가 열린 채 동기화됩니다. 슬롯 1에 마력 점화가 연결됩니다.",
+        },
+      },
+      keyEvents: {
+        northRockGoldCardHint: "북쪽 바위 틈에서 황금빛 카드의 위치만 기록됩니다. 1회차에는 획득하지 못합니다.",
+        alphaWolfElite: "그림자 늑대 우두머리는 회피하거나 재도전할 수 있는 첫 엘리트 전투입니다.",
+        hiddenStairLocked: "무너진 탑의 숨은 계단은 조건을 모르면 열리지 않습니다.",
+        sealedBoxLocked: "마석 광산의 봉인 상자는 기록 조건이 없으면 반응만 남깁니다.",
+        coreGolemHiddenElite: "광산 심부의 핵 골렘은 숨겨진 엘리트 전투 후보입니다.",
+        forgottenGodRemnant: "잊힌 신의 잔재는 회귀의 원인을 암시하지만 1회차에는 이해할 수 없습니다.",
+        run2GoldenCard: "2회차 이후 황금 카드가 회귀자의 기록으로 실체화됩니다.",
+        run2SealedBox: "2회차 이후 봉인 상자가 기록 조건으로 열립니다.",
+        run4WardenClear: "최종 관문 파수꾼은 누적 성장으로 완전 돌파합니다.",
+      },
+    },
+  },
   profile: {
     alignments: {
       neutral: "중립",
