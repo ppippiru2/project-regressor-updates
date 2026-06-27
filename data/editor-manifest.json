@@ -607,6 +607,8 @@
         "monsterSpriteConnectableSlots",
         "monsterSpriteFileReadySlots",
         "monsterSpriteFileMissingSlots",
+        "monsterSpriteRuntimeFallbackMode",
+        "monsterSpriteCssPlaceholderFallback",
         "monsterSpriteAssetManifestPatchDraft",
         "monsterSpriteAssetSlotPatchDraft",
         "monsterSpriteNestedSlotPatchObject",
@@ -1350,7 +1352,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v420",
+    "source": "v422",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1374,6 +1376,15 @@
     "fileScannedSlots": 24,
     "fileReadySlots": 0,
     "fileMissingSlots": 24,
+    "defaultFallbackSlots": 0,
+    "cssPlaceholderSlots": 24,
+    "runtimeFallbackModes": [
+      "assigned-asset",
+      "broken-asset",
+      "default-slot",
+      "css-placeholder"
+    ],
+    "runtimeFallbackPreviewVisible": true,
     "fileScanMode": "build-time-optional",
     "fileStatusValues": [
       "not-scanned",

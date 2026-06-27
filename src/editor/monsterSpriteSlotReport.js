@@ -1,6 +1,6 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=421";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=421";
-import { monsters } from "../data/worldData.js?v=421";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=422";
+import { MONSTER_COMBAT_POSES, monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=422";
+import { monsters } from "../data/worldData.js?v=422";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
 const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";
@@ -27,6 +27,8 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY, 
   const fileReadyRows = rows.filter((row) => row.fileStatus === FILE_STATUS.ready);
   const fileMissingRows = rows.filter((row) => row.fileStatus === FILE_STATUS.missing);
   const expectedPathMatches = rows.filter((row) => row.expectedPathMatch);
+  const defaultFallbackRows = rows.filter((row) => row.runtimeFallbackMode === "default-slot");
+  const cssPlaceholderRows = rows.filter((row) => row.runtimeFallbackMode === "css-placeholder");
   const draftRows = rows.filter((row) => !row.assetId);
 
   return {
@@ -43,6 +45,8 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY, 
       fileScannedSlots: existingFilePaths ? rows.length : 0,
       fileReadySlots: fileReadyRows.length,
       fileMissingSlots: fileMissingRows.length,
+      defaultFallbackSlots: defaultFallbackRows.length,
+      cssPlaceholderSlots: cssPlaceholderRows.length,
       expectedPathMatches: expectedPathMatches.length,
       draftAssetCandidates: draftRows.length,
     },
@@ -53,6 +57,8 @@ export function createMonsterSpriteSlotReport(registry = STATIC_ASSET_REGISTRY, 
     brokenRows,
     fileReadyRows,
     fileMissingRows,
+    defaultFallbackRows,
+    cssPlaceholderRows,
     draftRows,
     byMonster: groupRowsByMonster(rows),
   };
@@ -174,12 +180,17 @@ function createMonsterSpriteSlotRow(monster, pose, byMonsterId, assetsById, regi
   const slotId = `monster.byMonsterId.${monster.id}.${pose}`;
   const expectedPath = `${MONSTER_SPRITE_FOLDER}${monster.id}_${pose}.webp`;
   const assetId = byMonsterId?.[monster.id]?.[pose] || "";
+  const defaultSlotKey = monsterSpriteSlotKeyForPose(pose);
+  const defaultAssetId = registry?.slots?.slots?.monster?.[defaultSlotKey] || "";
   const asset = assetId ? assetsById.get(assetId) : null;
   const resolvedPath = normalizeAssetPath(resolveAssetPath(assetId, registry));
+  const defaultResolvedPath = normalizeAssetPath(resolveAssetPath(defaultAssetId, registry));
   const fileStatus = expectedFileStatus(expectedPath, existingFilePaths);
   const status = monsterSpriteSlotStatus(assetId, resolvedPath, fileStatus);
   const draftAssetId = monsterSpriteDraftAssetId(monster.id, pose);
   const slotPatchPath = `slots.monster.byMonsterId.${monster.id}.${pose}`;
+  const runtimePreviewPath = resolvedPath || defaultResolvedPath || "";
+  const runtimeFallbackMode = monsterSpriteRuntimeFallbackMode(assetId, resolvedPath, defaultResolvedPath);
 
   return {
     monsterId: monster.id,
@@ -188,10 +199,15 @@ function createMonsterSpriteSlotRow(monster, pose, byMonsterId, assetsById, regi
     slotId,
     expectedPath,
     assetId,
+    defaultAssetId,
+    defaultSlotKey,
     draftAssetId,
     slotPatchPath,
     draftAssetEntry: createMonsterSpriteDraftAssetEntry(monster, pose, expectedPath, draftAssetId),
     resolvedPath,
+    defaultResolvedPath,
+    runtimePreviewPath,
+    runtimeFallbackMode,
     status,
     fileStatus,
     fileExists: fileStatus === FILE_STATUS.ready,
@@ -204,6 +220,13 @@ function monsterSpriteSlotStatus(assetId, resolvedPath, fileStatus) {
   if (assetId) return resolvedPath ? "assigned" : "broken";
   if (fileStatus === FILE_STATUS.ready) return "connectable";
   return "missing";
+}
+
+function monsterSpriteRuntimeFallbackMode(assetId, resolvedPath, defaultResolvedPath) {
+  if (assetId && resolvedPath) return "assigned-asset";
+  if (assetId && !resolvedPath) return "broken-asset";
+  if (defaultResolvedPath) return "default-slot";
+  return "css-placeholder";
 }
 
 function monsterSpriteDraftAssetId(monsterId, pose) {

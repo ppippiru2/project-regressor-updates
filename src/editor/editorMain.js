@@ -1,17 +1,17 @@
-import { applyDomLocalization } from "../localization/domText.js?v=421";
-import { getLocaleText, tf } from "../localization/index.js?v=421";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=421";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=421";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=421";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=421";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=421";
+import { applyDomLocalization } from "../localization/domText.js?v=422";
+import { getLocaleText, tf } from "../localization/index.js?v=422";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=422";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=422";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=422";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=422";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=422";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=421";
+} from "./monsterSpriteSlotReport.js?v=422";
 
-const EDITOR_VERSION = "421";
+const EDITOR_VERSION = "422";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -90,6 +90,7 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   missingMetric: "Missing",
   brokenMetric: "Broken",
   fileScanMetric: "File-ready",
+  fallbackMetric: "CSS fallback",
   connectionPlanTitle: "Ready Connection Plan",
   connectionPlanDescription: "Only file-ready monster sprites become connection patch candidates.",
   readyPatchMetric: "Ready patches",
@@ -123,6 +124,15 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   slotPatch: "Slot patch",
   fileStatus: "File scan",
   runtimePath: "Runtime path",
+  runtimePreview: "Runtime preview",
+  fallbackMode: "Fallback",
+  defaultSlot: "Default slot",
+  fallbackModeLabels: {
+    "assigned-asset": "Assigned asset",
+    "broken-asset": "Broken asset",
+    "default-slot": "Default slot",
+    "css-placeholder": "CSS placeholder"
+  },
   statusLabels: {
     assigned: "Assigned",
     connectable: "Connectable",
@@ -471,6 +481,7 @@ function renderMonsterSpriteSlotReport() {
         ${combatVfxSummaryCard(detailText.connectableMetric, String(totals.connectableSlots || 0))}
         ${combatVfxSummaryCard(detailText.missingMetric, String(totals.missingSlots || 0))}
         ${combatVfxSummaryCard(detailText.fileScanMetric, String(totals.fileReadySlots || 0))}
+        ${combatVfxSummaryCard(detailText.fallbackMetric, String(totals.cssPlaceholderSlots || 0))}
         ${combatVfxSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
       </div>
       ${renderMonsterSpriteConnectionPlan(readiness, detailText)}
@@ -566,8 +577,10 @@ function renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatu
 function renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLabels) {
   const status = statusLabels[row.status] || row.status;
   const fileStatus = fileStatusLabels[row.fileStatus] || row.fileStatus;
+  const fallbackMode = detailText.fallbackModeLabels?.[row.runtimeFallbackMode] || row.runtimeFallbackMode;
   const assetValue = row.assetId || "-";
   const runtimePath = row.resolvedPath || "-";
+  const runtimePreviewPath = row.runtimePreviewPath || "-";
   return `
     <div class="editor-monster-sprite-pose" data-status="${escapeAttribute(row.status)}">
       <div>
@@ -576,9 +589,12 @@ function renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLa
       </div>
       ${combatVfxFieldBlock(detailText.expectedPath, [row.expectedPath])}
       ${combatVfxFieldBlock(detailText.fileStatus, [fileStatus])}
+      ${combatVfxFieldBlock(detailText.fallbackMode || "Fallback", [fallbackMode])}
       ${combatVfxFieldBlock(detailText.assignedAsset, [assetValue])}
       ${!row.assetId ? combatVfxFieldBlock(detailText.suggestedAsset, [row.draftAssetId]) : ""}
+      ${!row.assetId ? combatVfxFieldBlock(detailText.defaultSlot || "Default slot", [row.defaultSlotKey || "-"]) : ""}
       ${!row.assetId ? combatVfxFieldBlock(detailText.slotPatch, [row.slotPatchPath]) : ""}
+      ${row.runtimePreviewPath ? combatVfxFieldBlock(detailText.runtimePreview || "Runtime preview", [runtimePreviewPath]) : ""}
       ${row.resolvedPath ? combatVfxFieldBlock(detailText.runtimePath, [runtimePath]) : ""}
     </div>
   `;

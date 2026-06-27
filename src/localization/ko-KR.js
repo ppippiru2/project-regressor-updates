@@ -2029,6 +2029,7 @@ export const KO_KR_TEXT = {
         missingMetric: "파일 대기",
         brokenMetric: "깨진 슬롯",
         fileScanMetric: "파일 준비",
+        fallbackMetric: "CSS 대체",
         connectionPlanTitle: "Ready 연결 검토",
         connectionPlanDescription: "실제 파일이 존재하는 몬스터 스프라이트만 연결 후보가 됩니다.",
         readyPatchMetric: "연결 후보",
@@ -2046,6 +2047,15 @@ export const KO_KR_TEXT = {
         slotPatch: "슬롯 패치",
         fileStatus: "파일 상태",
         runtimePath: "런타임 경로",
+        runtimePreview: "런타임 미리보기",
+        fallbackMode: "대체 표시",
+        defaultSlot: "기본 슬롯",
+        fallbackModeLabels: {
+          "assigned-asset": "연결 에셋",
+          "broken-asset": "깨진 에셋",
+          "default-slot": "기본 슬롯",
+          "css-placeholder": "CSS 대체 표시"
+        },
         statusLabels: {
           assigned: "연결됨",
           connectable: "연결 가능",
