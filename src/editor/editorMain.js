@@ -1,11 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=366";
-import { getLocaleText, tf } from "../localization/index.js?v=366";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=366";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=366";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=366";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=366";
+import { applyDomLocalization } from "../localization/domText.js?v=367";
+import { getLocaleText, tf } from "../localization/index.js?v=367";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=367";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=367";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=367";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=367";
 
-const EDITOR_VERSION = "366";
+const EDITOR_VERSION = "367";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -112,7 +112,10 @@ function bindEvents() {
       const cursor = balanceInput.selectionStart ?? balanceInput.value.length;
       balanceDetailFilter = {
         ...balanceDetailFilter,
-        query: balanceInput.value
+        query: balanceInput.value,
+        candidateId: "",
+        candidateLabel: "",
+        candidateGroups: []
       };
       persistBalanceDetailFilter();
       renderPanelDetail();
@@ -124,6 +127,12 @@ function bindEvents() {
     }
   });
   elements.panelDetail?.addEventListener("click", (event) => {
+    const balanceCandidateButton = event.target.closest("[data-balance-candidate]");
+    if (balanceCandidateButton) {
+      applyBalanceCandidateFilter(balanceCandidateButton.dataset.balanceCandidate);
+      renderPanelDetail();
+      return;
+    }
     const balanceResetButton = event.target.closest("[data-balance-reset]");
     if (balanceResetButton) {
       resetBalanceDetailFilter();
@@ -134,7 +143,10 @@ function bindEvents() {
     if (balanceScopeButton) {
       balanceDetailFilter = {
         ...balanceDetailFilter,
-        scope: normalizeBalanceScope(balanceScopeButton.dataset.balanceScope)
+        scope: normalizeBalanceScope(balanceScopeButton.dataset.balanceScope),
+        candidateId: "",
+        candidateLabel: "",
+        candidateGroups: []
       };
       persistBalanceDetailFilter();
       renderPanelDetail();
@@ -299,14 +311,14 @@ function renderBalanceTuningCandidates(candidates = [], detailText = {}) {
     <section class="editor-balance-candidate-list" aria-label="${escapeAttribute(detailText.tuningCandidates || "Tuning candidates")}">
       <strong>${escapeHtml(detailText.tuningCandidates || "")}</strong>
       ${candidates.map((candidate) => `
-        <article class="editor-balance-candidate">
+        <button class="editor-balance-candidate${balanceDetailFilter.candidateId === candidate.id ? " is-active" : ""}" type="button" data-balance-candidate="${escapeAttribute(candidate.id || "")}" aria-pressed="${balanceDetailFilter.candidateId === candidate.id ? "true" : "false"}">
           <div>
             <h4>${escapeHtml(candidate.label || candidate.id || "")}</h4>
             <p>${escapeHtml(candidate.purpose || "")}</p>
           </div>
           ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
           ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", candidate.checks || [])}
-        </article>
+        </button>
       `).join("")}
     </section>
   `;
@@ -455,7 +467,9 @@ function formatBalancePreviewSummary(item, detailText = {}) {
 function matchesBalanceDetailFilter(group) {
   const scope = normalizeBalanceScope(balanceDetailFilter.scope);
   const query = normalizeSearchText(balanceDetailFilter.query);
+  const candidateGroups = normalizeBalanceCandidateGroups(balanceDetailFilter.candidateGroups);
   if (scope !== "all" && group.scope !== scope) return false;
+  if (candidateGroups.length && !candidateGroups.includes(group.id)) return false;
   return !query || balanceGroupSearchText(group).includes(query);
 }
 
@@ -481,6 +495,13 @@ function balanceScopeButton(scope, label) {
 function balanceFilterSummary(detailText = {}) {
   const scope = normalizeBalanceScope(balanceDetailFilter.scope);
   const query = String(balanceDetailFilter.query || "").trim();
+  const candidateLabel = String(balanceDetailFilter.candidateLabel || "").trim();
+
+  if (candidateLabel) {
+    return tf("editorPrep.balanceTuningDetail.activeCandidate", {
+      candidate: candidateLabel
+    }, candidateLabel);
+  }
 
   if (scope !== "all" && query) {
     return tf("editorPrep.balanceTuningDetail.activeFilterAndSearch", {
@@ -507,8 +528,13 @@ function balanceFilterSummary(detailText = {}) {
 function emptyBalanceRows(detailText = {}) {
   const query = String(balanceDetailFilter.query || "").trim();
   const scope = normalizeBalanceScope(balanceDetailFilter.scope);
+  const candidateLabel = String(balanceDetailFilter.candidateLabel || "").trim();
   let message = detailText.empty || "";
-  if (scope !== "all" && query) {
+  if (candidateLabel) {
+    message = tf("editorPrep.balanceTuningDetail.emptyByCandidate", {
+      candidate: candidateLabel
+    }, message);
+  } else if (scope !== "all" && query) {
     message = tf("editorPrep.balanceTuningDetail.emptyByFilterAndSearch", {
       filter: scope,
       query
@@ -963,18 +989,50 @@ function normalizeBalanceScope(value) {
   return ["all", "engine-balance", "content-balance"].includes(value) ? value : "all";
 }
 
+function normalizeBalanceCandidateGroups(value) {
+  if (!Array.isArray(value)) return [];
+  const groupIds = new Set(BALANCE_TUNING_GROUPS.map((group) => group.id));
+  return value
+    .filter((groupId) => typeof groupId === "string" && groupIds.has(groupId));
+}
+
+function findBalanceTuningCandidate(candidateId) {
+  const registryMeta = manifest.balanceTuningRegistry || {};
+  const candidates = Array.isArray(registryMeta.tuningCandidates) ? registryMeta.tuningCandidates : [];
+  return candidates.find((candidate) => candidate.id === candidateId) || null;
+}
+
+function applyBalanceCandidateFilter(candidateId) {
+  const candidate = findBalanceTuningCandidate(candidateId);
+  if (!candidate) return;
+  balanceDetailFilter = {
+    scope: "all",
+    query: "",
+    candidateId: candidate.id || "",
+    candidateLabel: candidate.label || candidate.id || "",
+    candidateGroups: normalizeBalanceCandidateGroups(candidate.groups)
+  };
+  persistBalanceDetailFilter();
+}
+
 function loadBalanceDetailFilter() {
   try {
     const raw = window.localStorage.getItem(BALANCE_FILTER_STORAGE_KEY);
     const parsed = raw ? JSON.parse(raw) : null;
     return {
       scope: normalizeBalanceScope(parsed?.scope),
-      query: typeof parsed?.query === "string" ? parsed.query : ""
+      query: typeof parsed?.query === "string" ? parsed.query : "",
+      candidateId: typeof parsed?.candidateId === "string" ? parsed.candidateId : "",
+      candidateLabel: typeof parsed?.candidateLabel === "string" ? parsed.candidateLabel : "",
+      candidateGroups: normalizeBalanceCandidateGroups(parsed?.candidateGroups)
     };
   } catch {
     return {
       scope: "all",
-      query: ""
+      query: "",
+      candidateId: "",
+      candidateLabel: "",
+      candidateGroups: []
     };
   }
 }
@@ -983,7 +1041,10 @@ function persistBalanceDetailFilter() {
   try {
     window.localStorage.setItem(BALANCE_FILTER_STORAGE_KEY, JSON.stringify({
       scope: normalizeBalanceScope(balanceDetailFilter.scope),
-      query: String(balanceDetailFilter.query || "")
+      query: String(balanceDetailFilter.query || ""),
+      candidateId: String(balanceDetailFilter.candidateId || ""),
+      candidateLabel: String(balanceDetailFilter.candidateLabel || ""),
+      candidateGroups: normalizeBalanceCandidateGroups(balanceDetailFilter.candidateGroups)
     }));
   } catch {
     // Editor convenience state is optional; failed persistence should not block the read-only screen.
@@ -993,7 +1054,10 @@ function persistBalanceDetailFilter() {
 function resetBalanceDetailFilter() {
   balanceDetailFilter = {
     scope: "all",
-    query: ""
+    query: "",
+    candidateId: "",
+    candidateLabel: "",
+    candidateGroups: []
   };
   try {
     window.localStorage.removeItem(BALANCE_FILTER_STORAGE_KEY);

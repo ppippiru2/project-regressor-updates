@@ -387,6 +387,7 @@
         "exportPreviewSummary",
         "tutorialPacingSnapshot",
         "tuningCandidates",
+        "candidateFilter",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"

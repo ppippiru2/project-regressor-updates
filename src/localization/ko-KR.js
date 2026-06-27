@@ -1473,6 +1473,7 @@ export const KO_KR_TEXT = {
         activeFilter: "필터 {filter}",
         activeSearch: "검색 \"{query}\"",
         activeFilterAndSearch: "필터 {filter} · 검색 \"{query}\"",
+        activeCandidate: "튜닝 후보 {candidate}",
         preview: "주요 수치 미리보기",
         previewArray: "{count}개 항목 · {sample}",
         previewObject: "{count}개 필드 · {sample}",
@@ -1493,6 +1494,7 @@ export const KO_KR_TEXT = {
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
         emptyByFilterAndSearch: "{filter} 범위에서 \"{query}\" 검색 결과가 없습니다.",
+        emptyByCandidate: "{candidate} 후보에 연결된 밸런스 그룹이 없습니다.",
         emptyResetHint: "초기화를 누르면 전체 밸런스 그룹으로 돌아갑니다.",
       },
       assetTypes: {

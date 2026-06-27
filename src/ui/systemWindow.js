@@ -1,4 +1,4 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=366";
+import { getLocaleText, t, tf } from "../localization/index.js?v=367";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));
