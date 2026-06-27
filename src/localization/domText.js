@@ -1,4 +1,4 @@
-import { t } from "./index.js?v=438";
+import { t } from "./index.js?v=439";
 
 export function applyDomLocalization(root = document) {
   if (!root || typeof root.querySelectorAll !== "function") return;

@@ -1990,13 +1990,17 @@ export const KO_KR_TEXT = {
           version: "{version}",
           pending: "대기 후보",
           ready: "검토 가능",
-          actions: "작업 수",
-          rewardLinks: "보상 링크",
-          codexRecord: "도감 기록",
-          risks: "주의 신호",
-          actionPlan: "승격 전 작업",
-          readyForReview: "검토 가능",
-          blocked: "보류",
+            actions: "작업 수",
+            rewardLinks: "보상 링크",
+            codexRecord: "도감 기록",
+            fullRewardLinks: "완전 연결",
+            partialRewardLinks: "보강 필요",
+            risks: "주의 신호",
+            actionPlan: "승격 전 작업",
+            promotionStage: "승격 단계",
+            rewardCoverage: "보상 연결 상태",
+            readyForReview: "검토 가능",
+            blocked: "보류",
           boss: "보스",
           representative: "대표 {monster}",
           groupSummary: "검토 {ready} / 대기 {pending}",
@@ -2013,13 +2017,26 @@ export const KO_KR_TEXT = {
             "check-codex-progress": "도감 진행도 확인",
             "run-balance-checks": "밸런스 검사 실행"
           },
-          riskLabels: {
-            "missing-codex-fragment": "도감 조각 누락",
-            "no-material-link": "마정석 보상 없음",
-            "no-skill-link": "스킬 보상 없음",
-            "boss-role-review": "보스 역할 검토"
-          }
-        },
+            riskLabels: {
+              "missing-codex-fragment": "도감 조각 누락",
+              "no-material-link": "마정석 보상 없음",
+              "no-skill-link": "스킬 보상 없음",
+              "boss-role-review": "보스 역할 검토"
+            },
+            stageLabels: {
+              "complete-reward-link": "보상 연결 완료",
+              "needs-material-link": "마정석 보강 필요",
+              "needs-skill-link": "스킬 보강 필요",
+              "blocked-codex-link": "도감 조각 차단"
+            },
+            coverageLabels: {
+              codex: "도감",
+              material: "마정석",
+              skill: "스킬",
+              connected: "연결",
+              missing: "미연결"
+            }
+          },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",

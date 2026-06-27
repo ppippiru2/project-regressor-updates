@@ -1,4 +1,4 @@
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=438";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=439";
 
 export const MONSTER_CANDIDATE_PROMOTION_CHECKLIST_VERSION = "monster-candidate-promotion-checklist-v1";
 
@@ -55,6 +55,8 @@ export function createMonsterCandidatePromotionChecklist(preview = createMonster
   const uniqueRewardItems = new Set(rows.flatMap((row) => row.rewardItemIds));
   const codexRecordTargets = rows.filter((row) => row.codexRecord?.state === "read-only-target");
   const riskSignalIds = new Set(rows.flatMap((row) => row.riskSignalIds));
+  const fullRewardLinkRows = rows.filter((row) => row.promotionStageId === "complete-reward-link");
+  const partialRewardLinkRows = rows.filter((row) => row.promotionStageId === "needs-material-link" || row.promotionStageId === "needs-skill-link");
 
   return {
     version: MONSTER_CANDIDATE_PROMOTION_CHECKLIST_VERSION,
@@ -72,6 +74,8 @@ export function createMonsterCandidatePromotionChecklist(preview = createMonster
       materialLinkCount: uniqueMaterialItems.size,
       skillLinkCount: uniqueSkillItems.size,
       riskSignalCount: riskSignalIds.size,
+      fullRewardLinkCount: fullRewardLinkRows.length,
+      partialRewardLinkCount: partialRewardLinkRows.length,
     },
     requiredActions: MONSTER_CANDIDATE_PROMOTION_ACTIONS,
     groups,
@@ -102,6 +106,12 @@ function createPromotionRow(row, actionIds) {
     row.isBoss ? "boss-role-review" : "",
   ].filter(Boolean);
   const blockingSignals = riskSignalIds.filter((signal) => signal === "missing-codex-fragment");
+  const rewardCoverage = {
+    codex: Boolean(row.codexFragment?.id),
+    material: materialItemIds.length > 0,
+    skill: skillItemIds.length > 0,
+  };
+  const promotionStageId = promotionStageForRewardCoverage(rewardCoverage);
 
   return {
     id: row.id,
@@ -119,8 +129,17 @@ function createPromotionRow(row, actionIds) {
     skillItemIds,
     rewardItemIds,
     rewardItemCount: rewardItemIds.length,
+    rewardCoverage,
+    promotionStageId,
     requiredActionIds: actionIds,
     riskSignalIds,
     readyForReview: blockingSignals.length === 0,
   };
+}
+
+function promotionStageForRewardCoverage(coverage) {
+  if (!coverage.codex) return "blocked-codex-link";
+  if (!coverage.material) return "needs-material-link";
+  if (!coverage.skill) return "needs-skill-link";
+  return "complete-reward-link";
 }

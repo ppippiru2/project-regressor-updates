@@ -442,6 +442,8 @@
         "candidateMonsterPromotionRiskSignals",
         "candidateMonsterPromotionActions",
         "candidateMonsterPromotionCodexRecord",
+        "candidateMonsterPromotionStage",
+        "candidateMonsterPromotionRewardCoverage",
         "candidateMonsterPromotionRows",
         "candidateMonsterPromotionGroups",
         "monsterCandidatePromotionChecklist",
@@ -1232,7 +1234,9 @@
       "expectedGroupCount": 5,
       "editorSummaryVisible": true,
       "writesGameData": false,
-      "expectedCodexRecordTargetCount": 9
+      "expectedCodexRecordTargetCount": 9,
+      "expectedFullRewardLinkCount": 6,
+      "expectedPartialRewardLinkCount": 3
     }
   },
   "combatVfxPlacementPreview": {

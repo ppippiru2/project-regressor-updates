@@ -1,45 +1,45 @@
 {
     "schemaVersion":  1,
     "project":  "Project Regressor",
-    "versionCode":  438,
-    "displayVersion":  "v438",
-    "cacheVersion":  "project-regressor-mvp-v438",
-    "updatedAt":  "2026-06-28T04:38:00.000+09:00",
+    "versionCode":  439,
+    "displayVersion":  "v439",
+    "cacheVersion":  "project-regressor-mvp-v439",
+    "updatedAt":  "2026-06-28T04:51:00.000+09:00",
     "repositoryUrl":  "https://github.com/ppippiru2/project-regressor-updates",
     "pagesUrl":  "https://ppippiru2.github.io/project-regressor-updates/",
-    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=438\u0026cachebust=438",
+    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=439\u0026cachebust=439",
     "recommendedAndroidShell":  "Trusted Web Activity",
     "notes":  [
-                  "v438 pins a balance tuning candidate summary at the top of the editor detail panel.",
-                  "v438 shows a default candidate overview before a candidate is selected.",
-                  "v438 scrolls the editor back to the pinned candidate summary after candidate selection."
+                  "v439 adds promotion-stage labels to pending monster candidates before live drop wiring.",
+                  "v439 exposes codex/material/skill reward coverage for each promotion checklist row.",
+                  "v439 summarizes complete versus partial reward-link candidates in the balance editor."
               ],
-    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v438-debug.apk",
+    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v439-debug.apk",
     "downloads":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v438-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v439-debug.apk"
                   },
     "version":  {
-                    "code":  438,
-                    "name":  "4.38.0",
-                    "displayName":  "v438"
+                    "code":  439,
+                    "name":  "4.39.0",
+                    "displayName":  "v439"
                 },
     "artifacts":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v438-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v439-debug.apk"
                   },
     "android":  {
-                    "code":  438,
-                    "name":  "4.38.0",
-                    "displayName":  "v438",
+                    "code":  439,
+                    "name":  "4.39.0",
+                    "displayName":  "v439",
                     "artifacts":  {
-                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v438-debug.apk"
+                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v439-debug.apk"
                                   },
                     "version":  {
                                     "code":  437,
-                                    "name":  "4.38.0",
-                                    "displayName":  "v438"
+                                    "name":  "4.39.0",
+                                    "displayName":  "v439"
                                 }
                 },
     "apk":  {
-                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v438-debug.apk"
+                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v439-debug.apk"
             }
 }

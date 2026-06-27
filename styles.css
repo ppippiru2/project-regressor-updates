@@ -4329,7 +4329,7 @@ select:focus {
 .editor-monster-candidate-promotion-metrics {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 
 .editor-monster-candidate-promotion-metrics span,
@@ -4420,10 +4420,23 @@ select:focus {
   border-top-color: rgba(255, 111, 151, 0.28);
 }
 
+.editor-monster-candidate-promotion-row[data-stage="complete-reward-link"] {
+  border-top-color: rgba(141, 255, 181, 0.32);
+}
+
+.editor-monster-candidate-promotion-row[data-stage="needs-material-link"],
+.editor-monster-candidate-promotion-row[data-stage="needs-skill-link"] {
+  border-top-color: rgba(244, 211, 94, 0.34);
+}
+
+.editor-monster-candidate-promotion-row[data-stage="blocked-codex-link"] {
+  border-top-color: rgba(255, 111, 151, 0.42);
+}
+
 .editor-monster-candidate-promotion-grid {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .editor-balance-candidate-list {
