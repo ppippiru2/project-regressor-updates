@@ -380,6 +380,8 @@
         "files",
         "exports",
         "affects",
+        "searchQuery",
+        "scopeFilter",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"

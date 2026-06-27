@@ -1,7 +1,7 @@
-import { applyDomLocalization } from "../localization/domText.js?v=362";
-import { getLocaleText, tf } from "../localization/index.js?v=362";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=362";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=362";
+import { applyDomLocalization } from "../localization/domText.js?v=363";
+import { getLocaleText, tf } from "../localization/index.js?v=363";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=363";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=363";
 
 const EDITOR_VERSION = "362";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
@@ -13,9 +13,11 @@ const SAVE_KEYS = [
   "project_regressor_save_slots",
   "project_regressor_active_save_slot",
   "project_regressor_ui_state",
-  "project_regressor_editor_retarget_filter"
+  "project_regressor_editor_retarget_filter",
+  "project_regressor_editor_balance_filter"
 ];
 const RETARGET_FILTER_STORAGE_KEY = "project_regressor_editor_retarget_filter";
+const BALANCE_FILTER_STORAGE_KEY = "project_regressor_editor_balance_filter";
 
 let manifest = null;
 let backlog = null;
@@ -23,6 +25,7 @@ let activePanelId = "";
 const storedRetargetDetailFilter = loadRetargetDetailFilter();
 let retargetDetailFilter = storedRetargetDetailFilter.filter;
 const expandedRetargetRows = new Set(storedRetargetDetailFilter.expandedRows);
+let balanceDetailFilter = loadBalanceDetailFilter();
 
 const elements = {
   nav: document.getElementById("editor-panel-nav"),
@@ -84,21 +87,54 @@ function bindEvents() {
   });
   elements.panelDetail?.addEventListener("input", (event) => {
     const input = event.target.closest("[data-retarget-search]");
-    if (!input) return;
-    const cursor = input.selectionStart ?? input.value.length;
-    retargetDetailFilter = {
-      ...retargetDetailFilter,
-      query: input.value
-    };
-    persistRetargetDetailFilter();
-    renderPanelDetail();
-    const nextInput = elements.panelDetail.querySelector("[data-retarget-search]");
-    if (nextInput) {
-      nextInput.focus();
-      nextInput.setSelectionRange(cursor, cursor);
+    if (input) {
+      const cursor = input.selectionStart ?? input.value.length;
+      retargetDetailFilter = {
+        ...retargetDetailFilter,
+        query: input.value
+      };
+      persistRetargetDetailFilter();
+      renderPanelDetail();
+      const nextInput = elements.panelDetail.querySelector("[data-retarget-search]");
+      if (nextInput) {
+        nextInput.focus();
+        nextInput.setSelectionRange(cursor, cursor);
+      }
+      return;
+    }
+    const balanceInput = event.target.closest("[data-balance-search]");
+    if (balanceInput) {
+      const cursor = balanceInput.selectionStart ?? balanceInput.value.length;
+      balanceDetailFilter = {
+        ...balanceDetailFilter,
+        query: balanceInput.value
+      };
+      persistBalanceDetailFilter();
+      renderPanelDetail();
+      const nextInput = elements.panelDetail.querySelector("[data-balance-search]");
+      if (nextInput) {
+        nextInput.focus();
+        nextInput.setSelectionRange(cursor, cursor);
+      }
     }
   });
   elements.panelDetail?.addEventListener("click", (event) => {
+    const balanceResetButton = event.target.closest("[data-balance-reset]");
+    if (balanceResetButton) {
+      resetBalanceDetailFilter();
+      renderPanelDetail();
+      return;
+    }
+    const balanceScopeButton = event.target.closest("[data-balance-scope]");
+    if (balanceScopeButton) {
+      balanceDetailFilter = {
+        ...balanceDetailFilter,
+        scope: normalizeBalanceScope(balanceScopeButton.dataset.balanceScope)
+      };
+      persistBalanceDetailFilter();
+      renderPanelDetail();
+      return;
+    }
     const resetButton = event.target.closest("[data-retarget-reset]");
     if (resetButton) {
       resetRetargetDetailFilter();
@@ -223,20 +259,8 @@ function renderBalanceTuningDetail() {
   const relatedChecks = Array.isArray(registryMeta.relatedChecks) ? registryMeta.relatedChecks : [];
   const fileCount = new Set(BALANCE_TUNING_GROUPS.flatMap((group) => group.files)).size;
   const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
-  const rows = BALANCE_TUNING_GROUPS.map((group) => `
-    <article class="editor-balance-row">
-      <div class="editor-balance-row-head">
-        <div>
-          <h4>${escapeHtml(group.id)}</h4>
-          <span>${escapeHtml(group.scope)}</span>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.exportCount", { count: group.exports.length }, `${group.exports.length}`))}</strong>
-      </div>
-      ${balanceDetailChipBlock(detailText.files || "Files", group.files)}
-      ${balanceDetailChipBlock(detailText.exports || "Exports", group.exports)}
-      ${balanceDetailChipBlock(detailText.affects || "Affects", group.affects)}
-    </article>
-  `).join("");
+  const visibleGroups = BALANCE_TUNING_GROUPS.filter((group) => matchesBalanceDetailFilter(group));
+  const rows = visibleGroups.map((group) => renderBalanceGroupRow(group, detailText)).join("");
 
   return `
     <section class="editor-balance-detail" aria-label="${escapeAttribute(detailText.title || "Balance Tuning Detail")}">
@@ -251,11 +275,56 @@ function renderBalanceTuningDetail() {
           exportCount
         }, ""))}</span>
       </div>
+      ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
-        ${rows}
+        ${rows || emptyBalanceRows(detailText)}
       </div>
     </section>
+  `;
+}
+
+function renderBalanceGroupRow(group, detailText = {}) {
+  return `
+    <article class="editor-balance-row">
+      <div class="editor-balance-row-head">
+        <div>
+          <h4>${escapeHtml(group.id)}</h4>
+          <span>${escapeHtml(group.scope)}</span>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.exportCount", { count: group.exports.length }, `${group.exports.length}`))}</strong>
+      </div>
+      ${balanceDetailChipBlock(detailText.files || "Files", group.files)}
+      ${balanceDetailChipBlock(detailText.exports || "Exports", group.exports)}
+      ${balanceDetailChipBlock(detailText.affects || "Affects", group.affects)}
+    </article>
+  `;
+}
+
+function renderBalanceFilterControls(detailText = {}, visibleCount = 0, totalCount = 0) {
+  const filterSummary = balanceFilterSummary(detailText);
+  return `
+    <div class="editor-balance-controls">
+      <label class="editor-balance-search">
+        <span>${escapeHtml(detailText.searchLabel || "Search")}</span>
+        <input type="search" data-balance-search value="${escapeAttribute(balanceDetailFilter.query)}" placeholder="${escapeAttribute(detailText.searchPlaceholder || "")}" />
+      </label>
+      <div class="editor-balance-filter-buttons" role="group" aria-label="${escapeAttribute(detailText.scopeFilter || "Scope Filter")}">
+        ${balanceScopeButton("all", detailText.allScopes || "All")}
+        ${balanceScopeButton("engine-balance", "engine-balance")}
+        ${balanceScopeButton("content-balance", "content-balance")}
+      </div>
+      <button class="editor-balance-reset" type="button" data-balance-reset>
+        ${escapeHtml(detailText.reset || "Reset")}
+      </button>
+      <span class="editor-balance-count">
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.visibleCount", {
+          visible: visibleCount,
+          total: totalCount
+        }, `${visibleCount}/${totalCount}`))}</strong>
+        ${filterSummary ? `<small>${escapeHtml(filterSummary)}</small>` : ""}
+      </span>
+    </div>
   `;
 }
 
@@ -287,6 +356,85 @@ function balanceDetailChipBlock(title, values = []) {
       <span>${escapeHtml(title)}</span>
       <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
     </div>
+  `;
+}
+
+function matchesBalanceDetailFilter(group) {
+  const scope = normalizeBalanceScope(balanceDetailFilter.scope);
+  const query = normalizeSearchText(balanceDetailFilter.query);
+  if (scope !== "all" && group.scope !== scope) return false;
+  return !query || balanceGroupSearchText(group).includes(query);
+}
+
+function balanceGroupSearchText(group) {
+  return [
+    group.id,
+    group.scope,
+    ...(group.files || []),
+    ...(group.exports || []),
+    ...(group.affects || [])
+  ].join(" ").toLowerCase();
+}
+
+function balanceScopeButton(scope, label) {
+  const active = normalizeBalanceScope(balanceDetailFilter.scope) === scope;
+  return `
+    <button class="editor-balance-filter${active ? " is-active" : ""}" type="button" data-balance-scope="${escapeAttribute(scope)}" aria-pressed="${active ? "true" : "false"}">
+      ${escapeHtml(label)}
+    </button>
+  `;
+}
+
+function balanceFilterSummary(detailText = {}) {
+  const scope = normalizeBalanceScope(balanceDetailFilter.scope);
+  const query = String(balanceDetailFilter.query || "").trim();
+
+  if (scope !== "all" && query) {
+    return tf("editorPrep.balanceTuningDetail.activeFilterAndSearch", {
+      filter: scope,
+      query
+    }, `${scope} · ${query}`);
+  }
+
+  if (scope !== "all") {
+    return tf("editorPrep.balanceTuningDetail.activeFilter", {
+      filter: scope
+    }, scope);
+  }
+
+  if (query) {
+    return tf("editorPrep.balanceTuningDetail.activeSearch", {
+      query
+    }, query);
+  }
+
+  return "";
+}
+
+function emptyBalanceRows(detailText = {}) {
+  const query = String(balanceDetailFilter.query || "").trim();
+  const scope = normalizeBalanceScope(balanceDetailFilter.scope);
+  let message = detailText.empty || "";
+  if (scope !== "all" && query) {
+    message = tf("editorPrep.balanceTuningDetail.emptyByFilterAndSearch", {
+      filter: scope,
+      query
+    }, message);
+  } else if (scope !== "all") {
+    message = tf("editorPrep.balanceTuningDetail.emptyByFilter", {
+      filter: scope
+    }, message);
+  } else if (query) {
+    message = tf("editorPrep.balanceTuningDetail.emptyBySearch", {
+      query
+    }, message);
+  }
+
+  return `
+    <p class="editor-balance-empty">
+      <span>${escapeHtml(message)}</span>
+      <small>${escapeHtml(detailText.emptyResetHint || "")}</small>
+    </p>
   `;
 }
 
@@ -716,6 +864,49 @@ function normalizeSearchText(value) {
 
 function normalizeRetargetKind(value) {
   return ["all", "text", "asset"].includes(value) ? value : "all";
+}
+
+function normalizeBalanceScope(value) {
+  return ["all", "engine-balance", "content-balance"].includes(value) ? value : "all";
+}
+
+function loadBalanceDetailFilter() {
+  try {
+    const raw = window.localStorage.getItem(BALANCE_FILTER_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return {
+      scope: normalizeBalanceScope(parsed?.scope),
+      query: typeof parsed?.query === "string" ? parsed.query : ""
+    };
+  } catch {
+    return {
+      scope: "all",
+      query: ""
+    };
+  }
+}
+
+function persistBalanceDetailFilter() {
+  try {
+    window.localStorage.setItem(BALANCE_FILTER_STORAGE_KEY, JSON.stringify({
+      scope: normalizeBalanceScope(balanceDetailFilter.scope),
+      query: String(balanceDetailFilter.query || "")
+    }));
+  } catch {
+    // Editor convenience state is optional; failed persistence should not block the read-only screen.
+  }
+}
+
+function resetBalanceDetailFilter() {
+  balanceDetailFilter = {
+    scope: "all",
+    query: ""
+  };
+  try {
+    window.localStorage.removeItem(BALANCE_FILTER_STORAGE_KEY);
+  } catch {
+    // Editor convenience state is optional; failed reset should not block the read-only screen.
+  }
 }
 
 function loadRetargetDetailFilter() {

@@ -3513,6 +3513,88 @@ select:focus {
   padding: 0 0.65rem;
 }
 
+.editor-balance-controls {
+  align-items: end;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content max-content max-content;
+  min-width: 0;
+}
+
+.editor-balance-search {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.editor-balance-search span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.editor-balance-search input {
+  background: rgba(1, 11, 27, 0.78);
+  border: 1px solid rgba(108, 210, 255, 0.28);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  min-height: 2.4rem;
+  min-width: 0;
+  padding: 0.45rem 0.65rem;
+}
+
+.editor-balance-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.editor-balance-filter,
+.editor-balance-reset {
+  border: 1px solid rgba(108, 210, 255, 0.28);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  min-height: 2.4rem;
+  padding: 0.4rem 0.65rem;
+}
+
+.editor-balance-filter.is-active {
+  border-color: rgba(57, 228, 255, 0.76);
+  color: var(--cyan);
+}
+
+.editor-balance-count {
+  color: var(--muted);
+  display: grid;
+  font-size: 0.78rem;
+  gap: 0.12rem;
+  justify-items: end;
+  min-width: max-content;
+}
+
+.editor-balance-count strong {
+  color: var(--text);
+}
+
+.editor-balance-empty {
+  border: 1px dashed rgba(108, 210, 255, 0.24);
+  border-radius: 6px;
+  color: var(--muted);
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0.85rem;
+}
+
+.editor-balance-empty small {
+  color: rgba(190, 213, 239, 0.72);
+}
+
 .editor-balance-list {
   display: grid;
   gap: 0.65rem;
@@ -5858,6 +5940,33 @@ body[data-info-tooltips="off"] .info-term {
   .editor-retarget-reset,
   .editor-retarget-count {
     max-width: 100%;
+  }
+
+  .editor-balance-controls {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .editor-balance-filter-buttons,
+  .editor-balance-reset,
+  .editor-balance-count {
+    justify-content: flex-start;
+    justify-items: start;
+    justify-self: start;
+  }
+
+  .editor-balance-filter-buttons {
+    width: 100%;
+  }
+
+  .editor-balance-filter {
+    flex: 1 1 6.4rem;
+  }
+
+  .editor-balance-reset,
+  .editor-balance-count {
+    max-width: 100%;
+    min-width: 0;
   }
 }
 
