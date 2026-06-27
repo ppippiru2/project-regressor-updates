@@ -369,6 +369,7 @@
       "primaryDataTargets": [
         "src/balance/balanceTuningRegistry.js",
         "src/editor/balanceTuningPreview.js",
+        "src/editor/tutorialIslandPacingPreview.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
         "build-scripts/check-equipment-value-balance.mjs",
@@ -384,6 +385,7 @@
         "searchQuery",
         "scopeFilter",
         "exportPreviewSummary",
+        "tutorialPacingSnapshot",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"

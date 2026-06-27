@@ -1,6 +1,6 @@
 import { addInventoryItem, consumeInventoryItem } from "./inventory.js";
-import { t, tf } from "../localization/index.js?v=364";
-import { SHOP_PRICE_BALANCE } from "../balance/equipmentValueBalance.js?v=364";
+import { t, tf } from "../localization/index.js?v=365";
+import { SHOP_PRICE_BALANCE } from "../balance/equipmentValueBalance.js?v=365";
 
 export function buyShopItem({ state, entry, item }) {
   if (!state || !entry || !item) {

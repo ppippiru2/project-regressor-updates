@@ -1,10 +1,11 @@
-import { applyDomLocalization } from "../localization/domText.js?v=364";
-import { getLocaleText, tf } from "../localization/index.js?v=364";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=364";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=364";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=364";
+import { applyDomLocalization } from "../localization/domText.js?v=365";
+import { getLocaleText, tf } from "../localization/index.js?v=365";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=365";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=365";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=365";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=365";
 
-const EDITOR_VERSION = "364";
+const EDITOR_VERSION = "365";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -261,6 +262,7 @@ function renderBalanceTuningDetail() {
   const detailText = EDITOR_TEXT.balanceTuningDetail || {};
   const registryMeta = manifest.balanceTuningRegistry || {};
   const relatedChecks = Array.isArray(registryMeta.relatedChecks) ? registryMeta.relatedChecks : [];
+  const pacingSnapshot = createTutorialIslandPacingSnapshot();
   const fileCount = new Set(BALANCE_TUNING_GROUPS.flatMap((group) => group.files)).size;
   const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
   const visibleGroups = BALANCE_TUNING_GROUPS.filter((group) => matchesBalanceDetailFilter(group));
@@ -280,10 +282,40 @@ function renderBalanceTuningDetail() {
         }, ""))}</span>
       </div>
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
+      ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
         ${rows || emptyBalanceRows(detailText)}
       </div>
+    </section>
+  `;
+}
+
+function renderBalancePacingSnapshot(snapshot, detailText = {}) {
+  const metrics = [
+    [detailText.pacingKills || "Kills", `${snapshot.totalKills}`],
+    [detailText.pacingRequiredKillSeconds || "Required Avg", `${snapshot.requiredAverageKillSeconds}s`],
+    [detailText.pacingPowerSlashMinutes || "Power Slash", `${snapshot.noGearPowerSlashMinutes}min`],
+    [detailText.pacingGold || "Gold", `${snapshot.totalGold} G`],
+  ];
+  return `
+    <section class="editor-balance-pacing" data-valid="${snapshot.isValid ? "true" : "false"}" aria-label="${escapeAttribute(detailText.pacingTitle || "Tutorial pacing")}">
+      <div class="editor-balance-pacing-head">
+        <div>
+          <h4>${escapeHtml(detailText.pacingTitle || "")}</h4>
+          <p class="muted">${escapeHtml(detailText.pacingDescription || "")}</p>
+        </div>
+        <strong>${escapeHtml(snapshot.isValid ? (detailText.pacingStatusOk || "") : (detailText.pacingStatusReview || ""))}</strong>
+      </div>
+      <div class="editor-balance-pacing-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      ${snapshot.isValid ? "" : `<p class="editor-balance-pacing-error">${escapeHtml(snapshot.errors.slice(0, 2).join(" / "))}</p>`}
     </section>
   `;
 }

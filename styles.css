@@ -3596,6 +3596,81 @@ select:focus {
   color: rgba(190, 213, 239, 0.72);
 }
 
+.editor-balance-pacing {
+  border: 1px solid rgba(149, 255, 185, 0.22);
+  border-radius: 6px;
+  background: rgba(5, 34, 35, 0.42);
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-balance-pacing[data-valid="false"] {
+  border-color: rgba(255, 111, 151, 0.42);
+}
+
+.editor-balance-pacing-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+}
+
+.editor-balance-pacing-head h4,
+.editor-balance-pacing-head p {
+  margin: 0;
+}
+
+.editor-balance-pacing-head h4 {
+  color: var(--cyan);
+  font-size: 0.95rem;
+}
+
+.editor-balance-pacing-head strong {
+  color: var(--mint);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.editor-balance-pacing[data-valid="false"] .editor-balance-pacing-head strong,
+.editor-balance-pacing-error {
+  color: var(--pink);
+}
+
+.editor-balance-pacing-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-balance-pacing-metrics span {
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.5rem;
+}
+
+.editor-balance-pacing-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-balance-pacing-metrics b {
+  color: var(--text);
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-balance-pacing-error {
+  font-size: 0.76rem;
+  font-weight: 800;
+  margin: 0;
+}
+
 .editor-balance-list {
   display: grid;
   gap: 0.65rem;
@@ -5973,6 +6048,18 @@ body[data-info-tooltips="off"] .info-term {
   .editor-balance-count {
     max-width: 100%;
     min-width: 0;
+  }
+
+  .editor-balance-pacing-head {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-balance-pacing-head strong {
+    justify-self: start;
+  }
+
+  .editor-balance-pacing-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
