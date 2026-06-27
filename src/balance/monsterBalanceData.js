@@ -28,6 +28,19 @@ export const MONSTER_BALANCE_DATA = [
     ],
   },
   {
+    id: "shore_claw_crab",
+    regionId: "tutorial_shore",
+    level: 1,
+    stats: { STR: 2, AGI: 1, VIT: 3, INT: 0, WIS: 0, LUK: 0 },
+    exp: 16,
+    gold: 3,
+    dropTable: [
+      { itemId: "shore_claw_crab_codex_fragment", chance: 0.102 },
+      { itemId: "low_mana_crystal_fragment", chance: 0.054 },
+      { itemId: "guard_stance_skill_rune", chance: 0.025 },
+    ],
+  },
+  {
     id: "forest_wolf",
     regionId: "tutorial_forest",
     level: 2,

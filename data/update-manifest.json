@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 447,
-  "displayVersion": "v447",
-  "cacheVersion": "project-regressor-mvp-v447",
-  "updatedAt": "2026-06-28T06:58:00.000+09:00",
+  "versionCode": 448,
+  "displayVersion": "v448",
+  "cacheVersion": "project-regressor-mvp-v448",
+  "updatedAt": "2026-06-28T07:14:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=447&cachebust=447",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=448&cachebust=448",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v447 completes the remaining deferred monster reward links for shore_claw_crab, forest_goblin_scout, and mine_crystal_bug.",
-    "v447 moves the three pending candidates back into the complete reward-link plan while keeping live monster/world data unchanged.",
-    "v447 restores the next read-only live patch draft from phase-1 shore with shore_claw_crab as the first candidate."
+    "v448 promotes shore_claw_crab into live shore alternate encounters while preserving shore_imp as the representative monster.",
+    "v448 connects shore_claw_crab codex, low mana crystal, and guard stance skill-rune drops to live reward checks.",
+    "v448 registers shore_claw_crab sprite slots and a shell_guard_runtime VFX motion profile for runtime/editor checks."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v447-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v447-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
   },
   "version": {
-    "code": 447,
-    "name": "4.47.0",
-    "displayName": "v447"
+    "code": 448,
+    "name": "4.48.0",
+    "displayName": "v448"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v447-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
   },
   "android": {
-    "code": 447,
-    "name": "4.47.0",
-    "displayName": "v447",
+    "code": 448,
+    "name": "4.48.0",
+    "displayName": "v448",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v447-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
     },
     "version": {
-      "code": 447,
-      "name": "4.47.0",
-      "displayName": "v447"
+      "code": 448,
+      "name": "4.48.0",
+      "displayName": "v448"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v447-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v448-debug.apk"
   }
 }

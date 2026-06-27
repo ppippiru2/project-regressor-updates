@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=447";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=447";
+import { getLocaleText } from "../localization/index.js?v=448";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=448";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;
@@ -19,7 +19,7 @@ export const regions = [
     name: REGION_TEXT.tutorial_shore.name,
     recommendedLevel: 1,
     monsterId: "shore_imp",
-    monsterPool: ["shore_imp", "shore_drift_slime"],
+    monsterPool: ["shore_imp", "shore_claw_crab", "shore_drift_slime"],
     description: REGION_TEXT.tutorial_shore.description,
   },
   {

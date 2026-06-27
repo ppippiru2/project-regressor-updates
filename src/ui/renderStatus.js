@@ -1,8 +1,8 @@
-import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=447";
-import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=447";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=447";
-import { t, tf } from "../localization/index.js?v=447";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=447";
+import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=448";
+import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=448";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=448";
+import { t, tf } from "../localization/index.js?v=448";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=448";
 
 const PROFILE_FIELDS = [
   ["statusUi.profileFields.name", "name", "profile:name"],
