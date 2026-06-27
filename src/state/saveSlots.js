@@ -1,5 +1,5 @@
 import { normalizeSavedState, normalizeUiState } from "./save.js";
-import { t } from "../localization/index.js?v=368";
+import { t } from "../localization/index.js?v=369";
 
 const SAVE_SLOTS_KEY = "project_regressor_save_slots";
 const ACTIVE_SAVE_SLOT_KEY = "project_regressor_active_save_slot";

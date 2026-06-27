@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=368";
+import { t, tf } from "../localization/index.js?v=369";
 
 export function choosePlayerAction(player, state, skills, getSkill, hypMax) {
   const hpRate = state.player.hp / player.maxHp;
