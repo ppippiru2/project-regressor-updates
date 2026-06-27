@@ -1,4 +1,4 @@
-import { COMBAT_FORMATION_LIMITS } from "./combatDisplayConfig.js?v=359";
+import { COMBAT_FORMATION_LIMITS } from "./combatDisplayConfig.js?v=360";
 
 export function createCombatFormationState(state) {
   return {

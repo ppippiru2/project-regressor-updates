@@ -1398,14 +1398,21 @@ export const KO_KR_TEXT = {
         value: "{count}개",
         hint: "추후 배치 업데이트 항목",
       },
-      themeRetargetPreview: {
-        label: "테마 미리보기",
-        value: "텍스트 {textCount} · 에셋 {assetCount}",
-        hint: "테마 전환 preview",
-        readyHint: "무협 샘플 연결 준비 완료",
-        reviewHint: "검토 필요 · 텍스트 {missingText} · 에셋 {missingAssets} · 불일치 {mismatchedAssets}",
+        themeRetargetPreview: {
+          label: "테마 미리보기",
+          value: "텍스트 {textCount} · 에셋 {assetCount}",
+          hint: "테마 전환 preview",
+          readyHint: "무협 샘플 연결 준비 완료",
+          reviewHint: "검토 필요 · 텍스트 {missingText} · 에셋 {missingAssets} · 불일치 {mismatchedAssets}",
+        },
+        balanceTuningRegistry: {
+          label: "밸런스 표면",
+          value: "그룹 {groupCount} · 파일 {fileCount}",
+          hint: "밸런스 조정 표면 검토 필요",
+          readyHint: "export {exportCount}개 검증 완료",
+          reviewHint: "검토 필요 · export {exportCount}",
+        },
       },
-    },
     noPanel: "표시할 패널이 없습니다.",
     detailTitles: {
       dataTargets: "데이터 위치",

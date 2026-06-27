@@ -1,8 +1,9 @@
-import { applyDomLocalization } from "../localization/domText.js?v=359";
-import { getLocaleText, tf } from "../localization/index.js?v=359";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=359";
+import { applyDomLocalization } from "../localization/domText.js?v=360";
+import { getLocaleText, tf } from "../localization/index.js?v=360";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=360";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=360";
 
-const EDITOR_VERSION = "338";
+const EDITOR_VERSION = "359";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -153,7 +154,8 @@ function renderSummary() {
     localizedMetricCard("imageSlot", imageCount),
     localizedMetricCard("audioSlot", audioCount),
     localizedMetricCard("backlog", backlogCount),
-    retargetPreviewMetricCard(retargetPreview)
+    retargetPreviewMetricCard(retargetPreview),
+    balanceRegistryMetricCard()
   ].join("");
 }
 
@@ -585,6 +587,32 @@ function retargetPreviewMetricCard(preview) {
           missingText: preview.counts.missingTextTargets,
           missingAssets: preview.counts.missingAssetTargets,
           mismatchedAssets: preview.counts.mismatchedAssetTargets
+        }, metric.hint || "")
+  );
+}
+
+function balanceRegistryMetricCard() {
+  const metric = EDITOR_TEXT.metrics.balanceTuningRegistry || {};
+  const manifestRegistry = manifest.balanceTuningRegistry || {};
+  const groupCount = BALANCE_TUNING_GROUPS.length;
+  const fileCount = new Set(BALANCE_TUNING_GROUPS.flatMap((group) => group.files)).size;
+  const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
+  const expectedMatches =
+    (!manifestRegistry.expectedGroupCount || manifestRegistry.expectedGroupCount === groupCount) &&
+    (!manifestRegistry.expectedFileCount || manifestRegistry.expectedFileCount === fileCount) &&
+    (!manifestRegistry.expectedExportCount || manifestRegistry.expectedExportCount === exportCount);
+  return metricCard(
+    metric.label || "Balance Registry",
+    tf("editorPrep.metrics.balanceTuningRegistry.value", {
+      groupCount,
+      fileCount
+    }, `${groupCount}/${fileCount}`),
+    expectedMatches
+      ? tf("editorPrep.metrics.balanceTuningRegistry.readyHint", {
+          exportCount
+        }, metric.readyHint || "")
+      : tf("editorPrep.metrics.balanceTuningRegistry.reviewHint", {
+          exportCount
         }, metric.hint || "")
   );
 }
