@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 451,
-  "displayVersion": "v451",
-  "cacheVersion": "project-regressor-mvp-v451",
+  "versionCode": 452,
+  "displayVersion": "v452",
+  "cacheVersion": "project-regressor-mvp-v452",
   "updatedAt": "2026-06-28T07:56:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=451&cachebust=451",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=452&cachebust=452",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v451 adds monster motionProfile summary rows to the combat VFX placement preview.",
-    "v451 exposes profile-level VFX base, hyper, effect-range, modifier, and tuning-signal cards in the editor.",
-    "v451 strengthens combat VFX checks so profile ranges and manifest counts are guarded by quick validation."
+    "v452 adds a read-only bulk monster patch automation surface for future large monster batches.",
+    "v452 maps each candidate monster to balance data, region pool, reward, sprite slot, asset bucket, runtime preset, CSS, and manifest count surfaces.",
+    "v452 strengthens monster candidate and editor metadata checks so 15 candidates and 105 generated surfaces are guarded by quick validation."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v451-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v452-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v451-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v452-debug.apk"
   },
   "version": {
-    "code": 451,
-    "name": "4.51.0",
-    "displayName": "v451"
+    "code": 452,
+    "name": "4.52.0",
+    "displayName": "v452"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v451-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v452-debug.apk"
   },
   "android": {
-    "code": 451,
-    "name": "4.51.0",
-    "displayName": "v451",
+    "code": 452,
+    "name": "4.52.0",
+    "displayName": "v452",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v451-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v452-debug.apk"
     },
     "version": {
-      "code": 451,
-      "name": "4.51.0",
-      "displayName": "v451"
+      "code": 452,
+      "name": "4.52.0",
+      "displayName": "v452"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v451-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v452-debug.apk"
   }
 }

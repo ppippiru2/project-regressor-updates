@@ -2120,6 +2120,77 @@ export const KO_KR_TEXT = {
             "missing-drop-item": "드랍 아이템 누락"
           }
         },
+        monsterCandidateBulkPatchAutomation: {
+          title: "대량 몬스터 적용 자동화 표면",
+          description: "후보 몬스터 한 줄에서 live 데이터, 지역 풀, 보상, 스프라이트 슬롯, VFX 프리셋, manifest 변경 초안까지 이어지는 표면을 읽기 전용으로 점검합니다.",
+          version: "{version}",
+          candidates: "후보",
+          liveCovered: "실전 반영",
+          surfaces: "자동 표면",
+          coveredSurfaces: "완료 표면",
+          needsDraft: "초안 필요",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          inputFields: "필수 입력",
+          targetSurfaces: "자동 생성 대상",
+          inputSummary: "입력 요약",
+          surfaceStates: "표면 상태",
+          generatedPatches: "생성 초안",
+          rowMeta: "지역 {region} · 대표 {representative}",
+          balance: "밸런스",
+          world: "지역",
+          spriteSlots: "스프라이트 슬롯",
+          runtimePreset: "런타임 프리셋",
+          cssSelector: "CSS 선택자",
+          level: "레벨",
+          live: "실전",
+          pending: "대기",
+          noRows: "자동화 행 없음",
+          stateLabels: {
+            "fully-covered": "전체 반영됨",
+            "needs-draft": "초안 필요",
+            covered: "반영됨",
+            "draft-ready": "초안 생성 가능",
+            blocked: "차단"
+          },
+          surfaceLabels: {
+            "monster-balance-entry": "몬스터 밸런스",
+            "region-monster-pool": "지역 출현 풀",
+            "monster-sprite-slot-bucket": "스프라이트 슬롯 버킷",
+            "monster-asset-data-bucket": "assetData 버킷",
+            "monster-runtime-preset": "전투 프리셋",
+            "monster-runtime-css": "전투 CSS",
+            "editor-manifest-counts": "에디터 기대값"
+          }
+        },
+        contentBulkPatchAutomationPlan: {
+          title: "대량 콘텐츠 적용 계약",
+          description: "몬스터뿐 아니라 장비, 전리품, 스킬, 스킬룬, 보상 링크를 대량 추가할 때 같은 규칙으로 생성하고 검사해야 하는 표면을 점검합니다.",
+          version: "{version}",
+          domains: "분야",
+          currentRows: "현재 행",
+          surfaceTemplates: "표면 종류",
+          generatedSurfaces: "생성 표면",
+          contractReady: "계약 준비",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          requiredInputs: "필수 입력",
+          targetSurfaces: "연결 표면",
+          guardChecks: "검증",
+          noDomains: "대량 콘텐츠 계약 분야 없음",
+          domainMeta: "현재 {rows}행 · 표면 {surfaces}종 · 생성 {generated}개",
+          stateLabels: {
+            "covered-currently": "현재 자동화 반영",
+            "contract-ready": "대량 추가 계약 준비"
+          },
+          domainLabels: {
+            monster: "몬스터",
+            equipment_item: "장비 아이템",
+            loot_item: "전리품/재료",
+            skill: "스킬",
+            reward_link: "보상 링크"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",

@@ -432,11 +432,13 @@
       "primaryDataTargets": [
         "src/balance/balanceTuningRegistry.js",
         "src/editor/balanceTuningPreview.js",
+        "src/editor/contentBulkPatchAutomationPlan.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
         "src/editor/monsterCandidateLivePromotionPlan.js",
         "src/editor/monsterCandidateLivePatchDraft.js",
+        "src/editor/monsterCandidateBulkPatchAutomation.js",
         "src/balance/monsterCandidatePool.js",
         "build-scripts/check-balance-tuning-registry.mjs",
         "build-scripts/check-tutorial-island-pacing.mjs",
@@ -493,6 +495,14 @@
         "candidateMonsterLivePatchRows",
         "candidateMonsterLivePatchDropTable",
         "candidateMonsterLivePatchWorldPatch",
+        "monsterCandidateBulkPatchAutomation",
+        "candidateMonsterBulkPatchRows",
+        "candidateMonsterBulkPatchSurfaces",
+        "candidateMonsterBulkPatchCoverage",
+        "contentBulkPatchAutomationPlan",
+        "contentBulkPatchDomains",
+        "contentBulkPatchSurfaceTemplates",
+        "contentBulkPatchCurrentRows",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
@@ -506,6 +516,8 @@
         "후보 몬스터 승격 체크리스트",
         "후보 몬스터 실전 승격 계획",
         "후보 몬스터 실전 패치 초안",
+        "후보 몬스터 대량 적용 자동화 표면",
+        "대량 콘텐츠 적용 계약",
         "변경 전 읽기 전용 검증 리포트"
       ]
     },
@@ -1416,6 +1428,7 @@
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_GROUP_IDS",
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_DOMAIN_SUMMARIES",
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_DOMAIN_IDS",
+      "src/editor/contentBulkPatchAutomationPlan.js:createContentBulkPatchAutomationPlan",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1424,12 +1437,13 @@
       "src/editor/monsterCandidatePromotionChecklist.js:createMonsterCandidatePromotionChecklist",
       "src/editor/monsterCandidateLivePromotionPlan.js:createMonsterCandidateLivePromotionPlan",
       "src/editor/monsterCandidateLivePatchDraft.js:createMonsterCandidateLivePatchDraft",
+      "src/editor/monsterCandidateBulkPatchAutomation.js:createMonsterCandidateBulkPatchAutomationPreview",
       "build-scripts/check-monster-candidate-pool.mjs",
       "build-scripts/check-equipment-value-balance.mjs"
     ],
     "monsterCandidateRewardPreview": {
       "id": "monster-candidate-reward-preview-v1",
-      "source": "v451",
+      "source": "v452",
       "sourceModule": "src/editor/monsterCandidateRewardPreview.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 15,
@@ -1468,6 +1482,15 @@
         "guards": [
           "상점 가격 계수",
           "추천 장비 점수"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-automation",
+        "label": "대량 콘텐츠 적용 계약 검사",
+        "script": "build-scripts/check-content-bulk-patch-automation.mjs",
+        "guards": [
+          "몬스터/아이템/스킬/보상 링크 대량 추가 표면",
+          "현재 행 수와 생성 표면 수"
         ]
       },
       {
@@ -1567,9 +1590,23 @@
       "data/editor-manifest.json:balance_tuning_registry",
       "data/editor-backlog.json:balance-tuning-registry-editor"
     ],
+    "contentBulkPatchAutomationPlan": {
+      "id": "content-bulk-patch-automation-plan-v1",
+      "source": "v452",
+      "sourceModule": "src/editor/contentBulkPatchAutomationPlan.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-automation.mjs",
+      "expectedDomainCount": 5,
+      "expectedCurrentRowCount": 80,
+      "expectedSurfaceTemplateCount": 33,
+      "expectedGeneratedSurfaceCount": 521,
+      "expectedContractReadyDomainCount": 4,
+      "expectedCoveredCurrentDomainCount": 1,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
     "monsterCandidatePromotionChecklist": {
       "id": "monster-candidate-promotion-checklist-v1",
-      "source": "v451",
+      "source": "v452",
       "sourceModule": "src/editor/monsterCandidatePromotionChecklist.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedPendingCandidateCount": 0,
@@ -1584,7 +1621,7 @@
     },
     "monsterCandidateLivePromotionPlan": {
       "id": "monster-candidate-live-promotion-plan-v1",
-      "source": "v451",
+      "source": "v452",
       "sourceModule": "src/editor/monsterCandidateLivePromotionPlan.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 0,
@@ -1596,13 +1633,30 @@
     },
     "monsterCandidateLivePatchDraft": {
       "id": "monster-candidate-live-patch-draft-v1",
-      "source": "v451",
+      "source": "v452",
       "sourceModule": "src/editor/monsterCandidateLivePatchDraft.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedDraftCount": 0,
       "expectedTargetPhaseId": "",
       "expectedTargetRegionCount": 0,
       "expectedBlockingSignalCount": 0,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "monsterCandidateBulkPatchAutomation": {
+      "id": "monster-candidate-bulk-patch-automation-v1",
+      "source": "v452",
+      "sourceModule": "src/editor/monsterCandidateBulkPatchAutomation.js",
+      "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
+      "expectedCandidateCount": 15,
+      "expectedLiveCoveredCount": 15,
+      "expectedPendingCandidateCount": 0,
+      "expectedSurfaceCount": 7,
+      "expectedGeneratedSurfaceCount": 105,
+      "expectedCoveredSurfaceCount": 105,
+      "expectedDraftSurfaceCount": 0,
+      "expectedFullyCoveredCount": 15,
+      "expectedNeedsDraftCount": 0,
       "editorSummaryVisible": true,
       "writesGameData": false
     }
@@ -1781,7 +1835,7 @@
   ],
   "monsterBattleSpriteAssetSlots": {
     "version": 1,
-    "source": "v451",
+    "source": "v452",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,
@@ -1796,7 +1850,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v451",
+    "source": "v452",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,

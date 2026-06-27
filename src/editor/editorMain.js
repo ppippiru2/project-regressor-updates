@@ -1,31 +1,35 @@
-import { applyDomLocalization } from "../localization/domText.js?v=451";
-import { getLocaleText, tf } from "../localization/index.js?v=451";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=451";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=451";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=451";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=451";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=451";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=451";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=451";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=451";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=451";
+import { applyDomLocalization } from "../localization/domText.js?v=452";
+import { getLocaleText, tf } from "../localization/index.js?v=452";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=452";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=452";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=452";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=452";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=452";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=452";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=452";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=452";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=452";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=452";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=452";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=451";
+} from "./monsterSpriteSlotReport.js?v=452";
 
-const EDITOR_VERSION = "451";
+const EDITOR_VERSION = "452";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
 const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
   createBalanceTuningPreviewRows(BALANCE_TUNING_GROUPS).map((row) => [row.id, row])
 );
+const CONTENT_BULK_PATCH_AUTOMATION_PLAN = createContentBulkPatchAutomationPlan();
 const MONSTER_CANDIDATE_REWARD_PREVIEW = createMonsterCandidateRewardPreview();
 const MONSTER_CANDIDATE_PROMOTION_CHECKLIST = createMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_REWARD_PREVIEW);
 const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN = createMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_PROMOTION_CHECKLIST);
 const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT = createMonsterCandidateLivePatchDraft(MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN);
+const MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION = createMonsterCandidateBulkPatchAutomationPreview();
 const COMBAT_VFX_PLACEMENT_PREVIEW = createCombatVfxPlacementPreview();
 const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
   title: "Combat VFX Placement Preview",
@@ -1158,6 +1162,8 @@ function renderBalanceTuningDetail() {
       ${renderMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_PROMOTION_CHECKLIST, detailText)}
       ${renderMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN, detailText)}
       ${renderMonsterCandidateLivePatchDraft(MONSTER_CANDIDATE_LIVE_PATCH_DRAFT, detailText)}
+      ${renderMonsterCandidateBulkPatchAutomation(MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION, detailText)}
+      ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
@@ -2018,6 +2024,160 @@ function monsterCandidatePatchDraftSignalLabel(signalId, text = {}) {
 function formatPatchDraftChance(chance) {
   const value = Number(chance || 0) * 100;
   return `${Number(value.toFixed(1))}%`;
+}
+
+function renderMonsterCandidateBulkPatchAutomation(preview, detailText = {}) {
+  const text = detailText.monsterCandidateBulkPatchAutomation || {};
+  const summary = preview.summary || {};
+  const metrics = [
+    [text.candidates || "Candidates", `${summary.candidateCount || 0}`],
+    [text.liveCovered || "Live covered", `${summary.liveCoveredCount || 0}`],
+    [text.surfaces || "Surfaces", `${summary.surfaceCount || 0}`],
+    [text.coveredSurfaces || "Covered", `${summary.coveredSurfaceCount || 0}/${summary.generatedSurfaceCount || 0}`],
+    [text.needsDraft || "Needs draft", `${summary.needsDraftCount || 0}`],
+    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-monster-candidate-bulk-automation" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Bulk Patch Automation")}">
+      <div class="editor-monster-candidate-bulk-automation-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Monster Candidate Bulk Patch Automation")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only automation surface for bulk monster live promotion.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateBulkPatchAutomation.version", {
+          version: preview.version || "-"
+        }, preview.version || "-"))}</strong>
+      </div>
+      <div class="editor-monster-candidate-bulk-automation-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      ${balanceDetailChipBlock(text.inputFields || "Input fields", preview.templateInputFields || [])}
+      ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", (preview.surfaces || []).map((surface) => `${surface.output}: ${surface.file}`))}
+      <div class="editor-monster-candidate-bulk-automation-list">
+        ${(preview.rows || []).map((row) => renderMonsterCandidateBulkPatchAutomationRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No automation rows.")}</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderMonsterCandidateBulkPatchAutomationRow(row, text = {}) {
+  const surfaceLabels = (row.surfaces || []).map((surface) => `${bulkPatchAutomationSurfaceLabel(surface.id, text)}: ${bulkPatchAutomationStateLabel(surface.state, text)}`);
+  const patchValues = [
+    `${text.balance || "Balance"}: ${row.monsterBalanceEntry?.id || row.id}`,
+    `${text.world || "World"}: ${row.worldDataPatch?.action || "-"}`,
+    `${text.spriteSlots || "Sprite slots"}: ${(row.spriteSlotBucketPatch?.poseKeys || []).join(" / ") || "-"}`,
+    `${text.runtimePreset || "Runtime preset"}: ${row.battleSpritePresetDraft?.classId || "-"}`,
+    `${text.cssSelector || "CSS selector"}: ${row.runtimeCssSelector || "-"}`,
+  ];
+  return `
+    <article class="editor-monster-candidate-bulk-automation-row" data-state="${escapeAttribute(row.coverageState || "unknown")}">
+      <div class="editor-monster-candidate-bulk-automation-row-head">
+        <div>
+          <h5>${escapeHtml(row.name || row.id || "")}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateBulkPatchAutomation.rowMeta", {
+            region: row.regionId || "-",
+            representative: row.representativeMonsterId || "-"
+          }, `${row.regionId || "-"} / ${row.representativeMonsterId || "-"}`))}</p>
+        </div>
+        <div class="editor-chip-list">
+          ${chip(bulkPatchAutomationStateLabel(row.coverageState, text))}
+          ${row.isLive ? chip(text.live || "Live") : chip(text.pending || "Pending")}
+        </div>
+      </div>
+      <div class="editor-monster-candidate-bulk-automation-grid">
+        ${balanceDetailChipBlock(text.inputSummary || "Input summary", [
+          `${text.level || "Level"} ${row.input?.level || 0}`,
+          ...(row.input?.tags || []),
+          row.input?.rewardLink?.codexFragmentId || "",
+        ].filter(Boolean))}
+        ${balanceDetailChipBlock(text.surfaceStates || "Surface states", surfaceLabels)}
+        ${balanceDetailChipBlock(text.generatedPatches || "Generated patches", patchValues)}
+      </div>
+    </article>
+  `;
+}
+
+function bulkPatchAutomationSurfaceLabel(surfaceId, text = {}) {
+  return text.surfaceLabels?.[surfaceId] || surfaceId || "unknown";
+}
+
+function bulkPatchAutomationStateLabel(stateId, text = {}) {
+  return text.stateLabels?.[stateId] || stateId || "unknown";
+}
+
+function renderContentBulkPatchAutomationPlan(plan, detailText = {}) {
+  const text = detailText.contentBulkPatchAutomationPlan || {};
+  const summary = plan.summary || {};
+  const metrics = [
+    [text.domains || "Domains", `${summary.domainCount || 0}`],
+    [text.currentRows || "Current rows", `${summary.currentRowCount || 0}`],
+    [text.surfaceTemplates || "Surface templates", `${summary.surfaceTemplateCount || 0}`],
+    [text.generatedSurfaces || "Generated surfaces", `${summary.generatedSurfaceCount || 0}`],
+    [text.contractReady || "Contract ready", `${summary.contractReadyDomainCount || 0}`],
+    [text.writes || "Writes", plan.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-content-bulk-automation" data-readonly="${plan.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Automation Plan")}">
+      <div class="editor-content-bulk-automation-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Content Bulk Patch Automation Plan")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only content batch expansion contract.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchAutomationPlan.version", {
+          version: plan.version || "-"
+        }, plan.version || "-"))}</strong>
+      </div>
+      <div class="editor-content-bulk-automation-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-content-bulk-automation-list">
+        ${(plan.domains || []).map((domain) => renderContentBulkPatchAutomationDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderContentBulkPatchAutomationDomain(domain, text = {}) {
+  return `
+    <article class="editor-content-bulk-automation-domain" data-state="${escapeAttribute(domain.coverageState || "unknown")}">
+      <div class="editor-content-bulk-automation-domain-head">
+        <div>
+          <h5>${escapeHtml(contentBulkPatchDomainLabel(domain.id, text))}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchAutomationPlan.domainMeta", {
+            rows: domain.currentRowCount || 0,
+            surfaces: domain.surfaceTemplateCount || 0,
+            generated: domain.generatedSurfaceCount || 0
+          }, `${domain.currentRowCount || 0} / ${domain.surfaceTemplateCount || 0}`))}</p>
+        </div>
+        <div class="editor-chip-list">
+          ${chip(contentBulkPatchStateLabel(domain.coverageState, text))}
+        </div>
+      </div>
+      <div class="editor-content-bulk-automation-grid">
+        ${balanceDetailChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [])}
+        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", domain.surfaces || [])}
+        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
+      </div>
+    </article>
+  `;
+}
+
+function contentBulkPatchDomainLabel(domainId, text = {}) {
+  return text.domainLabels?.[domainId] || domainId || "unknown";
+}
+
+function contentBulkPatchStateLabel(stateId, text = {}) {
+  return text.stateLabels?.[stateId] || stateId || "unknown";
 }
 
 function renderBalanceGroupRow(group, detailText = {}) {

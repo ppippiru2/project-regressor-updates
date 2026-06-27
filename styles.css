@@ -4662,6 +4662,202 @@ select:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.editor-monster-candidate-bulk-automation {
+  background: rgba(4, 22, 46, 0.5);
+  border: 1px solid rgba(91, 229, 132, 0.26);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-monster-candidate-bulk-automation-head,
+.editor-monster-candidate-bulk-automation-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-monster-candidate-bulk-automation-head h4,
+.editor-monster-candidate-bulk-automation-head p,
+.editor-monster-candidate-bulk-automation-row-head h5,
+.editor-monster-candidate-bulk-automation-row-head p {
+  margin: 0;
+}
+
+.editor-monster-candidate-bulk-automation-head h4 {
+  color: var(--green);
+  font-size: 0.95rem;
+}
+
+.editor-monster-candidate-bulk-automation-head strong {
+  border: 1px solid rgba(91, 229, 132, 0.32);
+  border-radius: 999px;
+  color: var(--green);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-monster-candidate-bulk-automation-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-monster-candidate-bulk-automation-metrics span,
+.editor-monster-candidate-bulk-automation-row {
+  background: rgba(1, 10, 28, 0.28);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-monster-candidate-bulk-automation-metrics span,
+.editor-monster-candidate-bulk-automation-list,
+.editor-monster-candidate-bulk-automation-row {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-monster-candidate-bulk-automation-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-monster-candidate-bulk-automation-metrics b,
+.editor-monster-candidate-bulk-automation-row-head h5 {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-bulk-automation-row-head p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-candidate-bulk-automation-row[data-state="fully-covered"] {
+  border-color: rgba(91, 229, 132, 0.34);
+}
+
+.editor-monster-candidate-bulk-automation-row[data-state="needs-draft"] {
+  border-color: rgba(244, 211, 94, 0.38);
+}
+
+.editor-monster-candidate-bulk-automation-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-content-bulk-automation {
+  background: rgba(7, 18, 44, 0.52);
+  border: 1px solid rgba(108, 210, 255, 0.22);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-content-bulk-automation-head,
+.editor-content-bulk-automation-domain-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-content-bulk-automation-head h4,
+.editor-content-bulk-automation-head p,
+.editor-content-bulk-automation-domain-head h5,
+.editor-content-bulk-automation-domain-head p {
+  margin: 0;
+}
+
+.editor-content-bulk-automation-head h4 {
+  color: var(--cyan);
+  font-size: 0.95rem;
+}
+
+.editor-content-bulk-automation-head strong {
+  border: 1px solid rgba(108, 210, 255, 0.32);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-content-bulk-automation-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-content-bulk-automation-metrics span,
+.editor-content-bulk-automation-domain {
+  background: rgba(1, 10, 28, 0.28);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-content-bulk-automation-metrics span,
+.editor-content-bulk-automation-list,
+.editor-content-bulk-automation-domain {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-content-bulk-automation-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-content-bulk-automation-metrics b,
+.editor-content-bulk-automation-domain-head h5 {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-automation-domain-head p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-automation-domain[data-state="covered-currently"] {
+  border-color: rgba(91, 229, 132, 0.32);
+}
+
+.editor-content-bulk-automation-domain[data-state="contract-ready"] {
+  border-color: rgba(108, 210, 255, 0.28);
+}
+
+.editor-content-bulk-automation-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -8237,6 +8433,12 @@ body[data-info-tooltips="off"] .info-term {
   .editor-monster-candidate-live-patch-draft-head,
   .editor-monster-candidate-live-patch-draft-row-head,
   .editor-monster-candidate-live-patch-draft-grid,
+  .editor-monster-candidate-bulk-automation-head,
+  .editor-monster-candidate-bulk-automation-row-head,
+  .editor-monster-candidate-bulk-automation-grid,
+  .editor-content-bulk-automation-head,
+  .editor-content-bulk-automation-domain-head,
+  .editor-content-bulk-automation-grid,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -8249,6 +8451,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-monster-candidate-promotion-metrics,
   .editor-monster-candidate-live-promotion-metrics,
   .editor-monster-candidate-live-patch-draft-metrics,
+  .editor-monster-candidate-bulk-automation-metrics,
+  .editor-content-bulk-automation-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -8345,6 +8549,8 @@ body[data-info-tooltips="off"] .info-term {
     .editor-combat-vfx-head,
     .editor-combat-vfx-tuning-head,
     .editor-combat-vfx-profile-head,
+    .editor-monster-candidate-bulk-automation-head,
+    .editor-monster-candidate-bulk-automation-row-head,
     .editor-combat-vfx-tuning-card > div:first-child,
     .editor-combat-vfx-profile-card-head,
     .editor-combat-vfx-row-head,
@@ -8373,6 +8579,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-combat-vfx-head > span,
   .editor-combat-vfx-tuning-head strong,
   .editor-combat-vfx-profile-head strong,
+  .editor-monster-candidate-bulk-automation-head strong,
+  .editor-content-bulk-automation-head strong,
   .editor-combat-vfx-tuning-card > div:first-child span,
   .editor-combat-vfx-profile-card-head strong,
   .editor-combat-vfx-row-head strong,

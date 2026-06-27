@@ -1,4 +1,4 @@
-import { KO_KR_TEXT } from "./ko-KR.js?v=451";
+import { KO_KR_TEXT } from "./ko-KR.js?v=452";
 
 export const DEFAULT_LOCALE = "ko-KR";
 
