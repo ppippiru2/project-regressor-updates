@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 399,
-  "displayVersion": "v3.99",
-  "cacheVersion": "project-regressor-mvp-v399",
+  "versionCode": 400,
+  "displayVersion": "v4.00",
+  "cacheVersion": "project-regressor-mvp-v400",
   "updatedAt": "2026-06-27",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=399&cachebust=399",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=400&cachebust=400",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
+    "v400 adds monster battle sprite runtime placement presets for every tutorial island monster.",
+    "v400 exposes enemy motion, SFX profile, and foot-baseline safe-margin metadata to the combat card runtime.",
+    "v400 adds a separate target hit flash while keeping the combat card frame and resource bars fixed.",
     "v399 applies the battle sprite motion runtime pack with transform-only player and enemy sprite motions.",
     "v399 keeps combat cards, bars, damage text, and slash SFX on separate layers while the sprite image moves independently.",
     "v399 adds a quick-check guard for sprite motion ids, runtime triggers, service-worker caching, and no combat-card hit shake.",
@@ -178,21 +181,21 @@
     "Android update shell baseline is recorded in data/android-update-config.sample.json.",
     "Mobile dice sprite loading now resolves runtime asset URLs and falls back safely if the image cannot be loaded."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v399-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v400-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v399-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v400-debug.apk"
   },
   "version": {
-    "code": 399,
-    "name": "3.99.0",
-    "displayName": "v399"
+    "code": 400,
+    "name": "4.00.0",
+    "displayName": "v400"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v399-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v400-debug.apk"
   },
   "android": {
-    "code": 399,
-    "name": "3.99.0",
-    "displayName": "v399"
+    "code": 400,
+    "name": "4.00.0",
+    "displayName": "v400"
   }
 }

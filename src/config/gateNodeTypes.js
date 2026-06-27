@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=399";
+import { getLocaleText } from "../localization/index.js?v=400";
 
 const NODE_TEXT = getLocaleText().gateNodeTypes;
 

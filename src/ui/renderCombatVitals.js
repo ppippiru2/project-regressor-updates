@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=399";
+import { t, tf } from "../localization/index.js?v=400";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
@@ -21,12 +21,13 @@ export function renderCombatVitals({
   playerSpritePath = "",
   playerSpritePlacement = null,
   enemySpritePath = "",
+  enemySpritePlacement = null,
   formation,
 }) {
   renderBattlefieldBackground(battleBackgroundPath, formation);
   renderCombatViewMode(state.settings?.combatView);
   renderActorSprite("player-portrait", playerSpritePath, playerSpritePlacement);
-  renderActorSprite("enemy-portrait", enemySpritePath);
+  renderActorSprite("enemy-portrait", enemySpritePath, enemySpritePlacement);
   syncClearSpriteFrameBackground(battleBackgroundPath);
   byId("region-title").textContent = region.name;
   byId("region-lore").textContent = region.description;
@@ -124,6 +125,10 @@ function renderActorSpritePlacement(portrait, placement) {
     portrait.style.removeProperty("--actor-sprite-transform-origin");
     combatant?.removeAttribute("data-runtime-sprite-class");
     combatant?.removeAttribute("data-runtime-sprite-gender");
+    combatant?.removeAttribute("data-runtime-sprite-profile");
+    combatant?.removeAttribute("data-runtime-sprite-sfx-profile");
+    combatant?.removeAttribute("data-runtime-sprite-safe-x");
+    combatant?.removeAttribute("data-runtime-sprite-safe-y");
     return;
   }
 
@@ -135,6 +140,12 @@ function renderActorSpritePlacement(portrait, placement) {
   portrait.style.setProperty("--actor-sprite-transform-origin", `${(pivotX * 100).toFixed(2)}% ${(pivotY * 100).toFixed(2)}%`);
   combatant?.setAttribute("data-runtime-sprite-class", placement.classId || "");
   combatant?.setAttribute("data-runtime-sprite-gender", placement.gender || "");
+  if (placement.motionProfile) combatant?.setAttribute("data-runtime-sprite-profile", placement.motionProfile);
+  if (placement.sfxProfile) combatant?.setAttribute("data-runtime-sprite-sfx-profile", placement.sfxProfile);
+  if (placement.motionSafeMargin) {
+    combatant?.setAttribute("data-runtime-sprite-safe-x", String(Number(placement.motionSafeMargin.x) || 0));
+    combatant?.setAttribute("data-runtime-sprite-safe-y", String(Number(placement.motionSafeMargin.y) || 0));
+  }
 }
 
 function renderBattlefieldBackground(battleBackgroundPath, formation) {

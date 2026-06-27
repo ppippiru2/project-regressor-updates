@@ -1,5 +1,5 @@
-import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=399";
-import { t, tf } from "../localization/index.js?v=399";
+import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=400";
+import { t, tf } from "../localization/index.js?v=400";
 
 export function createCombatReadiness({
   region,
