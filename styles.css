@@ -4359,7 +4359,7 @@ select:focus {
 .editor-monster-sprite-summary {
   display: grid;
   gap: 0.65rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
   min-width: 0;
 }
 
@@ -4412,6 +4412,10 @@ select:focus {
 
 .editor-monster-sprite-pose[data-status="missing"] {
   border-color: rgba(244, 211, 94, 0.34);
+}
+
+.editor-monster-sprite-pose[data-status="connectable"] {
+  border-color: rgba(149, 255, 185, 0.45);
 }
 
 .editor-monster-sprite-pose[data-status="broken"] {

@@ -1,13 +1,13 @@
-import { applyDomLocalization } from "../localization/domText.js?v=412";
-import { getLocaleText, tf } from "../localization/index.js?v=412";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=412";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=412";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=412";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=412";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=412";
-import { createMonsterSpriteSlotReport } from "./monsterSpriteSlotReport.js?v=412";
+import { applyDomLocalization } from "../localization/domText.js?v=413";
+import { getLocaleText, tf } from "../localization/index.js?v=413";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=413";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=413";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=413";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=413";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=413";
+import { createMonsterSpriteSlotReport } from "./monsterSpriteSlotReport.js?v=413";
 
-const EDITOR_VERSION = "412";
+const EDITOR_VERSION = "413";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -82,17 +82,26 @@ const MONSTER_SPRITE_REPORT_TEXT = Object.freeze({
   description: "Read-only checklist for monster idle, attack, hit, and dead sprite files before final PNG/WebP production.",
   slotMetric: "Total Slots",
   assignedMetric: "Assigned",
+  connectableMetric: "Connectable",
   missingMetric: "Missing",
   brokenMetric: "Broken",
+  fileScanMetric: "File-ready",
   expectedPath: "Expected file",
   assignedAsset: "Assigned asset",
   suggestedAsset: "Suggested asset",
   slotPatch: "Slot patch",
+  fileStatus: "File scan",
   runtimePath: "Runtime path",
   statusLabels: {
     assigned: "Assigned",
+    connectable: "Connectable",
     missing: "Missing",
     broken: "Broken"
+  },
+  fileStatusLabels: {
+    "not-scanned": "Not scanned",
+    "file-ready": "File ready",
+    "file-missing": "File missing"
   }
 });
 
@@ -405,6 +414,10 @@ function renderMonsterSpriteSlotReport() {
     ...MONSTER_SPRITE_REPORT_TEXT.statusLabels,
     ...(detailText.statusLabels || {})
   };
+  const fileStatusLabels = {
+    ...MONSTER_SPRITE_REPORT_TEXT.fileStatusLabels,
+    ...(detailText.fileStatusLabels || {})
+  };
 
   return `
     <section class="editor-monster-sprite-report" aria-label="${escapeAttribute(detailText.title)}">
@@ -418,17 +431,19 @@ function renderMonsterSpriteSlotReport() {
       <div class="editor-monster-sprite-summary">
         ${combatVfxSummaryCard(detailText.slotMetric, String(totals.slots || 0))}
         ${combatVfxSummaryCard(detailText.assignedMetric, String(totals.assignedSlots || 0))}
+        ${combatVfxSummaryCard(detailText.connectableMetric, String(totals.connectableSlots || 0))}
         ${combatVfxSummaryCard(detailText.missingMetric, String(totals.missingSlots || 0))}
+        ${combatVfxSummaryCard(detailText.fileScanMetric, String(totals.fileReadySlots || 0))}
         ${combatVfxSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
       </div>
       <div class="editor-monster-sprite-list">
-        ${(report.byMonster || []).map((group) => renderMonsterSpriteSlotGroup(group, detailText, statusLabels)).join("")}
+        ${(report.byMonster || []).map((group) => renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels)).join("")}
       </div>
     </section>
   `;
 }
 
-function renderMonsterSpriteSlotGroup(group, detailText, statusLabels) {
+function renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels) {
   return `
     <article class="editor-monster-sprite-group">
       <div class="editor-monster-sprite-group-head">
@@ -439,14 +454,15 @@ function renderMonsterSpriteSlotGroup(group, detailText, statusLabels) {
         <strong>${escapeHtml(`${group.assignedSlots}/${group.rows.length}`)}</strong>
       </div>
       <div class="editor-monster-sprite-pose-grid">
-        ${group.rows.map((row) => renderMonsterSpriteSlotPose(row, detailText, statusLabels)).join("")}
+        ${group.rows.map((row) => renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLabels)).join("")}
       </div>
     </article>
   `;
 }
 
-function renderMonsterSpriteSlotPose(row, detailText, statusLabels) {
+function renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLabels) {
   const status = statusLabels[row.status] || row.status;
+  const fileStatus = fileStatusLabels[row.fileStatus] || row.fileStatus;
   const assetValue = row.assetId || "-";
   const runtimePath = row.resolvedPath || "-";
   return `
@@ -456,6 +472,7 @@ function renderMonsterSpriteSlotPose(row, detailText, statusLabels) {
         <span>${escapeHtml(status)}</span>
       </div>
       ${combatVfxFieldBlock(detailText.expectedPath, [row.expectedPath])}
+      ${combatVfxFieldBlock(detailText.fileStatus, [fileStatus])}
       ${combatVfxFieldBlock(detailText.assignedAsset, [assetValue])}
       ${!row.assetId ? combatVfxFieldBlock(detailText.suggestedAsset, [row.draftAssetId]) : ""}
       ${!row.assetId ? combatVfxFieldBlock(detailText.slotPatch, [row.slotPatchPath]) : ""}

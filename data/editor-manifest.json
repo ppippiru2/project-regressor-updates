@@ -601,7 +601,11 @@
         "assignedMonsterSpriteAssetIds",
         "monsterSpriteDraftAssetIds",
         "monsterSpriteSlotPatchPaths",
-        "monsterSpriteDraftAssetEntries"
+        "monsterSpriteDraftAssetEntries",
+        "monsterSpriteFileStatus",
+        "monsterSpriteConnectableSlots",
+        "monsterSpriteFileReadySlots",
+        "monsterSpriteFileMissingSlots"
       ],
       "futureControls": [
         "슬롯 검색",
@@ -610,7 +614,8 @@
         "폴더별 누락 파일 확인",
         "???? idle/attack/hit/dead ?? ?? ??",
         "Monster sprite missing-slot readiness report",
-        "Monster sprite assetId draft generator"
+        "Monster sprite assetId draft generator",
+        "Monster sprite file-existence readiness scan"
       ]
     },
     {
@@ -1334,8 +1339,8 @@
     "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId"
   },
   "monsterSpriteSlotReadiness": {
-    "version": 2,
-    "source": "v412",
+    "version": 3,
+    "source": "v413",
     "monsterCount": 6,
     "poseCount": 4,
     "slotCount": 24,
@@ -1346,6 +1351,7 @@
     "expectedPattern": "{monsterId}_{pose}.webp",
     "statusValues": [
       "assigned",
+      "connectable",
       "missing",
       "broken"
     ],
@@ -1353,6 +1359,16 @@
     "draftAssetCandidates": 24,
     "draftAssetIdPattern": "monster_{monsterId}_{pose}_v1",
     "draftCategory": "monster-combat-sprite",
-    "draftUseInGame": false
+    "draftUseInGame": false,
+    "connectableSlots": 0,
+    "fileScannedSlots": 24,
+    "fileReadySlots": 0,
+    "fileMissingSlots": 24,
+    "fileScanMode": "build-time-optional",
+    "fileStatusValues": [
+      "not-scanned",
+      "file-ready",
+      "file-missing"
+    ]
   }
 }

@@ -71,8 +71,8 @@
       "title": "??? ?? ????? ?? ?? ??",
       "status": "partial",
       "priority": "high",
-      "source": "v412",
-      "summary": "Expose per-monster idle, attack, hit, and dead sprite slot targets plus readiness and draft assetId/slot patch candidates before final monster PNG/WebP production.",
+      "source": "v413",
+      "summary": "Expose per-monster sprite slots, readiness, draft assetId candidates, and optional build-time file existence classification before final monster PNG/WebP production.",
       "editorHooks": [
         "data/editor-manifest.json:monsterBattleSpriteAssetSlots",
         "data/asset-slots.json:slots.monster.byMonsterId",
@@ -82,7 +82,10 @@
         "src/editor/editorMain.js:renderMonsterSpriteSlotReport",
         "data/editor-manifest.json:monsterSpriteSlotReadiness",
         "src/editor/monsterSpriteSlotReport.js:createMonsterSpriteAssignmentDrafts",
-        "data/editor-manifest.json:monsterSpriteSlotReadiness.draftAssetCandidates"
+        "data/editor-manifest.json:monsterSpriteSlotReadiness.draftAssetCandidates",
+        "src/editor/monsterSpriteSlotReport.js:fileStatus",
+        "data/editor-manifest.json:monsterSpriteSlotReadiness.fileReadySlots",
+        "build-scripts/check-monster-combat-display-slots.mjs:file-existence-scan"
       ]
     },
     {
