@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 491,
-  "displayVersion": "v491",
-  "cacheVersion": "project-regressor-mvp-v491",
-  "updatedAt": "2026-06-28T22:58:00.000+09:00",
+  "versionCode": 492,
+  "displayVersion": "v492",
+  "cacheVersion": "project-regressor-mvp-v492",
+  "updatedAt": "2026-06-28T23:20:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=491&cachebust=491",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=492&cachebust=492",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v491 gates repeated automatic combat actions behind Auto Hunt ON.",
-    "v491 keeps manual combat buttons as one locked exchange per click when Auto Hunt is OFF.",
-    "v491 shows action bars as waiting in manual combat instead of refilling the idle auto gauge."
+    "v492 surfaces MP cost, cooldown, and availability state directly on manual combat action buttons.",
+    "v492 keeps the existing locked one-exchange battle loop while making unavailable skill reasons visible before clicking.",
+    "v492 adds regression checks for combat button cost/cooldown metadata and blocked-state styling."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v491-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v492-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v491-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v492-debug.apk"
   },
   "version": {
-    "code": 491,
-    "name": "4.91.0",
-    "displayName": "v491"
+    "code": 492,
+    "name": "4.92.0",
+    "displayName": "v492"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v491-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v492-debug.apk"
   },
   "android": {
-    "code": 491,
-    "name": "4.91.0",
-    "displayName": "v491",
+    "code": 492,
+    "name": "4.92.0",
+    "displayName": "v492",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v491-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v492-debug.apk"
     },
     "version": {
-      "code": 491,
-      "name": "4.91.0",
-      "displayName": "v491"
+      "code": 492,
+      "name": "4.92.0",
+      "displayName": "v492"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v491-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v492-debug.apk"
   }
 }

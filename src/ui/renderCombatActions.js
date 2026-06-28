@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=491";
+import { t, tf } from "../localization/index.js?v=492";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;
@@ -79,6 +79,7 @@ function renderCombatSkills(player, context) {
       const lastUsed = context.combatRuntime.lastActionId === action.id;
       const flashing = lastUsed && now < context.combatRuntime.actionFlashUntil;
       const infoParts = actionInfoParts(action, context, availability);
+      const buttonMeta = actionButtonMeta(action, availability);
       const usable = availability.available && !inputLocked;
       const classes = [
         "skill-button",
@@ -93,7 +94,9 @@ function renderCombatSkills(player, context) {
       const ariaLabel = `${action.name}. ${action.description}. ${infoParts.join(" · ")}`;
 
       return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-combat-action="${escapeHtml(action.id)}" data-last-used="${lastUsed}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}" aria-disabled="${usable ? "false" : "true"}" ${inputLocked ? "disabled" : ""}>
-        <span>${escapeHtml(action.name)}</span>
+        <span class="skill-button-name">${escapeHtml(action.name)}</span>
+        <small class="skill-button-meta">${escapeHtml(buttonMeta.meta)}</small>
+        <small class="skill-button-state ${availability.available ? "is-ready" : "is-blocked"}">${escapeHtml(buttonMeta.state)}</small>
       </button>`;
     })
     .join("");
@@ -148,14 +151,30 @@ function combatSkillInfoMarkup(player, context) {
 function actionInfoParts(action, context, availability) {
   return [
     actionCostText(action),
+    actionCooldownText(action),
     context.actionTriggerText(action),
     availability?.reason ? tf("combatActions.unavailableReason", { reason: availability.reason }) : "",
   ].filter(Boolean);
 }
 
+function actionButtonMeta(action, availability) {
+  const meta = [actionCostText(action), actionCooldownText(action)].filter(Boolean).join(" · ");
+  const state = availability?.available ? t("combatActions.ready") : availability?.reason || t("combatActions.unavailable");
+  return {
+    meta,
+    state,
+  };
+}
+
 function actionCostText(action) {
   const mpCost = Number(action?.mpCost ?? action?.skill?.mpCost ?? 0);
-  return `MP ${Number.isFinite(mpCost) ? Math.max(0, mpCost) : 0}`;
+  return tf("combatActions.mpCost", { mp: Number.isFinite(mpCost) ? Math.max(0, mpCost) : 0 });
+}
+
+function actionCooldownText(action) {
+  const cooldown = Number(action?.cooldown ?? action?.skill?.cooldown ?? 0);
+  if (!Number.isFinite(cooldown) || cooldown <= 0) return t("combatActions.noCooldown");
+  return tf("combatActions.cooldown", { cooldown });
 }
 
 function escapeHtml(value) {

@@ -869,6 +869,11 @@ export const KO_KR_TEXT = {
   combatActions: {
     skillLoadoutTabsLabel: "스킬 슬롯 선택",
     unavailableReason: "현재 {reason}",
+    mpCost: "MP {mp}",
+    cooldown: "쿨 {cooldown}s",
+    noCooldown: "쿨 없음",
+    ready: "사용 가능",
+    unavailable: "사용 불가",
   },
   combatVitals: {
     waiting: "대기",
