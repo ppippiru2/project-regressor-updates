@@ -2720,6 +2720,12 @@ export const KO_KR_TEXT = {
           domains: "분야",
           anchorHints: "삽입 위치 힌트",
           postApplyChecks: "반영 후 확인",
+          fileSafetyReview: "파일 안전 검토",
+          backupBlockers: "백업 차단",
+          restoreBlockers: "복구 차단",
+          backupBlockerSummary: "백업 차단 {count}개",
+          restoreBlockerSummary: "복구 차단 {count}개",
+          noSafetyBlockers: "파일 안전 차단 없음",
           noFiles: "patch 초안 없음",
           fileMeta: "표면 {surfaces}개 · 후보 {staged}개 · 블록 {blocks}개 · 작업 {operation}",
           statusLabels: {
