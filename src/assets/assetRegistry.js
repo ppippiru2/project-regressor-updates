@@ -1,7 +1,8 @@
-import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=478";
-import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=478";
+import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=479";
+import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=479";
+import { resolveMonsterRuntimeIntegrationPreset } from "../config/monsterRuntimeIntegrationPresets.js?v=479";
 
-const ASSET_DATA_VERSION = "461";
+const ASSET_DATA_VERSION = "479";
 
 export const STATIC_ASSET_REGISTRY = {
   manifest: ASSET_MANIFEST,
@@ -53,7 +54,11 @@ export function resolveMonsterCombatSpritePath(monster, registry, pose = "idle")
   const monsterSlots = registry?.slots?.slots?.monster || {};
   const actorAssetId = monsterSlots.byMonsterId?.[monster?.id]?.[pose];
   const defaultAssetId = monsterSlots[monsterSpriteSlotKeyForPose(pose)];
-  return resolveAssetPath(actorAssetId || defaultAssetId, registry);
+  const slotPath = resolveAssetPath(actorAssetId || defaultAssetId, registry);
+  if (slotPath) return slotPath;
+
+  const runtimePreset = resolveMonsterRuntimeIntegrationPreset(monster);
+  return runtimePreset?.spritePolicy?.sourcePreviewFile || "";
 }
 
 export function resolveItemIconPath(item, registry) {
@@ -74,6 +79,4 @@ async function fetchJson(fetcher, path) {
   if (!response.ok) throw new Error(`Failed to load ${path}`);
   return response.json();
 }
-
-
 

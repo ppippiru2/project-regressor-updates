@@ -1,9 +1,13 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=478";
+import { formatText, getLocaleText } from "../localization/index.js?v=479";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 
 export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
   "playerName",
+  "age",
+  "gender",
+  "country",
+  "profileImage",
   "dispositionName",
   "statSummary",
   "statTotal",
@@ -14,13 +18,142 @@ export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
   "INT",
   "WIS",
   "LUK",
+  "starterCardName",
   "starterTraitName",
   "starterSkillName",
+  "karmaValue",
+  "cardCandidateCount",
+  "cardGradeWeightSummary",
+  "selectedCardName",
+  "selectedTraitName",
+  "selectedSkillName",
+  "nextCalamityName",
+  "savedTime",
+  "clearTime",
+  "timeDiff",
   "itemName",
   "count",
   "target",
   "remaining",
 ]);
+
+export const TUTORIAL_SELF_DESCRIBING_VERSION = "v2.9.1_CODEX_SELF_DESCRIBING";
+
+export const TUTORIAL_SELF_DESCRIBING_REQUIRED_SYSTEMS = Object.freeze([
+  "eventIdDialogueLoader",
+  "placeholderRenderer",
+  "newGamePrologueSystem",
+  "abyssQuestionDispositionSystem",
+  "starterCardSelectionUi",
+  "regressionCardResyncSystem",
+  "karmaSettlementStub",
+  "codexScrapbookLockBeforeForgottenRemnant",
+  "hiddenNodeState",
+  "eliteState",
+  "bossDamageEvaluation",
+  "postRealityReturnWorldUnlock",
+  "loopDialogueRotationAfterRun5",
+  "coverageTests",
+]);
+
+export const TUTORIAL_SELF_DESCRIBING_MINIMUM_STATE_KEYS = Object.freeze([
+  "profile",
+  "initialSync",
+  "disposition",
+  "starterCard",
+  "regressionCard",
+  "tutorialFlags",
+  "tutorialRun",
+]);
+
+export const TUTORIAL_SELF_DESCRIBING_COVERAGE_REQUIRED = Object.freeze({
+  shore: Object.freeze([
+    "tutorial_1st_shore_03_shore_imp",
+    "tutorial_1st_shore_04_claw_crab",
+    "tutorial_1st_shore_05_drift_slime_mana_variant",
+    "tutorial_1st_shore_06_nameless_scrap",
+    "tutorial_1st_shore_07_buried_cache_hint",
+    "tutorial_1st_shore_08_rest_point",
+  ]),
+  forest: Object.freeze([
+    "tutorial_1st_forest_01_entry",
+    "tutorial_1st_forest_02_shadow_wolf",
+    "tutorial_1st_forest_03_goblin_scout",
+    "tutorial_1st_forest_04_north_rock_gold_card_hint",
+    "tutorial_1st_forest_05_alpha_wolf_elite",
+    "tutorial_1st_forest_06_hidden_herb_field",
+  ]),
+  ruins: Object.freeze([
+    "tutorial_1st_ruins_01_entry",
+    "tutorial_1st_ruins_02_mock_gate_node_map",
+    "tutorial_1st_ruins_03_sentinel",
+    "tutorial_1st_ruins_04_rune_doll",
+    "tutorial_1st_ruins_05_hidden_stair_locked",
+    "tutorial_1st_ruins_06_hidden_treasure_hint",
+  ]),
+  mine: Object.freeze([
+    "tutorial_1st_mine_01_entry",
+    "tutorial_1st_mine_02_crystal_bug",
+    "tutorial_1st_mine_03_mine_golem",
+    "tutorial_1st_mine_04_sealed_box_locked",
+    "tutorial_1st_mine_05_core_golem_hidden_elite",
+    "tutorial_1st_mine_06_forgotten_god_remnant",
+  ]),
+  gate: Object.freeze([
+    "tutorial_1st_gate_01_rift_squire",
+    "tutorial_1st_gate_02_shieldbearer",
+    "tutorial_1st_gate_03_rift_knight",
+    "tutorial_1st_gate_04_warden_intro",
+    "tutorial_1st_gate_05_warden_appears",
+    "tutorial_1st_gate_06_warden_20_clear",
+  ]),
+});
+
+export const TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW = Object.freeze([
+  "prologue_dream_01_falling_consciousness",
+  "prologue_dream_02_profile_record",
+  "prologue_dream_03_initial_stat_sync",
+  "prologue_dream_04_abyss_questions_start",
+  "prologue_result_{dispositionId}",
+  "prologue_card_01_show_cards",
+  "prologue_card_{starterCardId}",
+  "prologue_transfer_to_tutorial",
+  "tutorial_1st_shore_wake_after_dream",
+  "tutorial_1st_shore_status_after_dream",
+]);
+
+export const TUTORIAL_SELF_DESCRIBING_REGRESSION_FLOW = Object.freeze({
+  profileAndAbyssQuestionsRepeat: false,
+  traitCardResyncRepeats: true,
+  eventIds: Object.freeze([
+    "regression_2nd_pre_shore_card_resync",
+    "regression_3rd_pre_shore_card_resync",
+    "regression_4th_pre_shore_card_resync",
+    "tutorial_loop_common_pre_shore_card_resync",
+  ]),
+  loopStartRun: 5,
+  loopVariantFormula: "(regressionCount - 5) % 4",
+});
+
+export const TUTORIAL_SELF_DESCRIBING_UNLOCK_STAGES = Object.freeze({
+  beforeForgottenRemnant: Object.freeze({
+    codex: false,
+    scrapbook: false,
+    regressorRecordName: false,
+    allowedPanels: Object.freeze(["basicStatus", "systemHelp", "combatLog", "warning"]),
+  }),
+  afterForgottenRemnantRun1: Object.freeze({
+    damagedRecord: true,
+    codex: "damaged_partial",
+    scrapbook: false,
+    regressorRecordName: false,
+  }),
+  run2Plus: Object.freeze({
+    codex: true,
+    scrapbook: true,
+    regressorRecordName: true,
+  }),
+});
 
 export const TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS = Object.freeze([
   "hunterAssociation",
@@ -333,9 +466,30 @@ export function resolveTutorialKeyEventDialogue(
   };
 }
 
+export function renderTutorialDialogueTemplate(template, templateValues = {}) {
+  return formatText(template, templateValues);
+}
+
+export function buildTutorialDialogueCoverageReport({ implementedEventIds = [] } = {}) {
+  const implemented = new Set([
+    ...TUTORIAL_DIALOGUE_KEY_EVENTS.map((event) => event.id),
+    ...implementedEventIds,
+  ]);
+
+  return Object.entries(TUTORIAL_SELF_DESCRIBING_COVERAGE_REQUIRED).flatMap(([regionKey, eventIds]) =>
+    eventIds.map((eventId) => ({
+      regionKey,
+      eventId,
+      state: implemented.has(eventId) ? "wired" : "planned",
+      isImplemented: implemented.has(eventId),
+    })),
+  );
+}
+
 export function getTutorialDialogueEventCatalog() {
   return {
     version: TUTORIAL_DIALOGUE_VERSION,
+    selfDescribingVersion: TUTORIAL_SELF_DESCRIBING_VERSION,
     newGameFlow: TUTORIAL_FINAL_NEW_GAME_FLOW,
     phases: TUTORIAL_DIALOGUE_PHASES,
     dynamicPlaceholders: TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS,
@@ -347,6 +501,16 @@ export function getTutorialDialogueEventCatalog() {
       variants: TUTORIAL_LOOP_DIALOGUE_VARIANTS,
     },
     starterSkillAliases: TUTORIAL_FINAL_STARTER_SKILL_ALIASES,
+    selfDescribing: {
+      version: TUTORIAL_SELF_DESCRIBING_VERSION,
+      requiredSystems: TUTORIAL_SELF_DESCRIBING_REQUIRED_SYSTEMS,
+      minimumStateKeys: TUTORIAL_SELF_DESCRIBING_MINIMUM_STATE_KEYS,
+      coverageRequired: TUTORIAL_SELF_DESCRIBING_COVERAGE_REQUIRED,
+      coverageReport: buildTutorialDialogueCoverageReport(),
+      newGameEventFlow: TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW,
+      regressionFlow: TUTORIAL_SELF_DESCRIBING_REGRESSION_FLOW,
+      unlockStages: TUTORIAL_SELF_DESCRIBING_UNLOCK_STAGES,
+    },
   };
 }
 

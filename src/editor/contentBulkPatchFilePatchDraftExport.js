@@ -1,8 +1,8 @@
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=478";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=478";
+} from "./contentBulkPatchPackageAdapter.js?v=479";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=479";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_EXPORT_VERSION = "content-bulk-patch-file-patch-draft-export-v1";
 

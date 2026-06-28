@@ -1,4 +1,4 @@
-import { KO_KR_TEXT } from "./ko-KR.js?v=478";
+import { KO_KR_TEXT } from "./ko-KR.js?v=479";
 
 export const DEFAULT_LOCALE = "ko-KR";
 
@@ -21,7 +21,10 @@ export function t(path, fallback = "", locale = DEFAULT_LOCALE) {
 }
 
 export function formatText(template, values = {}) {
-  return String(template || "").replace(/\{(\w+)\}/g, (match, key) => {
+  return String(template || "").replace(/\{\{(\w+)\}\}/g, (match, key) => {
+    if (!Object.prototype.hasOwnProperty.call(values, key)) return match;
+    return String(values[key]);
+  }).replace(/\{(\w+)\}/g, (match, key) => {
     if (!Object.prototype.hasOwnProperty.call(values, key)) return match;
     return String(values[key]);
   });

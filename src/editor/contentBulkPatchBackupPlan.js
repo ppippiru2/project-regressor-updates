@@ -1,5 +1,5 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=478";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=478";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=479";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=479";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION = "content-bulk-patch-backup-plan-v1";
 

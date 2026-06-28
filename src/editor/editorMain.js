@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=478";
-import { getLocaleText, t, tf } from "../localization/index.js?v=478";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=478";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=478";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=478";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=478";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=478";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=478";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=478";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=478";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=478";
+import { applyDomLocalization } from "../localization/domText.js?v=479";
+import { getLocaleText, t, tf } from "../localization/index.js?v=479";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=479";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=479";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=479";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=479";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=479";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=479";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=479";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=479";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=479";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=478";
+} from "./contentBulkPatchPackageAdapter.js?v=479";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=478";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=478";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=478";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=478";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=478";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=478";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=478";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=478";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=478";
+} from "./contentBulkPackageOverview.js?v=479";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=479";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=479";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=479";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=479";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=479";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=479";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=479";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=479";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=478";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=478";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=478";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=478";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=478";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=478";
+} from "./runtimeVfxBulkIntakePreview.js?v=479";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=479";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=479";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=479";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=479";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=479";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=478";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=478";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=478";
+} from "./monsterSpriteSlotReport.js?v=479";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=479";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=479";
 
-const EDITOR_VERSION = "478";
+const EDITOR_VERSION = "479";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
