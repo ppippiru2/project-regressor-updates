@@ -435,6 +435,7 @@
         "src/editor/contentBulkPatchAutomationPlan.js",
         "src/editor/contentBulkPatchIntakeContract.js",
         "src/editor/contentBulkPatchDryRunImporter.js",
+        "src/editor/contentBulkPatchStagedImportPreview.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -512,6 +513,9 @@
         "contentBulkPatchCurrentRows",
         "contentBulkPatchDryRunDomains",
         "contentBulkPatchDryRunIssues",
+        "contentBulkPatchStagedImportPreview",
+        "contentBulkPatchStagedRows",
+        "contentBulkPatchStagedApplySteps",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings"
@@ -1441,6 +1445,7 @@
       "src/editor/contentBulkPatchAutomationPlan.js:createContentBulkPatchAutomationPlan",
       "src/editor/contentBulkPatchIntakeContract.js:createContentBulkPatchIntakeContract",
       "src/editor/contentBulkPatchDryRunImporter.js:createContentBulkPatchDryRunPreview",
+      "src/editor/contentBulkPatchStagedImportPreview.js:createContentBulkPatchStagedImportPreview",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1455,7 +1460,7 @@
     ],
     "monsterCandidateRewardPreview": {
       "id": "monster-candidate-reward-preview-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/monsterCandidateRewardPreview.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 15,
@@ -1521,6 +1526,15 @@
       "guards": [
         "추가/갱신 후보와 영향 표면 계산",
         "차단 오류와 경고를 실제 반영 전 분리"
+      ]
+    },
+    {
+      "id": "content-bulk-patch-staged-import-preview",
+      "label": "대량 콘텐츠 적용 대기열 검사",
+      "script": "build-scripts/check-content-bulk-patch-staged-import-preview.mjs",
+      "guards": [
+        "검증된 행만 적용 후보로 대기",
+        "차단된 행은 보류하고 적용 표면에서 제외"
       ]
     },
     {
@@ -1622,7 +1636,7 @@
     ],
     "contentBulkPatchAutomationPlan": {
       "id": "content-bulk-patch-automation-plan-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/contentBulkPatchAutomationPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-automation.mjs",
       "expectedDomainCount": 5,
@@ -1636,7 +1650,7 @@
     },
     "contentBulkPatchIntakeContract": {
       "id": "content-bulk-patch-intake-contract-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/contentBulkPatchIntakeContract.js",
       "checkScript": "build-scripts/check-content-bulk-patch-intake-contract.mjs",
       "expectedDomainCount": 5,
@@ -1651,7 +1665,7 @@
     },
     "contentBulkPatchDryRunImporter": {
       "id": "content-bulk-patch-dry-run-importer-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/contentBulkPatchDryRunImporter.js",
       "checkScript": "build-scripts/check-content-bulk-patch-dry-run-importer.mjs",
       "expectedDomainCount": 5,
@@ -1664,9 +1678,26 @@
       "editorSummaryVisible": true,
       "writesGameData": false
     },
+    "contentBulkPatchStagedImportPreview": {
+      "id": "content-bulk-patch-staged-import-preview-v1",
+      "source": "v456",
+      "sourceModule": "src/editor/contentBulkPatchStagedImportPreview.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-staged-import-preview.mjs",
+      "expectedDomainCount": 5,
+      "expectedActiveDomainCount": 5,
+      "expectedTemplateInputRowCount": 5,
+      "expectedTemplateStagedRowCount": 5,
+      "expectedAppendStageCount": 5,
+      "expectedUpdateStageCount": 0,
+      "expectedGeneratedSurfaceCount": 33,
+      "expectedRequiredCheckCount": 10,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
     "monsterCandidatePromotionChecklist": {
       "id": "monster-candidate-promotion-checklist-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/monsterCandidatePromotionChecklist.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedPendingCandidateCount": 0,
@@ -1681,7 +1712,7 @@
     },
     "monsterCandidateLivePromotionPlan": {
       "id": "monster-candidate-live-promotion-plan-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/monsterCandidateLivePromotionPlan.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 0,
@@ -1693,7 +1724,7 @@
     },
     "monsterCandidateLivePatchDraft": {
       "id": "monster-candidate-live-patch-draft-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/monsterCandidateLivePatchDraft.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedDraftCount": 0,
@@ -1705,7 +1736,7 @@
     },
     "monsterCandidateBulkPatchAutomation": {
       "id": "monster-candidate-bulk-patch-automation-v1",
-      "source": "v455",
+      "source": "v456",
       "sourceModule": "src/editor/monsterCandidateBulkPatchAutomation.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 15,
@@ -1895,7 +1926,7 @@
   ],
   "monsterBattleSpriteAssetSlots": {
     "version": 1,
-    "source": "v455",
+    "source": "v456",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,
@@ -1910,7 +1941,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v455",
+    "source": "v456",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,

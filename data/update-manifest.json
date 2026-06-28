@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 455,
-  "displayVersion": "v455",
-  "cacheVersion": "project-regressor-mvp-v455",
-  "updatedAt": "2026-06-28T09:34:00.000+09:00",
+  "versionCode": 456,
+  "displayVersion": "v456",
+  "cacheVersion": "project-regressor-mvp-v456",
+  "updatedAt": "2026-06-28T10:10:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=455&cachebust=455",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=456&cachebust=456",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v455 adds one-time first non-equipment loot guidance to battle reward logs.",
-    "v455 adds a read-only bulk content dry-run importer for monster, item, skill, and reward-link batches.",
-    "v455 strengthens editor metadata and quick checks for bulk patch dry-run validation."
+    "v456 adds a staged import preview after bulk content dry-run validation.",
+    "v456 stages only validated monster, item, skill, loot, and reward-link rows while withholding blocked rows.",
+    "v456 strengthens editor metadata, service-worker cache, and quick checks for bulk staged import workflows."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v455-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v456-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v455-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v456-debug.apk"
   },
   "version": {
-    "code": 455,
-    "name": "4.55.0",
-    "displayName": "v455"
+    "code": 456,
+    "name": "4.56.0",
+    "displayName": "v456"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v455-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v456-debug.apk"
   },
   "android": {
-    "code": 455,
-    "name": "4.55.0",
-    "displayName": "v455",
+    "code": 456,
+    "name": "4.56.0",
+    "displayName": "v456",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v455-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v456-debug.apk"
     },
     "version": {
-      "code": 455,
-      "name": "4.55.0",
-      "displayName": "v455"
+      "code": 456,
+      "name": "4.56.0",
+      "displayName": "v456"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v455-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v456-debug.apk"
   }
 }

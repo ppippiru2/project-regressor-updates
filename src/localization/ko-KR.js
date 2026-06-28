@@ -2262,6 +2262,54 @@ export const KO_KR_TEXT = {
             reward_link: "보상 링크"
           }
         },
+        contentBulkPatchStagedImportPreview: {
+          title: "대량 콘텐츠 적용 대기열",
+          description: "dry-run을 통과한 행만 적용 후보로 묶고, 문제가 있는 행은 보류하는 읽기 전용 적용 미리보기입니다.",
+          version: "{version}",
+          inputRows: "입력 행",
+          stagedRows: "적용 후보",
+          appendStages: "신규 추가",
+          updateStages: "갱신 후보",
+          withheldRows: "보류 행",
+          generatedSurfaces: "적용 표면",
+          requiredChecks: "필수 검사",
+          applyMode: "적용 방식",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          batchKey: "배치 키",
+          targetSurfaces: "대상 표면",
+          guardChecks: "검증",
+          applySteps: "적용 단계",
+          noDomains: "적용 대기 분야 없음",
+          domainMeta: "입력 {rows}개 · 적용 {staged}개 · 추가 {append} · 갱신 {update} · 보류 {withheld}",
+          rowMeta: "#{index} {identity} · {state} · 표면 {surfaces}개",
+          stateLabels: {
+            empty: "입력 없음",
+            ready: "적용 대기",
+            "ready-with-warnings": "경고 포함 대기",
+            partial: "일부 보류",
+            blocked: "차단됨"
+          },
+          rowStateLabels: {
+            "staged-append": "신규 추가",
+            "staged-update": "기존 갱신",
+            "withheld-blocked": "보류"
+          },
+          stepLabels: {
+            "validate-batch-contract": "배치 계약 검증",
+            "review-update-candidates": "갱신 후보 검토",
+            "stage-append-and-update-rows": "추가/갱신 행 대기열",
+            "apply-generated-surfaces-after-explicit-confirm": "확정 후 표면 반영",
+            "run-required-checks": "필수 검사 실행"
+          },
+          domainLabels: {
+            monster: "몬스터",
+            equipment_item: "장비 아이템",
+            loot_item: "전리품 재료",
+            skill: "스킬",
+            reward_link: "보상 링크"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",

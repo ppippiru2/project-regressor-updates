@@ -1,25 +1,26 @@
-import { applyDomLocalization } from "../localization/domText.js?v=455";
-import { getLocaleText, tf } from "../localization/index.js?v=455";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=455";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=455";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=455";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=455";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=455";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=455";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=455";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=455";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=455";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=455";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=455";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=455";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=455";
+import { applyDomLocalization } from "../localization/domText.js?v=456";
+import { getLocaleText, tf } from "../localization/index.js?v=456";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=456";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=456";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=456";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=456";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=456";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=456";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=456";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=456";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=456";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=456";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=456";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=456";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=456";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=456";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=455";
+} from "./monsterSpriteSlotReport.js?v=456";
 
-const EDITOR_VERSION = "455";
+const EDITOR_VERSION = "456";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -29,6 +30,7 @@ const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
 const CONTENT_BULK_PATCH_AUTOMATION_PLAN = createContentBulkPatchAutomationPlan();
 const CONTENT_BULK_PATCH_INTAKE_CONTRACT = createContentBulkPatchIntakeContract();
 const CONTENT_BULK_PATCH_DRY_RUN_PREVIEW = createContentBulkPatchDryRunPreview();
+const CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW = createContentBulkPatchStagedImportPreview();
 const MONSTER_CANDIDATE_REWARD_PREVIEW = createMonsterCandidateRewardPreview();
 const MONSTER_CANDIDATE_PROMOTION_CHECKLIST = createMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_REWARD_PREVIEW);
 const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN = createMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_PROMOTION_CHECKLIST);
@@ -1170,6 +1172,7 @@ function renderBalanceTuningDetail() {
       ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
       ${renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText)}
       ${renderContentBulkPatchDryRunPreview(CONTENT_BULK_PATCH_DRY_RUN_PREVIEW, detailText)}
+      ${renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
@@ -2320,6 +2323,99 @@ function renderContentBulkPatchDryRunDomain(domain, text = {}) {
 
 function contentBulkPatchDryRunStateLabel(stateId, text = {}) {
   return text.stateLabels?.[stateId] || stateId || "unknown";
+}
+
+function renderContentBulkPatchStagedImportPreview(preview, detailText = {}) {
+  const text = detailText.contentBulkPatchStagedImportPreview || {};
+  const summary = preview.summary || {};
+  const metrics = [
+    [text.inputRows || "Input rows", `${summary.inputRowCount || 0}`],
+    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
+    [text.appendStages || "Append", `${summary.appendStageCount || 0}`],
+    [text.updateStages || "Update", `${summary.updateStageCount || 0}`],
+    [text.withheldRows || "Withheld", `${summary.withheldRowCount || 0}`],
+    [text.generatedSurfaces || "Generated surfaces", `${summary.generatedSurfaceCount || 0}`],
+    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
+    [text.applyMode || "Apply mode", preview.applyMode || "-"],
+    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-content-bulk-stage" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Staged Import Preview")}">
+      <div class="editor-content-bulk-stage-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Content Bulk Patch Staged Import Preview")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only staged apply preview for validated batch rows.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchStagedImportPreview.version", {
+          version: preview.version || "-"
+        }, preview.version || "-"))}</strong>
+      </div>
+      <div class="editor-content-bulk-stage-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-content-bulk-stage-list">
+        ${(preview.domains || []).map((domain) => renderContentBulkPatchStagedImportDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No staged domains.")}</p>`}
+      </div>
+      <div class="editor-content-bulk-stage-steps">
+        <strong>${escapeHtml(text.applySteps || "Apply steps")}</strong>
+        <div class="editor-chip-list">
+          ${(preview.applySteps || []).map((step) => chip(contentBulkPatchStageStepLabel(step, text))).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderContentBulkPatchStagedImportDomain(domain, text = {}) {
+  const surfaceLabels = (domain.surfaces || []).map((surface) => `${surface.id} (${surface.stagedCandidateCount || 0})`);
+  const rowLabels = (domain.rows || []).map((row) => tf("editorPrep.balanceTuningDetail.contentBulkPatchStagedImportPreview.rowMeta", {
+    index: row.rowIndex + 1,
+    identity: row.identity || "-",
+    state: contentBulkPatchStageRowStateLabel(row.state, text),
+    surfaces: row.targetSurfaceCount || 0,
+  }, `#${row.rowIndex + 1} ${row.identity || "-"} ${row.state}`));
+  return `
+    <article class="editor-content-bulk-stage-domain" data-state="${escapeAttribute(domain.state || "unknown")}">
+      <div class="editor-content-bulk-stage-domain-head">
+        <div>
+          <h5>${escapeHtml(contentBulkPatchDomainLabel(domain.id, text))}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchStagedImportPreview.domainMeta", {
+            rows: domain.rowCount || 0,
+            staged: domain.stagedRowCount || 0,
+            append: domain.appendStageCount || 0,
+            update: domain.updateStageCount || 0,
+            withheld: domain.withheldRowCount || 0,
+          }, `${domain.rowCount || 0}`))}</p>
+        </div>
+        <div class="editor-chip-list">
+          ${chip(contentBulkPatchStageStateLabel(domain.state, text))}
+        </div>
+      </div>
+      <div class="editor-content-bulk-stage-grid">
+        ${balanceDetailChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
+        ${balanceDetailChipBlock(text.stagedRows || "Staged rows", rowLabels)}
+        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", surfaceLabels)}
+        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
+      </div>
+    </article>
+  `;
+}
+
+function contentBulkPatchStageStateLabel(stateId, text = {}) {
+  return text.stateLabels?.[stateId] || stateId || "unknown";
+}
+
+function contentBulkPatchStageRowStateLabel(stateId, text = {}) {
+  return text.rowStateLabels?.[stateId] || stateId || "unknown";
+}
+
+function contentBulkPatchStageStepLabel(stepId, text = {}) {
+  return text.stepLabels?.[stepId] || stepId || "unknown";
 }
 
 function renderBalanceGroupRow(group, detailText = {}) {
