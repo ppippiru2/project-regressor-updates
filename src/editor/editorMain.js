@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=514";
-import { getLocaleText, t, tf } from "../localization/index.js?v=514";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=514";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=514";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=514";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=514";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=514";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=514";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=514";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=514";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=514";
+import { applyDomLocalization } from "../localization/domText.js?v=515";
+import { getLocaleText, t, tf } from "../localization/index.js?v=515";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=515";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=515";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=515";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=515";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=515";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=515";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=515";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=515";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=515";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=514";
+} from "./contentBulkPatchPackageAdapter.js?v=515";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=514";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=514";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=514";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=514";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=514";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=514";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=514";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=514";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=514";
+} from "./contentBulkPackageOverview.js?v=515";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=515";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=515";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=515";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=515";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=515";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=515";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=515";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=515";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=514";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=514";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=514";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=514";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=514";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=514";
+} from "./runtimeVfxBulkIntakePreview.js?v=515";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=515";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=515";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=515";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=515";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=515";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=514";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=514";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=514";
+} from "./monsterSpriteSlotReport.js?v=515";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=515";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=515";
 
-const EDITOR_VERSION = "514";
+const EDITOR_VERSION = "515";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5160,7 +5160,94 @@ function renderSaveSlotDiagnostics() {
         })}
         ${diagnostics.slots.map((slot) => renderSaveDiagnosticCard(slot)).join("")}
       </div>
+      ${renderSaveSlotValidationPlan(diagnostics)}
     </section>
+  `;
+}
+
+function renderSaveSlotValidationPlan(diagnostics) {
+  const plan = createSaveSlotValidationPlan(diagnostics);
+  const text = EDITOR_TEXT.saveValidation || {};
+  return `
+    <section class="editor-save-validation" data-save-validation-plan>
+      <div class="editor-save-validation-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save validation plan")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(plan.applyStatus)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(plan.applyStatus))}
+        </span>
+      </div>
+      <div class="editor-save-validation-metrics">
+        ${metricCard(
+          text.readyCheckMetric || "Ready checks",
+          tf("editorPrep.saveValidation.readyCheckValue", {
+            ready: plan.readyChecks,
+            total: plan.totalChecks,
+          }, `${plan.readyChecks}/${plan.totalChecks}`),
+          text.readyCheckHint || "",
+        )}
+        ${metricCard(
+          text.rollbackMetric || "Rollback",
+          saveDiagnosticStatusLabel(plan.rollbackStatus),
+          text.rollbackHint || "",
+        )}
+        ${metricCard(
+          text.applyMetric || "Apply",
+          saveDiagnosticStatusLabel(plan.applyStatus),
+          text.applyHint || "",
+        )}
+      </div>
+      <div class="editor-save-validation-grid">
+        ${plan.checks.map((check) => renderSaveValidationCheck(check)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function createSaveSlotValidationPlan(diagnostics) {
+  const text = EDITOR_TEXT.saveValidation || {};
+  const activeSaveReady = diagnostics.activeSave.status === "ready";
+  const slotStoreReady = diagnostics.slotStore.status === "ready";
+  const activeSlotSafe = ["ready", "none", "empty"].includes(diagnostics.activeSlot.status);
+  const rollbackReady = [diagnostics.activeSave, diagnostics.slotStore, diagnostics.uiState].every((entry) => entry.status !== "invalid") && activeSlotSafe;
+  const checks = [
+    saveValidationCheck("active-save-readable", activeSaveReady, text.checkLabels?.activeSaveReadable, diagnostics.activeSave.hint),
+    saveValidationCheck("slot-store-readable", slotStoreReady, text.checkLabels?.slotStoreReadable, diagnostics.slotStore.hint),
+    saveValidationCheck("active-slot-safe", activeSlotSafe, text.checkLabels?.activeSlotSafe, diagnostics.activeSlot.hint),
+    saveValidationCheck("rollback-snapshot-ready", rollbackReady, text.checkLabels?.rollbackSnapshotReady, text.rollbackSnapshotDetail),
+    saveValidationCheck("write-controls-blocked", true, text.checkLabels?.writeControlsBlocked, text.writeControlsBlockedDetail),
+    saveValidationCheck("explicit-confirmation-required", false, text.checkLabels?.explicitConfirmationRequired, text.explicitConfirmationDetail),
+    saveValidationCheck("apply-writer-disabled", false, text.checkLabels?.applyWriterDisabled, text.applyWriterDisabledDetail),
+  ];
+  return {
+    checks,
+    readyChecks: checks.filter((check) => check.status === "ready").length,
+    totalChecks: checks.length,
+    rollbackStatus: rollbackReady ? "ready" : "blocked",
+    applyStatus: "blocked",
+  };
+}
+
+function saveValidationCheck(id, isReady, label, detail) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+  };
+}
+
+function renderSaveValidationCheck(check) {
+  return `
+    <article class="editor-save-validation-check" data-save-validation-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
+    </article>
   `;
 }
 

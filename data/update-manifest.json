@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 514,
-  "displayVersion": "v514",
-  "cacheVersion": "514",
-  "updatedAt": "2026-06-29T03:17:57.652+09:00",
+  "versionCode": 515,
+  "displayVersion": "v515",
+  "cacheVersion": "515",
+  "updatedAt": "2026-06-29T03:28:23.624+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=514&cachebust=514",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=515&cachebust=515",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "에디터 세계선 데이터 패널에 활성 세이브와 슬롯 저장소의 읽기 전용 진단 표면을 추가했습니다.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk",
+  "notes": "저장 데이터 편집 전 검증 조건과 롤백 스냅샷 준비 상태를 읽기 전용 계약으로 표시합니다.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
   },
-  "version": "5.14.0",
+  "version": "5.15.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
   },
   "android": {
-    "code": 514,
-    "name": "5.14.0",
-    "displayName": "v514",
+    "code": 515,
+    "name": "5.15.0",
+    "displayName": "v515",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
     },
     "version": {
-      "code": 514,
-      "name": "5.14.0",
-      "displayName": "v514"
+      "code": 515,
+      "name": "5.15.0",
+      "displayName": "v515"
     },
-    "versionCode": 514,
-    "versionName": "5.14.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-release.apk"
+    "versionCode": 515,
+    "versionName": "5.15.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
   },
-  "versionName": "5.14.0"
+  "versionName": "5.15.0"
 }

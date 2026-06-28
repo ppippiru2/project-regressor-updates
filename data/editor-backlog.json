@@ -248,14 +248,17 @@
       "status": "partial",
       "priority": "high",
       "source": "user-request-save-editor",
-      "summary": "Read-only save slot diagnostics are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs validation and rollback before write controls.",
+      "summary": "Read-only save slot diagnostics and validation/rollback contract preview are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
       "editorHooks": [
         "src/state/save.js",
         "src/state/saveSlots.js",
         "localStorage save keys",
         "src/editor/editorMain.js:renderSaveSlotDiagnostics",
+        "src/editor/editorMain.js:renderSaveSlotValidationPlan",
         "styles.css:.editor-save-diagnostics",
+        "styles.css:.editor-save-validation",
         "build-scripts/check-save-slot-diagnostics.mjs",
+        "build-scripts/check-save-slot-validation-plan.mjs",
         "future rollback snapshot"
       ]
     },

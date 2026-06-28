@@ -1,5 +1,5 @@
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=514";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=514";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=515";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=515";
 
 export const CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST_VERSION = "content-bulk-patch-manual-apply-checklist-v1";
 
