@@ -2,10 +2,10 @@ import {
   applyDeploymentUpdate,
   checkDeploymentUpdate,
   getDeploymentUpdateState,
-} from "../app/deploymentUpdate.js?v=527";
-import { t, tf } from "../localization/index.js?v=527";
-import { renderDeploymentUpdate } from "./renderDeploymentUpdate.js?v=527";
-import { renderRetargetPreviewSummary } from "./renderRetargetPreview.js?v=527";
+} from "../app/deploymentUpdate.js?v=528";
+import { t, tf } from "../localization/index.js?v=528";
+import { renderDeploymentUpdate } from "./renderDeploymentUpdate.js?v=528";
+import { renderRetargetPreviewSummary } from "./renderRetargetPreview.js?v=528";
 
 export function renderBuildInfo() {
   const info = createBuildInfo();

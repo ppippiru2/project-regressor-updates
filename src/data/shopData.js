@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=527";
+import { getLocaleText } from "../localization/index.js?v=528";
 
 const SHOP_TEXT = getLocaleText().data;
 const SHOP_CATEGORIES = SHOP_TEXT.shopCategories;

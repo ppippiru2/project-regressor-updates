@@ -1,5 +1,5 @@
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=527";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=527";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=528";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=528";
 
 export const CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW_VERSION = "content-bulk-patch-staged-import-preview-v1";
 

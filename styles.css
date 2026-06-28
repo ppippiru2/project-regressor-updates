@@ -4717,6 +4717,109 @@ select:focus {
   overflow-wrap: anywhere;
 }
 
+.editor-save-edit-validator-result {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(149, 255, 185, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 28, 32, 0.3);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-validator-result-head,
+.editor-save-edit-validator-result-card > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-validator-result h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-validator-result-head span,
+.editor-save-edit-validator-result-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-validator-result-metrics,
+.editor-save-edit-validator-result-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-validator-result-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-validator-result-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(149, 255, 185, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-validator-result-card strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-validator-result-card code {
+  color: var(--cyan);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-validator-result-card dl {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-edit-validator-result-card dt {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-validator-result-card dd {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-validator-result-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #dff8ff;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
 @media (max-width: 900px) {
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
@@ -4727,7 +4830,9 @@ select:focus {
   .editor-save-edit-dry-run-stages,
   .editor-save-edit-dry-run-rules,
   .editor-save-edit-validator-registry-metrics,
-  .editor-save-edit-validator-registry-grid {
+  .editor-save-edit-validator-registry-grid,
+  .editor-save-edit-validator-result-metrics,
+  .editor-save-edit-validator-result-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -4743,6 +4848,8 @@ select:focus {
   .editor-save-edit-dry-run-rule > div:first-child,
   .editor-save-edit-validator-registry-head,
   .editor-save-edit-validator-card > div:first-child,
+  .editor-save-edit-validator-result-head,
+  .editor-save-edit-validator-result-card > div:first-child,
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
   .editor-save-edit-rule-card-meta,
@@ -4755,7 +4862,10 @@ select:focus {
   .editor-save-edit-dry-run-rule dl,
   .editor-save-edit-validator-registry-metrics,
   .editor-save-edit-validator-registry-grid,
-  .editor-save-edit-validator-card dl {
+  .editor-save-edit-validator-card dl,
+  .editor-save-edit-validator-result-metrics,
+  .editor-save-edit-validator-result-grid,
+  .editor-save-edit-validator-result-card dl {
     grid-template-columns: 1fr;
   }
 }

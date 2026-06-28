@@ -731,7 +731,8 @@
         "build-scripts/check-save-slot-edit-rule-drilldown.mjs",
         "build-scripts/check-save-slot-edit-sample-payload.mjs",
         "build-scripts/check-save-slot-edit-validator-dry-run.mjs",
-        "build-scripts/check-save-slot-edit-validator-registry.mjs"
+        "build-scripts/check-save-slot-edit-validator-registry.mjs",
+        "build-scripts/check-save-slot-edit-validator-result-schema.mjs"
       ],
       "assetSlots": [],
       "editorFields": [
@@ -775,6 +776,8 @@
         "saveEditValidatorDryRunBlockers",
         "saveEditValidatorRegistryContract",
         "saveEditValidatorRegistryMissing",
+        "saveEditValidatorResultSchema",
+        "saveEditValidatorResultBlockers",
         "missingSlotWarning"
       ],
       "futureControls": [
@@ -791,6 +794,7 @@
         "저장 편집 제안 payload 샘플",
         "저장 편집 validator dry-run 계획",
         "저장 편집 validator registry 계약",
+        "저장 편집 validator 결과 스키마",
         "세이브 슬롯 선택",
         "세계선 데이터 조작",
         "JSON 백업/복원",
