@@ -4149,6 +4149,93 @@ select:focus {
   overflow-wrap: anywhere;
 }
 
+.editor-save-input-schema {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(149, 255, 185, 0.2);
+  border-radius: 6px;
+  background: rgba(4, 24, 28, 0.28);
+  padding: 0.85rem;
+}
+
+.editor-save-input-schema-head,
+.editor-save-input-schema-field > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-input-schema h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-input-schema-head span,
+.editor-save-input-schema-field span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-input-schema-metrics,
+.editor-save-input-schema-grid,
+.editor-save-input-schema-fields {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-input-schema-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-input-schema-group,
+.editor-save-input-schema-field {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(149, 255, 185, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-input-schema-group strong,
+.editor-save-input-schema-field strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-input-schema-field dl {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-input-schema-field dt {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.editor-save-input-schema-field dd {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
 .editor-detail-header,
 .editor-backlog-head,
 .editor-asset-card {
@@ -11133,6 +11220,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-save-recovery-head,
   .editor-save-recovery-key div,
   .editor-save-recovery-step div,
+  .editor-save-input-schema-head,
+  .editor-save-input-schema-field > div:first-child,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -11173,6 +11262,10 @@ body[data-info-tooltips="off"] .info-term {
   .editor-save-recovery-grid,
   .editor-save-recovery-steps,
   .editor-save-recovery-routes,
+  .editor-save-input-schema-metrics,
+  .editor-save-input-schema-grid,
+  .editor-save-input-schema-fields,
+  .editor-save-input-schema-field dl,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -11282,6 +11375,8 @@ body[data-info-tooltips="off"] .info-term {
     .editor-save-recovery-head,
     .editor-save-recovery-key div,
     .editor-save-recovery-step div,
+    .editor-save-input-schema-head,
+    .editor-save-input-schema-field > div:first-child,
     .editor-topbar {
     grid-template-columns: 1fr;
   }
@@ -11352,6 +11447,10 @@ body[data-info-tooltips="off"] .info-term {
   .editor-save-recovery-grid,
   .editor-save-recovery-steps,
   .editor-save-recovery-routes,
+  .editor-save-input-schema-metrics,
+  .editor-save-input-schema-grid,
+  .editor-save-input-schema-fields,
+  .editor-save-input-schema-field dl,
   .editor-panel-nav {
     grid-template-columns: 1fr;
   }

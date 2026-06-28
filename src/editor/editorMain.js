@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=521";
-import { getLocaleText, t, tf } from "../localization/index.js?v=521";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=521";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=521";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=521";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=521";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=521";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=521";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=521";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=521";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=521";
+import { applyDomLocalization } from "../localization/domText.js?v=522";
+import { getLocaleText, t, tf } from "../localization/index.js?v=522";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=522";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=522";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=522";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=522";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=522";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=522";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=522";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=522";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=522";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=521";
+} from "./contentBulkPatchPackageAdapter.js?v=522";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=521";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=521";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=521";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=521";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=521";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=521";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=521";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=521";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=521";
+} from "./contentBulkPackageOverview.js?v=522";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=522";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=522";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=522";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=522";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=522";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=522";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=522";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=522";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=521";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=521";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=521";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=521";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=521";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=521";
+} from "./runtimeVfxBulkIntakePreview.js?v=522";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=522";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=522";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=522";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=522";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=522";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=521";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=521";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=521";
+} from "./monsterSpriteSlotReport.js?v=522";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=522";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=522";
 
-const EDITOR_VERSION = "521";
+const EDITOR_VERSION = "522";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5286,6 +5286,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotDraftDiffSummary(diagnostics)}
       ${renderSaveSlotApplyGateChecklist(diagnostics)}
       ${renderSaveSlotRecoveryRehearsalPreview(diagnostics)}
+      ${renderSaveSlotEditInputSchemaPreview(diagnostics)}
     </section>
   `;
 }
@@ -5634,6 +5635,36 @@ function renderSaveSlotRecoveryRehearsalPreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditInputSchemaPreview(diagnostics) {
+  const schema = createSaveSlotEditInputSchemaPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditInput || {};
+  return `
+    <section class="editor-save-input-schema" data-save-edit-input-schema>
+      <div class="editor-save-input-schema-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit input schema")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(schema.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(schema.status))}
+        </span>
+      </div>
+      <div class="editor-save-input-schema-metrics">
+        ${metricCard(text.groupMetric || "Groups", tf("editorPrep.saveEditInput.groupValue", { count: schema.groups.length }, `${schema.groups.length}`), text.groupHint || "")}
+        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditInput.fieldValue", { count: schema.fieldCount }, `${schema.fieldCount}`), text.fieldHint || "")}
+        ${metricCard(text.validationMetric || "Validation", tf("editorPrep.saveEditInput.validationValue", { count: schema.validationRuleCount }, `${schema.validationRuleCount}`), text.validationHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditInput.blockedValue", { count: schema.blockedFieldCount }, `${schema.blockedFieldCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-input-schema-grid">
+        ${schema.groups.map((group) => renderSaveEditInputSchemaGroup(group)).join("")}
+      </div>
+      <div class="editor-save-input-schema-fields">
+        ${schema.fields.map((field) => renderSaveEditInputSchemaField(field)).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -5668,6 +5699,87 @@ function createSaveSlotDraftDiffSummary(diagnostics) {
     rows,
     groups,
   };
+}
+
+function createSaveSlotEditInputSchemaPreview(diagnostics) {
+  const draft = createSaveSlotDraftPayloadPreview(diagnostics);
+  const diff = createSaveSlotDraftDiffSummary(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const groups = draft.fieldGroups.map((group) => ({
+    id: group.id,
+    label: group.label,
+    fieldCount: group.fields.length,
+    comparableRows: diff.groups.find((item) => item.id === group.id)?.comparableRows ?? 0,
+  }));
+  const fields = draft.fieldGroups.flatMap((group) => group.fields.map((field) => saveEditInputSchemaField(group, field, gate)));
+  return {
+    status: "blocked",
+    groups,
+    fields,
+    fieldCount: fields.length,
+    validationRuleCount: new Set(fields.map((field) => field.validationRule)).size,
+    blockedFieldCount: fields.filter((field) => field.status === "blocked").length,
+  };
+}
+
+function saveEditInputSchemaField(group, field, gate) {
+  return {
+    groupId: group.id,
+    groupLabel: group.label,
+    path: field.path,
+    valueType: field.valueType,
+    inputKind: saveEditInputKindForField(field),
+    validationRule: field.guard,
+    status: "blocked",
+    blocker: gate.applyStatus === "blocked" ? "apply-gate-blocked" : "input-control-disabled",
+  };
+}
+
+function saveEditInputKindForField(field) {
+  if (field.valueType === "integer") return "number-stepper";
+  if (field.valueType === "string") return "text-field";
+  if (field.valueType.endsWith("[]")) return "readonly-list-editor";
+  if (field.valueType === "slot-map") return "readonly-slot-map";
+  if (field.valueType === "object") return "readonly-json-object";
+  return "readonly-preview";
+}
+
+function renderSaveEditInputSchemaGroup(group) {
+  return `
+    <article class="editor-save-input-schema-group" data-save-edit-input-group="${escapeAttribute(group.id)}">
+      <strong>${escapeHtml(group.label)}</strong>
+      <div class="editor-chip-list">
+        ${chip(tf("editorPrep.saveEditInput.groupFieldValue", { count: group.fieldCount }, `${group.fieldCount}`))}
+        ${chip(tf("editorPrep.saveEditInput.groupComparableValue", { count: group.comparableRows }, `${group.comparableRows}`))}
+      </div>
+    </article>
+  `;
+}
+
+function renderSaveEditInputSchemaField(field) {
+  const text = EDITOR_TEXT.saveEditInput || {};
+  return `
+    <article class="editor-save-input-schema-field" data-save-edit-input-field="${escapeAttribute(field.path)}" data-status="${escapeAttribute(field.status)}">
+      <div>
+        <strong>${escapeHtml(field.path)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(field.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.inputKind || "Input")}</dt>
+          <dd>${escapeHtml(field.inputKind)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.validationRule || "Validation")}</dt>
+          <dd>${escapeHtml(field.validationRule)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
+          <dd>${escapeHtml(field.blocker)}</dd>
+        </div>
+      </dl>
+    </article>
+  `;
 }
 
 function createSaveSlotRecoveryRehearsalPreview(diagnostics, options = {}) {

@@ -1,6 +1,6 @@
-import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=521";
-import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=521";
-import { resolveMonsterRuntimeIntegrationPreset } from "../config/monsterRuntimeIntegrationPresets.js?v=521";
+import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=522";
+import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=522";
+import { resolveMonsterRuntimeIntegrationPreset } from "../config/monsterRuntimeIntegrationPresets.js?v=522";
 
 const ASSET_DATA_VERSION = "483";
 
