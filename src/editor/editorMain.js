@@ -1,31 +1,31 @@
-import { applyDomLocalization } from "../localization/domText.js?v=459";
-import { getLocaleText, t, tf } from "../localization/index.js?v=459";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=459";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=459";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=459";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=459";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=459";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=459";
+import { applyDomLocalization } from "../localization/domText.js?v=461";
+import { getLocaleText, t, tf } from "../localization/index.js?v=461";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=461";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=461";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=461";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=461";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=461";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=461";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=459";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=459";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=459";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=459";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=459";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=459";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=459";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=459";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=459";
+} from "./contentBulkPatchPackageAdapter.js?v=461";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=461";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=461";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=461";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=461";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=461";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=461";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=461";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=461";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=459";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=459";
+} from "./monsterSpriteSlotReport.js?v=461";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=461";
 
-const EDITOR_VERSION = "459";
+const EDITOR_VERSION = "461";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;

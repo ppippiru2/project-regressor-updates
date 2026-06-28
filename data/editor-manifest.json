@@ -448,7 +448,9 @@
         "build-scripts/check-tutorial-island-pacing.mjs",
         "build-scripts/check-monster-candidate-pool.mjs",
         "build-scripts/check-equipment-value-balance.mjs",
-        "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES"
+        "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
+        "build-scripts/extract-content-bulk-package-json.mjs",
+        "build-scripts/check-content-bulk-package-json-extractor.mjs"
       ],
       "assetSlots": [],
       "editorFields": [
@@ -526,7 +528,9 @@
         "contentBulkPatchStagedApplySteps",
         "swapBoundaryCoverage",
         "missingFileWarnings",
-        "missingExportWarnings"
+        "missingExportWarnings",
+        "contentBulkPackageJsonExtractor",
+        "contentBulkPackageExtractorOutput"
       ],
       "futureControls": [
         "밸런스 그룹 목록",
@@ -541,7 +545,8 @@
         "대량 콘텐츠 적용 계약",
         "대량 콘텐츠 입력 계약",
         "대량 패키지 입력 변환",
-        "변경 전 읽기 전용 검증 리포트"
+        "변경 전 읽기 전용 검증 리포트",
+        "대량 패키지 JSON 추출"
       ]
     },
     {
@@ -1476,7 +1481,8 @@
       "src/editor/monsterCandidateLivePatchDraft.js:createMonsterCandidateLivePatchDraft",
       "src/editor/monsterCandidateBulkPatchAutomation.js:createMonsterCandidateBulkPatchAutomationPreview",
       "build-scripts/check-monster-candidate-pool.mjs",
-      "build-scripts/check-equipment-value-balance.mjs"
+      "build-scripts/check-equipment-value-balance.mjs",
+      "build-scripts/extract-content-bulk-package-json.mjs:createContentBulkPackageJsonFromInput"
     ],
     "monsterCandidateRewardPreview": {
       "id": "monster-candidate-reward-preview-v1",
@@ -1530,44 +1536,53 @@
           "현재 행 수와 생성 표면 수"
         ]
       },
-    {
-      "id": "content-bulk-patch-intake-contract",
-      "label": "대량 콘텐츠 입력 계약 검사",
-      "script": "build-scripts/check-content-bulk-patch-intake-contract.mjs",
-      "guards": [
-        "배치 키/식별 칸/필수 입력 칸",
-        "누락 필드와 중복 ID 사전 차단"
-      ]
-    },
-    {
-      "id": "content-bulk-patch-package-adapter",
-      "label": "대량 패키지 입력 변환 검사",
-      "script": "build-scripts/check-content-bulk-patch-package-adapter.mjs",
-      "guards": [
-        "외부 ZIP/문서의 별칭 키를 공통 배치 키로 변환",
-        "몬스터/아이템/스킬/스킬룬 후보를 묶음 단위로 staged preview 연결"
-      ]
-    },
-    {
-      "id": "content-bulk-patch-dry-run-importer",
-      "label": "대량 콘텐츠 dry-run 반영 검사",
-      "script": "build-scripts/check-content-bulk-patch-dry-run-importer.mjs",
-      "guards": [
-        "추가/갱신 후보와 영향 표면 계산",
-        "차단 오류와 경고를 실제 반영 전 분리"
-      ]
-    },
-    {
-      "id": "content-bulk-patch-staged-import-preview",
-      "label": "대량 콘텐츠 적용 대기열 검사",
-      "script": "build-scripts/check-content-bulk-patch-staged-import-preview.mjs",
-      "guards": [
-        "검증된 행만 적용 후보로 대기",
-        "차단된 행은 보류하고 적용 표면에서 제외"
-      ]
-    },
-    {
-      "id": "monster-candidate-pool",
+      {
+        "id": "content-bulk-patch-intake-contract",
+        "label": "대량 콘텐츠 입력 계약 검사",
+        "script": "build-scripts/check-content-bulk-patch-intake-contract.mjs",
+        "guards": [
+          "배치 키/식별 칸/필수 입력 칸",
+          "누락 필드와 중복 ID 사전 차단"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-package-adapter",
+        "label": "대량 패키지 입력 변환 검사",
+        "script": "build-scripts/check-content-bulk-patch-package-adapter.mjs",
+        "guards": [
+          "외부 ZIP/문서의 별칭 키를 공통 배치 키로 변환",
+          "몬스터/아이템/스킬/스킬룬 후보를 묶음 단위로 staged preview 연결"
+        ]
+      },
+      {
+        "id": "content-bulk-package-json-extractor",
+        "label": "대량 패키지 JSON 추출 검사",
+        "script": "build-scripts/check-content-bulk-package-json-extractor.mjs",
+        "guards": [
+          "ZIP/폴더 안 JSON 후보를 단일 패키지로 병합",
+          "미인식 배열 키와 파싱 오류를 보고서로 분리"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-dry-run-importer",
+        "label": "대량 콘텐츠 dry-run 반영 검사",
+        "script": "build-scripts/check-content-bulk-patch-dry-run-importer.mjs",
+        "guards": [
+          "추가/갱신 후보와 영향 표면 계산",
+          "차단 오류와 경고를 실제 반영 전 분리"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-staged-import-preview",
+        "label": "대량 콘텐츠 적용 대기열 검사",
+        "script": "build-scripts/check-content-bulk-patch-staged-import-preview.mjs",
+        "guards": [
+          "검증된 행만 적용 후보로 대기",
+          "차단된 행은 보류하고 적용 표면에서 제외"
+        ]
+      },
+      {
+        "id": "monster-candidate-pool",
         "label": "몬스터 후보 보상 검사",
         "script": "build-scripts/check-monster-candidate-pool.mjs",
         "guards": [
@@ -1694,7 +1709,7 @@
     },
     "contentBulkPatchPackageAdapter": {
       "id": "content-bulk-patch-package-adapter-v1",
-      "source": "v459",
+      "source": "v461",
       "sourceModule": "src/editor/contentBulkPatchPackageAdapter.js",
       "checkScript": "build-scripts/check-content-bulk-patch-package-adapter.mjs",
       "expectedDomainCount": 5,
@@ -1795,6 +1810,22 @@
       "expectedFullyCoveredCount": 15,
       "expectedNeedsDraftCount": 0,
       "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "contentBulkPackageJsonExtractor": {
+      "id": "content-bulk-package-json-extractor-v1",
+      "source": "v461",
+      "sourceScript": "build-scripts/extract-content-bulk-package-json.mjs",
+      "checkScript": "build-scripts/check-content-bulk-package-json-extractor.mjs",
+      "outputBatchKeys": [
+        "monsters",
+        "equipmentItems",
+        "lootItems",
+        "skills",
+        "rewardLinks"
+      ],
+      "acceptsZipInput": true,
+      "acceptsDirectoryInput": true,
       "writesGameData": false
     }
   },
@@ -2103,6 +2134,9 @@
     "externalIdAliasConnected": true,
     "transparentSpriteRequired": true,
     "sourceImageIsComposite": true,
+    "sourcePreviewAssetId": "monster_shore_imp_runtime_pack_v1_preview",
+    "sourcePreviewFile": "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+    "sourcePackageFile": "F:/project_regressor_monster_runtime_integration_pack_v1.zip",
     "expectedSpriteFiles": [
       "assets/monsters/shore_imp_idle.webp",
       "assets/monsters/shore_imp_attack.webp",

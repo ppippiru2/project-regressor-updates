@@ -253,6 +253,24 @@
       "notes": "Transparent player combat idle reference sprite used to define battle-card framing before final sprite production."
     },
     {
+      "assetId": "monster_shore_imp_runtime_pack_v1_preview",
+      "category": "monster-runtime-source",
+      "sourceFile": "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+      "cleanFile": "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": false,
+      "tags": [
+        "monster",
+        "shore_imp",
+        "rift_imp_lv1",
+        "runtime-pack",
+        "composite-source",
+        "preview"
+      ],
+      "notes": "Source preview image preserved from project_regressor_monster_runtime_integration_pack_v1.zip. It is a composite battle preview, not a transparent combat sprite."
+    },
+    {
       "assetId": "ui_system_dice_roll_sheet_v2",
       "category": "ui-sprite-sheet",
       "sourceFile": "assets/ui/system_dice_roll_sheet.png",

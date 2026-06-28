@@ -60,6 +60,9 @@ export const MONSTER_RUNTIME_INTEGRATION_PRESETS = Object.freeze({
     ]),
     spritePolicy: Object.freeze({
       sourceImageIsComposite: true,
+      sourcePreviewAssetId: "monster_shore_imp_runtime_pack_v1_preview",
+      sourcePreviewFile: "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+      sourcePackageFile: "F:/project_regressor_monster_runtime_integration_pack_v1.zip",
       requiresTransparentSprite: true,
       expectedFolder: "assets/monsters/",
       expectedFiles: Object.freeze([

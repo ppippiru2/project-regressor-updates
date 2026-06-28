@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 459,
-  "displayVersion": "v459",
-  "cacheVersion": "project-regressor-mvp-v459",
-  "updatedAt": "2026-06-28T11:46:00.000+09:00",
+  "versionCode": 461,
+  "displayVersion": "v461",
+  "cacheVersion": "project-regressor-mvp-v461",
+  "updatedAt": "2026-06-28T11:56:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=459&cachebust=459",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=461&cachebust=461",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v459 adds a balance editor JSON paste/file input for bulk monster, item, loot, skill, skill rune, and reward link packages.",
-    "v459 lets the editor download a package template, apply pasted JSON as a read-only preview, and keep drafts in local editor storage.",
-    "v459 extends metadata and quick checks so large content package intake stays scalable instead of one-by-one manual edits."
+    "v461 adds a ZIP/folder JSON extractor that combines external package JSON files into one read-only bulk package.",
+    "v461 preserves the monster runtime pack source preview for Rift Imp and keeps it separate from transparent combat sprite slots.",
+    "v461 extends metadata and quick checks so large content packages can be gathered, previewed, and validated before any explicit apply step exists."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
   },
   "version": {
-    "code": 459,
-    "name": "4.59.0",
-    "displayName": "v459"
+    "code": 461,
+    "name": "4.61.0",
+    "displayName": "v461"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
   },
   "android": {
-    "code": 459,
-    "name": "4.59.0",
-    "displayName": "v459",
+    "code": 461,
+    "name": "4.61.0",
+    "displayName": "v461",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
     },
     "version": {
-      "code": 459,
-      "name": "4.59.0",
-      "displayName": "v459"
+      "code": 461,
+      "name": "4.61.0",
+      "displayName": "v461"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
   }
 }

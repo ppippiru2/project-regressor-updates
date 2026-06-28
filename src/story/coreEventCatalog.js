@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=459";
+import { formatText, getLocaleText } from "../localization/index.js?v=461";
 
 export const TUTORIAL_CORE_EVENT_VERSION = "v2.5-region-core-events-v1";
 
