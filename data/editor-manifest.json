@@ -457,7 +457,8 @@
         "build-scripts/check-equipment-value-balance.mjs",
         "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
         "build-scripts/extract-content-bulk-package-json.mjs",
-        "build-scripts/check-content-bulk-package-json-extractor.mjs"
+        "build-scripts/check-content-bulk-package-json-extractor.mjs",
+        "src/editor/monsterRuntimeBulkIntakePreview.js"
       ],
       "assetSlots": [],
       "editorFields": [
@@ -551,7 +552,11 @@
         "missingFileWarnings",
         "missingExportWarnings",
         "contentBulkPackageJsonExtractor",
-        "contentBulkPackageExtractorOutput"
+        "contentBulkPackageExtractorOutput",
+        "monsterRuntimeBulkIntakePreview",
+        "monsterRuntimeBulkIntakeRows",
+        "monsterRuntimeBulkPackageRows",
+        "monsterRuntimeBulkSpriteWaitlist"
       ],
       "futureControls": [
         "밸런스 그룹 목록",
@@ -574,7 +579,8 @@
         "대량 패키지 JSON 추출",
         "Content bulk apply gate skeleton",
         "Content bulk backup snapshot plan",
-        "Content bulk restore rehearsal report"
+        "Content bulk restore rehearsal report",
+        "Monster runtime bulk intake preview"
       ]
     },
     {
@@ -1517,7 +1523,9 @@
       "src/editor/monsterCandidateBulkPatchAutomation.js:createMonsterCandidateBulkPatchAutomationPreview",
       "build-scripts/check-monster-candidate-pool.mjs",
       "build-scripts/check-equipment-value-balance.mjs",
-      "build-scripts/extract-content-bulk-package-json.mjs:createContentBulkPackageJsonFromInput"
+      "build-scripts/extract-content-bulk-package-json.mjs:createContentBulkPackageJsonFromInput",
+      "src/editor/monsterRuntimeBulkIntakePreview.js:createMonsterRuntimeBulkIntakePreview",
+      "src/editor/monsterRuntimeBulkIntakePreview.js:createMonsterRuntimeBulkIntakePackage"
     ],
     "monsterCandidateRewardPreview": {
       "id": "monster-candidate-reward-preview-v1",
@@ -1695,6 +1703,15 @@
           "후보 15종/지역 대표 연결",
           "도감 조각/마정석/스킬룬 보상 미리보기"
         ]
+      },
+      {
+        "id": "monster-runtime-bulk-intake-preview",
+        "script": "build-scripts/check-monster-runtime-bulk-intake-preview.mjs",
+        "guards": [
+          "monsterRuntimePresets alias recognized",
+          "existing monster stays update candidate",
+          "transparent sprite waitlist blocks live connection"
+        ]
       }
     ],
     "tuningCandidates": [
@@ -1864,7 +1881,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v468",
+      "source": "v469",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1878,7 +1895,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v468",
+      "source": "v469",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1892,7 +1909,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v468",
+      "source": "v469",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -1977,7 +1994,7 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v468",
+      "source": "v469",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
@@ -1989,7 +2006,7 @@
     },
     "contentBulkPatchApplyGatePlan": {
       "id": "content-bulk-patch-apply-gate-plan-v1",
-      "source": "v468",
+      "source": "v469",
       "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
       "expectedGateCount": 6,
@@ -2003,7 +2020,7 @@
     },
     "contentBulkPatchBackupPlan": {
       "id": "content-bulk-patch-backup-plan-v1",
-      "source": "v468",
+      "source": "v469",
       "sourceModule": "src/editor/contentBulkPatchBackupPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
       "expectedTargetFileCount": 24,
@@ -2018,7 +2035,7 @@
     },
     "contentBulkPatchRestoreRehearsal": {
       "id": "content-bulk-patch-restore-rehearsal-v1",
-      "source": "v468",
+      "source": "v469",
       "sourceModule": "src/editor/contentBulkPatchRestoreRehearsal.js",
       "checkScript": "build-scripts/check-content-bulk-patch-restore-rehearsal.mjs",
       "expectedTargetFileCount": 24,
@@ -2030,6 +2047,24 @@
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,
       "writesGameData": false
+    },
+    "monsterRuntimeBulkIntakePreview": {
+      "id": "monster-runtime-bulk-intake-preview-v1",
+      "source": "v469",
+      "sourceModule": "src/editor/monsterRuntimeBulkIntakePreview.js",
+      "checkScript": "build-scripts/check-monster-runtime-bulk-intake-preview.mjs",
+      "packageKey": "monsterRuntimePresets",
+      "expectedRuntimePresetCount": 1,
+      "expectedPackageRowCount": 1,
+      "expectedRecognizedRuntimeRows": 1,
+      "expectedUpdateCandidateCount": 1,
+      "expectedMissingSpriteFileCount": 4,
+      "expectedBlockedRuntimeRowCount": 1,
+      "writesGameData": false,
+      "requiresTransparentSprites": true,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true
     }
   },
   "combatVfxPlacementPreview": {
@@ -2355,6 +2390,9 @@
       "enemy_hit_reaction_v1",
       "enemy_basic_attack_v1",
       "enemy_down_v1"
-    ]
+    ],
+    "bulkIntakePreviewModule": "src/editor/monsterRuntimeBulkIntakePreview.js",
+    "bulkIntakePackageKey": "monsterRuntimePresets",
+    "bulkIntakeEditorSummaryVisible": true
   }
 }

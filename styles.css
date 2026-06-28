@@ -5041,6 +5041,100 @@ select:focus {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.editor-monster-runtime-bulk-intake {
+  background: rgba(8, 18, 40, 0.56);
+  border: 1px solid rgba(132, 205, 255, 0.2);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-monster-runtime-bulk-intake-head,
+.editor-monster-runtime-bulk-intake-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-monster-runtime-bulk-intake-head h4,
+.editor-monster-runtime-bulk-intake-head p,
+.editor-monster-runtime-bulk-intake-row-head h5,
+.editor-monster-runtime-bulk-intake-row-head p {
+  margin: 0;
+}
+
+.editor-monster-runtime-bulk-intake-head h4 {
+  color: #84cdff;
+  font-size: 0.95rem;
+}
+
+.editor-monster-runtime-bulk-intake-head strong,
+.editor-monster-runtime-bulk-intake-row-head span {
+  border: 1px solid rgba(132, 205, 255, 0.32);
+  border-radius: 999px;
+  color: #84cdff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+}
+
+.editor-monster-runtime-bulk-intake-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-monster-runtime-bulk-intake-metrics span,
+.editor-monster-runtime-bulk-intake-row {
+  background: rgba(1, 10, 28, 0.3);
+  border: 1px solid rgba(132, 205, 255, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-monster-runtime-bulk-intake-metrics span,
+.editor-monster-runtime-bulk-intake-list,
+.editor-monster-runtime-bulk-intake-row {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-monster-runtime-bulk-intake-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-monster-runtime-bulk-intake-metrics b,
+.editor-monster-runtime-bulk-intake-row-head h5 {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-runtime-bulk-intake-row-head p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-monster-runtime-bulk-intake-row[data-state="blocked-waiting-transparent-sprites"] {
+  border-color: rgba(255, 214, 112, 0.26);
+}
+
+.editor-monster-runtime-bulk-intake-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .editor-content-bulk-package-input {
   background: rgba(1, 10, 28, 0.34);
   border: 1px solid rgba(143, 255, 192, 0.16);
@@ -9795,6 +9889,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-package-domain-head,
   .editor-content-bulk-package-input-head,
   .editor-content-bulk-package-grid,
+  .editor-monster-runtime-bulk-intake-head,
+  .editor-monster-runtime-bulk-intake-row-head,
+  .editor-monster-runtime-bulk-intake-grid,
   .editor-content-bulk-dry-run-head,
   .editor-content-bulk-dry-run-domain-head,
   .editor-content-bulk-dry-run-grid,
@@ -9836,6 +9933,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-automation-metrics,
   .editor-content-bulk-intake-metrics,
   .editor-content-bulk-package-metrics,
+  .editor-monster-runtime-bulk-intake-metrics,
   .editor-content-bulk-dry-run-metrics,
   .editor-content-bulk-stage-metrics,
   .editor-content-bulk-diff-metrics,

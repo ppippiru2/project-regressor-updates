@@ -1,8 +1,8 @@
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=468";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=469";
 import {
   CONTENT_BULK_PATCH_BATCH_KEYS,
   createContentBulkPatchIntakeContract,
-} from "./contentBulkPatchIntakeContract.js?v=468";
+} from "./contentBulkPatchIntakeContract.js?v=469";
 
 export const CONTENT_BULK_PATCH_PACKAGE_ADAPTER_VERSION = "content-bulk-patch-package-adapter-v1";
 
@@ -14,6 +14,9 @@ export const CONTENT_BULK_PATCH_PACKAGE_ALIASES = Object.freeze({
     "monster_candidate_pool",
     "enemyCandidates",
     "enemies",
+    "monsterRuntimePresets",
+    "runtimeMonsterPresets",
+    "enemyRuntimePresets",
   ]),
   equipment_item: Object.freeze([
     "equipmentItems",

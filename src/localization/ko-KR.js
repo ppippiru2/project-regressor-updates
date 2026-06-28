@@ -2281,6 +2281,35 @@ export const KO_KR_TEXT = {
             reward_link: "보상 링크"
           }
         },
+        monsterRuntimeBulkIntakePreview: {
+          title: "몬스터 런타임 대량 입력",
+          description: "몬스터 런타임 ZIP 프리셋을 현재 대량 입력 계약의 읽기 전용 검증 행으로 연결합니다.",
+          version: "{version}",
+          runtimePresets: "런타임 프리셋",
+          packageRows: "패키지 행",
+          recognizedRows: "인식 행",
+          updateCandidates: "갱신 후보",
+          missingSprites: "대기 스프라이트",
+          blockedRows: "보류 행",
+          requiredChecks: "검증",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          noRows: "런타임 패키지 행 없음",
+          rowMeta: "{key} · {domain} · {state}",
+          motions: "모션",
+          actions: "행동",
+          optional: "선택",
+          missingSpriteFiles: "대기 중 투명 스프라이트",
+          sourcePreview: "원본 미리보기",
+          stateLabels: {
+            "blocked-waiting-transparent-sprites": "투명 스프라이트 대기",
+            "ready-for-runtime-review": "런타임 검토 가능",
+            "staged-update": "현재 몬스터 갱신 후보",
+            "staged-append": "신규 추가 후보",
+            "withheld-blocked": "차단 보류",
+            "not-staged": "스테이지 없음"
+          }
+        },
         contentBulkPatchDryRunImporter: {
           title: "대량 콘텐츠 dry-run 반영",
           description: "배치 파일을 실제 게임 데이터에 쓰기 전에 추가/갱신 후보, 차단 오류, 경고, 영향 표면을 읽기 전용으로 계산합니다.",

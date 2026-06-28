@@ -1,38 +1,39 @@
-import { applyDomLocalization } from "../localization/domText.js?v=468";
-import { getLocaleText, t, tf } from "../localization/index.js?v=468";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=468";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=468";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=468";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=468";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=468";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=468";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=468";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=468";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=468";
+import { applyDomLocalization } from "../localization/domText.js?v=469";
+import { getLocaleText, t, tf } from "../localization/index.js?v=469";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=469";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=469";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=469";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=469";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=469";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=469";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=469";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=469";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=469";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=468";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=468";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=468";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=468";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=468";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=468";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=468";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=468";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=468";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=468";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=468";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=468";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=468";
+} from "./contentBulkPatchPackageAdapter.js?v=469";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=469";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=469";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=469";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=469";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=469";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=469";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=469";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=469";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=469";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=469";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=469";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=469";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=468";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=468";
+} from "./monsterSpriteSlotReport.js?v=469";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=469";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=469";
 
-const EDITOR_VERSION = "468";
+const EDITOR_VERSION = "469";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -53,6 +54,7 @@ const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT = createMonsterCandidateLivePatchDraft(
 const MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION = createMonsterCandidateBulkPatchAutomationPreview();
 const COMBAT_VFX_PLACEMENT_PREVIEW = createCombatVfxPlacementPreview();
 const MONSTER_RUNTIME_INTEGRATION_PREVIEW = createMonsterRuntimeIntegrationPreview();
+const MONSTER_RUNTIME_BULK_INTAKE_PREVIEW = createMonsterRuntimeBulkIntakePreview(MONSTER_RUNTIME_INTEGRATION_PREVIEW);
 const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
   title: "Combat VFX Placement Preview",
   description: "Read-only placement summary for player and monster attack effects.",
@@ -1323,6 +1325,7 @@ function renderBalanceTuningDetail() {
       ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
       ${renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText)}
       ${renderContentBulkPatchPackageAdapterPreview(contentBulkPatchPackageAdapterPreview, detailText)}
+      ${renderMonsterRuntimeBulkIntakePreview(MONSTER_RUNTIME_BULK_INTAKE_PREVIEW, detailText)}
       ${renderContentBulkPatchDryRunPreview(CONTENT_BULK_PATCH_DRY_RUN_PREVIEW, detailText)}
       ${renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText)}
       ${renderContentBulkPatchDiffExport(CONTENT_BULK_PATCH_DIFF_EXPORT, detailText)}
@@ -2519,6 +2522,76 @@ function renderContentBulkPatchPackageMapping(mapping, text = {}) {
       </div>
     </article>
   `;
+}
+
+function renderMonsterRuntimeBulkIntakePreview(preview, detailText = {}) {
+  const text = detailText.monsterRuntimeBulkIntakePreview || {};
+  const summary = preview.summary || {};
+  const metrics = [
+    [text.runtimePresets || "Runtime presets", `${summary.runtimePresetCount || 0}`],
+    [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
+    [text.recognizedRows || "Recognized rows", `${summary.recognizedRuntimeRows || 0}`],
+    [text.updateCandidates || "Update candidates", `${summary.updateCandidateCount || 0}`],
+    [text.missingSprites || "Missing sprites", `${summary.missingSpriteFileCount || 0}`],
+    [text.blockedRows || "Blocked rows", `${summary.blockedRuntimeRowCount || 0}`],
+    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
+    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-monster-runtime-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster runtime bulk intake")}">
+      <div class="editor-monster-runtime-bulk-intake-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Monster runtime bulk intake")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only bridge from monster runtime package presets into the bulk intake contract.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterRuntimeBulkIntakePreview.version", {
+          version: preview.version || "-"
+        }, preview.version || "-"))}</strong>
+      </div>
+      <div class="editor-monster-runtime-bulk-intake-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-monster-runtime-bulk-intake-list">
+        ${(preview.rows || []).map((row) => renderMonsterRuntimeBulkIntakeRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No runtime package rows.")}</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderMonsterRuntimeBulkIntakeRow(row, text = {}) {
+  const stateLabels = text.stateLabels || {};
+  const motionLabels = (row.motions || []).map((motion) => `${motion.phase}: ${motion.runtimeMotionId || motion.externalMotionId}`);
+  const actionLabels = (row.actions || []).map((action) => `${action.id}${action.optional ? ` (${text.optional || "optional"})` : ""}`);
+  return `
+    <article class="editor-monster-runtime-bulk-intake-row" data-state="${escapeAttribute(row.runtimeState || "unknown")}">
+      <div class="editor-monster-runtime-bulk-intake-row-head">
+        <div>
+          <h5>${escapeHtml(row.externalMonsterId || "-")} → ${escapeHtml(row.liveMonsterId || "-")}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterRuntimeBulkIntakePreview.rowMeta", {
+            key: row.acceptedAliasKey || "-",
+            domain: row.targetDomainId || "-",
+            state: monsterRuntimeBulkIntakeLabel(row.bulkState, stateLabels),
+          }, `${row.acceptedAliasKey || "-"} / ${row.targetDomainId || "-"}`))}</p>
+        </div>
+        <span>${escapeHtml(monsterRuntimeBulkIntakeLabel(row.runtimeState, stateLabels))}</span>
+      </div>
+      <div class="editor-monster-runtime-bulk-intake-grid">
+        ${balanceDetailChipBlock(text.motions || "Motions", motionLabels)}
+        ${balanceDetailChipBlock(text.actions || "Actions", actionLabels)}
+        ${balanceDetailChipBlock(text.missingSpriteFiles || "Missing sprite files", row.missingSpriteFiles || [])}
+        ${balanceDetailChipBlock(text.sourcePreview || "Source preview", [row.sourcePreviewFile].filter(Boolean))}
+      </div>
+    </article>
+  `;
+}
+
+function monsterRuntimeBulkIntakeLabel(id, labels = {}) {
+  return labels?.[id] || id || "unknown";
 }
 
 function renderContentBulkPatchDryRunPreview(preview, detailText = {}) {

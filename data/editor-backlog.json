@@ -135,7 +135,12 @@
         "build-scripts/check-editor-balance-tuning-metadata.mjs",
         "build-scripts/extract-content-bulk-package-json.mjs",
         "build-scripts/check-content-bulk-package-json-extractor.mjs",
-        "data/editor-manifest.json:balanceTuningRegistry.contentBulkPackageJsonExtractor"
+        "data/editor-manifest.json:balanceTuningRegistry.contentBulkPackageJsonExtractor",
+        "src/editor/monsterRuntimeBulkIntakePreview.js",
+        "data/editor-manifest.json:balanceTuningRegistry.monsterRuntimeBulkIntakePreview",
+        "src/editor/editorMain.js:renderMonsterRuntimeBulkIntakePreview",
+        "styles.css:.editor-monster-runtime-bulk-intake",
+        "build-scripts/check-monster-runtime-bulk-intake-preview.mjs"
       ]
     },
     {
@@ -213,7 +218,10 @@
         "data/editor-manifest.json:monsterRuntimeIntegration",
         "src/editor/editorMain.js:renderMonsterRuntimeIntegrationPreview",
         "styles.css:.editor-monster-runtime-preview",
-        "build-scripts/check-monster-runtime-integration-pack.mjs"
+        "build-scripts/check-monster-runtime-integration-pack.mjs",
+        "src/editor/monsterRuntimeBulkIntakePreview.js",
+        "data/editor-manifest.json:monsterRuntimeIntegration.bulkIntakePreviewModule",
+        "build-scripts/check-monster-runtime-bulk-intake-preview.mjs"
       ]
     },
     {
