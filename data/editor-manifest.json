@@ -442,6 +442,7 @@
         "src/editor/contentBulkPatchFilePatchDraft.js",
         "src/editor/contentBulkPatchFilePatchDraftExport.js",
         "src/editor/contentBulkPatchApplyGatePlan.js",
+        "src/editor/contentBulkPatchBackupPlan.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -541,6 +542,8 @@
         "contentBulkPatchFilePatchDraftExportPayload",
         "contentBulkPatchApplyGatePlan",
         "contentBulkPatchApplyGates",
+        "contentBulkPatchBackupPlan",
+        "contentBulkPatchBackupFiles",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings",
@@ -566,7 +569,8 @@
         "대량 콘텐츠 파일별 patch 초안",
         "대량 콘텐츠 파일별 patch 초안 내보내기",
         "대량 패키지 JSON 추출",
-        "Content bulk apply gate skeleton"
+        "Content bulk apply gate skeleton",
+        "Content bulk backup snapshot plan"
       ]
     },
     {
@@ -1496,6 +1500,7 @@
       "src/editor/contentBulkPatchFilePatchDraft.js:createContentBulkPatchFilePatchDraft",
       "src/editor/contentBulkPatchFilePatchDraftExport.js:createContentBulkPatchFilePatchDraftExport",
       "src/editor/contentBulkPatchApplyGatePlan.js:createContentBulkPatchApplyGatePlan",
+      "src/editor/contentBulkPatchBackupPlan.js:createContentBulkPatchBackupPlan",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1651,6 +1656,18 @@
           "writer disabled",
           "backup and rollback gates",
           "manual review before explicit apply"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-backup-plan",
+        "label": "Content bulk patch backup plan",
+        "script": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
+        "guards": [
+          "backup writer disabled",
+          "restore writer disabled",
+          "target file count matches export",
+          "snapshot artifacts named",
+          "quick check includes backup plan"
         ]
       },
       {
@@ -1830,7 +1847,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v466",
+      "source": "v467",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1844,7 +1861,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v466",
+      "source": "v467",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1858,7 +1875,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v466",
+      "source": "v467",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -1943,7 +1960,7 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v466",
+      "source": "v467",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
@@ -1955,13 +1972,28 @@
     },
     "contentBulkPatchApplyGatePlan": {
       "id": "content-bulk-patch-apply-gate-plan-v1",
-      "source": "v466",
+      "source": "v467",
       "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
       "expectedGateCount": 6,
       "expectedRollbackStepCount": 4,
       "expectedValidationStepCount": 5,
       "applyEnabled": false,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "contentBulkPatchBackupPlan": {
+      "id": "content-bulk-patch-backup-plan-v1",
+      "source": "v467",
+      "sourceModule": "src/editor/contentBulkPatchBackupPlan.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
+      "expectedTargetFileCount": 24,
+      "expectedBackupStepCount": 5,
+      "expectedRestoreStepCount": 4,
+      "backupEnabled": false,
+      "restoreEnabled": false,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,

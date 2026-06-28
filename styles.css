@@ -5819,6 +5819,102 @@ select:focus {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.editor-content-bulk-backup-plan {
+  background: rgba(4, 18, 42, 0.56);
+  border: 1px solid rgba(143, 255, 192, 0.22);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-content-bulk-backup-plan-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-content-bulk-backup-plan-head h4,
+.editor-content-bulk-backup-plan-head p {
+  margin: 0;
+}
+
+.editor-content-bulk-backup-plan-head h4 {
+  color: #8fffc0;
+  font-size: 0.95rem;
+}
+
+.editor-content-bulk-backup-plan-head strong {
+  border: 1px solid rgba(143, 255, 192, 0.34);
+  border-radius: 999px;
+  color: #8fffc0;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-content-bulk-backup-plan-metrics,
+.editor-content-bulk-backup-plan-artifacts {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-content-bulk-backup-plan-metrics span,
+.editor-content-bulk-backup-plan-artifacts span,
+.editor-content-bulk-backup-plan-file {
+  background: rgba(1, 10, 28, 0.3);
+  border: 1px solid rgba(143, 255, 192, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-content-bulk-backup-plan-metrics small,
+.editor-content-bulk-backup-plan-artifacts small,
+.editor-content-bulk-backup-plan-file small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-content-bulk-backup-plan-metrics b,
+.editor-content-bulk-backup-plan-artifacts b,
+.editor-content-bulk-backup-plan-file strong {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-backup-plan-grid,
+.editor-content-bulk-backup-plan-files {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-content-bulk-backup-plan-files > strong {
+  color: #8fffc0;
+  font-size: 0.82rem;
+  grid-column: 1 / -1;
+}
+
+.editor-content-bulk-backup-plan-file {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.editor-content-bulk-backup-plan-file span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -9626,6 +9722,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-patch-draft-export-actions,
   .editor-content-bulk-apply-gate-head,
   .editor-content-bulk-apply-gate-grid,
+  .editor-content-bulk-backup-plan-head,
+  .editor-content-bulk-backup-plan-grid,
+  .editor-content-bulk-backup-plan-files,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -9649,6 +9748,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-patch-draft-metrics,
   .editor-content-bulk-patch-draft-export-metrics,
   .editor-content-bulk-apply-gate-metrics,
+  .editor-content-bulk-backup-plan-metrics,
+  .editor-content-bulk-backup-plan-artifacts,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

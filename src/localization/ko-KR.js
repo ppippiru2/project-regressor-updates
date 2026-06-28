@@ -2565,6 +2565,49 @@ export const KO_KR_TEXT = {
             "verify-local-http": "로컬 접속 확인"
           }
         },
+        contentBulkPatchBackupPlan: {
+          title: "대량 백업 계획",
+          description: "실제 백업 writer는 아직 비활성입니다. 적용 전 어떤 파일을 스냅샷으로 묶을지 먼저 고정합니다.",
+          version: "{version}",
+          targetFiles: "백업 파일",
+          patchBlocks: "patch 블록",
+          pendingBackups: "대기 백업",
+          backupSteps: "백업 단계",
+          restoreSteps: "복구 단계",
+          backupState: "백업 상태",
+          enabled: "활성",
+          disabled: "비활성",
+          backupArchive: "백업 압축",
+          snapshotManifest: "스냅샷 목록",
+          restoreReport: "복구 리포트",
+          blockedReasons: "차단 사유",
+          backupPlan: "백업 계획",
+          restorePlan: "복구 계획",
+          targetFilePreview: "대상 파일 미리보기",
+          emptyFiles: "백업 대상 파일 없음",
+          blockedReasonLabels: {
+            "backup-writer-not-implemented": "백업 writer 미구현",
+            "snapshot-not-created": "스냅샷 미생성",
+            "restore-not-tested": "복구 절차 미검증"
+          },
+          stateLabels: {
+            "pending-snapshot": "스냅샷 대기",
+            "pending-restore-test": "복구 테스트 대기"
+          },
+          backupStepLabels: {
+            "collect-target-file-list": "대상 파일 목록 수집",
+            "export-current-save-data": "현재 저장 데이터 내보내기",
+            "copy-target-files-to-backup": "대상 파일 백업 복사",
+            "write-snapshot-manifest": "스냅샷 목록 작성",
+            "verify-backup-readable": "백업 읽기 확인"
+          },
+          restoreStepLabels: {
+            "select-snapshot-manifest": "스냅샷 목록 선택",
+            "restore-target-files": "대상 파일 복구",
+            "restore-save-data": "저장 데이터 복구",
+            "run-post-restore-checks": "복구 후 검사"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
