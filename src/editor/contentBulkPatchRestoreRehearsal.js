@@ -1,4 +1,4 @@
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=485";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=486";
 
 export const CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VERSION = "content-bulk-patch-restore-rehearsal-v1";
 
@@ -38,6 +38,18 @@ export function createContentBulkPatchRestoreRehearsal(backupPlan = createConten
       blockedReasonCount: blockedReasons.length,
     },
     blockedReasons,
+    preApplyReviewSummary: {
+      reviewItemCount: backupPlan.preApplyReviewSummary?.reviewItemCount || 0,
+      readyReviewItemCount: backupPlan.preApplyReviewSummary?.readyReviewItemCount || 0,
+      blockedReviewItemCount: backupPlan.preApplyReviewSummary?.blockedReviewItemCount || 0,
+      warningReviewItemCount: backupPlan.preApplyReviewSummary?.warningReviewItemCount || 0,
+    },
+    preApplyReviewItems: (backupPlan.preApplyReviewItems || []).map((item) => ({
+      id: item.id,
+      state: item.state,
+      detail: item.detail,
+      blocksApply: item.blocksApply === true,
+    })),
     validationSteps,
     restoreActions,
   };

@@ -2783,6 +2783,8 @@ export const KO_KR_TEXT = {
           pendingBackups: "대기 백업",
           backupSteps: "백업 단계",
           restoreSteps: "복구 단계",
+          preApplyReviewItems: "사전 검토",
+          preApplyBlockedItems: "차단 검토",
           backupState: "백업 상태",
           enabled: "활성",
           disabled: "비활성",
@@ -2790,6 +2792,7 @@ export const KO_KR_TEXT = {
           snapshotManifest: "스냅샷 목록",
           restoreReport: "복구 리포트",
           blockedReasons: "차단 사유",
+          preApplyReview: "사전 적용 검토",
           backupPlan: "백업 계획",
           restorePlan: "복구 계획",
           targetFilePreview: "대상 파일 미리보기",
@@ -2802,6 +2805,22 @@ export const KO_KR_TEXT = {
           stateLabels: {
             "pending-snapshot": "스냅샷 대기",
             "pending-restore-test": "복구 테스트 대기"
+          },
+          preApplyReviewLabels: {
+            "review-patch-draft-payload": "patch 초안 payload 검토",
+            "resolve-withheld-rows": "보류 행 해소",
+            "review-update-candidates": "갱신 후보 확인",
+            "confirm-explicit-apply": "명시 적용 확인",
+            "prepare-backup-snapshot": "백업 스냅샷 준비",
+            "prepare-rollback-rehearsal": "롤백 리허설 준비",
+            "run-validation-suite": "검증 묶음 실행"
+          },
+          preApplyStateLabels: {
+            ready: "준비",
+            review: "검토",
+            blocked: "차단",
+            waiting: "대기",
+            disabled: "비활성"
           },
           backupStepLabels: {
             "collect-target-file-list": "대상 파일 목록 수집",
@@ -2826,10 +2845,13 @@ export const KO_KR_TEXT = {
           missingRestores: "누락 복구",
           restoreSteps: "복구 단계",
           validationSteps: "검증",
+          preApplyReviewItems: "사전 검토",
+          preApplyBlockedItems: "차단 검토",
           restoreState: "복구 상태",
           enabled: "활성",
           disabled: "비활성",
           blockedReasons: "차단 사유",
+          preApplyReview: "사전 적용 검토",
           validationPlan: "리허설 검증",
           restoreFilePreview: "복구 파일 미리보기",
           emptyFiles: "복구 액션 없음",
@@ -2841,6 +2863,22 @@ export const KO_KR_TEXT = {
             "pending-snapshot": "스냅샷 대기",
             "mapped-to-restore": "복구 매핑 완료",
             "pending-rehearsal": "리허설 대기"
+          },
+          preApplyReviewLabels: {
+            "review-patch-draft-payload": "patch 초안 payload 검토",
+            "resolve-withheld-rows": "보류 행 해소",
+            "review-update-candidates": "갱신 후보 확인",
+            "confirm-explicit-apply": "명시 적용 확인",
+            "prepare-backup-snapshot": "백업 스냅샷 준비",
+            "prepare-rollback-rehearsal": "롤백 리허설 준비",
+            "run-validation-suite": "검증 묶음 실행"
+          },
+          preApplyStateLabels: {
+            ready: "준비",
+            review: "검토",
+            blocked: "차단",
+            waiting: "대기",
+            disabled: "비활성"
           },
           validationLabels: {
             "verify-snapshot-manifest-name": "스냅샷 목록 이름 확인",

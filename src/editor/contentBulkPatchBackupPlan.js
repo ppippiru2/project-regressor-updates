@@ -1,5 +1,5 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=485";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=485";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=486";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=486";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION = "content-bulk-patch-backup-plan-v1";
 
@@ -54,8 +54,23 @@ export function createContentBulkPatchBackupPlan(
       restoreStepCount: restoreSteps.length,
       blockedReasonCount: blockedReasons.length,
       applyGateCount: applyGatePlan.summary?.gateCount || 0,
+      preApplyReviewItemCount: applyGatePlan.summary?.reviewItemCount || 0,
+      preApplyBlockedReviewItemCount: applyGatePlan.summary?.blockedReviewItemCount || 0,
+      preApplyWarningReviewItemCount: applyGatePlan.summary?.warningReviewItemCount || 0,
     },
     blockedReasons,
+    preApplyReviewSummary: {
+      reviewItemCount: applyGatePlan.summary?.reviewItemCount || 0,
+      readyReviewItemCount: applyGatePlan.summary?.readyReviewItemCount || 0,
+      blockedReviewItemCount: applyGatePlan.summary?.blockedReviewItemCount || 0,
+      warningReviewItemCount: applyGatePlan.summary?.warningReviewItemCount || 0,
+    },
+    preApplyReviewItems: (applyGatePlan.reviewChecklist || []).map((item) => ({
+      id: item.id,
+      state: item.state,
+      detail: item.detail,
+      blocksApply: item.blocksApply === true,
+    })),
     backupSteps,
     restoreSteps,
     fileBackups,

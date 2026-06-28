@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 485,
-  "displayVersion": "v485",
-  "cacheVersion": "project-regressor-mvp-v485",
-  "updatedAt": "2026-06-28T21:24:15.000+09:00",
+  "versionCode": 486,
+  "displayVersion": "v486",
+  "cacheVersion": "project-regressor-mvp-v486",
+  "updatedAt": "2026-06-28T21:34:49.784+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=485&cachebust=485",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=486&cachebust=486",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v485 adds a read-only pre-apply review checklist to the content bulk apply gate.",
-    "v485 surfaces patch draft payload review, withheld row resolution, update candidate review, explicit apply, backup, rollback, and validation states before any writer exists.",
-    "v485 keeps the bulk apply path read-only and bumps the runtime, service worker, Android, and update manifest cache keys."
+    "v486 connects the apply gate pre-apply review summary into backup and restore rehearsal cards.",
+    "v486 lets backup and restore review surfaces show the same blocked/ready checklist state before any writer is enabled.",
+    "v486 keeps backup, restore, and apply writers disabled and bumps runtime, service worker, Android, and update manifest cache keys."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v485-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v486-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v485-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v486-debug.apk"
   },
   "version": {
-    "code": 485,
-    "name": "4.85.0",
-    "displayName": "v485"
+    "code": 486,
+    "name": "4.86.0",
+    "displayName": "v486"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v485-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v486-debug.apk"
   },
   "android": {
-    "code": 485,
-    "name": "4.85.0",
-    "displayName": "v485",
+    "code": 486,
+    "name": "4.86.0",
+    "displayName": "v486",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v485-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v486-debug.apk"
     },
     "version": {
-      "code": 485,
-      "name": "4.85.0",
-      "displayName": "v485"
+      "code": 486,
+      "name": "4.86.0",
+      "displayName": "v486"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v485-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v486-debug.apk"
   }
 }
