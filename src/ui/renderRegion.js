@@ -4,9 +4,9 @@ import {
   gateNodeTypeIcon,
   gateNodeTypeIconKey,
   gateNodeTypeLabel,
-} from "../config/gateNodeTypes.js?v=486";
-import { t, tf } from "../localization/index.js?v=486";
-import { buildRegionCoreEventProgress } from "../story/coreEventCatalog.js?v=486";
+} from "../config/gateNodeTypes.js?v=487";
+import { t, tf } from "../localization/index.js?v=487";
+import { buildRegionCoreEventProgress } from "../story/coreEventCatalog.js?v=487";
 
 const stableHtmlCache = new WeakMap();
 

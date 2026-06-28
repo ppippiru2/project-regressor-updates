@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=486";
+import { tf } from "../localization/index.js?v=487";
 
 const ALLOWED_STANCES = new Set(["conserve", "power", "berserk", "break_wait"]);
 

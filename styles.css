@@ -6277,6 +6277,12 @@ select:focus {
   padding: 0.55rem;
 }
 
+.editor-content-bulk-patch-draft-export-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .editor-content-bulk-patch-draft-export-metrics small {
   color: var(--muted);
   font-size: 0.68rem;
@@ -10391,6 +10397,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-patch-draft-file-head,
   .editor-content-bulk-patch-draft-grid,
   .editor-content-bulk-patch-draft-export-head,
+  .editor-content-bulk-patch-draft-export-grid,
   .editor-content-bulk-patch-draft-export-actions,
   .editor-content-bulk-apply-gate-head,
   .editor-content-bulk-apply-gate-grid,

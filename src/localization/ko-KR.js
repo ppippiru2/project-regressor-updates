@@ -2706,10 +2706,29 @@ export const KO_KR_TEXT = {
           stagedRows: "적용 후보",
           updateDrafts: "갱신 초안",
           blockedDrafts: "보류 초안",
+          preApplyReviewItems: "사전 검토",
+          preApplyBlockedItems: "차단 검토",
           writes: "데이터 쓰기",
           readOnly: "읽기 전용",
           source: "입력 출처",
-          download: "patch 초안 다운로드"
+          download: "patch 초안 다운로드",
+          preApplyReview: "사전 적용 검토",
+          preApplyReviewLabels: {
+            "review-patch-draft-payload": "patch 초안 payload 검토",
+            "resolve-withheld-rows": "보류 행 해소",
+            "review-update-candidates": "갱신 후보 확인",
+            "confirm-explicit-apply": "명시 적용 확인",
+            "prepare-backup-snapshot": "백업 스냅샷 준비",
+            "prepare-rollback-rehearsal": "롤백 리허설 준비",
+            "run-validation-suite": "검증 묶음 실행"
+          },
+          preApplyStateLabels: {
+            ready: "준비",
+            review: "검토",
+            blocked: "차단",
+            waiting: "대기",
+            disabled: "비활성"
+          }
         },
         contentBulkPatchApplyGatePlan: {
           title: "대량 적용 게이트",

@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=486";
+import { tf } from "../localization/index.js?v=487";
 
 export function selectRegionState(state, uiState, regionId) {
   state.regionId = regionId;

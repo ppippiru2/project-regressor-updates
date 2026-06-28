@@ -2051,6 +2051,8 @@
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
       "expectedExportedBlockCount": 33,
+      "expectedPreApplyReviewItemCount": 7,
+      "expectedPreApplyBlockedReviewItemCount": 3,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,
