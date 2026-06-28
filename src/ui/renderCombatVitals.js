@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=490";
+import { t, tf } from "../localization/index.js?v=491";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
@@ -41,8 +41,12 @@ export function renderCombatVitals({
   byId("player-hp-text").textContent = formatResourceText(state.player.hp, player.maxHp, useResourcePercent, "ceil");
   byId("player-mp-bar").style.width = `${Math.max(0, ((state.player.mp || 0) / player.maxMp) * 100)}%`;
   byId("player-mp-text").textContent = formatResourceText(state.player.mp || 0, player.maxMp, useResourcePercent, "floor");
-  byId("player-action-bar").style.width = `${state.inCombat ? combatRuntime.playerAction : 0}%`;
-  byId("player-action-text").textContent = state.inCombat ? `${Math.floor(combatRuntime.playerAction)}%` : t("combatVitals.waiting");
+  const autoActionActive = state.inCombat && state.autoHunt;
+  const playerActionProgress = autoActionActive ? combatRuntime.playerAction : 0;
+  byId("player-action-bar").style.width = `${playerActionProgress}%`;
+  byId("player-action-text").textContent = autoActionActive
+    ? `${Math.floor(playerActionProgress)}%`
+    : t("combatVitals.waiting");
 
   document.querySelectorAll("[data-stance]").forEach((button) => {
     button.classList.toggle("active", button.dataset.stance === state.stance);
@@ -65,9 +69,10 @@ export function renderCombatVitals({
   byId("enemy-hp-text").textContent = formatResourceText(enemyHp, targetStats.maxHp, useResourcePercent, "ceil");
   byId("enemy-mp-bar").style.width = `${Math.max(0, (enemyMp / targetStats.maxMp) * 100)}%`;
   byId("enemy-mp-text").textContent = formatResourceText(enemyMp, targetStats.maxMp, useResourcePercent, "floor");
-  byId("enemy-action-bar").style.width = `${state.inCombat ? combatRuntime.enemyAction : 0}%`;
-  byId("enemy-action-text").textContent = state.inCombat
-    ? `${Math.floor(combatRuntime.enemyAction)}%`
+  const enemyActionProgress = autoActionActive ? combatRuntime.enemyAction : 0;
+  byId("enemy-action-bar").style.width = `${enemyActionProgress}%`;
+  byId("enemy-action-text").textContent = autoActionActive
+    ? `${Math.floor(enemyActionProgress)}%`
     : defeatedTarget
     ? t("combatVitals.defeated")
     : t("combatVitals.waiting");

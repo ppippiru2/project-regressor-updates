@@ -1,7 +1,7 @@
 import {
   createContentBulkPatchFilePatchDraftExport,
   createContentBulkPatchPreApplyReview,
-} from "./contentBulkPatchFilePatchDraftExport.js?v=490";
+} from "./contentBulkPatchFilePatchDraftExport.js?v=491";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VERSION = "content-bulk-patch-apply-gate-plan-v1";
 

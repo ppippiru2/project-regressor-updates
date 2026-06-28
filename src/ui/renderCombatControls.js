@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=490";
+import { t } from "../localization/index.js?v=491";
 
 const byId = (id) => document.getElementById(id);
 const COMPACT_COMBAT_BUTTON_LABELS = true;
@@ -45,7 +45,7 @@ export function renderCombatControls({ state, region }) {
 
   const battleState = byId("battle-state");
   if (battleState) {
-    const status = state.inCombat ? "combat" : state.resting ? "rest" : state.autoHunt ? "auto" : "manual";
+    const status = state.inCombat && state.autoHunt ? "combat" : state.resting ? "rest" : state.autoHunt ? "auto" : "manual";
     battleState.textContent =
       status === "combat"
         ? t("combatControls.statusCombat")

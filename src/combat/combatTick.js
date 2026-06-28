@@ -24,13 +24,17 @@ export function advanceCombatActionGauges(combatRuntime, player, enemy, elapsedS
   combatRuntime.enemyAction = advanceActionGauge(combatRuntime.enemyAction, enemy.attackSpeed, elapsedSeconds);
 }
 
+export function shouldAdvanceAutoCombatActions(state, combatRuntime) {
+  return Boolean(state?.autoHunt && combatRuntime && !combatRuntime.inputLocked);
+}
+
 export function advanceCombatFrameRuntime({ state, combatRuntime, player, enemy }) {
   const elapsedSeconds = beginCombatFrame(combatRuntime);
 
   regenerateCombatResources(state, player, enemy, elapsedSeconds);
   const playerHyperEnded = advancePlayerHyperState(state, elapsedSeconds) === "ended";
   const enemyHyperEnded = advanceEnemyHyperState(combatRuntime, elapsedSeconds) === "ended";
-  if (!combatRuntime.inputLocked) advanceCombatActionGauges(combatRuntime, player, enemy, elapsedSeconds);
+  if (shouldAdvanceAutoCombatActions(state, combatRuntime)) advanceCombatActionGauges(combatRuntime, player, enemy, elapsedSeconds);
 
   return {
     elapsedSeconds,
