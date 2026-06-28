@@ -908,6 +908,7 @@ export const KO_KR_TEXT = {
     firstCombatWarning: "[경고] 적성 개체가 접근합니다.",
     firstCombatBasicGuide: "[전투 도움말] 기본 공격은 MP를 소모하지 않습니다.",
     firstCombatSkillGuide: "[전투 도움말] 카드 스킬은 조건과 MP를 확인한 뒤 자동으로 사용됩니다.",
+    firstLootDropGuide: "[전리품 안내] {itemName} x{count}. 장비가 아닌 조각과 룬은 소지품에 누적됩니다.",
     firstCodexRecordGuide: "[도감 기록] 첫 카드 조각이 기록되었습니다. 소지품의 도감 기록 진행도에서 확인하십시오.",
     profileUpdated: "플레이어 정보 변경사항을 저장했습니다.",
   },
@@ -2219,6 +2220,40 @@ export const KO_KR_TEXT = {
           appendOrUpdate: "추가/갱신",
           noDomains: "대량 입력 계약 분야 없음",
           domainMeta: "{batchKey} · 현재 {rows}행 · 필수 {fields}칸",
+          domainLabels: {
+            monster: "몬스터",
+            equipment_item: "장비 아이템",
+            loot_item: "전리품/재료",
+            skill: "스킬",
+            reward_link: "보상 링크"
+          }
+        },
+        contentBulkPatchDryRunImporter: {
+          title: "대량 콘텐츠 dry-run 반영",
+          description: "배치 파일을 실제 게임 데이터에 쓰기 전에 추가/갱신 후보, 차단 오류, 경고, 영향 표면을 읽기 전용으로 계산합니다.",
+          version: "{version}",
+          rows: "입력 행",
+          activeDomains: "활성 분야",
+          appendCandidates: "추가 후보",
+          updateCandidates: "갱신 후보",
+          generatedSurfaces: "영향 표면",
+          blockers: "차단 오류",
+          warnings: "경고",
+          requiredChecks: "필수 검사",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          batchKey: "배치 키",
+          identityFields: "식별 칸",
+          targetSurfaces: "대상 표면",
+          guardChecks: "검증",
+          noDomains: "dry-run 분야 없음",
+          domainMeta: "입력 {rows}행 · 추가 {append} · 갱신 {update} · 영향 표면 {surfaces}개",
+          stateLabels: {
+            empty: "입력 없음",
+            ready: "반영 가능",
+            "ready-with-warnings": "경고 포함 가능",
+            blocked: "차단됨"
+          },
           domainLabels: {
             monster: "몬스터",
             equipment_item: "장비 아이템",

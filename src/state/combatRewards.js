@@ -1,9 +1,9 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=454";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=454";
-import { claimFirstCodexRecordGuide } from "./tutorialGuidance.js?v=454";
-import { t, tf } from "../localization/index.js?v=454";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=454";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=455";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=455";
+import { claimFirstCodexRecordGuide, claimFirstLootDropGuide } from "./tutorialGuidance.js?v=455";
+import { t, tf } from "../localization/index.js?v=455";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=455";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
@@ -40,6 +40,7 @@ export function applyMonsterDefeatRewards(state, monster, context) {
         itemName: item.name || getItemName(itemId),
         typeLabel: item.typeLabel || t("combatRewards.lootItemFallbackType"),
       }));
+      messages.push(...claimFirstLootDropGuide(state, { item, count: inventoryEntry?.count || 1 }));
       messages.push(...claimFirstCodexRecordGuide(state, { item, count: inventoryEntry?.count || 1 }));
       continue;
     }

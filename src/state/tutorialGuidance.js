@@ -1,9 +1,10 @@
-import { t } from "../localization/index.js?v=454";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=454";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=454";
+import { t, tf } from "../localization/index.js?v=455";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=455";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=455";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,
+  firstLootDropGuideShown: false,
   firstCodexRecordGuideShown: false,
   shownRegionCoreEventIds: [],
 });
@@ -53,6 +54,20 @@ export function claimFirstCodexRecordGuide(state, { item, count = 0 } = {}) {
     },
   });
   return [resolved?.detail?.log || t("stateMessages.firstCodexRecordGuide")].filter(Boolean);
+}
+
+export function claimFirstLootDropGuide(state, { item, count = 0 } = {}) {
+  state.tutorialFlags = normalizeTutorialFlags(state.tutorialFlags);
+  if (state.tutorialFlags.firstLootDropGuideShown) return [];
+  if (!item || item.slot) return [];
+
+  state.tutorialFlags.firstLootDropGuideShown = true;
+  return [
+    tf("stateMessages.firstLootDropGuide", {
+      itemName: item.name || item.id || t("combatRewards.lootItemFallbackType"),
+      count: Math.max(1, Number(count) || 1),
+    }),
+  ];
 }
 
 export function claimRegionCoreEventGuide(state, region) {
