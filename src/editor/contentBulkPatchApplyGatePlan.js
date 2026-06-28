@@ -1,10 +1,11 @@
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=484";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=485";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VERSION = "content-bulk-patch-apply-gate-plan-v1";
 
 export function createContentBulkPatchApplyGatePlan(exportPreview = createContentBulkPatchFilePatchDraftExport()) {
   const summary = exportPreview.summary || {};
   const gates = createApplyGates(exportPreview);
+  const reviewChecklist = createReviewChecklist(exportPreview);
   const rollbackSteps = [
     "export-current-save-data",
     "snapshot-target-files",
@@ -38,16 +39,69 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
       rollbackStepCount: rollbackSteps.length,
       validationStepCount: validationSteps.length,
       blockedReasonCount: 3,
+      reviewItemCount: reviewChecklist.length,
+      readyReviewItemCount: reviewChecklist.filter((item) => item.state === "ready").length,
+      warningReviewItemCount: reviewChecklist.filter((item) => item.state === "review").length,
+      blockedReviewItemCount: reviewChecklist.filter((item) => item.state === "blocked").length,
     },
     blockedReasons: [
       "writer-not-implemented",
       "rollback-not-executed",
       "explicit-apply-ui-not-confirmed",
     ],
+    reviewChecklist,
     gates,
     rollbackSteps,
     validationSteps,
   };
+}
+
+function createReviewChecklist(exportPreview) {
+  const summary = exportPreview.summary || {};
+  return [
+    {
+      id: "review-patch-draft-payload",
+      state: (summary.exportedFileCount || 0) > 0 ? "ready" : "blocked",
+      blocksApply: true,
+      detail: `${summary.exportedFileCount || 0} files / ${summary.exportedBlockCount || 0} blocks`,
+    },
+    {
+      id: "resolve-withheld-rows",
+      state: (summary.withheldRowCount || 0) > 0 ? "blocked" : "ready",
+      blocksApply: true,
+      detail: `${summary.withheldRowCount || 0} withheld`,
+    },
+    {
+      id: "review-update-candidates",
+      state: (summary.updateDraftCount || 0) > 0 ? "review" : "ready",
+      blocksApply: true,
+      detail: `${summary.updateDraftCount || 0} updates`,
+    },
+    {
+      id: "confirm-explicit-apply",
+      state: "blocked",
+      blocksApply: true,
+      detail: "required",
+    },
+    {
+      id: "prepare-backup-snapshot",
+      state: "blocked",
+      blocksApply: true,
+      detail: `${summary.exportedFileCount || 0} target files`,
+    },
+    {
+      id: "prepare-rollback-rehearsal",
+      state: "blocked",
+      blocksApply: true,
+      detail: "required",
+    },
+    {
+      id: "run-validation-suite",
+      state: "waiting",
+      blocksApply: true,
+      detail: "after manual review",
+    },
+  ];
 }
 
 function createApplyGates(exportPreview) {

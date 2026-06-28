@@ -2064,6 +2064,7 @@
       "expectedGateCount": 6,
       "expectedRollbackStepCount": 4,
       "expectedValidationStepCount": 5,
+      "expectedReviewItemCount": 7,
       "applyEnabled": false,
       "requiresManualReview": true,
       "requiresExplicitApply": true,

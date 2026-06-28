@@ -2720,9 +2720,13 @@ export const KO_KR_TEXT = {
           gates: "게이트",
           rollbackSteps: "롤백",
           validationSteps: "검증",
+          reviewItems: "검토 항목",
+          blockedReviewItems: "차단 검토",
+          warningReviewItems: "확인 검토",
           applyState: "적용 상태",
           enabled: "활성",
           disabled: "비활성",
+          reviewChecklist: "적용 전 검토",
           blockedReasons: "차단 사유",
           gateList: "적용 게이트",
           rollbackPlan: "롤백 계획",
@@ -2740,8 +2744,18 @@ export const KO_KR_TEXT = {
             "apply-file-patches": "파일 patch 반영",
             "run-post-apply-checks": "반영 후 검사"
           },
+          reviewLabels: {
+            "review-patch-draft-payload": "patch 초안 payload 검토",
+            "resolve-withheld-rows": "보류 행 해소",
+            "review-update-candidates": "갱신 후보 확인",
+            "confirm-explicit-apply": "명시 적용 확인",
+            "prepare-backup-snapshot": "백업 스냅샷 준비",
+            "prepare-rollback-rehearsal": "롤백 리허설 준비",
+            "run-validation-suite": "검증 묶음 실행"
+          },
           stateLabels: {
             ready: "준비",
+            review: "검토",
             blocked: "차단",
             disabled: "비활성",
             waiting: "대기"
