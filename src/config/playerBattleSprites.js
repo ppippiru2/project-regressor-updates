@@ -3,11 +3,11 @@ import {
   PLAYER_BATTLE_SPRITE_GENDERS,
   PLAYER_BATTLE_SPRITE_PRESETS,
   DEFAULT_PLAYER_ATTACK_EFFECT_PLACEMENT,
-} from "./playerBattleSpritePresets.js?v=481";
+} from "./playerBattleSpritePresets.js?v=482";
 
 export { PLAYER_BATTLE_SPRITE_CLASSES, PLAYER_BATTLE_SPRITE_GENDERS, PLAYER_BATTLE_SPRITE_PRESETS };
 
-const PLAYER_EFFECT_TYPE_PLACEMENT_TUNING = Object.freeze({
+export const PLAYER_EFFECT_TYPE_PLACEMENT_TUNING = Object.freeze({
   slash: { slashWidth: 1.02, expandedSlashWidth: 1.02, offsetY: -1 },
   impact: { slashWidth: 1.06, expandedSlashWidth: 1.05, offsetY: 2 },
   pierce: { slashWidth: 1.08, expandedSlashWidth: 1.08, slashHeight: 0.72, expandedSlashHeight: 0.76, offsetY: -3 },
