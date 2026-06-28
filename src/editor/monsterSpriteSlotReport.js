@@ -1,6 +1,6 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=520";
-import { MONSTER_COMBAT_POSES, monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=520";
-import { monsters } from "../data/worldData.js?v=520";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=521";
+import { MONSTER_COMBAT_POSES, monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=521";
+import { monsters } from "../data/worldData.js?v=521";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
 const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";

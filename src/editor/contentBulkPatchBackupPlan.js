@@ -1,5 +1,5 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=520";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=520";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=521";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=521";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION = "content-bulk-patch-backup-plan-v1";
 const FILE_BACKUP_REVIEW_BLOCKERS = Object.freeze([
