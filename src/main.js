@@ -1850,6 +1850,3 @@ resumeSavedCombatLoop();
 registerServiceWorker();
 window.addEventListener("pagehide", cleanupRuntimeTimers);
 window.addEventListener("beforeunload", cleanupRuntimeTimers);
-
-
-

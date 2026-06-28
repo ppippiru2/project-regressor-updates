@@ -57,6 +57,3 @@ export function renderCombatControls({ state, region }) {
     battleState.dataset.status = status;
   }
 }
-
-
-
