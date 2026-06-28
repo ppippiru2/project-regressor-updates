@@ -5361,6 +5361,98 @@ select:focus {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.editor-content-bulk-diff {
+  background: rgba(4, 18, 42, 0.54);
+  border: 1px solid rgba(108, 210, 255, 0.2);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-content-bulk-diff-head,
+.editor-content-bulk-diff-target-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-content-bulk-diff-head h4,
+.editor-content-bulk-diff-head p,
+.editor-content-bulk-diff-target-head h5,
+.editor-content-bulk-diff-target-head p {
+  margin: 0;
+}
+
+.editor-content-bulk-diff-head h4 {
+  color: var(--cyan);
+  font-size: 0.95rem;
+}
+
+.editor-content-bulk-diff-head strong {
+  border: 1px solid rgba(57, 228, 255, 0.34);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-content-bulk-diff-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-content-bulk-diff-metrics span,
+.editor-content-bulk-diff-target {
+  background: rgba(1, 10, 28, 0.28);
+  border: 1px solid rgba(108, 210, 255, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-content-bulk-diff-metrics span,
+.editor-content-bulk-diff-list,
+.editor-content-bulk-diff-target,
+.editor-content-bulk-diff-steps {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-content-bulk-diff-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-content-bulk-diff-metrics b,
+.editor-content-bulk-diff-target-head h5,
+.editor-content-bulk-diff-steps strong {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-diff-target-head p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-diff-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -9155,6 +9247,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-stage-head,
   .editor-content-bulk-stage-domain-head,
   .editor-content-bulk-stage-grid,
+  .editor-content-bulk-diff-head,
+  .editor-content-bulk-diff-target-head,
+  .editor-content-bulk-diff-grid,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -9173,6 +9268,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-package-metrics,
   .editor-content-bulk-dry-run-metrics,
   .editor-content-bulk-stage-metrics,
+  .editor-content-bulk-diff-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

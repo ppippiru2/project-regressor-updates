@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 461,
-  "displayVersion": "v461",
-  "cacheVersion": "project-regressor-mvp-v461",
-  "updatedAt": "2026-06-28T12:31:00.000+09:00",
+  "versionCode": 462,
+  "displayVersion": "v462",
+  "cacheVersion": "project-regressor-mvp-v462",
+  "updatedAt": "2026-06-28T12:52:56.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=461&cachebust=461",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=462&cachebust=462",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v461 adds a ZIP/folder JSON extractor that combines external package JSON files into one read-only bulk package.",
-    "v461 preserves the monster runtime pack source preview for Rift Imp and keeps it separate from transparent combat sprite slots.",
-    "v461 extends metadata and quick checks so large content packages can be gathered, previewed, and validated before any explicit apply step exists."
+    "v462 adds a read-only diff export summary for bulk content packages before any manual apply step.",
+    "v462 shows target files, affected surfaces, staged rows, and review steps in the balance editor.",
+    "v462 extends quick checks and editor metadata so large monster/item/skill batches can be reviewed as one package."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v462-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v462-debug.apk"
   },
   "version": {
-    "code": 461,
-    "name": "4.61.0",
-    "displayName": "v461"
+    "code": 462,
+    "name": "4.62.0",
+    "displayName": "v462"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v462-debug.apk"
   },
   "android": {
-    "code": 461,
-    "name": "4.61.0",
-    "displayName": "v461",
+    "code": 462,
+    "name": "4.62.0",
+    "displayName": "v462",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v462-debug.apk"
     },
     "version": {
-      "code": 461,
-      "name": "4.61.0",
-      "displayName": "v461"
+      "code": 462,
+      "name": "4.62.0",
+      "displayName": "v462"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v461-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v462-debug.apk"
   }
 }

@@ -2363,6 +2363,45 @@ export const KO_KR_TEXT = {
             reward_link: "보상 링크"
           }
         },
+        contentBulkPatchDiffExport: {
+          title: "대량 콘텐츠 diff 내보내기",
+          description: "적용 대기열이 닿는 파일과 표면을 실제 반영 전에 확인하는 읽기 전용 diff 요약입니다.",
+          version: "{version}",
+          targetFiles: "대상 파일",
+          targetSurfaces: "대상 표면",
+          stagedRows: "적용 후보",
+          appendStages: "신규 추가",
+          updateStages: "갱신 후보",
+          withheldRows: "보류 행",
+          requiredChecks: "필수 검사",
+          applyMode: "적용 방식",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          domains: "분야",
+          surfaces: "표면",
+          reviewSteps: "검토 단계",
+          noTargets: "diff 대상 파일 없음",
+          targetMeta: "표면 {surfaces}개 · 후보 {staged}개 · 추가 {append} · 갱신 {update} · 보류 {withheld}",
+          statusLabels: {
+            empty: "대상 없음",
+            "ready-for-diff-review": "diff 검토 가능",
+            "review-withheld-rows": "보류 행 검토 필요"
+          },
+          stepLabels: {
+            "export-diff-json": "diff JSON 내보내기",
+            "review-target-files-and-surfaces": "대상 파일/표면 검토",
+            "apply-after-explicit-confirm": "명시 확정 후 반영",
+            "run-required-checks": "필수 검사 실행",
+            "verify-game-and-editor": "게임/에디터 확인"
+          },
+          domainLabels: {
+            monster: "몬스터",
+            equipment_item: "장비 아이템",
+            loot_item: "전리품 재료",
+            skill: "스킬",
+            reward_link: "보상 링크"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
