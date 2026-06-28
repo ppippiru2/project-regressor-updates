@@ -1,4 +1,4 @@
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=501";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=502";
 
 export const CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VERSION = "content-bulk-patch-restore-rehearsal-v1";
 const RESTORE_FILE_REHEARSAL_BLOCKERS = Object.freeze([
@@ -20,6 +20,11 @@ export function createContentBulkPatchRestoreRehearsal(backupPlan = createConten
     "restore-writer-not-implemented",
     "actual-snapshot-not-created",
   ];
+  const issueSummary = createRestoreRehearsalIssueSummary({
+    blockedReasons,
+    restoreActions,
+    preApplyReviewItems: backupPlan.preApplyReviewItems || [],
+  });
 
   return {
     version: CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VERSION,
@@ -43,8 +48,11 @@ export function createContentBulkPatchRestoreRehearsal(backupPlan = createConten
       blockedReasonCount: blockedReasons.length,
       filesWithRehearsalBlockers: restoreActions.filter((action) => action.rehearsalBlockerCodes.length > 0).length,
       fileRehearsalBlockerCount: restoreActions.reduce((sum, action) => sum + action.rehearsalBlockerCodes.length, 0),
+      blockingIssueCount: issueSummary.blockingIssueCodes.length,
+      warningIssueCount: issueSummary.warningIssueCodes.length,
     },
     blockedReasons,
+    issueSummary,
     preApplyReviewSummary: {
       reviewItemCount: backupPlan.preApplyReviewSummary?.reviewItemCount || 0,
       readyReviewItemCount: backupPlan.preApplyReviewSummary?.readyReviewItemCount || 0,
@@ -59,6 +67,42 @@ export function createContentBulkPatchRestoreRehearsal(backupPlan = createConten
     })),
     validationSteps,
     restoreActions,
+  };
+}
+
+function createRestoreRehearsalIssueSummary({ blockedReasons = [], restoreActions = [], preApplyReviewItems = [] } = {}) {
+  const blockingIssueCodes = new Set(blockedReasons);
+  const warningIssueCodes = new Set();
+  const affectedDomainIds = new Set();
+  let affectedFileCount = 0;
+
+  for (const action of restoreActions) {
+    const blockers = Array.isArray(action.rehearsalBlockerCodes) ? action.rehearsalBlockerCodes.filter(Boolean) : [];
+    if (!blockers.length) continue;
+    affectedFileCount += 1;
+    for (const code of blockers) blockingIssueCodes.add(code);
+    for (const domainId of action.domainIds || []) affectedDomainIds.add(domainId);
+  }
+
+  let affectedReviewItemCount = 0;
+  for (const item of preApplyReviewItems) {
+    if (item.state === "blocked") {
+      blockingIssueCodes.add(item.id);
+      affectedReviewItemCount += 1;
+    }
+    if (item.state === "review") {
+      warningIssueCodes.add(item.id);
+      affectedReviewItemCount += 1;
+    }
+  }
+
+  return {
+    blockingIssueCodes: [...blockingIssueCodes],
+    warningIssueCodes: [...warningIssueCodes],
+    affectedDomainCount: affectedDomainIds.size,
+    affectedRowCount: affectedFileCount,
+    affectedFileCount,
+    affectedReviewItemCount,
   };
 }
 

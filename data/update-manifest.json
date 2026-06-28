@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 501,
-  "displayVersion": "v501",
-  "cacheVersion": "project-regressor-mvp-v501",
-  "updatedAt": "2026-06-29T01:31:00.000+09:00",
+  "versionCode": 502,
+  "displayVersion": "v502",
+  "cacheVersion": "project-regressor-mvp-v502",
+  "updatedAt": "2026-06-29T01:49:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=501&cachebust=501",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=502&cachebust=502",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v501 adds a top-level mass apply readiness summary for content bulk review.",
-    "v501 combines dry-run, staged import, apply gate, backup, and restore rehearsal states.",
-    "v501 keeps mass apply readiness read-only while surfacing blocker and warning reasons."
+    "v502 adds issue summaries to backup and restore rehearsal review surfaces.",
+    "v502 aggregates file-level backup and restore blockers with pre-apply review blockers.",
+    "v502 keeps backup and restore rehearsal summaries read-only while preserving explicit apply gates."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v501-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v502-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v501-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v502-debug.apk"
   },
   "version": {
-    "code": 501,
-    "name": "5.1.0",
-    "displayName": "v501"
+    "code": 502,
+    "name": "5.2.0",
+    "displayName": "v502"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v501-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v502-debug.apk"
   },
   "android": {
-    "code": 501,
-    "name": "5.1.0",
-    "displayName": "v501",
+    "code": 502,
+    "name": "5.2.0",
+    "displayName": "v502",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v501-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v502-debug.apk"
     },
     "version": {
-      "code": 501,
-      "name": "5.1.0",
-      "displayName": "v501"
+      "code": 502,
+      "name": "5.2.0",
+      "displayName": "v502"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v501-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v502-debug.apk"
   }
 }

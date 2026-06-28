@@ -1,5 +1,5 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=501";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=501";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=502";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=502";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION = "content-bulk-patch-backup-plan-v1";
 const FILE_BACKUP_REVIEW_BLOCKERS = Object.freeze([
@@ -32,6 +32,11 @@ export function createContentBulkPatchBackupPlan(
     "snapshot-not-created",
     "restore-not-tested",
   ];
+  const issueSummary = createBackupIssueSummary({
+    blockedReasons,
+    fileBackups,
+    preApplyReviewItems: applyGatePlan.reviewChecklist || [],
+  });
 
   return {
     version: CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION,
@@ -64,8 +69,11 @@ export function createContentBulkPatchBackupPlan(
       preApplyReviewItemCount: applyGatePlan.summary?.reviewItemCount || 0,
       preApplyBlockedReviewItemCount: applyGatePlan.summary?.blockedReviewItemCount || 0,
       preApplyWarningReviewItemCount: applyGatePlan.summary?.warningReviewItemCount || 0,
+      blockingIssueCount: issueSummary.blockingIssueCodes.length,
+      warningIssueCount: issueSummary.warningIssueCodes.length,
     },
     blockedReasons,
+    issueSummary,
     preApplyReviewSummary: {
       reviewItemCount: applyGatePlan.summary?.reviewItemCount || 0,
       readyReviewItemCount: applyGatePlan.summary?.readyReviewItemCount || 0,
@@ -81,6 +89,42 @@ export function createContentBulkPatchBackupPlan(
     backupSteps,
     restoreSteps,
     fileBackups,
+  };
+}
+
+function createBackupIssueSummary({ blockedReasons = [], fileBackups = [], preApplyReviewItems = [] } = {}) {
+  const blockingIssueCodes = new Set(blockedReasons);
+  const warningIssueCodes = new Set();
+  const affectedDomainIds = new Set();
+  let affectedFileCount = 0;
+
+  for (const file of fileBackups) {
+    const blockers = Array.isArray(file.reviewBlockerCodes) ? file.reviewBlockerCodes.filter(Boolean) : [];
+    if (!blockers.length) continue;
+    affectedFileCount += 1;
+    for (const code of blockers) blockingIssueCodes.add(code);
+    for (const domainId of file.domainIds || []) affectedDomainIds.add(domainId);
+  }
+
+  let affectedReviewItemCount = 0;
+  for (const item of preApplyReviewItems) {
+    if (item.state === "blocked") {
+      blockingIssueCodes.add(item.id);
+      affectedReviewItemCount += 1;
+    }
+    if (item.state === "review") {
+      warningIssueCodes.add(item.id);
+      affectedReviewItemCount += 1;
+    }
+  }
+
+  return {
+    blockingIssueCodes: [...blockingIssueCodes],
+    warningIssueCodes: [...warningIssueCodes],
+    affectedDomainCount: affectedDomainIds.size,
+    affectedRowCount: affectedFileCount,
+    affectedFileCount,
+    affectedReviewItemCount,
   };
 }
 
