@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=496";
+import { t, tf } from "../localization/index.js?v=497";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;

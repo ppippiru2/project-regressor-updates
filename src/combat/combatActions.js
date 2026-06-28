@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=496";
+import { t, tf } from "../localization/index.js?v=497";
 
 export function choosePlayerAction(player, state, skills, getSkill, hypMax, actionCooldowns = {}) {
   const hpRate = state.player.hp / player.maxHp;
@@ -20,15 +20,31 @@ export function choosePlayerAction(player, state, skills, getSkill, hypMax, acti
     if (state.stance === "berserk" && state.hyp < hypMax && state.hyperActiveTicks <= 0) return false;
     return true;
   });
-  return createPlayerCombatAction(selectAutoHuntAttackSkill(candidates, state), player);
+  const selection = selectAutoHuntAttackSkillChoice(candidates, state);
+  const action = createPlayerCombatAction(selection.skill, player);
+  if (selection.priority) action.autoPriority = selection.priority;
+  return action;
 }
 
 export function selectAutoHuntAttackSkill(candidates = [], state, now = Date.now()) {
-  if (!Array.isArray(candidates) || candidates.length === 0) return null;
-  if (!isTargetWeakForAutoHunt(state, now)) return candidates[0] || null;
-  return candidates
+  return selectAutoHuntAttackSkillChoice(candidates, state, now).skill;
+}
+
+export function selectAutoHuntAttackSkillChoice(candidates = [], state, now = Date.now()) {
+  if (!Array.isArray(candidates) || candidates.length === 0) return { skill: null, priority: null };
+  const defaultSkill = candidates[0] || null;
+  if (!isTargetWeakForAutoHunt(state, now)) return { skill: defaultSkill, priority: null };
+  const selectedSkill = candidates
     .map((skill, index) => ({ skill, index, score: weaknessAutoHuntSkillScore(skill) }))
     .sort((left, right) => right.score - left.score || left.index - right.index)[0]?.skill || null;
+  const priority = selectedSkill?.id && defaultSkill?.id && selectedSkill.id !== defaultSkill.id
+    ? {
+      type: "weakness",
+      selectedSkillId: selectedSkill.id,
+      replacedSkillId: defaultSkill.id,
+    }
+    : null;
+  return { skill: selectedSkill, priority };
 }
 
 export function weaknessAutoHuntSkillScore(skill) {

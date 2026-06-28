@@ -1174,6 +1174,7 @@ export const KO_KR_TEXT = {
     hit: "{criticalText}{actionName}{actionParticle} {monsterName}에게 {damage} 피해.",
     weaknessExposed: "{monsterName}의 약점이 드러났습니다. 반짝임이 사라지기 전 강한 스킬을 집중하십시오.",
     weaknessHit: "{skillName} 약점 집중 {count}타.",
+    autoWeaknessPriority: "자동 전투가 약점 노출에 맞춰 {skillName}을 우선 사용합니다.",
     actionParticleConsonant: "으로",
     actionParticleVowel: "로",
     actionParticleDefault: "으로",
@@ -1583,6 +1584,7 @@ export const KO_KR_TEXT = {
       critical: "치명타!",
       weaknessExposed: "약점 노출!",
       weaknessHit: "약점 집중!",
+      weaknessAutoPriority: "약점 우선!",
     },
     info: {
       touchDoubleTapHint: "터치 환경에서는 한 번 터치하면 설명이 보이고, 같은 실행 버튼을 한 번 더 터치하면 동작합니다.",

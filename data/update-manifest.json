@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 496,
-  "displayVersion": "v496",
-  "cacheVersion": "project-regressor-mvp-v496",
-  "updatedAt": "2026-06-29T00:31:00.000+09:00",
+  "versionCode": 497,
+  "displayVersion": "v497",
+  "cacheVersion": "project-regressor-mvp-v497",
+  "updatedAt": "2026-06-29T00:41:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=496&cachebust=496",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=497&cachebust=497",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v496 makes Auto Hunt prefer stronger offensive skills while weakness is exposed.",
-    "v496 keeps emergency recovery, MP, stance, and cooldown blockers ahead of weakness priority.",
-    "v496 adds a regression check for weakness Auto Hunt selection order."
+    "v497 adds a combat log and text hint when Auto Hunt changes skill priority during weakness exposure.",
+    "v497 deduplicates the weakness priority hint per target weakness window.",
+    "v497 extends regression checks for Auto Hunt priority feedback metadata."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
   },
   "version": {
-    "code": 496,
-    "name": "4.96.0",
-    "displayName": "v496"
+    "code": 497,
+    "name": "4.97.0",
+    "displayName": "v497"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
   },
   "android": {
-    "code": 496,
-    "name": "4.96.0",
-    "displayName": "v496",
+    "code": 497,
+    "name": "4.97.0",
+    "displayName": "v497",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
     },
     "version": {
-      "code": 496,
-      "name": "4.96.0",
-      "displayName": "v496"
+      "code": 497,
+      "name": "4.97.0",
+      "displayName": "v497"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
   }
 }
