@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=530";
-import { getLocaleText, t, tf } from "../localization/index.js?v=530";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=530";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=530";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=530";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=530";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=530";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=530";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=530";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=530";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=530";
+import { applyDomLocalization } from "../localization/domText.js?v=531";
+import { getLocaleText, t, tf } from "../localization/index.js?v=531";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=531";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=531";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=531";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=531";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=531";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=531";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=531";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=531";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=531";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=530";
+} from "./contentBulkPatchPackageAdapter.js?v=531";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=530";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=530";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=530";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=530";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=530";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=530";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=530";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=530";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=530";
+} from "./contentBulkPackageOverview.js?v=531";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=531";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=531";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=531";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=531";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=531";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=531";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=531";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=531";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=530";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=530";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=530";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=530";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=530";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=530";
+} from "./runtimeVfxBulkIntakePreview.js?v=531";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=531";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=531";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=531";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=531";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=531";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=530";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=530";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=530";
+} from "./monsterSpriteSlotReport.js?v=531";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=531";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=531";
 
-const EDITOR_VERSION = "530";
+const EDITOR_VERSION = "531";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5295,6 +5295,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditValidatorResultSchemaPreview(diagnostics)}
       ${renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics)}
       ${renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics)}
+      ${renderSaveSlotEditConfirmationInputContractPreview(diagnostics)}
     </section>
   `;
 }
@@ -5905,6 +5906,44 @@ function renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditConfirmationInputContractPreview(diagnostics) {
+  const contract = createSaveSlotEditConfirmationInputContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationInputContract || {};
+  return `
+    <section class="editor-save-edit-confirmation-contract" data-save-edit-confirmation-input-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
+      <div class="editor-save-edit-confirmation-contract-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit confirmation input contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-confirmation-contract-metrics">
+        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditConfirmationInputContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`), text.fieldHint || "")}
+        ${metricCard(text.guardMetric || "Guards", tf("editorPrep.saveEditConfirmationInputContract.guardValue", { count: contract.guardCount }, `${contract.guardCount}`), text.guardHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditConfirmationInputContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.runnerMetric || "Runner", contract.applyRunner.status, text.runnerHint || "")}
+      </div>
+      <div class="editor-save-edit-confirmation-contract-grid">
+        ${contract.fields.map((field) => renderSaveEditConfirmationInputContractField(field)).join("")}
+      </div>
+      <div class="editor-save-edit-confirmation-runner" data-save-edit-apply-runner-contract data-status="${escapeAttribute(contract.applyRunner.status)}">
+        <div>
+          <strong>${escapeHtml(text.runnerTitle || "Apply runner contract")}</strong>
+          <span>${escapeHtml(contract.applyRunner.status)}</span>
+        </div>
+        <div class="editor-chip-list">
+          ${contract.applyRunner.requires.map((item) => chip(item)).join("")}
+          ${contract.applyRunner.blockers.map((item) => chip(item)).join("")}
+        </div>
+      </div>
+      <pre class="editor-save-edit-confirmation-contract-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -6283,6 +6322,111 @@ function createSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics) {
   };
 }
 
+function createSaveSlotEditConfirmationInputContractPreview(diagnostics) {
+  const preflight = createSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationInputContract || {};
+  const fields = [
+    saveEditConfirmationInputContractField(
+      "confirmationPhrase",
+      text.fieldLabels?.confirmationPhrase,
+      "text-confirmation",
+      "not-created",
+      preflight.requiredPhrase,
+      "confirmation-input-missing",
+    ),
+    saveEditConfirmationInputContractField(
+      "confirmationMatch",
+      text.fieldLabels?.confirmationMatch,
+      "boolean-match-preview",
+      "not-evaluated",
+      "not-evaluated",
+      "confirmation-input-missing",
+    ),
+    saveEditConfirmationInputContractField(
+      "validatorResultState",
+      text.fieldLabels?.validatorResultState,
+      "readonly-result-state",
+      "blocked",
+      "not-produced",
+      "result-not-produced",
+    ),
+    saveEditConfirmationInputContractField(
+      "applyRunnerState",
+      text.fieldLabels?.applyRunnerState,
+      "readonly-runner-state",
+      "not-bound",
+      "not-bound",
+      "apply-runner-missing",
+    ),
+  ];
+  const guards = [
+    "confirmation-phrase-visible",
+    "confirmation-input-created",
+    "confirmation-match-verified",
+    "validator-results-valid",
+    "apply-runner-bound",
+    "writer-enabled",
+  ];
+  const blockers = Array.from(new Set([
+    ...fields.map((field) => field.blocker),
+    "confirmation-input-missing",
+    "apply-runner-missing",
+    "writer-disabled",
+  ]));
+  const applyRunner = {
+    status: "not-bound",
+    mode: "contract-only",
+    requires: guards,
+    blockers: ["apply-runner-missing", "writer-disabled"],
+    sideEffects: "disabled",
+  };
+  return {
+    status: "blocked",
+    version: "save-edit-confirmation-input-apply-runner-contract-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    requiredPhrase: preflight.requiredPhrase,
+    fieldCount: fields.length,
+    guardCount: guards.length,
+    blockerCount: blockers.length,
+    fields,
+    guards,
+    blockers,
+    applyRunner,
+    payloadShape: {
+      version: "save-edit-confirmation-input-apply-runner-contract-v1",
+      mode: "read-only-preview",
+      source: preflight.version,
+      confirmationInput: {
+        status: "not-created",
+        inputKind: "text-confirmation",
+        requiredPhrase: preflight.requiredPhrase,
+        match: "not-evaluated",
+      },
+      applyRunner: {
+        status: "not-bound",
+        mode: "contract-only",
+        requires: guards,
+        sideEffects: "disabled",
+      },
+      writer: "disabled",
+      apply: "disabled",
+      blockers,
+    },
+  };
+}
+
+function saveEditConfirmationInputContractField(id, label, inputKind, status, previewValue, blocker) {
+  return {
+    id,
+    label: label || id,
+    inputKind,
+    status,
+    previewValue,
+    blocker,
+  };
+}
+
 function saveEditValidatorConfirmationPreflightGroup(id, label, blockers) {
   const uniqueBlockers = Array.from(new Set(blockers.filter(Boolean)));
   return {
@@ -6612,6 +6756,32 @@ function renderSaveEditValidatorConfirmationPreflightCheck(check) {
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
       ${check.blocker ? chip(tf("editorPrep.saveEditValidatorConfirmationPreflight.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationInputContractField(field) {
+  const text = EDITOR_TEXT.saveEditConfirmationInputContract || {};
+  return `
+    <article class="editor-save-edit-confirmation-contract-field" data-save-edit-confirmation-input-field="${escapeAttribute(field.id)}" data-status="${escapeAttribute(field.status)}">
+      <div>
+        <strong>${escapeHtml(field.label)}</strong>
+        <span>${escapeHtml(field.status)}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.inputKind || "Input kind")}</dt>
+          <dd>${escapeHtml(field.inputKind)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.previewValue || "Preview")}</dt>
+          <dd>${escapeHtml(field.previewValue)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
+          <dd>${escapeHtml(field.blocker)}</dd>
+        </div>
+      </dl>
     </article>
   `;
 }
