@@ -2237,6 +2237,36 @@ export const KO_KR_TEXT = {
             reward_link: "보상 링크"
           }
         },
+        contentBulkPatchPackageAdapter: {
+          title: "대량 패키지 입력 변환",
+          description: "외부 ZIP/문서의 몬스터, 아이템, 스킬, 스킬룬 목록 키를 현재 공통 배치 형식으로 정규화합니다.",
+          version: "{version}",
+          sourceKeys: "원본 키",
+          recognizedKeys: "인식 키",
+          unmappedKeys: "미인식 키",
+          normalizedRows: "정규화 행",
+          stagedRows: "적용 후보",
+          withheldRows: "보류 행",
+          requiredChecks: "필수 검사",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          noMappings: "대량 패키지 매핑 없음",
+          sourceKeysForDomain: "인식된 원본 키",
+          acceptedAliases: "허용 별칭",
+          requiredInputs: "필수 입력",
+          identityFields: "식별 칸",
+          unmappedArrayKeys: "미인식 배열 키",
+          active: "입력 있음",
+          empty: "입력 없음",
+          domainMeta: "{batchKey} · {rows}행 · 별칭 {aliases}개",
+          domainLabels: {
+            monster: "몬스터",
+            equipment_item: "장비 아이템",
+            loot_item: "전리품/재료",
+            skill: "스킬",
+            reward_link: "보상 링크"
+          }
+        },
         contentBulkPatchDryRunImporter: {
           title: "대량 콘텐츠 dry-run 반영",
           description: "배치 파일을 실제 게임 데이터에 쓰기 전에 추가/갱신 후보, 차단 오류, 경고, 영향 표면을 읽기 전용으로 계산합니다.",

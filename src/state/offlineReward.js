@@ -1,7 +1,7 @@
 import { addInventoryItem } from "./inventory.js";
 import { rollMonsterDrops } from "./rewards.js";
-import { OFFLINE_REWARD_BALANCE } from "../balance/rewardBalance.js?v=457";
-import { tf } from "../localization/index.js?v=457";
+import { OFFLINE_REWARD_BALANCE } from "../balance/rewardBalance.js?v=458";
+import { tf } from "../localization/index.js?v=458";
 
 export function stampLastSeen(state, now = Date.now()) {
   state.lastSeenAt = now;

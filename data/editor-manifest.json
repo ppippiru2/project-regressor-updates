@@ -434,6 +434,7 @@
         "src/editor/balanceTuningPreview.js",
         "src/editor/contentBulkPatchAutomationPlan.js",
         "src/editor/contentBulkPatchIntakeContract.js",
+        "src/editor/contentBulkPatchPackageAdapter.js",
         "src/editor/contentBulkPatchDryRunImporter.js",
         "src/editor/contentBulkPatchStagedImportPreview.js",
         "src/editor/tutorialIslandPacingPreview.js",
@@ -504,6 +505,9 @@
         "candidateMonsterBulkPatchCoverage",
         "contentBulkPatchAutomationPlan",
         "contentBulkPatchIntakeContract",
+        "contentBulkPatchPackageAdapter",
+        "contentBulkPatchPackageMappings",
+        "contentBulkPatchPackageAliases",
         "contentBulkPatchDryRunImporter",
         "contentBulkPatchDomains",
         "contentBulkPatchBatchKeys",
@@ -532,6 +536,7 @@
         "후보 몬스터 대량 적용 자동화 표면",
         "대량 콘텐츠 적용 계약",
         "대량 콘텐츠 입력 계약",
+        "대량 패키지 입력 변환",
         "변경 전 읽기 전용 검증 리포트"
       ]
     },
@@ -1454,6 +1459,7 @@
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_DOMAIN_IDS",
       "src/editor/contentBulkPatchAutomationPlan.js:createContentBulkPatchAutomationPlan",
       "src/editor/contentBulkPatchIntakeContract.js:createContentBulkPatchIntakeContract",
+      "src/editor/contentBulkPatchPackageAdapter.js:createContentBulkPatchPackageAdapterPreview",
       "src/editor/contentBulkPatchDryRunImporter.js:createContentBulkPatchDryRunPreview",
       "src/editor/contentBulkPatchStagedImportPreview.js:createContentBulkPatchStagedImportPreview",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
@@ -1527,6 +1533,15 @@
       "guards": [
         "배치 키/식별 칸/필수 입력 칸",
         "누락 필드와 중복 ID 사전 차단"
+      ]
+    },
+    {
+      "id": "content-bulk-patch-package-adapter",
+      "label": "대량 패키지 입력 변환 검사",
+      "script": "build-scripts/check-content-bulk-patch-package-adapter.mjs",
+      "guards": [
+        "외부 ZIP/문서의 별칭 키를 공통 배치 키로 변환",
+        "몬스터/아이템/스킬/스킬룬 후보를 묶음 단위로 staged preview 연결"
       ]
     },
     {
@@ -1670,6 +1685,21 @@
       "expectedGeneratedSurfaceCount": 521,
       "expectedUniqueCheckCount": 10,
       "expectedAppendOrUpdateDomainCount": 5,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "contentBulkPatchPackageAdapter": {
+      "id": "content-bulk-patch-package-adapter-v1",
+      "source": "v458",
+      "sourceModule": "src/editor/contentBulkPatchPackageAdapter.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-package-adapter.mjs",
+      "expectedDomainCount": 5,
+      "expectedActiveDomainCount": 4,
+      "expectedTemplateSourceKeyCount": 4,
+      "expectedTemplateNormalizedRowCount": 4,
+      "expectedTemplateStagedRowCount": 4,
+      "expectedRequiredCheckCount": 9,
+      "requiresExplicitApply": true,
       "editorSummaryVisible": true,
       "writesGameData": false
     },
