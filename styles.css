@@ -5915,6 +5915,98 @@ select:focus {
   overflow-wrap: anywhere;
 }
 
+.editor-content-bulk-restore-rehearsal {
+  background: rgba(4, 18, 42, 0.56);
+  border: 1px solid rgba(181, 143, 255, 0.22);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-content-bulk-restore-rehearsal-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-content-bulk-restore-rehearsal-head h4,
+.editor-content-bulk-restore-rehearsal-head p {
+  margin: 0;
+}
+
+.editor-content-bulk-restore-rehearsal-head h4 {
+  color: #d5c3ff;
+  font-size: 0.95rem;
+}
+
+.editor-content-bulk-restore-rehearsal-head strong {
+  border: 1px solid rgba(181, 143, 255, 0.34);
+  border-radius: 999px;
+  color: #d5c3ff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-content-bulk-restore-rehearsal-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-content-bulk-restore-rehearsal-metrics span,
+.editor-content-bulk-restore-rehearsal-file {
+  background: rgba(1, 10, 28, 0.3);
+  border: 1px solid rgba(181, 143, 255, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-content-bulk-restore-rehearsal-metrics small,
+.editor-content-bulk-restore-rehearsal-file small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-content-bulk-restore-rehearsal-metrics b,
+.editor-content-bulk-restore-rehearsal-file strong {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-restore-rehearsal-grid,
+.editor-content-bulk-restore-rehearsal-files {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-content-bulk-restore-rehearsal-files > strong {
+  color: #d5c3ff;
+  font-size: 0.82rem;
+  grid-column: 1 / -1;
+}
+
+.editor-content-bulk-restore-rehearsal-file {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.editor-content-bulk-restore-rehearsal-file span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -9725,6 +9817,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-backup-plan-head,
   .editor-content-bulk-backup-plan-grid,
   .editor-content-bulk-backup-plan-files,
+  .editor-content-bulk-restore-rehearsal-head,
+  .editor-content-bulk-restore-rehearsal-grid,
+  .editor-content-bulk-restore-rehearsal-files,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -9750,6 +9845,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-apply-gate-metrics,
   .editor-content-bulk-backup-plan-metrics,
   .editor-content-bulk-backup-plan-artifacts,
+  .editor-content-bulk-restore-rehearsal-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

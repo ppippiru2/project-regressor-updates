@@ -2608,6 +2608,39 @@ export const KO_KR_TEXT = {
             "run-post-restore-checks": "복구 후 검사"
           }
         },
+        contentBulkPatchRestoreRehearsal: {
+          title: "대량 복구 리허설",
+          description: "실제 복구 writer는 아직 비활성입니다. 백업 대상 파일이 복구 액션으로 모두 매핑되는지 읽기 전용으로 확인합니다.",
+          version: "{version}",
+          targetFiles: "대상 파일",
+          mappedRestores: "복구 매핑",
+          missingRestores: "누락 복구",
+          restoreSteps: "복구 단계",
+          validationSteps: "검증",
+          restoreState: "복구 상태",
+          enabled: "활성",
+          disabled: "비활성",
+          blockedReasons: "차단 사유",
+          validationPlan: "리허설 검증",
+          restoreFilePreview: "복구 파일 미리보기",
+          emptyFiles: "복구 액션 없음",
+          blockedReasonLabels: {
+            "restore-writer-not-implemented": "복구 writer 미구현",
+            "actual-snapshot-not-created": "실제 스냅샷 미생성"
+          },
+          stateLabels: {
+            "pending-snapshot": "스냅샷 대기",
+            "mapped-to-restore": "복구 매핑 완료",
+            "pending-rehearsal": "리허설 대기"
+          },
+          validationLabels: {
+            "verify-snapshot-manifest-name": "스냅샷 목록 이름 확인",
+            "verify-all-target-files-mapped": "대상 파일 복구 매핑 확인",
+            "verify-restore-writer-disabled": "복구 writer 비활성 확인",
+            "run-quick-check": "빠른 검사",
+            "verify-local-http-after-rehearsal": "리허설 후 로컬 접속 확인"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",

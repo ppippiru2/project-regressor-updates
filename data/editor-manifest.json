@@ -443,6 +443,7 @@
         "src/editor/contentBulkPatchFilePatchDraftExport.js",
         "src/editor/contentBulkPatchApplyGatePlan.js",
         "src/editor/contentBulkPatchBackupPlan.js",
+        "src/editor/contentBulkPatchRestoreRehearsal.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -544,6 +545,8 @@
         "contentBulkPatchApplyGates",
         "contentBulkPatchBackupPlan",
         "contentBulkPatchBackupFiles",
+        "contentBulkPatchRestoreRehearsal",
+        "contentBulkPatchRestoreActions",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings",
@@ -570,7 +573,8 @@
         "대량 콘텐츠 파일별 patch 초안 내보내기",
         "대량 패키지 JSON 추출",
         "Content bulk apply gate skeleton",
-        "Content bulk backup snapshot plan"
+        "Content bulk backup snapshot plan",
+        "Content bulk restore rehearsal report"
       ]
     },
     {
@@ -1501,6 +1505,7 @@
       "src/editor/contentBulkPatchFilePatchDraftExport.js:createContentBulkPatchFilePatchDraftExport",
       "src/editor/contentBulkPatchApplyGatePlan.js:createContentBulkPatchApplyGatePlan",
       "src/editor/contentBulkPatchBackupPlan.js:createContentBulkPatchBackupPlan",
+      "src/editor/contentBulkPatchRestoreRehearsal.js:createContentBulkPatchRestoreRehearsal",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1668,6 +1673,18 @@
           "target file count matches export",
           "snapshot artifacts named",
           "quick check includes backup plan"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-restore-rehearsal",
+        "label": "Content bulk patch restore rehearsal",
+        "script": "build-scripts/check-content-bulk-patch-restore-rehearsal.mjs",
+        "guards": [
+          "restore writer disabled",
+          "all target files mapped",
+          "missing restore count zero",
+          "rehearsal only",
+          "quick check includes restore rehearsal"
         ]
       },
       {
@@ -1847,7 +1864,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v467",
+      "source": "v468",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1861,7 +1878,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v467",
+      "source": "v468",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1875,7 +1892,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v467",
+      "source": "v468",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -1960,7 +1977,7 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v467",
+      "source": "v468",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
@@ -1972,7 +1989,7 @@
     },
     "contentBulkPatchApplyGatePlan": {
       "id": "content-bulk-patch-apply-gate-plan-v1",
-      "source": "v467",
+      "source": "v468",
       "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
       "expectedGateCount": 6,
@@ -1986,7 +2003,7 @@
     },
     "contentBulkPatchBackupPlan": {
       "id": "content-bulk-patch-backup-plan-v1",
-      "source": "v467",
+      "source": "v468",
       "sourceModule": "src/editor/contentBulkPatchBackupPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
       "expectedTargetFileCount": 24,
@@ -1994,6 +2011,21 @@
       "expectedRestoreStepCount": 4,
       "backupEnabled": false,
       "restoreEnabled": false,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "contentBulkPatchRestoreRehearsal": {
+      "id": "content-bulk-patch-restore-rehearsal-v1",
+      "source": "v468",
+      "sourceModule": "src/editor/contentBulkPatchRestoreRehearsal.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-restore-rehearsal.mjs",
+      "expectedTargetFileCount": 24,
+      "expectedMappedRestoreCount": 24,
+      "expectedMissingRestoreCount": 0,
+      "restoreEnabled": false,
+      "rehearsalOnly": true,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,
