@@ -3788,6 +3788,77 @@ select:focus {
   line-height: 1.45;
 }
 
+.editor-save-draft {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 16, 40, 0.42);
+  padding: 0.85rem;
+}
+
+.editor-save-draft-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-draft h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-draft-head span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-draft-metrics,
+.editor-save-draft-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.editor-save-draft-group {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(3, 13, 34, 0.55);
+  padding: 0.7rem;
+}
+
+.editor-save-draft-group strong {
+  color: var(--text);
+  font-size: 0.84rem;
+}
+
+.editor-save-draft-code {
+  max-height: 18rem;
+  overflow: auto;
+  margin: 0;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(2, 8, 20, 0.72);
+  color: var(--cyan);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  padding: 0.75rem;
+  white-space: pre;
+}
+
 .editor-detail-header,
 .editor-backlog-head,
 .editor-asset-card {
@@ -10928,6 +10999,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-save-diagnostics-grid,
   .editor-save-validation-metrics,
   .editor-save-validation-grid,
+  .editor-save-draft-metrics,
+  .editor-save-draft-grid,
   .editor-panel-nav {
     grid-template-columns: 1fr;
   }

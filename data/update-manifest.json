@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 515,
-  "displayVersion": "v515",
-  "cacheVersion": "515",
-  "updatedAt": "2026-06-29T03:28:23.624+09:00",
+  "versionCode": 516,
+  "displayVersion": "v516",
+  "cacheVersion": "516",
+  "updatedAt": "2026-06-29T03:36:24.325+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=515&cachebust=515",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=516&cachebust=516",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "저장 데이터 편집 전 검증 조건과 롤백 스냅샷 준비 상태를 읽기 전용 계약으로 표시합니다.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk",
+  "notes": "저장 편집 writer 전에 허용 대상과 필드 경로를 staged draft payload로 미리 표시합니다.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v516-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v516-debug.apk"
   },
-  "version": "5.15.0",
+  "version": "5.16.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v516-debug.apk"
   },
   "android": {
-    "code": 515,
-    "name": "5.15.0",
-    "displayName": "v515",
+    "code": 516,
+    "name": "5.16.0",
+    "displayName": "v516",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v516-debug.apk"
     },
     "version": {
-      "code": 515,
-      "name": "5.15.0",
-      "displayName": "v515"
+      "code": 516,
+      "name": "5.16.0",
+      "displayName": "v516"
     },
-    "versionCode": 515,
-    "versionName": "5.15.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-release.apk"
+    "versionCode": 516,
+    "versionName": "5.16.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v516-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v516-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v515-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v516-debug.apk"
   },
-  "versionName": "5.15.0"
+  "versionName": "5.16.0"
 }
