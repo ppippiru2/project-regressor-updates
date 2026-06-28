@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=477";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=477";
+import { getLocaleText } from "../localization/index.js?v=478";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=478";
 
 const WORLD_TEXT = getLocaleText().data;
 const MONSTER_NAMES = WORLD_TEXT.monsters;
@@ -110,5 +110,6 @@ export const gateMaps = [
     ],
   },
 ];
+
 
 

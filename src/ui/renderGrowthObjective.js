@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=477";
+import { t, tf } from "../localization/index.js?v=478";
 
 export function renderGrowthObjective(objective, uiState = {}, handlers = {}) {
   const container = document.getElementById("growth-objective");
@@ -145,5 +145,6 @@ function isObjectiveCollapsed(objective, uiState) {
   const key = objective?.id || objective?.state;
   return Boolean(key && uiState.collapsedObjectives?.includes(key));
 }
+
 
 

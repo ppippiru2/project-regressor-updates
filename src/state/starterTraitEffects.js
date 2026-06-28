@@ -1,4 +1,4 @@
-import { STARTER_TRAIT_BONUSES } from "../balance/playerGrowthBalance.js?v=477";
+import { STARTER_TRAIT_BONUSES } from "../balance/playerGrowthBalance.js?v=478";
 
 const STARTER_CARD_TRAIT_IDS = {
   starter_weapon_sense: "lower_weapon_mastery",
@@ -14,5 +14,6 @@ export function starterTraitStatBonuses(playerProfile = {}) {
     Object.entries(bonus).filter(([, value]) => Number.isFinite(value) && value !== 0)
   );
 }
+
 
 

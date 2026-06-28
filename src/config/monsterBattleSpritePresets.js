@@ -1,4 +1,4 @@
-import { MONSTER_RUNTIME_INTEGRATION_PACK_VERSION } from "./monsterRuntimeIntegrationPresets.js?v=477";
+import { MONSTER_RUNTIME_INTEGRATION_PACK_VERSION } from "./monsterRuntimeIntegrationPresets.js?v=478";
 
 const DEFAULT_MONSTER_BATTLE_SPRITE_PRESET = Object.freeze({
   monsterId: "default",
@@ -590,4 +590,5 @@ function boundedNumber(value, min, max, fallback) {
   if (!Number.isFinite(numeric)) return fallback;
   return Math.min(max, Math.max(min, numeric));
 }
+
 

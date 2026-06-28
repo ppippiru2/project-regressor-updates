@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=477";
+import { t, tf } from "../localization/index.js?v=478";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
@@ -257,5 +257,6 @@ function usesClearSpriteFrame() {
   const params = new URLSearchParams(window.location.search);
   return params.get("spriteFramePreview") !== "default";
 }
+
 
 

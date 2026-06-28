@@ -2,7 +2,7 @@ import {
   INITIAL_CREATION_STAT_BALANCE,
   PLAYER_INITIAL_STATS,
   STATUS_GRADE_ORDER,
-} from "../balance/playerGrowthBalance.js?v=477";
+} from "../balance/playerGrowthBalance.js?v=478";
 
 export const STATUS_GRADE_BASELINE_TOTAL = INITIAL_CREATION_STAT_BALANCE.total;
 export const STATUS_GRADE_STAT_KEYS = Object.freeze(Object.keys(PLAYER_INITIAL_STATS));
@@ -61,5 +61,6 @@ function safeNumber(value, fallback) {
   const number = Number(value);
   return Number.isFinite(number) ? number : fallback;
 }
+
 
 

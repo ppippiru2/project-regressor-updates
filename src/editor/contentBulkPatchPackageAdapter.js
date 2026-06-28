@@ -1,8 +1,8 @@
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=477";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=478";
 import {
   CONTENT_BULK_PATCH_BATCH_KEYS,
   createContentBulkPatchIntakeContract,
-} from "./contentBulkPatchIntakeContract.js?v=477";
+} from "./contentBulkPatchIntakeContract.js?v=478";
 
 export const CONTENT_BULK_PATCH_PACKAGE_ADAPTER_VERSION = "content-bulk-patch-package-adapter-v1";
 
@@ -346,4 +346,5 @@ function firstValue(...values) {
 function isObjectRecord(value) {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
+
 

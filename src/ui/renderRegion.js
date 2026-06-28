@@ -4,9 +4,9 @@ import {
   gateNodeTypeIcon,
   gateNodeTypeIconKey,
   gateNodeTypeLabel,
-} from "../config/gateNodeTypes.js?v=477";
-import { t, tf } from "../localization/index.js?v=477";
-import { buildRegionCoreEventProgress } from "../story/coreEventCatalog.js?v=477";
+} from "../config/gateNodeTypes.js?v=478";
+import { t, tf } from "../localization/index.js?v=478";
+import { buildRegionCoreEventProgress } from "../story/coreEventCatalog.js?v=478";
 
 const stableHtmlCache = new WeakMap();
 
@@ -354,5 +354,6 @@ function setStableInnerHtml(element, nextHtml) {
   element.innerHTML = nextHtml;
   stableHtmlCache.set(element, nextHtml);
 }
+
 
 

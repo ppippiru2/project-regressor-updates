@@ -1,8 +1,8 @@
-import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=477";
-import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=477";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=477";
-import { t, tf } from "../localization/index.js?v=477";
-import { renderPortraitImagePreview } from "./portraitFrameView.js?v=477";
+import { RESISTANCE_STATS } from "../state/resistanceCatalog.js?v=478";
+import { allocatedFreeStatPoints } from "../state/statAllocation.js?v=478";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=478";
+import { t, tf } from "../localization/index.js?v=478";
+import { renderPortraitImagePreview } from "./portraitFrameView.js?v=478";
 
 const PROFILE_FIELDS = [
   ["statusUi.profileFields.name", "name", "profile:name"],
@@ -204,5 +204,6 @@ function escapeHtml(value) {
     return entities[char];
   });
 }
+
 
 

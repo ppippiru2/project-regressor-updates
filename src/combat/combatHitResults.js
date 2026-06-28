@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=477";
+import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=478";
 
 export function advanceHitCombo(state, now = Date.now()) {
   state.hitCount += 1;
@@ -29,5 +29,6 @@ export function applySkillBreakDamage(targetState, skill, clampValue) {
   );
   return { triggered: beforeBreak > 0 && targetState.breakGauge === 0 };
 }
+
 
 

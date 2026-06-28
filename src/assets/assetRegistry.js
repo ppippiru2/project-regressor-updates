@@ -1,5 +1,5 @@
-import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=477";
-import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=477";
+import { ASSET_MANIFEST, ASSET_SLOTS } from "./assetData.js?v=478";
+import { monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=478";
 
 const ASSET_DATA_VERSION = "461";
 
@@ -74,5 +74,6 @@ async function fetchJson(fetcher, path) {
   if (!response.ok) throw new Error(`Failed to load ${path}`);
   return response.json();
 }
+
 
 

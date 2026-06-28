@@ -1,4 +1,4 @@
-import { KO_KR_TEXT } from "./ko-KR.js?v=477";
+import { KO_KR_TEXT } from "./ko-KR.js?v=478";
 
 export const DEFAULT_LOCALE = "ko-KR";
 
@@ -30,5 +30,6 @@ export function formatText(template, values = {}) {
 export function tf(path, values = {}, fallback = "", locale = DEFAULT_LOCALE) {
   return formatText(t(path, fallback, locale), values);
 }
+
 
 

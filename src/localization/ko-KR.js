@@ -2253,6 +2253,7 @@ export const KO_KR_TEXT = {
           reviewSurfaces: "검토 표면",
           jumpToDetail: "이동",
           stateFilter: "대량 후보 상태 필터",
+          domainFilter: "대량 후보 분야 필터",
           searchLabel: "후보 검색",
           searchPlaceholder: "몬스터, 아이템, 스킬, 파일명",
           resetSearch: "검색 초기화",
@@ -2280,11 +2281,14 @@ export const KO_KR_TEXT = {
             "runtime-vfx": "런타임 VFX"
           },
           domainLabels: {
+            all: "전체 분야",
             monster: "몬스터",
             equipment_item: "장비 아이템",
             loot_item: "전리품/재료",
             skill: "스킬",
-            reward_link: "보상 링크"
+            reward_link: "보상 링크",
+            monster_runtime: "몬스터 런타임",
+            runtime_vfx: "런타임 VFX"
           }
         },
         contentBulkPatchPackageAdapter: {

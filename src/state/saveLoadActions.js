@@ -1,6 +1,6 @@
 import { parseSavePayload, serializeSavePayload } from "./save.js";
 import { downloadSavePayload } from "./saveDownload.js";
-import { t } from "../localization/index.js?v=477";
+import { t } from "../localization/index.js?v=478";
 
 const EXPORT_SAVE_MESSAGE = t("saveLoad.exportMessage");
 const IMPORT_SAVE_MESSAGE = t("saveLoad.importMessage");
@@ -33,5 +33,6 @@ export function applyImportedUiState(uiState, importedUiState) {
   uiState.selectedRegionId = importedUiState.selectedRegionId;
   return true;
 }
+
 
 

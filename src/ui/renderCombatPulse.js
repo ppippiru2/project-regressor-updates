@@ -1,5 +1,5 @@
 import { clamp } from "../combat/combatFormula.js";
-import { t, tf } from "../localization/index.js?v=477";
+import { t, tf } from "../localization/index.js?v=478";
 
 export function renderHitCounter(state) {
   const hitCounter = document.getElementById("hit-counter");
@@ -78,5 +78,6 @@ function getEnemyHyperEdgeProgress(combatRuntime, hypMax) {
   if (combatRuntime.enemyHyperCooldown > 0) return 0;
   return clamp(combatRuntime.enemyHyp || 0, 0, hypMax);
 }
+
 
 

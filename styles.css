@@ -5124,6 +5124,14 @@ select:focus {
   min-width: 0;
 }
 
+.editor-content-bulk-domain-filter {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
 .editor-content-bulk-filter-button b {
   color: #58e1ff;
   font-size: 0.66rem;

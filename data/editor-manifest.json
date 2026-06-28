@@ -2101,8 +2101,8 @@
       "writesGameData": false
     },
     "contentBulkPackageOverview": {
-      "id": "content-bulk-package-overview-v5",
-      "source": "v477",
+      "id": "content-bulk-package-overview-v6",
+      "source": "v478",
       "sourceModule": "src/editor/contentBulkPackageOverview.js",
       "checkScript": "build-scripts/check-content-bulk-package-overview.mjs",
       "expectedPackageRowCount": 7,
@@ -2118,7 +2118,9 @@
       "supportsDrilldownRowTargets": true,
       "supportsRowStateFilter": true,
       "supportsRowTextSearch": true,
+      "supportsRowDomainFilter": true,
       "expectedRowStateFilterCount": 6,
+      "expectedRowDomainFilterCount": 8,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,

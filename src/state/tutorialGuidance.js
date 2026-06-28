@@ -1,6 +1,6 @@
-import { t, tf } from "../localization/index.js?v=477";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=477";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=477";
+import { t, tf } from "../localization/index.js?v=478";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=478";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=478";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,
@@ -94,5 +94,6 @@ function validTutorialFlagOverrides(source) {
     })
   );
 }
+
 
 

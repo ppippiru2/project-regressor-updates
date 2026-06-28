@@ -1,4 +1,4 @@
-import { normalizePortraitFrame } from "../state/portraitFrame.js?v=477";
+import { normalizePortraitFrame } from "../state/portraitFrame.js?v=478";
 
 export function applyPortraitFrameToElement(element, frame) {
   if (!element) return normalizePortraitFrame(frame);
@@ -59,5 +59,6 @@ function escapeAttr(value) {
     "'": "&#39;",
   })[char]);
 }
+
 
 

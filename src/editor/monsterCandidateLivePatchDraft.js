@@ -1,11 +1,11 @@
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=477";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=478";
 import {
   candidateMonsterRewardLinkFor,
   TUTORIAL_MONSTER_POOL_DATA,
-} from "../balance/monsterCandidatePool.js?v=477";
-import { lootItems } from "../data/itemData.js?v=477";
-import { regions } from "../data/worldData.js?v=477";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=477";
+} from "../balance/monsterCandidatePool.js?v=478";
+import { lootItems } from "../data/itemData.js?v=478";
+import { regions } from "../data/worldData.js?v=478";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=478";
 
 export const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT_VERSION = "monster-candidate-live-patch-draft-v1";
 
@@ -122,4 +122,5 @@ function scaleReward(value, sourceLevel, candidateLevel, weight) {
 function clampChance(value, min, max) {
   return Number(Math.min(max, Math.max(min, value)).toFixed(3));
 }
+
 

@@ -70,6 +70,7 @@
         "styles.css:.editor-content-bulk-overview-jump",
         "styles.css:.editor-content-bulk-filter",
         "styles.css:.editor-content-bulk-search",
+        "styles.css:.editor-content-bulk-domain-filter",
         "styles.css:.editor-content-bulk-package-domain:target",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchPackageAdapter",
         "data/editor-manifest.json:balanceTuningRegistry.lootSkillBulkIntakePreview",

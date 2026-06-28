@@ -1,8 +1,8 @@
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=477";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=477";
+} from "./contentBulkPatchPackageAdapter.js?v=478";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=478";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_EXPORT_VERSION = "content-bulk-patch-file-patch-draft-export-v1";
 
@@ -87,4 +87,5 @@ function createPatchDraftPayload(draft, context) {
     })),
   };
 }
+
 

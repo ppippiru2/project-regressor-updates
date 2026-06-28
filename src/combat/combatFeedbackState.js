@@ -1,4 +1,4 @@
-import { MAX_COMBAT_EFFECTS } from "./combatDisplayConfig.js?v=477";
+import { MAX_COMBAT_EFFECTS } from "./combatDisplayConfig.js?v=478";
 
 export function shouldShowCombatText(feedbackSettings, type) {
   if (type === "damage" && !feedbackSettings.damage) return false;
@@ -46,5 +46,6 @@ export function queueCombatTextEffect(
     placement,
   });
 }
+
 
 

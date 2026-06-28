@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=477";
+import { getLocaleText } from "../localization/index.js?v=478";
 
 const SHOP_TEXT = getLocaleText().data;
 const SHOP_CATEGORIES = SHOP_TEXT.shopCategories;
@@ -80,5 +80,6 @@ export const shopCatalog = [
     note: SHOP_NOTES.shop_regressor_charm,
   },
 ];
+
 
 

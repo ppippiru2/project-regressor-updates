@@ -1,5 +1,5 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=477";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=477";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=478";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=478";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION = "content-bulk-patch-backup-plan-v1";
 
@@ -74,4 +74,5 @@ function createFileBackups(exportPreview) {
     restoreState: "pending-restore-test",
   }));
 }
+
 

@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=477";
-import { portraitFrameFromFormData } from "./portraitFrame.js?v=477";
+import { getLocaleText } from "../localization/index.js?v=478";
+import { portraitFrameFromFormData } from "./portraitFrame.js?v=478";
 
 export function buildPlayerProfileInput(formData, defaultProfile) {
   return {
@@ -58,5 +58,6 @@ export function resolveAlignment(answers) {
     chaotic: alignmentText.chaotic,
   }[best] || alignmentText.neutral;
 }
+
 
 
