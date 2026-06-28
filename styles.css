@@ -2458,6 +2458,34 @@ select:focus {
   box-shadow: 0 0 20px rgba(244, 211, 94, 0.28), inset 0 0 18px rgba(244, 211, 94, 0.14);
 }
 
+.skill-button.is-weakness-priority {
+  border-color: rgba(255, 242, 168, 0.92);
+  box-shadow:
+    0 0 18px rgba(244, 211, 94, 0.34),
+    inset 0 0 18px rgba(244, 211, 94, 0.14);
+}
+
+.skill-button-weakness {
+  position: absolute;
+  top: 0.16rem;
+  right: 0.18rem;
+  z-index: 2;
+  max-width: calc(100% - 0.36rem);
+  overflow: hidden;
+  padding: 0.08rem 0.24rem;
+  border: 1px solid rgba(255, 242, 168, 0.72);
+  border-radius: 3px;
+  background: rgba(34, 23, 2, 0.82);
+  color: #fff2a8;
+  font-size: 0.56rem;
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 8px rgba(244, 211, 94, 0.56);
+  white-space: nowrap;
+}
+
 .skill-button.is-flashing {
   border-color: #fff5a8;
   color: #fff5a8;
@@ -2512,6 +2540,10 @@ select:focus {
 .battlefield[data-card-layout="stage"] .skill-button-state {
   font-size: 0.64rem;
   width: 100%;
+}
+
+.battlefield[data-card-layout="stage"] .skill-button-weakness {
+  font-size: 0.5rem;
 }
 
 .skill-loadout-tabs {

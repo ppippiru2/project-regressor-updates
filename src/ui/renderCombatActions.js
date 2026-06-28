@@ -1,4 +1,5 @@
-import { t, tf } from "../localization/index.js?v=511";
+import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=512";
+import { t, tf } from "../localization/index.js?v=512";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;
@@ -31,6 +32,7 @@ export function renderCombatSkillsIfNeeded(player, context) {
       ? `${context.combatRuntime.lastActionId || ""}:${context.combatRuntime.actionFlashUntil || 0}`
       : "";
   const inputLocked = context.combatRuntime.inputLocked === true;
+  const weaknessUiKey = combatWeaknessSkillUiKey(context.state, now);
   const availabilityKey = context
     .combatActionList()
     .map((action) => {
@@ -53,6 +55,7 @@ export function renderCombatSkillsIfNeeded(player, context) {
     loadoutKey,
     flashActionId,
     availabilityKey,
+    weaknessUiKey,
   ].join(";");
 
   if (key === lastCombatSkillsRenderKey) return;
@@ -70,14 +73,21 @@ function renderCombatSkills(player, context) {
     ? context.getCombatAction(context.combatRuntime.visibleActionInfoId)
     : null;
 
-  const buttons = context
+  const actionEntries = context
     .combatActionList()
     .slice(0, COMBAT_SKILL_SLOT_COUNT)
-    .map((action) => {
-      const availability = context.skillAvailability(action, player, false);
+    .map((action) => ({
+      action,
+      availability: context.skillAvailability(action, player, false),
+    }));
+  const weaknessPriorityActionId = combatWeaknessPriorityActionId(actionEntries, context.state, now);
+  const buttons = actionEntries
+    .map(({ action, availability }) => {
       const selected = visibleAction && action.id === visibleAction.id;
       const lastUsed = context.combatRuntime.lastActionId === action.id;
       const flashing = lastUsed && now < context.combatRuntime.actionFlashUntil;
+      const weaknessPriority = action.id === weaknessPriorityActionId;
+      const weaknessPriorityLabel = weaknessPriority ? t("combatActions.weaknessPriority") : "";
       const infoParts = actionInfoParts(action, context, availability);
       const buttonMeta = actionButtonMeta(action, availability);
       const usable = availability.available && !inputLocked;
@@ -88,15 +98,17 @@ function renderCombatSkills(player, context) {
         selected ? "is-selected" : "",
         lastUsed ? "is-last-used" : "",
         flashing ? "is-flashing" : "",
+        weaknessPriority ? "is-weakness-priority" : "",
       ]
         .filter(Boolean)
         .join(" ");
-      const ariaLabel = `${action.name}. ${action.description}. ${infoParts.join(" · ")}`;
+      const ariaLabel = `${action.name}. ${action.description}. ${infoParts.join(" · ")}${weaknessPriorityLabel ? ` · ${weaknessPriorityLabel}` : ""}`;
 
-      return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-combat-action="${escapeHtml(action.id)}" data-last-used="${lastUsed}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}" aria-disabled="${usable ? "false" : "true"}" ${inputLocked ? "disabled" : ""}>
+      return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-combat-action="${escapeHtml(action.id)}" data-last-used="${lastUsed}" data-weakness-priority="${weaknessPriority ? "true" : "false"}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}" aria-disabled="${usable ? "false" : "true"}" ${inputLocked ? "disabled" : ""}>
         <span class="skill-button-name">${escapeHtml(action.name)}</span>
         <small class="skill-button-meta">${escapeHtml(buttonMeta.meta)}</small>
         <small class="skill-button-state ${availability.available ? "is-ready" : "is-blocked"}">${escapeHtml(buttonMeta.state)}</small>
+        ${weaknessPriorityLabel ? `<span class="skill-button-weakness" aria-hidden="true">${escapeHtml(weaknessPriorityLabel)}</span>` : ""}
       </button>`;
     })
     .join("");
@@ -164,6 +176,27 @@ function actionButtonMeta(action, availability) {
     meta,
     state,
   };
+}
+
+function combatWeaknessPriorityActionId(actionEntries, state, now = Date.now()) {
+  if (combatWeaknessSkillUiKey(state, now) === "weakness:idle") return "";
+  const best = actionEntries
+    .map(({ action, availability }, index) => ({
+      action,
+      index,
+      score: availability?.available && action?.id !== "basic_attack" && action?.damageType !== "support"
+        ? weaknessAutoHuntSkillScore(action)
+        : -Infinity,
+    }))
+    .filter((entry) => Number.isFinite(entry.score))
+    .sort((left, right) => right.score - left.score || left.index - right.index)[0];
+  return best?.action?.id || "";
+}
+
+function combatWeaknessSkillUiKey(state, now = Date.now()) {
+  const weaknessUntil = Number(state?.target?.weaknessUntil || 0);
+  if (!state?.inCombat || !weaknessUntil || weaknessUntil <= now) return "weakness:idle";
+  return `weakness:${Math.floor(weaknessUntil)}:${Number(state.target.weaknessStrikeCount || 0)}`;
 }
 
 function actionCostText(action) {
