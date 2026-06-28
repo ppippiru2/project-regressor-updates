@@ -1,39 +1,40 @@
-import { applyDomLocalization } from "../localization/domText.js?v=469";
-import { getLocaleText, t, tf } from "../localization/index.js?v=469";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=469";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=469";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=469";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=469";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=469";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=469";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=469";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=469";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=469";
+import { applyDomLocalization } from "../localization/domText.js?v=470";
+import { getLocaleText, t, tf } from "../localization/index.js?v=470";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=470";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=470";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=470";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=470";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=470";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=470";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=470";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=470";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=470";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=469";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=469";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=469";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=469";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=469";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=469";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=469";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=469";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=469";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=469";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=469";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=469";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=469";
+} from "./contentBulkPatchPackageAdapter.js?v=470";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=470";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=470";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=470";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=470";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=470";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=470";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=470";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=470";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=470";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=470";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=470";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=470";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=470";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=469";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=469";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=469";
+} from "./monsterSpriteSlotReport.js?v=470";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=470";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=470";
 
-const EDITOR_VERSION = "469";
+const EDITOR_VERSION = "470";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -1325,6 +1326,7 @@ function renderBalanceTuningDetail() {
       ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
       ${renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText)}
       ${renderContentBulkPatchPackageAdapterPreview(contentBulkPatchPackageAdapterPreview, detailText)}
+      ${renderLootSkillBulkIntakePreview(createLootSkillBulkIntakePreview(contentBulkPatchPackageAdapterPreview), detailText)}
       ${renderMonsterRuntimeBulkIntakePreview(MONSTER_RUNTIME_BULK_INTAKE_PREVIEW, detailText)}
       ${renderContentBulkPatchDryRunPreview(CONTENT_BULK_PATCH_DRY_RUN_PREVIEW, detailText)}
       ${renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText)}
@@ -2522,6 +2524,106 @@ function renderContentBulkPatchPackageMapping(mapping, text = {}) {
       </div>
     </article>
   `;
+}
+
+function renderLootSkillBulkIntakePreview(preview, detailText = {}) {
+  const text = detailText.lootSkillBulkIntakePreview || {};
+  const summary = preview.summary || {};
+  const metrics = [
+    [text.lootRows || "Loot rows", `${summary.lootRowCount || 0}`],
+    [text.skillRows || "Skill rows", `${summary.skillRowCount || 0}`],
+    [text.codexFragments || "Codex fragments", `${summary.codexFragmentCount || 0}`],
+    [text.manaCrystals || "Mana crystals", `${summary.manaCrystalCount || 0}`],
+    [text.skillFragments || "Skill fragments", `${summary.skillFragmentCount || 0}`],
+    [text.skillRunes || "Skill runes", `${summary.skillRuneCount || 0}`],
+    [text.rewardLinked || "Reward linked", `${summary.rewardLinkedLootCount || 0}`],
+    [text.missingSkillDefinitions || "Missing skill defs", `${summary.missingSkillDefinitionCount || 0}`],
+    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
+    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-loot-skill-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Loot and skill bulk intake")}">
+      <div class="editor-loot-skill-bulk-intake-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Loot and skill bulk intake")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Classifies non-equipment loot and skill rows from the shared bulk package preview.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.lootSkillBulkIntakePreview.version", {
+          version: preview.version || "-"
+        }, preview.version || "-"))}</strong>
+      </div>
+      <div class="editor-loot-skill-bulk-intake-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-loot-skill-bulk-intake-list">
+        ${(preview.lootRows || []).map((row) => renderLootSkillBulkLootRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noLootRows || "No loot rows.")}</p>`}
+      </div>
+      <div class="editor-loot-skill-bulk-intake-list">
+        ${(preview.skillRows || []).map((row) => renderLootSkillBulkSkillRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noSkillRows || "No skill rows.")}</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderLootSkillBulkLootRow(row, text = {}) {
+  const stateLabels = text.stateLabels || {};
+  const typeLabels = text.typeLabels || {};
+  const bulkLabels = text.bulkStateLabels || {};
+  return `
+    <article class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.intakeState || "unknown")}">
+      <div class="editor-loot-skill-bulk-intake-row-head">
+        <div>
+          <h5>${escapeHtml(row.id || "-")}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.lootSkillBulkIntakePreview.lootMeta", {
+            type: lootSkillBulkLabel(row.type, typeLabels),
+            rarity: row.rarity || "-",
+            state: lootSkillBulkLabel(row.bulkState, bulkLabels),
+          }, `${row.type || "-"} / ${row.rarity || "-"}`))}</p>
+        </div>
+        <span>${escapeHtml(lootSkillBulkLabel(row.intakeState, stateLabels))}</span>
+      </div>
+      <div class="editor-loot-skill-bulk-intake-grid">
+        ${balanceDetailChipBlock(text.skillLink || "Skill link", [row.skillId || (text.none || "None")])}
+        ${balanceDetailChipBlock(text.dropSource || "Drop source", [row.dropSource || (text.globalSource || "Global")])}
+        ${balanceDetailChipBlock(text.codexRecordTarget || "Codex target", row.recordTarget > 0 ? [`${row.recordTarget}`] : [])}
+        ${balanceDetailChipBlock(text.rewardLink || "Reward link", [row.rewardLinked ? (text.linked || "Linked") : (text.unlinked || "Unlinked")])}
+      </div>
+    </article>
+  `;
+}
+
+function renderLootSkillBulkSkillRow(row, text = {}) {
+  const bulkLabels = text.bulkStateLabels || {};
+  return `
+    <article class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.bulkState || "unknown")}">
+      <div class="editor-loot-skill-bulk-intake-row-head">
+        <div>
+          <h5>${escapeHtml(row.id || "-")}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.lootSkillBulkIntakePreview.skillMeta", {
+            type: row.type || "-",
+            mp: row.mpCost || 0,
+            cooldown: row.cooldown || 0,
+            state: lootSkillBulkLabel(row.bulkState, bulkLabels),
+          }, `${row.type || "-"} / ${row.mpCost || 0}`))}</p>
+        </div>
+        <span>${escapeHtml(lootSkillBulkLabel(row.bulkState, bulkLabels))}</span>
+      </div>
+      <div class="editor-loot-skill-bulk-intake-grid">
+        ${balanceDetailChipBlock(text.damageType || "Damage", [row.damageType || "-"])}
+        ${balanceDetailChipBlock(text.effectType || "Effect", [row.effectType || "-"])}
+        ${balanceDetailChipBlock(text.stances || "Stances", row.stanceAllowed || [])}
+      </div>
+    </article>
+  `;
+}
+
+function lootSkillBulkLabel(id, labels = {}) {
+  return labels?.[id] || id || "unknown";
 }
 
 function renderMonsterRuntimeBulkIntakePreview(preview, detailText = {}) {

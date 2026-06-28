@@ -1,8 +1,8 @@
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=469";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=470";
 import {
   CONTENT_BULK_PATCH_BATCH_KEYS,
   createContentBulkPatchIntakeContract,
-} from "./contentBulkPatchIntakeContract.js?v=469";
+} from "./contentBulkPatchIntakeContract.js?v=470";
 
 export const CONTENT_BULK_PATCH_PACKAGE_ADAPTER_VERSION = "content-bulk-patch-package-adapter-v1";
 
@@ -66,7 +66,7 @@ export function createContentBulkPatchPackageAdapterTemplate() {
         visualBaseId: "shore_imp",
         codexFragmentId: "bulk_sample_imp_codex_fragment",
         materialItemIds: ["low_mana_crystal_fragment"],
-        skillItemIds: ["power_slash_skill_fragment"],
+        skillItemIds: ["bulk_sample_skill_rune"],
       },
     ],
     skillRunes: [
@@ -95,7 +95,7 @@ export function createContentBulkPatchPackageAdapterTemplate() {
         monsterId: "bulk_sample_imp",
         codexFragmentId: "bulk_sample_imp_codex_fragment",
         materialItemIds: ["low_mana_crystal_fragment"],
-        skillItemIds: ["power_slash_skill_fragment"],
+        skillItemIds: ["bulk_sample_skill_rune"],
         dropChance: 1,
       },
     ],

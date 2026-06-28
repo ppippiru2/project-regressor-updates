@@ -2281,6 +2281,59 @@ export const KO_KR_TEXT = {
             reward_link: "보상 링크"
           }
         },
+        lootSkillBulkIntakePreview: {
+          title: "전리품/스킬 대량 분류",
+          description: "대량 패키지 안의 비장비 전리품, 도감 조각, 마정석 조각, 스킬 조각, 스킬룬, 스킬 정의를 읽기 전용으로 분류합니다.",
+          version: "{version}",
+          lootRows: "전리품 행",
+          skillRows: "스킬 행",
+          codexFragments: "도감 조각",
+          manaCrystals: "마정석 조각",
+          skillFragments: "스킬 조각",
+          skillRunes: "스킬룬",
+          rewardLinked: "보상 연결",
+          missingSkillDefinitions: "스킬 누락",
+          requiredChecks: "검증",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          noLootRows: "분류할 전리품 행 없음",
+          noSkillRows: "분류할 스킬 행 없음",
+          lootMeta: "{type} · {rarity} · {state}",
+          skillMeta: "{type} · MP {mp} · 쿨 {cooldown} · {state}",
+          skillLink: "스킬 연결",
+          dropSource: "드랍 출처",
+          codexRecordTarget: "도감 목표",
+          rewardLink: "보상 링크",
+          damageType: "피해 계열",
+          effectType: "연출",
+          stances: "전술",
+          none: "없음",
+          globalSource: "공통",
+          linked: "연결됨",
+          unlinked: "미연결",
+          typeLabels: {
+            codex_fragment: "도감 조각",
+            mana_crystal: "마정석 조각",
+            skill_fragment: "스킬 조각",
+            skill_rune: "스킬룬",
+            material: "재료"
+          },
+          stateLabels: {
+            "blocked-missing-skill": "스킬 정의 대기",
+            "codex-record-linked": "도감 기록 연결",
+            "codex-record-unlinked": "도감 기록 미연결",
+            "material-linked": "재료 보상 연결",
+            "material-unlinked": "재료 보상 미연결",
+            "skill-loot-linked": "스킬 보상 연결",
+            "skill-loot-unlinked": "스킬 보상 미연결",
+            "loot-linked": "전리품 연결",
+            "loot-unlinked": "전리품 미연결"
+          },
+          bulkStateLabels: {
+            "staged-update": "현재 데이터 갱신 후보",
+            "staged-append": "신규 추가 후보"
+          }
+        },
         monsterRuntimeBulkIntakePreview: {
           title: "몬스터 런타임 대량 입력",
           description: "몬스터 런타임 ZIP 프리셋을 현재 대량 입력 계약의 읽기 전용 검증 행으로 연결합니다.",

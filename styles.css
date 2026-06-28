@@ -5041,6 +5041,106 @@ select:focus {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.editor-loot-skill-bulk-intake {
+  background: rgba(7, 18, 38, 0.56);
+  border: 1px solid rgba(190, 166, 255, 0.2);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-loot-skill-bulk-intake-head,
+.editor-loot-skill-bulk-intake-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-loot-skill-bulk-intake-head h4,
+.editor-loot-skill-bulk-intake-head p,
+.editor-loot-skill-bulk-intake-row-head h5,
+.editor-loot-skill-bulk-intake-row-head p {
+  margin: 0;
+}
+
+.editor-loot-skill-bulk-intake-head h4 {
+  color: #bea6ff;
+  font-size: 0.95rem;
+}
+
+.editor-loot-skill-bulk-intake-head strong,
+.editor-loot-skill-bulk-intake-row-head span {
+  border: 1px solid rgba(190, 166, 255, 0.32);
+  border-radius: 999px;
+  color: #d6c8ff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-loot-skill-bulk-intake-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.editor-loot-skill-bulk-intake-metrics span,
+.editor-loot-skill-bulk-intake-row {
+  background: rgba(1, 10, 28, 0.3);
+  border: 1px solid rgba(190, 166, 255, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-loot-skill-bulk-intake-metrics span,
+.editor-loot-skill-bulk-intake-list,
+.editor-loot-skill-bulk-intake-row {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-loot-skill-bulk-intake-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-loot-skill-bulk-intake-metrics b,
+.editor-loot-skill-bulk-intake-row-head h5 {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-loot-skill-bulk-intake-row-head p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-loot-skill-bulk-intake-row[data-state="blocked-missing-skill"] {
+  border-color: rgba(255, 107, 151, 0.34);
+}
+
+.editor-loot-skill-bulk-intake-row[data-state$="-linked"],
+.editor-loot-skill-bulk-intake-row[data-state="codex-record-linked"] {
+  border-color: rgba(91, 229, 132, 0.28);
+}
+
+.editor-loot-skill-bulk-intake-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .editor-monster-runtime-bulk-intake {
   background: rgba(8, 18, 40, 0.56);
   border: 1px solid rgba(132, 205, 255, 0.2);
@@ -9889,6 +9989,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-package-domain-head,
   .editor-content-bulk-package-input-head,
   .editor-content-bulk-package-grid,
+  .editor-loot-skill-bulk-intake-head,
+  .editor-loot-skill-bulk-intake-row-head,
+  .editor-loot-skill-bulk-intake-grid,
   .editor-monster-runtime-bulk-intake-head,
   .editor-monster-runtime-bulk-intake-row-head,
   .editor-monster-runtime-bulk-intake-grid,
@@ -9933,6 +10036,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-automation-metrics,
   .editor-content-bulk-intake-metrics,
   .editor-content-bulk-package-metrics,
+  .editor-loot-skill-bulk-intake-metrics,
   .editor-monster-runtime-bulk-intake-metrics,
   .editor-content-bulk-dry-run-metrics,
   .editor-content-bulk-stage-metrics,
@@ -10076,6 +10180,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-combat-vfx-profile-head strong,
   .editor-monster-candidate-bulk-automation-head strong,
   .editor-content-bulk-automation-head strong,
+  .editor-loot-skill-bulk-intake-head strong,
+  .editor-loot-skill-bulk-intake-row-head span,
   .editor-content-bulk-checklist-head strong,
   .editor-content-bulk-patch-draft-head strong,
   .editor-combat-vfx-tuning-card > div:first-child span,

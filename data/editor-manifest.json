@@ -458,6 +458,7 @@
         "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
         "build-scripts/extract-content-bulk-package-json.mjs",
         "build-scripts/check-content-bulk-package-json-extractor.mjs",
+        "src/editor/lootSkillBulkIntakePreview.js",
         "src/editor/monsterRuntimeBulkIntakePreview.js"
       ],
       "assetSlots": [],
@@ -553,6 +554,11 @@
         "missingExportWarnings",
         "contentBulkPackageJsonExtractor",
         "contentBulkPackageExtractorOutput",
+        "lootSkillBulkIntakePreview",
+        "lootSkillBulkIntakeRows",
+        "lootSkillBulkSkillRows",
+        "lootSkillBulkCategorySummary",
+        "lootSkillBulkRewardLinks",
         "monsterRuntimeBulkIntakePreview",
         "monsterRuntimeBulkIntakeRows",
         "monsterRuntimeBulkPackageRows",
@@ -577,6 +583,7 @@
         "대량 콘텐츠 파일별 patch 초안",
         "대량 콘텐츠 파일별 patch 초안 내보내기",
         "대량 패키지 JSON 추출",
+        "전리품/스킬 대량 분류",
         "Content bulk apply gate skeleton",
         "Content bulk backup snapshot plan",
         "Content bulk restore rehearsal report",
@@ -1524,6 +1531,7 @@
       "build-scripts/check-monster-candidate-pool.mjs",
       "build-scripts/check-equipment-value-balance.mjs",
       "build-scripts/extract-content-bulk-package-json.mjs:createContentBulkPackageJsonFromInput",
+      "src/editor/lootSkillBulkIntakePreview.js:createLootSkillBulkIntakePreview",
       "src/editor/monsterRuntimeBulkIntakePreview.js:createMonsterRuntimeBulkIntakePreview",
       "src/editor/monsterRuntimeBulkIntakePreview.js:createMonsterRuntimeBulkIntakePackage"
     ],
@@ -1604,6 +1612,16 @@
         "guards": [
           "ZIP/폴더 안 JSON 후보를 단일 패키지로 병합",
           "미인식 배열 키와 파싱 오류를 보고서로 분리"
+        ]
+      },
+      {
+        "id": "loot-skill-bulk-intake-preview",
+        "label": "전리품/스킬 대량 분류 검사",
+        "script": "build-scripts/check-loot-skill-bulk-intake-preview.mjs",
+        "guards": [
+          "도감 조각/마정석/스킬 조각/스킬룬 분류",
+          "스킬 전리품의 스킬 정의 연결 확인",
+          "보상 링크와 비장비 전리품을 장비 후보와 분리"
         ]
       },
       {
@@ -1881,7 +1899,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1895,7 +1913,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1909,7 +1927,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -1994,7 +2012,7 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
@@ -2006,7 +2024,7 @@
     },
     "contentBulkPatchApplyGatePlan": {
       "id": "content-bulk-patch-apply-gate-plan-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
       "expectedGateCount": 6,
@@ -2020,7 +2038,7 @@
     },
     "contentBulkPatchBackupPlan": {
       "id": "content-bulk-patch-backup-plan-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/contentBulkPatchBackupPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
       "expectedTargetFileCount": 24,
@@ -2035,7 +2053,7 @@
     },
     "contentBulkPatchRestoreRehearsal": {
       "id": "content-bulk-patch-restore-rehearsal-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/contentBulkPatchRestoreRehearsal.js",
       "checkScript": "build-scripts/check-content-bulk-patch-restore-rehearsal.mjs",
       "expectedTargetFileCount": 24,
@@ -2048,9 +2066,23 @@
       "editorSummaryVisible": true,
       "writesGameData": false
     },
+    "lootSkillBulkIntakePreview": {
+      "id": "loot-skill-bulk-intake-preview-v1",
+      "source": "v470",
+      "sourceModule": "src/editor/lootSkillBulkIntakePreview.js",
+      "checkScript": "build-scripts/check-loot-skill-bulk-intake-preview.mjs",
+      "expectedLootRowCount": 1,
+      "expectedSkillRowCount": 1,
+      "expectedSkillRuneCount": 1,
+      "expectedRewardLinkedLootCount": 1,
+      "expectedMissingSkillDefinitionCount": 0,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
     "monsterRuntimeBulkIntakePreview": {
       "id": "monster-runtime-bulk-intake-preview-v1",
-      "source": "v469",
+      "source": "v470",
       "sourceModule": "src/editor/monsterRuntimeBulkIntakePreview.js",
       "checkScript": "build-scripts/check-monster-runtime-bulk-intake-preview.mjs",
       "packageKey": "monsterRuntimePresets",

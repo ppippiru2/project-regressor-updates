@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 469,
-  "displayVersion": "v469",
-  "cacheVersion": "project-regressor-mvp-v469",
-  "updatedAt": "2026-06-28T14:49:43.508+09:00",
+  "versionCode": 470,
+  "displayVersion": "v470",
+  "cacheVersion": "project-regressor-mvp-v470",
+  "updatedAt": "2026-06-28T15:58:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=469&cachebust=469",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=470&cachebust=470",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v469 adds a read-only monster runtime bulk intake preview for the Rift Imp runtime package.",
-    "v469 maps monsterRuntimePresets into the shared bulk package contract as update candidates while transparent sprites are still missing.",
-    "v469 keeps live monster writes disabled and preserves the scalable batch path for future monster, item, skill, loot, codex, magic-stone, and asset updates."
+    "v470 adds a read-only loot and skill bulk intake preview for external package JSON.",
+    "v470 separates codex fragments, mana crystal fragments, skill fragments, skill runes, and skill definitions before any live data write.",
+    "v470 keeps the scalable batch path ready for future monster, item, skill, loot, codex, magic-stone, and asset updates."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v469-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v469-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
   },
   "version": {
-    "code": 469,
-    "name": "4.69.0",
-    "displayName": "v469"
+    "code": 470,
+    "name": "4.70.0",
+    "displayName": "v470"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v469-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
   },
   "android": {
-    "code": 469,
-    "name": "4.69.0",
-    "displayName": "v469",
+    "code": 470,
+    "name": "4.70.0",
+    "displayName": "v470",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v469-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
     },
     "version": {
-      "code": 469,
-      "name": "4.69.0",
-      "displayName": "v469"
+      "code": 470,
+      "name": "4.70.0",
+      "displayName": "v470"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v469-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
   }
 }
