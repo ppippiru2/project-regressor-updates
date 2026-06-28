@@ -1,4 +1,5 @@
-import { t, tf } from "../localization/index.js?v=494";
+import { t, tf } from "../localization/index.js?v=495";
+import { WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=495";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
@@ -69,6 +70,7 @@ export function renderCombatVitals({
   byId("enemy-hp-text").textContent = formatResourceText(enemyHp, targetStats.maxHp, useResourcePercent, "ceil");
   byId("enemy-mp-bar").style.width = `${Math.max(0, (enemyMp / targetStats.maxMp) * 100)}%`;
   byId("enemy-mp-text").textContent = formatResourceText(enemyMp, targetStats.maxMp, useResourcePercent, "floor");
+  renderEnemyWeaknessMeter(state);
   const enemyActionProgress = autoActionActive ? combatRuntime.enemyAction : 0;
   byId("enemy-action-bar").style.width = `${enemyActionProgress}%`;
   byId("enemy-action-text").textContent = autoActionActive
@@ -78,6 +80,42 @@ export function renderCombatVitals({
     : t("combatVitals.waiting");
 
   return { enemyHp, enemyMp };
+}
+
+function renderEnemyWeaknessMeter(state, now = Date.now()) {
+  const meter = byId("enemy-weakness-meter");
+  const fill = byId("enemy-weakness-bar");
+  const text = byId("enemy-weakness-text");
+  if (!meter || !fill || !text) return;
+
+  const target = state.inCombat ? state.target : null;
+  if (!target || target.hp <= 0) {
+    meter.dataset.weaknessState = "idle";
+    fill.style.width = "0%";
+    text.textContent = t("combatVitals.weaknessWaiting");
+    return;
+  }
+
+  const weaknessUntil = Number(target.weaknessUntil || 0);
+  if (weaknessUntil > now) {
+    const remainingSeconds = Math.max(0, (weaknessUntil - now) / 1000);
+    const duration = Math.max(0.1, Number(WEAKNESS_BALANCE.durationSeconds) || 0.1);
+    const percent = clampValue((remainingSeconds / duration) * 100, 0, 100);
+    meter.dataset.weaknessState = "active";
+    fill.style.width = `${percent}%`;
+    text.textContent = tf("combatVitals.weaknessActive", {
+      seconds: Math.ceil(remainingSeconds),
+      count: Number(target.weaknessStrikeCount || 0),
+    });
+    return;
+  }
+
+  const maxGauge = Math.max(0, Number(target.breakGaugeMax || 0));
+  const currentGauge = clampValue(Number(target.breakGauge ?? maxGauge), 0, maxGauge);
+  const progress = maxGauge > 0 ? clampValue(((maxGauge - currentGauge) / maxGauge) * 100, 0, 100) : 0;
+  meter.dataset.weaknessState = progress > 0 ? "charging" : "idle";
+  fill.style.width = `${progress}%`;
+  text.textContent = tf("combatVitals.weaknessGauge", { percent: Math.floor(progress) });
 }
 
 function getVisibleDefeatedTarget(state, targetMonster, combatRuntime) {

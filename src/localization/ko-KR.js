@@ -879,6 +879,9 @@ export const KO_KR_TEXT = {
     waiting: "대기",
     defeated: "처치 완료",
     enemyLevel: "레벨 {level} · {name}",
+    weaknessWaiting: "약점 대기",
+    weaknessGauge: "약점 게이지 {percent}%",
+    weaknessActive: "약점 {seconds}s · 집중 {count}타",
   },
   equipmentActions: {
     equipped: "{itemName} 장착.",
