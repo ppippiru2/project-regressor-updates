@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=505";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=505";
-import { createTutorialFlags } from "./tutorialGuidance.js?v=505";
+import { t } from "../localization/index.js?v=506";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=506";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=506";
 
 export function createInitialState({
   slots,

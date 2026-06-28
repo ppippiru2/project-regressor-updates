@@ -2513,6 +2513,29 @@ export const KO_KR_TEXT = {
             ready: "준비"
           }
         },
+        contentBulkStagedApplyRehearsal: {
+          title: "적용 리허설 요약",
+          description: "staged rows, patch 초안 파일, 백업/복구 안전 상태를 실제 적용 전에 대조합니다.",
+          stagedRows: "적용 후보 행",
+          withheldRows: "보류 행",
+          draftFiles: "초안 파일",
+          readyFiles: "준비 파일",
+          backupBlockedFiles: "백업 차단 파일",
+          restoreBlockedFiles: "복구 차단 파일",
+          state: "상태",
+          blockingReasons: "차단 사유",
+          filePreview: "{patchBlocks} blocks / {domains}",
+          domains: "영향 분야",
+          patchBlocks: "patch 블록",
+          backupBlockers: "백업 차단",
+          restoreBlockers: "복구 차단",
+          noIssues: "없음",
+          noFiles: "patch 초안 파일 없음",
+          stateLabels: {
+            blocked: "차단",
+            ready: "준비"
+          }
+        },
         contentBulkPatchDryRunImporter: {
           title: "대량 콘텐츠 dry-run 반영",
           description: "배치 파일을 실제 게임 데이터에 쓰기 전에 추가/갱신 후보, 차단 오류, 경고, 영향 표면을 읽기 전용으로 계산합니다.",
