@@ -1,11 +1,11 @@
 import {
   COMBAT_VFX_PREVIEW_EFFECT_TYPES,
   createCombatVfxPlacementPreview,
-} from "./combatVfxPlacementPreview.js?v=483";
+} from "./combatVfxPlacementPreview.js?v=484";
 import {
   MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
   MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
-} from "../config/monsterBattleSpritePresets.js?v=483";
+} from "../config/monsterBattleSpritePresets.js?v=484";
 
 export const RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION = "runtime-vfx-bulk-intake-preview-v1";
 
@@ -180,6 +180,8 @@ function createRuntimeVfxPreviewRow(row, rowIndex, combatPreview) {
   const signals = kind === "profile-placement" ? placementTuningSignals(placement) : modifierTuningSignals(modifier);
   const existing = kind === "profile-placement" ? Boolean(currentProfilePlacement) : Boolean(currentModifier);
   const profileMonsterCount = countMonstersForMotionProfile(combatPreview, motionProfile);
+  const blockingIssueCodes = Array.from(issues);
+  const warningIssueCodes = runtimeVfxWarningIssueCodes({ kind, existing, signals, blockingIssueCodes });
 
   return {
     rowIndex,
@@ -197,6 +199,9 @@ function createRuntimeVfxPreviewRow(row, rowIndex, combatPreview) {
     currentModifier: summarizeCurrentModifier(currentModifier),
     profileMonsterCount,
     bulkState: existing ? "staged-update" : "staged-append",
+    targetSurfaceCount: blockingIssueCodes.length ? 0 : 1,
+    blockingIssueCodes,
+    warningIssueCodes,
     intakeState: runtimeVfxIntakeState({ motionProfile, effectType, kind, issues, existing, signals }),
     issues,
     signals,
@@ -252,6 +257,14 @@ function runtimeVfxIntakeState({ motionProfile, effectType, kind, issues, existi
   if (!existing && kind === "effect-modifier") return "review-new-effect-modifier";
   if (signals.length) return "review-tuning-signal";
   return kind === "profile-placement" ? "ready-profile-update" : "ready-effect-modifier-update";
+}
+
+function runtimeVfxWarningIssueCodes({ kind, existing, signals, blockingIssueCodes }) {
+  if (blockingIssueCodes.length) return [];
+  const warnings = Array.from(signals || []);
+  if (!existing && kind === "profile-placement") warnings.unshift("review-new-motion-profile");
+  if (!existing && kind === "effect-modifier") warnings.unshift("review-new-effect-modifier");
+  return Array.from(new Set(warnings.filter(Boolean)));
 }
 
 function normalizePlacement(value = {}, fallback = DEFAULT_PROFILE_PLACEMENT) {
