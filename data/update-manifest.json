@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 495,
-  "displayVersion": "v495",
-  "cacheVersion": "project-regressor-mvp-v495",
-  "updatedAt": "2026-06-29T00:18:00.000+09:00",
+  "versionCode": 496,
+  "displayVersion": "v496",
+  "cacheVersion": "project-regressor-mvp-v496",
+  "updatedAt": "2026-06-29T00:31:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=495&cachebust=495",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=496&cachebust=496",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v495 adds a thin weakness meter to the enemy combat card.",
-    "v495 shows break-gauge buildup before weakness exposure and remaining weakness seconds while exposed.",
-    "v495 keeps the weakness meter tied to the shared 6.5s weakness duration and focused-hit count."
+    "v496 makes Auto Hunt prefer stronger offensive skills while weakness is exposed.",
+    "v496 keeps emergency recovery, MP, stance, and cooldown blockers ahead of weakness priority.",
+    "v496 adds a regression check for weakness Auto Hunt selection order."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v495-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v495-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
   },
   "version": {
-    "code": 495,
-    "name": "4.95.0",
-    "displayName": "v495"
+    "code": 496,
+    "name": "4.96.0",
+    "displayName": "v496"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v495-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
   },
   "android": {
-    "code": 495,
-    "name": "4.95.0",
-    "displayName": "v495",
+    "code": 496,
+    "name": "4.96.0",
+    "displayName": "v496",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v495-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
     },
     "version": {
-      "code": 495,
-      "name": "4.95.0",
-      "displayName": "v495"
+      "code": 496,
+      "name": "4.96.0",
+      "displayName": "v496"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v495-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v496-debug.apk"
   }
 }

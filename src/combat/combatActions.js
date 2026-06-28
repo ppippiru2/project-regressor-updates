@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=495";
+import { t, tf } from "../localization/index.js?v=496";
 
 export function choosePlayerAction(player, state, skills, getSkill, hypMax, actionCooldowns = {}) {
   const hpRate = state.player.hp / player.maxHp;
@@ -20,7 +20,20 @@ export function choosePlayerAction(player, state, skills, getSkill, hypMax, acti
     if (state.stance === "berserk" && state.hyp < hypMax && state.hyperActiveTicks <= 0) return false;
     return true;
   });
-  return createPlayerCombatAction(candidates[0] || null, player);
+  return createPlayerCombatAction(selectAutoHuntAttackSkill(candidates, state), player);
+}
+
+export function selectAutoHuntAttackSkill(candidates = [], state, now = Date.now()) {
+  if (!Array.isArray(candidates) || candidates.length === 0) return null;
+  if (!isTargetWeakForAutoHunt(state, now)) return candidates[0] || null;
+  return candidates
+    .map((skill, index) => ({ skill, index, score: weaknessAutoHuntSkillScore(skill) }))
+    .sort((left, right) => right.score - left.score || left.index - right.index)[0]?.skill || null;
+}
+
+export function weaknessAutoHuntSkillScore(skill) {
+  if (!skill || skill.damageType === "support") return -Infinity;
+  return (Number(skill.multiplier || 1) - 1) * 100 + Number(skill.breakPower || 0) * 10;
 }
 
 export function createPlayerCombatAction(action, player) {
@@ -67,6 +80,10 @@ function skillHealAmount(skill, player) {
 
 function isSkillOnCooldown(skill, actionCooldowns) {
   return skillCooldownRemaining(skill, actionCooldowns) > 0;
+}
+
+function isTargetWeakForAutoHunt(state, now = Date.now()) {
+  return Boolean(state?.target?.weaknessUntil && Number(state.target.weaknessUntil) > now);
 }
 
 function skillCooldownRemaining(skill, actionCooldowns, now = Date.now()) {
