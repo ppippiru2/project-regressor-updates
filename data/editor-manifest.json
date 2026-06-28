@@ -733,7 +733,8 @@
         "build-scripts/check-save-slot-edit-validator-dry-run.mjs",
         "build-scripts/check-save-slot-edit-validator-registry.mjs",
         "build-scripts/check-save-slot-edit-validator-result-schema.mjs",
-        "build-scripts/check-save-slot-edit-validator-apply-gate-bridge.mjs"
+        "build-scripts/check-save-slot-edit-validator-apply-gate-bridge.mjs",
+        "build-scripts/check-save-slot-edit-validator-confirmation-preflight.mjs"
       ],
       "assetSlots": [],
       "editorFields": [
@@ -781,6 +782,8 @@
         "saveEditValidatorResultBlockers",
         "saveEditValidatorApplyGateBridge",
         "saveEditValidatorApplyGateBridgeBlockers",
+        "saveEditValidatorConfirmationPreflight",
+        "saveEditValidatorConfirmationPreflightBlockers",
         "missingSlotWarning"
       ],
       "futureControls": [
@@ -799,6 +802,7 @@
         "저장 편집 validator registry 계약",
         "저장 편집 validator 결과 스키마",
         "저장 편집 validator 적용 게이트 연결",
+        "저장 편집 확인 preflight",
         "세이브 슬롯 선택",
         "세계선 데이터 조작",
         "JSON 백업/복원",

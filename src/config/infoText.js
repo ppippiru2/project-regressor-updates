@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=529";
+import { getLocaleText } from "../localization/index.js?v=530";
 
 export const INFO_TEXT = getLocaleText().infoText;
 

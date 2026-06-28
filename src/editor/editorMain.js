@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=529";
-import { getLocaleText, t, tf } from "../localization/index.js?v=529";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=529";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=529";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=529";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=529";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=529";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=529";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=529";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=529";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=529";
+import { applyDomLocalization } from "../localization/domText.js?v=530";
+import { getLocaleText, t, tf } from "../localization/index.js?v=530";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=530";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=530";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=530";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=530";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=530";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=530";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=530";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=530";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=530";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=529";
+} from "./contentBulkPatchPackageAdapter.js?v=530";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=529";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=529";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=529";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=529";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=529";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=529";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=529";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=529";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=529";
+} from "./contentBulkPackageOverview.js?v=530";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=530";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=530";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=530";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=530";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=530";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=530";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=530";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=530";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=529";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=529";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=529";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=529";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=529";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=529";
+} from "./runtimeVfxBulkIntakePreview.js?v=530";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=530";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=530";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=530";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=530";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=530";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=529";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=529";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=529";
+} from "./monsterSpriteSlotReport.js?v=530";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=530";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=530";
 
-const EDITOR_VERSION = "529";
+const EDITOR_VERSION = "530";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5294,6 +5294,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditValidatorRegistryContract(diagnostics)}
       ${renderSaveSlotEditValidatorResultSchemaPreview(diagnostics)}
       ${renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics)}
+      ${renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics)}
     </section>
   `;
 }
@@ -5873,6 +5874,37 @@ function renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics) {
+  const preflight = createSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {};
+  return `
+    <section class="editor-save-edit-validator-preflight" data-save-edit-validator-confirmation-preflight data-status="${escapeAttribute(preflight.status)}" data-mode="${escapeAttribute(preflight.mode)}" data-apply="${escapeAttribute(preflight.apply)}">
+      <div class="editor-save-edit-validator-preflight-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit validator confirmation preflight")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(preflight.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(preflight.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-validator-preflight-metrics">
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditValidatorConfirmationPreflight.blockerValue", { count: preflight.blockerCount }, `${preflight.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditValidatorConfirmationPreflight.checkValue", { count: preflight.checkCount }, `${preflight.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditValidatorConfirmationPreflight.blockedValue", { count: preflight.blockedCheckCount }, `${preflight.blockedCheckCount}`), text.blockedHint || "")}
+        ${metricCard(text.phraseMetric || "Phrase", preflight.requiredPhrase, text.phraseHint || "")}
+      </div>
+      <div class="editor-save-edit-validator-preflight-groups">
+        ${preflight.groups.map((group) => renderSaveEditValidatorConfirmationPreflightGroup(group)).join("")}
+      </div>
+      <div class="editor-save-edit-validator-preflight-grid">
+        ${preflight.checks.map((check) => renderSaveEditValidatorConfirmationPreflightCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-validator-preflight-code"><code>${escapeHtml(JSON.stringify(preflight.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -6196,6 +6228,81 @@ function createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
   };
 }
 
+function createSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics) {
+  const bridge = createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const text = EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {};
+  const bridgeBlockers = bridge.steps
+    .filter((step) => step.status === "blocked")
+    .map((step) => step.blocker)
+    .filter(Boolean);
+  const gateBlockers = bridge.gateBlockers.map((item) => item.blocker).filter(Boolean);
+  const blockers = Array.from(new Set([
+    ...bridgeBlockers,
+    ...gateBlockers,
+    "confirmation-input-missing",
+    "apply-runner-missing",
+    "writer-disabled",
+  ]));
+  const groups = [
+    saveEditValidatorConfirmationPreflightGroup("validator-results", text.groupLabels?.validatorResults, bridgeBlockers.filter((blocker) => ["result-not-produced", "validator-missing"].includes(blocker))),
+    saveEditValidatorConfirmationPreflightGroup("apply-gate", text.groupLabels?.applyGate, gateBlockers),
+    saveEditValidatorConfirmationPreflightGroup("confirmation", text.groupLabels?.confirmation, ["confirmation-input-missing", "confirmation-not-implemented"]),
+    saveEditValidatorConfirmationPreflightGroup("writer", text.groupLabels?.writer, ["apply-runner-missing", "writer-disabled"]),
+  ];
+  const checks = [
+    saveEditValidatorConfirmationPreflightCheck("bridge-readable", true, text.checkLabels?.bridgeReadable, text.checkDetails?.bridgeReadable, ""),
+    saveEditValidatorConfirmationPreflightCheck("blocker-summary-readable", blockers.length > 0, text.checkLabels?.blockerSummaryReadable, text.checkDetails?.blockerSummaryReadable, blockers.length > 0 ? "" : "blocker-summary-empty"),
+    saveEditValidatorConfirmationPreflightCheck("confirmation-phrase-visible", Boolean(gate.confirmationPhrase), text.checkLabels?.confirmationPhraseVisible, text.checkDetails?.confirmationPhraseVisible, Boolean(gate.confirmationPhrase) ? "" : "confirmation-phrase-missing"),
+    saveEditValidatorConfirmationPreflightCheck("confirmation-input-created", false, text.checkLabels?.confirmationInputCreated, text.checkDetails?.confirmationInputCreated, "confirmation-input-missing"),
+    saveEditValidatorConfirmationPreflightCheck("apply-runner-bound", false, text.checkLabels?.applyRunnerBound, text.checkDetails?.applyRunnerBound, "apply-runner-missing"),
+    saveEditValidatorConfirmationPreflightCheck("writer-enabled", false, text.checkLabels?.writerEnabled, text.checkDetails?.writerEnabled, "writer-disabled"),
+  ];
+  return {
+    status: "blocked",
+    version: "save-edit-validator-confirmation-preflight-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    requiredPhrase: gate.confirmationPhrase,
+    blockerCount: blockers.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    groups,
+    checks,
+    payloadShape: {
+      version: "save-edit-validator-confirmation-preflight-v1",
+      mode: "read-only-preview",
+      source: bridge.bridgeVersion,
+      requiredPhrase: gate.confirmationPhrase,
+      confirmationInput: "not-created",
+      applyRunner: "not-bound",
+      writer: "disabled",
+      apply: "disabled",
+      blockers,
+    },
+  };
+}
+
+function saveEditValidatorConfirmationPreflightGroup(id, label, blockers) {
+  const uniqueBlockers = Array.from(new Set(blockers.filter(Boolean)));
+  return {
+    id,
+    label: label || id,
+    blockerCount: uniqueBlockers.length,
+    blockers: uniqueBlockers,
+  };
+}
+
+function saveEditValidatorConfirmationPreflightCheck(id, isReady, label, detail, blocker) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+    blocker: blocker || "",
+  };
+}
+
 function saveEditValidatorApplyBridgeStep(id, isReady, label, detail, blocker) {
   return {
     id,
@@ -6476,6 +6583,35 @@ function renderSaveEditValidatorApplyGateBridgeStep(step) {
       </div>
       ${step.detail ? `<p>${escapeHtml(step.detail)}</p>` : ""}
       ${step.blocker ? chip(tf("editorPrep.saveEditValidatorApplyGateBridge.blockerValue", { blocker: step.blocker }, `${text.blocker || "Blocker"}: ${step.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditValidatorConfirmationPreflightGroup(group) {
+  const text = EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {};
+  return `
+    <article class="editor-save-edit-validator-preflight-group" data-save-edit-validator-confirmation-preflight-group="${escapeAttribute(group.id)}">
+      <div>
+        <strong>${escapeHtml(group.label)}</strong>
+        <span>${escapeHtml(tf("editorPrep.saveEditValidatorConfirmationPreflight.groupBlockerValue", { count: group.blockerCount }, `${group.blockerCount}`))}</span>
+      </div>
+      <div class="editor-chip-list">
+        ${group.blockers.map((blocker) => chip(blocker)).join("") || chip(text.noBlocker || "no-blocker")}
+      </div>
+    </article>
+  `;
+}
+
+function renderSaveEditValidatorConfirmationPreflightCheck(check) {
+  const text = EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {};
+  return `
+    <article class="editor-save-edit-validator-preflight-check" data-save-edit-validator-confirmation-preflight-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
+      ${check.blocker ? chip(tf("editorPrep.saveEditValidatorConfirmationPreflight.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
     </article>
   `;
 }

@@ -251,7 +251,7 @@
       "status": "partial",
       "priority": "high",
       "source": "user-request-save-editor",
-      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, apply gate checklist, recovery rehearsal preview, apply-gate recovery readiness summary, edit-input schema preview, proposed-value validation matrix, validation-rule drilldown, proposed-value sample payload preview, validator dry-run plan, validator registry contract preview, validator result schema preview, and validator result-to-apply gate bridge preview are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
+      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, apply gate checklist, recovery rehearsal preview, apply-gate recovery readiness summary, edit-input schema preview, proposed-value validation matrix, validation-rule drilldown, proposed-value sample payload preview, validator dry-run plan, validator registry contract preview, validator result schema preview, validator result-to-apply gate bridge preview, and confirmation preflight preview are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
       "editorHooks": [
         "src/state/save.js",
         "src/state/saveSlots.js",
@@ -270,6 +270,7 @@
         "src/editor/editorMain.js:renderSaveSlotEditValidatorRegistryContract",
         "src/editor/editorMain.js:renderSaveSlotEditValidatorResultSchemaPreview",
         "src/editor/editorMain.js:renderSaveSlotEditValidatorApplyGateBridgePreview",
+        "src/editor/editorMain.js:renderSaveSlotEditValidatorConfirmationPreflightPreview",
         "styles.css:.editor-save-diagnostics",
         "styles.css:.editor-save-validation",
         "styles.css:.editor-save-draft",
@@ -284,6 +285,7 @@
         "styles.css:.editor-save-edit-validator-registry",
         "styles.css:.editor-save-edit-validator-result",
         "styles.css:.editor-save-edit-validator-bridge",
+        "styles.css:.editor-save-edit-validator-preflight",
         "build-scripts/check-save-slot-diagnostics.mjs",
         "build-scripts/check-save-slot-validation-plan.mjs",
         "build-scripts/check-save-slot-draft-payload.mjs",
@@ -299,6 +301,7 @@
         "build-scripts/check-save-slot-edit-validator-registry.mjs",
         "build-scripts/check-save-slot-edit-validator-result-schema.mjs",
         "build-scripts/check-save-slot-edit-validator-apply-gate-bridge.mjs",
+        "build-scripts/check-save-slot-edit-validator-confirmation-preflight.mjs",
         "future rollback snapshot"
       ]
     },

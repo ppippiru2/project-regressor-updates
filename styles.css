@@ -4906,6 +4906,95 @@ select:focus {
   padding: 0.75rem;
 }
 
+.editor-save-edit-validator-preflight {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(244, 211, 94, 0.2);
+  border-radius: 6px;
+  background: rgba(30, 24, 8, 0.28);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-validator-preflight-head,
+.editor-save-edit-validator-preflight-group > div:first-child,
+.editor-save-edit-validator-preflight-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-validator-preflight h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-validator-preflight-head span,
+.editor-save-edit-validator-preflight-group span,
+.editor-save-edit-validator-preflight-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-validator-preflight-metrics,
+.editor-save-edit-validator-preflight-groups,
+.editor-save-edit-validator-preflight-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-validator-preflight-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-validator-preflight-group,
+.editor-save-edit-validator-preflight-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(244, 211, 94, 0.14);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-validator-preflight-group strong,
+.editor-save-edit-validator-preflight-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-validator-preflight-check p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.editor-save-edit-validator-preflight-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(244, 211, 94, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #fff8d7;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
 @media (max-width: 900px) {
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
@@ -4920,7 +5009,10 @@ select:focus {
   .editor-save-edit-validator-result-metrics,
   .editor-save-edit-validator-result-grid,
   .editor-save-edit-validator-bridge-metrics,
-  .editor-save-edit-validator-bridge-grid {
+  .editor-save-edit-validator-bridge-grid,
+  .editor-save-edit-validator-preflight-metrics,
+  .editor-save-edit-validator-preflight-groups,
+  .editor-save-edit-validator-preflight-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -4940,6 +5032,9 @@ select:focus {
   .editor-save-edit-validator-result-card > div:first-child,
   .editor-save-edit-validator-bridge-head,
   .editor-save-edit-validator-bridge-step > div:first-child,
+  .editor-save-edit-validator-preflight-head,
+  .editor-save-edit-validator-preflight-group > div:first-child,
+  .editor-save-edit-validator-preflight-check > div:first-child,
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
   .editor-save-edit-rule-card-meta,
@@ -4957,7 +5052,10 @@ select:focus {
   .editor-save-edit-validator-result-grid,
   .editor-save-edit-validator-result-card dl,
   .editor-save-edit-validator-bridge-metrics,
-  .editor-save-edit-validator-bridge-grid {
+  .editor-save-edit-validator-bridge-grid,
+  .editor-save-edit-validator-preflight-metrics,
+  .editor-save-edit-validator-preflight-groups,
+  .editor-save-edit-validator-preflight-grid {
     grid-template-columns: 1fr;
   }
 }
