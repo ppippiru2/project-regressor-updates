@@ -4,8 +4,9 @@ import {
   gateNodeTypeIcon,
   gateNodeTypeIconKey,
   gateNodeTypeLabel,
-} from "../config/gateNodeTypes.js?v=453";
-import { t, tf } from "../localization/index.js?v=453";
+} from "../config/gateNodeTypes.js?v=454";
+import { t, tf } from "../localization/index.js?v=454";
+import { buildRegionCoreEventProgress } from "../story/coreEventCatalog.js?v=454";
 
 const stableHtmlCache = new WeakMap();
 
@@ -14,6 +15,7 @@ export function renderRegions(regions, context) {
   if (!container) return;
 
   renderRegionSummary(regions, context);
+  renderRegionCoreEventProgress(regions, context);
 
   const selectedRegionId = regions.some((region) => region.id === context.selectedRegionId)
     ? context.selectedRegionId
@@ -83,6 +85,58 @@ function renderRegionSummary(regions, context) {
     total: regions.length,
     cleared: clearedCount,
   });
+}
+
+function renderRegionCoreEventProgress(regions, context) {
+  const container = document.getElementById("region-core-event-progress");
+  if (!container) return;
+
+  const rows = buildRegionCoreEventProgress(regions, context.completedRegions, {
+    currentRegionId: context.regionId,
+  });
+  if (!rows.length) {
+    setStableInnerHtml(container, `<p class="muted">${escapeHtml(t("regionUi.coreEventNoRows"))}</p>`);
+    return;
+  }
+
+  const completedCount = rows.filter((row) => row.isCompleted).length;
+  const nextRow = rows.find((row) => row.state !== "completed") || rows[rows.length - 1];
+  const nextTitle = nextRow?.title || t("regionUi.coreEventFallbackTitle");
+  setStableInnerHtml(container, `
+    <div class="region-core-event-progress-head">
+      <div>
+        <span class="eyebrow">${escapeHtml(t("regionUi.coreEventEyebrow"))}</span>
+        <h4>${escapeHtml(t("regionUi.coreEventTitle"))}</h4>
+      </div>
+      <strong>${escapeHtml(tf("regionUi.coreEventSummary", {
+        completed: completedCount,
+        total: rows.length,
+      }))}</strong>
+    </div>
+    <p class="region-core-event-current">${escapeHtml(tf("regionUi.coreEventNext", { title: nextTitle }))}</p>
+    <div class="region-core-event-list">
+      ${rows.map((row) => renderRegionCoreEventProgressRow(row)).join("")}
+    </div>
+  `);
+}
+
+function renderRegionCoreEventProgressRow(row) {
+  return `
+    <article class="region-core-event-row" data-state="${escapeHtml(row.state)}">
+      <div>
+        <strong>${escapeHtml(row.title)}</strong>
+        <span>${escapeHtml(row.regionName)}</span>
+      </div>
+      <p>${escapeHtml(row.isCompleted && row.completionLog ? row.completionLog : row.log)}</p>
+      <em>${escapeHtml(regionCoreEventStateLabel(row.state))}</em>
+    </article>
+  `;
+}
+
+function regionCoreEventStateLabel(state) {
+  if (state === "completed") return t("regionUi.coreEventCompleted");
+  if (state === "active") return t("regionUi.coreEventActive");
+  return t("regionUi.coreEventPending");
 }
 
 export function renderGateMap(region, getGateMap, ensureGateProgress, context = {}) {

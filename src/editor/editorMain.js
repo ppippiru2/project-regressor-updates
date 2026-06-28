@@ -1,24 +1,24 @@
-import { applyDomLocalization } from "../localization/domText.js?v=453";
-import { getLocaleText, tf } from "../localization/index.js?v=453";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=453";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=453";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=453";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=453";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=453";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=453";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=453";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=453";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=453";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=453";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=453";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=453";
+import { applyDomLocalization } from "../localization/domText.js?v=454";
+import { getLocaleText, tf } from "../localization/index.js?v=454";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=454";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=454";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=454";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=454";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=454";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=454";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=454";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=454";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=454";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=454";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=454";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=454";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=453";
+} from "./monsterSpriteSlotReport.js?v=454";
 
-const EDITOR_VERSION = "453";
+const EDITOR_VERSION = "454";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;

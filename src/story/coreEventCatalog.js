@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=453";
+import { formatText, getLocaleText } from "../localization/index.js?v=454";
 
 export const TUTORIAL_CORE_EVENT_VERSION = "v2.5-region-core-events-v1";
 
@@ -45,6 +45,34 @@ export function resolveRegionCoreEvent(region, { localeText = getLocaleText() } 
       ? formatText(detail.completionLog, { regionName: region.name })
       : "",
   };
+}
+
+export function buildRegionCoreEventProgress(regions = [], completedRegionIds = [], options = {}) {
+  const localeText = options.localeText || getLocaleText();
+  const currentRegionId = options.currentRegionId || "";
+  const completed = new Set(Array.isArray(completedRegionIds) ? completedRegionIds : []);
+  const regionById = new Map((Array.isArray(regions) ? regions : []).map((region) => [region.id, region]));
+
+  return TUTORIAL_REGION_CORE_EVENTS
+    .map((event) => {
+      const region = regionById.get(event.regionId);
+      const resolved = resolveRegionCoreEvent(region, { localeText });
+      if (!region || !resolved) return null;
+      const isCompleted = completed.has(region.id);
+      const isCurrent = region.id === currentRegionId;
+      return {
+        eventId: event.id,
+        regionId: region.id,
+        regionName: region.name,
+        title: resolved.title,
+        log: resolved.log,
+        completionLog: resolved.completionLog,
+        state: isCompleted ? "completed" : isCurrent ? "active" : "pending",
+        isCompleted,
+        isCurrent,
+      };
+    })
+    .filter(Boolean);
 }
 
 export function getCoreEventCatalog() {

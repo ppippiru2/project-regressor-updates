@@ -1362,6 +1362,15 @@ export const KO_KR_TEXT = {
     stateLine: "붕괴까지 {turn}턴 · 탐사율 {exploration}% · 현재 노드 {nodeName}",
     legendAria: "노드 색상 범례",
     undiscovered: "미확인",
+    coreEventEyebrow: "지역 기록",
+    coreEventTitle: "핵심 사건 진행도",
+    coreEventSummary: "{completed}/{total} 완료",
+    coreEventNext: "현재 추적: {title}",
+    coreEventCompleted: "완료",
+    coreEventActive: "진행 중",
+    coreEventPending: "대기",
+    coreEventFallbackTitle: "지역 핵심 사건",
+    coreEventNoRows: "표시할 지역 기록이 없습니다.",
   },
   systemWindow: {
     routinePatterns: [
