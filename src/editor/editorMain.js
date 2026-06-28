@@ -1,44 +1,45 @@
-import { applyDomLocalization } from "../localization/domText.js?v=471";
-import { getLocaleText, t, tf } from "../localization/index.js?v=471";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=471";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=471";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=471";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=471";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=471";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=471";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=471";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=471";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=471";
+import { applyDomLocalization } from "../localization/domText.js?v=472";
+import { getLocaleText, t, tf } from "../localization/index.js?v=472";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=472";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=472";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=472";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=472";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=472";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=472";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=472";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=472";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=472";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=471";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=471";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=471";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=471";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=471";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=471";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=471";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=471";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=471";
+} from "./contentBulkPatchPackageAdapter.js?v=472";
+import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=472";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=472";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=472";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=472";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=472";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=472";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=472";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=472";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=472";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=471";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=471";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=471";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=471";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=471";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=471";
+} from "./runtimeVfxBulkIntakePreview.js?v=472";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=472";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=472";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=472";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=472";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=472";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=471";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=471";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=471";
+} from "./monsterSpriteSlotReport.js?v=472";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=472";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=472";
 
-const EDITOR_VERSION = "471";
+const EDITOR_VERSION = "472";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -1304,6 +1305,14 @@ function renderBalanceTuningDetail() {
   const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
   const visibleGroups = BALANCE_TUNING_GROUPS.filter((group) => matchesBalanceDetailFilter(group));
   const rows = visibleGroups.map((group) => renderBalanceGroupRow(group, detailText)).join("");
+  const lootSkillBulkIntakePreview = createLootSkillBulkIntakePreview(contentBulkPatchPackageAdapterPreview);
+  const runtimeVfxBulkIntakePreview = createRuntimeVfxBulkIntakePreviewFromInput();
+  const contentBulkPackageOverview = createContentBulkPackageOverview({
+    adapterPreview: contentBulkPatchPackageAdapterPreview,
+    lootSkillPreview: lootSkillBulkIntakePreview,
+    monsterRuntimePreview: MONSTER_RUNTIME_BULK_INTAKE_PREVIEW,
+    runtimeVfxPreview: runtimeVfxBulkIntakePreview,
+  });
 
   return `
     <section class="editor-balance-detail" aria-label="${escapeAttribute(detailText.title || "Balance Tuning Detail")}">
@@ -1329,10 +1338,11 @@ function renderBalanceTuningDetail() {
       ${renderMonsterCandidateBulkPatchAutomation(MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION, detailText)}
       ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
       ${renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText)}
+      ${renderContentBulkPackageOverview(contentBulkPackageOverview, detailText)}
       ${renderContentBulkPatchPackageAdapterPreview(contentBulkPatchPackageAdapterPreview, detailText)}
-      ${renderLootSkillBulkIntakePreview(createLootSkillBulkIntakePreview(contentBulkPatchPackageAdapterPreview), detailText)}
+      ${renderLootSkillBulkIntakePreview(lootSkillBulkIntakePreview, detailText)}
       ${renderMonsterRuntimeBulkIntakePreview(MONSTER_RUNTIME_BULK_INTAKE_PREVIEW, detailText)}
-      ${renderRuntimeVfxBulkIntakePreview(createRuntimeVfxBulkIntakePreviewFromInput(), detailText)}
+      ${renderRuntimeVfxBulkIntakePreview(runtimeVfxBulkIntakePreview, detailText)}
       ${renderContentBulkPatchDryRunPreview(CONTENT_BULK_PATCH_DRY_RUN_PREVIEW, detailText)}
       ${renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText)}
       ${renderContentBulkPatchDiffExport(CONTENT_BULK_PATCH_DIFF_EXPORT, detailText)}
@@ -2427,6 +2437,82 @@ function renderContentBulkPatchIntakeDomain(domain, text = {}) {
       </div>
     </article>
   `;
+}
+
+function renderContentBulkPackageOverview(preview, detailText = {}) {
+  const text = detailText.contentBulkPackageOverview || {};
+  const summary = preview.summary || {};
+  const metrics = [
+    [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
+    [text.activeDomains || "Active domains", `${summary.activeDomainCount || 0}`],
+    [text.readyRows || "Ready", `${summary.readyRowCount || 0}`],
+    [text.warningRows || "Review", `${summary.warningRowCount || 0}`],
+    [text.blockedRows || "Blocked", `${summary.blockedRowCount || 0}`],
+    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
+    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-content-bulk-overview" data-state="${escapeAttribute(preview.status || "ready")}" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Package Overview")}">
+      <div class="editor-content-bulk-overview-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Content Bulk Package Overview")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Summarizes the current bulk package before reviewing each specialized card.")}</p>
+        </div>
+        <strong>${escapeHtml(contentBulkOverviewLabel(preview.status || "ready", text.statusLabels))}</strong>
+      </div>
+      <div class="editor-content-bulk-overview-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-content-bulk-overview-grid">
+        ${balanceDetailChipBlock(text.recognizedSourceKeys || "Recognized source keys", [`${summary.recognizedSourceKeyCount || 0}`])}
+        ${balanceDetailChipBlock(text.unmappedSourceKeys || "Unmapped source keys", [`${summary.unmappedSourceKeyCount || 0}`])}
+        ${balanceDetailChipBlock(text.reviewSurfaces || "Review surfaces", [`${summary.reviewSurfaceCount || 0}`])}
+      </div>
+      <div class="editor-content-bulk-overview-list">
+        ${(preview.reviewRows || []).map((row) => renderContentBulkOverviewRow(row, text)).join("")}
+      </div>
+      <div class="editor-content-bulk-overview-domains">
+        ${(preview.domainRows || []).map((row) => renderContentBulkOverviewDomain(row, text)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderContentBulkOverviewRow(row, text = {}) {
+  return `
+    <article class="editor-content-bulk-overview-row" data-state="${escapeAttribute(row.state || "empty")}">
+      <div>
+        <h5>${escapeHtml(contentBulkOverviewLabel(row.id, text.surfaceLabels))}</h5>
+        <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.rowMeta", {
+          rows: row.rowCount || 0,
+          ready: row.readyCount || 0,
+          blocked: row.blockedCount || 0,
+        }, `${row.rowCount || 0}`))}</p>
+      </div>
+      <span>${escapeHtml(contentBulkOverviewLabel(row.state, text.statusLabels))}</span>
+    </article>
+  `;
+}
+
+function renderContentBulkOverviewDomain(row, text = {}) {
+  return `
+    <article class="editor-content-bulk-overview-domain" data-state="${escapeAttribute(row.state || "empty")}">
+      <strong>${escapeHtml(contentBulkPatchDomainLabel(row.id, text))}</strong>
+      <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.domainMeta", {
+        batchKey: row.batchKey || "-",
+        rows: row.rowCount || 0,
+      }, `${row.batchKey || "-"} / ${row.rowCount || 0}`))}</span>
+    </article>
+  `;
+}
+
+function contentBulkOverviewLabel(id, labels = {}) {
+  return labels?.[id] || id || "-";
 }
 
 function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {

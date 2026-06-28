@@ -1,45 +1,45 @@
 {
     "schemaVersion":  1,
     "project":  "Project Regressor",
-    "versionCode":  471,
-    "displayVersion":  "v471",
-    "cacheVersion":  "project-regressor-mvp-v471",
-    "updatedAt":  "2026-06-28T16:21:00.000+09:00",
+    "versionCode":  472,
+    "displayVersion":  "v472",
+    "cacheVersion":  "project-regressor-mvp-v472",
+    "updatedAt":  "2026-06-28T17:18:00.000+09:00",
     "repositoryUrl":  "https://github.com/ppippiru2/project-regressor-updates",
     "pagesUrl":  "https://ppippiru2.github.io/project-regressor-updates/",
-    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=471\u0026cachebust=471",
+    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=472\u0026cachebust=472",
     "recommendedAndroidShell":  "Trusted Web Activity",
     "notes":  [
-                  "v471 adds a read-only runtime VFX bulk intake preview for external package JSON.",
-                  "v471 classifies monster motion-profile VFX placement rows and effect modifiers before any live data write.",
-                  "v471 keeps large monster, item, skill, loot, codex, magic-stone, runtime sprite, and VFX updates on a scalable batch-review path."
+                  "v472 adds a read-only top overview for large content packages before detailed review cards.",
+                  "v472 aggregates monster, item, loot, skill, reward link, runtime monster, and runtime VFX rows into one status surface.",
+                  "v472 highlights ready, review, and blocked counts first so large updates do not require one-by-one inspection."
               ],
-    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk",
+    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v472-debug.apk",
     "downloads":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v472-debug.apk"
                   },
     "version":  {
-                    "code":  471,
-                    "name":  "4.71.0",
-                    "displayName":  "v471"
+                    "code":  472,
+                    "name":  "4.72.0",
+                    "displayName":  "v472"
                 },
     "artifacts":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v472-debug.apk"
                   },
     "android":  {
-                    "code":  471,
-                    "name":  "4.71.0",
-                    "displayName":  "v471",
+                    "code":  472,
+                    "name":  "4.72.0",
+                    "displayName":  "v472",
                     "artifacts":  {
-                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v472-debug.apk"
                                   },
                     "version":  {
-                                    "code":  471,
-                                    "name":  "4.71.0",
-                                    "displayName":  "v471"
+                                    "code":  472,
+                                    "name":  "4.72.0",
+                                    "displayName":  "v472"
                                 }
                 },
     "apk":  {
-                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v472-debug.apk"
             }
 }

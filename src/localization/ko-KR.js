@@ -2237,6 +2237,43 @@ export const KO_KR_TEXT = {
             reward_link: "보상 링크"
           }
         },
+        contentBulkPackageOverview: {
+          title: "대량 패키지 상단 요약",
+          description: "붙여넣은 패키지의 몬스터, 아이템, 전리품, 스킬, 보상 링크, 런타임 몬스터, VFX 후보를 먼저 합산해 막힌 지점을 한눈에 보여줍니다.",
+          packageRows: "전체 후보",
+          activeDomains: "활성 분야",
+          readyRows: "준비",
+          warningRows: "검토",
+          blockedRows: "차단",
+          requiredChecks: "검증",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          recognizedSourceKeys: "인식 원본 키",
+          unmappedSourceKeys: "미인식 원본 키",
+          reviewSurfaces: "검토 표면",
+          rowMeta: "행 {rows} · 준비 {ready} · 차단 {blocked}",
+          domainMeta: "{batchKey} · {rows}행",
+          statusLabels: {
+            ready: "검토 가능",
+            review: "추가 검토",
+            blocked: "차단 있음",
+            empty: "입력 없음",
+            active: "입력 있음"
+          },
+          surfaceLabels: {
+            "package-contract": "공통 입력 변환",
+            "loot-skill": "전리품/스킬",
+            "monster-runtime": "몬스터 런타임",
+            "runtime-vfx": "런타임 VFX"
+          },
+          domainLabels: {
+            monster: "몬스터",
+            equipment_item: "장비 아이템",
+            loot_item: "전리품/재료",
+            skill: "스킬",
+            reward_link: "보상 링크"
+          }
+        },
         contentBulkPatchPackageAdapter: {
           title: "대량 패키지 입력 변환",
           description: "외부 ZIP/문서의 몬스터, 아이템, 스킬, 스킬룬 목록 키를 현재 공통 배치 형식으로 정규화합니다.",

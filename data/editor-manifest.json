@@ -434,6 +434,7 @@
         "src/editor/balanceTuningPreview.js",
         "src/editor/contentBulkPatchAutomationPlan.js",
         "src/editor/contentBulkPatchIntakeContract.js",
+        "src/editor/contentBulkPackageOverview.js",
         "src/editor/contentBulkPatchPackageAdapter.js",
         "src/editor/contentBulkPatchDryRunImporter.js",
         "src/editor/contentBulkPatchStagedImportPreview.js",
@@ -517,6 +518,10 @@
         "candidateMonsterBulkPatchCoverage",
         "contentBulkPatchAutomationPlan",
         "contentBulkPatchIntakeContract",
+        "contentBulkPackageOverview",
+        "contentBulkPackageOverviewRows",
+        "contentBulkPackageOverviewDomains",
+        "contentBulkPackageOverviewStatus",
         "contentBulkPatchPackageAdapter",
         "contentBulkPatchPackageMappings",
         "contentBulkPatchPackageAliases",
@@ -581,6 +586,7 @@
         "후보 몬스터 대량 적용 자동화 표면",
         "대량 콘텐츠 적용 계약",
         "대량 콘텐츠 입력 계약",
+        "대량 패키지 상단 요약",
         "대량 패키지 입력 변환",
         "변경 전 읽기 전용 검증 리포트",
         "대량 콘텐츠 diff 내보내기",
@@ -1515,6 +1521,7 @@
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_DOMAIN_IDS",
       "src/editor/contentBulkPatchAutomationPlan.js:createContentBulkPatchAutomationPlan",
       "src/editor/contentBulkPatchIntakeContract.js:createContentBulkPatchIntakeContract",
+      "src/editor/contentBulkPackageOverview.js:createContentBulkPackageOverview",
       "src/editor/contentBulkPatchPackageAdapter.js:createContentBulkPatchPackageAdapterPreview",
       "src/editor/contentBulkPatchDryRunImporter.js:createContentBulkPatchDryRunPreview",
       "src/editor/contentBulkPatchStagedImportPreview.js:createContentBulkPatchStagedImportPreview",
@@ -1611,6 +1618,16 @@
         "guards": [
           "외부 ZIP/문서의 별칭 키를 공통 배치 키로 변환",
           "몬스터/아이템/스킬/스킬룬 후보를 묶음 단위로 staged preview 연결"
+        ]
+      },
+      {
+        "id": "content-bulk-package-overview",
+        "label": "대량 패키지 상단 요약 검사",
+        "script": "build-scripts/check-content-bulk-package-overview.mjs",
+        "guards": [
+          "몬스터/아이템/스킬/전리품/VFX 후보를 상단에서 합산",
+          "차단/검토/준비 행을 큰 패키지 기준으로 먼저 노출",
+          "실제 데이터 쓰기 없이 기존 미리보기만 요약"
         ]
       },
       {
@@ -1916,7 +1933,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1930,7 +1947,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1944,7 +1961,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -2029,7 +2046,7 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
@@ -2041,7 +2058,7 @@
     },
     "contentBulkPatchApplyGatePlan": {
       "id": "content-bulk-patch-apply-gate-plan-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
       "expectedGateCount": 6,
@@ -2055,7 +2072,7 @@
     },
     "contentBulkPatchBackupPlan": {
       "id": "content-bulk-patch-backup-plan-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/contentBulkPatchBackupPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
       "expectedTargetFileCount": 24,
@@ -2070,7 +2087,7 @@
     },
     "contentBulkPatchRestoreRehearsal": {
       "id": "content-bulk-patch-restore-rehearsal-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/contentBulkPatchRestoreRehearsal.js",
       "checkScript": "build-scripts/check-content-bulk-patch-restore-rehearsal.mjs",
       "expectedTargetFileCount": 24,
@@ -2083,9 +2100,25 @@
       "editorSummaryVisible": true,
       "writesGameData": false
     },
+    "contentBulkPackageOverview": {
+      "id": "content-bulk-package-overview-v1",
+      "source": "v472",
+      "sourceModule": "src/editor/contentBulkPackageOverview.js",
+      "checkScript": "build-scripts/check-content-bulk-package-overview.mjs",
+      "expectedPackageRowCount": 7,
+      "expectedActiveDomainCount": 4,
+      "expectedReviewSurfaceCount": 4,
+      "expectedBlockedRowCount": 1,
+      "expectedWarningRowCount": 1,
+      "expectedRequiredCheckCount": 14,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
     "lootSkillBulkIntakePreview": {
       "id": "loot-skill-bulk-intake-preview-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/lootSkillBulkIntakePreview.js",
       "checkScript": "build-scripts/check-loot-skill-bulk-intake-preview.mjs",
       "expectedLootRowCount": 1,
@@ -2099,7 +2132,7 @@
     },
     "monsterRuntimeBulkIntakePreview": {
       "id": "monster-runtime-bulk-intake-preview-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/monsterRuntimeBulkIntakePreview.js",
       "checkScript": "build-scripts/check-monster-runtime-bulk-intake-preview.mjs",
       "packageKey": "monsterRuntimePresets",
@@ -2117,7 +2150,7 @@
     },
     "runtimeVfxBulkIntakePreview": {
       "id": "runtime-vfx-bulk-intake-preview-v1",
-      "source": "v471",
+      "source": "v472",
       "sourceModule": "src/editor/runtimeVfxBulkIntakePreview.js",
       "checkScript": "build-scripts/check-runtime-vfx-bulk-intake-preview.mjs",
       "expectedPackageRowCount": 2,
