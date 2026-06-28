@@ -508,6 +508,10 @@
         "contentBulkPatchPackageAdapter",
         "contentBulkPatchPackageMappings",
         "contentBulkPatchPackageAliases",
+        "contentBulkPatchPackageJsonInput",
+        "contentBulkPatchPackageFileInput",
+        "contentBulkPatchPackagePreviewApply",
+        "contentBulkPatchPackageTemplateDownload",
         "contentBulkPatchDryRunImporter",
         "contentBulkPatchDomains",
         "contentBulkPatchBatchKeys",
@@ -1690,7 +1694,7 @@
     },
     "contentBulkPatchPackageAdapter": {
       "id": "content-bulk-patch-package-adapter-v1",
-      "source": "v458",
+      "source": "v459",
       "sourceModule": "src/editor/contentBulkPatchPackageAdapter.js",
       "checkScript": "build-scripts/check-content-bulk-patch-package-adapter.mjs",
       "expectedDomainCount": 5,
@@ -1700,6 +1704,8 @@
       "expectedTemplateStagedRowCount": 4,
       "expectedRequiredCheckCount": 9,
       "requiresExplicitApply": true,
+      "editorJsonInputVisible": true,
+      "templateDownloadEnabled": true,
       "editorSummaryVisible": true,
       "writesGameData": false
     },

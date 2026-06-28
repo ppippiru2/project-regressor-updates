@@ -1,28 +1,31 @@
-import { applyDomLocalization } from "../localization/domText.js?v=458";
-import { getLocaleText, t, tf } from "../localization/index.js?v=458";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=458";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=458";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=458";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=458";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=458";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=458";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=458";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=458";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=458";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=458";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=458";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=458";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=458";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=458";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=458";
+import { applyDomLocalization } from "../localization/domText.js?v=459";
+import { getLocaleText, t, tf } from "../localization/index.js?v=459";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=459";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=459";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=459";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=459";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=459";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=459";
+import {
+  createContentBulkPatchPackageAdapterPreview,
+  createContentBulkPatchPackageAdapterTemplate,
+} from "./contentBulkPatchPackageAdapter.js?v=459";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=459";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=459";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=459";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=459";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=459";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=459";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=459";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=459";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=458";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=458";
+} from "./monsterSpriteSlotReport.js?v=459";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=459";
 
-const EDITOR_VERSION = "458";
+const EDITOR_VERSION = "459";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -31,7 +34,6 @@ const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
 );
 const CONTENT_BULK_PATCH_AUTOMATION_PLAN = createContentBulkPatchAutomationPlan();
 const CONTENT_BULK_PATCH_INTAKE_CONTRACT = createContentBulkPatchIntakeContract();
-const CONTENT_BULK_PATCH_PACKAGE_ADAPTER_PREVIEW = createContentBulkPatchPackageAdapterPreview();
 const CONTENT_BULK_PATCH_DRY_RUN_PREVIEW = createContentBulkPatchDryRunPreview();
 const CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW = createContentBulkPatchStagedImportPreview();
 const MONSTER_CANDIDATE_REWARD_PREVIEW = createMonsterCandidateRewardPreview();
@@ -197,11 +199,13 @@ const SAVE_KEYS = [
   "project_regressor_ui_state",
   "project_regressor_editor_retarget_filter",
   "project_regressor_editor_balance_filter",
-  "project_regressor_editor_combat_vfx_filter"
+  "project_regressor_editor_combat_vfx_filter",
+  "project_regressor_editor_content_bulk_package_input"
 ];
 const RETARGET_FILTER_STORAGE_KEY = "project_regressor_editor_retarget_filter";
 const BALANCE_FILTER_STORAGE_KEY = "project_regressor_editor_balance_filter";
 const COMBAT_VFX_FILTER_STORAGE_KEY = "project_regressor_editor_combat_vfx_filter";
+const CONTENT_BULK_PACKAGE_INPUT_STORAGE_KEY = "project_regressor_editor_content_bulk_package_input";
 
 let manifest = null;
 let backlog = null;
@@ -211,6 +215,9 @@ let retargetDetailFilter = storedRetargetDetailFilter.filter;
 const expandedRetargetRows = new Set(storedRetargetDetailFilter.expandedRows);
 let balanceDetailFilter = loadBalanceDetailFilter();
 let combatVfxDetailFilter = loadCombatVfxDetailFilter();
+let contentBulkPatchPackageInput = loadContentBulkPatchPackageInput();
+let contentBulkPatchPackageParseError = "";
+let contentBulkPatchPackageAdapterPreview = createContentBulkPatchPackageAdapterPreviewFromInput();
 const MONSTER_SPRITE_SLOT_REPORT = createMonsterSpriteSlotReport();
 const MONSTER_SPRITE_READY_CONNECTION_PLAN = createMonsterSpriteReadyConnectionPatchPlan(MONSTER_SPRITE_SLOT_REPORT);
 const MONSTER_SPRITE_READY_CONNECTION_REVIEW = createMonsterSpriteReadyConnectionReview(
@@ -326,9 +333,73 @@ function bindEvents() {
         nextInput.focus();
         nextInput.setSelectionRange(cursor, cursor);
       }
+      return;
+    }
+    const packageTextarea = event.target.closest("[data-content-bulk-package-json]");
+    if (packageTextarea) {
+      contentBulkPatchPackageInput = {
+        ...contentBulkPatchPackageInput,
+        draftText: packageTextarea.value,
+        parseError: ""
+      };
+      persistContentBulkPatchPackageInput();
+    }
+  });
+  elements.panelDetail?.addEventListener("change", async (event) => {
+    const fileInput = event.target.closest("[data-content-bulk-package-file]");
+    if (!fileInput) return;
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      contentBulkPatchPackageInput = {
+        draftText: text,
+        appliedText: text,
+        sourceName: file.name,
+        parseError: ""
+      };
+      persistContentBulkPatchPackageInput();
+      refreshContentBulkPatchPackageAdapterPreview();
+      renderPanelDetail();
+      scrollContentBulkPackageIntoView();
+    } catch (error) {
+      contentBulkPatchPackageInput = {
+        ...contentBulkPatchPackageInput,
+        parseError: error?.message || "File read failed"
+      };
+      persistContentBulkPatchPackageInput();
+      renderPanelDetail();
+      scrollContentBulkPackageIntoView();
     }
   });
   elements.panelDetail?.addEventListener("click", (event) => {
+    const packageApplyButton = event.target.closest("[data-content-bulk-package-apply]");
+    if (packageApplyButton) {
+      applyContentBulkPatchPackageInput();
+      renderPanelDetail();
+      scrollContentBulkPackageIntoView();
+      return;
+    }
+    const packageSampleButton = event.target.closest("[data-content-bulk-package-sample]");
+    if (packageSampleButton) {
+      applyContentBulkPatchPackageSample();
+      renderPanelDetail();
+      scrollContentBulkPackageIntoView();
+      return;
+    }
+    const packageResetButton = event.target.closest("[data-content-bulk-package-reset]");
+    if (packageResetButton) {
+      resetContentBulkPatchPackageInput();
+      refreshContentBulkPatchPackageAdapterPreview();
+      renderPanelDetail();
+      scrollContentBulkPackageIntoView();
+      return;
+    }
+    const packageTemplateButton = event.target.closest("[data-content-bulk-package-template]");
+    if (packageTemplateButton) {
+      downloadJson("project-regressor-content-bulk-package-template.json", createContentBulkPatchPackageAdapterTemplate());
+      return;
+    }
     const combatVfxResetButton = event.target.closest("[data-combat-vfx-reset]");
     if (combatVfxResetButton) {
       resetCombatVfxDetailFilter();
@@ -1229,7 +1300,7 @@ function renderBalanceTuningDetail() {
       ${renderMonsterCandidateBulkPatchAutomation(MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION, detailText)}
       ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
       ${renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText)}
-      ${renderContentBulkPatchPackageAdapterPreview(CONTENT_BULK_PATCH_PACKAGE_ADAPTER_PREVIEW, detailText)}
+      ${renderContentBulkPatchPackageAdapterPreview(contentBulkPatchPackageAdapterPreview, detailText)}
       ${renderContentBulkPatchDryRunPreview(CONTENT_BULK_PATCH_DRY_RUN_PREVIEW, detailText)}
       ${renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
@@ -1343,6 +1414,13 @@ function scrollBalanceCandidateSummaryIntoView() {
   window.requestAnimationFrame(() => {
     const summary = elements.panelDetail?.querySelector("[data-balance-active-summary]");
     summary?.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
+}
+
+function scrollContentBulkPackageIntoView() {
+  window.requestAnimationFrame(() => {
+    const packagePanel = elements.panelDetail?.querySelector(".editor-content-bulk-package");
+    packagePanel?.scrollIntoView({ block: "start", behavior: "smooth" });
   });
 }
 
@@ -2315,6 +2393,15 @@ function renderContentBulkPatchIntakeDomain(domain, text = {}) {
 function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {
   const text = detailText.contentBulkPatchPackageAdapter || {};
   const summary = preview.summary || {};
+  const draftText = contentBulkPatchPackageInput.draftText || "";
+  const hasAppliedInput = Boolean(String(contentBulkPatchPackageInput.appliedText || "").trim());
+  const message = contentBulkPatchPackageParseError || contentBulkPatchPackageInput.parseError || "";
+  const inputState = message ? "error" : (hasAppliedInput ? "ready" : "template");
+  const sourceName = contentBulkPatchPackageInput.sourceName
+    || (hasAppliedInput ? (text.pasteSource || "Pasted JSON") : (text.templateSource || "Template preview"));
+  const statusLabel = message
+    ? (text.errorStatus || "JSON error")
+    : (hasAppliedInput ? (text.readyStatus || "Preview ready") : (text.templateStatus || "Template preview"));
   const metrics = [
     [text.sourceKeys || "Source keys", `${summary.sourceKeyCount || 0}`],
     [text.recognizedKeys || "Recognized", `${summary.recognizedSourceKeyCount || 0}`],
@@ -2335,6 +2422,31 @@ function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {
         <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchPackageAdapter.version", {
           version: preview.version || "-"
         }, preview.version || "-"))}</strong>
+      </div>
+      <div class="editor-content-bulk-package-input" data-state="${escapeAttribute(inputState)}">
+        <div class="editor-content-bulk-package-input-head">
+          <div>
+            <h5>${escapeHtml(text.inputTitle || "Package JSON input")}</h5>
+            <p>${escapeHtml(text.inputDescription || "Paste or load one external package JSON, then preview normalized rows before applying anything.")}</p>
+          </div>
+          <span>${escapeHtml(statusLabel)}</span>
+        </div>
+        <textarea data-content-bulk-package-json spellcheck="false" placeholder="${escapeAttribute(text.inputPlaceholder || "")}">${escapeHtml(draftText)}</textarea>
+        <div class="editor-content-bulk-package-actions">
+          <label class="editor-content-bulk-package-file">
+            <span>${escapeHtml(text.loadFile || "Load file")}</span>
+            <input type="file" accept=".json,application/json" data-content-bulk-package-file />
+          </label>
+          <button type="button" data-content-bulk-package-apply>${escapeHtml(text.applyPreview || "Preview input")}</button>
+          <button type="button" data-content-bulk-package-sample>${escapeHtml(text.useSample || "Use sample")}</button>
+          <button type="button" data-content-bulk-package-template>${escapeHtml(text.downloadTemplate || "Download template")}</button>
+          <button type="button" data-content-bulk-package-reset>${escapeHtml(text.resetInput || "Reset")}</button>
+        </div>
+        <p class="editor-content-bulk-package-message">
+          ${escapeHtml(message || tf("editorPrep.balanceTuningDetail.contentBulkPatchPackageAdapter.inputSource", {
+            source: sourceName
+          }, sourceName))}
+        </p>
       </div>
       <div class="editor-content-bulk-package-metrics">
         ${metrics.map(([label, value]) => `
@@ -3290,6 +3402,95 @@ function resetBalanceDetailFilter() {
     window.localStorage.removeItem(BALANCE_FILTER_STORAGE_KEY);
   } catch {
     // Editor convenience state is optional; failed reset should not block the read-only screen.
+  }
+}
+
+function loadContentBulkPatchPackageInput() {
+  try {
+    const raw = window.localStorage.getItem(CONTENT_BULK_PACKAGE_INPUT_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return {
+      draftText: typeof parsed?.draftText === "string" ? parsed.draftText : "",
+      appliedText: typeof parsed?.appliedText === "string" ? parsed.appliedText : "",
+      sourceName: typeof parsed?.sourceName === "string" ? parsed.sourceName : "",
+      parseError: typeof parsed?.parseError === "string" ? parsed.parseError : ""
+    };
+  } catch {
+    return {
+      draftText: "",
+      appliedText: "",
+      sourceName: "",
+      parseError: ""
+    };
+  }
+}
+
+function persistContentBulkPatchPackageInput() {
+  try {
+    window.localStorage.setItem(CONTENT_BULK_PACKAGE_INPUT_STORAGE_KEY, JSON.stringify({
+      draftText: String(contentBulkPatchPackageInput.draftText || ""),
+      appliedText: String(contentBulkPatchPackageInput.appliedText || ""),
+      sourceName: String(contentBulkPatchPackageInput.sourceName || ""),
+      parseError: String(contentBulkPatchPackageInput.parseError || "")
+    }));
+  } catch {
+    // Editor convenience state is optional; failed persistence should not block the read-only screen.
+  }
+}
+
+function applyContentBulkPatchPackageInput() {
+  const textarea = elements.panelDetail?.querySelector("[data-content-bulk-package-json]");
+  const draftText = textarea ? textarea.value : String(contentBulkPatchPackageInput.draftText || "");
+  contentBulkPatchPackageInput = {
+    draftText,
+    appliedText: draftText,
+    sourceName: draftText.trim() ? "pasted-package.json" : "",
+    parseError: ""
+  };
+  persistContentBulkPatchPackageInput();
+  refreshContentBulkPatchPackageAdapterPreview();
+}
+
+function applyContentBulkPatchPackageSample() {
+  const sampleText = JSON.stringify(createContentBulkPatchPackageAdapterTemplate(), null, 2);
+  contentBulkPatchPackageInput = {
+    draftText: sampleText,
+    appliedText: sampleText,
+    sourceName: "project-regressor-content-bulk-package-template.json",
+    parseError: ""
+  };
+  persistContentBulkPatchPackageInput();
+  refreshContentBulkPatchPackageAdapterPreview();
+}
+
+function resetContentBulkPatchPackageInput() {
+  contentBulkPatchPackageInput = {
+    draftText: "",
+    appliedText: "",
+    sourceName: "",
+    parseError: ""
+  };
+  contentBulkPatchPackageParseError = "";
+  try {
+    window.localStorage.removeItem(CONTENT_BULK_PACKAGE_INPUT_STORAGE_KEY);
+  } catch {
+    // Editor convenience state is optional; failed reset should not block the read-only screen.
+  }
+}
+
+function refreshContentBulkPatchPackageAdapterPreview() {
+  contentBulkPatchPackageAdapterPreview = createContentBulkPatchPackageAdapterPreviewFromInput();
+}
+
+function createContentBulkPatchPackageAdapterPreviewFromInput() {
+  contentBulkPatchPackageParseError = "";
+  const appliedText = String(contentBulkPatchPackageInput.appliedText || "").trim();
+  if (!appliedText) return createContentBulkPatchPackageAdapterPreview();
+  try {
+    return createContentBulkPatchPackageAdapterPreview(JSON.parse(appliedText));
+  } catch (error) {
+    contentBulkPatchPackageParseError = error?.message || "JSON parse error";
+    return createContentBulkPatchPackageAdapterPreview();
   }
 }
 

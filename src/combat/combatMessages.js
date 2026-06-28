@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=458";
+import { t, tf } from "../localization/index.js?v=459";
 
 export function combatStartMessage(monster) {
   return tf("combatMessages.start", { monsterName: monster.name });

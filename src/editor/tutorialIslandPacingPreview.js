@@ -1,10 +1,10 @@
-import { expToNext, monsterStats, rankCombatModifier, clamp } from "../combat/combatFormula.js?v=458";
-import { primaryStats, skills } from "../data/coreData.js?v=458";
-import { items } from "../data/itemData.js?v=458";
-import { regions, monsters } from "../data/worldData.js?v=458";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=458";
-import { playerStats } from "../state/progression.js?v=458";
-import { regionExpMultiplier } from "../state/rewards.js?v=458";
+import { expToNext, monsterStats, rankCombatModifier, clamp } from "../combat/combatFormula.js?v=459";
+import { primaryStats, skills } from "../data/coreData.js?v=459";
+import { items } from "../data/itemData.js?v=459";
+import { regions, monsters } from "../data/worldData.js?v=459";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=459";
+import { playerStats } from "../state/progression.js?v=459";
+import { regionExpMultiplier } from "../state/rewards.js?v=459";
 
 export const TUTORIAL_ISLAND_PACING_LIMITS = {
   bossLevelTargetOffset: 3,

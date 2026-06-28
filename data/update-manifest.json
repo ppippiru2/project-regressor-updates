@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 458,
-  "displayVersion": "v458",
-  "cacheVersion": "project-regressor-mvp-v458",
-  "updatedAt": "2026-06-28T11:15:00.000+09:00",
+  "versionCode": 459,
+  "displayVersion": "v459",
+  "cacheVersion": "project-regressor-mvp-v459",
+  "updatedAt": "2026-06-28T11:46:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=458&cachebust=458",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=459&cachebust=459",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v458 adds a read-only bulk package adapter so external monster, item, loot, skill, skill rune, and reward link lists can normalize into one shared batch contract.",
-    "v458 wires the adapter into the balance editor between intake contract and dry-run/staged import previews.",
-    "v458 extends quick checks and editor metadata guards so large content package intake remains scalable instead of one-by-one."
+    "v459 adds a balance editor JSON paste/file input for bulk monster, item, loot, skill, skill rune, and reward link packages.",
+    "v459 lets the editor download a package template, apply pasted JSON as a read-only preview, and keep drafts in local editor storage.",
+    "v459 extends metadata and quick checks so large content package intake stays scalable instead of one-by-one manual edits."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v458-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v458-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
   },
   "version": {
-    "code": 458,
-    "name": "4.58.0",
-    "displayName": "v458"
+    "code": 459,
+    "name": "4.59.0",
+    "displayName": "v459"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v458-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
   },
   "android": {
-    "code": 458,
-    "name": "4.58.0",
-    "displayName": "v458",
+    "code": 459,
+    "name": "4.59.0",
+    "displayName": "v459",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v458-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
     },
     "version": {
-      "code": 458,
-      "name": "4.58.0",
-      "displayName": "v458"
+      "code": 459,
+      "name": "4.59.0",
+      "displayName": "v459"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v458-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v459-debug.apk"
   }
 }
