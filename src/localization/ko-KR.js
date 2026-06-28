@@ -2458,6 +2458,7 @@ export const KO_KR_TEXT = {
           warningRows: "검토",
           blockedRows: "차단",
           requiredChecks: "검증",
+          stagedContract: "공통 staged 계약",
           writes: "데이터 쓰기",
           readOnly: "읽기 전용",
           noRows: "분류할 런타임 VFX 행 없음",

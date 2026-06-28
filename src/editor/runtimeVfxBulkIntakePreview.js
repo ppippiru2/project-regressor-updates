@@ -1,11 +1,12 @@
 import {
   COMBAT_VFX_PREVIEW_EFFECT_TYPES,
   createCombatVfxPlacementPreview,
-} from "./combatVfxPlacementPreview.js?v=498";
+} from "./combatVfxPlacementPreview.js?v=499";
 import {
   MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
   MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
-} from "../config/monsterBattleSpritePresets.js?v=498";
+} from "../config/monsterBattleSpritePresets.js?v=499";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=499";
 
 export const RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION = "runtime-vfx-bulk-intake-preview-v1";
 
@@ -87,6 +88,7 @@ export function createRuntimeVfxBulkIntakePreview(
   const warningRows = rows.filter((row) => row.intakeState.startsWith("review-"));
   const profileRows = rows.filter((row) => row.kind === "profile-placement");
   const modifierRows = rows.filter((row) => row.kind === "effect-modifier");
+  const stagedContract = createStagedContractSummary(createRuntimeVfxStagedContractAdapter(rows), ["runtime_vfx"]);
 
   return {
     version: RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION,
@@ -106,12 +108,17 @@ export function createRuntimeVfxBulkIntakePreview(
       readyRowCount: readyRows.length,
       warningRowCount: warningRows.length,
       blockedRowCount: blockedRows.length,
+      contractStagedRowCount: stagedContract.summary.stagedRowCount,
+      contractBlockedRowCount: stagedContract.summary.blockedRowCount,
+      contractWarningRowCount: stagedContract.summary.warningRowCount,
+      contractTargetSurfaceCount: stagedContract.summary.targetSurfaceCount,
       tuningSignalRowCount: rows.filter((row) => row.signals.length).length,
       currentMotionProfileCount: Object.keys(MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE).length,
       currentModifierProfileCount: Object.keys(MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE).length,
       requiredCheckCount: REQUIRED_CHECKS.length,
     },
     rows,
+    stagedContract,
     guard: {
       actualWritesDisabled: true,
       appliesAfterExplicitReview: true,
@@ -119,6 +126,46 @@ export function createRuntimeVfxBulkIntakePreview(
       validatesPlacementBeforePatch: true,
     },
   };
+}
+
+function createRuntimeVfxStagedContractAdapter(rows = []) {
+  const contractRows = rows.map((row) => ({
+    state: row.blockingIssueCodes?.length ? "withheld-blocked" : row.bulkState,
+    identity: row.effectType ? `${row.motionProfile}:${row.effectType}` : row.motionProfile,
+    targetSurface: row.targetSurface,
+    targetSurfaceCount: Number(row.targetSurfaceCount || 0),
+    blockingIssueCodes: Array.from(row.blockingIssueCodes || []),
+    warningIssueCodes: Array.from(row.warningIssueCodes || []),
+  }));
+  const blockedRows = contractRows.filter((row) => row.state === "withheld-blocked");
+  const stagedRows = contractRows.filter((row) => String(row.state || "").startsWith("staged-"));
+  const warningRows = contractRows.filter((row) => row.warningIssueCodes.length);
+
+  return {
+    stagedImport: {
+      version: RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION,
+      sourceVersion: RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION,
+      requiresExplicitApply: true,
+      domains: [
+        {
+          id: "runtime_vfx",
+          batchKey: "runtime_vfx",
+          state: runtimeVfxContractDomainState({ rows: contractRows, blockedRows, stagedRows, warningRows }),
+          rows: contractRows,
+          generatedSurfaceCount: 0,
+          checkScripts: REQUIRED_CHECKS,
+        },
+      ],
+    },
+  };
+}
+
+function runtimeVfxContractDomainState({ rows, blockedRows, stagedRows, warningRows }) {
+  if (!rows.length) return "empty";
+  if (blockedRows.length && stagedRows.length) return "partial";
+  if (blockedRows.length) return "blocked";
+  if (warningRows.length) return "ready-with-warnings";
+  return "ready";
 }
 
 function collectRuntimeVfxRows(packageData = {}) {
