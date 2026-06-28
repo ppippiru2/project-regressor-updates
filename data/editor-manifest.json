@@ -459,7 +459,8 @@
         "build-scripts/extract-content-bulk-package-json.mjs",
         "build-scripts/check-content-bulk-package-json-extractor.mjs",
         "src/editor/lootSkillBulkIntakePreview.js",
-        "src/editor/monsterRuntimeBulkIntakePreview.js"
+        "src/editor/monsterRuntimeBulkIntakePreview.js",
+        "src/editor/runtimeVfxBulkIntakePreview.js"
       ],
       "assetSlots": [],
       "editorFields": [
@@ -562,7 +563,11 @@
         "monsterRuntimeBulkIntakePreview",
         "monsterRuntimeBulkIntakeRows",
         "monsterRuntimeBulkPackageRows",
-        "monsterRuntimeBulkSpriteWaitlist"
+        "monsterRuntimeBulkSpriteWaitlist",
+        "runtimeVfxBulkIntakePreview",
+        "runtimeVfxBulkIntakeRows",
+        "runtimeVfxBulkPlacementRows",
+        "runtimeVfxBulkModifierRows"
       ],
       "futureControls": [
         "밸런스 그룹 목록",
@@ -587,7 +592,8 @@
         "Content bulk apply gate skeleton",
         "Content bulk backup snapshot plan",
         "Content bulk restore rehearsal report",
-        "Monster runtime bulk intake preview"
+        "Monster runtime bulk intake preview",
+        "런타임 VFX 대량 분류"
       ]
     },
     {
@@ -1533,7 +1539,9 @@
       "build-scripts/extract-content-bulk-package-json.mjs:createContentBulkPackageJsonFromInput",
       "src/editor/lootSkillBulkIntakePreview.js:createLootSkillBulkIntakePreview",
       "src/editor/monsterRuntimeBulkIntakePreview.js:createMonsterRuntimeBulkIntakePreview",
-      "src/editor/monsterRuntimeBulkIntakePreview.js:createMonsterRuntimeBulkIntakePackage"
+      "src/editor/monsterRuntimeBulkIntakePreview.js:createMonsterRuntimeBulkIntakePackage",
+      "src/editor/runtimeVfxBulkIntakePreview.js:createRuntimeVfxBulkIntakePreview",
+      "src/editor/runtimeVfxBulkIntakePreview.js:createRuntimeVfxBulkIntakeTemplate"
     ],
     "monsterCandidateRewardPreview": {
       "id": "monster-candidate-reward-preview-v1",
@@ -1730,6 +1738,15 @@
           "existing monster stays update candidate",
           "transparent sprite waitlist blocks live connection"
         ]
+      },
+      {
+        "id": "runtime-vfx-bulk-intake-preview",
+        "script": "build-scripts/check-runtime-vfx-bulk-intake-preview.mjs",
+        "guards": [
+          "runtime VFX aliases recognized",
+          "motion profile placement rows stay read-only",
+          "effect modifier rows validate before patch"
+        ]
       }
     ],
     "tuningCandidates": [
@@ -1899,7 +1916,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1913,7 +1930,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1927,7 +1944,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -2012,7 +2029,7 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
@@ -2024,7 +2041,7 @@
     },
     "contentBulkPatchApplyGatePlan": {
       "id": "content-bulk-patch-apply-gate-plan-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
       "expectedGateCount": 6,
@@ -2038,7 +2055,7 @@
     },
     "contentBulkPatchBackupPlan": {
       "id": "content-bulk-patch-backup-plan-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/contentBulkPatchBackupPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
       "expectedTargetFileCount": 24,
@@ -2053,7 +2070,7 @@
     },
     "contentBulkPatchRestoreRehearsal": {
       "id": "content-bulk-patch-restore-rehearsal-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/contentBulkPatchRestoreRehearsal.js",
       "checkScript": "build-scripts/check-content-bulk-patch-restore-rehearsal.mjs",
       "expectedTargetFileCount": 24,
@@ -2068,7 +2085,7 @@
     },
     "lootSkillBulkIntakePreview": {
       "id": "loot-skill-bulk-intake-preview-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/lootSkillBulkIntakePreview.js",
       "checkScript": "build-scripts/check-loot-skill-bulk-intake-preview.mjs",
       "expectedLootRowCount": 1,
@@ -2082,7 +2099,7 @@
     },
     "monsterRuntimeBulkIntakePreview": {
       "id": "monster-runtime-bulk-intake-preview-v1",
-      "source": "v470",
+      "source": "v471",
       "sourceModule": "src/editor/monsterRuntimeBulkIntakePreview.js",
       "checkScript": "build-scripts/check-monster-runtime-bulk-intake-preview.mjs",
       "packageKey": "monsterRuntimePresets",
@@ -2094,6 +2111,21 @@
       "expectedBlockedRuntimeRowCount": 1,
       "writesGameData": false,
       "requiresTransparentSprites": true,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true
+    },
+    "runtimeVfxBulkIntakePreview": {
+      "id": "runtime-vfx-bulk-intake-preview-v1",
+      "source": "v471",
+      "sourceModule": "src/editor/runtimeVfxBulkIntakePreview.js",
+      "checkScript": "build-scripts/check-runtime-vfx-bulk-intake-preview.mjs",
+      "expectedPackageRowCount": 2,
+      "expectedProfilePlacementRowCount": 1,
+      "expectedEffectModifierRowCount": 1,
+      "expectedUpdateCandidateCount": 2,
+      "expectedBlockedRowCount": 0,
+      "writesGameData": false,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true

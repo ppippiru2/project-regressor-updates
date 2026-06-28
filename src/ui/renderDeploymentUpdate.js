@@ -1,8 +1,8 @@
 import {
   FALLBACK_PAGES_URL,
   FALLBACK_REPOSITORY_URL,
-} from "../app/deploymentUpdate.js?v=470";
-import { t, tf } from "../localization/index.js?v=470";
+} from "../app/deploymentUpdate.js?v=471";
+import { t, tf } from "../localization/index.js?v=471";
 
 export function renderDeploymentUpdate(info, updateState, actions = {}) {
   const grid = document.querySelector(".build-info-grid");

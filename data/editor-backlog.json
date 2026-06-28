@@ -47,6 +47,7 @@
         "src/editor/contentBulkPatchIntakeContract.js",
         "src/editor/contentBulkPatchPackageAdapter.js",
         "src/editor/lootSkillBulkIntakePreview.js",
+        "src/editor/runtimeVfxBulkIntakePreview.js",
         "src/editor/contentBulkPatchDryRunImporter.js",
         "src/editor/contentBulkPatchStagedImportPreview.js",
         "src/editor/contentBulkPatchDiffExport.js",
@@ -66,6 +67,7 @@
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchIntakeContract",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchPackageAdapter",
         "data/editor-manifest.json:balanceTuningRegistry.lootSkillBulkIntakePreview",
+        "data/editor-manifest.json:balanceTuningRegistry.runtimeVfxBulkIntakePreview",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchDryRunImporter",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchStagedImportPreview",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchDiffExport",
@@ -89,6 +91,7 @@
         "src/editor/editorMain.js:renderContentBulkPatchIntakeContract",
         "src/editor/editorMain.js:renderContentBulkPatchPackageAdapterPreview",
         "src/editor/editorMain.js:renderLootSkillBulkIntakePreview",
+        "src/editor/editorMain.js:renderRuntimeVfxBulkIntakePreview",
         "src/editor/editorMain.js:applyContentBulkPatchPackageInput",
         "src/editor/editorMain.js:applyContentBulkPatchPackageSample",
         "src/editor/editorMain.js:createContentBulkPatchPackageAdapterPreviewFromInput",
@@ -224,7 +227,9 @@
         "build-scripts/check-monster-runtime-integration-pack.mjs",
         "src/editor/monsterRuntimeBulkIntakePreview.js",
         "data/editor-manifest.json:monsterRuntimeIntegration.bulkIntakePreviewModule",
-        "build-scripts/check-monster-runtime-bulk-intake-preview.mjs"
+        "build-scripts/check-monster-runtime-bulk-intake-preview.mjs",
+        "src/editor/runtimeVfxBulkIntakePreview.js",
+        "build-scripts/check-runtime-vfx-bulk-intake-preview.mjs"
       ]
     },
     {

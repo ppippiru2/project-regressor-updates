@@ -1,10 +1,10 @@
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=470";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=471";
 import { normalizePlayerProfile } from "./save.js";
-import { buildPlayerProfileInput } from "./profile.js?v=470";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=470";
-import { t, tf } from "../localization/index.js?v=470";
-import { buildTutorialIntroDialogueLogs } from "../story/tutorialDialogueEvents.js?v=470";
-import { statusGradeTemplateValues } from "./statusGrade.js?v=470";
+import { buildPlayerProfileInput } from "./profile.js?v=471";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=471";
+import { t, tf } from "../localization/index.js?v=471";
+import { buildTutorialIntroDialogueLogs } from "../story/tutorialDialogueEvents.js?v=471";
+import { statusGradeTemplateValues } from "./statusGrade.js?v=471";
 
 export function createCharacterProfile(formData, defaultPlayerProfile) {
   return normalizePlayerProfile(

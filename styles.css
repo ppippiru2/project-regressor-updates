@@ -5235,6 +5235,109 @@ select:focus {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.editor-runtime-vfx-bulk-intake {
+  background: rgba(8, 21, 39, 0.56);
+  border: 1px solid rgba(112, 226, 255, 0.2);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-runtime-vfx-bulk-intake-head,
+.editor-runtime-vfx-bulk-intake-row-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-runtime-vfx-bulk-intake-head h4,
+.editor-runtime-vfx-bulk-intake-head p,
+.editor-runtime-vfx-bulk-intake-row-head h5,
+.editor-runtime-vfx-bulk-intake-row-head p {
+  margin: 0;
+}
+
+.editor-runtime-vfx-bulk-intake-head h4 {
+  color: #70e2ff;
+  font-size: 0.95rem;
+}
+
+.editor-runtime-vfx-bulk-intake-head strong,
+.editor-runtime-vfx-bulk-intake-row-head span {
+  border: 1px solid rgba(112, 226, 255, 0.32);
+  border-radius: 999px;
+  color: #a7eeff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-runtime-vfx-bulk-intake-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.editor-runtime-vfx-bulk-intake-metrics span,
+.editor-runtime-vfx-bulk-intake-row {
+  background: rgba(1, 10, 28, 0.3);
+  border: 1px solid rgba(112, 226, 255, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-runtime-vfx-bulk-intake-metrics span,
+.editor-runtime-vfx-bulk-intake-list,
+.editor-runtime-vfx-bulk-intake-row {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.editor-runtime-vfx-bulk-intake-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-runtime-vfx-bulk-intake-metrics b,
+.editor-runtime-vfx-bulk-intake-row-head h5 {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-runtime-vfx-bulk-intake-row-head p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.editor-runtime-vfx-bulk-intake-row[data-state^="blocked-"] {
+  border-color: rgba(255, 107, 151, 0.34);
+}
+
+.editor-runtime-vfx-bulk-intake-row[data-state^="review-"] {
+  border-color: rgba(255, 214, 112, 0.28);
+}
+
+.editor-runtime-vfx-bulk-intake-row[data-state^="ready-"] {
+  border-color: rgba(91, 229, 132, 0.28);
+}
+
+.editor-runtime-vfx-bulk-intake-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .editor-content-bulk-package-input {
   background: rgba(1, 10, 28, 0.34);
   border: 1px solid rgba(143, 255, 192, 0.16);
@@ -9995,6 +10098,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-monster-runtime-bulk-intake-head,
   .editor-monster-runtime-bulk-intake-row-head,
   .editor-monster-runtime-bulk-intake-grid,
+  .editor-runtime-vfx-bulk-intake-head,
+  .editor-runtime-vfx-bulk-intake-row-head,
+  .editor-runtime-vfx-bulk-intake-grid,
   .editor-content-bulk-dry-run-head,
   .editor-content-bulk-dry-run-domain-head,
   .editor-content-bulk-dry-run-grid,
@@ -10038,6 +10144,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-package-metrics,
   .editor-loot-skill-bulk-intake-metrics,
   .editor-monster-runtime-bulk-intake-metrics,
+  .editor-runtime-vfx-bulk-intake-metrics,
   .editor-content-bulk-dry-run-metrics,
   .editor-content-bulk-stage-metrics,
   .editor-content-bulk-diff-metrics,

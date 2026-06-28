@@ -1,45 +1,45 @@
 {
-  "schemaVersion": 1,
-  "project": "Project Regressor",
-  "versionCode": 470,
-  "displayVersion": "v470",
-  "cacheVersion": "project-regressor-mvp-v470",
-  "updatedAt": "2026-06-28T15:58:00.000+09:00",
-  "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
-  "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=470&cachebust=470",
-  "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": [
-    "v470 adds a read-only loot and skill bulk intake preview for external package JSON.",
-    "v470 separates codex fragments, mana crystal fragments, skill fragments, skill runes, and skill definitions before any live data write.",
-    "v470 keeps the scalable batch path ready for future monster, item, skill, loot, codex, magic-stone, and asset updates."
-  ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk",
-  "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
-  },
-  "version": {
-    "code": 470,
-    "name": "4.70.0",
-    "displayName": "v470"
-  },
-  "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
-  },
-  "android": {
-    "code": 470,
-    "name": "4.70.0",
-    "displayName": "v470",
-    "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
-    },
-    "version": {
-      "code": 470,
-      "name": "4.70.0",
-      "displayName": "v470"
-    }
-  },
-  "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v470-debug.apk"
-  }
+    "schemaVersion":  1,
+    "project":  "Project Regressor",
+    "versionCode":  471,
+    "displayVersion":  "v471",
+    "cacheVersion":  "project-regressor-mvp-v471",
+    "updatedAt":  "2026-06-28T16:21:00.000+09:00",
+    "repositoryUrl":  "https://github.com/ppippiru2/project-regressor-updates",
+    "pagesUrl":  "https://ppippiru2.github.io/project-regressor-updates/",
+    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=471\u0026cachebust=471",
+    "recommendedAndroidShell":  "Trusted Web Activity",
+    "notes":  [
+                  "v471 adds a read-only runtime VFX bulk intake preview for external package JSON.",
+                  "v471 classifies monster motion-profile VFX placement rows and effect modifiers before any live data write.",
+                  "v471 keeps large monster, item, skill, loot, codex, magic-stone, runtime sprite, and VFX updates on a scalable batch-review path."
+              ],
+    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk",
+    "downloads":  {
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+                  },
+    "version":  {
+                    "code":  471,
+                    "name":  "4.71.0",
+                    "displayName":  "v471"
+                },
+    "artifacts":  {
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+                  },
+    "android":  {
+                    "code":  471,
+                    "name":  "4.71.0",
+                    "displayName":  "v471",
+                    "artifacts":  {
+                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+                                  },
+                    "version":  {
+                                    "code":  471,
+                                    "name":  "4.71.0",
+                                    "displayName":  "v471"
+                                }
+                },
+    "apk":  {
+                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v471-debug.apk"
+            }
 }

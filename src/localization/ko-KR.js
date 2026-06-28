@@ -2363,6 +2363,49 @@ export const KO_KR_TEXT = {
             "not-staged": "스테이지 없음"
           }
         },
+        runtimeVfxBulkIntakePreview: {
+          title: "런타임 VFX 대량 분류",
+          description: "외부 패키지의 몬스터 모션 프로필별 VFX 위치와 크기 조정값을 실제 적용 전에 읽기 전용으로 검사합니다.",
+          version: "{version}",
+          packageRows: "패키지 행",
+          profileRows: "프로필 배치",
+          modifierRows: "효과 보정",
+          updateCandidates: "갱신 후보",
+          appendCandidates: "신규 후보",
+          readyRows: "준비",
+          warningRows: "검토",
+          blockedRows: "차단",
+          requiredChecks: "검증",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          noRows: "분류할 런타임 VFX 행 없음",
+          rowMeta: "{key} · {kind} · {state}",
+          targetSurface: "대상 위치",
+          sourceMonster: "참조 몬스터",
+          profileMonsterCount: "현재 연결 몬스터",
+          signals: "조정 신호",
+          issues: "문제",
+          placement: "배치값",
+          none: "없음",
+          kindLabels: {
+            "profile-placement": "모션 프로필 배치",
+            "effect-modifier": "효과별 보정"
+          },
+          stateLabels: {
+            "blocked-missing-motion-profile": "모션 프로필 없음",
+            "blocked-unknown-effect-type": "알 수 없는 효과",
+            "blocked-invalid-placement": "배치값 오류",
+            "review-new-motion-profile": "신규 프로필 검토",
+            "review-new-effect-modifier": "신규 효과 보정 검토",
+            "review-tuning-signal": "위치/크기 검토",
+            "ready-profile-update": "프로필 갱신 가능",
+            "ready-effect-modifier-update": "효과 보정 갱신 가능"
+          },
+          bulkStateLabels: {
+            "staged-update": "현재 값 갱신 후보",
+            "staged-append": "신규 추가 후보"
+          }
+        },
         contentBulkPatchDryRunImporter: {
           title: "대량 콘텐츠 dry-run 반영",
           description: "배치 파일을 실제 게임 데이터에 쓰기 전에 추가/갱신 후보, 차단 오류, 경고, 영향 표면을 읽기 전용으로 계산합니다.",
