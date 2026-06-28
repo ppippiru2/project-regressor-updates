@@ -67,6 +67,7 @@
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchAutomationPlan",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchIntakeContract",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPackageOverview",
+        "styles.css:.editor-content-bulk-overview-jump",
         "data/editor-manifest.json:balanceTuningRegistry.contentBulkPatchPackageAdapter",
         "data/editor-manifest.json:balanceTuningRegistry.lootSkillBulkIntakePreview",
         "data/editor-manifest.json:balanceTuningRegistry.runtimeVfxBulkIntakePreview",

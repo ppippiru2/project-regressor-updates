@@ -4968,6 +4968,14 @@ select:focus {
   min-width: 0;
 }
 
+.editor-content-bulk-overview,
+.editor-content-bulk-package,
+.editor-loot-skill-bulk-intake,
+.editor-monster-runtime-bulk-intake,
+.editor-runtime-vfx-bulk-intake {
+  scroll-margin-top: 1rem;
+}
+
 .editor-content-bulk-overview-head h4,
 .editor-content-bulk-overview-head p,
 .editor-content-bulk-overview-row h5,
@@ -4989,6 +4997,32 @@ select:focus {
   font-weight: 900;
   padding: 0.2rem 0.45rem;
   white-space: nowrap;
+}
+
+.editor-content-bulk-overview-actions {
+  align-items: end;
+  display: grid;
+  gap: 0.35rem;
+  justify-items: end;
+}
+
+.editor-content-bulk-overview-jump {
+  border: 1px solid rgba(88, 225, 255, 0.24);
+  border-radius: 999px;
+  color: #a8f3ff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0.26rem 0.48rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.editor-content-bulk-overview-jump:hover,
+.editor-content-bulk-overview-jump:focus-visible {
+  background: rgba(88, 225, 255, 0.12);
+  border-color: rgba(88, 225, 255, 0.56);
+  outline: none;
 }
 
 .editor-content-bulk-overview[data-state="blocked"] .editor-content-bulk-overview-head strong,
@@ -5018,6 +5052,13 @@ select:focus {
   border-radius: 6px;
   min-width: 0;
   padding: 0.55rem;
+}
+
+.editor-content-bulk-overview-domain {
+  align-items: start;
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
 }
 
 .editor-content-bulk-overview-metrics small {
@@ -10162,6 +10203,11 @@ body[data-info-tooltips="off"] .info-term {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .editor-content-bulk-overview-actions,
+  .editor-content-bulk-overview-domain {
+    justify-items: start;
+  }
+
   .editor-balance-domain-list,
   .editor-balance-active-candidate-metrics,
   .editor-monster-candidate-rewards-head,
@@ -10191,6 +10237,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-intake-grid,
   .editor-content-bulk-overview-head,
   .editor-content-bulk-overview-row,
+  .editor-content-bulk-overview-domain,
   .editor-content-bulk-overview-grid,
   .editor-content-bulk-overview-list,
   .editor-content-bulk-overview-domains,

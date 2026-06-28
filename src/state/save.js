@@ -1,13 +1,13 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=472";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=472";
-import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=472";
-import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=472";
-import { t, tf } from "../localization/index.js?v=472";
+} from "./developerOptions.js?v=473";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=473";
+import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=473";
+import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=473";
+import { t, tf } from "../localization/index.js?v=473";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=472";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=473";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";

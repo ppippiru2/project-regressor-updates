@@ -1,45 +1,45 @@
-import { applyDomLocalization } from "../localization/domText.js?v=472";
-import { getLocaleText, t, tf } from "../localization/index.js?v=472";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=472";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=472";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=472";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=472";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=472";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=472";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=472";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=472";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=472";
+import { applyDomLocalization } from "../localization/domText.js?v=473";
+import { getLocaleText, t, tf } from "../localization/index.js?v=473";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=473";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=473";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=473";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=473";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=473";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=473";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=473";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=473";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=473";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=472";
-import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=472";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=472";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=472";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=472";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=472";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=472";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=472";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=472";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=472";
+} from "./contentBulkPatchPackageAdapter.js?v=473";
+import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=473";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=473";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=473";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=473";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=473";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=473";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=473";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=473";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=473";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=472";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=472";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=472";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=472";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=472";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=472";
+} from "./runtimeVfxBulkIntakePreview.js?v=473";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=473";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=473";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=473";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=473";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=473";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=472";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=472";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=472";
+} from "./monsterSpriteSlotReport.js?v=473";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=473";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=473";
 
-const EDITOR_VERSION = "472";
+const EDITOR_VERSION = "473";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -2452,7 +2452,7 @@ function renderContentBulkPackageOverview(preview, detailText = {}) {
     [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
   ];
   return `
-    <section class="editor-content-bulk-overview" data-state="${escapeAttribute(preview.status || "ready")}" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Package Overview")}">
+    <section id="content-bulk-package-overview" class="editor-content-bulk-overview" data-state="${escapeAttribute(preview.status || "ready")}" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Package Overview")}">
       <div class="editor-content-bulk-overview-head">
         <div>
           <h4>${escapeHtml(text.title || "Content Bulk Package Overview")}</h4>
@@ -2494,7 +2494,10 @@ function renderContentBulkOverviewRow(row, text = {}) {
           blocked: row.blockedCount || 0,
         }, `${row.rowCount || 0}`))}</p>
       </div>
-      <span>${escapeHtml(contentBulkOverviewLabel(row.state, text.statusLabels))}</span>
+      <div class="editor-content-bulk-overview-actions">
+        <span>${escapeHtml(contentBulkOverviewLabel(row.state, text.statusLabels))}</span>
+        ${contentBulkOverviewJumpLink(row.drilldownTargetId, text)}
+      </div>
     </article>
   `;
 }
@@ -2502,17 +2505,27 @@ function renderContentBulkOverviewRow(row, text = {}) {
 function renderContentBulkOverviewDomain(row, text = {}) {
   return `
     <article class="editor-content-bulk-overview-domain" data-state="${escapeAttribute(row.state || "empty")}">
-      <strong>${escapeHtml(contentBulkPatchDomainLabel(row.id, text))}</strong>
-      <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.domainMeta", {
-        batchKey: row.batchKey || "-",
-        rows: row.rowCount || 0,
-      }, `${row.batchKey || "-"} / ${row.rowCount || 0}`))}</span>
+      <div>
+        <strong>${escapeHtml(contentBulkPatchDomainLabel(row.id, text))}</strong>
+        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.domainMeta", {
+          batchKey: row.batchKey || "-",
+          rows: row.rowCount || 0,
+        }, `${row.batchKey || "-"} / ${row.rowCount || 0}`))}</span>
+      </div>
+      ${contentBulkOverviewJumpLink(row.drilldownTargetId, text)}
     </article>
   `;
 }
 
 function contentBulkOverviewLabel(id, labels = {}) {
   return labels?.[id] || id || "-";
+}
+
+function contentBulkOverviewJumpLink(targetId, text = {}) {
+  if (!targetId) return "";
+  return `
+    <a class="editor-content-bulk-overview-jump" href="#${escapeAttribute(targetId)}">${escapeHtml(text.jumpToDetail || "Jump")}</a>
+  `;
 }
 
 function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {
@@ -2538,7 +2551,7 @@ function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {
     [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
   ];
   return `
-    <section class="editor-content-bulk-package" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Package Adapter")}">
+    <section id="content-bulk-package-adapter" class="editor-content-bulk-package" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Package Adapter")}">
       <div class="editor-content-bulk-package-head">
         <div>
           <h4>${escapeHtml(text.title || "Content Bulk Patch Package Adapter")}</h4>
@@ -2633,7 +2646,7 @@ function renderLootSkillBulkIntakePreview(preview, detailText = {}) {
     [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
   ];
   return `
-    <section class="editor-loot-skill-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Loot and skill bulk intake")}">
+    <section id="loot-skill-bulk-intake" class="editor-loot-skill-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Loot and skill bulk intake")}">
       <div class="editor-loot-skill-bulk-intake-head">
         <div>
           <h4>${escapeHtml(text.title || "Loot and skill bulk intake")}</h4>
@@ -2731,7 +2744,7 @@ function renderMonsterRuntimeBulkIntakePreview(preview, detailText = {}) {
     [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
   ];
   return `
-    <section class="editor-monster-runtime-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster runtime bulk intake")}">
+    <section id="monster-runtime-bulk-intake" class="editor-monster-runtime-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster runtime bulk intake")}">
       <div class="editor-monster-runtime-bulk-intake-head">
         <div>
           <h4>${escapeHtml(text.title || "Monster runtime bulk intake")}</h4>
@@ -2803,7 +2816,7 @@ function renderRuntimeVfxBulkIntakePreview(preview, detailText = {}) {
     [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
   ];
   return `
-    <section class="editor-runtime-vfx-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Runtime VFX bulk intake")}">
+    <section id="runtime-vfx-bulk-intake" class="editor-runtime-vfx-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Runtime VFX bulk intake")}">
       <div class="editor-runtime-vfx-bulk-intake-head">
         <div>
           <h4>${escapeHtml(text.title || "Runtime VFX bulk intake")}</h4>

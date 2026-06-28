@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=472";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=472";
+import { getLocaleText } from "../localization/index.js?v=473";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=473";
 
 const DATA_TEXT = getLocaleText().data;
 const SKILL_TEXT = DATA_TEXT.skills;

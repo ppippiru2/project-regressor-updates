@@ -1,4 +1,20 @@
-export const CONTENT_BULK_PACKAGE_OVERVIEW_VERSION = "content-bulk-package-overview-v1";
+export const CONTENT_BULK_PACKAGE_OVERVIEW_VERSION = "content-bulk-package-overview-v2";
+
+export const CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS = Object.freeze({
+  reviewSurface: Object.freeze({
+    "package-contract": "content-bulk-package-adapter",
+    "loot-skill": "loot-skill-bulk-intake",
+    "monster-runtime": "monster-runtime-bulk-intake",
+    "runtime-vfx": "runtime-vfx-bulk-intake",
+  }),
+  domain: Object.freeze({
+    monster: "content-bulk-package-adapter",
+    equipment_item: "content-bulk-package-adapter",
+    loot_item: "loot-skill-bulk-intake",
+    skill: "loot-skill-bulk-intake",
+    reward_link: "content-bulk-package-adapter",
+  }),
+});
 
 export function createContentBulkPackageOverview({
   adapterPreview,
@@ -58,6 +74,7 @@ export function createContentBulkPackageOverview({
       actualWritesDisabled: true,
       summarizesExistingPreviewsOnly: true,
       scalableForBulkMonsterItemSkillUpdates: true,
+      drilldownAnchorsOnly: true,
     },
   };
 }
@@ -70,6 +87,7 @@ function createDomainRows(adapterPreview = {}) {
     sourceKeys: Array.from(mapping.sourceKeys || []),
     requiredInputFields: Array.from(mapping.requiredInputFields || []),
     state: Number(mapping.rowCount || 0) > 0 ? "active" : "empty",
+    drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.domain[mapping.domainId || ""] || "content-bulk-package-adapter",
   }));
 }
 
@@ -82,6 +100,7 @@ function createPackageContractRow(summary = {}) {
     blockedCount: Number(summary.withheldRowCount || 0) + Number(summary.unmappedArrayKeyCount || 0),
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(Number(summary.withheldRowCount || 0) + Number(summary.unmappedArrayKeyCount || 0), Number(summary.warningRowCount || 0), Number(summary.normalizedRowCount || 0)),
+    drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["package-contract"],
   };
 }
 
@@ -96,6 +115,7 @@ function createLootSkillRow(summary = {}) {
     blockedCount,
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(blockedCount, 0, rowCount),
+    drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["loot-skill"],
   };
 }
 
@@ -111,6 +131,7 @@ function createMonsterRuntimeRow(summary = {}) {
     blockedCount,
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(blockedCount, warningCount, rowCount),
+    drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["monster-runtime"],
   };
 }
 
@@ -126,6 +147,7 @@ function createRuntimeVfxRow(summary = {}) {
     blockedCount,
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(blockedCount, warningCount, rowCount),
+    drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["runtime-vfx"],
   };
 }
 

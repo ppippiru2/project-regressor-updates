@@ -2251,6 +2251,7 @@ export const KO_KR_TEXT = {
           recognizedSourceKeys: "인식 원본 키",
           unmappedSourceKeys: "미인식 원본 키",
           reviewSurfaces: "검토 표면",
+          jumpToDetail: "이동",
           rowMeta: "행 {rows} · 준비 {ready} · 차단 {blocked}",
           domainMeta: "{batchKey} · {rows}행",
           statusLabels: {
