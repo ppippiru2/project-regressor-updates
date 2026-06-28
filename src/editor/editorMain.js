@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=503";
-import { getLocaleText, t, tf } from "../localization/index.js?v=503";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=503";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=503";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=503";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=503";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=503";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=503";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=503";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=503";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=503";
+import { applyDomLocalization } from "../localization/domText.js?v=504";
+import { getLocaleText, t, tf } from "../localization/index.js?v=504";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=504";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=504";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=504";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=504";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=504";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=504";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=504";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=504";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=504";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=503";
+} from "./contentBulkPatchPackageAdapter.js?v=504";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=503";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=503";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=503";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=503";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=503";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=503";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=503";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=503";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=503";
+} from "./contentBulkPackageOverview.js?v=504";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=504";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=504";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=504";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=504";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=504";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=504";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=504";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=504";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=503";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=503";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=503";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=503";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=503";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=503";
+} from "./runtimeVfxBulkIntakePreview.js?v=504";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=504";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=504";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=504";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=504";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=504";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=503";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=503";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=503";
+} from "./monsterSpriteSlotReport.js?v=504";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=504";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=504";
 
-const EDITOR_VERSION = "503";
+const EDITOR_VERSION = "504";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -1424,7 +1424,10 @@ function renderBalanceTuningDetail() {
       ${renderContentBulkPatchDiffExport(CONTENT_BULK_PATCH_DIFF_EXPORT, detailText)}
       ${renderContentBulkPatchManualApplyChecklist(CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST, detailText)}
       ${renderContentBulkPatchFilePatchDraft(contentBulkPatchFilePatchDraftExport.draft || CONTENT_BULK_PATCH_FILE_PATCH_DRAFT, detailText)}
-      ${renderContentBulkPatchFilePatchDraftExport(contentBulkPatchFilePatchDraftExport, detailText)}
+      ${renderContentBulkPatchFilePatchDraftExport(contentBulkPatchFilePatchDraftExport, detailText, {
+        backupPlan: contentBulkPatchBackupPlan,
+        restoreRehearsal: contentBulkPatchRestoreRehearsal,
+      })}
       ${renderContentBulkPatchApplyGatePlan(contentBulkPatchApplyGatePlan, detailText)}
       ${renderContentBulkPatchBackupPlan(contentBulkPatchBackupPlan, detailText)}
       ${renderContentBulkPatchRestoreRehearsal(contentBulkPatchRestoreRehearsal, detailText)}
@@ -3781,7 +3784,7 @@ function contentBulkPatchFilePatchOperationLabel(operationId, text = {}) {
   return text.operationLabels?.[operationId] || operationId || "unknown";
 }
 
-function renderContentBulkPatchFilePatchDraftExport(exportPreview, detailText = {}) {
+function renderContentBulkPatchFilePatchDraftExport(exportPreview, detailText = {}, reviewContext = {}) {
   const text = detailText.contentBulkPatchFilePatchDraftExport || {};
   const summary = exportPreview.summary || {};
   const metrics = [
@@ -3814,6 +3817,7 @@ function renderContentBulkPatchFilePatchDraftExport(exportPreview, detailText = 
         `).join("")}
       </div>
       <div class="editor-content-bulk-patch-draft-export-grid">
+        ${renderContentBulkPatchExportReviewStrip(exportPreview, reviewContext, text)}
         ${balanceDetailChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(exportPreview.preApplyReview?.checklist, text))}
       </div>
       <div class="editor-content-bulk-patch-draft-export-actions">
@@ -3826,6 +3830,53 @@ function renderContentBulkPatchFilePatchDraftExport(exportPreview, detailText = 
         </button>
       </div>
     </section>
+  `;
+}
+
+function renderContentBulkPatchExportReviewStrip(exportPreview = {}, reviewContext = {}, text = {}) {
+  const preApplySummary = exportPreview.preApplyReview?.summary || {};
+  const preApplyChecklist = Array.isArray(exportPreview.preApplyReview?.checklist) ? exportPreview.preApplyReview.checklist : [];
+  const backupIssueSummary = reviewContext.backupPlan?.issueSummary || {};
+  const restoreIssueSummary = reviewContext.restoreRehearsal?.issueSummary || {};
+  const preApplyBlockers = preApplyChecklist.filter((item) => item.state === "blocked").map((item) => item.id);
+  const preApplyWarnings = preApplyChecklist.filter((item) => item.state === "review").map((item) => item.id);
+  const blockingIssues = Array.from(new Set([
+    ...preApplyBlockers,
+    ...(backupIssueSummary.blockingIssueCodes || []),
+    ...(restoreIssueSummary.blockingIssueCodes || []),
+  ]));
+  const warningIssues = Array.from(new Set([
+    ...preApplyWarnings,
+    ...(backupIssueSummary.warningIssueCodes || []),
+    ...(restoreIssueSummary.warningIssueCodes || []),
+  ]));
+  const state = blockingIssues.length > 0 ? "blocked" : "ready";
+  const metrics = [
+    [text.reviewStripPreApplyBlocked || "Pre-apply blocked", `${preApplySummary.blockedReviewItemCount || 0}`],
+    [text.reviewStripBackupIssues || "Backup issues", `${backupIssueSummary.blockingIssueCodes?.length || 0}`],
+    [text.reviewStripRestoreIssues || "Restore issues", `${restoreIssueSummary.blockingIssueCodes?.length || 0}`],
+    [text.reviewStripState || "State", state === "blocked" ? (text.reviewStripStateBlocked || "Blocked") : (text.reviewStripStateReady || "Ready")],
+  ];
+
+  return `
+    <div class="editor-content-bulk-contract-summary editor-content-bulk-patch-draft-export-review-strip" data-state="${escapeAttribute(state)}">
+      <div>
+        <strong>${escapeHtml(text.reviewStripTitle || "Export review strip")}</strong>
+        <p class="muted">${escapeHtml(text.reviewStripHint || "Pre-apply, backup, and restore blockers before download.")}</p>
+      </div>
+      <div class="editor-content-bulk-contract-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-content-bulk-contract-issues">
+        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(blockingIssues, text))}
+        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(warningIssues, text))}
+      </div>
+    </div>
   `;
 }
 
