@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=508";
-import { getLocaleText, t, tf } from "../localization/index.js?v=508";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=508";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=508";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=508";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=508";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=508";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=508";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=508";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=508";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=508";
+import { applyDomLocalization } from "../localization/domText.js?v=509";
+import { getLocaleText, t, tf } from "../localization/index.js?v=509";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=509";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=509";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=509";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=509";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=509";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=509";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=509";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=509";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=509";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=508";
+} from "./contentBulkPatchPackageAdapter.js?v=509";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=508";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=508";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=508";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=508";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=508";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=508";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=508";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=508";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=508";
+} from "./contentBulkPackageOverview.js?v=509";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=509";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=509";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=509";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=509";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=509";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=509";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=509";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=509";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=508";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=508";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=508";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=508";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=508";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=508";
+} from "./runtimeVfxBulkIntakePreview.js?v=509";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=509";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=509";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=509";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=509";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=509";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=508";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=508";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=508";
+} from "./monsterSpriteSlotReport.js?v=509";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=509";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=509";
 
-const EDITOR_VERSION = "508";
+const EDITOR_VERSION = "509";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -3383,6 +3383,10 @@ function renderContentBulkDomainApplyReadiness({
     reviewDomainCount: rows.filter((row) => row.state === "review").length,
     blockedDomainCount: rows.filter((row) => row.state === "blocked").length,
     emptyDomainCount: rows.filter((row) => row.state === "empty").length,
+    dryRunBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.dryRun || []).length > 0).length,
+    stagedBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.staged || []).length > 0).length,
+    backupBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.backup || []).length > 0).length,
+    restoreBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.restore || []).length > 0).length,
     filteredCandidateCount: Number(filterCounts.visibleRows || 0),
     filteredDomainCount: visibleRows.length,
     draftFileCount: rows.reduce((sum, row) => sum + row.draftFileCount, 0),
@@ -3394,6 +3398,10 @@ function renderContentBulkDomainApplyReadiness({
     [text.reviewDomains || "Review", `${summary.reviewDomainCount}`],
     [text.blockedDomains || "Blocked", `${summary.blockedDomainCount}`],
     [text.emptyDomains || "Empty", `${summary.emptyDomainCount}`],
+    [text.dryRunBlockedDomains || "Dry-run blocked", `${summary.dryRunBlockedDomainCount}`],
+    [text.stagedBlockedDomains || "Staged blocked", `${summary.stagedBlockedDomainCount}`],
+    [text.backupBlockedDomains || "Backup blocked", `${summary.backupBlockedDomainCount}`],
+    [text.restoreBlockedDomains || "Restore blocked", `${summary.restoreBlockedDomainCount}`],
     [text.filteredCandidates || "Filtered candidates", `${summary.filteredCandidateCount}`],
     [text.filteredDomains || "Filtered domains", `${summary.filteredDomainCount}`],
     [text.draftFiles || "Draft files", `${summary.draftFileCount}`],
@@ -3485,15 +3493,21 @@ function contentBulkDomainApplyReadinessRows({
     const domainRestoreActions = restoreActions.filter((action) => (action.domainIds || []).includes(domainId));
     const backupBlockerCodes = domainBackupFiles.flatMap((file) => file.reviewBlockerCodes || []).filter(Boolean);
     const restoreBlockerCodes = domainRestoreActions.flatMap((action) => action.rehearsalBlockerCodes || []).filter(Boolean);
+    const stageBlockerGroups = {
+      dryRun: Array.from(new Set(dryDomain.blockingIssueCodes || [])),
+      staged: Array.from(new Set(stagedDomain.blockingIssueCodes || [])),
+      backup: Array.from(new Set(backupBlockerCodes)),
+      restore: Array.from(new Set(restoreBlockerCodes)),
+    };
     const blockedFileNames = new Set([
       ...domainBackupFiles.filter((file) => (file.reviewBlockerCodes || []).filter(Boolean).length > 0).map((file) => file.file),
       ...domainRestoreActions.filter((action) => (action.rehearsalBlockerCodes || []).filter(Boolean).length > 0).map((action) => action.file),
     ].filter(Boolean));
     const blockingIssueCodes = Array.from(new Set([
-      ...(dryDomain.blockingIssueCodes || []),
-      ...(stagedDomain.blockingIssueCodes || []),
-      ...backupBlockerCodes,
-      ...restoreBlockerCodes,
+      ...stageBlockerGroups.dryRun,
+      ...stageBlockerGroups.staged,
+      ...stageBlockerGroups.backup,
+      ...stageBlockerGroups.restore,
     ]));
     const warningIssueCodes = Array.from(new Set([
       ...(dryDomain.warningIssueCodes || []),
@@ -3528,6 +3542,7 @@ function contentBulkDomainApplyReadinessRows({
       generatedSurfaceCount: Number(stagedDomain.generatedSurfaceCount || dryDomain.generatedSurfaceCount || 0),
       blockingIssueCodes,
       warningIssueCodes,
+      stageBlockerGroups,
       fileNames: domainFiles.map((file) => file.file).filter(Boolean),
       checkScripts: Array.from(new Set([
         ...(stagedDomain.checkScripts || []),
@@ -3554,7 +3569,7 @@ function contentBulkDomainApplyReadinessState({
 
 function renderContentBulkDomainApplyReadinessRow(row = {}, text = {}) {
   return `
-    <article class="editor-content-bulk-patch-draft-file" data-state="${escapeAttribute(row.state || "unknown")}" data-filter-visible="${row.filterMatched ? "true" : "false"}">
+    <article class="editor-content-bulk-patch-draft-file" data-state="${escapeAttribute(row.state || "unknown")}" data-filter-visible="${row.filterMatched ? "true" : "false"}" data-blocked-stages="${escapeAttribute(contentBulkDomainBlockedStageIds(row.stageBlockerGroups).join(" "))}">
       <div class="editor-content-bulk-patch-draft-file-head">
         <div>
           <h5>${escapeHtml(contentBulkPatchDomainLabel(row.id, text))}</h5>
@@ -3591,6 +3606,7 @@ function renderContentBulkDomainApplyReadinessRow(row = {}, text = {}) {
             state: row.filterMatched ? (text.filterMatched || "shown") : (text.filterHidden || "hidden"),
           }, `${row.filterVisibleCandidateCount || 0}`)
         ])}
+        ${balanceDetailChipBlock(text.blockerStages || "Blocker stages", contentBulkDomainStageBlockerLabels(row.stageBlockerGroups, text))}
         ${balanceDetailChipBlock(text.patchFiles || "Patch files", contentBulkIssueList(row.fileNames, text))}
         ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
         ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
@@ -3598,6 +3614,18 @@ function renderContentBulkDomainApplyReadinessRow(row = {}, text = {}) {
       </div>
     </article>
   `;
+}
+
+function contentBulkDomainBlockedStageIds(groups = {}) {
+  return ["dryRun", "staged", "backup", "restore"].filter((stageId) => (groups?.[stageId] || []).filter(Boolean).length > 0);
+}
+
+function contentBulkDomainStageBlockerLabels(groups = {}, text = {}) {
+  const labels = text.stageLabels || {};
+  return ["dryRun", "staged", "backup", "restore"].map((stageId) => tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.stageBlockerSummary", {
+    stage: labels[stageId] || stageId,
+    count: (groups?.[stageId] || []).filter(Boolean).length,
+  }, `${labels[stageId] || stageId}: ${(groups?.[stageId] || []).filter(Boolean).length}`));
 }
 
 function contentBulkDomainApplyReadinessLabel(id, labels = {}) {

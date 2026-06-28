@@ -2544,6 +2544,10 @@ export const KO_KR_TEXT = {
           reviewDomains: "검토",
           blockedDomains: "차단",
           emptyDomains: "비어 있음",
+          dryRunBlockedDomains: "dry-run 차단",
+          stagedBlockedDomains: "staged 차단",
+          backupBlockedDomains: "백업 차단",
+          restoreBlockedDomains: "복구 차단",
           filteredCandidates: "필터 후보",
           filteredDomains: "필터 도메인",
           draftFiles: "초안 파일",
@@ -2557,6 +2561,8 @@ export const KO_KR_TEXT = {
           filterScopeSummary: "후보 {candidates} / {state}",
           filterMatched: "표시",
           filterHidden: "숨김",
+          blockerStages: "차단 단계",
+          stageBlockerSummary: "{stage} {count}",
           noQuery: "없음",
           rows: "행 상태",
           files: "파일 상태",
@@ -2580,6 +2586,12 @@ export const KO_KR_TEXT = {
             ready: "준비",
             active: "활성",
             empty: "비어 있음"
+          },
+          stageLabels: {
+            dryRun: "dry-run",
+            staged: "staged",
+            backup: "백업",
+            restore: "복구"
           },
           stateLabels: {
             ready: "준비",
