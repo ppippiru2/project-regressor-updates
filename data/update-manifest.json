@@ -1,45 +1,45 @@
 {
     "schemaVersion":  1,
     "project":  "Project Regressor",
-    "versionCode":  474,
-    "displayVersion":  "v474",
-    "cacheVersion":  "project-regressor-mvp-v474",
-    "updatedAt":  "2026-06-28T17:55:00.000+09:00",
+    "versionCode":  475,
+    "displayVersion":  "v475",
+    "cacheVersion":  "project-regressor-mvp-v475",
+    "updatedAt":  "2026-06-28T18:20:00.000+09:00",
     "repositoryUrl":  "https://github.com/ppippiru2/project-regressor-updates",
     "pagesUrl":  "https://ppippiru2.github.io/project-regressor-updates/",
-    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=474\u0026cachebust=474",
+    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=475\u0026cachebust=475",
     "recommendedAndroidShell":  "Trusted Web Activity",
     "notes":  [
-                  "v474 highlights the detailed review card reached from the large content package overview.",
-                  "v474 keeps package-contract, loot/skill, monster runtime, and runtime VFX drilldowns visually anchored after the jump.",
-                  "v474 preserves the read-only bulk intake path while making large monster, item, and skill packages easier to inspect."
+                  "v475 lets the large content package overview jump directly to the first detailed row that needs review.",
+                  "v475 adds stable row anchors for package domains, loot/skill rows, monster runtime rows, and runtime VFX rows.",
+                  "v475 keeps bulk monster, item, skill, reward, and VFX intake read-only while making large package review faster."
               ],
-    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v474-debug.apk",
+    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v475-debug.apk",
     "downloads":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v474-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v475-debug.apk"
                   },
     "version":  {
-                    "code":  474,
-                    "name":  "4.74.0",
-                    "displayName":  "v474"
+                    "code":  475,
+                    "name":  "4.75.0",
+                    "displayName":  "v475"
                 },
     "artifacts":  {
-                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v474-debug.apk"
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v475-debug.apk"
                   },
     "android":  {
-                    "code":  474,
-                    "name":  "4.74.0",
-                    "displayName":  "v474",
+                    "code":  475,
+                    "name":  "4.75.0",
+                    "displayName":  "v475",
                     "artifacts":  {
-                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v474-debug.apk"
+                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v475-debug.apk"
                                   },
                     "version":  {
-                                    "code":  474,
-                                    "name":  "4.74.0",
-                                    "displayName":  "v474"
+                                    "code":  475,
+                                    "name":  "4.75.0",
+                                    "displayName":  "v475"
                                 }
                 },
     "apk":  {
-                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v474-debug.apk"
+                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v475-debug.apk"
             }
 }

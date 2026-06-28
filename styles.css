@@ -4972,7 +4972,11 @@ select:focus {
 .editor-content-bulk-package,
 .editor-loot-skill-bulk-intake,
 .editor-monster-runtime-bulk-intake,
-.editor-runtime-vfx-bulk-intake {
+.editor-runtime-vfx-bulk-intake,
+.editor-content-bulk-package-domain,
+.editor-loot-skill-bulk-intake-row,
+.editor-monster-runtime-bulk-intake-row,
+.editor-runtime-vfx-bulk-intake-row {
   scroll-margin-top: 1rem;
 }
 
@@ -4984,6 +4988,16 @@ select:focus {
   box-shadow:
     0 0 0 1px rgba(88, 225, 255, 0.28),
     0 0 22px rgba(88, 225, 255, 0.18);
+}
+
+.editor-content-bulk-package-domain:target,
+.editor-loot-skill-bulk-intake-row:target,
+.editor-monster-runtime-bulk-intake-row:target,
+.editor-runtime-vfx-bulk-intake-row:target {
+  border-color: rgba(88, 225, 255, 0.7);
+  box-shadow:
+    0 0 0 1px rgba(88, 225, 255, 0.32),
+    0 0 18px rgba(88, 225, 255, 0.2);
 }
 
 .editor-content-bulk-overview-head h4,

@@ -1,45 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=474";
-import { getLocaleText, t, tf } from "../localization/index.js?v=474";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=474";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=474";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=474";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=474";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=474";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=474";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=474";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=474";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=474";
+import { applyDomLocalization } from "../localization/domText.js?v=475";
+import { getLocaleText, t, tf } from "../localization/index.js?v=475";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=475";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=475";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=475";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=475";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=475";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=475";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=475";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=475";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=475";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=474";
-import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=474";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=474";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=474";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=474";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=474";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=474";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=474";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=474";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=474";
+} from "./contentBulkPatchPackageAdapter.js?v=475";
+import {
+  CONTENT_BULK_ROW_TARGET_SCOPES,
+  createContentBulkPackageOverview,
+  createContentBulkRowTargetId,
+} from "./contentBulkPackageOverview.js?v=475";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=475";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=475";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=475";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=475";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=475";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=475";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=475";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=475";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=474";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=474";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=474";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=474";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=474";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=474";
+} from "./runtimeVfxBulkIntakePreview.js?v=475";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=475";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=475";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=475";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=475";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=475";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=474";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=474";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=474";
+} from "./monsterSpriteSlotReport.js?v=475";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=475";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=475";
 
-const EDITOR_VERSION = "474";
+const EDITOR_VERSION = "475";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -2496,7 +2500,7 @@ function renderContentBulkOverviewRow(row, text = {}) {
       </div>
       <div class="editor-content-bulk-overview-actions">
         <span>${escapeHtml(contentBulkOverviewLabel(row.state, text.statusLabels))}</span>
-        ${contentBulkOverviewJumpLink(row.drilldownTargetId, text)}
+        ${contentBulkOverviewJumpLink(row.primaryRowTargetId || row.drilldownTargetId, text)}
       </div>
     </article>
   `;
@@ -2512,7 +2516,7 @@ function renderContentBulkOverviewDomain(row, text = {}) {
           rows: row.rowCount || 0,
         }, `${row.batchKey || "-"} / ${row.rowCount || 0}`))}</span>
       </div>
-      ${contentBulkOverviewJumpLink(row.drilldownTargetId, text)}
+      ${contentBulkOverviewJumpLink(row.rowTargetId || row.drilldownTargetId, text)}
     </article>
   `;
 }
@@ -2606,7 +2610,7 @@ function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {
 
 function renderContentBulkPatchPackageMapping(mapping, text = {}) {
   return `
-    <article class="editor-content-bulk-package-domain" data-active="${mapping.rowCount > 0 ? "true" : "false"}">
+    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.packageDomain, mapping.domainId || mapping.batchKey))}" class="editor-content-bulk-package-domain" data-active="${mapping.rowCount > 0 ? "true" : "false"}">
       <div class="editor-content-bulk-package-domain-head">
         <div>
           <h5>${escapeHtml(contentBulkPatchDomainLabel(mapping.domainId, text))}</h5>
@@ -2679,7 +2683,7 @@ function renderLootSkillBulkLootRow(row, text = {}) {
   const typeLabels = text.typeLabels || {};
   const bulkLabels = text.bulkStateLabels || {};
   return `
-    <article class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.intakeState || "unknown")}">
+    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.loot, row.id || row.type))}" class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.intakeState || "unknown")}">
       <div class="editor-loot-skill-bulk-intake-row-head">
         <div>
           <h5>${escapeHtml(row.id || "-")}</h5>
@@ -2704,7 +2708,7 @@ function renderLootSkillBulkLootRow(row, text = {}) {
 function renderLootSkillBulkSkillRow(row, text = {}) {
   const bulkLabels = text.bulkStateLabels || {};
   return `
-    <article class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.bulkState || "unknown")}">
+    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.skill, row.id || row.type))}" class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.bulkState || "unknown")}">
       <div class="editor-loot-skill-bulk-intake-row-head">
         <div>
           <h5>${escapeHtml(row.id || "-")}</h5>
@@ -2774,7 +2778,7 @@ function renderMonsterRuntimeBulkIntakeRow(row, text = {}) {
   const motionLabels = (row.motions || []).map((motion) => `${motion.phase}: ${motion.runtimeMotionId || motion.externalMotionId}`);
   const actionLabels = (row.actions || []).map((action) => `${action.id}${action.optional ? ` (${text.optional || "optional"})` : ""}`);
   return `
-    <article class="editor-monster-runtime-bulk-intake-row" data-state="${escapeAttribute(row.runtimeState || "unknown")}">
+    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.monsterRuntime, row.liveMonsterId || row.externalMonsterId || row.packageIdentity))}" class="editor-monster-runtime-bulk-intake-row" data-state="${escapeAttribute(row.runtimeState || "unknown")}">
       <div class="editor-monster-runtime-bulk-intake-row-head">
         <div>
           <h5>${escapeHtml(row.externalMonsterId || "-")} → ${escapeHtml(row.liveMonsterId || "-")}</h5>
@@ -2846,7 +2850,7 @@ function renderRuntimeVfxBulkIntakeRow(row, text = {}) {
   const kindLabels = text.kindLabels || {};
   const bulkLabels = text.bulkStateLabels || {};
   return `
-    <article class="editor-runtime-vfx-bulk-intake-row" data-state="${escapeAttribute(row.intakeState || "unknown")}">
+    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.runtimeVfx, row.rowIndex, row.motionProfile, row.effectType || row.kind))}" class="editor-runtime-vfx-bulk-intake-row" data-state="${escapeAttribute(row.intakeState || "unknown")}">
       <div class="editor-runtime-vfx-bulk-intake-row-head">
         <div>
           <h5>${escapeHtml(row.motionProfile || "-")}${row.effectType ? ` · ${escapeHtml(row.effectType)}` : ""}</h5>

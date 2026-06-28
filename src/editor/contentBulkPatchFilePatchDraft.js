@@ -1,6 +1,6 @@
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=474";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=474";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=474";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=475";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=475";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=475";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_VERSION = "content-bulk-patch-file-patch-draft-v1";
 

@@ -1,4 +1,4 @@
-export const CONTENT_BULK_PACKAGE_OVERVIEW_VERSION = "content-bulk-package-overview-v3";
+export const CONTENT_BULK_PACKAGE_OVERVIEW_VERSION = "content-bulk-package-overview-v4";
 
 export const CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS = Object.freeze({
   reviewSurface: Object.freeze({
@@ -16,6 +16,23 @@ export const CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS = Object.freeze({
   }),
 });
 
+export const CONTENT_BULK_ROW_TARGET_SCOPES = Object.freeze({
+  packageDomain: "content-bulk-package-domain",
+  loot: "loot-skill-loot",
+  skill: "loot-skill-skill",
+  monsterRuntime: "monster-runtime-row",
+  runtimeVfx: "runtime-vfx-row",
+});
+
+export function createContentBulkRowTargetId(scope, ...parts) {
+  const normalizedParts = parts
+    .flat()
+    .map((part) => normalizeAnchorPart(part))
+    .filter(Boolean);
+  const suffix = normalizedParts.join("-") || "row";
+  return `${scope}-${suffix}`;
+}
+
 export function createContentBulkPackageOverview({
   adapterPreview,
   lootSkillPreview,
@@ -29,10 +46,10 @@ export function createContentBulkPackageOverview({
   const domainRows = createDomainRows(adapterPreview);
   const activeDomainRows = domainRows.filter((row) => row.rowCount > 0);
   const reviewRows = [
-    createPackageContractRow(adapterSummary),
-    createLootSkillRow(lootSummary),
-    createMonsterRuntimeRow(monsterRuntimeSummary),
-    createRuntimeVfxRow(runtimeVfxSummary),
+    createPackageContractRow(adapterPreview),
+    createLootSkillRow(lootSummary, lootSkillPreview),
+    createMonsterRuntimeRow(monsterRuntimeSummary, monsterRuntimePreview),
+    createRuntimeVfxRow(runtimeVfxSummary, runtimeVfxPreview),
   ];
   const activeReviewRows = reviewRows.filter((row) => row.rowCount > 0);
   const blockedRowCount = reviewRows.reduce((sum, row) => sum + row.blockedCount, 0);
@@ -64,6 +81,12 @@ export function createContentBulkPackageOverview({
         runtimeVfxSummary,
       }),
       reviewSurfaceCount: activeReviewRows.length,
+      drilldownRowTargetCount: countDrilldownRowTargets({
+        activeDomainRows,
+        lootSkillPreview,
+        monsterRuntimePreview,
+        runtimeVfxPreview,
+      }),
     },
     status: blockedRowCount > 0
       ? "blocked"
@@ -75,6 +98,7 @@ export function createContentBulkPackageOverview({
       summarizesExistingPreviewsOnly: true,
       scalableForBulkMonsterItemSkillUpdates: true,
       drilldownAnchorsOnly: true,
+      drilldownRowTargetsOnly: true,
     },
   };
 }
@@ -88,10 +112,15 @@ function createDomainRows(adapterPreview = {}) {
     requiredInputFields: Array.from(mapping.requiredInputFields || []),
     state: Number(mapping.rowCount || 0) > 0 ? "active" : "empty",
     drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.domain[mapping.domainId || ""] || "content-bulk-package-adapter",
+    rowTargetId: Number(mapping.rowCount || 0) > 0
+      ? createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.packageDomain, mapping.domainId || mapping.batchKey)
+      : "",
   }));
 }
 
-function createPackageContractRow(summary = {}) {
+function createPackageContractRow(adapterPreview = {}) {
+  const summary = adapterPreview.summary || {};
+  const primaryRowTargetId = firstPackageMappingTargetId(adapterPreview);
   return {
     id: "package-contract",
     rowCount: Number(summary.normalizedRowCount || 0),
@@ -101,10 +130,11 @@ function createPackageContractRow(summary = {}) {
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(Number(summary.withheldRowCount || 0) + Number(summary.unmappedArrayKeyCount || 0), Number(summary.warningRowCount || 0), Number(summary.normalizedRowCount || 0)),
     drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["package-contract"],
+    primaryRowTargetId,
   };
 }
 
-function createLootSkillRow(summary = {}) {
+function createLootSkillRow(summary = {}, lootSkillPreview = {}) {
   const rowCount = Number(summary.lootRowCount || 0) + Number(summary.skillRowCount || 0);
   const blockedCount = Number(summary.missingSkillDefinitionCount || 0);
   return {
@@ -116,10 +146,11 @@ function createLootSkillRow(summary = {}) {
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(blockedCount, 0, rowCount),
     drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["loot-skill"],
+    primaryRowTargetId: firstLootSkillRowTargetId(lootSkillPreview),
   };
 }
 
-function createMonsterRuntimeRow(summary = {}) {
+function createMonsterRuntimeRow(summary = {}, monsterRuntimePreview = {}) {
   const rowCount = Number(summary.packageRowCount || 0);
   const blockedCount = Number(summary.blockedRuntimeRowCount || 0);
   const warningCount = Number(summary.warningRowCount || 0);
@@ -132,10 +163,11 @@ function createMonsterRuntimeRow(summary = {}) {
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(blockedCount, warningCount, rowCount),
     drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["monster-runtime"],
+    primaryRowTargetId: firstMonsterRuntimeRowTargetId(monsterRuntimePreview),
   };
 }
 
-function createRuntimeVfxRow(summary = {}) {
+function createRuntimeVfxRow(summary = {}, runtimeVfxPreview = {}) {
   const rowCount = Number(summary.packageRowCount || 0);
   const blockedCount = Number(summary.blockedRowCount || 0);
   const warningCount = Number(summary.warningRowCount || 0);
@@ -148,6 +180,7 @@ function createRuntimeVfxRow(summary = {}) {
     checkCount: Number(summary.requiredCheckCount || 0),
     state: rowState(blockedCount, warningCount, rowCount),
     drilldownTargetId: CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS.reviewSurface["runtime-vfx"],
+    primaryRowTargetId: firstRuntimeVfxRowTargetId(runtimeVfxPreview),
   };
 }
 
@@ -165,4 +198,63 @@ function rowState(blockedCount, warningCount, rowCount) {
   if (warningCount > 0) return "review";
   if (rowCount > 0) return "ready";
   return "empty";
+}
+
+function firstPackageMappingTargetId(adapterPreview = {}) {
+  const mapping = (adapterPreview.mappings || []).find((row) => Number(row.rowCount || 0) > 0);
+  if (!mapping) return "";
+  return createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.packageDomain, mapping.domainId || mapping.batchKey);
+}
+
+function firstLootSkillRowTargetId(lootSkillPreview = {}) {
+  const blockedLoot = (lootSkillPreview.lootRows || []).find((row) => String(row.intakeState || "").startsWith("blocked-"));
+  const lootRow = blockedLoot || (lootSkillPreview.lootRows || [])[0];
+  if (lootRow) return createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.loot, lootRow.id || lootRow.type);
+  const skillRow = (lootSkillPreview.skillRows || [])[0];
+  if (skillRow) return createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.skill, skillRow.id || skillRow.type);
+  return "";
+}
+
+function firstMonsterRuntimeRowTargetId(monsterRuntimePreview = {}) {
+  const blockedRow = (monsterRuntimePreview.rows || []).find((row) => String(row.runtimeState || "").startsWith("blocked-"));
+  const row = blockedRow || (monsterRuntimePreview.rows || [])[0];
+  if (!row) return "";
+  return createContentBulkRowTargetId(
+    CONTENT_BULK_ROW_TARGET_SCOPES.monsterRuntime,
+    row.liveMonsterId || row.externalMonsterId || row.packageIdentity,
+  );
+}
+
+function firstRuntimeVfxRowTargetId(runtimeVfxPreview = {}) {
+  const blockedRow = (runtimeVfxPreview.rows || []).find((row) => String(row.intakeState || "").startsWith("blocked-"));
+  const reviewRow = (runtimeVfxPreview.rows || []).find((row) => String(row.intakeState || "").startsWith("review-"));
+  const row = blockedRow || reviewRow || (runtimeVfxPreview.rows || [])[0];
+  if (!row) return "";
+  return createContentBulkRowTargetId(
+    CONTENT_BULK_ROW_TARGET_SCOPES.runtimeVfx,
+    row.rowIndex,
+    row.motionProfile,
+    row.effectType || row.kind,
+  );
+}
+
+function countDrilldownRowTargets({
+  activeDomainRows = [],
+  lootSkillPreview = {},
+  monsterRuntimePreview = {},
+  runtimeVfxPreview = {},
+}) {
+  return activeDomainRows.length
+    + (lootSkillPreview.lootRows || []).length
+    + (lootSkillPreview.skillRows || []).length
+    + (monsterRuntimePreview.rows || []).length
+    + (runtimeVfxPreview.rows || []).length;
+}
+
+function normalizeAnchorPart(part) {
+  return String(part ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
