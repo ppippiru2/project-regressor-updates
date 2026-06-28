@@ -5184,6 +5184,83 @@ select:focus {
   padding: 0.75rem;
 }
 
+.editor-save-edit-postwrite-restore {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(244, 211, 94, 0.2);
+  border-radius: 6px;
+  background: rgba(30, 22, 6, 0.28);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-postwrite-restore-head,
+.editor-save-edit-postwrite-restore-route > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-postwrite-restore h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-postwrite-restore-head span,
+.editor-save-edit-postwrite-restore-route span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-postwrite-restore-metrics,
+.editor-save-edit-postwrite-restore-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-postwrite-restore-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-postwrite-restore-route {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(244, 211, 94, 0.14);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-postwrite-restore-route strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-postwrite-restore-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(244, 211, 94, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #fff8d7;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
 @media (max-width: 900px) {
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
@@ -5205,7 +5282,9 @@ select:focus {
   .editor-save-edit-confirmation-contract-metrics,
   .editor-save-edit-confirmation-contract-grid,
   .editor-save-edit-writer-checkpoint-metrics,
-  .editor-save-edit-writer-checkpoint-grid {
+  .editor-save-edit-writer-checkpoint-grid,
+  .editor-save-edit-postwrite-restore-metrics,
+  .editor-save-edit-postwrite-restore-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -5234,6 +5313,8 @@ select:focus {
   .editor-save-edit-writer-checkpoint-head,
   .editor-save-edit-writer-checkpoint-check > div:first-child,
   .editor-save-edit-writer-checkpoint-route > div:first-child,
+  .editor-save-edit-postwrite-restore-head,
+  .editor-save-edit-postwrite-restore-route > div:first-child,
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
   .editor-save-edit-rule-card-meta,
@@ -5259,7 +5340,9 @@ select:focus {
   .editor-save-edit-confirmation-contract-grid,
   .editor-save-edit-confirmation-contract-field dl,
   .editor-save-edit-writer-checkpoint-metrics,
-  .editor-save-edit-writer-checkpoint-grid {
+  .editor-save-edit-writer-checkpoint-grid,
+  .editor-save-edit-postwrite-restore-metrics,
+  .editor-save-edit-postwrite-restore-grid {
     grid-template-columns: 1fr;
   }
 }

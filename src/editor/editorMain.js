@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=532";
-import { getLocaleText, t, tf } from "../localization/index.js?v=532";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=532";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=532";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=532";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=532";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=532";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=532";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=532";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=532";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=532";
+import { applyDomLocalization } from "../localization/domText.js?v=533";
+import { getLocaleText, t, tf } from "../localization/index.js?v=533";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=533";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=533";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=533";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=533";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=533";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=533";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=533";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=533";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=533";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=532";
+} from "./contentBulkPatchPackageAdapter.js?v=533";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=532";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=532";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=532";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=532";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=532";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=532";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=532";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=532";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=532";
+} from "./contentBulkPackageOverview.js?v=533";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=533";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=533";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=533";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=533";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=533";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=533";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=533";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=533";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=532";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=532";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=532";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=532";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=532";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=532";
+} from "./runtimeVfxBulkIntakePreview.js?v=533";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=533";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=533";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=533";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=533";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=533";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=532";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=532";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=532";
+} from "./monsterSpriteSlotReport.js?v=533";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=533";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=533";
 
-const EDITOR_VERSION = "532";
+const EDITOR_VERSION = "533";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5297,6 +5297,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics)}
       ${renderSaveSlotEditConfirmationInputContractPreview(diagnostics)}
       ${renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics)}
+      ${renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics)}
     </section>
   `;
 }
@@ -5983,6 +5984,34 @@ function renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics) {
+  const contract = createSaveSlotEditPostWriteRestoreContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditPostWriteRestoreContract || {};
+  return `
+    <section class="editor-save-edit-postwrite-restore" data-save-edit-postwrite-restore-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
+      <div class="editor-save-edit-postwrite-restore-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit post-write restore contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-postwrite-restore-metrics">
+        ${metricCard(text.validationMetric || "Validation", contract.postWriteValidation.status, text.validationHint || "")}
+        ${metricCard(text.routeMetric || "Routes", tf("editorPrep.saveEditPostWriteRestoreContract.routeValue", { count: contract.routeCount }, `${contract.routeCount}`), text.routeHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditPostWriteRestoreContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.restoreMetric || "Restore", contract.restoreRunner.status, text.restoreHint || "")}
+      </div>
+      <div class="editor-save-edit-postwrite-restore-grid">
+        ${contract.routes.map((route) => renderSaveEditPostWriteRestoreRoute(route)).join("")}
+      </div>
+      <pre class="editor-save-edit-postwrite-restore-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -6508,6 +6537,59 @@ function createSaveSlotEditWriterPayloadCheckpointPreview(diagnostics) {
   };
 }
 
+function createSaveSlotEditPostWriteRestoreContractPreview(diagnostics) {
+  const checkpoint = createSaveSlotEditWriterPayloadCheckpointPreview(diagnostics);
+  const recovery = createSaveSlotRecoveryRehearsalPreview(diagnostics, { skipApplyGate: true });
+  const text = EDITOR_TEXT.saveEditPostWriteRestoreContract || {};
+  const routes = [
+    saveEditPostWriteRestoreRoute("post-write-validation", text.routeLabels?.postWriteValidation, "not-bound", "post-write-validation-missing"),
+    saveEditPostWriteRestoreRoute("restore-from-checkpoint", text.routeLabels?.restoreFromCheckpoint, "not-bound", "restore-runner-missing"),
+    saveEditPostWriteRestoreRoute("revalidate-after-restore", text.routeLabels?.revalidateAfterRestore, "not-bound", "restore-validation-missing"),
+    saveEditPostWriteRestoreRoute("surface-failure-log", text.routeLabels?.surfaceFailureLog, "planned", "failure-log-not-connected"),
+  ];
+  const blockers = Array.from(new Set(routes.map((route) => route.blocker).concat(checkpoint.rollbackCheckpoint.blockers)));
+  return {
+    status: "blocked",
+    version: "save-edit-post-write-validation-restore-route-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    postWriteValidation: {
+      status: "not-bound",
+      mode: "contract-only",
+      requires: ["writer-result", "saved-state-readable", "schema-validation"],
+    },
+    restoreRunner: {
+      status: "not-bound",
+      mode: "contract-only",
+      checkpointKeys: recovery.snapshotKeys,
+    },
+    routeCount: routes.length,
+    blockerCount: blockers.length,
+    routes,
+    blockers,
+    payloadShape: {
+      version: "save-edit-post-write-validation-restore-route-v1",
+      mode: "read-only-preview",
+      source: checkpoint.version,
+      postWriteValidation: "not-bound",
+      restoreRunner: "not-bound",
+      rollbackCheckpoint: checkpoint.rollbackCheckpoint.status,
+      checkpointKeys: recovery.snapshotKeys,
+      apply: "disabled",
+      blockers,
+    },
+  };
+}
+
+function saveEditPostWriteRestoreRoute(id, label, status, blocker) {
+  return {
+    id,
+    label: label || id,
+    status,
+    blocker,
+  };
+}
+
 function saveEditWriterPayloadCheckpointCheck(id, isReady, label, detail, blocker) {
   return {
     id,
@@ -6898,6 +6980,19 @@ function renderSaveEditWriterPayloadCheckpointCheck(check) {
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
       ${check.blocker ? chip(tf("editorPrep.saveEditWriterPayloadCheckpoint.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditPostWriteRestoreRoute(route) {
+  const text = EDITOR_TEXT.saveEditPostWriteRestoreContract || {};
+  return `
+    <article class="editor-save-edit-postwrite-restore-route" data-save-edit-postwrite-restore-route="${escapeAttribute(route.id)}" data-status="${escapeAttribute(route.status)}">
+      <div>
+        <strong>${escapeHtml(route.label)}</strong>
+        <span>${escapeHtml(route.status)}</span>
+      </div>
+      ${chip(tf("editorPrep.saveEditPostWriteRestoreContract.blockerText", { blocker: route.blocker }, `${text.blocker || "Blocker"}: ${route.blocker}`))}
     </article>
   `;
 }
