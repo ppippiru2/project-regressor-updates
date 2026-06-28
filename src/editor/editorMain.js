@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=531";
-import { getLocaleText, t, tf } from "../localization/index.js?v=531";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=531";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=531";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=531";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=531";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=531";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=531";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=531";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=531";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=531";
+import { applyDomLocalization } from "../localization/domText.js?v=532";
+import { getLocaleText, t, tf } from "../localization/index.js?v=532";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=532";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=532";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=532";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=532";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=532";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=532";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=532";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=532";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=532";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=531";
+} from "./contentBulkPatchPackageAdapter.js?v=532";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=531";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=531";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=531";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=531";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=531";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=531";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=531";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=531";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=531";
+} from "./contentBulkPackageOverview.js?v=532";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=532";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=532";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=532";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=532";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=532";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=532";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=532";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=532";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=531";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=531";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=531";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=531";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=531";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=531";
+} from "./runtimeVfxBulkIntakePreview.js?v=532";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=532";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=532";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=532";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=532";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=532";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=531";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=531";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=531";
+} from "./monsterSpriteSlotReport.js?v=532";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=532";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=532";
 
-const EDITOR_VERSION = "531";
+const EDITOR_VERSION = "532";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5296,6 +5296,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics)}
       ${renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics)}
       ${renderSaveSlotEditConfirmationInputContractPreview(diagnostics)}
+      ${renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics)}
     </section>
   `;
 }
@@ -5944,6 +5945,44 @@ function renderSaveSlotEditConfirmationInputContractPreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics) {
+  const review = createSaveSlotEditWriterPayloadCheckpointPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditWriterPayloadCheckpoint || {};
+  return `
+    <section class="editor-save-edit-writer-checkpoint" data-save-edit-writer-payload-checkpoint data-status="${escapeAttribute(review.status)}" data-mode="${escapeAttribute(review.mode)}" data-apply="${escapeAttribute(review.apply)}">
+      <div class="editor-save-edit-writer-checkpoint-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit writer payload checkpoint")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(review.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(review.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-writer-checkpoint-metrics">
+        ${metricCard(text.targetMetric || "Targets", tf("editorPrep.saveEditWriterPayloadCheckpoint.targetValue", { count: review.targetCount }, `${review.targetCount}`), text.targetHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditWriterPayloadCheckpoint.checkValue", { count: review.checkCount }, `${review.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditWriterPayloadCheckpoint.blockedValue", { count: review.blockedCheckCount }, `${review.blockedCheckCount}`), text.blockedHint || "")}
+        ${metricCard(text.checkpointMetric || "Checkpoint", review.rollbackCheckpoint.status, text.checkpointHint || "")}
+      </div>
+      <div class="editor-save-edit-writer-checkpoint-grid">
+        ${review.checks.map((check) => renderSaveEditWriterPayloadCheckpointCheck(check)).join("")}
+      </div>
+      <div class="editor-save-edit-writer-checkpoint-route" data-save-edit-rollback-checkpoint-contract data-status="${escapeAttribute(review.rollbackCheckpoint.status)}">
+        <div>
+          <strong>${escapeHtml(text.rollbackTitle || "Rollback checkpoint contract")}</strong>
+          <span>${escapeHtml(review.rollbackCheckpoint.status)}</span>
+        </div>
+        <div class="editor-chip-list">
+          ${review.rollbackCheckpoint.keys.map((item) => chip(item)).join("")}
+          ${review.rollbackCheckpoint.blockers.map((item) => chip(item)).join("")}
+        </div>
+      </div>
+      <pre class="editor-save-edit-writer-checkpoint-code"><code>${escapeHtml(JSON.stringify(review.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -6416,6 +6455,69 @@ function createSaveSlotEditConfirmationInputContractPreview(diagnostics) {
   };
 }
 
+function createSaveSlotEditWriterPayloadCheckpointPreview(diagnostics) {
+  const contract = createSaveSlotEditConfirmationInputContractPreview(diagnostics);
+  const draft = createSaveSlotDraftPayloadPreview(diagnostics);
+  const recovery = createSaveSlotRecoveryRehearsalPreview(diagnostics, { skipApplyGate: true });
+  const text = EDITOR_TEXT.saveEditWriterPayloadCheckpoint || {};
+  const rollbackCheckpoint = {
+    status: "not-created",
+    mode: "contract-only",
+    keys: recovery.snapshotKeys,
+    blockers: ["rollback-checkpoint-not-created", "writer-disabled"],
+  };
+  const checks = [
+    saveEditWriterPayloadCheckpointCheck("confirmation-contract-readable", true, text.checkLabels?.confirmationContractReadable, text.checkDetails?.confirmationContractReadable, ""),
+    saveEditWriterPayloadCheckpointCheck("draft-payload-readable", draft.operationCount > 0, text.checkLabels?.draftPayloadReadable, text.checkDetails?.draftPayloadReadable, draft.operationCount > 0 ? "" : "draft-empty"),
+    saveEditWriterPayloadCheckpointCheck("rollback-checkpoint-created", false, text.checkLabels?.rollbackCheckpointCreated, text.checkDetails?.rollbackCheckpointCreated, "rollback-checkpoint-not-created"),
+    saveEditWriterPayloadCheckpointCheck("apply-runner-bound", false, text.checkLabels?.applyRunnerBound, text.checkDetails?.applyRunnerBound, "apply-runner-missing"),
+    saveEditWriterPayloadCheckpointCheck("writer-enabled", false, text.checkLabels?.writerEnabled, text.checkDetails?.writerEnabled, "writer-disabled"),
+    saveEditWriterPayloadCheckpointCheck("post-write-validation-ready", false, text.checkLabels?.postWriteValidationReady, text.checkDetails?.postWriteValidationReady, "post-write-validation-missing"),
+  ];
+  return {
+    status: "blocked",
+    version: "save-edit-writer-payload-rollback-checkpoint-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    targetCount: draft.targetCount,
+    operationCount: draft.operationCount,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    checks,
+    rollbackCheckpoint,
+    payloadShape: {
+      version: "save-edit-writer-payload-rollback-checkpoint-v1",
+      mode: "read-only-preview",
+      source: contract.version,
+      writerPayload: {
+        status: "not-created",
+        targetCount: draft.targetCount,
+        operationCount: draft.operationCount,
+        sourceDraft: draft.version,
+      },
+      rollbackCheckpoint: {
+        status: "not-created",
+        mode: "contract-only",
+        keys: rollbackCheckpoint.keys,
+      },
+      applyRunner: "not-bound",
+      writer: "disabled",
+      apply: "disabled",
+      blockers: ["rollback-checkpoint-not-created", "apply-runner-missing", "writer-disabled", "post-write-validation-missing"],
+    },
+  };
+}
+
+function saveEditWriterPayloadCheckpointCheck(id, isReady, label, detail, blocker) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+    blocker: blocker || "",
+  };
+}
+
 function saveEditConfirmationInputContractField(id, label, inputKind, status, previewValue, blocker) {
   return {
     id,
@@ -6782,6 +6884,20 @@ function renderSaveEditConfirmationInputContractField(field) {
           <dd>${escapeHtml(field.blocker)}</dd>
         </div>
       </dl>
+    </article>
+  `;
+}
+
+function renderSaveEditWriterPayloadCheckpointCheck(check) {
+  const text = EDITOR_TEXT.saveEditWriterPayloadCheckpoint || {};
+  return `
+    <article class="editor-save-edit-writer-checkpoint-check" data-save-edit-writer-payload-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
+      ${check.blocker ? chip(tf("editorPrep.saveEditWriterPayloadCheckpoint.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
     </article>
   `;
 }
