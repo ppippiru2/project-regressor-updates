@@ -4627,6 +4627,96 @@ select:focus {
   overflow-wrap: anywhere;
 }
 
+.editor-save-edit-validator-registry {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 16, 40, 0.34);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-validator-registry-head,
+.editor-save-edit-validator-card > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-validator-registry h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-validator-registry-head span,
+.editor-save-edit-validator-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-validator-registry-metrics,
+.editor-save-edit-validator-registry-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-validator-registry-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-validator-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-validator-card strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-validator-card code {
+  color: var(--cyan);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-validator-card dl {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-edit-validator-card dt {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-validator-card dd {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 900px) {
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
@@ -4635,7 +4725,9 @@ select:focus {
   .editor-save-edit-sample-payload-grid,
   .editor-save-edit-dry-run-metrics,
   .editor-save-edit-dry-run-stages,
-  .editor-save-edit-dry-run-rules {
+  .editor-save-edit-dry-run-rules,
+  .editor-save-edit-validator-registry-metrics,
+  .editor-save-edit-validator-registry-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -4649,6 +4741,8 @@ select:focus {
   .editor-save-edit-dry-run-head,
   .editor-save-edit-dry-run-stage > div:first-child,
   .editor-save-edit-dry-run-rule > div:first-child,
+  .editor-save-edit-validator-registry-head,
+  .editor-save-edit-validator-card > div:first-child,
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
   .editor-save-edit-rule-card-meta,
@@ -4658,7 +4752,10 @@ select:focus {
   .editor-save-edit-dry-run-metrics,
   .editor-save-edit-dry-run-stages,
   .editor-save-edit-dry-run-rules,
-  .editor-save-edit-dry-run-rule dl {
+  .editor-save-edit-dry-run-rule dl,
+  .editor-save-edit-validator-registry-metrics,
+  .editor-save-edit-validator-registry-grid,
+  .editor-save-edit-validator-card dl {
     grid-template-columns: 1fr;
   }
 }

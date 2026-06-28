@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=526";
-import { getLocaleText, t, tf } from "../localization/index.js?v=526";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=526";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=526";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=526";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=526";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=526";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=526";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=526";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=526";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=526";
+import { applyDomLocalization } from "../localization/domText.js?v=527";
+import { getLocaleText, t, tf } from "../localization/index.js?v=527";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=527";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=527";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=527";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=527";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=527";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=527";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=527";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=527";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=527";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=526";
+} from "./contentBulkPatchPackageAdapter.js?v=527";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=526";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=526";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=526";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=526";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=526";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=526";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=526";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=526";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=526";
+} from "./contentBulkPackageOverview.js?v=527";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=527";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=527";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=527";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=527";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=527";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=527";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=527";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=527";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=526";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=526";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=526";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=526";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=526";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=526";
+} from "./runtimeVfxBulkIntakePreview.js?v=527";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=527";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=527";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=527";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=527";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=527";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=526";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=526";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=526";
+} from "./monsterSpriteSlotReport.js?v=527";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=527";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=527";
 
-const EDITOR_VERSION = "526";
+const EDITOR_VERSION = "527";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5291,6 +5291,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditValidationRuleDrilldown(diagnostics)}
       ${renderSaveSlotEditSamplePayloadPreview(diagnostics)}
       ${renderSaveSlotEditValidatorDryRunPlan(diagnostics)}
+      ${renderSaveSlotEditValidatorRegistryContract(diagnostics)}
     </section>
   `;
 }
@@ -5781,6 +5782,33 @@ function renderSaveSlotEditValidatorDryRunPlan(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditValidatorRegistryContract(diagnostics) {
+  const contract = createSaveSlotEditValidatorRegistryContract(diagnostics);
+  const text = EDITOR_TEXT.saveEditValidatorRegistry || {};
+  return `
+    <section class="editor-save-edit-validator-registry" data-save-edit-validator-registry>
+      <div class="editor-save-edit-validator-registry-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit validator registry contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-validator-registry-metrics">
+        ${metricCard(text.ruleMetric || "Rules", tf("editorPrep.saveEditValidatorRegistry.ruleValue", { count: contract.ruleCount }, `${contract.ruleCount}`), text.ruleHint || "")}
+        ${metricCard(text.validatorMetric || "Validators", tf("editorPrep.saveEditValidatorRegistry.validatorValue", { count: contract.validatorCount }, `${contract.validatorCount}`), text.validatorHint || "")}
+        ${metricCard(text.missingMetric || "Missing", tf("editorPrep.saveEditValidatorRegistry.missingValue", { count: contract.missingValidatorCount }, `${contract.missingValidatorCount}`), text.missingHint || "")}
+        ${metricCard(text.contractMetric || "Contract", contract.contractVersion, text.contractHint || "")}
+      </div>
+      <div class="editor-save-edit-validator-registry-grid">
+        ${contract.validators.map((validator) => renderSaveEditValidatorRegistryCard(validator)).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -6001,6 +6029,32 @@ function createSaveSlotEditValidatorDryRunPlan(diagnostics) {
   };
 }
 
+function createSaveSlotEditValidatorRegistryContract(diagnostics) {
+  const drilldown = createSaveSlotEditValidationRuleDrilldown(diagnostics);
+  const validators = drilldown.rules.map((rule) => ({
+    ruleId: rule.id,
+    label: rule.label,
+    functionName: saveEditValidatorFunctionName(rule.id),
+    status: "missing",
+    mode: "contract-only",
+    inputs: ["proposedValue", "currentValue", "saveTarget"],
+    outputs: ["validationResult", "blocker"],
+    fieldCount: rule.fieldCount,
+  }));
+  return {
+    status: "blocked",
+    contractVersion: "save-edit-validator-registry-contract-v1",
+    ruleCount: drilldown.ruleCount,
+    validatorCount: validators.length,
+    missingValidatorCount: validators.filter((validator) => validator.status === "missing").length,
+    validators,
+  };
+}
+
+function saveEditValidatorFunctionName(ruleId) {
+  return `validateSaveEdit_${ruleId.replace(/[^a-z0-9]+/gi, "_").replace(/^_+|_+$/g, "")}`;
+}
+
 function saveEditDryRunStage(id, isReady, label, detail) {
   return {
     id,
@@ -6189,6 +6243,37 @@ function renderSaveEditDryRunRule(rule) {
         <div>
           <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
           <dd>${escapeHtml(rule.blocker)}</dd>
+        </div>
+      </dl>
+    </article>
+  `;
+}
+
+function renderSaveEditValidatorRegistryCard(validator) {
+  const text = EDITOR_TEXT.saveEditValidatorRegistry || {};
+  return `
+    <article class="editor-save-edit-validator-card" data-save-edit-validator="${escapeAttribute(validator.ruleId)}" data-status="${escapeAttribute(validator.status)}">
+      <div>
+        <strong>${escapeHtml(validator.label)}</strong>
+        <span>${escapeHtml(validator.status)}</span>
+      </div>
+      <code>${escapeHtml(validator.functionName)}</code>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.fieldCount || "Fields")}</dt>
+          <dd>${escapeHtml(String(validator.fieldCount))}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.mode || "Mode")}</dt>
+          <dd>${escapeHtml(validator.mode)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.inputs || "Inputs")}</dt>
+          <dd>${escapeHtml(validator.inputs.join(", "))}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.outputs || "Outputs")}</dt>
+          <dd>${escapeHtml(validator.outputs.join(", "))}</dd>
         </div>
       </dl>
     </article>
