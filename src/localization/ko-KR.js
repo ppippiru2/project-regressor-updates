@@ -2536,6 +2536,41 @@ export const KO_KR_TEXT = {
             ready: "준비"
           }
         },
+        contentBulkDomainApplyReadiness: {
+          title: "도메인별 적용 준비도",
+          description: "전리품, 스킬, 몬스터, 런타임 후보를 dry-run, staged, patch 초안, 백업/복구 blocker 기준으로 대조합니다.",
+          domains: "도메인",
+          readyDomains: "준비",
+          reviewDomains: "검토",
+          blockedDomains: "차단",
+          emptyDomains: "비어 있음",
+          draftFiles: "초안 파일",
+          blockedFiles: "차단 파일",
+          domainMeta: "입력 {rows} / staged {staged} / 보류 {withheld} / 파일 {files} / 차단 파일 {blocked}",
+          rowSummary: "입력 {rows} / staged {staged} / 추가 {append} / 갱신 {update} / 보류 {withheld}",
+          fileSummary: "파일 {files} / 준비 {ready} / 차단 {blocked}",
+          rows: "행 상태",
+          files: "파일 상태",
+          patchFiles: "patch 파일",
+          blockingIssues: "차단 사유",
+          warningIssues: "검토 사유",
+          guardChecks: "검증",
+          noIssues: "없음",
+          noDomains: "도메인 없음",
+          domainLabels: {
+            equipment_item: "장비/아이템",
+            loot_item: "전리품",
+            skill: "스킬",
+            monster: "몬스터",
+            runtime_vfx: "런타임 VFX"
+          },
+          stateLabels: {
+            ready: "준비",
+            review: "검토",
+            blocked: "차단",
+            empty: "비어 있음"
+          }
+        },
         contentBulkPatchDryRunImporter: {
           title: "대량 콘텐츠 dry-run 반영",
           description: "배치 파일을 실제 게임 데이터에 쓰기 전에 추가/갱신 후보, 차단 오류, 경고, 영향 표면을 읽기 전용으로 계산합니다.",
