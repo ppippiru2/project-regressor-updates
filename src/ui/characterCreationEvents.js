@@ -1,25 +1,25 @@
-import { getLocaleText, tf } from "../localization/index.js?v=476";
-import { resolveAlignment } from "../state/profile.js?v=476";
+import { getLocaleText, tf } from "../localization/index.js?v=477";
+import { resolveAlignment } from "../state/profile.js?v=477";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=476";
+} from "../state/portraitFrame.js?v=477";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=476";
+} from "./portraitFrameView.js?v=477";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=476";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=476";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=476";
+} from "./diceSpriteRenderer.js?v=477";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=477";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=477";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -654,4 +654,5 @@ function escapeHtml(value) {
 function escapeAttr(value) {
   return escapeHtml(value);
 }
+
 

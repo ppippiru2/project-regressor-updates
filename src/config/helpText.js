@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=476";
+import { getLocaleText } from "../localization/index.js?v=477";
 
 const HELP_TEXT_CONFIG = getLocaleText().helpTextConfig;
 
@@ -17,4 +17,5 @@ export const BASIC_ATTACK_ACTION = { ...HELP_TEXT_CONFIG.basicAttackAction };
 export const ACTION_TRIGGER_TEXT = HELP_TEXT_CONFIG.actionTriggerText;
 
 export const COMBAT_INFO_HIDE_HINT = HELP_TEXT_CONFIG.combatInfoHideHint;
+
 

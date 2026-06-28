@@ -2253,6 +2253,9 @@ export const KO_KR_TEXT = {
           reviewSurfaces: "검토 표면",
           jumpToDetail: "이동",
           stateFilter: "대량 후보 상태 필터",
+          searchLabel: "후보 검색",
+          searchPlaceholder: "몬스터, 아이템, 스킬, 파일명",
+          resetSearch: "검색 초기화",
           rowMeta: "행 {rows} · 준비 {ready} · 차단 {blocked}",
           domainMeta: "{batchKey} · {rows}행",
           filterLabels: {

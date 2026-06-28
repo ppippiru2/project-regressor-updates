@@ -1,7 +1,7 @@
 import { addInventoryItem } from "./inventory.js";
 import { rollMonsterDrops } from "./rewards.js";
-import { OFFLINE_REWARD_BALANCE } from "../balance/rewardBalance.js?v=476";
-import { tf } from "../localization/index.js?v=476";
+import { OFFLINE_REWARD_BALANCE } from "../balance/rewardBalance.js?v=477";
+import { tf } from "../localization/index.js?v=477";
 
 export function stampLastSeen(state, now = Date.now()) {
   state.lastSeenAt = now;
@@ -118,4 +118,5 @@ function offlineDropMessages(drops, getItemName) {
 
   return [tf("stateMessages.offlineExtraLoot", { summary })];
 }
+
 

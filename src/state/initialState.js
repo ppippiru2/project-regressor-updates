@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=476";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=476";
-import { createTutorialFlags } from "./tutorialGuidance.js?v=476";
+import { t } from "../localization/index.js?v=477";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=477";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=477";
 
 export function createInitialState({
   slots,
@@ -57,4 +57,5 @@ export function createInitialState({
     offlineAutoHuntEngagedAt: 0,
   };
 }
+
 

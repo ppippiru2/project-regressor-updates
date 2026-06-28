@@ -1,6 +1,6 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=476";
-import { MONSTER_COMBAT_POSES, monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=476";
-import { monsters } from "../data/worldData.js?v=476";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=477";
+import { MONSTER_COMBAT_POSES, monsterSpriteSlotKeyForPose } from "../config/monsterCombatDisplay.js?v=477";
+import { monsters } from "../data/worldData.js?v=477";
 
 const MONSTER_SPRITE_FOLDER = "assets/monsters/";
 const MONSTER_SPRITE_DRAFT_CATEGORY = "monster-combat-sprite";
@@ -331,4 +331,5 @@ function normalizeExistingFilePaths(paths) {
 function normalizeAssetPath(path) {
   return String(path || "").replaceAll("\\", "/").replace(/^\.\//, "");
 }
+
 

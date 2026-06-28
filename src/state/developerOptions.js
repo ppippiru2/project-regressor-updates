@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=476";
+import { t } from "../localization/index.js?v=477";
 
 export const DEFAULT_DEVELOPER_OPTIONS = {
   expMultiplier: 1,
@@ -56,4 +56,5 @@ function normalizeMultiplier(value) {
   if (!Number.isFinite(number)) return 1;
   return Math.max(0, Math.min(100, Math.round(number * 10) / 10));
 }
+
 

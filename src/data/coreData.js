@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=476";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=476";
+import { getLocaleText } from "../localization/index.js?v=477";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=477";
 
 const DATA_TEXT = getLocaleText().data;
 const SKILL_TEXT = DATA_TEXT.skills;
@@ -24,4 +24,5 @@ export const skills = SKILL_BALANCE_DATA.map((skill) => ({
   name: SKILL_TEXT[skill.id].name,
   description: SKILL_TEXT[skill.id].description,
 }));
+
 

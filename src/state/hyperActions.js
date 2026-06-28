@@ -1,5 +1,5 @@
 import { activateEnemyHyperState, endEnemyHyperState, endPlayerHyperState } from "../combat/hyperState.js";
-import { t, tf } from "../localization/index.js?v=476";
+import { t, tf } from "../localization/index.js?v=477";
 
 export function activatePlayerHyperMode(state, durationSeconds, maxHyp) {
   if (state.hyp < maxHyp || state.hyperActiveTicks > 0 || state.hyperCooldown > 0) {
@@ -29,4 +29,5 @@ export function endEnemyHyperMode(combatRuntime, monster, cooldownSeconds) {
   endEnemyHyperState(combatRuntime, cooldownSeconds);
   return tf("hyperActions.enemyEnded", { monsterName: monster.name });
 }
+
 

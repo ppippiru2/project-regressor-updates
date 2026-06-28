@@ -1,5 +1,5 @@
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=476";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=476";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=477";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=477";
 
 export const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN_VERSION = "monster-candidate-live-promotion-plan-v1";
 
@@ -132,4 +132,5 @@ function sortLivePromotionRows(left, right) {
   if (levelDiff) return levelDiff;
   return String(left.id || "").localeCompare(String(right.id || ""));
 }
+
 

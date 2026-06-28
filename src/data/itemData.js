@@ -1,6 +1,6 @@
-import { getLocaleText } from "../localization/index.js?v=476";
-import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=476";
-import { equipment } from "./equipmentData.js?v=476";
+import { getLocaleText } from "../localization/index.js?v=477";
+import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=477";
+import { equipment } from "./equipmentData.js?v=477";
 
 const ITEM_TEXT = getLocaleText().data;
 const ITEM_NAMES = ITEM_TEXT.itemNames || {};
@@ -28,4 +28,5 @@ export const items = [...equipment, ...lootItems];
 export function isEquipmentItem(item) {
   return Boolean(item?.slot);
 }
+
 

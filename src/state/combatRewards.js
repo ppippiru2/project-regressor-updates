@@ -1,9 +1,9 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=476";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=476";
-import { claimFirstCodexRecordGuide, claimFirstLootDropGuide } from "./tutorialGuidance.js?v=476";
-import { t, tf } from "../localization/index.js?v=476";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=476";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=477";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=477";
+import { claimFirstCodexRecordGuide, claimFirstLootDropGuide } from "./tutorialGuidance.js?v=477";
+import { t, tf } from "../localization/index.js?v=477";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=477";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
@@ -64,4 +64,5 @@ function normalizeMultiplier(value) {
   if (!Number.isFinite(number)) return 1;
   return Math.max(0, Math.min(100, number));
 }
+
 

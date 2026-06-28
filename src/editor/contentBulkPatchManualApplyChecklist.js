@@ -1,5 +1,5 @@
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=476";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=476";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=477";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=477";
 
 export const CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST_VERSION = "content-bulk-patch-manual-apply-checklist-v1";
 
@@ -109,3 +109,4 @@ function reviewActionForSurface(surface) {
   if (surface.domainId === "monster") return "verify-monster-runtime";
   return "verify-data-row";
 }
+

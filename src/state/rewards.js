@@ -3,8 +3,8 @@ import {
   REGION_EXP_MULTIPLIER_BY_OVERLEVEL,
   REWARD_MULTIPLIER_MAX,
   REWARD_MULTIPLIER_MIN,
-} from "../balance/rewardBalance.js?v=476";
-import { LEVEL_UP_FREE_POINTS } from "../balance/playerGrowthBalance.js?v=476";
+} from "../balance/rewardBalance.js?v=477";
+import { LEVEL_UP_FREE_POINTS } from "../balance/playerGrowthBalance.js?v=477";
 
 export { LEVEL_UP_AUTO_STATS };
 
@@ -72,4 +72,5 @@ function normalizeRewardMultiplier(value) {
   if (!Number.isFinite(number)) return 1;
   return Math.max(REWARD_MULTIPLIER_MIN, Math.min(REWARD_MULTIPLIER_MAX, number));
 }
+
 

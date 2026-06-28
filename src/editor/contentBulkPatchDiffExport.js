@@ -1,5 +1,5 @@
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=476";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=476";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=477";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=477";
 
 export const CONTENT_BULK_PATCH_DIFF_EXPORT_VERSION = "content-bulk-patch-diff-export-v1";
 
@@ -121,3 +121,4 @@ function surfaceName(surfaceId = "") {
   const parts = String(surfaceId || "").split(":");
   return parts.length > 1 ? parts.slice(1).join(":") : "";
 }
+

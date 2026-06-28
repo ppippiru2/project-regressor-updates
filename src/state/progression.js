@@ -3,8 +3,8 @@ import {
   PLAYER_GEAR_BALANCE,
   PLAYER_POWER_WEIGHTS,
   PLAYER_STAT_FORMULA,
-} from "../balance/playerStatBalance.js?v=476";
-import { applyResistanceOption, createEmptyResistances } from "./resistanceCatalog.js?v=476";
+} from "../balance/playerStatBalance.js?v=477";
+import { applyResistanceOption, createEmptyResistances } from "./resistanceCatalog.js?v=477";
 
 export function playerStats(player, equippedItems = [], bonusStats = {}) {
   const total = { ...player.stats };
@@ -74,4 +74,5 @@ export function playerStats(player, equippedItems = [], bonusStats = {}) {
     power,
   };
 }
+
 

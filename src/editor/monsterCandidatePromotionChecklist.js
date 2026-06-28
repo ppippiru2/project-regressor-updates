@@ -1,4 +1,4 @@
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=476";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=477";
 
 export const MONSTER_CANDIDATE_PROMOTION_CHECKLIST_VERSION = "monster-candidate-promotion-checklist-v1";
 
@@ -143,4 +143,5 @@ function promotionStageForRewardCoverage(coverage) {
   if (!coverage.skill) return "needs-skill-link";
   return "complete-reward-link";
 }
+
 

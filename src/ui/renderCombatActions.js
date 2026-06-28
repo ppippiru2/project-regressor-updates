@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=476";
+import { t, tf } from "../localization/index.js?v=477";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;
@@ -160,4 +160,5 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+
 

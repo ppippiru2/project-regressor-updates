@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=476";
-import { getLocaleText, t, tf } from "../localization/index.js?v=476";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=476";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=476";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=476";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=476";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=476";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=476";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=476";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=476";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=476";
+import { applyDomLocalization } from "../localization/domText.js?v=477";
+import { getLocaleText, t, tf } from "../localization/index.js?v=477";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=477";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=477";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=477";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=477";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=477";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=477";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=477";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=477";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=477";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=476";
+} from "./contentBulkPatchPackageAdapter.js?v=477";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=476";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=476";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=476";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=476";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=476";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=476";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=476";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=476";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=476";
+} from "./contentBulkPackageOverview.js?v=477";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=477";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=477";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=477";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=477";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=477";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=477";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=477";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=477";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=476";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=476";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=476";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=476";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=476";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=476";
+} from "./runtimeVfxBulkIntakePreview.js?v=477";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=477";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=477";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=477";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=477";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=477";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=476";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=476";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=476";
+} from "./monsterSpriteSlotReport.js?v=477";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=477";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=477";
 
-const EDITOR_VERSION = "476";
+const EDITOR_VERSION = "477";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -364,6 +364,22 @@ function bindEvents() {
       }
       return;
     }
+    const contentBulkSearchInput = event.target.closest("[data-content-bulk-search]");
+    if (contentBulkSearchInput) {
+      const cursor = contentBulkSearchInput.selectionStart ?? contentBulkSearchInput.value.length;
+      contentBulkDetailFilter = {
+        ...contentBulkDetailFilter,
+        query: contentBulkSearchInput.value
+      };
+      persistContentBulkDetailFilter();
+      renderPanelDetail();
+      const nextInput = elements.panelDetail.querySelector("[data-content-bulk-search]");
+      if (nextInput) {
+        nextInput.focus();
+        nextInput.setSelectionRange(cursor, cursor);
+      }
+      return;
+    }
     const packageTextarea = event.target.closest("[data-content-bulk-package-json]");
     if (packageTextarea) {
       contentBulkPatchPackageInput = {
@@ -440,7 +456,18 @@ function bindEvents() {
     const contentBulkFilterButton = event.target.closest("[data-content-bulk-filter]");
     if (contentBulkFilterButton) {
       contentBulkDetailFilter = {
+        ...contentBulkDetailFilter,
         state: normalizeContentBulkFilterState(contentBulkFilterButton.dataset.contentBulkFilter)
+      };
+      persistContentBulkDetailFilter();
+      renderPanelDetail();
+      return;
+    }
+    const contentBulkSearchResetButton = event.target.closest("[data-content-bulk-search-reset]");
+    if (contentBulkSearchResetButton) {
+      contentBulkDetailFilter = {
+        ...contentBulkDetailFilter,
+        query: ""
       };
       persistContentBulkDetailFilter();
       renderPanelDetail();
@@ -2554,19 +2581,29 @@ function contentBulkOverviewJumpLink(targetId, text = {}) {
 function renderContentBulkFilterControls(text = {}, counts = {}) {
   const filters = ["all", "blocked", "review", "ready", "active", "empty"];
   const activeState = normalizeContentBulkFilterState(contentBulkDetailFilter.state);
+  const query = normalizeContentBulkSearchQuery(contentBulkDetailFilter.query);
   return `
     <div class="editor-content-bulk-filter" role="group" aria-label="${escapeAttribute(text.stateFilter || "Bulk row filter")}">
-      ${filters.map((state) => {
-        const active = activeState === state;
-        const label = contentBulkFilterLabel(state, text.filterLabels);
-        const count = state === "all" ? counts.all : counts[state];
-        return `
-          <button class="editor-content-bulk-filter-button${active ? " is-active" : ""}" type="button" data-content-bulk-filter="${escapeAttribute(state)}" aria-pressed="${active ? "true" : "false"}">
-            <span>${escapeHtml(label)}</span>
-            <b>${escapeHtml(String(count || 0))}</b>
-          </button>
-        `;
-      }).join("")}
+      <label class="editor-content-bulk-search">
+        <span>${escapeHtml(text.searchLabel || "Search")}</span>
+        <input type="search" data-content-bulk-search value="${escapeAttribute(query)}" placeholder="${escapeAttribute(text.searchPlaceholder || "Monster, item, skill, file")}" />
+      </label>
+      <button class="editor-content-bulk-search-reset" type="button" data-content-bulk-search-reset ${query ? "" : "disabled"}>
+        ${escapeHtml(text.resetSearch || "Reset")}
+      </button>
+      <div class="editor-content-bulk-filter-buttons">
+        ${filters.map((state) => {
+          const active = activeState === state;
+          const label = contentBulkFilterLabel(state, text.filterLabels);
+          const count = state === "all" ? counts.all : counts[state];
+          return `
+            <button class="editor-content-bulk-filter-button${active ? " is-active" : ""}" type="button" data-content-bulk-filter="${escapeAttribute(state)}" aria-pressed="${active ? "true" : "false"}">
+              <span>${escapeHtml(label)}</span>
+              <b>${escapeHtml(String(count || 0))}</b>
+            </button>
+          `;
+        }).join("")}
+      </div>
     </div>
   `;
 }
@@ -2586,13 +2623,29 @@ function createContentBulkFilterCounts({
     empty: 0,
   };
   const states = [
-    ...(adapterPreview.mappings || []).map((mapping) => Number(mapping.rowCount || 0) > 0 ? "active" : "empty"),
-    ...(lootSkillPreview.lootRows || []).map((row) => row.intakeState),
-    ...(lootSkillPreview.skillRows || []).map((row) => row.bulkState),
-    ...(monsterRuntimePreview.rows || []).map((row) => row.runtimeState),
-    ...(runtimeVfxPreview.rows || []).map((row) => row.intakeState),
+    ...(adapterPreview.mappings || []).map((mapping) => ({
+      state: Number(mapping.rowCount || 0) > 0 ? "active" : "empty",
+      values: mapping,
+    })),
+    ...(lootSkillPreview.lootRows || []).map((row) => ({
+      state: row.intakeState,
+      values: row,
+    })),
+    ...(lootSkillPreview.skillRows || []).map((row) => ({
+      state: row.bulkState,
+      values: row,
+    })),
+    ...(monsterRuntimePreview.rows || []).map((row) => ({
+      state: row.runtimeState,
+      values: row,
+    })),
+    ...(runtimeVfxPreview.rows || []).map((row) => ({
+      state: row.intakeState,
+      values: row,
+    })),
   ];
-  for (const state of states) {
+  for (const { state, values } of states) {
+    if (!matchesContentBulkFilterQuery(values)) continue;
     const bucket = contentBulkStateBucket(state);
     counts.all += 1;
     counts[bucket] = Number(counts[bucket] || 0) + 1;
@@ -2608,6 +2661,35 @@ function matchesContentBulkFilterState(state) {
   const filterState = normalizeContentBulkFilterState(contentBulkDetailFilter.state);
   if (filterState === "all") return true;
   return contentBulkStateBucket(state) === filterState;
+}
+
+function matchesContentBulkFilterRow(state, values = []) {
+  return matchesContentBulkFilterState(state) && matchesContentBulkFilterQuery(values);
+}
+
+function matchesContentBulkFilterQuery(values = []) {
+  const query = normalizeContentBulkSearchQuery(contentBulkDetailFilter.query);
+  if (!query) return true;
+  return collectContentBulkSearchText(values).includes(query);
+}
+
+function collectContentBulkSearchText(values = []) {
+  const parts = [];
+  collectContentBulkSearchParts(values, parts);
+  return parts.join(" ").toLowerCase();
+}
+
+function collectContentBulkSearchParts(value, parts) {
+  if (value === null || value === undefined) return;
+  if (Array.isArray(value)) {
+    for (const entry of value) collectContentBulkSearchParts(entry, parts);
+    return;
+  }
+  if (typeof value === "object") {
+    for (const entry of Object.values(value)) collectContentBulkSearchParts(entry, parts);
+    return;
+  }
+  parts.push(String(value));
 }
 
 function contentBulkStateBucket(state) {
@@ -2628,11 +2710,18 @@ function normalizeContentBulkFilterState(state) {
   return ["all", "blocked", "review", "ready", "active", "empty"].includes(state) ? state : "all";
 }
 
+function normalizeContentBulkSearchQuery(query) {
+  return String(query || "").trim().toLowerCase();
+}
+
 function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {
   const text = detailText.contentBulkPatchPackageAdapter || {};
   const summary = preview.summary || {};
   const visibleMappings = (preview.mappings || []).filter((mapping) =>
-    matchesContentBulkFilterState(Number(mapping.rowCount || 0) > 0 ? "active" : "empty")
+    matchesContentBulkFilterRow(Number(mapping.rowCount || 0) > 0 ? "active" : "empty", [
+      mapping,
+      contentBulkPatchDomainLabel(mapping.domainId, text),
+    ])
   );
   const draftText = contentBulkPatchPackageInput.draftText || "";
   const hasAppliedInput = Boolean(String(contentBulkPatchPackageInput.appliedText || "").trim());
@@ -2736,8 +2825,12 @@ function renderContentBulkPatchPackageMapping(mapping, text = {}) {
 function renderLootSkillBulkIntakePreview(preview, detailText = {}) {
   const text = detailText.lootSkillBulkIntakePreview || {};
   const summary = preview.summary || {};
-  const visibleLootRows = (preview.lootRows || []).filter((row) => matchesContentBulkFilterState(row.intakeState));
-  const visibleSkillRows = (preview.skillRows || []).filter((row) => matchesContentBulkFilterState(row.bulkState));
+  const typeLabels = text.typeLabels || {};
+  const visibleLootRows = (preview.lootRows || []).filter((row) => matchesContentBulkFilterRow(row.intakeState, [
+    row,
+    lootSkillBulkLabel(row.type, typeLabels),
+  ]));
+  const visibleSkillRows = (preview.skillRows || []).filter((row) => matchesContentBulkFilterRow(row.bulkState, row));
   const metrics = [
     [text.lootRows || "Loot rows", `${summary.lootRowCount || 0}`],
     [text.skillRows || "Skill rows", `${summary.skillRowCount || 0}`],
@@ -2838,7 +2931,12 @@ function lootSkillBulkLabel(id, labels = {}) {
 function renderMonsterRuntimeBulkIntakePreview(preview, detailText = {}) {
   const text = detailText.monsterRuntimeBulkIntakePreview || {};
   const summary = preview.summary || {};
-  const visibleRows = (preview.rows || []).filter((row) => matchesContentBulkFilterState(row.runtimeState));
+  const stateLabels = text.stateLabels || {};
+  const visibleRows = (preview.rows || []).filter((row) => matchesContentBulkFilterRow(row.runtimeState, [
+    row,
+    monsterRuntimeBulkIntakeLabel(row.runtimeState, stateLabels),
+    monsterRuntimeBulkIntakeLabel(row.bulkState, stateLabels),
+  ]));
   const metrics = [
     [text.runtimePresets || "Runtime presets", `${summary.runtimePresetCount || 0}`],
     [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
@@ -2909,7 +3007,15 @@ function monsterRuntimeBulkIntakeLabel(id, labels = {}) {
 function renderRuntimeVfxBulkIntakePreview(preview, detailText = {}) {
   const text = detailText.runtimeVfxBulkIntakePreview || {};
   const summary = preview.summary || {};
-  const visibleRows = (preview.rows || []).filter((row) => matchesContentBulkFilterState(row.intakeState));
+  const stateLabels = text.stateLabels || {};
+  const kindLabels = text.kindLabels || {};
+  const bulkLabels = text.bulkStateLabels || {};
+  const visibleRows = (preview.rows || []).filter((row) => matchesContentBulkFilterRow(row.intakeState, [
+    row,
+    runtimeVfxBulkLabel(row.intakeState, stateLabels),
+    runtimeVfxBulkLabel(row.kind, kindLabels),
+    runtimeVfxBulkLabel(row.bulkState, bulkLabels),
+  ]));
   const metrics = [
     [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
     [text.profileRows || "Profile rows", `${summary.profilePlacementRowCount || 0}`],
@@ -4378,11 +4484,13 @@ function loadContentBulkDetailFilter() {
     const raw = window.localStorage.getItem(CONTENT_BULK_FILTER_STORAGE_KEY);
     const parsed = raw ? JSON.parse(raw) : null;
     return {
-      state: normalizeContentBulkFilterState(parsed?.state)
+      state: normalizeContentBulkFilterState(parsed?.state),
+      query: typeof parsed?.query === "string" ? parsed.query : ""
     };
   } catch {
     return {
-      state: "all"
+      state: "all",
+      query: ""
     };
   }
 }
@@ -4390,7 +4498,8 @@ function loadContentBulkDetailFilter() {
 function persistContentBulkDetailFilter() {
   try {
     window.localStorage.setItem(CONTENT_BULK_FILTER_STORAGE_KEY, JSON.stringify({
-      state: normalizeContentBulkFilterState(contentBulkDetailFilter.state)
+      state: normalizeContentBulkFilterState(contentBulkDetailFilter.state),
+      query: normalizeContentBulkSearchQuery(contentBulkDetailFilter.query)
     }));
   } catch {
     // Editor convenience state is optional; failed persistence should not block the read-only screen.
@@ -4642,4 +4751,5 @@ function escapeHtml(value) {
 function escapeAttribute(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
 }
+
 

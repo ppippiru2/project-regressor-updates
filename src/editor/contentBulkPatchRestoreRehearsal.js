@@ -1,4 +1,4 @@
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=476";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=477";
 
 export const CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VERSION = "content-bulk-patch-restore-rehearsal-v1";
 
@@ -56,3 +56,4 @@ function createRestoreActions(backupPlan) {
     checkState: "pending-rehearsal",
   }));
 }
+

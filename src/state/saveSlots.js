@@ -1,5 +1,5 @@
 import { normalizeSavedState, normalizeUiState } from "./save.js";
-import { t } from "../localization/index.js?v=476";
+import { t } from "../localization/index.js?v=477";
 
 const SAVE_SLOTS_KEY = "project_regressor_save_slots";
 const ACTIVE_SAVE_SLOT_KEY = "project_regressor_active_save_slot";
@@ -138,4 +138,5 @@ function writeSaveSlotStore(slots, storage) {
 function cloneJson(value) {
   return JSON.parse(JSON.stringify(value));
 }
+
 

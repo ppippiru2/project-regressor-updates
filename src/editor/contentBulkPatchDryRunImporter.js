@@ -2,7 +2,7 @@ import {
   createContentBulkPatchIntakeContract,
   createContentBulkPatchTemplate,
   validateContentBulkPatchBatch,
-} from "./contentBulkPatchIntakeContract.js?v=476";
+} from "./contentBulkPatchIntakeContract.js?v=477";
 
 export const CONTENT_BULK_PATCH_DRY_RUN_IMPORTER_VERSION = "content-bulk-patch-dry-run-importer-v1";
 
@@ -77,3 +77,4 @@ function dryRunState(rowCount, blockingIssueCount, warningIssueCount) {
   if (warningIssueCount > 0) return "ready-with-warnings";
   return "ready";
 }
+

@@ -1,4 +1,4 @@
-import { t } from "./index.js?v=476";
+import { t } from "./index.js?v=477";
 
 export function applyDomLocalization(root = document) {
   if (!root || typeof root.querySelectorAll !== "function") return;
@@ -50,4 +50,5 @@ function parseAttributeMap(value) {
     })
     .filter((entry) => entry.attribute && entry.key);
 }
+
 

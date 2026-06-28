@@ -1,5 +1,5 @@
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=476";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=476";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=477";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=477";
 
 export const CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW_VERSION = "content-bulk-patch-staged-import-preview-v1";
 
@@ -110,3 +110,4 @@ function isMissingValue(value) {
   if (typeof value === "string") return value.trim() === "";
   return false;
 }
+
