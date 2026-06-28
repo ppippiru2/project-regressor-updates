@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=462";
+import { t } from "../localization/index.js?v=463";
 
 export const DEFAULT_DEVELOPER_OPTIONS = {
   expMultiplier: 1,

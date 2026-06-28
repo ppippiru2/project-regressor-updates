@@ -438,6 +438,7 @@
         "src/editor/contentBulkPatchDryRunImporter.js",
         "src/editor/contentBulkPatchStagedImportPreview.js",
         "src/editor/contentBulkPatchDiffExport.js",
+        "src/editor/contentBulkPatchManualApplyChecklist.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -529,6 +530,8 @@
         "contentBulkPatchStagedApplySteps",
         "contentBulkPatchDiffExport",
         "contentBulkPatchDiffFileTargets",
+        "contentBulkPatchManualApplyChecklist",
+        "contentBulkPatchManualApplyFiles",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings",
@@ -550,6 +553,7 @@
         "대량 패키지 입력 변환",
         "변경 전 읽기 전용 검증 리포트",
         "대량 콘텐츠 diff 내보내기",
+        "대량 콘텐츠 수동 적용 체크리스트",
         "대량 패키지 JSON 추출"
       ]
     },
@@ -1476,6 +1480,7 @@
       "src/editor/contentBulkPatchDryRunImporter.js:createContentBulkPatchDryRunPreview",
       "src/editor/contentBulkPatchStagedImportPreview.js:createContentBulkPatchStagedImportPreview",
       "src/editor/contentBulkPatchDiffExport.js:createContentBulkPatchDiffExport",
+      "src/editor/contentBulkPatchManualApplyChecklist.js:createContentBulkPatchManualApplyChecklist",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1593,6 +1598,15 @@
         "guards": [
           "적용 대기열 이후 파일/표면 대상 요약",
           "실제 데이터 쓰기 전 수동 검토 유지"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-manual-apply-checklist",
+        "label": "대량 콘텐츠 수동 적용 체크리스트 검사",
+        "script": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
+        "guards": [
+          "diff export 이후 파일별 수동 적용 순서",
+          "명시 확정 전 실제 데이터 쓰기 차단"
         ]
       },
       {
@@ -1772,13 +1786,27 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v462",
+      "source": "v463",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
       "expectedTargetSurfaceCount": 33,
       "expectedTemplateStagedRowCount": 5,
       "expectedRequiredCheckCount": 10,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "contentBulkPatchManualApplyChecklist": {
+      "id": "content-bulk-patch-manual-apply-checklist-v1",
+      "source": "v463",
+      "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
+      "expectedTargetFileCount": 24,
+      "expectedTargetSurfaceCount": 33,
+      "expectedManualItemCount": 24,
+      "expectedVerificationStepCount": 10,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,
