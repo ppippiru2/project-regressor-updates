@@ -1,4 +1,4 @@
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=522";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=523";
 
 export const CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VERSION = "content-bulk-patch-restore-rehearsal-v1";
 const RESTORE_FILE_REHEARSAL_BLOCKERS = Object.freeze([

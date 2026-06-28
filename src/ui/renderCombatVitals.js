@@ -1,5 +1,5 @@
-import { t, tf } from "../localization/index.js?v=522";
-import { WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=522";
+import { t, tf } from "../localization/index.js?v=523";
+import { WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=523";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
