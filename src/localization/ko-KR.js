@@ -2456,6 +2456,52 @@ export const KO_KR_TEXT = {
             "verify-data-row": "데이터 행 확인"
           }
         },
+        contentBulkPatchFilePatchDraft: {
+          title: "대량 콘텐츠 파일별 patch 초안",
+          description: "수동 적용 체크리스트를 파일별 patch 초안으로 다시 묶는 읽기 전용 단계입니다.",
+          version: "{version}",
+          draftFiles: "초안 파일",
+          patchBlocks: "patch 블록",
+          targetSurfaces: "대상 표면",
+          stagedRows: "적용 후보",
+          updateDrafts: "갱신 초안",
+          blockedDrafts: "보류 초안",
+          verificationSteps: "검증 단계",
+          applyMode: "적용 방식",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          globalSteps: "전체 단계",
+          domains: "분야",
+          anchorHints: "삽입 위치 힌트",
+          postApplyChecks: "반영 후 확인",
+          noFiles: "patch 초안 없음",
+          fileMeta: "표면 {surfaces}개 · 후보 {staged}개 · 블록 {blocks}개 · 작업 {operation}",
+          statusLabels: {
+            empty: "대상 없음",
+            "draft-ready": "초안 검토 가능",
+            "review-update": "갱신 초안 확인 필요",
+            "review-update-candidates": "갱신 후보 검토 필요",
+            "review-withheld": "보류 초안 확인 필요",
+            "review-withheld-rows": "보류 행 검토 필요"
+          },
+          operationLabels: {
+            "append-new": "신규 추가",
+            "update-existing": "기존 갱신",
+            "append-and-update": "추가/갱신",
+            "hold-blocked": "보류",
+            "review-only": "검토만"
+          },
+          stepLabels: {
+            "review-file-patch-drafts": "파일별 초안 검토",
+            "compare-with-diff-export": "diff export와 대조",
+            "apply-after-user-confirmation": "사용자 확정 후 반영",
+            "run-required-checks": "필수 검사 실행",
+            "verify-editor-summary": "에디터 요약 확인",
+            "verify-monster-runtime": "몬스터 런타임 확인",
+            "verify-skill-runtime": "스킬 런타임 확인",
+            "verify-inventory-and-rewards": "인벤토리/보상 확인"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
