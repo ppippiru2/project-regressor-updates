@@ -1,8 +1,8 @@
-export { primaryStats, displayNames, slots, skills } from "./data/coreData.js?v=518";
-export { equipment } from "./data/equipmentData.js?v=518";
-export { items, lootItems, isEquipmentItem } from "./data/itemData.js?v=518";
-export { monsters, regions, gateMaps } from "./data/worldData.js?v=518";
-export { shopCatalog, shopCategories } from "./data/shopData.js?v=518";
+export { primaryStats, displayNames, slots, skills } from "./data/coreData.js?v=519";
+export { equipment } from "./data/equipmentData.js?v=519";
+export { items, lootItems, isEquipmentItem } from "./data/itemData.js?v=519";
+export { monsters, regions, gateMaps } from "./data/worldData.js?v=519";
+export { shopCatalog, shopCategories } from "./data/shopData.js?v=519";
 
 
 

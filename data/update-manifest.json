@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 518,
-  "displayVersion": "v518",
-  "cacheVersion": "518",
-  "updatedAt": "2026-06-29T04:05:44.121+09:00",
+  "versionCode": 519,
+  "displayVersion": "v519",
+  "cacheVersion": "519",
+  "updatedAt": "2026-06-29T04:18:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=518&cachebust=518",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=519&cachebust=519",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "?? ?? writer ?? ??? draft payload? ?? ??? ?? save/slot ?? ???? ?? ?? diff ??? ?????.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v518-debug.apk",
+  "notes": "?? ?? writer ? apply gate? ?? ?? ?????? ?? ???? ??????.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v519-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v518-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v519-debug.apk"
   },
-  "version": "5.18.0",
+  "version": "5.19.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v518-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v519-debug.apk"
   },
   "android": {
-    "code": 518,
-    "name": "5.18.0",
-    "displayName": "v518",
+    "code": 519,
+    "name": "5.19.0",
+    "displayName": "v519",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v518-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v519-debug.apk"
     },
     "version": {
-      "code": 518,
-      "name": "5.18.0",
-      "displayName": "v518"
+      "code": 519,
+      "name": "5.19.0",
+      "displayName": "v519"
     },
-    "versionCode": 518,
-    "versionName": "5.18.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v518-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v518-release.apk"
+    "versionCode": 519,
+    "versionName": "5.19.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v519-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v519-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v518-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v519-debug.apk"
   },
-  "versionName": "5.18.0"
+  "versionName": "5.19.0"
 }
