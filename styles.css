@@ -3597,6 +3597,7 @@ select:focus {
 .editor-detail-block,
 .editor-asset-card,
 .editor-save-card,
+.editor-save-diagnostic-card,
 .editor-backlog-card {
   border: 1px solid rgba(108, 210, 255, 0.2);
   border-radius: 6px;
@@ -3626,6 +3627,91 @@ select:focus {
 .editor-asset-card small,
 .editor-save-card small {
   color: var(--muted);
+  line-height: 1.45;
+}
+
+.editor-save-diagnostics {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.editor-save-diagnostics-head,
+.editor-save-diagnostic-card-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-diagnostics-head span,
+.editor-save-diagnostic-card-head span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  border: 1px solid rgba(57, 228, 255, 0.36);
+  border-radius: 999px;
+  background: rgba(4, 20, 48, 0.74);
+  color: var(--cyan);
+  font-size: 0.74rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-diagnostics-head span[data-status="blocked"],
+.editor-save-diagnostic-card[data-status="warning"] .editor-save-diagnostic-card-head span {
+  border-color: rgba(244, 211, 94, 0.58);
+  color: var(--gold);
+}
+
+.editor-save-diagnostic-card[data-status="invalid"] .editor-save-diagnostic-card-head span,
+.editor-save-diagnostic-card[data-status="unavailable"] .editor-save-diagnostic-card-head span {
+  border-color: rgba(255, 95, 122, 0.58);
+  color: #ff9aaa;
+}
+
+.editor-save-diagnostics-metrics,
+.editor-save-diagnostics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.editor-save-diagnostic-card {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.editor-save-diagnostic-card dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem 0.75rem;
+  margin: 0;
+}
+
+.editor-save-diagnostic-card dl div {
+  min-width: 0;
+}
+
+.editor-save-diagnostic-card dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.editor-save-diagnostic-card dd {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 0.84rem;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-diagnostic-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
   line-height: 1.45;
 }
 

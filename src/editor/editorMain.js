@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=513";
-import { getLocaleText, t, tf } from "../localization/index.js?v=513";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=513";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=513";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=513";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=513";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=513";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=513";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=513";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=513";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=513";
+import { applyDomLocalization } from "../localization/domText.js?v=514";
+import { getLocaleText, t, tf } from "../localization/index.js?v=514";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=514";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=514";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=514";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=514";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=514";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=514";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=514";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=514";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=514";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=513";
+} from "./contentBulkPatchPackageAdapter.js?v=514";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=513";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=513";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=513";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=513";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=513";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=513";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=513";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=513";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=513";
+} from "./contentBulkPackageOverview.js?v=514";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=514";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=514";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=514";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=514";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=514";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=514";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=514";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=514";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=513";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=513";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=513";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=513";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=513";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=513";
+} from "./runtimeVfxBulkIntakePreview.js?v=514";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=514";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=514";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=514";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=514";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=514";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=513";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=513";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=513";
+} from "./monsterSpriteSlotReport.js?v=514";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=514";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=514";
 
-const EDITOR_VERSION = "513";
+const EDITOR_VERSION = "514";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -225,6 +225,14 @@ const SAVE_KEYS = [
   "project_regressor_editor_content_bulk_filter",
   "project_regressor_editor_content_bulk_package_input"
 ];
+const SAVE_SLOT_DIAGNOSTIC_KEYS = Object.freeze({
+  activeSave: "project_regressor_mvp_save",
+  slotStore: "project_regressor_save_slots",
+  activeSlot: "project_regressor_active_save_slot",
+  uiState: "project_regressor_ui_state"
+});
+const SAVE_SLOT_DIAGNOSTIC_SLOT_IDS = Object.freeze(["slot1", "slot2", "slot3", "slot4", "slot5"]);
+const SAVE_SLOT_DIAGNOSTIC_NO_ACTIVE = "__none__";
 const RETARGET_FILTER_STORAGE_KEY = "project_regressor_editor_retarget_filter";
 const BALANCE_FILTER_STORAGE_KEY = "project_regressor_editor_balance_filter";
 const COMBAT_VFX_FILTER_STORAGE_KEY = "project_regressor_editor_combat_vfx_filter";
@@ -636,6 +644,7 @@ function renderPanelDetail() {
   const combatVfxDetail = panel.id === "combat_vfx_placement_preview" ? renderCombatVfxPlacementDetail() : "";
   const monsterSpriteReport = panel.id === "asset_registry" ? renderMonsterSpriteSlotReport() : "";
   const monsterRuntimePreview = panel.id === "asset_registry" ? renderMonsterRuntimeIntegrationPreview() : "";
+  const saveSlotDiagnostics = panel.id === "save_data" ? renderSaveSlotDiagnostics() : "";
 
   elements.panelDetail.innerHTML = `
     <div class="editor-detail-header">
@@ -657,6 +666,7 @@ function renderPanelDetail() {
     ${combatVfxDetail}
     ${monsterSpriteReport}
     ${monsterRuntimePreview}
+    ${saveSlotDiagnostics}
   `;
 }
 
@@ -5096,6 +5106,311 @@ function summarizeJson(value) {
   if (keys.includes("player")) details.push(EDITOR_TEXT.save.includesPlayer);
   if (keys.includes("slots")) details.push(EDITOR_TEXT.save.includesSlots);
   return details.join(" · ");
+}
+
+function renderSaveSlotDiagnostics() {
+  const diagnostics = createSaveSlotDiagnostics();
+  const text = EDITOR_TEXT.saveDiagnostics || {};
+  const activeSlotValue = diagnostics.activeSlot.raw || text.emptyValue || "";
+  return `
+    <section class="editor-save-diagnostics" data-save-slot-diagnostics>
+      <div class="editor-save-diagnostics-head">
+        <div>
+          <h3>${escapeHtml(text.title || "Save slot diagnostics")}</h3>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(diagnostics.writeMode.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(diagnostics.writeMode.status))}
+        </span>
+      </div>
+      <div class="editor-save-diagnostics-metrics">
+        ${metricCard(
+          text.activeSaveMetric || "Active save",
+          saveDiagnosticStatusLabel(diagnostics.activeSave.status),
+          diagnostics.activeSave.hint || "",
+        )}
+        ${metricCard(
+          text.slotStoreMetric || "Save slots",
+          tf("editorPrep.saveDiagnostics.slotCountValue", {
+            filled: diagnostics.slotCounts.filled,
+            total: diagnostics.slotCounts.total,
+            invalid: diagnostics.slotCounts.invalid,
+          }, `${diagnostics.slotCounts.filled}/${diagnostics.slotCounts.total}`),
+          diagnostics.slotStore.hint || "",
+        )}
+        ${metricCard(
+          text.activeSlotMetric || "Active slot",
+          `${saveDiagnosticStatusLabel(diagnostics.activeSlot.status)} · ${activeSlotValue}`,
+          diagnostics.activeSlot.hint || "",
+        )}
+        ${metricCard(
+          text.writeModeMetric || "Write mode",
+          saveDiagnosticStatusLabel(diagnostics.writeMode.status),
+          diagnostics.writeMode.hint || "",
+        )}
+      </div>
+      <div class="editor-save-diagnostics-grid">
+        ${renderSaveDiagnosticCard({
+          id: "active-save",
+          label: text.activeSaveCard || "Active save",
+          status: diagnostics.activeSave.status,
+          summary: diagnostics.activeSave.summary,
+          rawLength: diagnostics.activeSave.rawLength,
+          key: SAVE_SLOT_DIAGNOSTIC_KEYS.activeSave,
+        })}
+        ${diagnostics.slots.map((slot) => renderSaveDiagnosticCard(slot)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function createSaveSlotDiagnostics() {
+  const text = EDITOR_TEXT.saveDiagnostics || {};
+  const activeSave = readEditorStorageJson(SAVE_SLOT_DIAGNOSTIC_KEYS.activeSave, { expectObject: true });
+  activeSave.summary = activeSave.status === "ready" ? summarizeSaveStateForDiagnostics(activeSave.value) : null;
+  activeSave.hint = saveDiagnosticStorageHint(activeSave);
+
+  const slotStore = readEditorStorageJson(SAVE_SLOT_DIAGNOSTIC_KEYS.slotStore, { expectObject: true });
+  slotStore.hint = saveDiagnosticStorageHint(slotStore);
+  const slots = SAVE_SLOT_DIAGNOSTIC_SLOT_IDS.map((slotId, index) => createSaveSlotDiagnostic(slotId, index, slotStore));
+  const slotCounts = {
+    total: slots.length,
+    filled: slots.filter((slot) => ["ready", "warning"].includes(slot.status)).length,
+    invalid: slots.filter((slot) => ["invalid", "unavailable"].includes(slot.status)).length,
+  };
+
+  const activeSlot = readEditorStorageText(SAVE_SLOT_DIAGNOSTIC_KEYS.activeSlot);
+  activeSlot.status = normalizeActiveSaveSlotDiagnosticStatus(activeSlot.raw);
+  activeSlot.hint = text.activeSlotHint || "";
+
+  const uiState = readEditorStorageJson(SAVE_SLOT_DIAGNOSTIC_KEYS.uiState, { expectObject: true });
+  const writeMode = {
+    status: "blocked",
+    hint: text.writeModeHint || "",
+  };
+
+  return {
+    activeSave,
+    slotStore,
+    activeSlot,
+    uiState,
+    writeMode,
+    slotCounts,
+    slots,
+  };
+}
+
+function createSaveSlotDiagnostic(slotId, index, slotStore) {
+  const text = EDITOR_TEXT.saveDiagnostics || {};
+  const label = tf("editorPrep.saveDiagnostics.slotLabel", { number: index + 1 }, `Slot ${index + 1}`);
+  const base = {
+    id: slotId,
+    key: slotId,
+    label,
+    rawLength: 0,
+    summary: null,
+    warnings: [],
+  };
+  if (slotStore.status !== "ready") {
+    return {
+      ...base,
+      status: "unavailable",
+      hint: text.slotStoreUnavailable || "",
+    };
+  }
+  const snapshot = slotStore.value?.[slotId];
+  if (!snapshot) {
+    return {
+      ...base,
+      status: "empty",
+      hint: text.emptySlotHint || "",
+    };
+  }
+  const rawLength = safeJsonSize(snapshot);
+  if (!isPlainObject(snapshot) || !isPlainObject(snapshot.state)) {
+    return {
+      ...base,
+      rawLength,
+      status: "invalid",
+      hint: text.invalidSlotHint || "",
+    };
+  }
+
+  const warnings = [];
+  if (snapshot.slotId && snapshot.slotId !== slotId) {
+    warnings.push(tf("editorPrep.saveDiagnostics.slotIdMismatch", {
+      expected: slotId,
+      actual: snapshot.slotId,
+    }, `${slotId}/${snapshot.slotId}`));
+  }
+  const summary = {
+    ...summarizeSaveStateForDiagnostics(snapshot.state),
+    ...summarizeSaveSlotMeta(snapshot),
+  };
+  return {
+    ...base,
+    rawLength,
+    status: warnings.length ? "warning" : "ready",
+    summary,
+    warnings,
+    hint: warnings.length ? warnings.join(" · ") : (text.readySlotHint || ""),
+  };
+}
+
+function renderSaveDiagnosticCard(card) {
+  const text = EDITOR_TEXT.saveDiagnostics || {};
+  const labels = text.labels || {};
+  const summary = card.summary || {};
+  const fields = [
+    [labels.key || "Key", card.key],
+    [labels.status || "Status", saveDiagnosticStatusLabel(card.status)],
+    [labels.name || "Name", summary.name],
+    [labels.level || "Level", summary.level],
+    [labels.gold || "Gold", summary.gold],
+    [labels.region || "Region", summary.regionId],
+    [labels.inventory || "Inventory", summary.inventoryCount],
+    [labels.equipment || "Equipment", summary.equipmentCount],
+    [labels.savedAt || "Saved at", summary.savedAt],
+    [labels.bytes || "Bytes", saveDiagnosticNumber(card.rawLength)],
+  ];
+  return `
+    <article class="editor-save-diagnostic-card" data-save-slot-id="${escapeAttribute(card.id)}" data-status="${escapeAttribute(card.status)}">
+      <div class="editor-save-diagnostic-card-head">
+        <strong>${escapeHtml(card.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(card.status))}</span>
+      </div>
+      <dl>
+        ${fields.map(([label, value]) => `
+          <div>
+            <dt>${escapeHtml(label)}</dt>
+            <dd>${escapeHtml(saveDiagnosticValue(value))}</dd>
+          </div>
+        `).join("")}
+      </dl>
+      ${card.hint ? `<p>${escapeHtml(card.hint)}</p>` : ""}
+    </article>
+  `;
+}
+
+function summarizeSaveSlotMeta(snapshot) {
+  const summary = isPlainObject(snapshot.summary) ? snapshot.summary : {};
+  return {
+    name: saveDiagnosticValue(summary.name),
+    level: saveDiagnosticNumber(summary.level),
+    gold: saveDiagnosticNumber(summary.gold),
+    regionId: saveDiagnosticValue(summary.regionName || summary.regionId),
+    savedAt: saveDiagnosticValue(snapshot.savedAt || summary.savedAt),
+  };
+}
+
+function summarizeSaveStateForDiagnostics(state) {
+  const player = isPlainObject(state?.player) ? state.player : {};
+  const profile = isPlainObject(state?.playerProfile) ? state.playerProfile : {};
+  const equipment = isPlainObject(state?.equipment) ? state.equipment : {};
+  return {
+    name: saveDiagnosticValue(profile.name || player.name),
+    level: saveDiagnosticNumber(player.level),
+    gold: saveDiagnosticNumber(player.gold),
+    regionId: saveDiagnosticValue(state?.regionId),
+    inventoryCount: Array.isArray(state?.inventory) ? saveDiagnosticNumber(state.inventory.length) : saveDiagnosticEmptyValue(),
+    equipmentCount: saveDiagnosticNumber(Object.values(equipment).filter(Boolean).length),
+  };
+}
+
+function readEditorStorageJson(key, { expectObject = false } = {}) {
+  const entry = readEditorStorageText(key);
+  if (entry.status !== "ready") return { ...entry, value: null };
+  try {
+    const parsed = JSON.parse(entry.raw);
+    if (expectObject && !isPlainObject(parsed)) {
+      return {
+        ...entry,
+        status: "invalid",
+        value: parsed,
+      };
+    }
+    return {
+      ...entry,
+      value: parsed,
+    };
+  } catch (error) {
+    return {
+      ...entry,
+      status: "invalid",
+      value: null,
+      error: error?.message || "",
+    };
+  }
+}
+
+function readEditorStorageText(key) {
+  try {
+    const raw = window.localStorage.getItem(key);
+    return {
+      key,
+      raw,
+      rawLength: raw ? raw.length : 0,
+      status: raw ? "ready" : "empty",
+      error: "",
+    };
+  } catch (error) {
+    return {
+      key,
+      raw: "",
+      rawLength: 0,
+      status: "invalid",
+      error: error?.message || "",
+    };
+  }
+}
+
+function normalizeActiveSaveSlotDiagnosticStatus(value) {
+  if (!value) return "empty";
+  if (value === SAVE_SLOT_DIAGNOSTIC_NO_ACTIVE) return "none";
+  return SAVE_SLOT_DIAGNOSTIC_SLOT_IDS.includes(value) ? "ready" : "invalid";
+}
+
+function saveDiagnosticStorageHint(entry) {
+  const text = EDITOR_TEXT.saveDiagnostics || {};
+  if (entry.status === "ready") {
+    return tf("editorPrep.saveDiagnostics.storageHint", {
+      chars: entry.rawLength.toLocaleString(EDITOR_TEXT.locale),
+    }, `${entry.rawLength}`);
+  }
+  if (entry.status === "empty") return text.emptyStorageHint || "";
+  return entry.error || text.invalidStorageHint || "";
+}
+
+function saveDiagnosticStatusLabel(status) {
+  const labels = EDITOR_TEXT.saveDiagnostics?.statusLabels || {};
+  return labels[status] || status;
+}
+
+function saveDiagnosticNumber(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return saveDiagnosticEmptyValue();
+  return number.toLocaleString(EDITOR_TEXT.locale);
+}
+
+function saveDiagnosticValue(value) {
+  const text = String(value ?? "").trim();
+  return text || saveDiagnosticEmptyValue();
+}
+
+function saveDiagnosticEmptyValue() {
+  return EDITOR_TEXT.saveDiagnostics?.emptyValue || "-";
+}
+
+function safeJsonSize(value) {
+  try {
+    return JSON.stringify(value).length;
+  } catch {
+    return 0;
+  }
+}
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
 function localizedMetricCard(key, count) {

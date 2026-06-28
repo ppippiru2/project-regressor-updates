@@ -245,14 +245,17 @@
     {
       "id": "save-slot-editor",
       "title": "세계선 저장 데이터 수동 편집",
-      "status": "planned",
+      "status": "partial",
       "priority": "high",
       "source": "user-request-save-editor",
-      "summary": "Allow editing active save, save slots, gold, level, region, equipment, inventory, and profile with validation and rollback.",
+      "summary": "Read-only save slot diagnostics are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs validation and rollback before write controls.",
       "editorHooks": [
         "src/state/save.js",
         "src/state/saveSlots.js",
         "localStorage save keys",
+        "src/editor/editorMain.js:renderSaveSlotDiagnostics",
+        "styles.css:.editor-save-diagnostics",
+        "build-scripts/check-save-slot-diagnostics.mjs",
         "future rollback snapshot"
       ]
     },

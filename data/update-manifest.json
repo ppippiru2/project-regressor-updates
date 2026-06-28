@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 513,
-  "displayVersion": "v513",
-  "cacheVersion": "513",
-  "updatedAt": "2026-06-29T03:01:58.000+09:00",
+  "versionCode": 514,
+  "displayVersion": "v514",
+  "cacheVersion": "514",
+  "updatedAt": "2026-06-29T03:17:57.652+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=513&cachebust=513",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=514&cachebust=514",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "스킬 정보 패널에 약점 예상 배율과 다음 집중 타수를 표시합니다.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk",
+  "notes": "에디터 세계선 데이터 패널에 활성 세이브와 슬롯 저장소의 읽기 전용 진단 표면을 추가했습니다.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
   },
-  "version": "5.13.0",
+  "version": "5.14.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
   },
   "android": {
-    "code": 513,
-    "name": "5.13.0",
-    "displayName": "v513",
+    "code": 514,
+    "name": "5.14.0",
+    "displayName": "v514",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
     },
     "version": {
-      "code": 513,
-      "name": "5.13.0",
-      "displayName": "v513"
+      "code": 514,
+      "name": "5.14.0",
+      "displayName": "v514"
     },
-    "versionCode": 513,
-    "versionName": "5.13.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-release.apk"
+    "versionCode": 514,
+    "versionName": "5.14.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v514-debug.apk"
   },
-  "versionName": "5.13.0"
+  "versionName": "5.14.0"
 }
