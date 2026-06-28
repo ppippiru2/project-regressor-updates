@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=519";
-import { getLocaleText, t, tf } from "../localization/index.js?v=519";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=519";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=519";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=519";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=519";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=519";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=519";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=519";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=519";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=519";
+import { applyDomLocalization } from "../localization/domText.js?v=520";
+import { getLocaleText, t, tf } from "../localization/index.js?v=520";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=520";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=520";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=520";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=520";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=520";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=520";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=520";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=520";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=520";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=519";
+} from "./contentBulkPatchPackageAdapter.js?v=520";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=519";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=519";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=519";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=519";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=519";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=519";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=519";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=519";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=519";
+} from "./contentBulkPackageOverview.js?v=520";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=520";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=520";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=520";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=520";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=520";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=520";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=520";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=520";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=519";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=519";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=519";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=519";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=519";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=519";
+} from "./runtimeVfxBulkIntakePreview.js?v=520";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=520";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=520";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=520";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=520";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=520";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=519";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=519";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=519";
+} from "./monsterSpriteSlotReport.js?v=520";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=520";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=520";
 
-const EDITOR_VERSION = "519";
+const EDITOR_VERSION = "520";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5285,6 +5285,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotDraftPayloadPreview(diagnostics)}
       ${renderSaveSlotDraftDiffSummary(diagnostics)}
       ${renderSaveSlotApplyGateChecklist(diagnostics)}
+      ${renderSaveSlotRecoveryRehearsalPreview(diagnostics)}
     </section>
   `;
 }
@@ -5579,6 +5580,55 @@ function renderSaveSlotApplyGateChecklist(diagnostics) {
   `;
 }
 
+function renderSaveSlotRecoveryRehearsalPreview(diagnostics) {
+  const rehearsal = createSaveSlotRecoveryRehearsalPreview(diagnostics);
+  const text = EDITOR_TEXT.saveRecovery || {};
+  return `
+    <section class="editor-save-recovery" data-save-recovery-rehearsal>
+      <div class="editor-save-recovery-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save recovery rehearsal")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(rehearsal.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(rehearsal.status))}
+        </span>
+      </div>
+      <div class="editor-save-recovery-metrics">
+        ${metricCard(
+          text.keyMetric || "Snapshot keys",
+          tf("editorPrep.saveRecovery.keyValue", { readable: rehearsal.readableKeys, total: rehearsal.snapshotKeys.length }, `${rehearsal.readableKeys}/${rehearsal.snapshotKeys.length}`),
+          text.keyHint || "",
+        )}
+        ${metricCard(
+          text.stepMetric || "Steps",
+          tf("editorPrep.saveRecovery.stepValue", { count: rehearsal.steps.length }, `${rehearsal.steps.length}`),
+          text.stepHint || "",
+        )}
+        ${metricCard(
+          text.blockedMetric || "Blocked",
+          tf("editorPrep.saveRecovery.blockedValue", { count: rehearsal.blockedSteps }, `${rehearsal.blockedSteps}`),
+          text.blockedHint || "",
+        )}
+        ${metricCard(
+          text.routeMetric || "Failure routes",
+          tf("editorPrep.saveRecovery.routeValue", { count: rehearsal.failureRoutes.length }, `${rehearsal.failureRoutes.length}`),
+          text.routeHint || "",
+        )}
+      </div>
+      <div class="editor-save-recovery-grid">
+        ${rehearsal.snapshotKeys.map((item) => renderSaveRecoveryKey(item)).join("")}
+      </div>
+      <div class="editor-save-recovery-steps">
+        ${rehearsal.steps.map((step) => renderSaveRecoveryStep(step)).join("")}
+      </div>
+      <div class="editor-save-recovery-routes">
+        ${rehearsal.failureRoutes.map((route) => renderSaveRecoveryRoute(route)).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -5613,6 +5663,119 @@ function createSaveSlotDraftDiffSummary(diagnostics) {
     rows,
     groups,
   };
+}
+
+function createSaveSlotRecoveryRehearsalPreview(diagnostics) {
+  const text = EDITOR_TEXT.saveRecovery || {};
+  const validation = createSaveSlotValidationPlan(diagnostics);
+  const draft = createSaveSlotDraftPayloadPreview(diagnostics);
+  const diff = createSaveSlotDraftDiffSummary(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const snapshotKeys = [
+    saveRecoverySnapshotKey(SAVE_SLOT_DIAGNOSTIC_KEYS.activeSave, text.keyLabels?.activeSave, diagnostics.activeSave),
+    saveRecoverySnapshotKey(SAVE_SLOT_DIAGNOSTIC_KEYS.slotStore, text.keyLabels?.slotStore, diagnostics.slotStore),
+    saveRecoverySnapshotKey(SAVE_SLOT_DIAGNOSTIC_KEYS.activeSlot, text.keyLabels?.activeSlot, diagnostics.activeSlot),
+    saveRecoverySnapshotKey(SAVE_SLOT_DIAGNOSTIC_KEYS.uiState, text.keyLabels?.uiState, diagnostics.uiState),
+  ];
+  const keysReadable = snapshotKeys.every((item) => item.status === "ready");
+  const rollbackReady = validation.rollbackStatus === "ready";
+  const diffReady = diff.rowCount > 0;
+  const gateBlocked = gate.applyStatus === "blocked";
+  const steps = [
+    saveRecoveryStep("snapshot-readiness", keysReadable, text.stepLabels?.snapshotReadiness, text.stepDetails?.snapshotReadiness, keysReadable ? "" : "snapshot-key-invalid"),
+    saveRecoveryStep("rollback-contract", rollbackReady, text.stepLabels?.rollbackContract, text.stepDetails?.rollbackContract, rollbackReady ? "" : "rollback-contract-blocked"),
+    saveRecoveryStep("draft-diff-boundary", draft.operationCount > 0 && diffReady, text.stepLabels?.draftDiffBoundary, text.stepDetails?.draftDiffBoundary, diffReady ? "" : "diff-preview-empty"),
+    saveRecoveryStep("apply-gate-hold", gateBlocked, text.stepLabels?.applyGateHold, text.stepDetails?.applyGateHold, ""),
+    saveRecoveryStep("writer-exception-restore", false, text.stepLabels?.writerExceptionRestore, text.stepDetails?.writerExceptionRestore, "writer-not-implemented"),
+    saveRecoveryStep("post-apply-validation-restore", false, text.stepLabels?.postApplyValidationRestore, text.stepDetails?.postApplyValidationRestore, "post-apply-validation-missing"),
+  ];
+  const failureRoutes = [
+    saveRecoveryRoute("parse-failure-before-apply", text.routeLabels?.parseFailure, text.routeDetails?.parseFailure, "stop-before-writer"),
+    saveRecoveryRoute("missing-path-before-apply", text.routeLabels?.missingPath, text.routeDetails?.missingPath, diff.missingRows > 0 ? "block-on-missing-path" : "no-missing-path"),
+    saveRecoveryRoute("writer-exception", text.routeLabels?.writerException, text.routeDetails?.writerException, "restore-snapshot-keys"),
+    saveRecoveryRoute("post-apply-validation-failure", text.routeLabels?.postApplyValidationFailure, text.routeDetails?.postApplyValidationFailure, "restore-then-rerun-diagnostics"),
+  ];
+  return {
+    status: "blocked",
+    readableKeys: snapshotKeys.filter((item) => item.status === "ready").length,
+    blockedSteps: steps.filter((step) => step.status === "blocked").length,
+    snapshotKeys,
+    steps,
+    failureRoutes,
+    previewShape: {
+      version: "save-slot-recovery-rehearsal-v1",
+      mode: "read-only-preview",
+      snapshotKeys: snapshotKeys.map((item) => item.key),
+      apply: "disabled",
+    },
+  };
+}
+
+function saveRecoverySnapshotKey(key, label, diagnostic) {
+  const status = diagnostic?.status === "invalid" || diagnostic?.status === "unavailable" ? "blocked" : "ready";
+  return {
+    key,
+    label: label || key,
+    status,
+    detail: diagnostic?.hint || "",
+  };
+}
+
+function saveRecoveryStep(id, isReady, label, detail, blocker) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+    blocker: blocker || "",
+  };
+}
+
+function saveRecoveryRoute(id, label, detail, action) {
+  return {
+    id,
+    label: label || id,
+    detail: detail || "",
+    action,
+  };
+}
+
+function renderSaveRecoveryKey(item) {
+  return `
+    <article class="editor-save-recovery-key" data-save-recovery-key="${escapeAttribute(item.key)}" data-status="${escapeAttribute(item.status)}">
+      <div>
+        <strong>${escapeHtml(item.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(item.status))}</span>
+      </div>
+      <code>${escapeHtml(item.key)}</code>
+      ${item.detail ? `<p>${escapeHtml(item.detail)}</p>` : ""}
+    </article>
+  `;
+}
+
+function renderSaveRecoveryStep(step) {
+  const text = EDITOR_TEXT.saveRecovery || {};
+  return `
+    <article class="editor-save-recovery-step" data-save-recovery-step="${escapeAttribute(step.id)}" data-status="${escapeAttribute(step.status)}">
+      <div>
+        <strong>${escapeHtml(step.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(step.status))}</span>
+      </div>
+      ${step.detail ? `<p>${escapeHtml(step.detail)}</p>` : ""}
+      ${step.blocker ? chip(tf("editorPrep.saveRecovery.blockerValue", { blocker: step.blocker }, `${text.blockerLabel || "Blocker"}: ${step.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveRecoveryRoute(route) {
+  const text = EDITOR_TEXT.saveRecovery || {};
+  return `
+    <article class="editor-save-recovery-route" data-save-recovery-route="${escapeAttribute(route.id)}">
+      <strong>${escapeHtml(route.label)}</strong>
+      <p>${escapeHtml(route.detail)}</p>
+      ${chip(tf("editorPrep.saveRecovery.routeActionValue", { action: route.action }, `${text.routeActionLabel || "Action"}: ${route.action}`))}
+    </article>
+  `;
 }
 
 function createSaveSlotApplyGateChecklist(diagnostics) {

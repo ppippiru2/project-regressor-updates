@@ -251,7 +251,7 @@
       "status": "partial",
       "priority": "high",
       "source": "user-request-save-editor",
-      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, and apply gate checklist are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
+      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, apply gate checklist, and recovery rehearsal preview are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
       "editorHooks": [
         "src/state/save.js",
         "src/state/saveSlots.js",
@@ -261,16 +261,19 @@
         "src/editor/editorMain.js:renderSaveSlotDraftPayloadPreview",
         "src/editor/editorMain.js:renderSaveSlotDraftDiffSummary",
         "src/editor/editorMain.js:renderSaveSlotApplyGateChecklist",
+        "src/editor/editorMain.js:renderSaveSlotRecoveryRehearsalPreview",
         "styles.css:.editor-save-diagnostics",
         "styles.css:.editor-save-validation",
         "styles.css:.editor-save-draft",
         "styles.css:.editor-save-diff",
         "styles.css:.editor-save-apply-gate",
+        "styles.css:.editor-save-recovery",
         "build-scripts/check-save-slot-diagnostics.mjs",
         "build-scripts/check-save-slot-validation-plan.mjs",
         "build-scripts/check-save-slot-draft-payload.mjs",
         "build-scripts/check-save-slot-draft-diff-summary.mjs",
         "build-scripts/check-save-slot-apply-gate-checklist.mjs",
+        "build-scripts/check-save-slot-recovery-rehearsal.mjs",
         "future rollback snapshot"
       ]
     },

@@ -4050,6 +4050,105 @@ select:focus {
   padding: 0.52rem 0.6rem;
 }
 
+.editor-save-recovery {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(108, 210, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(4, 16, 40, 0.28);
+  padding: 0.85rem;
+}
+
+.editor-save-recovery-head,
+.editor-save-recovery-key div,
+.editor-save-recovery-step div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-recovery h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-recovery-head span,
+.editor-save-recovery-key span,
+.editor-save-recovery-step span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-recovery-key[data-status="ready"] span,
+.editor-save-recovery-step[data-status="ready"] span {
+  border-color: rgba(91, 229, 132, 0.5);
+  color: var(--green);
+}
+
+.editor-save-recovery-metrics,
+.editor-save-recovery-grid,
+.editor-save-recovery-steps,
+.editor-save-recovery-routes {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-recovery-steps,
+.editor-save-recovery-routes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-recovery-key,
+.editor-save-recovery-step,
+.editor-save-recovery-route {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-recovery-key[data-status="blocked"],
+.editor-save-recovery-step[data-status="blocked"] {
+  border-color: rgba(255, 119, 119, 0.28);
+}
+
+.editor-save-recovery-key strong,
+.editor-save-recovery-step strong,
+.editor-save-recovery-route strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-recovery-key p,
+.editor-save-recovery-step p,
+.editor-save-recovery-route p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.editor-save-recovery-key code {
+  color: var(--cyan);
+  font-size: 0.74rem;
+  overflow-wrap: anywhere;
+}
+
 .editor-detail-header,
 .editor-backlog-head,
 .editor-asset-card {
@@ -11031,6 +11130,9 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-restore-rehearsal-files,
   .editor-save-apply-gate-head,
   .editor-save-apply-gate-check div,
+  .editor-save-recovery-head,
+  .editor-save-recovery-key div,
+  .editor-save-recovery-step div,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -11067,6 +11169,10 @@ body[data-info-tooltips="off"] .info-term {
   .editor-save-diff-row dl,
   .editor-save-apply-gate-metrics,
   .editor-save-apply-gate-grid,
+  .editor-save-recovery-metrics,
+  .editor-save-recovery-grid,
+  .editor-save-recovery-steps,
+  .editor-save-recovery-routes,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -11173,6 +11279,9 @@ body[data-info-tooltips="off"] .info-term {
     .editor-monster-sprite-pose > div:first-child,
     .editor-save-apply-gate-head,
     .editor-save-apply-gate-check div,
+    .editor-save-recovery-head,
+    .editor-save-recovery-key div,
+    .editor-save-recovery-step div,
     .editor-topbar {
     grid-template-columns: 1fr;
   }
@@ -11239,6 +11348,10 @@ body[data-info-tooltips="off"] .info-term {
   .editor-save-diff-row dl,
   .editor-save-apply-gate-metrics,
   .editor-save-apply-gate-grid,
+  .editor-save-recovery-metrics,
+  .editor-save-recovery-grid,
+  .editor-save-recovery-steps,
+  .editor-save-recovery-routes,
   .editor-panel-nav {
     grid-template-columns: 1fr;
   }
