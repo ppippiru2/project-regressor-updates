@@ -1,5 +1,5 @@
 import { addInventoryItem, consumeInventoryItem } from "./inventory.js";
-import { tf } from "../localization/index.js?v=507";
+import { tf } from "../localization/index.js?v=508";
 
 export function equipInventoryItem({ equipmentState, inventory, itemId, item, slot }) {
   const inventoryEntry = inventory.find((entry) => entry.itemId === itemId);

@@ -1,4 +1,4 @@
-import { MONSTER_RUNTIME_INTEGRATION_PACK_VERSION } from "./monsterRuntimeIntegrationPresets.js?v=507";
+import { MONSTER_RUNTIME_INTEGRATION_PACK_VERSION } from "./monsterRuntimeIntegrationPresets.js?v=508";
 
 const DEFAULT_MONSTER_BATTLE_SPRITE_PRESET = Object.freeze({
   monsterId: "default",
