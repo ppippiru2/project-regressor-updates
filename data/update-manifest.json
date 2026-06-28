@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 534,
-  "displayVersion": "v534",
-  "cacheVersion": "534",
-  "updatedAt": "2026-06-29T06:31:00.000+09:00",
+  "versionCode": 535,
+  "displayVersion": "v535",
+  "cacheVersion": "535",
+  "updatedAt": "2026-06-29T06:45:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=534&cachebust=534",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=535&cachebust=535",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "?? ?? writer ??? ?? ?? preview? ?? ???? ??????.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v534-debug.apk",
+  "notes": "?? ?? validator dry-run ?? preview? ?? ???? ??????.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v534-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
   },
-  "version": "5.34.0",
+  "version": "5.35.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v534-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
   },
   "android": {
-    "code": 534,
-    "name": "5.34.0",
-    "displayName": "v534",
+    "code": 535,
+    "name": "5.35.0",
+    "displayName": "v535",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v534-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
     },
     "version": {
-      "code": 534,
-      "name": "5.34.0",
-      "displayName": "v534"
+      "code": 535,
+      "name": "5.35.0",
+      "displayName": "v535"
     },
-    "versionCode": 534,
-    "versionName": "5.34.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v534-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v534-release.apk"
+    "versionCode": 535,
+    "versionName": "5.35.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v534-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
   },
-  "versionName": "5.34.0"
+  "versionName": "5.35.0"
 }
