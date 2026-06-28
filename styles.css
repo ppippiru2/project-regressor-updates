@@ -4976,6 +4976,16 @@ select:focus {
   scroll-margin-top: 1rem;
 }
 
+.editor-content-bulk-package:target,
+.editor-loot-skill-bulk-intake:target,
+.editor-monster-runtime-bulk-intake:target,
+.editor-runtime-vfx-bulk-intake:target {
+  border-color: rgba(88, 225, 255, 0.66);
+  box-shadow:
+    0 0 0 1px rgba(88, 225, 255, 0.28),
+    0 0 22px rgba(88, 225, 255, 0.18);
+}
+
 .editor-content-bulk-overview-head h4,
 .editor-content-bulk-overview-head p,
 .editor-content-bulk-overview-row h5,

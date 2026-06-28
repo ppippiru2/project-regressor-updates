@@ -1,4 +1,4 @@
-export const CONTENT_BULK_PACKAGE_OVERVIEW_VERSION = "content-bulk-package-overview-v2";
+export const CONTENT_BULK_PACKAGE_OVERVIEW_VERSION = "content-bulk-package-overview-v3";
 
 export const CONTENT_BULK_OVERVIEW_DRILLDOWN_TARGETS = Object.freeze({
   reviewSurface: Object.freeze({

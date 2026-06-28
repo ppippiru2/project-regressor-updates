@@ -1,5 +1,5 @@
-import { itemSellPrice, shopBuyPrice } from "../state/shop.js?v=473";
-import { getLocaleText, t, tf } from "../localization/index.js?v=473";
+import { itemSellPrice, shopBuyPrice } from "../state/shop.js?v=474";
+import { getLocaleText, t, tf } from "../localization/index.js?v=474";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
