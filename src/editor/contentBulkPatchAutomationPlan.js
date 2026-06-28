@@ -1,16 +1,18 @@
-import { ITEM_BALANCE_DATA, LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=452";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=452";
+import { ITEM_BALANCE_DATA, LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=453";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=453";
 import {
   TUTORIAL_MONSTER_POOL_DATA,
   TUTORIAL_MONSTER_REWARD_LINKS,
-} from "../balance/monsterCandidatePool.js?v=452";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=452";
+} from "../balance/monsterCandidatePool.js?v=453";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=453";
 
 export const CONTENT_BULK_PATCH_AUTOMATION_PLAN_VERSION = "content-bulk-patch-automation-plan-v1";
 
 export const CONTENT_BULK_PATCH_DOMAIN_DEFINITIONS = Object.freeze([
   {
     id: "monster",
+    batchKey: "monsters",
+    identityFields: ["id"],
     requiredInputFields: ["id", "regionId", "level", "stats", "tags", "representativeMonsterId", "rewardLink"],
     checkScripts: [
       "build-scripts/check-monster-candidate-pool.mjs",
@@ -29,6 +31,8 @@ export const CONTENT_BULK_PATCH_DOMAIN_DEFINITIONS = Object.freeze([
   },
   {
     id: "equipment_item",
+    batchKey: "equipmentItems",
+    identityFields: ["id"],
     requiredInputFields: ["id", "slot", "rarity", "attack", "defense", "options", "shopPrice", "iconSlot"],
     checkScripts: [
       "build-scripts/check-equipment-value-balance.mjs",
@@ -47,6 +51,8 @@ export const CONTENT_BULK_PATCH_DOMAIN_DEFINITIONS = Object.freeze([
   },
   {
     id: "loot_item",
+    batchKey: "lootItems",
+    identityFields: ["id"],
     requiredInputFields: ["id", "type", "rarity", "stackable", "recordTarget", "skillId", "dropSource"],
     checkScripts: [
       "build-scripts/check-loot-item-catalog.mjs",
@@ -64,6 +70,8 @@ export const CONTENT_BULK_PATCH_DOMAIN_DEFINITIONS = Object.freeze([
   },
   {
     id: "skill",
+    batchKey: "skills",
+    identityFields: ["id"],
     requiredInputFields: ["id", "type", "mpCost", "cooldown", "damageType", "multiplier", "effectType", "stanceAllowed"],
     checkScripts: [
       "build-scripts/check-final-package-contract.mjs",
@@ -82,6 +90,8 @@ export const CONTENT_BULK_PATCH_DOMAIN_DEFINITIONS = Object.freeze([
   },
   {
     id: "reward_link",
+    batchKey: "rewardLinks",
+    identityFields: ["monsterId"],
     requiredInputFields: ["monsterId", "codexFragmentId", "materialItemIds", "skillItemIds", "dropChance"],
     checkScripts: [
       "build-scripts/check-monster-candidate-pool.mjs",

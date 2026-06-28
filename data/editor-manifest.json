@@ -433,6 +433,7 @@
         "src/balance/balanceTuningRegistry.js",
         "src/editor/balanceTuningPreview.js",
         "src/editor/contentBulkPatchAutomationPlan.js",
+        "src/editor/contentBulkPatchIntakeContract.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -500,7 +501,11 @@
         "candidateMonsterBulkPatchSurfaces",
         "candidateMonsterBulkPatchCoverage",
         "contentBulkPatchAutomationPlan",
+        "contentBulkPatchIntakeContract",
         "contentBulkPatchDomains",
+        "contentBulkPatchBatchKeys",
+        "contentBulkPatchIdentityFields",
+        "contentBulkPatchRequiredInputs",
         "contentBulkPatchSurfaceTemplates",
         "contentBulkPatchCurrentRows",
         "swapBoundaryCoverage",
@@ -518,6 +523,7 @@
         "후보 몬스터 실전 패치 초안",
         "후보 몬스터 대량 적용 자동화 표면",
         "대량 콘텐츠 적용 계약",
+        "대량 콘텐츠 입력 계약",
         "변경 전 읽기 전용 검증 리포트"
       ]
     },
@@ -1429,6 +1435,7 @@
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_DOMAIN_SUMMARIES",
       "src/balance/balanceTuningRegistry.js:BALANCE_TUNING_REQUIRED_DOMAIN_IDS",
       "src/editor/contentBulkPatchAutomationPlan.js:createContentBulkPatchAutomationPlan",
+      "src/editor/contentBulkPatchIntakeContract.js:createContentBulkPatchIntakeContract",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1443,7 +1450,7 @@
     ],
     "monsterCandidateRewardPreview": {
       "id": "monster-candidate-reward-preview-v1",
-      "source": "v452",
+      "source": "v453",
       "sourceModule": "src/editor/monsterCandidateRewardPreview.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 15,
@@ -1491,6 +1498,15 @@
         "guards": [
           "몬스터/아이템/스킬/보상 링크 대량 추가 표면",
           "현재 행 수와 생성 표면 수"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-intake-contract",
+        "label": "대량 콘텐츠 입력 계약 검사",
+        "script": "build-scripts/check-content-bulk-patch-intake-contract.mjs",
+        "guards": [
+          "배치 키/식별 칸/필수 입력 칸",
+          "누락 필드와 중복 ID 사전 차단"
         ]
       },
       {
@@ -1592,7 +1608,7 @@
     ],
     "contentBulkPatchAutomationPlan": {
       "id": "content-bulk-patch-automation-plan-v1",
-      "source": "v452",
+      "source": "v453",
       "sourceModule": "src/editor/contentBulkPatchAutomationPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-automation.mjs",
       "expectedDomainCount": 5,
@@ -1604,9 +1620,24 @@
       "editorSummaryVisible": true,
       "writesGameData": false
     },
+    "contentBulkPatchIntakeContract": {
+      "id": "content-bulk-patch-intake-contract-v1",
+      "source": "v453",
+      "sourceModule": "src/editor/contentBulkPatchIntakeContract.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-intake-contract.mjs",
+      "expectedDomainCount": 5,
+      "expectedBatchKeyCount": 5,
+      "expectedCurrentRowCount": 80,
+      "expectedRequiredFieldCount": 35,
+      "expectedGeneratedSurfaceCount": 521,
+      "expectedUniqueCheckCount": 10,
+      "expectedAppendOrUpdateDomainCount": 5,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
     "monsterCandidatePromotionChecklist": {
       "id": "monster-candidate-promotion-checklist-v1",
-      "source": "v452",
+      "source": "v453",
       "sourceModule": "src/editor/monsterCandidatePromotionChecklist.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedPendingCandidateCount": 0,
@@ -1621,7 +1652,7 @@
     },
     "monsterCandidateLivePromotionPlan": {
       "id": "monster-candidate-live-promotion-plan-v1",
-      "source": "v452",
+      "source": "v453",
       "sourceModule": "src/editor/monsterCandidateLivePromotionPlan.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 0,
@@ -1633,7 +1664,7 @@
     },
     "monsterCandidateLivePatchDraft": {
       "id": "monster-candidate-live-patch-draft-v1",
-      "source": "v452",
+      "source": "v453",
       "sourceModule": "src/editor/monsterCandidateLivePatchDraft.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedDraftCount": 0,
@@ -1645,7 +1676,7 @@
     },
     "monsterCandidateBulkPatchAutomation": {
       "id": "monster-candidate-bulk-patch-automation-v1",
-      "source": "v452",
+      "source": "v453",
       "sourceModule": "src/editor/monsterCandidateBulkPatchAutomation.js",
       "checkScript": "build-scripts/check-monster-candidate-pool.mjs",
       "expectedCandidateCount": 15,
@@ -1835,7 +1866,7 @@
   ],
   "monsterBattleSpriteAssetSlots": {
     "version": 1,
-    "source": "v452",
+    "source": "v453",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,
@@ -1850,7 +1881,7 @@
   },
   "monsterSpriteSlotReadiness": {
     "version": 3,
-    "source": "v452",
+    "source": "v453",
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,

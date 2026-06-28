@@ -1,23 +1,24 @@
-import { applyDomLocalization } from "../localization/domText.js?v=452";
-import { getLocaleText, tf } from "../localization/index.js?v=452";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=452";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=452";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=452";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=452";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=452";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=452";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=452";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=452";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=452";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=452";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=452";
+import { applyDomLocalization } from "../localization/domText.js?v=453";
+import { getLocaleText, tf } from "../localization/index.js?v=453";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=453";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=453";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=453";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=453";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=453";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=453";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=453";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=453";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=453";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=453";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=453";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=453";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=452";
+} from "./monsterSpriteSlotReport.js?v=453";
 
-const EDITOR_VERSION = "452";
+const EDITOR_VERSION = "453";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -25,6 +26,7 @@ const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
   createBalanceTuningPreviewRows(BALANCE_TUNING_GROUPS).map((row) => [row.id, row])
 );
 const CONTENT_BULK_PATCH_AUTOMATION_PLAN = createContentBulkPatchAutomationPlan();
+const CONTENT_BULK_PATCH_INTAKE_CONTRACT = createContentBulkPatchIntakeContract();
 const MONSTER_CANDIDATE_REWARD_PREVIEW = createMonsterCandidateRewardPreview();
 const MONSTER_CANDIDATE_PROMOTION_CHECKLIST = createMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_REWARD_PREVIEW);
 const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN = createMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_PROMOTION_CHECKLIST);
@@ -1164,6 +1166,7 @@ function renderBalanceTuningDetail() {
       ${renderMonsterCandidateLivePatchDraft(MONSTER_CANDIDATE_LIVE_PATCH_DRAFT, detailText)}
       ${renderMonsterCandidateBulkPatchAutomation(MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION, detailText)}
       ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
+      ${renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
@@ -2165,6 +2168,7 @@ function renderContentBulkPatchAutomationDomain(domain, text = {}) {
       </div>
       <div class="editor-content-bulk-automation-grid">
         ${balanceDetailChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [])}
+        ${balanceDetailChipBlock(text.batchIdentity || "Batch identity", [domain.batchKey, ...(domain.identityFields || [])].filter(Boolean))}
         ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", domain.surfaces || [])}
         ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
       </div>
@@ -2178,6 +2182,69 @@ function contentBulkPatchDomainLabel(domainId, text = {}) {
 
 function contentBulkPatchStateLabel(stateId, text = {}) {
   return text.stateLabels?.[stateId] || stateId || "unknown";
+}
+
+function renderContentBulkPatchIntakeContract(contract, detailText = {}) {
+  const text = detailText.contentBulkPatchIntakeContract || {};
+  const summary = contract.summary || {};
+  const metrics = [
+    [text.domains || "Domains", `${summary.domainCount || 0}`],
+    [text.batchKeys || "Batch keys", `${summary.batchKeyCount || 0}`],
+    [text.requiredFields || "Required fields", `${summary.requiredFieldCount || 0}`],
+    [text.uniqueChecks || "Checks", `${summary.uniqueCheckCount || 0}`],
+    [text.currentRows || "Current rows", `${summary.currentRowCount || 0}`],
+    [text.writes || "Writes", contract.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-content-bulk-intake" data-readonly="${contract.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Intake Contract")}">
+      <div class="editor-content-bulk-intake-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Content Bulk Patch Intake Contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only batch input contract.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchIntakeContract.version", {
+          version: contract.version || "-"
+        }, contract.version || "-"))}</strong>
+      </div>
+      <div class="editor-content-bulk-intake-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-content-bulk-intake-list">
+        ${(contract.domains || []).map((domain) => renderContentBulkPatchIntakeDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderContentBulkPatchIntakeDomain(domain, text = {}) {
+  return `
+    <article class="editor-content-bulk-intake-domain">
+      <div class="editor-content-bulk-intake-domain-head">
+        <div>
+          <h5>${escapeHtml(contentBulkPatchDomainLabel(domain.id, text))}</h5>
+          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchIntakeContract.domainMeta", {
+            batchKey: domain.batchKey || "-",
+            rows: domain.currentRowCount || 0,
+            fields: (domain.requiredInputFields || []).length
+          }, `${domain.batchKey || "-"} / ${domain.currentRowCount || 0}`))}</p>
+        </div>
+        <div class="editor-chip-list">
+          ${chip(text.appendOrUpdate || "Append/update")}
+        </div>
+      </div>
+      <div class="editor-content-bulk-intake-grid">
+        ${balanceDetailChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
+        ${balanceDetailChipBlock(text.identityFields || "Identity", domain.identityFields || [])}
+        ${balanceDetailChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [])}
+        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
+      </div>
+    </article>
+  `;
 }
 
 function renderBalanceGroupRow(group, detailText = {}) {

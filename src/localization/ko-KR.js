@@ -2175,6 +2175,7 @@ export const KO_KR_TEXT = {
           writes: "데이터 쓰기",
           readOnly: "읽기 전용",
           requiredInputs: "필수 입력",
+          batchIdentity: "배치 식별",
           targetSurfaces: "연결 표면",
           guardChecks: "검증",
           noDomains: "대량 콘텐츠 계약 분야 없음",
@@ -2183,6 +2184,32 @@ export const KO_KR_TEXT = {
             "covered-currently": "현재 자동화 반영",
             "contract-ready": "대량 추가 계약 준비"
           },
+          domainLabels: {
+            monster: "몬스터",
+            equipment_item: "장비 아이템",
+            loot_item: "전리품/재료",
+            skill: "스킬",
+            reward_link: "보상 링크"
+          }
+        },
+        contentBulkPatchIntakeContract: {
+          title: "대량 콘텐츠 입력 계약",
+          description: "새 몬스터, 장비, 전리품, 스킬, 보상 연결을 묶음으로 받을 때 필요한 입력 칸과 중복 ID 검사를 먼저 고정합니다.",
+          version: "{version}",
+          domains: "분야",
+          batchKeys: "배치 키",
+          requiredFields: "필수 칸",
+          uniqueChecks: "검사",
+          currentRows: "현재 행",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          batchKey: "배치 키",
+          identityFields: "식별 칸",
+          requiredInputs: "필수 입력",
+          guardChecks: "검증",
+          appendOrUpdate: "추가/갱신",
+          noDomains: "대량 입력 계약 분야 없음",
+          domainMeta: "{batchKey} · 현재 {rows}행 · 필수 {fields}칸",
           domainLabels: {
             monster: "몬스터",
             equipment_item: "장비 아이템",
