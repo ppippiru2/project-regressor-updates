@@ -77,6 +77,8 @@ export const WEAKNESS_BALANCE = {
   baseSkillDamageMultiplier: 1.18,
   skillMultiplierScale: 0.5,
   breakPowerScale: 0.08,
+  strikeChainScale: 0.06,
+  maxStrikeChainBonus: 0.24,
   maxSkillDamageMultiplier: 1.75,
 };
 

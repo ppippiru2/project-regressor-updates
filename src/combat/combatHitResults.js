@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE, WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=510";
+import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE, WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=511";
 
 export function advanceHitCombo(state, now = Date.now()) {
   state.hitCount += 1;
@@ -66,13 +66,19 @@ export function applyWeaknessSkillDamageBonus(result, skill, targetState, now = 
 
   const skillMultiplier = Number(skill.multiplier || 1);
   const breakPower = Number(skill.breakPower || 0);
+  const strikeIndex = Number(targetState.weaknessStrikeCount || 0) + 1;
+  const strikeChainBonus = Math.min(
+    WEAKNESS_BALANCE.maxStrikeChainBonus,
+    Math.max(0, strikeIndex - 1) * WEAKNESS_BALANCE.strikeChainScale,
+  );
   const rawMultiplier =
     WEAKNESS_BALANCE.baseSkillDamageMultiplier +
     Math.max(0, skillMultiplier - 1) * WEAKNESS_BALANCE.skillMultiplierScale +
-    Math.max(0, breakPower) * WEAKNESS_BALANCE.breakPowerScale;
+    Math.max(0, breakPower) * WEAKNESS_BALANCE.breakPowerScale +
+    strikeChainBonus;
   const multiplier = Math.min(WEAKNESS_BALANCE.maxSkillDamageMultiplier, rawMultiplier);
   const damage = Math.max(1, Math.floor(result.damage * multiplier));
-  targetState.weaknessStrikeCount = Number(targetState.weaknessStrikeCount || 0) + 1;
+  targetState.weaknessStrikeCount = strikeIndex;
 
   return {
     result: {
@@ -80,6 +86,7 @@ export function applyWeaknessSkillDamageBonus(result, skill, targetState, now = 
       damage,
       weakness: true,
       weaknessMultiplier: multiplier,
+      weaknessStrikeChainBonus: strikeChainBonus,
       weaknessStrikeCount: targetState.weaknessStrikeCount,
     },
     applied: true,
