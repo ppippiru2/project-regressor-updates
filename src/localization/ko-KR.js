@@ -1991,6 +1991,8 @@ export const KO_KR_TEXT = {
         candidateSignals: "주의 신호",
         candidateImpact: "영향 요약",
         candidateImpactSummary: "그룹 {groups} · 파일 {files} · export {exports}",
+        candidateVisibleGroups: "현재 표시",
+        candidateVisibleGroupSummary: "표시 {visible}/{total} 그룹 · 파일 {files} · export {exports}",
         candidateValueRanges: "현재 값 범위",
         candidateGroups: "관련 그룹",
         candidateChecks: "연결 검사",

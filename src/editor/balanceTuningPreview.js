@@ -1,15 +1,15 @@
-import * as combatBalance from "../balance/combatBalance.js?v=502";
-import * as damageBalance from "../balance/damageBalance.js?v=502";
-import * as equipmentValueBalance from "../balance/equipmentValueBalance.js?v=502";
-import * as itemBalanceData from "../balance/itemBalanceData.js?v=502";
-import * as monsterBalanceData from "../balance/monsterBalanceData.js?v=502";
-import * as monsterCandidatePool from "../balance/monsterCandidatePool.js?v=502";
-import * as monsterStatBalance from "../balance/monsterStatBalance.js?v=502";
-import * as playerGrowthBalance from "../balance/playerGrowthBalance.js?v=502";
-import * as playerStatBalance from "../balance/playerStatBalance.js?v=502";
-import * as recoveryBalance from "../balance/recoveryBalance.js?v=502";
-import * as rewardBalance from "../balance/rewardBalance.js?v=502";
-import * as skillBalanceData from "../balance/skillBalanceData.js?v=502";
+import * as combatBalance from "../balance/combatBalance.js?v=503";
+import * as damageBalance from "../balance/damageBalance.js?v=503";
+import * as equipmentValueBalance from "../balance/equipmentValueBalance.js?v=503";
+import * as itemBalanceData from "../balance/itemBalanceData.js?v=503";
+import * as monsterBalanceData from "../balance/monsterBalanceData.js?v=503";
+import * as monsterCandidatePool from "../balance/monsterCandidatePool.js?v=503";
+import * as monsterStatBalance from "../balance/monsterStatBalance.js?v=503";
+import * as playerGrowthBalance from "../balance/playerGrowthBalance.js?v=503";
+import * as playerStatBalance from "../balance/playerStatBalance.js?v=503";
+import * as recoveryBalance from "../balance/recoveryBalance.js?v=503";
+import * as rewardBalance from "../balance/rewardBalance.js?v=503";
+import * as skillBalanceData from "../balance/skillBalanceData.js?v=503";
 
 const BALANCE_MODULE_BY_FILE = new Map([
   ["src/balance/combatBalance.js", combatBalance],

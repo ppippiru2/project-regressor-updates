@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=502";
-import { getLocaleText, t, tf } from "../localization/index.js?v=502";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=502";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=502";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=502";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=502";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=502";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=502";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=502";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=502";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=502";
+import { applyDomLocalization } from "../localization/domText.js?v=503";
+import { getLocaleText, t, tf } from "../localization/index.js?v=503";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=503";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=503";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=503";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=503";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=503";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=503";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=503";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=503";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=503";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=502";
+} from "./contentBulkPatchPackageAdapter.js?v=503";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=502";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=502";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=502";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=502";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=502";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=502";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=502";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=502";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=502";
+} from "./contentBulkPackageOverview.js?v=503";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=503";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=503";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=503";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=503";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=503";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=503";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=503";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=503";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=502";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=502";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=502";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=502";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=502";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=502";
+} from "./runtimeVfxBulkIntakePreview.js?v=503";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=503";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=503";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=503";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=503";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=503";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=502";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=502";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=502";
+} from "./monsterSpriteSlotReport.js?v=503";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=503";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=503";
 
-const EDITOR_VERSION = "502";
+const EDITOR_VERSION = "503";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -1397,7 +1397,7 @@ function renderBalanceTuningDetail() {
         }, ""))}</span>
       </div>
       ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
-      ${renderActiveBalanceCandidateSummary(detailText, relatedChecks, tuningCandidates)}
+      ${renderActiveBalanceCandidateSummary(detailText, relatedChecks, tuningCandidates, visibleGroups)}
       ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks)}
       ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
       ${renderMonsterCandidateRewardPreview(MONSTER_CANDIDATE_REWARD_PREVIEW, detailText)}
@@ -1437,7 +1437,7 @@ function renderBalanceTuningDetail() {
   `;
 }
 
-function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = [], candidates = []) {
+function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = [], candidates = [], visibleGroups = []) {
   const candidate = selectedBalanceTuningCandidate();
   if (!candidate) {
     const overview = balanceCandidateOverviewSummary(candidates, relatedChecks);
@@ -1471,6 +1471,7 @@ function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = []
     `;
   }
   const impact = balanceCandidateImpactSummary(candidate);
+  const visibleImpact = balanceGroupCollectionSummary(visibleGroups);
   const valueRanges = balanceCandidateValueRangeLabels(candidate, detailText);
   const checkLabels = balanceCandidateCheckLabels(candidate, relatedChecks);
   return `
@@ -1491,6 +1492,12 @@ function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = []
           files: impact.fileCount,
           exports: impact.exportCount
         }, `${impact.groupCount} · ${impact.fileCount} · ${impact.exportCount}`))}
+        ${balanceActiveCandidateMetric(detailText.candidateVisibleGroups || "Visible groups", tf("editorPrep.balanceTuningDetail.candidateVisibleGroupSummary", {
+          visible: visibleImpact.groupCount,
+          total: impact.groupCount,
+          files: visibleImpact.fileCount,
+          exports: visibleImpact.exportCount
+        }, `${visibleImpact.groupCount}/${impact.groupCount}`))}
         ${balanceActiveCandidateMetric(detailText.candidateValueRanges || "Value Ranges", valueRanges.join(" / "))}
         ${balanceActiveCandidateMetric(detailText.candidateChecks || "Checks", checkLabels.join(" / ") || "-")}
       </div>
@@ -1740,6 +1747,11 @@ function balanceCandidateImpactSummary(candidate = {}) {
 function balanceLinkedGroupSummary(groupLinks = []) {
   const groupIds = new Set(groupLinks);
   const linkedGroups = BALANCE_TUNING_GROUPS.filter((group) => groupIds.has(group.id));
+  return balanceGroupCollectionSummary(linkedGroups);
+}
+
+function balanceGroupCollectionSummary(groups = []) {
+  const linkedGroups = Array.isArray(groups) ? groups : [];
   const files = new Set(linkedGroups.flatMap((group) => group.files || []));
   const exports = new Set(linkedGroups.flatMap((group) => group.exports || []));
   return {
