@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=525";
+import { t } from "../localization/index.js?v=526";
 
 const byId = (id) => document.getElementById(id);
 const COMPACT_COMBAT_BUTTON_LABELS = true;

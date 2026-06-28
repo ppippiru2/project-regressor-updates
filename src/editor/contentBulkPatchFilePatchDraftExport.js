@@ -1,8 +1,8 @@
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=525";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=525";
+} from "./contentBulkPatchPackageAdapter.js?v=526";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=526";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_EXPORT_VERSION = "content-bulk-patch-file-patch-draft-export-v1";
 export const CONTENT_BULK_PATCH_PRE_APPLY_REVIEW_VERSION = "content-bulk-patch-pre-apply-review-v1";

@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=525";
-import { getLocaleText, t, tf } from "../localization/index.js?v=525";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=525";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=525";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=525";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=525";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=525";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=525";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=525";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=525";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=525";
+import { applyDomLocalization } from "../localization/domText.js?v=526";
+import { getLocaleText, t, tf } from "../localization/index.js?v=526";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=526";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=526";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=526";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=526";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=526";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=526";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=526";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=526";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=526";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=525";
+} from "./contentBulkPatchPackageAdapter.js?v=526";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=525";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=525";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=525";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=525";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=525";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=525";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=525";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=525";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=525";
+} from "./contentBulkPackageOverview.js?v=526";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=526";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=526";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=526";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=526";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=526";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=526";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=526";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=526";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=525";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=525";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=525";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=525";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=525";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=525";
+} from "./runtimeVfxBulkIntakePreview.js?v=526";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=526";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=526";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=526";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=526";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=526";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=525";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=525";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=525";
+} from "./monsterSpriteSlotReport.js?v=526";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=526";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=526";
 
-const EDITOR_VERSION = "525";
+const EDITOR_VERSION = "526";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5290,6 +5290,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditValidationMatrix(diagnostics)}
       ${renderSaveSlotEditValidationRuleDrilldown(diagnostics)}
       ${renderSaveSlotEditSamplePayloadPreview(diagnostics)}
+      ${renderSaveSlotEditValidatorDryRunPlan(diagnostics)}
     </section>
   `;
 }
@@ -5750,6 +5751,36 @@ function renderSaveSlotEditSamplePayloadPreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditValidatorDryRunPlan(diagnostics) {
+  const plan = createSaveSlotEditValidatorDryRunPlan(diagnostics);
+  const text = EDITOR_TEXT.saveEditDryRun || {};
+  return `
+    <section class="editor-save-edit-dry-run" data-save-edit-validator-dry-run>
+      <div class="editor-save-edit-dry-run-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit validator dry-run plan")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(plan.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(plan.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-dry-run-metrics">
+        ${metricCard(text.stageMetric || "Stages", tf("editorPrep.saveEditDryRun.stageValue", { count: plan.stageCount }, `${plan.stageCount}`), text.stageHint || "")}
+        ${metricCard(text.ruleMetric || "Rules", tf("editorPrep.saveEditDryRun.ruleValue", { count: plan.ruleCount }, `${plan.ruleCount}`), text.ruleHint || "")}
+        ${metricCard(text.blockedStageMetric || "Blocked stages", tf("editorPrep.saveEditDryRun.blockedStageValue", { count: plan.blockedStageCount }, `${plan.blockedStageCount}`), text.blockedStageHint || "")}
+        ${metricCard(text.blockedRuleMetric || "Blocked rules", tf("editorPrep.saveEditDryRun.blockedRuleValue", { count: plan.blockedRuleCount }, `${plan.blockedRuleCount}`), text.blockedRuleHint || "")}
+      </div>
+      <div class="editor-save-edit-dry-run-stages">
+        ${plan.stages.map((stage) => renderSaveEditDryRunStage(stage)).join("")}
+      </div>
+      <div class="editor-save-edit-dry-run-rules">
+        ${plan.rules.map((rule) => renderSaveEditDryRunRule(rule)).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -5938,6 +5969,47 @@ function createSaveSlotEditSamplePayloadPreview(diagnostics) {
   };
 }
 
+function createSaveSlotEditValidatorDryRunPlan(diagnostics) {
+  const sample = createSaveSlotEditSamplePayloadPreview(diagnostics);
+  const drilldown = createSaveSlotEditValidationRuleDrilldown(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const text = EDITOR_TEXT.saveEditDryRun || {};
+  const stages = [
+    saveEditDryRunStage("sample-payload-readable", sample.fieldCount > 0, text.stageLabels?.samplePayloadReadable, text.stageDetails?.samplePayloadReadable),
+    saveEditDryRunStage("proposed-values-present", false, text.stageLabels?.proposedValuesPresent, text.stageDetails?.proposedValuesPresent),
+    saveEditDryRunStage("validator-registry-ready", false, text.stageLabels?.validatorRegistryReady, text.stageDetails?.validatorRegistryReady),
+    saveEditDryRunStage("current-path-coverage", true, text.stageLabels?.currentPathCoverage, text.stageDetails?.currentPathCoverage),
+    saveEditDryRunStage("apply-gate-held", gate.applyStatus === "blocked", text.stageLabels?.applyGateHeld, text.stageDetails?.applyGateHeld),
+    saveEditDryRunStage("writer-side-effects-disabled", true, text.stageLabels?.writerSideEffectsDisabled, text.stageDetails?.writerSideEffectsDisabled),
+  ];
+  const rules = drilldown.rules.map((rule) => ({
+    id: rule.id,
+    label: rule.label,
+    status: "blocked",
+    fieldCount: rule.fieldCount,
+    mode: "dry-run-only",
+    blocker: "proposed-values-missing",
+  }));
+  return {
+    status: "blocked",
+    stageCount: stages.length,
+    ruleCount: rules.length,
+    blockedStageCount: stages.filter((stage) => stage.status === "blocked").length,
+    blockedRuleCount: rules.filter((rule) => rule.status === "blocked").length,
+    stages,
+    rules,
+  };
+}
+
+function saveEditDryRunStage(id, isReady, label, detail) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+  };
+}
+
 function saveEditValidationRuleChecks(ruleId, context, text) {
   const labels = text.ruleCheckLabels || {};
   const details = text.ruleCheckDetails || {};
@@ -6082,6 +6154,44 @@ function renderSaveEditValidationRuleCheck(check) {
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
     </div>
+  `;
+}
+
+function renderSaveEditDryRunStage(stage) {
+  return `
+    <article class="editor-save-edit-dry-run-stage" data-save-edit-dry-run-stage="${escapeAttribute(stage.id)}" data-status="${escapeAttribute(stage.status)}">
+      <div>
+        <strong>${escapeHtml(stage.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(stage.status))}</span>
+      </div>
+      ${stage.detail ? `<p>${escapeHtml(stage.detail)}</p>` : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditDryRunRule(rule) {
+  const text = EDITOR_TEXT.saveEditDryRun || {};
+  return `
+    <article class="editor-save-edit-dry-run-rule" data-save-edit-dry-run-rule="${escapeAttribute(rule.id)}" data-status="${escapeAttribute(rule.status)}">
+      <div>
+        <strong>${escapeHtml(rule.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(rule.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.fieldCount || "Fields")}</dt>
+          <dd>${escapeHtml(String(rule.fieldCount))}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.mode || "Mode")}</dt>
+          <dd>${escapeHtml(rule.mode)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
+          <dd>${escapeHtml(rule.blocker)}</dd>
+        </div>
+      </dl>
+    </article>
   `;
 }
 
