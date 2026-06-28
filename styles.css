@@ -5265,6 +5265,37 @@ select:focus {
   font-size: 0.78rem;
 }
 
+.editor-content-bulk-current-filter-preapply[data-state="blocked"],
+.editor-content-bulk-current-filter-domain[data-state="blocked"] {
+  border-color: rgba(255, 119, 119, 0.34);
+}
+
+.editor-content-bulk-current-filter-preapply[data-state="review"],
+.editor-content-bulk-current-filter-domain[data-state="review"] {
+  border-color: rgba(255, 205, 98, 0.34);
+}
+
+.editor-content-bulk-current-filter-preapply[data-state="ready"],
+.editor-content-bulk-current-filter-domain[data-state="ready"] {
+  border-color: rgba(92, 255, 190, 0.22);
+}
+
+.editor-content-bulk-current-filter-list {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.editor-content-bulk-current-filter-domain {
+  background: rgba(5, 18, 39, 0.46);
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.6rem;
+}
+
 .editor-content-bulk-overview {
   background: linear-gradient(180deg, rgba(6, 28, 56, 0.68), rgba(4, 15, 36, 0.64));
   border: 1px solid rgba(88, 225, 255, 0.24);

@@ -445,6 +445,7 @@
         "src/editor/contentBulkPatchApplyGatePlan.js",
         "src/editor/contentBulkPatchBackupPlan.js",
         "src/editor/contentBulkPatchRestoreRehearsal.js",
+        "build-scripts/check-content-bulk-current-filter-preapply-summary.mjs",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -556,6 +557,9 @@
         "contentBulkPatchBackupFiles",
         "contentBulkPatchRestoreRehearsal",
         "contentBulkPatchRestoreActions",
+        "contentBulkCurrentFilterPreApplySummary",
+        "contentBulkCurrentFilterPreApplyDomains",
+        "contentBulkCurrentFilterPreApplyBlockers",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings",
@@ -1547,6 +1551,7 @@
       "src/editor/contentBulkPatchApplyGatePlan.js:createContentBulkPatchApplyGatePlan",
       "src/editor/contentBulkPatchBackupPlan.js:createContentBulkPatchBackupPlan",
       "src/editor/contentBulkPatchRestoreRehearsal.js:createContentBulkPatchRestoreRehearsal",
+      "src/editor/editorMain.js:renderContentBulkCurrentFilterPreApplySummary",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1751,6 +1756,16 @@
           "missing restore count zero",
           "rehearsal only",
           "quick check includes restore rehearsal"
+        ]
+      },
+      {
+        "id": "content-bulk-current-filter-preapply-summary",
+        "label": "Content bulk current filter pre-apply summary",
+        "script": "build-scripts/check-content-bulk-current-filter-preapply-summary.mjs",
+        "guards": [
+          "current filter rows summarized before apply",
+          "dry-run/staged/file-patch blockers grouped",
+          "writer remains disabled"
         ]
       },
       {

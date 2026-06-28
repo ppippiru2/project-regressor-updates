@@ -3,8 +3,8 @@ import {
   REGION_EXP_MULTIPLIER_BY_OVERLEVEL,
   REWARD_MULTIPLIER_MAX,
   REWARD_MULTIPLIER_MIN,
-} from "../balance/rewardBalance.js?v=516";
-import { LEVEL_UP_FREE_POINTS } from "../balance/playerGrowthBalance.js?v=516";
+} from "../balance/rewardBalance.js?v=517";
+import { LEVEL_UP_FREE_POINTS } from "../balance/playerGrowthBalance.js?v=517";
 
 export { LEVEL_UP_AUTO_STATS };
 
