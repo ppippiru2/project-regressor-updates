@@ -1933,7 +1933,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1947,7 +1947,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1961,7 +1961,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -2046,7 +2046,7 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
@@ -2058,7 +2058,7 @@
     },
     "contentBulkPatchApplyGatePlan": {
       "id": "content-bulk-patch-apply-gate-plan-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
       "expectedGateCount": 6,
@@ -2072,7 +2072,7 @@
     },
     "contentBulkPatchBackupPlan": {
       "id": "content-bulk-patch-backup-plan-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPatchBackupPlan.js",
       "checkScript": "build-scripts/check-content-bulk-patch-backup-plan.mjs",
       "expectedTargetFileCount": 24,
@@ -2087,7 +2087,7 @@
     },
     "contentBulkPatchRestoreRehearsal": {
       "id": "content-bulk-patch-restore-rehearsal-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPatchRestoreRehearsal.js",
       "checkScript": "build-scripts/check-content-bulk-patch-restore-rehearsal.mjs",
       "expectedTargetFileCount": 24,
@@ -2102,7 +2102,7 @@
     },
     "contentBulkPackageOverview": {
       "id": "content-bulk-package-overview-v4",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/contentBulkPackageOverview.js",
       "checkScript": "build-scripts/check-content-bulk-package-overview.mjs",
       "expectedPackageRowCount": 7,
@@ -2116,6 +2116,8 @@
       "supportsDrilldownAnchors": true,
       "supportsDrilldownTargetHighlight": true,
       "supportsDrilldownRowTargets": true,
+      "supportsRowStateFilter": true,
+      "expectedRowStateFilterCount": 6,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,
@@ -2123,7 +2125,7 @@
     },
     "lootSkillBulkIntakePreview": {
       "id": "loot-skill-bulk-intake-preview-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/lootSkillBulkIntakePreview.js",
       "checkScript": "build-scripts/check-loot-skill-bulk-intake-preview.mjs",
       "expectedLootRowCount": 1,
@@ -2137,7 +2139,7 @@
     },
     "monsterRuntimeBulkIntakePreview": {
       "id": "monster-runtime-bulk-intake-preview-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/monsterRuntimeBulkIntakePreview.js",
       "checkScript": "build-scripts/check-monster-runtime-bulk-intake-preview.mjs",
       "packageKey": "monsterRuntimePresets",
@@ -2155,7 +2157,7 @@
     },
     "runtimeVfxBulkIntakePreview": {
       "id": "runtime-vfx-bulk-intake-preview-v1",
-      "source": "v475",
+      "source": "v476",
       "sourceModule": "src/editor/runtimeVfxBulkIntakePreview.js",
       "checkScript": "build-scripts/check-runtime-vfx-bulk-intake-preview.mjs",
       "expectedPackageRowCount": 2,

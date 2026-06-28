@@ -5049,6 +5049,41 @@ select:focus {
   outline: none;
 }
 
+.editor-content-bulk-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.editor-content-bulk-filter-button {
+  align-items: center;
+  background: rgba(4, 21, 47, 0.58);
+  border: 1px solid rgba(88, 225, 255, 0.18);
+  border-radius: 999px;
+  color: var(--text);
+  display: inline-flex;
+  font-size: 0.68rem;
+  font-weight: 900;
+  gap: 0.35rem;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0.24rem 0.55rem;
+}
+
+.editor-content-bulk-filter-button b {
+  color: #58e1ff;
+  font-size: 0.66rem;
+}
+
+.editor-content-bulk-filter-button.is-active,
+.editor-content-bulk-filter-button:focus-visible {
+  background: rgba(88, 225, 255, 0.15);
+  border-color: rgba(88, 225, 255, 0.58);
+  box-shadow: 0 0 0 1px rgba(88, 225, 255, 0.14);
+  outline: none;
+}
+
 .editor-content-bulk-overview[data-state="blocked"] .editor-content-bulk-overview-head strong,
 .editor-content-bulk-overview-row[data-state="blocked"] span {
   border-color: rgba(255, 106, 150, 0.42);

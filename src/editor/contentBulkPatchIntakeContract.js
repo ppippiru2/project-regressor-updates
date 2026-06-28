@@ -1,13 +1,13 @@
-import { ITEM_BALANCE_DATA, LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=475";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=475";
+import { ITEM_BALANCE_DATA, LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=476";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=476";
 import {
   TUTORIAL_MONSTER_POOL_DATA,
   TUTORIAL_MONSTER_REWARD_LINKS,
-} from "../balance/monsterCandidatePool.js?v=475";
+} from "../balance/monsterCandidatePool.js?v=476";
 import {
   CONTENT_BULK_PATCH_DOMAIN_DEFINITIONS,
   createContentBulkPatchAutomationPlan,
-} from "./contentBulkPatchAutomationPlan.js?v=475";
+} from "./contentBulkPatchAutomationPlan.js?v=476";
 
 export const CONTENT_BULK_PATCH_INTAKE_CONTRACT_VERSION = "content-bulk-patch-intake-contract-v1";
 
