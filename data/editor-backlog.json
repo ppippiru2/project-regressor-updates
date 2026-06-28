@@ -251,7 +251,7 @@
       "status": "partial",
       "priority": "high",
       "source": "user-request-save-editor",
-      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, apply gate checklist, recovery rehearsal preview, apply-gate recovery readiness summary, edit-input schema preview, and proposed-value validation matrix are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
+      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, apply gate checklist, recovery rehearsal preview, apply-gate recovery readiness summary, edit-input schema preview, proposed-value validation matrix, and validation-rule drilldown are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
       "editorHooks": [
         "src/state/save.js",
         "src/state/saveSlots.js",
@@ -264,6 +264,7 @@
         "src/editor/editorMain.js:renderSaveSlotRecoveryRehearsalPreview",
         "src/editor/editorMain.js:renderSaveSlotEditInputSchemaPreview",
         "src/editor/editorMain.js:renderSaveSlotEditValidationMatrix",
+        "src/editor/editorMain.js:renderSaveSlotEditValidationRuleDrilldown",
         "styles.css:.editor-save-diagnostics",
         "styles.css:.editor-save-validation",
         "styles.css:.editor-save-draft",
@@ -272,6 +273,7 @@
         "styles.css:.editor-save-recovery",
         "styles.css:.editor-save-input-schema",
         "styles.css:.editor-save-edit-matrix",
+        "styles.css:.editor-save-edit-rule-drilldown",
         "build-scripts/check-save-slot-diagnostics.mjs",
         "build-scripts/check-save-slot-validation-plan.mjs",
         "build-scripts/check-save-slot-draft-payload.mjs",
@@ -281,6 +283,7 @@
         "build-scripts/check-save-slot-apply-gate-recovery-summary.mjs",
         "build-scripts/check-save-slot-edit-input-schema.mjs",
         "build-scripts/check-save-slot-edit-validation-matrix.mjs",
+        "build-scripts/check-save-slot-edit-rule-drilldown.mjs",
         "future rollback snapshot"
       ]
     },

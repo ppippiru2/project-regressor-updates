@@ -4320,6 +4320,154 @@ select:focus {
   overflow-wrap: anywhere;
 }
 
+.editor-save-edit-rule-drilldown {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(149, 255, 185, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 28, 32, 0.3);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-rule-drilldown-head,
+.editor-save-edit-rule-card-head,
+.editor-save-edit-rule-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-rule-drilldown h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-rule-drilldown-head span,
+.editor-save-edit-rule-card-head span,
+.editor-save-edit-rule-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-rule-drilldown-metrics,
+.editor-save-edit-rule-drilldown-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-rule-drilldown-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-rule-card {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+  border: 1px solid rgba(149, 255, 185, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-rule-card strong,
+.editor-save-edit-rule-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-rule-card code {
+  display: inline-block;
+  margin-top: 0.24rem;
+  color: var(--cyan);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-rule-card-meta {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-edit-rule-card-meta dt,
+.editor-save-edit-rule-chip-block > span {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-rule-card-meta dd {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-rule-chip-block,
+.editor-save-edit-rule-checks {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.editor-save-edit-rule-checks {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-rule-check {
+  display: grid;
+  gap: 0.4rem;
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.48);
+  padding: 0.55rem;
+}
+
+.editor-save-edit-rule-check[data-status="ready"] span {
+  border-color: rgba(91, 229, 132, 0.48);
+  color: #5be584;
+}
+
+.editor-save-edit-rule-check p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+  .editor-save-edit-rule-drilldown-metrics,
+  .editor-save-edit-rule-drilldown-grid,
+  .editor-save-edit-rule-checks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .editor-save-edit-rule-drilldown-head,
+  .editor-save-edit-rule-card-head,
+  .editor-save-edit-rule-check > div:first-child,
+  .editor-save-edit-rule-drilldown-metrics,
+  .editor-save-edit-rule-drilldown-grid,
+  .editor-save-edit-rule-card-meta,
+  .editor-save-edit-rule-checks {
+    grid-template-columns: 1fr;
+  }
+}
+
 .editor-detail-header,
 .editor-backlog-head,
 .editor-asset-card {

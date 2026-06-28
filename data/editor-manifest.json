@@ -727,7 +727,8 @@
         "build-scripts/check-save-slot-recovery-rehearsal.mjs",
         "build-scripts/check-save-slot-apply-gate-recovery-summary.mjs",
         "build-scripts/check-save-slot-edit-input-schema.mjs",
-        "build-scripts/check-save-slot-edit-validation-matrix.mjs"
+        "build-scripts/check-save-slot-edit-validation-matrix.mjs",
+        "build-scripts/check-save-slot-edit-rule-drilldown.mjs"
       ],
       "assetSlots": [],
       "editorFields": [
@@ -763,6 +764,8 @@
         "saveEditInputControlBlockers",
         "saveEditValidationMatrix",
         "saveEditProposedValuePlaceholders",
+        "saveEditValidationRuleDrilldown",
+        "saveEditValidationRuleChecks",
         "missingSlotWarning"
       ],
       "futureControls": [
@@ -775,6 +778,7 @@
         "저장 편집 복구 준비도 요약",
         "저장 편집 입력 스키마",
         "저장 편집 검증 매트릭스",
+        "저장 편집 검증 규칙 상세",
         "세이브 슬롯 선택",
         "세계선 데이터 조작",
         "JSON 백업/복원",

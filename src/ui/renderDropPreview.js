@@ -1,5 +1,5 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=523";
-import { t, tf } from "../localization/index.js?v=523";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=524";
+import { t, tf } from "../localization/index.js?v=524";
 
 export function renderDropPreview(monster, getItem, equipmentState) {
   const container = document.getElementById("drop-preview-list");
