@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 488,
-  "displayVersion": "v488",
-  "cacheVersion": "project-regressor-mvp-v488",
-  "updatedAt": "2026-06-28T21:53:58.250+09:00",
+  "versionCode": 489,
+  "displayVersion": "v489",
+  "cacheVersion": "project-regressor-mvp-v489",
+  "updatedAt": "2026-06-28T22:06:17.480+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=488&cachebust=488",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=489&cachebust=489",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v488 adds file-level backup and restore rehearsal blocker drilldowns to the content bulk review surfaces.",
-    "v488 shows per-file snapshot, backup writer, restore writer, and rehearsal blockers in backup and restore preview rows.",
-    "v488 keeps patch export, apply, backup, and restore writers disabled and bumps runtime, service worker, Android, and update manifest cache keys."
+    "v489 restores combat attack effects to use the player and monster combat card as the sizing box.",
+    "v489 converts player, monster, skill, magic, and runtime VFX slash heights to card-relative percent values instead of viewport units.",
+    "v489 strengthens VFX checks so normal, critical, hyper, and critical-hyper effects keep card-relative sizing across runtime and editor previews."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
   },
   "version": {
-    "code": 488,
-    "name": "4.88.0",
-    "displayName": "v488"
+    "code": 489,
+    "name": "4.89.0",
+    "displayName": "v489"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
   },
   "android": {
-    "code": 488,
-    "name": "4.88.0",
-    "displayName": "v488",
+    "code": 489,
+    "name": "4.89.0",
+    "displayName": "v489",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
     },
     "version": {
-      "code": 488,
-      "name": "4.88.0",
-      "displayName": "v488"
+      "code": 489,
+      "name": "4.89.0",
+      "displayName": "v489"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
   }
 }

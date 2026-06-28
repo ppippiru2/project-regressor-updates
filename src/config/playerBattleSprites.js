@@ -3,7 +3,7 @@ import {
   PLAYER_BATTLE_SPRITE_GENDERS,
   PLAYER_BATTLE_SPRITE_PRESETS,
   DEFAULT_PLAYER_ATTACK_EFFECT_PLACEMENT,
-} from "./playerBattleSpritePresets.js?v=488";
+} from "./playerBattleSpritePresets.js?v=489";
 
 export { PLAYER_BATTLE_SPRITE_CLASSES, PLAYER_BATTLE_SPRITE_GENDERS, PLAYER_BATTLE_SPRITE_PRESETS };
 
@@ -35,16 +35,16 @@ export function resolvePlayerAttackEffectPlacement(playerProfile = {}, { effectT
     ...basePlacement,
     offsetY: Number(basePlacement.offsetY || 0) + Number(tuning.offsetY || 0),
     slashWidth: Math.round(Number(basePlacement.slashWidth || 150) * Number(tuning.slashWidth || 1)),
-    expandedSlashWidth: Math.round(Number(basePlacement.expandedSlashWidth || 278) * Number(tuning.expandedSlashWidth || 1)),
-    slashHeight: scaleClampLength(basePlacement.slashHeight, Number(tuning.slashHeight || 1)),
-    expandedSlashHeight: scaleClampLength(basePlacement.expandedSlashHeight, Number(tuning.expandedSlashHeight || 1)),
+    expandedSlashWidth: Math.round(Number(basePlacement.expandedSlashWidth || 190) * Number(tuning.expandedSlashWidth || 1)),
+    slashHeight: scaleCardPercentLength(basePlacement.slashHeight, Number(tuning.slashHeight || 1)),
+    expandedSlashHeight: scaleCardPercentLength(basePlacement.expandedSlashHeight, Number(tuning.expandedSlashHeight || 1)),
   };
   if (!hyperActive) return tunedPlacement;
   return {
     ...tunedPlacement,
     textOffsetY: Number(tunedPlacement.textOffsetY || 0) - 2,
     slashWidth: Math.round(Number(tunedPlacement.slashWidth || 150) * 1.14),
-    expandedSlashWidth: Math.round(Number(tunedPlacement.expandedSlashWidth || 278) * 1.1),
+    expandedSlashWidth: Math.round(Number(tunedPlacement.expandedSlashWidth || 190) * 1.1),
   };
 }
 
@@ -67,14 +67,15 @@ function getSearchParams() {
   return new URLSearchParams(window.location.search);
 }
 
-function scaleClampLength(value, multiplier) {
+function scaleCardPercentLength(value, multiplier) {
   if (!Number.isFinite(multiplier) || multiplier === 1) return value;
   if (typeof value !== "string") return value;
-  return value.replace(/(-?\d*\.?\d+)(rem|vw|cqw)/g, (_match, amount, unit) => {
-    const scaled = Number(amount) * multiplier;
-    const rounded = Math.round(scaled * 100) / 100;
-    return `${rounded}${unit}`;
-  });
+  const trimmed = value.trim();
+  const match = trimmed.match(/^(-?\d*\.?\d+)%$/);
+  if (!match) return value;
+  const scaled = Number(match[1]) * multiplier;
+  const rounded = Math.round(scaled * 100) / 100;
+  return `${rounded}%`;
 }
 
 

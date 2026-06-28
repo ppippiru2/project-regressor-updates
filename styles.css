@@ -2637,7 +2637,7 @@ select:focus {
 
 .effect-layer {
   position: absolute;
-  inset: -14%;
+  inset: 0;
   z-index: 4;
   pointer-events: none;
   overflow: visible;
@@ -2645,7 +2645,7 @@ select:focus {
 }
 
 .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .effect-layer {
-  inset: -24% -18% -30%;
+  inset: 0;
 }
 
 .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .combatant {
@@ -2717,7 +2717,7 @@ select:focus {
   top: calc(50% + var(--combat-effect-offset-y, 0%));
   z-index: 2;
   width: var(--combat-effect-slash-width, 136%);
-  height: var(--combat-effect-slash-height, clamp(3.2rem, 28vw, 6.25rem));
+  height: var(--combat-effect-slash-height, 34%);
   border-radius: 0;
   background:
     linear-gradient(100deg, transparent 0 10%, rgba(255, 255, 255, 0.98) 29%, rgba(145, 239, 255, 0.96) 36%, rgba(40, 215, 255, 0.62) 49%, transparent 72%),
@@ -2764,7 +2764,7 @@ select:focus {
 
 .slash-effect.effect-pierce,
 .slash-effect.effect-projectile {
-  height: 1.35rem;
+  height: var(--combat-effect-slash-height, 18%);
   background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 14%, rgba(91, 229, 132, 0.96) 62%, transparent 100%);
   clip-path: polygon(0 48%, 78% 32%, 100% 50%, 78% 68%, 0 54%);
   transform: translate(-55%, -50%) rotate(-10deg) scaleX(0.08);
@@ -2781,7 +2781,7 @@ select:focus {
 }
 
 .slash-effect.is-hyper {
-  height: var(--combat-effect-slash-height, clamp(3.8rem, 32vw, 7rem));
+  height: var(--combat-effect-slash-height, 38%);
   background:
     linear-gradient(100deg, transparent 0 8%, rgba(255, 255, 255, 1) 27%, rgba(255, 238, 128, 1) 38%, rgba(244, 211, 94, 0.82) 52%, transparent 76%),
     radial-gradient(ellipse at 36% 52%, rgba(255, 255, 255, 1) 0 8%, rgba(244, 211, 94, 0.32) 22%, transparent 48%);
@@ -2796,7 +2796,7 @@ select:focus {
   --slash-end-scale-x: 0.7;
   --slash-end-scale-y: 0.46;
   width: 92%;
-  height: clamp(1.25rem, 13vw, 3rem);
+  height: 16%;
   opacity: 0;
   background:
     linear-gradient(100deg, transparent 0 18%, rgba(210, 232, 255, 0.58) 34%, rgba(130, 166, 184, 0.36) 54%, transparent 78%);
@@ -2811,29 +2811,8 @@ select:focus {
   --slash-end-scale-x: 1.5;
   --slash-end-scale-y: 0.84;
   width: var(--combat-effect-slash-width, 172%);
-  height: var(--combat-effect-slash-height, clamp(4.4rem, 38vw, 8.2rem));
+  height: var(--combat-effect-slash-height, 42%);
   filter: drop-shadow(0 0 16px rgba(244, 211, 94, 0.95)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.38));
-}
-
-@supports (width: 1cqw) {
-  .slash-effect {
-    width: var(--combat-effect-slash-width, 138cqw);
-    height: var(--combat-effect-slash-height, clamp(3.2rem, 30cqw, 6.75rem));
-  }
-
-  .slash-effect.is-hyper {
-    height: var(--combat-effect-slash-height, clamp(3.8rem, 34cqw, 7.5rem));
-  }
-
-  .slash-effect.is-miss {
-    width: 94cqw;
-    height: clamp(1.25rem, 14cqw, 3.2rem);
-  }
-
-  .slash-effect.is-critical {
-    width: var(--combat-effect-slash-width, 176cqw);
-    height: var(--combat-effect-slash-height, clamp(4.4rem, 40cqw, 8.6rem));
-  }
 }
 
 .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect {
@@ -2850,15 +2829,15 @@ select:focus {
   --slash-end-scale-x: 1.18;
   left: calc(50% + var(--combat-effect-offset-x, 0%));
   top: calc(50% + var(--combat-effect-offset-y, 0%));
-  width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 260%));
-  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(4.2rem, 34vw, 7.8rem)));
+  width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 210%));
+  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, 44%));
   background:
     linear-gradient(100deg, transparent 0 3%, rgba(255, 255, 255, 0.98) 18%, rgba(145, 239, 255, 0.96) 28%, rgba(40, 215, 255, 0.62) 51%, transparent 84%),
     radial-gradient(ellipse at 36% 52%, rgba(255, 255, 255, 0.86) 0 6%, rgba(40, 215, 255, 0.24) 18%, transparent 45%);
 }
 
 .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect.is-hyper {
-  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(5.2rem, 43vw, 9.8rem)));
+  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, 52%));
   background:
     linear-gradient(100deg, transparent 0 2%, rgba(255, 255, 255, 1) 17%, rgba(255, 242, 140, 1) 29%, rgba(244, 211, 94, 0.86) 51%, transparent 86%),
     radial-gradient(ellipse at 36% 52%, rgba(255, 255, 255, 1) 0 8%, rgba(244, 211, 94, 0.38) 23%, transparent 50%);
@@ -2872,8 +2851,8 @@ select:focus {
   --slash-mid-y: -50%;
   --slash-end-x: -44%;
   --slash-end-y: -54%;
-  width: 188%;
-  height: clamp(2.1rem, 19vw, 4.2rem);
+  width: 125%;
+  height: 22%;
 }
 
 .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect.is-critical {
@@ -2885,40 +2864,14 @@ select:focus {
   --slash-end-y: -58%;
   --slash-mid-scale-x: 1.11;
   --slash-end-scale-x: 1.26;
-  width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 290%));
-  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(4.75rem, 40vw, 9.1rem)));
+  width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 230%));
+  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, 50%));
 }
 
 .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect.is-critical.is-hyper {
-  width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 325%));
-  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(5.25rem, 46vw, 10.3rem)));
+  width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 250%));
+  height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, 56%));
   filter: drop-shadow(0 0 22px rgba(244, 211, 94, 1)) drop-shadow(0 0 58px rgba(255, 245, 180, 0.78));
-}
-
-@supports (width: 1cqw) {
-  .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect {
-    width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 260cqw));
-    height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(4.2rem, 38cqw, 8.2rem)));
-  }
-
-  .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect.is-hyper {
-    height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(5.2rem, 48cqw, 10.2rem)));
-  }
-
-  .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect.is-miss {
-    width: 188cqw;
-    height: clamp(2.1rem, 20cqw, 4.4rem);
-  }
-
-  .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect.is-critical {
-    width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 290cqw));
-    height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(4.75rem, 42cqw, 9.4rem)));
-  }
-
-  .battlefield[data-card-layout="stage"][data-attack-effect-frame="expanded"] .slash-effect.is-critical.is-hyper {
-    width: var(--combat-effect-slash-width-expanded, var(--combat-effect-slash-width, 325cqw));
-    height: var(--combat-effect-slash-height-expanded, var(--combat-effect-slash-height, clamp(5.25rem, 48cqw, 10.6rem)));
-  }
 }
 
 .combat-action-flash .action-bar {

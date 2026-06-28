@@ -2190,7 +2190,7 @@
     "expectedEffectTypes": 8,
     "expectedMonsterMotionProfiles": 15,
     "expectedMonsterMotionProfileRows": 15,
-    "expectedProfileTuningRows": 10,
+    "expectedProfileTuningRows": 8,
     "dataTargets": [
       "src/editor/combatVfxPlacementPreview.js:createCombatVfxPlacementPreview",
       "src/config/playerBattleSpritePresets.js:PLAYER_BATTLE_SPRITE_PRESETS",

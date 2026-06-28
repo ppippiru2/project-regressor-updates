@@ -1,11 +1,11 @@
 import {
   COMBAT_VFX_PREVIEW_EFFECT_TYPES,
   createCombatVfxPlacementPreview,
-} from "./combatVfxPlacementPreview.js?v=488";
+} from "./combatVfxPlacementPreview.js?v=489";
 import {
   MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
   MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
-} from "../config/monsterBattleSpritePresets.js?v=488";
+} from "../config/monsterBattleSpritePresets.js?v=489";
 
 export const RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION = "runtime-vfx-bulk-intake-preview-v1";
 
@@ -30,9 +30,9 @@ const DEFAULT_PROFILE_PLACEMENT = Object.freeze({
   offsetY: 0,
   textOffsetY: 0,
   slashWidth: 136,
-  slashHeight: "clamp(3.2rem, 28vw, 6.25rem)",
-  expandedSlashWidth: 260,
-  expandedSlashHeight: "clamp(4.2rem, 34vw, 7.8rem)",
+  slashHeight: "34%",
+  expandedSlashWidth: 190,
+  expandedSlashHeight: "44%",
 });
 
 const DEFAULT_MODIFIER = Object.freeze({
@@ -55,9 +55,9 @@ export function createRuntimeVfxBulkIntakeTemplate() {
           offsetY: -11,
           textOffsetY: -6,
           slashWidth: 112,
-          slashHeight: "clamp(2.35rem, 21vw, 4.55rem)",
-          expandedSlashWidth: 208,
-          expandedSlashHeight: "clamp(3.3rem, 29vw, 6.45rem)",
+          slashHeight: "24%",
+          expandedSlashWidth: 165,
+          expandedSlashHeight: "34%",
         },
       },
       {
@@ -230,9 +230,9 @@ function placementIssues(placement = {}) {
     if (!Number.isFinite(Number(placement[key]))) issues.push(`${key}-not-finite`);
   }
   if (Number(placement.slashWidth) < 80 || Number(placement.slashWidth) > 260) issues.push("slash-width-out-of-range");
-  if (Number(placement.expandedSlashWidth) < 170 || Number(placement.expandedSlashWidth) > 430) issues.push("expanded-slash-width-out-of-range");
-  if (!String(placement.slashHeight || "").includes("clamp(")) issues.push("slash-height-must-use-clamp");
-  if (!String(placement.expandedSlashHeight || "").includes("clamp(")) issues.push("expanded-slash-height-must-use-clamp");
+  if (Number(placement.expandedSlashWidth) < 150 || Number(placement.expandedSlashWidth) > 320) issues.push("expanded-slash-width-out-of-range");
+  if (!isCardPercentLength(placement.slashHeight)) issues.push("slash-height-must-use-card-percent");
+  if (!isCardPercentLength(placement.expandedSlashHeight)) issues.push("expanded-slash-height-must-use-card-percent");
   return issues;
 }
 
@@ -350,6 +350,10 @@ function numericValue(...values) {
     if (typeof value === "string" && value.trim() !== "" && Number.isFinite(Number(value))) return Number(value);
   }
   return 0;
+}
+
+function isCardPercentLength(value) {
+  return /^-?\d*\.?\d+%$/.test(String(value || "").trim());
 }
 
 function isObjectRecord(value) {
