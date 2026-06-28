@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=499";
+import { t } from "../localization/index.js?v=500";
 
 function defaultClamp(value, min, max) {
   return Math.max(min, Math.min(max, value));

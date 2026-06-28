@@ -2,7 +2,7 @@ import {
   createContentBulkPatchIntakeContract,
   createContentBulkPatchTemplate,
   validateContentBulkPatchBatch,
-} from "./contentBulkPatchIntakeContract.js?v=499";
+} from "./contentBulkPatchIntakeContract.js?v=500";
 
 export const CONTENT_BULK_PATCH_DRY_RUN_IMPORTER_VERSION = "content-bulk-patch-dry-run-importer-v1";
 
@@ -15,6 +15,7 @@ export function createContentBulkPatchDryRunPreview(batch = createContentBulkPat
   const domains = contract.domains.map((domain) => dryRunDomain(domain, batch, validation));
   const activeDomains = domains.filter((domain) => domain.rowCount > 0);
   const uniqueChecks = new Set(activeDomains.flatMap((domain) => domain.checkScripts));
+  const issueSummary = createDryRunIssueSummary(validation.issues || []);
 
   return {
     version: CONTENT_BULK_PATCH_DRY_RUN_IMPORTER_VERSION,
@@ -35,8 +36,11 @@ export function createContentBulkPatchDryRunPreview(batch = createContentBulkPat
       readyDomainCount: activeDomains.filter((domain) => domain.state === "ready").length,
       warningDomainCount: activeDomains.filter((domain) => domain.state === "ready-with-warnings").length,
       blockedDomainCount: activeDomains.filter((domain) => domain.state === "blocked").length,
+      affectedIssueDomainCount: issueSummary.affectedDomainCount,
+      affectedIssueRowCount: issueSummary.affectedRowCount,
     },
     domains,
+    issueSummary,
     issues: validation.issues,
   };
 }
@@ -60,6 +64,8 @@ function dryRunDomain(domain, batch, validation) {
     generatedSurfaceCount,
     blockingIssueCount: domainResult.blockingIssueCount || 0,
     warningIssueCount: domainResult.warningIssueCount || 0,
+    blockingIssueCodes: uniqueIssueCodes(validation.issues, domain.id, "error"),
+    warningIssueCodes: uniqueIssueCodes(validation.issues, domain.id, "warning"),
     identityFields: domain.identityFields || [],
     requiredInputFields: domain.requiredInputFields || [],
     checkScripts: domain.checkScripts || [],
@@ -69,6 +75,37 @@ function dryRunDomain(domain, batch, validation) {
       state: rows.length ? "candidate" : "empty",
     })),
   };
+}
+
+function createDryRunIssueSummary(issues = []) {
+  const blockingIssueCodes = new Set();
+  const warningIssueCodes = new Set();
+  const affectedDomains = new Set();
+  const affectedRows = new Set();
+
+  for (const issue of issues) {
+    if (!issue?.code) continue;
+    if (issue.severity === "error") blockingIssueCodes.add(issue.code);
+    if (issue.severity === "warning") warningIssueCodes.add(issue.code);
+    if (issue.domainId) affectedDomains.add(issue.domainId);
+    if (issue.domainId && Number.isFinite(Number(issue.rowIndex))) affectedRows.add(`${issue.domainId}:${issue.rowIndex}`);
+  }
+
+  return {
+    blockingIssueCodes: [...blockingIssueCodes],
+    warningIssueCodes: [...warningIssueCodes],
+    affectedDomainCount: affectedDomains.size,
+    affectedRowCount: affectedRows.size,
+  };
+}
+
+function uniqueIssueCodes(issues = [], domainId, severity) {
+  return [...new Set(
+    issues
+      .filter((issue) => issue.domainId === domainId && issue.severity === severity)
+      .map((issue) => issue.code)
+      .filter(Boolean),
+  )];
 }
 
 function dryRunState(rowCount, blockingIssueCount, warningIssueCount) {

@@ -1,7 +1,7 @@
 import {
   createContentBulkPatchFilePatchDraftExport,
   createContentBulkPatchPreApplyReview,
-} from "./contentBulkPatchFilePatchDraftExport.js?v=499";
+} from "./contentBulkPatchFilePatchDraftExport.js?v=500";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VERSION = "content-bulk-patch-apply-gate-plan-v1";
 
@@ -10,6 +10,11 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
   const gates = createApplyGates(exportPreview);
   const preApplyReview = exportPreview.preApplyReview || exportPreview.payload?.preApplyReview || createContentBulkPatchPreApplyReview(summary);
   const reviewChecklist = preApplyReview.checklist || [];
+  const issueSummary = createApplyGateIssueSummary({ reviewChecklist, blockedReasons: [
+    "writer-not-implemented",
+    "rollback-not-executed",
+    "explicit-apply-ui-not-confirmed",
+  ] });
   const rollbackSteps = [
     "export-current-save-data",
     "snapshot-target-files",
@@ -43,6 +48,8 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
       rollbackStepCount: rollbackSteps.length,
       validationStepCount: validationSteps.length,
       blockedReasonCount: 3,
+      blockingIssueCount: issueSummary.blockingIssueCodes.length,
+      warningIssueCount: issueSummary.warningIssueCodes.length,
       reviewItemCount: preApplyReview.summary?.reviewItemCount || reviewChecklist.length,
       readyReviewItemCount: preApplyReview.summary?.readyReviewItemCount || reviewChecklist.filter((item) => item.state === "ready").length,
       warningReviewItemCount: preApplyReview.summary?.warningReviewItemCount || reviewChecklist.filter((item) => item.state === "review").length,
@@ -53,11 +60,28 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
       "rollback-not-executed",
       "explicit-apply-ui-not-confirmed",
     ],
+    issueSummary,
     preApplyReview,
     reviewChecklist,
     gates,
     rollbackSteps,
     validationSteps,
+  };
+}
+
+function createApplyGateIssueSummary({ reviewChecklist = [], blockedReasons = [] } = {}) {
+  const blockingIssueCodes = new Set(blockedReasons);
+  const warningIssueCodes = new Set();
+
+  for (const item of reviewChecklist) {
+    if (item.state === "blocked") blockingIssueCodes.add(item.id);
+    if (item.state === "review") warningIssueCodes.add(item.id);
+  }
+
+  return {
+    blockingIssueCodes: [...blockingIssueCodes],
+    warningIssueCodes: [...warningIssueCodes],
+    affectedReviewItemCount: reviewChecklist.filter((item) => item.state === "blocked" || item.state === "review").length,
   };
 }
 

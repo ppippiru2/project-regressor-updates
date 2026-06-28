@@ -1,5 +1,5 @@
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=499";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=499";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=500";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=500";
 
 export const CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW_VERSION = "content-bulk-patch-staged-import-preview-v1";
 
@@ -9,6 +9,7 @@ export function createContentBulkPatchStagedImportPreview(batch = createContentB
   const activeDomains = domains.filter((domain) => domain.rowCount > 0);
   const stagedDomains = activeDomains.filter((domain) => domain.stagedRowCount > 0);
   const uniqueChecks = new Set(stagedDomains.flatMap((domain) => domain.checkScripts || []));
+  const issueSummary = createStagedImportIssueSummary(domains);
 
   return {
     version: CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW_VERSION,
@@ -32,8 +33,11 @@ export function createContentBulkPatchStagedImportPreview(batch = createContentB
       warningDomainCount: activeDomains.filter((domain) => domain.state === "ready-with-warnings").length,
       partialDomainCount: activeDomains.filter((domain) => domain.state === "partial").length,
       blockedDomainCount: activeDomains.filter((domain) => domain.state === "blocked").length,
+      affectedIssueDomainCount: issueSummary.affectedDomainCount,
+      affectedIssueRowCount: issueSummary.affectedRowCount,
     },
     domains,
+    issueSummary,
     applySteps: [
       "validate-batch-contract",
       "review-update-candidates",
@@ -63,6 +67,8 @@ function stagedDomain(domain, batch, issues) {
     updateStageCount: updateRows.length,
     withheldRowCount: withheldRows.length,
     warningRowCount: warningRows.length,
+    blockingIssueCodes: uniqueRowIssueCodes(stagedRows, "blockingIssueCodes"),
+    warningIssueCodes: uniqueRowIssueCodes(stagedRows, "warningIssueCodes"),
     generatedSurfaceCount: actionableRows.length * (domain.surfaces || []).length,
     checkScripts: domain.checkScripts || [],
     surfaces: (domain.surfaces || []).map((surface) => ({
@@ -72,6 +78,37 @@ function stagedDomain(domain, batch, issues) {
     })),
     rows: stagedRows,
   };
+}
+
+function createStagedImportIssueSummary(domains = []) {
+  const blockingIssueCodes = new Set();
+  const warningIssueCodes = new Set();
+  const affectedDomains = new Set();
+  const affectedRows = new Set();
+
+  for (const domain of domains) {
+    for (const row of domain.rows || []) {
+      const rowBlocking = row.blockingIssueCodes || [];
+      const rowWarnings = row.warningIssueCodes || [];
+      for (const code of rowBlocking) blockingIssueCodes.add(code);
+      for (const code of rowWarnings) warningIssueCodes.add(code);
+      if (rowBlocking.length || rowWarnings.length) {
+        affectedDomains.add(domain.id);
+        affectedRows.add(`${domain.id}:${row.rowIndex}`);
+      }
+    }
+  }
+
+  return {
+    blockingIssueCodes: [...blockingIssueCodes],
+    warningIssueCodes: [...warningIssueCodes],
+    affectedDomainCount: affectedDomains.size,
+    affectedRowCount: affectedRows.size,
+  };
+}
+
+function uniqueRowIssueCodes(rows = [], key) {
+  return [...new Set(rows.flatMap((row) => row[key] || []).filter(Boolean))];
 }
 
 function stagedRow(domain, row, rowIndex, issues) {
