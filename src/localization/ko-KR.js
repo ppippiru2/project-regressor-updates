@@ -1169,6 +1169,8 @@ export const KO_KR_TEXT = {
     heal: "{skillName} 발동. HP {amount} 회복.",
     miss: "{actionName}이 빗나갔습니다.",
     hit: "{criticalText}{actionName}{actionParticle} {monsterName}에게 {damage} 피해.",
+    weaknessExposed: "{monsterName}의 약점이 드러났습니다. 반짝임이 사라지기 전 강한 스킬을 집중하십시오.",
+    weaknessHit: "{skillName} 약점 집중 {count}타.",
     actionParticleConsonant: "으로",
     actionParticleVowel: "로",
     actionParticleDefault: "으로",
@@ -1576,6 +1578,8 @@ export const KO_KR_TEXT = {
     text: {
       miss: "빗나감!",
       critical: "치명타!",
+      weaknessExposed: "약점 노출!",
+      weaknessHit: "약점 집중!",
     },
     info: {
       touchDoubleTapHint: "터치 환경에서는 한 번 터치하면 설명이 보이고, 같은 실행 버튼을 한 번 더 터치하면 동작합니다.",

@@ -67,9 +67,17 @@ export const HYPER_SCALING_BALANCE = {
 };
 
 export const BREAK_GAUGE_BALANCE = {
-  normalInitialGauge: 0,
+  normalInitialGauge: 24,
   bossInitialGauge: 100,
   skillGaugeDamagePerPower: 12,
+};
+
+export const WEAKNESS_BALANCE = {
+  durationSeconds: 6.5,
+  baseSkillDamageMultiplier: 1.18,
+  skillMultiplierScale: 0.5,
+  breakPowerScale: 0.08,
+  maxSkillDamageMultiplier: 1.75,
 };
 
 export const COMBAT_RUNTIME_BALANCE = {

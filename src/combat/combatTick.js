@@ -1,4 +1,5 @@
 import { clamp } from "./combatFormula.js";
+import { advanceTargetWeaknessState } from "./combatHitResults.js?v=494";
 
 export function combatElapsedSeconds(now, lastFrameAt) {
   return Math.max(0.04, Math.min(0.25, (now - (lastFrameAt || now)) / 1000));
@@ -33,12 +34,14 @@ export function advanceCombatFrameRuntime({ state, combatRuntime, player, enemy 
 
   regenerateCombatResources(state, player, enemy, elapsedSeconds);
   advanceActionCooldowns(combatRuntime);
+  const weaknessEnded = advanceTargetWeaknessState(state.target);
   const playerHyperEnded = advancePlayerHyperState(state, elapsedSeconds) === "ended";
   const enemyHyperEnded = advanceEnemyHyperState(combatRuntime, elapsedSeconds) === "ended";
   if (shouldAdvanceAutoCombatActions(state, combatRuntime)) advanceCombatActionGauges(combatRuntime, player, enemy, elapsedSeconds);
 
   return {
     elapsedSeconds,
+    weaknessEnded,
     playerHyperEnded,
     enemyHyperEnded,
   };

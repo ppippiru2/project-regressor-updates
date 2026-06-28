@@ -1,7 +1,7 @@
-import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_POOL_REGIONS, TUTORIAL_MONSTER_POOL_VERSION, candidateMonsterRewardLinkFor } from "../balance/monsterCandidatePool.js?v=493";
-import { lootItems } from "../data/itemData.js?v=493";
-import { monsters, regions } from "../data/worldData.js?v=493";
-import { getLocaleText } from "../localization/index.js?v=493";
+import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_POOL_REGIONS, TUTORIAL_MONSTER_POOL_VERSION, candidateMonsterRewardLinkFor } from "../balance/monsterCandidatePool.js?v=494";
+import { lootItems } from "../data/itemData.js?v=494";
+import { monsters, regions } from "../data/worldData.js?v=494";
+import { getLocaleText } from "../localization/index.js?v=494";
 
 const DATA_TEXT = getLocaleText().data || {};
 const MONSTER_NAMES = DATA_TEXT.monsters || {};

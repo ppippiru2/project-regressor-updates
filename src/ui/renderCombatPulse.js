@@ -1,5 +1,5 @@
 import { clamp } from "../combat/combatFormula.js";
-import { t, tf } from "../localization/index.js?v=493";
+import { t, tf } from "../localization/index.js?v=494";
 
 export function renderHitCounter(state) {
   const hitCounter = document.getElementById("hit-counter");
@@ -51,6 +51,7 @@ export function updateCombatPulseClasses({ state, combatRuntime, player, enemyHp
   const enemyHyperReady = state.inCombat && combatRuntime.enemyHyp >= hypMax && !enemyHyperActive && combatRuntime.enemyHyperCooldown <= 0;
   const enemyHyperCooldown = combatRuntime.enemyHyperCooldown > 0;
   const enemyHyperProgress = state.inCombat ? getEnemyHyperEdgeProgress(combatRuntime, hypMax) : 0;
+  const weaknessActive = Boolean(state.inCombat && state.target?.weaknessUntil && state.target.weaknessUntil > now);
 
   enemyCard.style.setProperty("--edge-progress", `${enemyHyperProgress}%`);
   enemyCard.classList.toggle(
@@ -61,6 +62,8 @@ export function updateCombatPulseClasses({ state, combatRuntime, player, enemyHp
   enemyCard.classList.toggle("enemy-hyper-active", enemyHyperActive);
   enemyCard.classList.toggle("enemy-hyper-cooldown", enemyHyperCooldown);
   enemyCard.classList.toggle("enemy-hyper-end-flash", now < combatRuntime.enemyHyperEndFlashUntil);
+  enemyCard.classList.toggle("weakness-exposed", weaknessActive);
+  enemyCard.dataset.weakness = weaknessActive ? "active" : "idle";
 }
 
 function getHyperEdgeProgress(state, hypMax) {

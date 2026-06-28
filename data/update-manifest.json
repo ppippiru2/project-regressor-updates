@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 493,
-  "displayVersion": "v493",
-  "cacheVersion": "project-regressor-mvp-v493",
-  "updatedAt": "2026-06-28T23:36:00.000+09:00",
+  "versionCode": 494,
+  "displayVersion": "v494",
+  "cacheVersion": "project-regressor-mvp-v494",
+  "updatedAt": "2026-06-28T23:58:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=493&cachebust=493",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=494&cachebust=494",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v493 connects skill cooldown values to runtime manual and Auto Hunt combat decisions.",
-    "v493 shows remaining cooldown blocker text directly on combat action buttons after a skill is used.",
-    "v493 keeps basic attack uncooldowned and preserves the existing locked one-exchange manual battle loop."
+    "v494 adds a weakness exposure system driven by skill break damage.",
+    "v494 shows a sparkling light at the center of the monster sprite while weakness is exposed.",
+    "v494 rewards repeated strong skill attacks during the sparkle window with weakness damage bonuses."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v493-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v494-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v493-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v494-debug.apk"
   },
   "version": {
-    "code": 493,
-    "name": "4.93.0",
-    "displayName": "v493"
+    "code": 494,
+    "name": "4.94.0",
+    "displayName": "v494"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v493-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v494-debug.apk"
   },
   "android": {
-    "code": 493,
-    "name": "4.93.0",
-    "displayName": "v493",
+    "code": 494,
+    "name": "4.94.0",
+    "displayName": "v494",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v493-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v494-debug.apk"
     },
     "version": {
-      "code": 493,
-      "name": "4.93.0",
-      "displayName": "v493"
+      "code": 494,
+      "name": "4.94.0",
+      "displayName": "v494"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v493-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v494-debug.apk"
   }
 }
