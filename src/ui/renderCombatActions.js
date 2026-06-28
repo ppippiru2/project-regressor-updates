@@ -1,5 +1,6 @@
-import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=512";
-import { t, tf } from "../localization/index.js?v=512";
+import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=513";
+import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=513";
+import { t, tf } from "../localization/index.js?v=513";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;
@@ -164,6 +165,7 @@ function actionInfoParts(action, context, availability) {
   return [
     actionCostText(action),
     actionCooldownText(action),
+    weaknessActionInfoText(action, context),
     context.actionTriggerText(action),
     availability?.reason ? tf("combatActions.unavailableReason", { reason: availability.reason }) : "",
   ].filter(Boolean);
@@ -197,6 +199,16 @@ function combatWeaknessSkillUiKey(state, now = Date.now()) {
   const weaknessUntil = Number(state?.target?.weaknessUntil || 0);
   if (!state?.inCombat || !weaknessUntil || weaknessUntil <= now) return "weakness:idle";
   return `weakness:${Math.floor(weaknessUntil)}:${Number(state.target.weaknessStrikeCount || 0)}`;
+}
+
+function weaknessActionInfoText(action, context, now = Date.now()) {
+  if (!action || action.id === "basic_attack" || action.damageType === "support") return "";
+  const weaknessInfo = calculateWeaknessSkillDamageMultiplier(action, context.state?.target, now);
+  if (!weaknessInfo.active) return "";
+  return tf("combatActions.weaknessBonus", {
+    multiplier: weaknessInfo.multiplier.toFixed(2),
+    count: weaknessInfo.strikeIndex,
+  });
 }
 
 function actionCostText(action) {

@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 512,
-  "displayVersion": "v512",
-  "cacheVersion": "512",
-  "updatedAt": "2026-06-29T02:56:03.000+09:00",
+  "versionCode": 513,
+  "displayVersion": "v513",
+  "cacheVersion": "513",
+  "updatedAt": "2026-06-29T03:01:58.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=512&cachebust=512",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=513&cachebust=513",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "약점 노출 중 현재 가장 유리한 공격 스킬을 버튼 배지로 표시합니다.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v512-debug.apk",
+  "notes": "스킬 정보 패널에 약점 예상 배율과 다음 집중 타수를 표시합니다.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v512-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
   },
-  "version": "5.12.0",
+  "version": "5.13.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v512-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
   },
   "android": {
-    "code": 512,
-    "name": "5.12.0",
-    "displayName": "v512",
+    "code": 513,
+    "name": "5.13.0",
+    "displayName": "v513",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v512-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
     },
     "version": {
-      "code": 512,
-      "name": "5.12.0",
-      "displayName": "v512"
+      "code": 513,
+      "name": "5.13.0",
+      "displayName": "v513"
     },
-    "versionCode": 512,
-    "versionName": "5.12.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v512-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v512-release.apk"
+    "versionCode": 513,
+    "versionName": "5.13.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v512-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v513-debug.apk"
   },
-  "versionName": "5.12.0"
+  "versionName": "5.13.0"
 }

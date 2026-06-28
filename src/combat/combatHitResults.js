@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE, WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=512";
+import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE, WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=513";
 
 export function advanceHitCombo(state, now = Date.now()) {
   state.hitCount += 1;
@@ -55,12 +55,13 @@ export function isTargetWeak(targetState, now = Date.now()) {
   return Boolean(targetState?.weaknessUntil && targetState.weaknessUntil > now);
 }
 
-export function applyWeaknessSkillDamageBonus(result, skill, targetState, now = Date.now()) {
-  if (!result || result.missed || !skill || skill.damageType === "support" || !isTargetWeak(targetState, now)) {
+export function calculateWeaknessSkillDamageMultiplier(skill, targetState, now = Date.now()) {
+  if (!skill || skill.damageType === "support" || !isTargetWeak(targetState, now)) {
     return {
-      result,
-      applied: false,
+      active: false,
       multiplier: 1,
+      strikeChainBonus: 0,
+      strikeIndex: 0,
     };
   }
 
@@ -77,8 +78,35 @@ export function applyWeaknessSkillDamageBonus(result, skill, targetState, now = 
     Math.max(0, breakPower) * WEAKNESS_BALANCE.breakPowerScale +
     strikeChainBonus;
   const multiplier = Math.min(WEAKNESS_BALANCE.maxSkillDamageMultiplier, rawMultiplier);
+  return {
+    active: true,
+    multiplier,
+    strikeChainBonus,
+    strikeIndex,
+  };
+}
+
+export function applyWeaknessSkillDamageBonus(result, skill, targetState, now = Date.now()) {
+  if (!result || result.missed) {
+    return {
+      result,
+      applied: false,
+      multiplier: 1,
+    };
+  }
+
+  const weaknessMultiplier = calculateWeaknessSkillDamageMultiplier(skill, targetState, now);
+  if (!weaknessMultiplier.active) {
+    return {
+      result,
+      applied: false,
+      multiplier: 1,
+    };
+  }
+
+  const multiplier = weaknessMultiplier.multiplier;
   const damage = Math.max(1, Math.floor(result.damage * multiplier));
-  targetState.weaknessStrikeCount = strikeIndex;
+  targetState.weaknessStrikeCount = weaknessMultiplier.strikeIndex;
 
   return {
     result: {
@@ -86,7 +114,7 @@ export function applyWeaknessSkillDamageBonus(result, skill, targetState, now = 
       damage,
       weakness: true,
       weaknessMultiplier: multiplier,
-      weaknessStrikeChainBonus: strikeChainBonus,
+      weaknessStrikeChainBonus: weaknessMultiplier.strikeChainBonus,
       weaknessStrikeCount: targetState.weaknessStrikeCount,
     },
     applied: true,

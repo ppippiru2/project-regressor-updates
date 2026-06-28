@@ -875,6 +875,7 @@ export const KO_KR_TEXT = {
     ready: "사용 가능",
     unavailable: "사용 불가",
     weaknessPriority: "약점 우선",
+    weaknessBonus: "약점 x{multiplier} · 다음 {count}타",
   },
   combatVitals: {
     waiting: "대기",
