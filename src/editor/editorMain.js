@@ -1,34 +1,35 @@
-import { applyDomLocalization } from "../localization/domText.js?v=464";
-import { getLocaleText, t, tf } from "../localization/index.js?v=464";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=464";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=464";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=464";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=464";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=464";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=464";
+import { applyDomLocalization } from "../localization/domText.js?v=465";
+import { getLocaleText, t, tf } from "../localization/index.js?v=465";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=465";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=465";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=465";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=465";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=465";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=465";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=464";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=464";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=464";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=464";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=464";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=464";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=464";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=464";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=464";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=464";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=464";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=464";
+} from "./contentBulkPatchPackageAdapter.js?v=465";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=465";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=465";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=465";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=465";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=465";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=465";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=465";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=465";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=465";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=465";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=465";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=465";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=464";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=464";
+} from "./monsterSpriteSlotReport.js?v=465";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=465";
 
-const EDITOR_VERSION = "464";
+const EDITOR_VERSION = "465";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -224,6 +225,7 @@ let combatVfxDetailFilter = loadCombatVfxDetailFilter();
 let contentBulkPatchPackageInput = loadContentBulkPatchPackageInput();
 let contentBulkPatchPackageParseError = "";
 let contentBulkPatchPackageAdapterPreview = createContentBulkPatchPackageAdapterPreviewFromInput();
+let contentBulkPatchFilePatchDraftExport = createContentBulkPatchFilePatchDraftExportFromInput();
 const MONSTER_SPRITE_SLOT_REPORT = createMonsterSpriteSlotReport();
 const MONSTER_SPRITE_READY_CONNECTION_PLAN = createMonsterSpriteReadyConnectionPatchPlan(MONSTER_SPRITE_SLOT_REPORT);
 const MONSTER_SPRITE_READY_CONNECTION_REVIEW = createMonsterSpriteReadyConnectionReview(
@@ -404,6 +406,14 @@ function bindEvents() {
     const packageTemplateButton = event.target.closest("[data-content-bulk-package-template]");
     if (packageTemplateButton) {
       downloadJson("project-regressor-content-bulk-package-template.json", createContentBulkPatchPackageAdapterTemplate());
+      return;
+    }
+    const filePatchDraftExportButton = event.target.closest("[data-content-bulk-file-patch-export]");
+    if (filePatchDraftExportButton) {
+      downloadJson(
+        contentBulkPatchFilePatchDraftExport.fileName || "project-regressor-content-bulk-file-patch-draft.json",
+        contentBulkPatchFilePatchDraftExport.payload || {},
+      );
       return;
     }
     const combatVfxResetButton = event.target.closest("[data-combat-vfx-reset]");
@@ -1311,7 +1321,8 @@ function renderBalanceTuningDetail() {
       ${renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText)}
       ${renderContentBulkPatchDiffExport(CONTENT_BULK_PATCH_DIFF_EXPORT, detailText)}
       ${renderContentBulkPatchManualApplyChecklist(CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST, detailText)}
-      ${renderContentBulkPatchFilePatchDraft(CONTENT_BULK_PATCH_FILE_PATCH_DRAFT, detailText)}
+      ${renderContentBulkPatchFilePatchDraft(contentBulkPatchFilePatchDraftExport.draft || CONTENT_BULK_PATCH_FILE_PATCH_DRAFT, detailText)}
+      ${renderContentBulkPatchFilePatchDraftExport(contentBulkPatchFilePatchDraftExport, detailText)}
       ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
       ${renderBalanceRelatedChecks(relatedChecks, detailText)}
       <div class="editor-balance-list">
@@ -2934,6 +2945,49 @@ function contentBulkPatchFilePatchOperationLabel(operationId, text = {}) {
   return text.operationLabels?.[operationId] || operationId || "unknown";
 }
 
+function renderContentBulkPatchFilePatchDraftExport(exportPreview, detailText = {}) {
+  const text = detailText.contentBulkPatchFilePatchDraftExport || {};
+  const summary = exportPreview.summary || {};
+  const metrics = [
+    [text.exportedFiles || "Exported files", `${summary.exportedFileCount || 0}`],
+    [text.exportedBlocks || "Exported blocks", `${summary.exportedBlockCount || 0}`],
+    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
+    [text.updateDrafts || "Update drafts", `${summary.updateDraftCount || 0}`],
+    [text.blockedDrafts || "Blocked drafts", `${summary.blockedDraftCount || 0}`],
+    [text.writes || "Writes", exportPreview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
+  ];
+  return `
+    <section class="editor-content-bulk-patch-draft-export" data-readonly="${exportPreview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Draft Export")}">
+      <div class="editor-content-bulk-patch-draft-export-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Content Bulk Patch Draft Export")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Download a read-only file patch draft for review.")}</p>
+        </div>
+        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchFilePatchDraftExport.version", {
+          version: exportPreview.version || "-"
+        }, exportPreview.version || "-"))}</strong>
+      </div>
+      <div class="editor-content-bulk-patch-draft-export-metrics">
+        ${metrics.map(([label, value]) => `
+          <span>
+            <small>${escapeHtml(label)}</small>
+            <b>${escapeHtml(value)}</b>
+          </span>
+        `).join("")}
+      </div>
+      <div class="editor-content-bulk-patch-draft-export-actions">
+        <div>
+          <strong>${escapeHtml(text.source || "Source")}</strong>
+          <span>${escapeHtml(summary.sourceName || "-")}</span>
+        </div>
+        <button type="button" data-content-bulk-file-patch-export>
+          ${escapeHtml(text.download || "Download patch draft")}
+        </button>
+      </div>
+    </section>
+  `;
+}
+
 function renderBalanceGroupRow(group, detailText = {}) {
   const preview = BALANCE_TUNING_PREVIEW_BY_ID.get(group.id);
   return `
@@ -3757,6 +3811,7 @@ function resetContentBulkPatchPackageInput() {
 
 function refreshContentBulkPatchPackageAdapterPreview() {
   contentBulkPatchPackageAdapterPreview = createContentBulkPatchPackageAdapterPreviewFromInput();
+  contentBulkPatchFilePatchDraftExport = createContentBulkPatchFilePatchDraftExportFromInput();
 }
 
 function createContentBulkPatchPackageAdapterPreviewFromInput() {
@@ -3768,6 +3823,26 @@ function createContentBulkPatchPackageAdapterPreviewFromInput() {
   } catch (error) {
     contentBulkPatchPackageParseError = error?.message || "JSON parse error";
     return createContentBulkPatchPackageAdapterPreview();
+  }
+}
+
+function createContentBulkPatchFilePatchDraftExportFromInput() {
+  const appliedText = String(contentBulkPatchPackageInput.appliedText || "").trim();
+  if (!appliedText) {
+    return createContentBulkPatchFilePatchDraftExport(createContentBulkPatchPackageAdapterTemplate(), {
+      sourceName: "project-regressor-content-bulk-package-template.json",
+      adapterPreview: contentBulkPatchPackageAdapterPreview,
+    });
+  }
+  try {
+    return createContentBulkPatchFilePatchDraftExport(JSON.parse(appliedText), {
+      sourceName: contentBulkPatchPackageInput.sourceName || "pasted-package.json",
+      adapterPreview: contentBulkPatchPackageAdapterPreview,
+    });
+  } catch {
+    return createContentBulkPatchFilePatchDraftExport(createContentBulkPatchPackageAdapterTemplate(), {
+      sourceName: "project-regressor-content-bulk-package-template.json",
+    });
   }
 }
 

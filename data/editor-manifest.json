@@ -440,6 +440,7 @@
         "src/editor/contentBulkPatchDiffExport.js",
         "src/editor/contentBulkPatchManualApplyChecklist.js",
         "src/editor/contentBulkPatchFilePatchDraft.js",
+        "src/editor/contentBulkPatchFilePatchDraftExport.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -535,6 +536,8 @@
         "contentBulkPatchManualApplyFiles",
         "contentBulkPatchFilePatchDraft",
         "contentBulkPatchFileDrafts",
+        "contentBulkPatchFilePatchDraftExport",
+        "contentBulkPatchFilePatchDraftExportPayload",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings",
@@ -558,6 +561,7 @@
         "대량 콘텐츠 diff 내보내기",
         "대량 콘텐츠 수동 적용 체크리스트",
         "대량 콘텐츠 파일별 patch 초안",
+        "대량 콘텐츠 파일별 patch 초안 내보내기",
         "대량 패키지 JSON 추출"
       ]
     },
@@ -1486,6 +1490,7 @@
       "src/editor/contentBulkPatchDiffExport.js:createContentBulkPatchDiffExport",
       "src/editor/contentBulkPatchManualApplyChecklist.js:createContentBulkPatchManualApplyChecklist",
       "src/editor/contentBulkPatchFilePatchDraft.js:createContentBulkPatchFilePatchDraft",
+      "src/editor/contentBulkPatchFilePatchDraftExport.js:createContentBulkPatchFilePatchDraftExport",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1621,6 +1626,16 @@
         "guards": [
           "수동 적용 체크리스트 이후 파일별 patch 초안",
           "명시 확정 전 실제 데이터 쓰기 차단"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-file-patch-draft-export",
+        "label": "Content bulk file patch draft export check",
+        "script": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
+        "guards": [
+          "file patch draft JSON payload",
+          "read-only download gate",
+          "manual review before explicit apply"
         ]
       },
       {
@@ -1800,7 +1815,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v464",
+      "source": "v465",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1814,7 +1829,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v464",
+      "source": "v465",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1828,7 +1843,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v464",
+      "source": "v465",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -1909,6 +1924,18 @@
       ],
       "acceptsZipInput": true,
       "acceptsDirectoryInput": true,
+      "writesGameData": false
+    },
+    "contentBulkPatchFilePatchDraftExport": {
+      "id": "content-bulk-patch-file-patch-draft-export-v1",
+      "source": "v465",
+      "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
+      "expectedExportedFileCount": 24,
+      "expectedExportedBlockCount": 33,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
       "writesGameData": false
     }
   },

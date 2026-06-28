@@ -2,7 +2,7 @@ import {
   INITIAL_CREATION_STAT_BALANCE,
   PLAYER_INITIAL_STATS,
   STATUS_GRADE_ORDER,
-} from "../balance/playerGrowthBalance.js?v=464";
+} from "../balance/playerGrowthBalance.js?v=465";
 
 export const STATUS_GRADE_BASELINE_TOTAL = INITIAL_CREATION_STAT_BALANCE.total;
 export const STATUS_GRADE_STAT_KEYS = Object.freeze(Object.keys(PLAYER_INITIAL_STATS));

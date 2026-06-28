@@ -5661,6 +5661,94 @@ select:focus {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.editor-content-bulk-patch-draft-export {
+  background: rgba(4, 18, 42, 0.56);
+  border: 1px solid rgba(143, 255, 192, 0.22);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-content-bulk-patch-draft-export-head,
+.editor-content-bulk-patch-draft-export-actions {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-content-bulk-patch-draft-export-head h4,
+.editor-content-bulk-patch-draft-export-head p,
+.editor-content-bulk-patch-draft-export-actions strong,
+.editor-content-bulk-patch-draft-export-actions span {
+  margin: 0;
+}
+
+.editor-content-bulk-patch-draft-export-head h4 {
+  color: #8fffc0;
+  font-size: 0.95rem;
+}
+
+.editor-content-bulk-patch-draft-export-head strong {
+  border: 1px solid rgba(143, 255, 192, 0.32);
+  border-radius: 999px;
+  color: #8fffc0;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-content-bulk-patch-draft-export-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-content-bulk-patch-draft-export-metrics span,
+.editor-content-bulk-patch-draft-export-actions {
+  background: rgba(1, 10, 28, 0.3);
+  border: 1px solid rgba(143, 255, 192, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-content-bulk-patch-draft-export-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-content-bulk-patch-draft-export-metrics b,
+.editor-content-bulk-patch-draft-export-actions strong {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-patch-draft-export-actions span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-patch-draft-export-actions button {
+  appearance: none;
+  background: linear-gradient(180deg, rgba(37, 115, 190, 0.96), rgba(7, 40, 88, 0.94));
+  border: 1px solid rgba(108, 210, 255, 0.45);
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 0.45rem 0.65rem;
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -9464,6 +9552,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-patch-draft-head,
   .editor-content-bulk-patch-draft-file-head,
   .editor-content-bulk-patch-draft-grid,
+  .editor-content-bulk-patch-draft-export-head,
+  .editor-content-bulk-patch-draft-export-actions,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -9485,6 +9575,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-diff-metrics,
   .editor-content-bulk-checklist-metrics,
   .editor-content-bulk-patch-draft-metrics,
+  .editor-content-bulk-patch-draft-export-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

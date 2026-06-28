@@ -2502,6 +2502,20 @@ export const KO_KR_TEXT = {
             "verify-inventory-and-rewards": "인벤토리/보상 확인"
           }
         },
+        contentBulkPatchFilePatchDraftExport: {
+          title: "파일별 patch 초안 내보내기",
+          description: "현재 입력 패키지를 검토용 patch 초안 JSON으로 내려받는 읽기 전용 단계입니다.",
+          version: "{version}",
+          exportedFiles: "내보낼 파일",
+          exportedBlocks: "내보낼 블록",
+          stagedRows: "적용 후보",
+          updateDrafts: "갱신 초안",
+          blockedDrafts: "보류 초안",
+          writes: "데이터 쓰기",
+          readOnly: "읽기 전용",
+          source: "입력 출처",
+          download: "patch 초안 다운로드"
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",
