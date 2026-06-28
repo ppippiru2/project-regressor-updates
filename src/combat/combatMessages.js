@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=456";
+import { t, tf } from "../localization/index.js?v=457";
 
 export function combatStartMessage(monster) {
   return tf("combatMessages.start", { monsterName: monster.name });
@@ -31,10 +31,12 @@ export function enemyEvadeMessage(monster) {
   return tf("combatMessages.enemyEvade", { monsterName: monster.name });
 }
 
-export function enemyAttackMessage(monster, result, enemyHyperActive) {
+export function enemyAttackMessage(monster, result, enemyHyperActive, runtimeAction = null) {
   return tf("combatMessages.enemyAttack", {
     monsterName: monster.name,
-    attackName: enemyHyperActive ? t("combatMessages.enemyHyperAttack") : t("combatMessages.enemyCounter"),
+    attackName:
+      (runtimeAction?.nameKey ? t(runtimeAction.nameKey) : runtimeAction?.name) ||
+      (enemyHyperActive ? t("combatMessages.enemyHyperAttack") : t("combatMessages.enemyCounter")),
     damage: result.damage,
   });
 }

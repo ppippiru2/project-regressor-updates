@@ -682,7 +682,9 @@
         "data/asset-slots.json",
         "src/assets/assetData.js",
         "src/assets/assetRegistry.js",
-        "src/editor/monsterSpriteSlotReport.js"
+        "src/editor/monsterSpriteSlotReport.js",
+        "src/config/monsterRuntimeIntegrationPresets.js",
+        "src/editor/monsterRuntimeIntegrationPreview.js"
       ],
       "assetSlots": [
         "asset.slotRegistry"
@@ -718,7 +720,12 @@
         "monsterSpriteNestedSlotPatchObject",
         "monsterSpritePatchExportSummary",
         "monsterSpriteReadyConnectionPatchPlan",
-        "monsterSpriteReadyConnectionReviewGate"
+        "monsterSpriteReadyConnectionReviewGate",
+        "monsterRuntimeIntegrationPack",
+        "monsterRuntimeExternalIdAlias",
+        "monsterRuntimeActionPattern",
+        "monsterRuntimeMotionAlias",
+        "monsterRuntimeTransparentSpriteWaitlist"
       ],
       "futureControls": [
         "슬롯 검색",
@@ -734,7 +741,10 @@
         "Monster sprite ready connection review gate",
         "Monster sprite runtime fallback mode summary",
         "Monster sprite missing-file production handoff",
-        "Monster sprite missing-file handoff editor summary"
+        "Monster sprite missing-file handoff editor summary",
+        "Monster runtime integration package preview",
+        "Monster external ID alias mapping",
+        "Monster action pattern routing"
       ]
     },
     {
@@ -2041,5 +2051,37 @@
       "validation-output/monster-sprite-missing-file-handoff.json"
     ],
     "applyPreviewEditorSummaryVisible": true
+  },
+  "monsterRuntimeIntegration": {
+    "version": 1,
+    "sourcePack": "monster_runtime_integration_pack_v1",
+    "targetExternalMonsterId": "rift_imp_lv1",
+    "mappedMonsterId": "shore_imp",
+    "duplicateMonsterCreationBlocked": true,
+    "currentImplementationWins": true,
+    "previewModule": "src/editor/monsterRuntimeIntegrationPreview.js",
+    "presetModule": "src/config/monsterRuntimeIntegrationPresets.js",
+    "editorSummaryVisible": true,
+    "actionPatternConnected": true,
+    "motionAliasConnected": true,
+    "externalIdAliasConnected": true,
+    "transparentSpriteRequired": true,
+    "sourceImageIsComposite": true,
+    "expectedSpriteFiles": [
+      "assets/monsters/shore_imp_idle.webp",
+      "assets/monsters/shore_imp_attack.webp",
+      "assets/monsters/shore_imp_hit.webp",
+      "assets/monsters/shore_imp_dead.webp"
+    ],
+    "runtimeActionIds": [
+      "claw_swipe",
+      "rift_spark"
+    ],
+    "runtimeMotionAliases": [
+      "enemy_idle_loop_v1",
+      "enemy_hit_reaction_v1",
+      "enemy_basic_attack_v1",
+      "enemy_down_v1"
+    ]
   }
 }

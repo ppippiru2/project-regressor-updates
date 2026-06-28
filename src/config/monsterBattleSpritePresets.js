@@ -1,3 +1,5 @@
+import { MONSTER_RUNTIME_INTEGRATION_PACK_VERSION } from "./monsterRuntimeIntegrationPresets.js?v=457";
+
 const DEFAULT_MONSTER_BATTLE_SPRITE_PRESET = Object.freeze({
   monsterId: "default",
   classId: "enemy_default",
@@ -311,6 +313,12 @@ export const MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE = Object.
 export const MONSTER_BATTLE_SPRITE_PRESETS = Object.freeze({
   shore_imp: {
     monsterId: "shore_imp",
+    externalMonsterIds: ["rift_imp_lv1"],
+    runtimeIntegrationPack: MONSTER_RUNTIME_INTEGRATION_PACK_VERSION,
+    sourceInitialScale: 0.62,
+    cardSlot: "enemy",
+    pivot: "foot_center",
+    cutoffPolicy: "minor_tail_or_claw_allowed",
     classId: "enemy_imp",
     motionProfile: "small_fiend_runtime",
     sfxProfile: "short_claw",

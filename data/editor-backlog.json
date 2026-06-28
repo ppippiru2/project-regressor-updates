@@ -160,7 +160,13 @@
         "src/editor/editorMain.js:renderMonsterSpriteApplyPreview",
         "styles.css:.editor-monster-sprite-apply-preview",
         "src/localization/ko-KR.js:editorPrep.monsterSpriteSlotReport.applyPreviewTitle",
-        "data/editor-manifest.json:monsterSpriteSlotReadiness.applyPreviewEditorSummaryVisible"
+        "data/editor-manifest.json:monsterSpriteSlotReadiness.applyPreviewEditorSummaryVisible",
+        "src/config/monsterRuntimeIntegrationPresets.js",
+        "src/editor/monsterRuntimeIntegrationPreview.js",
+        "data/editor-manifest.json:monsterRuntimeIntegration",
+        "src/editor/editorMain.js:renderMonsterRuntimeIntegrationPreview",
+        "styles.css:.editor-monster-runtime-preview",
+        "build-scripts/check-monster-runtime-integration-pack.mjs"
       ]
     },
     {

@@ -1,26 +1,27 @@
-import { applyDomLocalization } from "../localization/domText.js?v=456";
-import { getLocaleText, tf } from "../localization/index.js?v=456";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=456";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=456";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=456";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=456";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=456";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=456";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=456";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=456";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=456";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=456";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=456";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=456";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=456";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=456";
+import { applyDomLocalization } from "../localization/domText.js?v=457";
+import { getLocaleText, t, tf } from "../localization/index.js?v=457";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=457";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=457";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=457";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=457";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=457";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=457";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=457";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=457";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=457";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=457";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=457";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=457";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=457";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=457";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=456";
+} from "./monsterSpriteSlotReport.js?v=457";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=457";
 
-const EDITOR_VERSION = "456";
+const EDITOR_VERSION = "457";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -37,6 +38,7 @@ const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN = createMonsterCandidateLivePromotio
 const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT = createMonsterCandidateLivePatchDraft(MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN);
 const MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION = createMonsterCandidateBulkPatchAutomationPreview();
 const COMBAT_VFX_PLACEMENT_PREVIEW = createCombatVfxPlacementPreview();
+const MONSTER_RUNTIME_INTEGRATION_PREVIEW = createMonsterRuntimeIntegrationPreview();
 const COMBAT_VFX_DETAIL_TEXT = Object.freeze({
   title: "Combat VFX Placement Preview",
   description: "Read-only placement summary for player and monster attack effects.",
@@ -467,6 +469,7 @@ function renderPanelDetail() {
   const balanceDetail = panel.id === "balance_tuning_registry" ? renderBalanceTuningDetail() : "";
   const combatVfxDetail = panel.id === "combat_vfx_placement_preview" ? renderCombatVfxPlacementDetail() : "";
   const monsterSpriteReport = panel.id === "asset_registry" ? renderMonsterSpriteSlotReport() : "";
+  const monsterRuntimePreview = panel.id === "asset_registry" ? renderMonsterRuntimeIntegrationPreview() : "";
 
   elements.panelDetail.innerHTML = `
     <div class="editor-detail-header">
@@ -487,6 +490,59 @@ function renderPanelDetail() {
     ${balanceDetail}
     ${combatVfxDetail}
     ${monsterSpriteReport}
+    ${monsterRuntimePreview}
+  `;
+}
+
+function renderMonsterRuntimeIntegrationPreview() {
+  const preview = MONSTER_RUNTIME_INTEGRATION_PREVIEW;
+  const summary = preview.summary || {};
+  const detailText = EDITOR_TEXT.monsterRuntimeIntegrationPreview || {};
+  return `
+    <section class="editor-monster-runtime-preview" aria-label="${escapeAttribute(detailText.title || "Monster runtime integration")}">
+      <div class="editor-monster-runtime-head">
+        <div>
+          <h3>${escapeHtml(detailText.title || "Monster runtime integration")}</h3>
+          <p class="muted">${escapeHtml(detailText.description || "")}</p>
+        </div>
+        <span>${escapeHtml(preview.sourcePack || "")}</span>
+      </div>
+      <div class="editor-monster-sprite-summary">
+        ${combatVfxSummaryCard(detailText.presetMetric || "Runtime presets", String(summary.runtimePresets || 0))}
+        ${combatVfxSummaryCard(detailText.mappedMetric || "Mapped monsters", String(summary.mappedMonsters || 0))}
+        ${combatVfxSummaryCard(detailText.actionMetric || "Action patterns", String(summary.actionPatterns || 0))}
+        ${combatVfxSummaryCard(detailText.waitingFileMetric || "Waiting files", String(summary.waitingSpriteFiles || 0))}
+      </div>
+      <div class="editor-monster-runtime-list">
+        ${(preview.rows || []).map((row) => renderMonsterRuntimeIntegrationRow(row, detailText)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderMonsterRuntimeIntegrationRow(row, detailText = {}) {
+  const noMissingLabel = detailText.noMissingFiles || "Transparent sprite files connectable";
+  return `
+    <article class="editor-monster-runtime-row" data-status="${escapeAttribute(row.mappingStatus)}" data-sprite-status="${escapeAttribute(row.spriteStatus)}">
+      <div>
+        <strong>${escapeHtml(row.liveMonsterName)}</strong>
+        <span>${escapeHtml(row.externalMonsterId)} -> ${escapeHtml(row.liveMonsterId)}</span>
+      </div>
+      <div class="editor-monster-runtime-grid">
+        ${combatVfxFieldBlock(detailText.cardMetric || "Battle card", [row.cardSlot, row.runtimeClass, row.pivot])}
+        ${combatVfxFieldBlock(detailText.scaleMetric || "Scale", [
+          `${detailText.packScaleLabel || "Pack"} ${row.sourceInitialScale}`,
+          `${detailText.currentScaleLabel || "Current"} ${row.currentRuntimeScale}`,
+        ])}
+        ${combatVfxFieldBlock(detailText.motionMetric || "Motion", (row.motions || []).map((motion) => `${motion.phase}: ${motion.externalMotionId} -> ${motion.runtimeMotionId}`))}
+        ${combatVfxFieldBlock(detailText.actionListMetric || "Actions", (row.actions || []).map((action) => {
+          const label = action.nameKey ? t(action.nameKey, action.id) : action.id;
+          const optionalLabel = action.optional ? ` ${detailText.optionalTag || "optional"}` : "";
+          return `${label} · ${action.effectType}${optionalLabel}`;
+        }))}
+        ${combatVfxFieldBlock(detailText.waitingFileListMetric || "Waiting files", row.missingSpriteFiles?.length ? row.missingSpriteFiles : [noMissingLabel])}
+      </div>
+    </article>
   `;
 }
 

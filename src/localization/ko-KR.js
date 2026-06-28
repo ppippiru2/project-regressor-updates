@@ -1171,6 +1171,15 @@ export const KO_KR_TEXT = {
     enemyAttack: "{monsterName}의 {attackName}. {damage} 피해를 받았습니다.",
     bossBreak: "BREAK! 보스의 캐스팅이 끊겼습니다.",
   },
+  monsterRuntimeIntegration: {
+    displayNames: {
+      riftImpLv1: "레벨 1 · 균열 임프",
+    },
+    actions: {
+      clawSwipe: "할퀴기",
+      riftSpark: "균열 불꽃",
+    },
+  },
   combatLogFormatter: {
     classPatterns: {
       luckyNeedle: "행운",
@@ -2485,6 +2494,23 @@ export const KO_KR_TEXT = {
           "file-ready": "파일 준비",
           "file-missing": "파일 대기"
         }
+      },
+      monsterRuntimeIntegrationPreview: {
+        title: "몬스터 런타임 패키지 연결",
+        description: "외부 몬스터 패키지를 현재 게임 몬스터 ID와 행동 패턴에 매핑한 읽기 전용 상태입니다.",
+        presetMetric: "패키지 프리셋",
+        mappedMetric: "현재 몬스터 매핑",
+        actionMetric: "행동 패턴",
+        waitingFileMetric: "대기 중 파일",
+        cardMetric: "전투 카드",
+        scaleMetric: "스케일",
+        packScaleLabel: "패키지",
+        currentScaleLabel: "현재",
+        motionMetric: "모션",
+        actionListMetric: "행동",
+        waitingFileListMetric: "대기 파일",
+        optionalTag: "· 선택",
+        noMissingFiles: "투명 스프라이트 연결 가능"
       },
       assetTypes: {
         image: "이미지",

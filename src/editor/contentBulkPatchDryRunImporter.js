@@ -2,7 +2,7 @@ import {
   createContentBulkPatchIntakeContract,
   createContentBulkPatchTemplate,
   validateContentBulkPatchBatch,
-} from "./contentBulkPatchIntakeContract.js?v=456";
+} from "./contentBulkPatchIntakeContract.js?v=457";
 
 export const CONTENT_BULK_PATCH_DRY_RUN_IMPORTER_VERSION = "content-bulk-patch-dry-run-importer-v1";
 
