@@ -1,6 +1,7 @@
-import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=497";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=497";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=497";
+import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=498";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=498";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=498";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=498";
 
 export const LOOT_SKILL_BULK_INTAKE_PREVIEW_VERSION = "loot-skill-bulk-intake-preview-v1";
 
@@ -30,6 +31,7 @@ export function createLootSkillBulkIntakePreview(
   const rewardItemIds = collectRewardItemIds(rewardLinks);
   const stagedLootDomain = findStagedDomain(adapterPreview, "loot_item");
   const stagedSkillDomain = findStagedDomain(adapterPreview, "skill");
+  const stagedContract = createStagedContractSummary(adapterPreview, ["loot_item", "skill", "reward_link"]);
   const lootPreviewRows = lootRows.map((row, rowIndex) => createLootPreviewRow(row, rowIndex, {
     packageSkillIds,
     rewardItemIds,
@@ -58,6 +60,10 @@ export function createLootSkillBulkIntakePreview(
       updateLootCount: lootPreviewRows.filter((row) => row.bulkState === "staged-update").length,
       appendSkillCount: skillPreviewRows.filter((row) => row.bulkState === "staged-append").length,
       updateSkillCount: skillPreviewRows.filter((row) => row.bulkState === "staged-update").length,
+      contractStagedRowCount: stagedContract.summary.stagedRowCount,
+      contractBlockedRowCount: stagedContract.summary.blockedRowCount,
+      contractWarningRowCount: stagedContract.summary.warningRowCount,
+      contractTargetSurfaceCount: stagedContract.summary.targetSurfaceCount,
       rewardLinkedLootCount: rowsLinkedToRewards.length,
       codexRecordTargetCount: rowsWithCodexTargets.length,
       missingSkillDefinitionCount: rowsMissingSkillDefinitions.length,
@@ -65,6 +71,7 @@ export function createLootSkillBulkIntakePreview(
     },
     lootRows: lootPreviewRows,
     skillRows: skillPreviewRows,
+    stagedContract,
     rewardLinks: rewardLinks.map((link) => ({
       monsterId: link.monsterId || "",
       codexFragmentId: link.codexFragmentId || "",

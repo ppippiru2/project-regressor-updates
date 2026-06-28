@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 497,
-  "displayVersion": "v497",
-  "cacheVersion": "project-regressor-mvp-v497",
-  "updatedAt": "2026-06-29T00:41:00.000+09:00",
+  "versionCode": 498,
+  "displayVersion": "v498",
+  "cacheVersion": "project-regressor-mvp-v498",
+  "updatedAt": "2026-06-29T00:52:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=497&cachebust=497",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=498&cachebust=498",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v497 adds a combat log and text hint when Auto Hunt changes skill priority during weakness exposure.",
-    "v497 deduplicates the weakness priority hint per target weakness window.",
-    "v497 extends regression checks for Auto Hunt priority feedback metadata."
+    "v498 adds a shared staged contract summary for loot/skill and monster runtime bulk previews.",
+    "v498 surfaces staged, blocked, warning, target-surface, and required-check counts in the editor.",
+    "v498 extends bulk intake regression checks for shared staged contract metadata."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v498-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v498-debug.apk"
   },
   "version": {
-    "code": 497,
-    "name": "4.97.0",
-    "displayName": "v497"
+    "code": 498,
+    "name": "4.98.0",
+    "displayName": "v498"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v498-debug.apk"
   },
   "android": {
-    "code": 497,
-    "name": "4.97.0",
-    "displayName": "v497",
+    "code": 498,
+    "name": "4.98.0",
+    "displayName": "v498",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v498-debug.apk"
     },
     "version": {
-      "code": 497,
-      "name": "4.97.0",
-      "displayName": "v497"
+      "code": 498,
+      "name": "4.98.0",
+      "displayName": "v498"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v497-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v498-debug.apk"
   }
 }

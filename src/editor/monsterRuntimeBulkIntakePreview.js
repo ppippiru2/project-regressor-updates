@@ -1,6 +1,7 @@
-import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=497";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=497";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=497";
+import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=498";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=498";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=498";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=498";
 
 export const MONSTER_RUNTIME_BULK_INTAKE_PREVIEW_VERSION = "monster-runtime-bulk-intake-preview-v1";
 
@@ -11,6 +12,7 @@ export function createMonsterRuntimeBulkIntakePreview(
   const adapterPreview = createContentBulkPatchPackageAdapterPreview(packageData);
   const monsterMapping = (adapterPreview.mappings || []).find((mapping) => mapping.domainId === "monster") || {};
   const stagedMonsterDomain = (adapterPreview.stagedImport?.domains || []).find((domain) => domain.id === "monster") || {};
+  const stagedContract = createStagedContractSummary(adapterPreview, ["monster"]);
   const rows = (runtimePreview.rows || []).map((row, index) =>
     createRuntimeBulkIntakeRow(row, packageData.monsterRuntimePresets[index], stagedMonsterDomain),
   );
@@ -34,10 +36,15 @@ export function createMonsterRuntimeBulkIntakePreview(
       updateCandidateCount: adapterPreview.stagedImport?.summary?.updateStageCount || 0,
       appendCandidateCount: adapterPreview.stagedImport?.summary?.appendStageCount || 0,
       warningRowCount: adapterPreview.stagedImport?.summary?.warningRowCount || 0,
+      contractStagedRowCount: stagedContract.summary.stagedRowCount,
+      contractBlockedRowCount: stagedContract.summary.blockedRowCount,
+      contractWarningRowCount: stagedContract.summary.warningRowCount,
+      contractTargetSurfaceCount: stagedContract.summary.targetSurfaceCount,
       missingSpriteFileCount: rows.reduce((sum, row) => sum + row.missingSpriteFiles.length, 0),
       blockedRuntimeRowCount: rows.filter((row) => row.runtimeState === "blocked-waiting-transparent-sprites").length,
       requiredCheckCount: adapterPreview.summary?.requiredCheckCount || 0,
     },
+    stagedContract,
     rows,
   };
 }

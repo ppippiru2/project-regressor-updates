@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=497";
-import { ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=497";
+import { getLocaleText } from "../localization/index.js?v=498";
+import { ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=498";
 
 const EQUIPMENT_NAMES = getLocaleText().data.equipmentNames;
 

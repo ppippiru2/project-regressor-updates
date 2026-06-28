@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=497";
+import { getLocaleText } from "../localization/index.js?v=498";
 
 const HELP_TEXT_CONFIG = getLocaleText().helpTextConfig;
 
