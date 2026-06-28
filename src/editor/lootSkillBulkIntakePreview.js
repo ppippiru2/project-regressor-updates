@@ -1,6 +1,6 @@
-import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=482";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=482";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=482";
+import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=483";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=483";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=483";
 
 export const LOOT_SKILL_BULK_INTAKE_PREVIEW_VERSION = "loot-skill-bulk-intake-preview-v1";
 
@@ -28,11 +28,14 @@ export function createLootSkillBulkIntakePreview(
     : [];
   const packageSkillIds = new Set(skillRows.map((row) => row.id).filter(Boolean));
   const rewardItemIds = collectRewardItemIds(rewardLinks);
-  const lootPreviewRows = lootRows.map((row) => createLootPreviewRow(row, {
+  const stagedLootDomain = findStagedDomain(adapterPreview, "loot_item");
+  const stagedSkillDomain = findStagedDomain(adapterPreview, "skill");
+  const lootPreviewRows = lootRows.map((row, rowIndex) => createLootPreviewRow(row, rowIndex, {
     packageSkillIds,
     rewardItemIds,
+    stagedDomain: stagedLootDomain,
   }));
-  const skillPreviewRows = skillRows.map(createSkillPreviewRow);
+  const skillPreviewRows = skillRows.map((row, rowIndex) => createSkillPreviewRow(row, rowIndex, stagedSkillDomain));
   const categoryCounts = createCategoryCounts(lootPreviewRows);
   const rowsMissingSkillDefinitions = lootPreviewRows.filter((row) => row.requiresSkillDefinition && !row.hasSkillDefinition);
   const rowsLinkedToRewards = lootPreviewRows.filter((row) => row.rewardLinked);
@@ -79,21 +82,27 @@ export function createLootSkillBulkIntakePreview(
   };
 }
 
-function createLootPreviewRow(row, { packageSkillIds, rewardItemIds }) {
+function createLootPreviewRow(row, rowIndex, { packageSkillIds, rewardItemIds, stagedDomain }) {
   const id = row.id || "";
   const type = normalizeLootType(row.type);
   const skillId = row.skillId && row.skillId !== "none" ? row.skillId : "";
   const requiresSkillDefinition = type === "skill_fragment" || type === "skill_rune";
   const hasSkillDefinition = !requiresSkillDefinition || CURRENT_SKILL_IDS.has(skillId) || packageSkillIds.has(skillId);
+  const stagedRow = findStagedRow(stagedDomain, rowIndex);
   return {
     id,
+    targetDomainId: "loot_item",
+    packageIdentity: stagedRow.identity || id,
     type,
     rarity: row.rarity || "common",
     stackable: row.stackable !== false,
     recordTarget: Math.max(0, Number(row.recordTarget) || 0),
     skillId,
     dropSource: row.dropSource || "",
-    bulkState: CURRENT_LOOT_IDS.has(id) ? "staged-update" : "staged-append",
+    bulkState: stagedRow.state || (CURRENT_LOOT_IDS.has(id) ? "staged-update" : "staged-append"),
+    targetSurfaceCount: Number(stagedRow.targetSurfaceCount || 0),
+    blockingIssueCodes: Array.from(stagedRow.blockingIssueCodes || []),
+    warningIssueCodes: Array.from(stagedRow.warningIssueCodes || []),
     rewardLinked: rewardItemIds.has(id),
     requiresSkillDefinition,
     hasSkillDefinition,
@@ -106,18 +115,32 @@ function createLootPreviewRow(row, { packageSkillIds, rewardItemIds }) {
   };
 }
 
-function createSkillPreviewRow(row) {
+function createSkillPreviewRow(row, rowIndex, stagedDomain) {
   const id = row.id || "";
+  const stagedRow = findStagedRow(stagedDomain, rowIndex);
   return {
     id,
+    targetDomainId: "skill",
+    packageIdentity: stagedRow.identity || id,
     type: row.type || "Active",
     mpCost: Number(row.mpCost) || 0,
     cooldown: Number(row.cooldown) || 0,
     damageType: row.damageType || "",
     effectType: row.effectType || "",
     stanceAllowed: arrayValue(row.stanceAllowed),
-    bulkState: CURRENT_SKILL_IDS.has(id) ? "staged-update" : "staged-append",
+    bulkState: stagedRow.state || (CURRENT_SKILL_IDS.has(id) ? "staged-update" : "staged-append"),
+    targetSurfaceCount: Number(stagedRow.targetSurfaceCount || 0),
+    blockingIssueCodes: Array.from(stagedRow.blockingIssueCodes || []),
+    warningIssueCodes: Array.from(stagedRow.warningIssueCodes || []),
   };
+}
+
+function findStagedDomain(adapterPreview, domainId) {
+  return (adapterPreview?.stagedImport?.domains || []).find((domain) => domain.id === domainId) || {};
+}
+
+function findStagedRow(stagedDomain = {}, rowIndex = 0) {
+  return (stagedDomain.rows || []).find((row) => row.rowIndex === rowIndex) || {};
 }
 
 function createCategoryCounts(rows) {
