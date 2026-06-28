@@ -4448,10 +4448,89 @@ select:focus {
   line-height: 1.35;
 }
 
+.editor-save-edit-sample-payload {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 16, 40, 0.34);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-sample-payload-head,
+.editor-save-edit-sample-payload-group > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-sample-payload h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-sample-payload-head span,
+.editor-save-edit-sample-payload-group span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-sample-payload-metrics,
+.editor-save-edit-sample-payload-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-sample-payload-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-sample-payload-group {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-sample-payload-group strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-sample-payload-code {
+  max-height: 18rem;
+  overflow: auto;
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #dff8ff;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
 @media (max-width: 900px) {
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
-  .editor-save-edit-rule-checks {
+  .editor-save-edit-rule-checks,
+  .editor-save-edit-sample-payload-metrics,
+  .editor-save-edit-sample-payload-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -4460,10 +4539,14 @@ select:focus {
   .editor-save-edit-rule-drilldown-head,
   .editor-save-edit-rule-card-head,
   .editor-save-edit-rule-check > div:first-child,
+  .editor-save-edit-sample-payload-head,
+  .editor-save-edit-sample-payload-group > div:first-child,
   .editor-save-edit-rule-drilldown-metrics,
   .editor-save-edit-rule-drilldown-grid,
   .editor-save-edit-rule-card-meta,
-  .editor-save-edit-rule-checks {
+  .editor-save-edit-rule-checks,
+  .editor-save-edit-sample-payload-metrics,
+  .editor-save-edit-sample-payload-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -1,4 +1,4 @@
-import { INFO_TEXT } from "../config/infoText.js?v=524";
+import { INFO_TEXT } from "../config/infoText.js?v=525";
 
 const INFO_SELECTOR = "[data-info-key], [data-info-title]";
 
