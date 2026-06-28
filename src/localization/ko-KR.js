@@ -1241,6 +1241,7 @@ export const KO_KR_TEXT = {
   combatActionAvailability: {
     onlyCombat: "전투 중에만 사용할 수 있습니다.",
     noMp: "마나가 부족합니다.",
+    cooldownRemaining: "쿨다운 {seconds}s 남음",
     wrongStance: "{stanceName} 전술에서는 사용할 수 없습니다.",
     lowHp: "체력이 30% 이하일 때 사용할 수 있습니다.",
     berserkNeedHyper: "폭주 전술은 극한 동기화가 준비되어야 공격 스킬을 사용할 수 있습니다.",

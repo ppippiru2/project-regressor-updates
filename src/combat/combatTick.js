@@ -32,6 +32,7 @@ export function advanceCombatFrameRuntime({ state, combatRuntime, player, enemy 
   const elapsedSeconds = beginCombatFrame(combatRuntime);
 
   regenerateCombatResources(state, player, enemy, elapsedSeconds);
+  advanceActionCooldowns(combatRuntime);
   const playerHyperEnded = advancePlayerHyperState(state, elapsedSeconds) === "ended";
   const enemyHyperEnded = advanceEnemyHyperState(combatRuntime, elapsedSeconds) === "ended";
   if (shouldAdvanceAutoCombatActions(state, combatRuntime)) advanceCombatActionGauges(combatRuntime, player, enemy, elapsedSeconds);
@@ -53,6 +54,14 @@ export function consumeReadyEnemyAction(combatRuntime) {
   if (combatRuntime.enemyAction < 100) return false;
   combatRuntime.enemyAction = 0;
   return true;
+}
+
+export function advanceActionCooldowns(combatRuntime, now = Date.now()) {
+  const cooldowns = combatRuntime?.actionCooldowns;
+  if (!cooldowns || typeof cooldowns !== "object") return;
+  for (const [actionId, value] of Object.entries(cooldowns)) {
+    if (Number(value || 0) <= now) delete cooldowns[actionId];
+  }
 }
 
 export function advancePlayerHyperState(state, elapsedSeconds) {

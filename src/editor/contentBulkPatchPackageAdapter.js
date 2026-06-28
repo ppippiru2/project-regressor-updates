@@ -1,8 +1,8 @@
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=492";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=493";
 import {
   CONTENT_BULK_PATCH_BATCH_KEYS,
   createContentBulkPatchIntakeContract,
-} from "./contentBulkPatchIntakeContract.js?v=492";
+} from "./contentBulkPatchIntakeContract.js?v=493";
 
 export const CONTENT_BULK_PATCH_PACKAGE_ADAPTER_VERSION = "content-bulk-patch-package-adapter-v1";
 

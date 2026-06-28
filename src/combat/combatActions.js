@@ -1,12 +1,13 @@
-import { t, tf } from "../localization/index.js?v=492";
+import { t, tf } from "../localization/index.js?v=493";
 
-export function choosePlayerAction(player, state, skills, getSkill, hypMax) {
+export function choosePlayerAction(player, state, skills, getSkill, hypMax, actionCooldowns = {}) {
   const hpRate = state.player.hp / player.maxHp;
   const recovery = skills.find((skill) => (
     skill.damageType === "support"
     && Number.isFinite(skill.triggerHpRatio)
     && hpRate <= skill.triggerHpRatio
     && state.player.mp >= skill.mpCost
+    && !isSkillOnCooldown(skill, actionCooldowns)
     && skill.stanceAllowed.includes(state.stance)
   ));
   if (recovery) return createPlayerCombatAction(recovery, player);
@@ -15,6 +16,7 @@ export function choosePlayerAction(player, state, skills, getSkill, hypMax) {
     if (skill.damageType === "support") return false;
     if (!skill.stanceAllowed.includes(state.stance)) return false;
     if (state.player.mp < skill.mpCost) return false;
+    if (isSkillOnCooldown(skill, actionCooldowns)) return false;
     if (state.stance === "berserk" && state.hyp < hypMax && state.hyperActiveTicks <= 0) return false;
     return true;
   });
@@ -31,10 +33,17 @@ export function createPlayerCombatAction(action, player) {
   return { kind: "attack", skill: action, multiplier: action.multiplier || 1 };
 }
 
-export function skillAvailability(skill, player, state, requireCombat, hypMax) {
+export function skillAvailability(skill, player, state, requireCombat, hypMax, actionCooldowns = {}) {
   if (skill.id === "basic_attack") return { available: true, reason: "" };
   if (requireCombat && !state.inCombat) return { available: false, reason: t("combatActionAvailability.onlyCombat") };
   if (state.player.mp < skill.mpCost) return { available: false, reason: t("combatActionAvailability.noMp") };
+  const cooldownRemaining = skillCooldownRemaining(skill, actionCooldowns);
+  if (cooldownRemaining > 0) {
+    return {
+      available: false,
+      reason: tf("combatActionAvailability.cooldownRemaining", { seconds: Math.ceil(cooldownRemaining) }),
+    };
+  }
   if (!skill.stanceAllowed.includes(state.stance)) {
     return { available: false, reason: tf("combatActionAvailability.wrongStance", { stanceName: stanceName(state.stance) }) };
   }
@@ -54,6 +63,17 @@ export function stanceName(stance) {
 function skillHealAmount(skill, player) {
   const heal = skill.heal || {};
   return player.maxHp * (heal.maxHpRatio || 0) + player.total.WIS * (heal.wisScale || 0);
+}
+
+function isSkillOnCooldown(skill, actionCooldowns) {
+  return skillCooldownRemaining(skill, actionCooldowns) > 0;
+}
+
+function skillCooldownRemaining(skill, actionCooldowns, now = Date.now()) {
+  if (!skill?.id || !actionCooldowns || typeof actionCooldowns !== "object") return 0;
+  const cooldownUntil = Number(actionCooldowns[skill.id] || 0);
+  if (!Number.isFinite(cooldownUntil)) return 0;
+  return Math.max(0, (cooldownUntil - now) / 1000);
 }
 
 

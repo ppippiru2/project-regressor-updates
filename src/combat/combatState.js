@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, COMBAT_RUNTIME_BALANCE } from "../balance/combatBalance.js?v=492";
+import { BREAK_GAUGE_BALANCE, COMBAT_RUNTIME_BALANCE } from "../balance/combatBalance.js?v=493";
 
 export const COMBAT_FRAME_MS = COMBAT_RUNTIME_BALANCE.frameMs;
 export const AUTO_RESTART_DELAY_MS = COMBAT_RUNTIME_BALANCE.autoRestartDelayMs;
@@ -14,6 +14,7 @@ export function createCombatRuntime() {
     turnCount: 0,
     lastDamage: 0,
     battleLoopSequence: 0,
+    actionCooldowns: {},
     enemyHyp: 0,
     enemyHyperActiveTicks: 0,
     enemyHyperDuration: 0,

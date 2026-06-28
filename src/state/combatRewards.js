@@ -1,9 +1,9 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=492";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=492";
-import { claimFirstCodexRecordGuide, claimFirstLootDropGuide } from "./tutorialGuidance.js?v=492";
-import { t, tf } from "../localization/index.js?v=492";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=492";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=493";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=493";
+import { claimFirstCodexRecordGuide, claimFirstLootDropGuide } from "./tutorialGuidance.js?v=493";
+import { t, tf } from "../localization/index.js?v=493";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=493";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
