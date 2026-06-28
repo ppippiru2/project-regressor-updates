@@ -1,7 +1,12 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=487";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=487";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=488";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=488";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION = "content-bulk-patch-backup-plan-v1";
+const FILE_BACKUP_REVIEW_BLOCKERS = Object.freeze([
+  "backup-writer-not-implemented",
+  "snapshot-not-created",
+  "restore-not-tested",
+]);
 
 export function createContentBulkPatchBackupPlan(
   exportPreview = createContentBulkPatchFilePatchDraftExport(),
@@ -53,6 +58,8 @@ export function createContentBulkPatchBackupPlan(
       backupStepCount: backupSteps.length,
       restoreStepCount: restoreSteps.length,
       blockedReasonCount: blockedReasons.length,
+      filesWithReviewBlockers: fileBackups.filter((file) => file.reviewBlockerCodes.length > 0).length,
+      fileReviewBlockerCount: fileBackups.reduce((sum, file) => sum + file.reviewBlockerCodes.length, 0),
       applyGateCount: applyGatePlan.summary?.gateCount || 0,
       preApplyReviewItemCount: applyGatePlan.summary?.reviewItemCount || 0,
       preApplyBlockedReviewItemCount: applyGatePlan.summary?.blockedReviewItemCount || 0,
@@ -87,6 +94,7 @@ function createFileBackups(exportPreview) {
     patchBlockCount: Array.isArray(file.patchBlocks) ? file.patchBlocks.length : 0,
     backupState: "pending-snapshot",
     restoreState: "pending-restore-test",
+    reviewBlockerCodes: [...FILE_BACKUP_REVIEW_BLOCKERS],
   }));
 }
 

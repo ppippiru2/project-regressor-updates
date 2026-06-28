@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 487,
-  "displayVersion": "v487",
-  "cacheVersion": "project-regressor-mvp-v487",
-  "updatedAt": "2026-06-28T21:46:43.424+09:00",
+  "versionCode": 488,
+  "displayVersion": "v488",
+  "cacheVersion": "project-regressor-mvp-v488",
+  "updatedAt": "2026-06-28T21:53:58.250+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=487&cachebust=487",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=488&cachebust=488",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v487 embeds the pre-apply review checklist into the downloadable content bulk file patch draft payload.",
-    "v487 makes the apply gate reuse the exported payload checklist and surfaces the same pre-apply state on the patch draft export card.",
-    "v487 keeps patch export, apply, backup, and restore writers disabled and bumps runtime, service worker, Android, and update manifest cache keys."
+    "v488 adds file-level backup and restore rehearsal blocker drilldowns to the content bulk review surfaces.",
+    "v488 shows per-file snapshot, backup writer, restore writer, and rehearsal blockers in backup and restore preview rows.",
+    "v488 keeps patch export, apply, backup, and restore writers disabled and bumps runtime, service worker, Android, and update manifest cache keys."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v487-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v487-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
   },
   "version": {
-    "code": 487,
-    "name": "4.87.0",
-    "displayName": "v487"
+    "code": 488,
+    "name": "4.88.0",
+    "displayName": "v488"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v487-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
   },
   "android": {
-    "code": 487,
-    "name": "4.87.0",
-    "displayName": "v487",
+    "code": 488,
+    "name": "4.88.0",
+    "displayName": "v488",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v487-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
     },
     "version": {
-      "code": 487,
-      "name": "4.87.0",
-      "displayName": "v487"
+      "code": 488,
+      "name": "4.88.0",
+      "displayName": "v488"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v487-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v488-debug.apk"
   }
 }

@@ -2821,6 +2821,11 @@ export const KO_KR_TEXT = {
             "snapshot-not-created": "스냅샷 미생성",
             "restore-not-tested": "복구 절차 미검증"
           },
+          fileReviewBlockerLabels: {
+            "backup-writer-not-implemented": "파일 백업 writer 미구현",
+            "snapshot-not-created": "파일 스냅샷 미생성",
+            "restore-not-tested": "파일 복구 테스트 미검증"
+          },
           stateLabels: {
             "pending-snapshot": "스냅샷 대기",
             "pending-restore-test": "복구 테스트 대기"
@@ -2877,6 +2882,11 @@ export const KO_KR_TEXT = {
           blockedReasonLabels: {
             "restore-writer-not-implemented": "복구 writer 미구현",
             "actual-snapshot-not-created": "실제 스냅샷 미생성"
+          },
+          fileRehearsalBlockerLabels: {
+            "restore-writer-not-implemented": "파일 복구 writer 미구현",
+            "actual-snapshot-not-created": "실제 파일 스냅샷 미생성",
+            "pending-rehearsal": "파일 리허설 대기"
           },
           stateLabels: {
             "pending-snapshot": "스냅샷 대기",

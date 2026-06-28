@@ -1,6 +1,11 @@
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=487";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=488";
 
 export const CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VERSION = "content-bulk-patch-restore-rehearsal-v1";
+const RESTORE_FILE_REHEARSAL_BLOCKERS = Object.freeze([
+  "restore-writer-not-implemented",
+  "actual-snapshot-not-created",
+  "pending-rehearsal",
+]);
 
 export function createContentBulkPatchRestoreRehearsal(backupPlan = createContentBulkPatchBackupPlan()) {
   const restoreActions = createRestoreActions(backupPlan);
@@ -36,6 +41,8 @@ export function createContentBulkPatchRestoreRehearsal(backupPlan = createConten
       restoreStepCount: Array.isArray(backupPlan.restoreSteps) ? backupPlan.restoreSteps.length : 0,
       validationStepCount: validationSteps.length,
       blockedReasonCount: blockedReasons.length,
+      filesWithRehearsalBlockers: restoreActions.filter((action) => action.rehearsalBlockerCodes.length > 0).length,
+      fileRehearsalBlockerCount: restoreActions.reduce((sum, action) => sum + action.rehearsalBlockerCodes.length, 0),
     },
     blockedReasons,
     preApplyReviewSummary: {
@@ -66,6 +73,7 @@ function createRestoreActions(backupPlan) {
     backupState: file.backupState || "pending-snapshot",
     restoreState: "mapped-to-restore",
     checkState: "pending-rehearsal",
+    rehearsalBlockerCodes: [...RESTORE_FILE_REHEARSAL_BLOCKERS],
   }));
 }
 
