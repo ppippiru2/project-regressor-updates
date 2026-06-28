@@ -251,7 +251,7 @@
       "status": "partial",
       "priority": "high",
       "source": "user-request-save-editor",
-      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, apply gate checklist, recovery rehearsal preview, apply-gate recovery readiness summary, edit-input schema preview, proposed-value validation matrix, validation-rule drilldown, proposed-value sample payload preview, validator dry-run plan, validator registry contract preview, validator result schema preview, validator result-to-apply gate bridge preview, confirmation preflight preview, confirmation input/apply-runner contract preview, writer payload/rollback checkpoint preview, and post-write validation/restore route contract preview are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
+      "summary": "Read-only save slot diagnostics, validation/rollback contract preview, staged edit draft payload shape, staged draft diff summary, apply gate checklist, recovery rehearsal preview, apply-gate recovery readiness summary, edit-input schema preview, proposed-value validation matrix, validation-rule drilldown, proposed-value sample payload preview, validator dry-run plan, validator registry contract preview, validator result schema preview, validator result-to-apply gate bridge preview, confirmation preflight preview, confirmation input/apply-runner contract preview, writer payload/rollback checkpoint preview, post-write validation/restore route contract preview, and writer enablement risk/manual unlock checklist preview are connected. Manual editing for active save, save slots, gold, level, region, equipment, inventory, and profile still needs confirmed writer controls.",
       "editorHooks": [
         "src/state/save.js",
         "src/state/saveSlots.js",
@@ -274,6 +274,7 @@
         "src/editor/editorMain.js:renderSaveSlotEditConfirmationInputContractPreview",
         "src/editor/editorMain.js:renderSaveSlotEditWriterPayloadCheckpointPreview",
         "src/editor/editorMain.js:renderSaveSlotEditPostWriteRestoreContractPreview",
+        "src/editor/editorMain.js:renderSaveSlotEditWriterEnablementRiskSummary",
         "styles.css:.editor-save-diagnostics",
         "styles.css:.editor-save-validation",
         "styles.css:.editor-save-draft",
@@ -292,6 +293,7 @@
         "styles.css:.editor-save-edit-confirmation-contract",
         "styles.css:.editor-save-edit-writer-checkpoint",
         "styles.css:.editor-save-edit-postwrite-restore",
+        "styles.css:.editor-save-edit-writer-unlock",
         "build-scripts/check-save-slot-diagnostics.mjs",
         "build-scripts/check-save-slot-validation-plan.mjs",
         "build-scripts/check-save-slot-draft-payload.mjs",
@@ -311,6 +313,7 @@
         "build-scripts/check-save-slot-edit-confirmation-input-contract.mjs",
         "build-scripts/check-save-slot-edit-writer-payload-checkpoint.mjs",
         "build-scripts/check-save-slot-edit-postwrite-restore-contract.mjs",
+        "build-scripts/check-save-slot-edit-writer-enablement-risk.mjs",
         "future rollback snapshot"
       ]
     },

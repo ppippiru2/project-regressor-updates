@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=533";
-import { getLocaleText, t, tf } from "../localization/index.js?v=533";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=533";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=533";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=533";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=533";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=533";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=533";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=533";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=533";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=533";
+import { applyDomLocalization } from "../localization/domText.js?v=534";
+import { getLocaleText, t, tf } from "../localization/index.js?v=534";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=534";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=534";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=534";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=534";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=534";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=534";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=534";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=534";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=534";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=533";
+} from "./contentBulkPatchPackageAdapter.js?v=534";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=533";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=533";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=533";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=533";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=533";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=533";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=533";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=533";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=533";
+} from "./contentBulkPackageOverview.js?v=534";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=534";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=534";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=534";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=534";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=534";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=534";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=534";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=534";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=533";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=533";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=533";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=533";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=533";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=533";
+} from "./runtimeVfxBulkIntakePreview.js?v=534";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=534";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=534";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=534";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=534";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=534";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=533";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=533";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=533";
+} from "./monsterSpriteSlotReport.js?v=534";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=534";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=534";
 
-const EDITOR_VERSION = "533";
+const EDITOR_VERSION = "534";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5298,6 +5298,7 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditConfirmationInputContractPreview(diagnostics)}
       ${renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics)}
       ${renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics)}
+      ${renderSaveSlotEditWriterEnablementRiskSummary(diagnostics)}
     </section>
   `;
 }
@@ -6012,6 +6013,44 @@ function renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditWriterEnablementRiskSummary(diagnostics) {
+  const summary = createSaveSlotEditWriterEnablementRiskSummary(diagnostics);
+  const text = EDITOR_TEXT.saveEditWriterEnablementRisk || {};
+  return `
+    <section class="editor-save-edit-writer-unlock" data-save-edit-writer-enable-risk-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}" data-unlock="${escapeAttribute(summary.manualUnlock.status)}">
+      <div class="editor-save-edit-writer-unlock-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit writer enablement risk")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(summary.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(summary.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-writer-unlock-metrics">
+        ${metricCard(text.riskMetric || "Risk", summary.riskLevel, text.riskHint || "")}
+        ${metricCard(text.checkMetric || "Checklist", tf("editorPrep.saveEditWriterEnablementRisk.checkValue", { count: summary.checkCount }, `${summary.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditWriterEnablementRisk.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.unlockMetric || "Manual unlock", summary.manualUnlock.status, text.unlockHint || "")}
+      </div>
+      <div class="editor-save-edit-writer-unlock-grid">
+        ${summary.checklist.map((check) => renderSaveEditWriterEnablementRiskCheck(check)).join("")}
+      </div>
+      <div class="editor-save-edit-writer-unlock-manual" data-save-edit-manual-unlock-checklist data-status="${escapeAttribute(summary.manualUnlock.status)}">
+        <div>
+          <strong>${escapeHtml(text.manualTitle || "Manual unlock checklist")}</strong>
+          <span>${escapeHtml(summary.manualUnlock.status)}</span>
+        </div>
+        <div class="editor-chip-list">
+          ${summary.manualUnlock.requiredReview.map((item) => chip(item)).join("")}
+          ${summary.manualUnlock.blockers.map((item) => chip(item)).join("")}
+        </div>
+      </div>
+      <pre class="editor-save-edit-writer-unlock-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
 function createSaveSlotDraftDiffSummary(diagnostics) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
   const targets = createSaveDraftDiffTargets(diagnostics)
@@ -6581,12 +6620,80 @@ function createSaveSlotEditPostWriteRestoreContractPreview(diagnostics) {
   };
 }
 
+function createSaveSlotEditWriterEnablementRiskSummary(diagnostics) {
+  const restoreContract = createSaveSlotEditPostWriteRestoreContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditWriterEnablementRisk || {};
+  const checklist = [
+    saveEditWriterEnablementRiskCheck("restore-contract-readable", true, text.checkLabels?.restoreContractReadable, text.checkDetails?.restoreContractReadable, ""),
+    saveEditWriterEnablementRiskCheck("validator-results-produced", false, text.checkLabels?.validatorResultsProduced, text.checkDetails?.validatorResultsProduced, "validator-results-missing"),
+    saveEditWriterEnablementRiskCheck("confirmation-input-bound", false, text.checkLabels?.confirmationInputBound, text.checkDetails?.confirmationInputBound, "confirmation-input-missing"),
+    saveEditWriterEnablementRiskCheck("rollback-checkpoint-available", false, text.checkLabels?.rollbackCheckpointAvailable, text.checkDetails?.rollbackCheckpointAvailable, "rollback-checkpoint-not-created"),
+    saveEditWriterEnablementRiskCheck("post-write-validation-bound", false, text.checkLabels?.postWriteValidationBound, text.checkDetails?.postWriteValidationBound, "post-write-validation-missing"),
+    saveEditWriterEnablementRiskCheck("restore-runner-bound", false, text.checkLabels?.restoreRunnerBound, text.checkDetails?.restoreRunnerBound, "restore-runner-missing"),
+    saveEditWriterEnablementRiskCheck("manual-unlock-approved", false, text.checkLabels?.manualUnlockApproved, text.checkDetails?.manualUnlockApproved, "manual-unlock-not-approved"),
+  ];
+  const blockers = Array.from(new Set(
+    checklist
+      .map((check) => check.blocker)
+      .filter(Boolean)
+      .concat(restoreContract.blockers),
+  ));
+  const manualUnlock = {
+    status: "not-available",
+    mode: "manual-review-only",
+    requiredReview: [
+      "validator-results",
+      "rollback-checkpoint",
+      "post-write-validation",
+      "restore-runner",
+      "failure-log",
+    ],
+    blockers: ["manual-unlock-not-approved", "writer-disabled"],
+  };
+  return {
+    status: "blocked",
+    version: "save-edit-final-writer-enablement-risk-manual-unlock-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    riskLevel: "high",
+    checkCount: checklist.length,
+    blockerCount: blockers.length,
+    checklist,
+    manualUnlock,
+    payloadShape: {
+      version: "save-edit-final-writer-enablement-risk-manual-unlock-v1",
+      mode: "read-only-preview",
+      source: restoreContract.version,
+      riskLevel: "high",
+      writer: "disabled",
+      apply: "disabled",
+      manualUnlock: {
+        status: "not-available",
+        mode: "manual-review-only",
+        requiredReview: manualUnlock.requiredReview,
+        blockers: manualUnlock.blockers,
+      },
+      blockers,
+    },
+  };
+}
+
 function saveEditPostWriteRestoreRoute(id, label, status, blocker) {
   return {
     id,
     label: label || id,
     status,
     blocker,
+  };
+}
+
+function saveEditWriterEnablementRiskCheck(id, isReady, label, detail, blocker) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+    blocker: blocker || "",
   };
 }
 
@@ -6993,6 +7100,20 @@ function renderSaveEditPostWriteRestoreRoute(route) {
         <span>${escapeHtml(route.status)}</span>
       </div>
       ${chip(tf("editorPrep.saveEditPostWriteRestoreContract.blockerText", { blocker: route.blocker }, `${text.blocker || "Blocker"}: ${route.blocker}`))}
+    </article>
+  `;
+}
+
+function renderSaveEditWriterEnablementRiskCheck(check) {
+  const text = EDITOR_TEXT.saveEditWriterEnablementRisk || {};
+  return `
+    <article class="editor-save-edit-writer-unlock-check" data-save-edit-writer-unlock-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
+      ${check.blocker ? chip(tf("editorPrep.saveEditWriterEnablementRisk.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
     </article>
   `;
 }
