@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=517";
-import { getLocaleText, t, tf } from "../localization/index.js?v=517";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=517";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=517";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=517";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=517";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=517";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=517";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=517";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=517";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=517";
+import { applyDomLocalization } from "../localization/domText.js?v=518";
+import { getLocaleText, t, tf } from "../localization/index.js?v=518";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=518";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=518";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=518";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=518";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=518";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=518";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=518";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=518";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=518";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=517";
+} from "./contentBulkPatchPackageAdapter.js?v=518";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=517";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=517";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=517";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=517";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=517";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=517";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=517";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=517";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=517";
+} from "./contentBulkPackageOverview.js?v=518";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=518";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=518";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=518";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=518";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=518";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=518";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=518";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=518";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=517";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=517";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=517";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=517";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=517";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=517";
+} from "./runtimeVfxBulkIntakePreview.js?v=518";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=518";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=518";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=518";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=518";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=518";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=517";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=517";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=517";
+} from "./monsterSpriteSlotReport.js?v=518";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=518";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=518";
 
-const EDITOR_VERSION = "517";
+const EDITOR_VERSION = "518";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5283,6 +5283,7 @@ function renderSaveSlotDiagnostics() {
       </div>
       ${renderSaveSlotValidationPlan(diagnostics)}
       ${renderSaveSlotDraftPayloadPreview(diagnostics)}
+      ${renderSaveSlotDraftDiffSummary(diagnostics)}
     </section>
   `;
 }
@@ -5499,6 +5500,176 @@ function renderSaveDraftFieldGroup(group) {
   `;
 }
 
+function renderSaveSlotDraftDiffSummary(diagnostics) {
+  const diff = createSaveSlotDraftDiffSummary(diagnostics);
+  const text = EDITOR_TEXT.saveDraftDiff || {};
+  return `
+    <section class="editor-save-diff" data-save-draft-diff>
+      <div class="editor-save-diff-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save draft diff summary")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(diff.applyStatus)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(diff.applyStatus))}
+        </span>
+      </div>
+      <div class="editor-save-diff-metrics">
+        ${metricCard(text.targetMetric || "Targets", `${diff.targetCount}`, text.targetHint || "")}
+        ${metricCard(text.fieldMetric || "Fields", `${diff.fieldCount}`, text.fieldHint || "")}
+        ${metricCard(text.comparableMetric || "Comparable", `${diff.comparableRows}`, text.comparableHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", `${diff.blockedRows}`, text.blockedHint || "")}
+      </div>
+      <div class="editor-save-diff-grid">
+        ${diff.groups.map((group) => renderSaveDraftDiffGroup(group, text)).join("")}
+      </div>
+      <div class="editor-save-diff-row-list">
+        ${diff.rows.slice(0, 12).map((row) => renderSaveDraftDiffRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No diff rows.")}</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function createSaveSlotDraftDiffSummary(diagnostics) {
+  const draft = createSaveSlotDraftPayloadPreview(diagnostics);
+  const targets = createSaveDraftDiffTargets(diagnostics)
+    .filter((target) => draft.payloadShape.target.ids.includes(target.id));
+  const fields = draft.fieldGroups.flatMap((group) => group.fields.map((field) => ({
+    ...field,
+    groupId: group.id,
+    groupLabel: group.label,
+  })));
+  const rows = targets.flatMap((target) => fields.map((field) => createSaveDraftDiffRow(target, field)));
+  const groups = draft.fieldGroups.map((group) => {
+    const groupRows = rows.filter((row) => row.groupId === group.id);
+    return {
+      id: group.id,
+      label: group.label,
+      fieldCount: group.fields.length,
+      rowCount: groupRows.length,
+      comparableRows: groupRows.filter((row) => row.status === "waiting-input").length,
+      missingRows: groupRows.filter((row) => row.status === "missing-current-path").length,
+      blockedRows: groupRows.filter((row) => row.status === "target-blocked").length,
+      paths: group.fields.map((field) => field.path),
+    };
+  });
+  return {
+    applyStatus: "blocked",
+    targetCount: targets.length,
+    fieldCount: fields.length,
+    rowCount: rows.length,
+    comparableRows: rows.filter((row) => row.status === "waiting-input").length,
+    missingRows: rows.filter((row) => row.status === "missing-current-path").length,
+    blockedRows: rows.filter((row) => row.status === "target-blocked").length,
+    rows,
+    groups,
+  };
+}
+
+function createSaveDraftDiffTargets(diagnostics) {
+  const text = EDITOR_TEXT.saveDraftDiff || {};
+  return [
+    {
+      id: "activeSave",
+      label: text.activeSaveTarget || "Active save",
+      status: diagnostics.activeSave.status,
+      saveState: diagnostics.activeSave.value,
+    },
+    ...diagnostics.slots.map((slot) => ({
+      id: slot.id,
+      label: slot.label,
+      status: slot.status,
+      saveState: slot.saveState,
+    })),
+  ];
+}
+
+function createSaveDraftDiffRow(target, field) {
+  const targetReady = ["ready", "warning"].includes(target.status) && isPlainObject(target.saveState);
+  if (!targetReady) {
+    return {
+      ...field,
+      targetId: target.id,
+      targetLabel: target.label,
+      status: "target-blocked",
+      currentPreview: "-",
+      proposedPreview: "pending-input",
+      blocker: target.status || "unavailable",
+    };
+  }
+  const current = readSaveDraftPath(target.saveState, field.path);
+  return {
+    ...field,
+    targetId: target.id,
+    targetLabel: target.label,
+    status: current.exists ? "waiting-input" : "missing-current-path",
+    currentPreview: current.exists ? formatSaveDraftDiffValue(current.value) : "-",
+    proposedPreview: "pending-input",
+    blocker: current.exists ? "writer-disabled" : "missing-current-path",
+  };
+}
+
+function renderSaveDraftDiffGroup(group, text = {}) {
+  return `
+    <article class="editor-save-diff-group" data-save-diff-group="${escapeAttribute(group.id)}">
+      <strong>${escapeHtml(group.label)}</strong>
+      <div class="editor-save-diff-group-metrics">
+        ${chip(tf("editorPrep.saveDraftDiff.groupRowValue", { count: group.rowCount }, `${group.rowCount}`))}
+        ${chip(tf("editorPrep.saveDraftDiff.groupComparableValue", { count: group.comparableRows }, `${group.comparableRows}`))}
+        ${chip(tf("editorPrep.saveDraftDiff.groupMissingValue", { count: group.missingRows }, `${group.missingRows}`))}
+        ${chip(tf("editorPrep.saveDraftDiff.groupBlockedValue", { count: group.blockedRows }, `${group.blockedRows}`))}
+      </div>
+      ${balanceDetailChipBlock(text.paths || "Paths", group.paths)}
+    </article>
+  `;
+}
+
+function renderSaveDraftDiffRow(row, text = {}) {
+  const labels = text.statusLabels || {};
+  return `
+    <article class="editor-save-diff-row" data-save-diff-row data-status="${escapeAttribute(row.status)}">
+      <div>
+        <strong>${escapeHtml(row.targetLabel)} / ${escapeHtml(row.path)}</strong>
+        <span>${escapeHtml(labels[row.status] || row.status)}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.currentValue || "Current")}</dt>
+          <dd>${escapeHtml(row.currentPreview)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.proposedValue || "Proposed")}</dt>
+          <dd>${escapeHtml(text.pendingInput || row.proposedPreview)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
+          <dd>${escapeHtml(row.blocker)}</dd>
+        </div>
+      </dl>
+    </article>
+  `;
+}
+
+function readSaveDraftPath(source, path) {
+  const parts = String(path || "").split(".").filter(Boolean);
+  let value = source;
+  for (const part of parts) {
+    if (!isPlainObject(value) && !Array.isArray(value)) return { exists: false, value: undefined };
+    if (!Object.hasOwn(value, part)) return { exists: false, value: undefined };
+    value = value[part];
+  }
+  return { exists: true, value };
+}
+
+function formatSaveDraftDiffValue(value) {
+  if (value === null) return "null";
+  if (value === undefined) return "-";
+  if (Array.isArray(value)) return `array(${value.length})`;
+  if (isPlainObject(value)) return `object(${Object.keys(value).length})`;
+  const text = String(value);
+  return text.length > 32 ? `${text.slice(0, 29)}...` : text;
+}
+
 function createSaveSlotDiagnostics() {
   const text = EDITOR_TEXT.saveDiagnostics || {};
   const activeSave = readEditorStorageJson(SAVE_SLOT_DIAGNOSTIC_KEYS.activeSave, { expectObject: true });
@@ -5544,6 +5715,7 @@ function createSaveSlotDiagnostic(slotId, index, slotStore) {
     label,
     rawLength: 0,
     summary: null,
+    saveState: null,
     warnings: [],
   };
   if (slotStore.status !== "ready") {
@@ -5587,6 +5759,7 @@ function createSaveSlotDiagnostic(slotId, index, slotStore) {
     rawLength,
     status: warnings.length ? "warning" : "ready",
     summary,
+    saveState: snapshot.state,
     warnings,
     hint: warnings.length ? warnings.join(" · ") : (text.readySlotHint || ""),
   };

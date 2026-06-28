@@ -1,6 +1,6 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=517";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=517";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=517";
+import { getLocaleText, t, tf } from "../localization/index.js?v=518";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=518";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=518";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));

@@ -1,5 +1,5 @@
 import { activateEnemyHyperState, endEnemyHyperState, endPlayerHyperState } from "../combat/hyperState.js";
-import { t, tf } from "../localization/index.js?v=517";
+import { t, tf } from "../localization/index.js?v=518";
 
 export function activatePlayerHyperMode(state, durationSeconds, maxHyp) {
   if (state.hyp < maxHyp || state.hyperActiveTicks > 0 || state.hyperCooldown > 0) {

@@ -721,7 +721,8 @@
         "localStorage:project_regressor_ui_state",
         "build-scripts/check-save-slot-diagnostics.mjs",
         "build-scripts/check-save-slot-validation-plan.mjs",
-        "build-scripts/check-save-slot-draft-payload.mjs"
+        "build-scripts/check-save-slot-draft-payload.mjs",
+        "build-scripts/check-save-slot-draft-diff-summary.mjs"
       ],
       "assetSlots": [],
       "editorFields": [
@@ -743,12 +744,15 @@
         "writeApplyGate",
         "saveEditDraftPayload",
         "saveAllowedEditPaths",
+        "saveEditDraftDiffSummary",
+        "saveEditDraftDiffRows",
         "missingSlotWarning"
       ],
       "futureControls": [
         "읽기 전용 슬롯 진단",
         "검증/롤백 계약 미리보기",
         "저장 편집 draft payload 미리보기",
+        "저장 편집 draft diff 요약",
         "세이브 슬롯 선택",
         "세계선 데이터 조작",
         "JSON 백업/복원",
