@@ -23,8 +23,10 @@ export function bindDelegatedClickEvents({
   onDeveloperAction,
   onDeveloperOptionChange,
   onNavigateToView,
+  onCombatAction,
 } = {}) {
   root.addEventListener("click", (event) => {
+    const combatAction = event.target.closest("[data-combat-action]");
     const equip = event.target.closest("[data-equip]");
     const equipRecommended = event.target.closest("[data-equip-recommended]");
     const unequip = event.target.closest("[data-unequip]");
@@ -47,6 +49,12 @@ export function bindDelegatedClickEvents({
     const shopSell = event.target.closest("[data-shop-sell]");
     const developerAction = event.target.closest("[data-developer-action]");
     const systemTarget = event.target.closest("[data-system-target-view]");
+
+    if (combatAction) {
+      event.preventDefault();
+      onCombatAction?.(combatAction.dataset.combatAction);
+      return;
+    }
 
     if (systemTarget && !event.target.closest(".collapse-toggle")) {
       onNavigateToView?.(systemTarget.dataset.systemTargetView);

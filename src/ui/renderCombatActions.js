@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=489";
+import { t, tf } from "../localization/index.js?v=490";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;
@@ -30,6 +30,7 @@ export function renderCombatSkillsIfNeeded(player, context) {
     now < context.combatRuntime.actionFlashUntil
       ? `${context.combatRuntime.lastActionId || ""}:${context.combatRuntime.actionFlashUntil || 0}`
       : "";
+  const inputLocked = context.combatRuntime.inputLocked === true;
   const availabilityKey = context
     .combatActionList()
     .map((action) => {
@@ -46,6 +47,8 @@ export function renderCombatSkillsIfNeeded(player, context) {
     Math.floor(context.state.player.mp || 0),
     context.combatRuntime.visibleActionInfoId || "",
     context.combatRuntime.visibleCombatHelpId || "",
+    inputLocked ? "locked" : "ready",
+    context.combatRuntime.battlePhase || "",
     context.activeSkillLoadoutId?.() || "",
     loadoutKey,
     flashActionId,
@@ -62,6 +65,7 @@ function renderCombatSkills(player, context) {
   if (!container) return;
 
   const now = Date.now();
+  const inputLocked = context.combatRuntime.inputLocked === true;
   const visibleAction = context.combatRuntime.visibleActionInfoId
     ? context.getCombatAction(context.combatRuntime.visibleActionInfoId)
     : null;
@@ -75,9 +79,11 @@ function renderCombatSkills(player, context) {
       const lastUsed = context.combatRuntime.lastActionId === action.id;
       const flashing = lastUsed && now < context.combatRuntime.actionFlashUntil;
       const infoParts = actionInfoParts(action, context, availability);
+      const usable = availability.available && !inputLocked;
       const classes = [
         "skill-button",
-        availability.available ? "is-usable" : "is-locked",
+        usable ? "is-usable" : "is-locked",
+        inputLocked ? "is-input-locked" : "",
         selected ? "is-selected" : "",
         lastUsed ? "is-last-used" : "",
         flashing ? "is-flashing" : "",
@@ -86,7 +92,7 @@ function renderCombatSkills(player, context) {
         .join(" ");
       const ariaLabel = `${action.name}. ${action.description}. ${infoParts.join(" · ")}`;
 
-      return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-last-used="${lastUsed}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}">
+      return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-combat-action="${escapeHtml(action.id)}" data-last-used="${lastUsed}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}" aria-disabled="${usable ? "false" : "true"}" ${inputLocked ? "disabled" : ""}>
         <span>${escapeHtml(action.name)}</span>
       </button>`;
     })

@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=489";
+import { t, tf } from "../localization/index.js?v=490";
 
 export function choosePlayerAction(player, state, skills, getSkill, hypMax) {
   const hpRate = state.player.hp / player.maxHp;
@@ -9,9 +9,7 @@ export function choosePlayerAction(player, state, skills, getSkill, hypMax) {
     && state.player.mp >= skill.mpCost
     && skill.stanceAllowed.includes(state.stance)
   ));
-  if (recovery) {
-    return { kind: "heal", skill: recovery, amount: skillHealAmount(recovery, player) };
-  }
+  if (recovery) return createPlayerCombatAction(recovery, player);
 
   const candidates = skills.filter((skill) => {
     if (skill.damageType === "support") return false;
@@ -20,8 +18,17 @@ export function choosePlayerAction(player, state, skills, getSkill, hypMax) {
     if (state.stance === "berserk" && state.hyp < hypMax && state.hyperActiveTicks <= 0) return false;
     return true;
   });
-  const skill = candidates[0] || null;
-  return { kind: "attack", skill, multiplier: skill ? skill.multiplier : 1 };
+  return createPlayerCombatAction(candidates[0] || null, player);
+}
+
+export function createPlayerCombatAction(action, player) {
+  if (!action || action.id === "basic_attack") {
+    return { kind: "attack", skill: null, multiplier: 1 };
+  }
+  if (action.damageType === "support") {
+    return { kind: "heal", skill: action, amount: skillHealAmount(action, player) };
+  }
+  return { kind: "attack", skill: action, multiplier: action.multiplier || 1 };
 }
 
 export function skillAvailability(skill, player, state, requireCombat, hypMax) {

@@ -30,7 +30,7 @@ export function advanceCombatFrameRuntime({ state, combatRuntime, player, enemy 
   regenerateCombatResources(state, player, enemy, elapsedSeconds);
   const playerHyperEnded = advancePlayerHyperState(state, elapsedSeconds) === "ended";
   const enemyHyperEnded = advanceEnemyHyperState(combatRuntime, elapsedSeconds) === "ended";
-  advanceCombatActionGauges(combatRuntime, player, enemy, elapsedSeconds);
+  if (!combatRuntime.inputLocked) advanceCombatActionGauges(combatRuntime, player, enemy, elapsedSeconds);
 
   return {
     elapsedSeconds,

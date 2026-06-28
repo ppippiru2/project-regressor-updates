@@ -1,5 +1,5 @@
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=489";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=489";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=490";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=490";
 
 export const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN_VERSION = "monster-candidate-live-promotion-plan-v1";
 

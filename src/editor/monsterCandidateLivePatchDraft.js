@@ -1,11 +1,11 @@
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=489";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=490";
 import {
   candidateMonsterRewardLinkFor,
   TUTORIAL_MONSTER_POOL_DATA,
-} from "../balance/monsterCandidatePool.js?v=489";
-import { lootItems } from "../data/itemData.js?v=489";
-import { regions } from "../data/worldData.js?v=489";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=489";
+} from "../balance/monsterCandidatePool.js?v=490";
+import { lootItems } from "../data/itemData.js?v=490";
+import { regions } from "../data/worldData.js?v=490";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=490";
 
 export const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT_VERSION = "monster-candidate-live-patch-draft-v1";
 

@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 489,
-  "displayVersion": "v489",
-  "cacheVersion": "project-regressor-mvp-v489",
-  "updatedAt": "2026-06-28T22:06:17.480+09:00",
+  "versionCode": 490,
+  "displayVersion": "v490",
+  "cacheVersion": "project-regressor-mvp-v490",
+  "updatedAt": "2026-06-28T22:35:21.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=489&cachebust=489",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=490&cachebust=490",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v489 restores combat attack effects to use the player and monster combat card as the sizing box.",
-    "v489 converts player, monster, skill, magic, and runtime VFX slash heights to card-relative percent values instead of viewport units.",
-    "v489 strengthens VFX checks so normal, critical, hyper, and critical-hyper effects keep card-relative sizing across runtime and editor previews."
+    "v490 connects combat action buttons to the transform-only battle loop with input locking.",
+    "v490 applies player impact damage, enemy hit reaction, enemy counterattack, and player hit reaction on runtime motion timings.",
+    "v490 clamps player and monster HP at 0 so one-shot defeats show a clean 0 HP victory state."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v490-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v490-debug.apk"
   },
   "version": {
-    "code": 489,
-    "name": "4.89.0",
-    "displayName": "v489"
+    "code": 490,
+    "name": "4.90.0",
+    "displayName": "v490"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v490-debug.apk"
   },
   "android": {
-    "code": 489,
-    "name": "4.89.0",
-    "displayName": "v489",
+    "code": 490,
+    "name": "4.90.0",
+    "displayName": "v490",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v490-debug.apk"
     },
     "version": {
-      "code": 489,
-      "name": "4.89.0",
-      "displayName": "v489"
+      "code": 490,
+      "name": "4.90.0",
+      "displayName": "v490"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v489-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v490-debug.apk"
   }
 }
