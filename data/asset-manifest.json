@@ -271,6 +271,86 @@
       "notes": "Source preview image preserved from project_regressor_monster_runtime_integration_pack_v1.zip. It is a composite battle preview, not a transparent combat sprite."
     },
     {
+      "assetId": "monster_shore_imp_idle_v1",
+      "category": "monster-combat-sprite",
+      "sourceFile": "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+      "cleanFile": "assets/monsters/shore_imp_idle.webp",
+      "webpFile": "assets/monsters/shore_imp_idle.webp",
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "monster",
+        "combat-sprite",
+        "shore_imp",
+        "rift_imp_lv1",
+        "idle",
+        "transparent",
+        "runtime-pack-v1",
+        "source-extracted"
+      ],
+      "notes": "Transparent idle combat sprite for shore_imp extracted from the Monster Runtime Integration v1 composite source. Base cutout pose."
+    },
+    {
+      "assetId": "monster_shore_imp_attack_v1",
+      "category": "monster-combat-sprite",
+      "sourceFile": "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+      "cleanFile": "assets/monsters/shore_imp_attack.webp",
+      "webpFile": "assets/monsters/shore_imp_attack.webp",
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "monster",
+        "combat-sprite",
+        "shore_imp",
+        "rift_imp_lv1",
+        "attack",
+        "transparent",
+        "runtime-pack-v1",
+        "source-extracted"
+      ],
+      "notes": "Transparent attack combat sprite for shore_imp extracted from the Monster Runtime Integration v1 composite source. Transform-only derivative pose from the same approved cutout, matching the v1 enemy motion contract."
+    },
+    {
+      "assetId": "monster_shore_imp_hit_v1",
+      "category": "monster-combat-sprite",
+      "sourceFile": "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+      "cleanFile": "assets/monsters/shore_imp_hit.webp",
+      "webpFile": "assets/monsters/shore_imp_hit.webp",
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "monster",
+        "combat-sprite",
+        "shore_imp",
+        "rift_imp_lv1",
+        "hit",
+        "transparent",
+        "runtime-pack-v1",
+        "source-extracted"
+      ],
+      "notes": "Transparent hit combat sprite for shore_imp extracted from the Monster Runtime Integration v1 composite source. Transform-only derivative pose from the same approved cutout, matching the v1 enemy motion contract."
+    },
+    {
+      "assetId": "monster_shore_imp_dead_v1",
+      "category": "monster-combat-sprite",
+      "sourceFile": "assets/source/monsters/shore_imp/runtime_pack_v1_preview.png",
+      "cleanFile": "assets/monsters/shore_imp_dead.webp",
+      "webpFile": "assets/monsters/shore_imp_dead.webp",
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "monster",
+        "combat-sprite",
+        "shore_imp",
+        "rift_imp_lv1",
+        "dead",
+        "transparent",
+        "runtime-pack-v1",
+        "source-extracted"
+      ],
+      "notes": "Transparent dead combat sprite for shore_imp extracted from the Monster Runtime Integration v1 composite source. Transform-only derivative pose from the same approved cutout, matching the v1 enemy motion contract."
+    },
+    {
       "assetId": "ui_system_dice_roll_sheet_v2",
       "category": "ui-sprite-sheet",
       "sourceFile": "assets/ui/system_dice_roll_sheet.png",

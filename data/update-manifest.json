@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 479,
-  "displayVersion": "v479",
-  "cacheVersion": "project-regressor-mvp-v479",
-  "updatedAt": "2026-06-28T19:30:00.000+09:00",
+  "versionCode": 481,
+  "displayVersion": "v481",
+  "cacheVersion": "project-regressor-mvp-v481",
+  "updatedAt": "2026-06-28T20:20:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=479&cachebust=479",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=481&cachebust=481",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v479 reads ProjectRegressor v2.9.1 self-describing dialogue package requirements into the tutorial dialogue catalog.",
-    "v479 keeps required tutorial event coverage, unlock stages, and placeholder rules visible through guard checks.",
-    "v479 shows the Monster Runtime Integration v1 preview image as a temporary combat fallback while final transparent monster sprites are missing."
+    "v481 connects the Monster Runtime Integration v1 shore_imp transparent combat sprite slots.",
+    "v481 adds idle, attack, hit, and dead WebP sprites extracted from the approved composite source without regenerating the monster art.",
+    "v481 promotes the monster runtime preview from blocked-waiting-transparent-sprites to connected transparent sprites while keeping bulk writers read-only."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v479-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v481-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v479-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v481-debug.apk"
   },
   "version": {
-    "code": 479,
-    "name": "4.79.0",
-    "displayName": "v479"
+    "code": 481,
+    "name": "4.81.0",
+    "displayName": "v481"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v479-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v481-debug.apk"
   },
   "android": {
-    "code": 479,
-    "name": "4.79.0",
-    "displayName": "v479",
+    "code": 481,
+    "name": "4.81.0",
+    "displayName": "v481",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v479-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v481-debug.apk"
     },
     "version": {
-      "code": 479,
-      "name": "4.79.0",
-      "displayName": "v479"
+      "code": 481,
+      "name": "4.81.0",
+      "displayName": "v481"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v479-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v481-debug.apk"
   }
 }

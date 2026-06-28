@@ -1,14 +1,14 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=479";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=481";
 import {
   MONSTER_RUNTIME_ID_ALIASES,
   MONSTER_RUNTIME_INTEGRATION_PACK_VERSION,
   MONSTER_RUNTIME_INTEGRATION_PRESETS,
   MONSTER_RUNTIME_MOTION_ID_MAP,
   resolveMonsterRuntimeIntegrationPreset,
-} from "../config/monsterRuntimeIntegrationPresets.js?v=479";
-import { MONSTER_BATTLE_SPRITE_PRESETS } from "../config/monsterBattleSpritePresets.js?v=479";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=479";
-import { monsters } from "../data/worldData.js?v=479";
+} from "../config/monsterRuntimeIntegrationPresets.js?v=481";
+import { MONSTER_BATTLE_SPRITE_PRESETS } from "../config/monsterBattleSpritePresets.js?v=481";
+import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=481";
+import { monsters } from "../data/worldData.js?v=481";
 
 export function createMonsterRuntimeIntegrationPreview(registry = STATIC_ASSET_REGISTRY, options = {}) {
   const monsterById = new Map(monsters.map((monster) => [monster.id, monster]));
@@ -50,6 +50,7 @@ function createRuntimeIntegrationRow(preset, monsterById, registry, knownAssetFi
     .filter((entry) => !entry.assetId && !entry.fileKnownAtBuildTime)
     .map((entry) => entry.filePath);
   const connectedSpriteFiles = resolvedSpriteFiles.filter((entry) => entry.assetId || entry.fileKnownAtBuildTime);
+  const connectedAssetFiles = resolvedSpriteFiles.filter((entry) => entry.assetId);
 
   return {
     sourcePack: preset.sourcePack,
@@ -78,7 +79,11 @@ function createRuntimeIntegrationRow(preset, monsterById, registry, knownAssetFi
       effectType: action.effectType,
       optional: Boolean(action.optional),
     })),
-    spriteStatus: missingSpriteFiles.length ? "waiting-for-transparent-png" : "sprite-files-connectable",
+    spriteStatus: runtimeSpriteStatus({
+      expectedCount: expectedFiles.length,
+      missingSpriteFiles,
+      connectedAssetFiles,
+    }),
     sourcePreviewAssetId: preset.spritePolicy?.sourcePreviewAssetId || "",
     sourcePreviewFile: preset.spritePolicy?.sourcePreviewFile || "",
     sourcePreviewAssetPath: preset.spritePolicy?.sourcePreviewAssetId
@@ -91,6 +96,12 @@ function createRuntimeIntegrationRow(preset, monsterById, registry, knownAssetFi
     missingSpriteFiles,
     qaChecklist: Array.from(preset.qaChecklist || []),
   };
+}
+
+function runtimeSpriteStatus({ expectedCount, missingSpriteFiles, connectedAssetFiles }) {
+  if (missingSpriteFiles.length) return "waiting-for-transparent-png";
+  if (connectedAssetFiles.length >= expectedCount) return "transparent-sprites-connected";
+  return "sprite-files-connectable";
 }
 
 function expectedSpriteFiles(monsterId) {

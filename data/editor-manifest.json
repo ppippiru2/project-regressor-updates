@@ -2108,7 +2108,7 @@
       "expectedPackageRowCount": 7,
       "expectedActiveDomainCount": 4,
       "expectedReviewSurfaceCount": 4,
-      "expectedBlockedRowCount": 1,
+      "expectedBlockedRowCount": 0,
       "expectedWarningRowCount": 1,
       "expectedRequiredCheckCount": 14,
       "expectedDrilldownTargetCount": 4,
@@ -2124,7 +2124,8 @@
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,
-      "writesGameData": false
+      "writesGameData": false,
+      "expectedStatus": "review"
     },
     "lootSkillBulkIntakePreview": {
       "id": "loot-skill-bulk-intake-preview-v1",
@@ -2150,13 +2151,14 @@
       "expectedPackageRowCount": 1,
       "expectedRecognizedRuntimeRows": 1,
       "expectedUpdateCandidateCount": 1,
-      "expectedMissingSpriteFileCount": 4,
-      "expectedBlockedRuntimeRowCount": 1,
+      "expectedMissingSpriteFileCount": 0,
+      "expectedBlockedRuntimeRowCount": 0,
       "writesGameData": false,
       "requiresTransparentSprites": true,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
-      "editorSummaryVisible": true
+      "editorSummaryVisible": true,
+      "expectedConnectedRuntimeRowCount": 1
     },
     "runtimeVfxBulkIntakePreview": {
       "id": "runtime-vfx-bulk-intake-preview-v1",
@@ -2367,8 +2369,8 @@
     "monsterCount": 15,
     "poseCount": 4,
     "slotCount": 60,
-    "assignedSlots": 0,
-    "missingSlots": 60,
+    "assignedSlots": 4,
+    "missingSlots": 56,
     "brokenSlots": 0,
     "expectedFolder": "assets/monsters/",
     "expectedPattern": "{monsterId}_{pose}.webp",
@@ -2379,16 +2381,16 @@
       "broken"
     ],
     "dataTarget": "data/asset-slots.json:slots.monster.byMonsterId",
-    "draftAssetCandidates": 60,
+    "draftAssetCandidates": 56,
     "draftAssetIdPattern": "monster_{monsterId}_{pose}_v1",
     "draftCategory": "monster-combat-sprite",
     "draftUseInGame": false,
     "connectableSlots": 0,
     "fileScannedSlots": 60,
-    "fileReadySlots": 0,
-    "fileMissingSlots": 60,
+    "fileReadySlots": 4,
+    "fileMissingSlots": 56,
     "defaultFallbackSlots": 0,
-    "cssPlaceholderSlots": 60,
+    "cssPlaceholderSlots": 56,
     "runtimeFallbackModes": [
       "assigned-asset",
       "broken-asset",
@@ -2396,10 +2398,10 @@
       "css-placeholder"
     ],
     "runtimeFallbackModeCounts": {
-      "assigned-asset": 0,
+      "assigned-asset": 4,
       "broken-asset": 0,
       "default-slot": 0,
-      "css-placeholder": 60
+      "css-placeholder": 56
     },
     "runtimeFallbackPreviewVisible": true,
     "runtimeFallbackSummaryVisible": true,
@@ -2407,7 +2409,7 @@
     "missingFileHandoffArtifact": "validation-output/monster-sprite-missing-file-handoff.json",
     "missingFileHandoffWritesGameData": false,
     "missingFileHandoffMonsterGroups": 15,
-    "missingFileHandoffMissingFiles": 60,
+    "missingFileHandoffMissingFiles": 56,
     "missingFileHandoffProductionChecklist": true,
     "missingFileHandoffEditorSummaryVisible": true,
     "fileScanMode": "build-time-optional",
@@ -2417,8 +2419,8 @@
       "file-missing"
     ],
     "assignmentPatchDraftVersion": 1,
-    "assetManifestPatchEntries": 60,
-    "assetSlotPatchEntries": 60,
+    "assetManifestPatchEntries": 56,
+    "assetSlotPatchEntries": 56,
     "nestedSlotPatchObject": true,
     "readyConnectionPatchPlanVersion": 1,
     "readyConnectionApplyMode": "file-ready-only",
@@ -2500,6 +2502,14 @@
     ],
     "bulkIntakePreviewModule": "src/editor/monsterRuntimeBulkIntakePreview.js",
     "bulkIntakePackageKey": "monsterRuntimePresets",
-    "bulkIntakeEditorSummaryVisible": true
+    "bulkIntakeEditorSummaryVisible": true,
+    "transparentSpriteStatus": "transparent-sprites-connected",
+    "connectedSpriteFiles": [
+      "assets/monsters/shore_imp_idle.webp",
+      "assets/monsters/shore_imp_attack.webp",
+      "assets/monsters/shore_imp_hit.webp",
+      "assets/monsters/shore_imp_dead.webp"
+    ],
+    "missingSpriteFiles": []
   }
 }

@@ -1,6 +1,6 @@
-import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=479";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=479";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=479";
+import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=481";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=481";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=481";
 
 export const MONSTER_RUNTIME_BULK_INTAKE_PREVIEW_VERSION = "monster-runtime-bulk-intake-preview-v1";
 
@@ -64,9 +64,7 @@ function createRuntimeBulkIntakeRow(row, packageRow, stagedMonsterDomain) {
     packageLevel: packageRow?.level || 1,
     mappingStatus: row.mappingStatus,
     spriteStatus: row.spriteStatus,
-    runtimeState: missingSpriteFiles.length
-      ? "blocked-waiting-transparent-sprites"
-      : "ready-for-runtime-review",
+    runtimeState: runtimeBulkState(row, missingSpriteFiles),
     bulkState: stagedRow.state || "not-staged",
     warningIssueCodes: Array.from(stagedRow.warningIssueCodes || []),
     blockingIssueCodes: Array.from(stagedRow.blockingIssueCodes || []),
@@ -76,6 +74,12 @@ function createRuntimeBulkIntakeRow(row, packageRow, stagedMonsterDomain) {
     sourcePreviewFile: row.sourcePreviewFile,
     sourceImageIsComposite: row.sourceImageIsComposite === true,
   };
+}
+
+function runtimeBulkState(row, missingSpriteFiles) {
+  if (missingSpriteFiles.length) return "blocked-waiting-transparent-sprites";
+  if (row.spriteStatus === "transparent-sprites-connected") return "connected-transparent-sprites";
+  return "ready-for-runtime-review";
 }
 
 function createMonsterRuntimePresetPackageRow(row) {

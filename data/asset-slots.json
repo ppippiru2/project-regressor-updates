@@ -15,7 +15,12 @@
       "defaultHit": null,
       "defaultDead": null,
       "byMonsterId": {
-        "shore_imp": {},
+        "shore_imp": {
+          "idle": "monster_shore_imp_idle_v1",
+          "attack": "monster_shore_imp_attack_v1",
+          "hit": "monster_shore_imp_hit_v1",
+          "dead": "monster_shore_imp_dead_v1"
+        },
         "shore_claw_crab": {},
         "shore_drift_slime": {},
         "forest_wolf": {},
