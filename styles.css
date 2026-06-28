@@ -5749,6 +5749,76 @@ select:focus {
   padding: 0.45rem 0.65rem;
 }
 
+.editor-content-bulk-apply-gate {
+  background: rgba(4, 18, 42, 0.56);
+  border: 1px solid rgba(255, 94, 130, 0.22);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-content-bulk-apply-gate-head {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+}
+
+.editor-content-bulk-apply-gate-head h4,
+.editor-content-bulk-apply-gate-head p {
+  margin: 0;
+}
+
+.editor-content-bulk-apply-gate-head h4 {
+  color: #ff7f9f;
+  font-size: 0.95rem;
+}
+
+.editor-content-bulk-apply-gate-head strong {
+  border: 1px solid rgba(255, 94, 130, 0.34);
+  border-radius: 999px;
+  color: #ff9ab4;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.2rem 0.45rem;
+  white-space: nowrap;
+}
+
+.editor-content-bulk-apply-gate-metrics {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.editor-content-bulk-apply-gate-metrics span {
+  background: rgba(1, 10, 28, 0.3);
+  border: 1px solid rgba(255, 94, 130, 0.13);
+  border-radius: 6px;
+  min-width: 0;
+  padding: 0.55rem;
+}
+
+.editor-content-bulk-apply-gate-metrics small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.editor-content-bulk-apply-gate-metrics b {
+  color: var(--text);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-content-bulk-apply-gate-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .editor-balance-candidate-list {
   border: 1px solid rgba(108, 210, 255, 0.18);
   border-radius: 6px;
@@ -9554,6 +9624,8 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-patch-draft-grid,
   .editor-content-bulk-patch-draft-export-head,
   .editor-content-bulk-patch-draft-export-actions,
+  .editor-content-bulk-apply-gate-head,
+  .editor-content-bulk-apply-gate-grid,
   .editor-combat-vfx-grid,
   .editor-combat-vfx-tuning-list,
   .editor-combat-vfx-profile-list,
@@ -9576,6 +9648,7 @@ body[data-info-tooltips="off"] .info-term {
   .editor-content-bulk-checklist-metrics,
   .editor-content-bulk-patch-draft-metrics,
   .editor-content-bulk-patch-draft-export-metrics,
+  .editor-content-bulk-apply-gate-metrics,
   .editor-monster-sprite-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

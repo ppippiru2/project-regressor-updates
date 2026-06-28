@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=465";
+import { getLocaleText } from "../localization/index.js?v=466";
 
 const COMBAT_LOG_TEXT = getLocaleText().combatLogFormatter;
 const CLASS_PATTERNS = COMBAT_LOG_TEXT.classPatterns;

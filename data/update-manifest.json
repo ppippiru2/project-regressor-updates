@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 465,
-  "displayVersion": "v465",
-  "cacheVersion": "project-regressor-mvp-v465",
-  "updatedAt": "2026-06-28T14:10:48.946+09:00",
+  "versionCode": 466,
+  "displayVersion": "v466",
+  "cacheVersion": "project-regressor-mvp-v466",
+  "updatedAt": "2026-06-28T14:28:10.742+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=465&cachebust=465",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=466&cachebust=466",
   "recommendedAndroidShell": "Trusted Web Activity",
   "notes": [
-    "v465 adds a read-only downloadable file patch draft export for bulk content packages.",
-    "v465 lets the Balance editor export the currently applied package preview as a file/surface patch draft JSON.",
-    "v465 keeps large monster, item, skill, loot, codex, magic-stone, and asset updates gated behind manual review and explicit apply."
+    "v466 adds a disabled bulk apply gate after the downloadable patch draft export.",
+    "v466 keeps live file writing locked behind manual review, explicit apply, backup, and rollback gates.",
+    "v466 prepares safer batch updates for monsters, items, skills, loot, codex, magic-stone, and asset data without live writes."
   ],
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v465-debug.apk",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v466-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v465-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v466-debug.apk"
   },
   "version": {
-    "code": 465,
-    "name": "4.65.0",
-    "displayName": "v465"
+    "code": 466,
+    "name": "4.66.0",
+    "displayName": "v466"
   },
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v465-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v466-debug.apk"
   },
   "android": {
-    "code": 465,
-    "name": "4.65.0",
-    "displayName": "v465",
+    "code": 466,
+    "name": "4.66.0",
+    "displayName": "v466",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v465-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v466-debug.apk"
     },
     "version": {
-      "code": 465,
-      "name": "4.65.0",
-      "displayName": "v465"
+      "code": 466,
+      "name": "4.66.0",
+      "displayName": "v466"
     }
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v465-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v466-debug.apk"
   }
 }

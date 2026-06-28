@@ -2516,6 +2516,55 @@ export const KO_KR_TEXT = {
           source: "입력 출처",
           download: "patch 초안 다운로드"
         },
+        contentBulkPatchApplyGatePlan: {
+          title: "대량 적용 게이트",
+          description: "실제 반영기는 아직 비활성입니다. 백업, 롤백, 검증 조건만 먼저 고정합니다.",
+          version: "{version}",
+          targetFiles: "대상 파일",
+          patchBlocks: "patch 블록",
+          gates: "게이트",
+          rollbackSteps: "롤백",
+          validationSteps: "검증",
+          applyState: "적용 상태",
+          enabled: "활성",
+          disabled: "비활성",
+          blockedReasons: "차단 사유",
+          gateList: "적용 게이트",
+          rollbackPlan: "롤백 계획",
+          validationPlan: "검증 계획",
+          blockedReasonLabels: {
+            "writer-not-implemented": "실제 writer 미구현",
+            "rollback-not-executed": "롤백 절차 미실행",
+            "explicit-apply-ui-not-confirmed": "명시적 적용 UI 미확정"
+          },
+          gateLabels: {
+            "review-export-payload": "export payload 검토",
+            "confirm-user-intent": "사용자 의도 확정",
+            "create-backup": "백업 생성",
+            "snapshot-target-files": "대상 파일 스냅샷",
+            "apply-file-patches": "파일 patch 반영",
+            "run-post-apply-checks": "반영 후 검사"
+          },
+          stateLabels: {
+            ready: "준비",
+            blocked: "차단",
+            disabled: "비활성",
+            waiting: "대기"
+          },
+          rollbackLabels: {
+            "export-current-save-data": "현재 저장 데이터 내보내기",
+            "snapshot-target-files": "대상 파일 스냅샷",
+            "record-patch-draft-payload": "patch 초안 payload 기록",
+            "restore-target-files-on-failure": "실패 시 대상 파일 복구"
+          },
+          validationLabels: {
+            "run-content-bulk-patch-file-patch-draft-export-check": "patch 초안 export 검사",
+            "run-editor-balance-tuning-metadata-check": "에디터 메타데이터 검사",
+            "run-quick-check": "빠른 검사",
+            "run-web-build": "웹 빌드",
+            "verify-local-http": "로컬 접속 확인"
+          }
+        },
         empty: "표시할 밸런스 그룹 없음",
         emptyByFilter: "{filter} 범위에 표시할 밸런스 그룹이 없습니다.",
         emptyBySearch: "\"{query}\" 검색 결과가 없습니다.",

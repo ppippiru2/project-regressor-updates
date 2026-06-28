@@ -441,6 +441,7 @@
         "src/editor/contentBulkPatchManualApplyChecklist.js",
         "src/editor/contentBulkPatchFilePatchDraft.js",
         "src/editor/contentBulkPatchFilePatchDraftExport.js",
+        "src/editor/contentBulkPatchApplyGatePlan.js",
         "src/editor/tutorialIslandPacingPreview.js",
         "src/editor/monsterCandidateRewardPreview.js",
         "src/editor/monsterCandidatePromotionChecklist.js",
@@ -538,6 +539,8 @@
         "contentBulkPatchFileDrafts",
         "contentBulkPatchFilePatchDraftExport",
         "contentBulkPatchFilePatchDraftExportPayload",
+        "contentBulkPatchApplyGatePlan",
+        "contentBulkPatchApplyGates",
         "swapBoundaryCoverage",
         "missingFileWarnings",
         "missingExportWarnings",
@@ -562,7 +565,8 @@
         "대량 콘텐츠 수동 적용 체크리스트",
         "대량 콘텐츠 파일별 patch 초안",
         "대량 콘텐츠 파일별 patch 초안 내보내기",
-        "대량 패키지 JSON 추출"
+        "대량 패키지 JSON 추출",
+        "Content bulk apply gate skeleton"
       ]
     },
     {
@@ -1491,6 +1495,7 @@
       "src/editor/contentBulkPatchManualApplyChecklist.js:createContentBulkPatchManualApplyChecklist",
       "src/editor/contentBulkPatchFilePatchDraft.js:createContentBulkPatchFilePatchDraft",
       "src/editor/contentBulkPatchFilePatchDraftExport.js:createContentBulkPatchFilePatchDraftExport",
+      "src/editor/contentBulkPatchApplyGatePlan.js:createContentBulkPatchApplyGatePlan",
       "src/content/contentProfile.js:CONTENT_SWAP_BOUNDARIES",
       "build-scripts/check-tutorial-island-pacing.mjs",
       "src/balance/monsterCandidatePool.js:TUTORIAL_MONSTER_POOL_DATA",
@@ -1635,6 +1640,16 @@
         "guards": [
           "file patch draft JSON payload",
           "read-only download gate",
+          "manual review before explicit apply"
+        ]
+      },
+      {
+        "id": "content-bulk-patch-apply-gate-plan",
+        "label": "Content bulk apply gate plan check",
+        "script": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
+        "guards": [
+          "writer disabled",
+          "backup and rollback gates",
           "manual review before explicit apply"
         ]
       },
@@ -1815,7 +1830,7 @@
     },
     "contentBulkPatchDiffExport": {
       "id": "content-bulk-patch-diff-export-v1",
-      "source": "v465",
+      "source": "v466",
       "sourceModule": "src/editor/contentBulkPatchDiffExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-diff-export.mjs",
       "expectedTargetFileCount": 24,
@@ -1829,7 +1844,7 @@
     },
     "contentBulkPatchManualApplyChecklist": {
       "id": "content-bulk-patch-manual-apply-checklist-v1",
-      "source": "v465",
+      "source": "v466",
       "sourceModule": "src/editor/contentBulkPatchManualApplyChecklist.js",
       "checkScript": "build-scripts/check-content-bulk-patch-manual-apply-checklist.mjs",
       "expectedTargetFileCount": 24,
@@ -1843,7 +1858,7 @@
     },
     "contentBulkPatchFilePatchDraft": {
       "id": "content-bulk-patch-file-patch-draft-v1",
-      "source": "v465",
+      "source": "v466",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraft.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft.mjs",
       "expectedDraftFileCount": 24,
@@ -1928,11 +1943,25 @@
     },
     "contentBulkPatchFilePatchDraftExport": {
       "id": "content-bulk-patch-file-patch-draft-export-v1",
-      "source": "v465",
+      "source": "v466",
       "sourceModule": "src/editor/contentBulkPatchFilePatchDraftExport.js",
       "checkScript": "build-scripts/check-content-bulk-patch-file-patch-draft-export.mjs",
       "expectedExportedFileCount": 24,
       "expectedExportedBlockCount": 33,
+      "requiresManualReview": true,
+      "requiresExplicitApply": true,
+      "editorSummaryVisible": true,
+      "writesGameData": false
+    },
+    "contentBulkPatchApplyGatePlan": {
+      "id": "content-bulk-patch-apply-gate-plan-v1",
+      "source": "v466",
+      "sourceModule": "src/editor/contentBulkPatchApplyGatePlan.js",
+      "checkScript": "build-scripts/check-content-bulk-patch-apply-gate-plan.mjs",
+      "expectedGateCount": 6,
+      "expectedRollbackStepCount": 4,
+      "expectedValidationStepCount": 5,
+      "applyEnabled": false,
       "requiresManualReview": true,
       "requiresExplicitApply": true,
       "editorSummaryVisible": true,
