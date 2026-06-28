@@ -2494,6 +2494,23 @@ export const KO_KR_TEXT = {
             "staged-append": "신규 추가 후보"
           }
         },
+        contentBulkMassApplyReadiness: {
+          title: "대량 적용 준비도",
+          description: "dry-run, 적용 대기열, 적용 게이트, 백업, 복구 리허설 상태를 한곳에 묶어 봅니다.",
+          dryRunBlockers: "dry-run 차단",
+          stagedWithheld: "보류 행",
+          applyBlocked: "적용 차단",
+          backupBlocked: "백업 차단",
+          restoreBlocked: "복구 차단",
+          state: "상태",
+          blockedReasons: "차단 사유",
+          warningReasons: "검토 사유",
+          noIssues: "없음",
+          stateLabels: {
+            blocked: "차단",
+            ready: "준비"
+          }
+        },
         contentBulkPatchDryRunImporter: {
           title: "대량 콘텐츠 dry-run 반영",
           description: "배치 파일을 실제 게임 데이터에 쓰기 전에 추가/갱신 후보, 차단 오류, 경고, 영향 표면을 읽기 전용으로 계산합니다.",

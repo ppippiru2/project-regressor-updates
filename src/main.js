@@ -3,24 +3,24 @@ import {
   BASIC_ATTACK_ACTION,
   COMBAT_INFO_HIDE_HINT,
   HELP_TEXT,
-} from "./config/helpText.js?v=500";
-import { bindAppEvents } from "./app/appEvents.js?v=500";
-import { renderAppFrame, renderAppRegionList } from "./app/appRenderer.js?v=500";
-import { handleObjectiveActionNavigation } from "./app/objectiveActionNavigation.js?v=500";
+} from "./config/helpText.js?v=501";
+import { bindAppEvents } from "./app/appEvents.js?v=501";
+import { renderAppFrame, renderAppRegionList } from "./app/appRenderer.js?v=501";
+import { handleObjectiveActionNavigation } from "./app/objectiveActionNavigation.js?v=501";
 import {
   ACTIVE_SLOT_SYNC_INTERVAL_MS,
   MAX_LOG_LINES,
   OBJECTIVE_TICKER_INTERVAL_MS,
   SLOW_RENDER_INTERVAL_MS,
-} from "./app/appRuntimeConfig.js?v=500";
-import { finalizeSaveSessionTransition } from "./app/saveSessionFlow.js?v=500";
+} from "./app/appRuntimeConfig.js?v=501";
+import { finalizeSaveSessionTransition } from "./app/saveSessionFlow.js?v=501";
 import { registerServiceWorker } from "./app/serviceWorkerRegistration.js";
-import * as assetRegistryApi from "./assets/assetRegistry.js?v=500";
-import { applyDomLocalization } from "./localization/domText.js?v=500";
-import { t, tf } from "./localization/index.js?v=500";
-import { clearCombatEffectLayers } from "./combat/combatEffects.js?v=500";
-import { BULK_STAT_DEALLOCATE_AMOUNT } from "./balance/playerGrowthBalance.js?v=500";
-import { CONTENT_PROFILE, applyContentProfileToDocument, exposeContentProfile } from "./content/contentProfile.js?v=500";
+import * as assetRegistryApi from "./assets/assetRegistry.js?v=501";
+import { applyDomLocalization } from "./localization/domText.js?v=501";
+import { t, tf } from "./localization/index.js?v=501";
+import { clearCombatEffectLayers } from "./combat/combatEffects.js?v=501";
+import { BULK_STAT_DEALLOCATE_AMOUNT } from "./balance/playerGrowthBalance.js?v=501";
+import { CONTENT_PROFILE, applyContentProfileToDocument, exposeContentProfile } from "./content/contentProfile.js?v=501";
 import {
   clamp,
   enemyHyperChargeMultiplier,
@@ -38,7 +38,7 @@ import {
   createPlayerCombatAction,
   skillAvailability as getCombatSkillAvailability,
   stanceName,
-} from "./combat/combatActions.js?v=500";
+} from "./combat/combatActions.js?v=501";
 import {
   attackEffectType,
   buildCombatActionList,
@@ -46,14 +46,14 @@ import {
   equippedWeapon,
   findCombatAction,
 } from "./combat/combatActionDisplay.js";
-import { queueCombatTextEffect } from "./combat/combatFeedbackState.js?v=500";
+import { queueCombatTextEffect } from "./combat/combatFeedbackState.js?v=501";
 import { resolveEnemyAttack, resolvePlayerAttack } from "./combat/combatDamage.js";
-import { createDefeatedTargetPreview } from "./combat/combatDefeatPreview.js?v=500";
+import { createDefeatedTargetPreview } from "./combat/combatDefeatPreview.js?v=501";
 import {
   applyHealAction,
   applyResolvedEnemyAttack,
   applyResolvedPlayerAttack,
-} from "./combat/combatActionResults.js?v=500";
+} from "./combat/combatActionResults.js?v=501";
 import {
   activateTargetWeakness,
   advanceHitCombo,
@@ -61,7 +61,7 @@ import {
   applySkillBreakDamage,
   playerHyperChargeFromSuccessfulHit,
   resetHitComboState,
-} from "./combat/combatHitResults.js?v=500";
+} from "./combat/combatHitResults.js?v=501";
 import {
   AUTO_RESTART_DELAY_MS,
   COMBAT_FRAME_MS,
@@ -69,7 +69,7 @@ import {
   HYP_MAX,
   createCombatRuntime,
   resetCombatRuntime,
-} from "./combat/combatState.js?v=500";
+} from "./combat/combatState.js?v=501";
 import {
   bossBreakMessage,
   combatStartMessage,
@@ -91,12 +91,12 @@ import {
   consumeReadyEnemyAction,
   consumeReadyPlayerAction,
   shouldAdvanceAutoCombatActions,
-} from "./combat/combatTick.js?v=500";
-import { clearIntervalTimer, clearTimeoutTimer, restartIntervalTimer, restartTimeoutTimer } from "./combat/combatTimers.js?v=500";
+} from "./combat/combatTick.js?v=501";
+import { clearIntervalTimer, clearTimeoutTimer, restartIntervalTimer, restartTimeoutTimer } from "./combat/combatTimers.js?v=501";
 import {
   applyIncomingDamageTestOption,
   applyOutgoingDamageTestOption,
-} from "./combat/combatTestOptions.js?v=500";
+} from "./combat/combatTestOptions.js?v=501";
 import {
   displayNames,
   equipment,
@@ -109,7 +109,7 @@ import {
   shopCategories,
   skills,
   slots,
-} from "./data.js?v=500";
+} from "./data.js?v=501";
 import {
   DEFAULT_ACTIVE_SKILL_LOADOUT_ID,
   DEFAULT_COMBAT_FEEDBACK,
@@ -123,32 +123,32 @@ import {
   normalizeUiState,
   saveState as saveStoredState,
   saveUiState as saveStoredUiState,
-} from "./state/save.js?v=500";
+} from "./state/save.js?v=501";
 import {
   developerOptionLabel,
   normalizeDeveloperOptionValue,
   normalizeDeveloperOptions,
-} from "./state/developerOptions.js?v=500";
-import { createInitialState } from "./state/initialState.js?v=500";
-import { applyImportedUiState, exportSavePayloadSnapshot, importSavePayloadText } from "./state/saveLoadActions.js?v=500";
-import { playerStats } from "./state/progression.js?v=500";
-import { starterTraitStatBonuses } from "./state/starterTraitEffects.js?v=500";
+} from "./state/developerOptions.js?v=501";
+import { createInitialState } from "./state/initialState.js?v=501";
+import { applyImportedUiState, exportSavePayloadSnapshot, importSavePayloadText } from "./state/saveLoadActions.js?v=501";
+import { playerStats } from "./state/progression.js?v=501";
+import { starterTraitStatBonuses } from "./state/starterTraitEffects.js?v=501";
 import { addInventoryItem } from "./state/inventory.js";
-import { equipInventoryItem, resolveEquipmentSlot, unequipEquipmentSlot } from "./state/equipmentActions.js?v=500";
-import { equipRecommendedItems } from "./state/recommendedEquipment.js?v=500";
+import { equipInventoryItem, resolveEquipmentSlot, unequipEquipmentSlot } from "./state/equipmentActions.js?v=501";
+import { equipRecommendedItems } from "./state/recommendedEquipment.js?v=501";
 import {
   beginGateReplay,
   ensureGateProgress as ensureGateProgressState,
   isGateProgressComplete,
   moveGateProgress,
-} from "./state/regionProgress.js?v=500";
+} from "./state/regionProgress.js?v=501";
 import {
   applyCharacterProfile,
   applyInitialCreationStats,
   characterIntroLogMessages,
   createCharacterProfile,
   updatePlayerProfileSettings,
-} from "./state/profileActions.js?v=500";
+} from "./state/profileActions.js?v=501";
 import {
   DEFAULT_SAVE_SLOT_ID,
   clearSaveSlot,
@@ -158,108 +158,108 @@ import {
   saveActiveSaveSlotId,
   saveCurrentToSlot,
   saveSlotLabel,
-} from "./state/saveSlots.js?v=500";
+} from "./state/saveSlots.js?v=501";
 import {
   createPendingSlotCreationSnapshot,
   restorePendingSlotCreationSnapshot,
-} from "./state/saveSlotSession.js?v=500";
+} from "./state/saveSlotSession.js?v=501";
 
-import { createGateNodeResolution, resolveGateNodeOutcome } from "./state/gateNodeActions.js?v=500";
+import { createGateNodeResolution, resolveGateNodeOutcome } from "./state/gateNodeActions.js?v=501";
 import {
   shouldContinueAutoHunt,
   shouldRestartAutoHunt,
   startCombatSession,
   stopCombatSession,
   toggleAutoHuntState,
-} from "./state/combatSession.js?v=500";
+} from "./state/combatSession.js?v=501";
 import {
   IDLE_RECOVERY_FRAME_MS,
   applyPassiveRecovery,
   enterRestMode,
   leaveRestMode,
   passiveRecoveryElapsedSeconds,
-} from "./state/passiveRecovery.js?v=500";
-import { applyMonsterDefeatRewards } from "./state/combatRewards.js?v=500";
-import { applyPendingLevelProgression } from "./state/levelUpActions.js?v=500";
+} from "./state/passiveRecovery.js?v=501";
+import { applyMonsterDefeatRewards } from "./state/combatRewards.js?v=501";
+import { applyPendingLevelProgression } from "./state/levelUpActions.js?v=501";
 import { applyPlayerDefeatRecovery } from "./state/defeatRecovery.js";
 import {
   activateEnemyHyperMode,
   activatePlayerHyperMode,
   endEnemyHyperMode as endEnemyHyperModeAction,
   endPlayerHyperMode as endPlayerHyperModeAction,
-} from "./state/hyperActions.js?v=500";
+} from "./state/hyperActions.js?v=501";
 import {
   hideCombatInfoIfAllowed,
   markCombatActionUsed,
   showCombatActionInfo,
   showCombatHelpInfo,
   triggerCombatActionFlash,
-} from "./state/combatRuntimeUi.js?v=500";
+} from "./state/combatRuntimeUi.js?v=501";
 import {
   BATTLE_SPRITE_MOTION_IDS,
   clearBattleSpriteMotions,
   triggerBattleSpriteMotion,
-} from "./ui/battleSpriteMotion.js?v=500";
+} from "./ui/battleSpriteMotion.js?v=501";
 import {
   monsterAttackEffectPlacement,
   monsterAttackEffectType,
   resolveMonsterBattleSpritePreset,
-} from "./config/monsterBattleSpritePresets.js?v=500";
-import { resolveMonsterRuntimeAction } from "./config/monsterRuntimeIntegrationPresets.js?v=500";
-import { resolvePlayerAttackEffectPlacement } from "./config/playerBattleSprites.js?v=500";
+} from "./config/monsterBattleSpritePresets.js?v=501";
+import { resolveMonsterRuntimeAction } from "./config/monsterRuntimeIntegrationPresets.js?v=501";
+import { resolvePlayerAttackEffectPlacement } from "./config/playerBattleSprites.js?v=501";
 import { displayNameFor, equippedItemList, findById, itemOptionText } from "./state/dataLookup.js";
 import { addLogEntry } from "./state/log.js";
-import { buyShopItem, sellInventoryItem } from "./state/shop.js?v=500";
-import { applyStanceSelection } from "./state/stance.js?v=500";
+import { buyShopItem, sellInventoryItem } from "./state/shop.js?v=501";
+import { applyStanceSelection } from "./state/stance.js?v=501";
 import {
   allocatePlayerStat,
   allocateRecommendedStats,
   confirmAllocatedStats,
   deallocatePlayerStat,
   resetAllocatedStats,
-} from "./state/statAllocation.js?v=500";
-import { applyRegionSelection, previewRegionState } from "./state/regionSelection.js?v=500";
+} from "./state/statAllocation.js?v=501";
+import { applyRegionSelection, previewRegionState } from "./state/regionSelection.js?v=501";
 import {
   advanceRegionMonsterEncounter,
   regionMonsterEncounterSeed,
   resolveRegionMonster,
-} from "./state/regionMonsterPool.js?v=500";
+} from "./state/regionMonsterPool.js?v=501";
 import {
   stepObjectiveRotationState,
   toggleObjectiveAlertState,
   toggleObjectiveRotationModeState,
-} from "./state/objectiveUiState.js?v=500";
+} from "./state/objectiveUiState.js?v=501";
 import {
   normalizeHyperRuntime,
   normalizePlayerResources,
   normalizeTargetResources,
   restorePlayerResources,
   shouldResetHitCombo,
-} from "./state/playerResources.js?v=500";
+} from "./state/playerResources.js?v=501";
 import {
   hasSkillLoadout,
   resolveActiveLoadoutActions,
   resolveActiveLoadoutSkills,
   resolveActiveSkillLoadout,
-} from "./state/skillLoadout.js?v=500";
+} from "./state/skillLoadout.js?v=501";
 import {
   claimFirstCombatGuide,
   claimRegionCoreEventGuide,
   createTutorialFlags,
-} from "./state/tutorialGuidance.js?v=500";
-import { claimOfflineAutoHuntReward, stampLastSeen } from "./state/offlineReward.js?v=500";
-import { nodeName } from "./ui/renderRegion.js?v=500";
-import { renderLog } from "./ui/renderCommon.js?v=500";
-import { renderCombatSkillInfo } from "./ui/renderCombatActions.js?v=500";
-import { renderHitCounter } from "./ui/renderCombatPulse.js?v=500";
-import { setupCollapsiblePanels } from "./ui/panels.js?v=500";
-import { setSaveStatus } from "./ui/saveSlotStatus.js?v=500";
+} from "./state/tutorialGuidance.js?v=501";
+import { claimOfflineAutoHuntReward, stampLastSeen } from "./state/offlineReward.js?v=501";
+import { nodeName } from "./ui/renderRegion.js?v=501";
+import { renderLog } from "./ui/renderCommon.js?v=501";
+import { renderCombatSkillInfo } from "./ui/renderCombatActions.js?v=501";
+import { renderHitCounter } from "./ui/renderCombatPulse.js?v=501";
+import { setupCollapsiblePanels } from "./ui/panels.js?v=501";
+import { setSaveStatus } from "./ui/saveSlotStatus.js?v=501";
 import {
   activeViewId,
   activateView,
   resetCharacterCreationWizard,
   setCreationCancelMode,
-} from "./ui/viewNavigation.js?v=500";
+} from "./ui/viewNavigation.js?v=501";
 
 const $ = (selector) => document.querySelector(selector);
 const { loadAssetRegistry, resolveRegionCardImagePath } = assetRegistryApi;

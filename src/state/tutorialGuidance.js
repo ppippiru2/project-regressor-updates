@@ -1,6 +1,6 @@
-import { t, tf } from "../localization/index.js?v=500";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=500";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=500";
+import { t, tf } from "../localization/index.js?v=501";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=501";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=501";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,
