@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 565,
-  "displayVersion": "v565",
-  "cacheVersion": "565",
-  "updatedAt": "2026-06-29T15:30:00.000+09:00",
+  "versionCode": 571,
+  "displayVersion": "v571",
+  "cacheVersion": "571",
+  "updatedAt": "2026-06-29T18:55:20.900+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=565&cachebust=565",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=571&cachebust=571",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "v565 published: added Automated QA TestPlan v1.0 data plus a quick-check wired automated QA guard for pre-reality terms, record locks, remnant flags, golden-card run locks, boss disclosure timing, regression resync, loop rotation, placeholders, voice warnings, and current DialogueEvent coverage gaps.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v565-debug.apk",
+  "notes": "v571 build: separated preserve/full_power/rampage into combat style buttons, connected them to the existing buff runtime, rebuilt APK, and prepared GitHub Pages update payload.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v571-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v565-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v571-debug.apk"
   },
-  "version": "5.65.0",
+  "version": "5.71.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v565-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v571-debug.apk"
   },
   "android": {
-    "code": 565,
-    "name": "5.65.0",
-    "displayName": "v565",
+    "code": 571,
+    "name": "5.71.0",
+    "displayName": "v571",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v565-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v571-debug.apk"
     },
     "version": {
-      "code": 565,
-      "name": "5.65.0",
-      "displayName": "v565"
+      "code": 571,
+      "name": "5.71.0",
+      "displayName": "v571"
     },
-    "versionCode": 565,
-    "versionName": "5.65.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v565-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v565-release.apk"
+    "versionCode": 571,
+    "versionName": "5.71.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v571-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v571-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v565-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v571-debug.apk"
   },
-  "versionName": "5.65.0"
+  "versionName": "5.71.0"
 }

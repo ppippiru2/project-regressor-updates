@@ -1,26 +1,36 @@
-import { getLocaleText, tf } from "../localization/index.js?v=565";
-import { resolveAlignment, resolveDispositionResult } from "../state/profile.js?v=565";
+import { getLocaleText, tf } from "../localization/index.js?v=571";
+import {
+  PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
+  resolveAlignment,
+  resolveDispositionResult,
+} from "../state/profile.js?v=571";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=565";
+} from "../state/portraitFrame.js?v=571";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=565";
+} from "./portraitFrameView.js?v=571";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=565";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=565";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=565";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=565";
+} from "./diceSpriteRenderer.js?v=571";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=571";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=571";
+import {
+  renderTutorialDialogueTemplate,
+  resolveTutorialDispositionDialogue,
+  resolveTutorialKeyEventDialogue,
+  resolveTutorialStarterCardDialogue,
+  TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW,
+} from "../story/tutorialDialogueEvents.js?v=571";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -41,12 +51,15 @@ const INITIAL_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.startingStats;
 const MIN_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.minValues || INITIAL_STAT_VALUES;
 const MAX_STAT_VALUE = 10;
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
-const CREATION_PROLOGUE_EVENTS_BY_STEP = Object.freeze({
-  profile: Object.freeze(["prologue_dream_01_falling_consciousness", "prologue_dream_02_profile_record"]),
-  stats: Object.freeze(["prologue_dream_03_initial_stat_sync"]),
-  questions: Object.freeze(["prologue_dream_04_abyss_questions_start"]),
-  starterCards: Object.freeze(["prologue_card_01_show_cards"]),
-  result: Object.freeze(["prologue_transfer_to_tutorial"]),
+const CREATION_PROLOGUE_EVENT_STEPS = Object.freeze({
+  prologue_dream_01_falling_consciousness: "profile",
+  prologue_dream_02_profile_record: "profile",
+  prologue_dream_03_initial_stat_sync: "stats",
+  prologue_dream_04_abyss_questions_start: "questions",
+  "prologue_result_{dispositionId}": "starterCards",
+  prologue_card_01_show_cards: "starterCards",
+  "prologue_card_{starterCardId}": "starterCards",
+  prologue_transfer_to_tutorial: "result",
 });
 const STARTER_CARD_DISPOSITION_WEIGHTS = Object.freeze({
   starter_weapon_sense: Object.freeze({ coldCalculation: 20, practicalBalance: 10 }),
@@ -303,18 +316,73 @@ function renderStepBody(draft) {
 }
 
 function renderCreationProloguePanel(draft) {
-  const eventIds = CREATION_PROLOGUE_EVENTS_BY_STEP[draft.step] || [];
+  const eventIds = creationPrologueEventIdsForStep(draft.step);
   if (!eventIds.length) return "";
 
   const templateValues = creationPrologueTemplateValues(draft);
   const events = eventIds
-    .map((eventId) => resolveTutorialKeyEventDialogue(eventId, { localeText: TEXT, templateValues }))
+    .map((eventId) => resolveCreationPrologueEvent(eventId, draft, templateValues))
     .filter(Boolean);
   if (!events.length) return "";
 
   return `<div class="creation-prologue-panel" data-creation-prologue-step="${escapeAttr(draft.step)}">
     ${events.map(renderCreationPrologueEvent).join("")}
   </div>`;
+}
+
+function creationPrologueEventIdsForStep(step) {
+  return TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW
+    .filter((eventId) => CREATION_PROLOGUE_EVENT_STEPS[eventId] === step);
+}
+
+function resolveCreationPrologueEvent(eventId, draft, templateValues) {
+  if (eventId === "prologue_result_{dispositionId}") return resolveCreationDispositionEvent(draft, templateValues);
+  if (eventId === "prologue_card_{starterCardId}") return resolveCreationStarterCardEvent(draft, templateValues);
+  return resolveTutorialKeyEventDialogue(eventId, { localeText: TEXT, templateValues });
+}
+
+function resolveCreationDispositionEvent(draft, templateValues) {
+  const disposition = resolveDispositionResult(Object.values(draft.answers || {}));
+  const resolved = resolveTutorialDispositionDialogue({ alignment: disposition.name }, { localeText: TEXT });
+  if (!resolved) return null;
+  const introTemplate = TEXT.story?.tutorialDialogue?.introLog?.disposition || "{disposition}. {reaction}";
+  const reaction = renderTutorialDialogueTemplate(resolved.log || "", templateValues, { localeText: TEXT });
+  return {
+    eventId: `prologue_result_${resolved.id || disposition.id}`,
+    speakerType: "system",
+    title: resolved.name || disposition.name,
+    detail: {
+      systemLines: [
+        renderTutorialDialogueTemplate(introTemplate, {
+          ...templateValues,
+          disposition: resolved.name || disposition.name,
+          reaction,
+        }, { localeText: TEXT }),
+      ],
+    },
+  };
+}
+
+function resolveCreationStarterCardEvent(draft, templateValues) {
+  const selectedCard = selectedStarterCard(draft);
+  const resolved = resolveTutorialStarterCardDialogue({ starterCardId: selectedCard.id }, { localeText: TEXT });
+  if (!resolved) return null;
+  const introTemplate = TEXT.story?.tutorialDialogue?.introLog?.starterCard || "{cardName}. {reaction}";
+  const reaction = renderTutorialDialogueTemplate(resolved.log || "", templateValues, { localeText: TEXT });
+  return {
+    eventId: `prologue_card_${selectedCard.id}`,
+    speakerType: "system",
+    title: resolved.cardName || selectedCard.card,
+    detail: {
+      systemLines: [
+        renderTutorialDialogueTemplate(introTemplate, {
+          ...templateValues,
+          cardName: resolved.cardName || selectedCard.card,
+          reaction,
+        }, { localeText: TEXT }),
+      ],
+    },
+  };
 }
 
 function renderCreationPrologueEvent(event) {
@@ -408,14 +476,14 @@ function renderProfileStep(draft) {
         </select>
       </label>
     </div>
-    <div class="creation-image-row">
+    <div class="creation-image-row" data-customization-bridge="${escapeAttr(PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID)}">
       <span>
         <strong>${escapeHtml(CREATION_TEXT.profile.profileImage)}</strong>
         <small>${escapeHtml(draft.portraitFileName)}</small>
       </span>
       <label class="secondary-button creation-file-button">
         ${escapeHtml(CREATION_TEXT.profile.chooseImage)}
-        <input id="creation-profile-image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+        <input id="creation-profile-image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif" data-customization-bridge="${escapeAttr(PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID)}" hidden />
       </label>
     </div>
     ${renderCreationPortraitAdjuster(draft)}
@@ -619,6 +687,7 @@ function renderHiddenFields(draft) {
     <input type="hidden" name="gender" value="${escapeAttr(draft.gender)}" />
     <input type="hidden" name="country" value="${escapeAttr(draft.country)}" />
     <input type="hidden" name="portraitDataUrl" value="${escapeAttr(draft.portraitDataUrl)}" />
+    <input type="hidden" name="profileImageBridgeId" value="${escapeAttr(PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID)}" />
     <input type="hidden" name="portraitFrameX" value="${escapeAttr(draft.portraitFrame.x)}" />
     <input type="hidden" name="portraitFrameY" value="${escapeAttr(draft.portraitFrame.y)}" />
     <input type="hidden" name="portraitFrameScale" value="${escapeAttr(draft.portraitFrame.scale)}" />
@@ -636,6 +705,7 @@ function syncHiddenFields(form, draft) {
     gender: draft.gender,
     country: draft.country,
     portraitDataUrl: draft.portraitDataUrl,
+    profileImageBridgeId: PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
     portraitFrameX: draft.portraitFrame.x,
     portraitFrameY: draft.portraitFrame.y,
     portraitFrameScale: draft.portraitFrame.scale,

@@ -1,5 +1,7 @@
-import { getLocaleText } from "../localization/index.js?v=565";
-import { portraitFrameFromFormData } from "./portraitFrame.js?v=565";
+import { getLocaleText } from "../localization/index.js?v=571";
+import { portraitFrameFromFormData } from "./portraitFrame.js?v=571";
+
+export const PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID = "character_customization_profile_image_v1";
 
 const DISPOSITION_SCORE_KEYS = Object.freeze([
   "devotedOrder",
@@ -37,6 +39,7 @@ export function buildPlayerProfileInput(formData, defaultProfile) {
     starterSkill: formData.get("starterSkill") || "",
     starterSkillActionId: formData.get("starterSkillActionId") || "",
     portraitDataUrl: formData.get("portraitDataUrl") || "",
+    profileImageBridgeId: PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
     portraitFrame: portraitFrameFromFormData(formData),
   };
 }

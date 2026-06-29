@@ -1,13 +1,18 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=565";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=565";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=571";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=571";
 import {
   claimFirstCodexRecordGuide,
   claimFirstLootDropGuide,
   claimForgottenGodRemnantGuide,
-} from "./tutorialGuidance.js?v=565";
-import { t, tf } from "../localization/index.js?v=565";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=565";
+} from "./tutorialGuidance.js?v=571";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=571";
+import { t, tf } from "../localization/index.js?v=571";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=571";
+import {
+  claimDialogueEventById,
+  claimDialogueEventsForTrigger,
+} from "../story/dialogueEventRuntime.js?v=571";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
@@ -46,6 +51,17 @@ export function applyMonsterDefeatRewards(state, monster, context) {
       }));
       messages.push(...claimFirstLootDropGuide(state, { item, count: inventoryEntry?.count || 1 }));
       messages.push(...claimFirstCodexRecordGuide(state, { item, count: inventoryEntry?.count || 1 }));
+      messages.push(...claimDialogueEventsForTrigger(state, {
+        type: "onLoot",
+        targetId: itemId,
+        regionId: region?.id || "",
+      }, {
+        region,
+        itemName: item.name || getItemName(itemId),
+        count: inventoryEntry?.count || 1,
+        target: item.recordTarget || 0,
+        remaining: Math.max(0, (Number(item.recordTarget) || 0) - (Number(inventoryEntry?.count) || 0)),
+      }));
       continue;
     }
 
@@ -54,10 +70,34 @@ export function applyMonsterDefeatRewards(state, monster, context) {
     if (insight) messages.push(insight.message);
   }
 
+  messages.push(...claimDialogueEventsForTrigger(state, {
+    type: "onDefeatMonster",
+    targetId: monster.id,
+    regionId: region?.id || "",
+  }, {
+    region,
+    monster,
+  }));
+
+  if (region?.id === "mana_mine" && monster?.id === "mine_core_golem") {
+    messages.push(...claimDialogueEventById(state, TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID, {
+      region,
+      monster,
+    }));
+  }
   messages.push(...claimForgottenGodRemnantGuide(state, { region, monster }));
 
   if (monster.isBoss && region && markRegionCompleted(state.completedRegions, region.id)) {
     messages.push(tf("combatRewards.bossCleared", { regionName: region.name }));
+    messages.push(...claimDialogueEventsForTrigger(state, {
+      type: "onClear",
+      targetId: monster.id,
+      regionId: region.id,
+    }, {
+      region,
+      monster,
+      flags: ["forgottenGodRemnantContacted"],
+    }));
     const resolved = resolveRegionCoreEvent(region);
     if (resolved?.completionLog) messages.push(resolved.completionLog);
   }

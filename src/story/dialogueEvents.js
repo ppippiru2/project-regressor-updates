@@ -1,13 +1,17 @@
-import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=565";
+import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=571";
 
-export const DIALOGUE_EVENT_DATA_VERSION = "v1.0";
+export const DIALOGUE_EVENT_DATA_VERSION = "v1.2";
 
 export const DIALOGUE_EVENT_REQUIRED_IDS = Object.freeze([
   "prologue_dream_02_profile_record",
   "tutorial_1st_shore_status_after_dream",
   "regression_2nd_pre_shore_card_resync",
+  "regression_3rd_pre_shore_card_resync",
+  "regression_4th_pre_shore_card_resync",
+  "tutorial_loop_common_pre_shore_card_resync",
   "tutorial_1st_mine_06_forgotten_god_remnant",
   "tutorial_1st_gate_06_warden_20_clear",
+  "tutorial_2nd_03_golden_card",
 ]);
 
 export const DIALOGUE_EVENT_PHASES = Object.freeze([

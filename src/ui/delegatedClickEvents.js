@@ -24,8 +24,10 @@ export function bindDelegatedClickEvents({
   onDeveloperOptionChange,
   onNavigateToView,
   onCombatAction,
+  onCombatStyleAction,
 } = {}) {
   root.addEventListener("click", (event) => {
+    const combatStyleAction = event.target.closest("[data-combat-style-action]");
     const combatAction = event.target.closest("[data-combat-action]");
     const equip = event.target.closest("[data-equip]");
     const equipRecommended = event.target.closest("[data-equip-recommended]");
@@ -49,6 +51,12 @@ export function bindDelegatedClickEvents({
     const shopSell = event.target.closest("[data-shop-sell]");
     const developerAction = event.target.closest("[data-developer-action]");
     const systemTarget = event.target.closest("[data-system-target-view]");
+
+    if (combatStyleAction) {
+      event.preventDefault();
+      onCombatStyleAction?.(combatStyleAction.dataset.combatStyleAction);
+      return;
+    }
 
     if (combatAction) {
       event.preventDefault();

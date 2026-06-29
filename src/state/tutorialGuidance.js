@@ -1,15 +1,24 @@
-import { t, tf } from "../localization/index.js?v=565";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=565";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=565";
-import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=565";
+import { t, tf } from "../localization/index.js?v=571";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=571";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=571";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=571";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
+  prologueCompleted: false,
   firstCombatGuideShown: false,
   firstLootDropGuideShown: false,
   firstCodexRecordGuideShown: false,
   forgottenGodRemnantContacted: false,
+  firstDeathCauseRecorded: false,
+  regressorRecordUnlocked: false,
+  hasSeenGoldenCardNews: false,
+  traitCardResyncAvailable: false,
+  goldenCardObtained: false,
+  regressionCount: 1,
+  tutorialRun: 1,
   shownRegionCoreEventIds: [],
   shownTutorialEventIds: [],
+  dialogueRecordEntries: [],
 });
 
 export function createTutorialFlags(overrides = {}) {
@@ -105,6 +114,10 @@ function validTutorialFlagOverrides(source) {
       if (Array.isArray(fallback)) {
         const values = Array.isArray(source[key]) ? source[key] : fallback;
         return [key, [...new Set(values.filter(Boolean).map(String))]];
+      }
+      if (Number.isFinite(fallback)) {
+        const value = Math.floor(Number(source[key]));
+        return [key, Number.isFinite(value) && value > 0 ? value : fallback];
       }
       return [key, typeof source[key] === "boolean" ? source[key] : fallback];
     })

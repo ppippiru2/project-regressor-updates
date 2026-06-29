@@ -39,7 +39,7 @@
       {
         "speaker": "시스템",
         "lineType": "system",
-        "text": "[SYSTEM INITIALIZATION]",
+        "text": "[시스템 초기화]",
         "branchKey": null,
         "requires": {},
         "notesForCodex": null
@@ -107,9 +107,9 @@
       "헌터협회/길드/헌터 등급 용어 금지."
     ],
     "qaChecks": [
-      "prologueCompleted=false일 때만 실행되는가?",
-      "{playerName}, {age}, {gender}, {country}, {profileImage}가 실제 입력값으로 치환되는가?",
-      "주인공 독백이 출력되지 않는가?"
+      "prologueCompleted=false일 때만 실행되는가\u8005",
+      "{playerName}, {age}, {gender}, {country}, {profileImage}가 실제 입력값으로 치환되는가\u8005",
+      "주인공 독백이 출력되지 않는가\u8005"
     ]
   },
   {
@@ -364,7 +364,7 @@
       {
         "speaker": "주인공",
         "lineType": "dialogue",
-        "text": "하지만 출발점의 특성은 다시 조정할 수 있다?",
+        "text": "하지만 출발점의 특성은 다시 조정할 수 있다\u8005",
         "branchKey": null,
         "requires": {},
         "notesForCodex": null
@@ -392,10 +392,294 @@
       "선택 결과는 selectedCardName, selectedTraitName, selectedSkillName에 저장한다."
     ],
     "qaChecks": [
-      "2회차 해안 각성 전에 실행되는가?",
-      "프로필 질문이 반복되지 않는가?",
-      "카르마 값이 표시되는가?",
-      "카드 후보 수/등급 가중치가 표시되는가?"
+      "2회차 해안 각성 전에 실행되는가\u8005",
+      "프로필 질문이 반복되지 않는가\u8005",
+      "카르마 값이 표시되는가\u8005",
+      "카드 후보 수/등급 가중치가 표시되는가\u8005"
+    ]
+  },
+  {
+    "id": "tutorial_2nd_03_golden_card",
+    "title": "2회차 황금 카드 획득",
+    "phase": "tutorial_run2",
+    "runRequirement": {
+      "exactRun": 2,
+      "minRun": 2,
+      "maxRun": 2,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_forest",
+    "trigger": {
+      "type": "onInteraction",
+      "targetId": "north_rock_interaction",
+      "threshold": null,
+      "description": "2회차 이후 회귀자의 기록으로 북쪽 바위 단서를 다시 확인"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "regressorRecordUnlocked",
+        "hasSeenGoldenCardNews"
+      ],
+      "flagsFalse": [
+        "goldenCardObtained"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "goldenCardObtained"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_2nd_03_golden_card"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[회귀자의 기록] 이전에는 위치만 남겼던 단서가 보상 조건으로 정리되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[보상] 황금 카드가 기록에 추가되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "위치를 아는 것만으로는 부족했어. 조건을 채우고 돌아와야 열리는 보상이었군.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-005 DialogueEvent data coverage."
+    ],
+    "qaChecks": [
+      "TEST-005 goldenCardObtained state effect should be data-backed."
+    ]
+  },
+  {
+    "id": "regression_3rd_pre_shore_card_resync",
+    "title": "3회차 해안 전 운명 카드 재동기화",
+    "phase": "regression_pre_shore",
+    "runRequirement": {
+      "exactRun": 3,
+      "minRun": 3,
+      "maxRun": 3,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "pre_shore_card_resync",
+      "threshold": null,
+      "description": "3회차 시작 직전 운명 카드 후보를 다시 정렬"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "traitCardResyncAvailable"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "regression_3rd_pre_shore_card_resync",
+        "karmaSettlement"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[운명 카드 재동기화] 세 번째 회차의 사망 기록과 선택 경향을 대조합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[카드 후보] {cardCandidateCount}장.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[등급 가중치] {cardGradeWeightSummary}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-008 repeated card resync data coverage."
+    ],
+    "qaChecks": [
+      "TEST-008 run 3 card resync should set traitCardResyncAvailable."
+    ]
+  },
+  {
+    "id": "regression_4th_pre_shore_card_resync",
+    "title": "4회차 해안 전 운명 카드 재동기화",
+    "phase": "regression_pre_shore",
+    "runRequirement": {
+      "exactRun": 4,
+      "minRun": 4,
+      "maxRun": 4,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "pre_shore_card_resync",
+      "threshold": null,
+      "description": "4회차 시작 직전 운명 카드 후보를 다시 정렬"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "traitCardResyncAvailable"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "regression_4th_pre_shore_card_resync",
+        "karmaSettlement"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[운명 카드 재동기화] 네 번째 회차의 사망 기록과 선택 경향을 대조합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[카드 후보] {cardCandidateCount}장.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[등급 가중치] {cardGradeWeightSummary}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-008 repeated card resync data coverage."
+    ],
+    "qaChecks": [
+      "TEST-008 run 4 card resync should set traitCardResyncAvailable."
+    ]
+  },
+  {
+    "id": "tutorial_loop_common_pre_shore_card_resync",
+    "title": "5회차 이후 공통 운명 카드 재동기화",
+    "phase": "tutorial_loop",
+    "runRequirement": {
+      "exactRun": null,
+      "minRun": 5,
+      "maxRun": null,
+      "loopFormula": "(regressionCount - 5) % 4"
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "loop_pre_shore_card_resync",
+      "threshold": null,
+      "description": "5회차 이후 반복 루프 시작 직전 운명 카드 후보를 재동기화"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "traitCardResyncAvailable"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_loop_common_pre_shore_card_resync",
+        "karmaSettlement"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[운명 카드 재동기화] 반복 회차의 선택 기록을 다시 정렬합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[카드 후보] {cardCandidateCount}장.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[등급 가중치] {cardGradeWeightSummary}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-008 loop card resync data coverage."
+    ],
+    "qaChecks": [
+      "TEST-008 run 5+ card resync should set traitCardResyncAvailable."
     ]
   },
   {
@@ -433,7 +717,7 @@
       "grantItems": [],
       "grantSkills": [],
       "grantTraits": [
-        "▒록□\u8005?"
+        "▒록□\u8005\u8005"
       ],
       "recordEntries": [
         "forgotten_god_remnant_contact"
@@ -475,7 +759,7 @@
       {
         "speaker": "주인공",
         "lineType": "dialogue",
-        "text": "누구야?",
+        "text": "누구야\u8005",
         "branchKey": null,
         "requires": {},
         "notesForCodex": null
@@ -499,7 +783,7 @@
       {
         "speaker": "시스템",
         "lineType": "system",
-        "text": "[특성] ▒록□\u8005?",
+        "text": "[특성] ▒록□\u8005\u8005",
         "branchKey": null,
         "requires": {},
         "notesForCodex": "1회차에는 회귀자의 기록 정상명 표시 금지"
@@ -519,9 +803,9 @@
       "2회차 시작부터 regressorRecordUnlocked=true."
     ],
     "qaChecks": [
-      "광산 핵 골렘 우회 노드에서만 발생하는가?",
-      "특성명은 깨진 글자로 표시되는가?",
-      "도감 정상 메시지가 아니라 손상된 기록으로 표시되는가?"
+      "광산 핵 골렘 우회 노드에서만 발생하는가\u8005",
+      "특성명은 깨진 글자로 표시되는가\u8005",
+      "도감 정상 메시지가 아니라 손상된 기록으로 표시되는가\u8005"
     ]
   },
   {
@@ -636,9 +920,2265 @@
       "클리어 후 C/B/A/S 평가 기준 공개."
     ],
     "qaChecks": [
-      "전투 전 평가 기준이 공개되지 않는가?",
-      "클리어 후 C/B/A/S 기준이 공개되는가?",
-      "주인공이 강자/랭커 비교를 하지 않는가?"
+      "전투 전 평가 기준이 공개되지 않는가\u8005",
+      "클리어 후 C/B/A/S 기준이 공개되는가\u8005",
+      "주인공이 강자/랭커 비교를 하지 않는가\u8005"
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_03_shore_imp",
+    "title": "해안 조우 03",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "shore_imp",
+      "threshold": null,
+      "description": "해안 조우 03 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_shore_03_shore_imp_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_shore_03_shore_imp_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_shore_03_shore_imp"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 해안 조우 03",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_04_claw_crab",
+    "title": "해안 조우 04",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "claw_crab",
+      "threshold": null,
+      "description": "해안 조우 04 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_shore_04_claw_crab_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_shore_04_claw_crab_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_shore_04_claw_crab"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 해안 조우 04",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_05_drift_slime_mana_variant",
+    "title": "해안 조우 05",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "drift_slime_mana_variant",
+      "threshold": null,
+      "description": "해안 조우 05 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_shore_05_drift_slime_mana_variant_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_shore_05_drift_slime_mana_variant_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_shore_05_drift_slime_mana_variant"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 해안 조우 05",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_06_nameless_scrap",
+    "title": "해안 숨겨진 기록 06",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "onLoot",
+      "targetId": "nameless_scrap",
+      "threshold": null,
+      "description": "해안 숨겨진 기록 06 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_shore_06_nameless_scrap_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_shore_06_nameless_scrap_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_shore_06_nameless_scrap"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 해안 숨겨진 기록 06",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "표식은 없지만 기록은 남아. 다시 오면 써먹을 수 있겠어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_07_buried_cache_hint",
+    "title": "해안 단서 07",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "buried_cache_hint",
+      "threshold": null,
+      "description": "해안 단서 07 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_shore_07_buried_cache_hint_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_shore_07_buried_cache_hint_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_shore_07_buried_cache_hint"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 해안 단서 07",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "숨겨진 단서가 있어. 지금은 위치만 기억해두자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_08_rest_point",
+    "title": "해안 휴식 08",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "onRest",
+      "targetId": "shore_rest_point",
+      "threshold": null,
+      "description": "해안 휴식 08 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_shore_08_rest_point_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_shore_08_rest_point_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_shore_08_rest_point"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 해안 휴식 08",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[안내] 잠깐 숨을 고르자. 다음 싸움이 더 중요해.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "잠깐 숨을 고르자. 다음 싸움이 더 중요해.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_forest_01_entry",
+    "title": "숲 진입 01",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_forest",
+    "trigger": {
+      "type": "onEnterRegion",
+      "targetId": "tutorial_forest",
+      "threshold": null,
+      "description": "숲 진입 01 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_forest_01_entry_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_forest_01_entry_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_forest_01_entry"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 숲 진입 01",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[안내] 공기가 달라졌어. 여기부터는 더 조심하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "공기가 달라졌어. 여기부터는 더 조심하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_forest_02_shadow_wolf",
+    "title": "숲 조우 02",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_forest",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "shadow_wolf",
+      "threshold": null,
+      "description": "숲 조우 02 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_forest_02_shadow_wolf_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_forest_02_shadow_wolf_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_forest_02_shadow_wolf"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 숲 조우 02",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_forest_03_goblin_scout",
+    "title": "숲 조우 03",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_forest",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "goblin_scout",
+      "threshold": null,
+      "description": "숲 조우 03 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_forest_03_goblin_scout_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_forest_03_goblin_scout_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_forest_03_goblin_scout"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 숲 조우 03",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_forest_04_north_rock_gold_card_hint",
+    "title": "숲 단서 04",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_forest",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "north_rock_hint",
+      "threshold": null,
+      "description": "숲 단서 04 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_forest_04_north_rock_gold_card_hint_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_forest_04_north_rock_gold_card_hint_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_forest_04_north_rock_gold_card_hint"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 숲 단서 04",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "숨겨진 단서가 있어. 지금은 위치만 기억해두자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_forest_05_alpha_wolf_elite",
+    "title": "숲 위험 조우 05",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_forest",
+    "trigger": {
+      "type": "onEliteSighted",
+      "targetId": "alpha_wolf",
+      "threshold": null,
+      "description": "숲 위험 조우 05 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_forest_05_alpha_wolf_elite_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_forest_05_alpha_wolf_elite_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_forest_05_alpha_wolf_elite"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 숲 위험 조우 05",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "지금 다시 들어가면 위험해. 위치만 기억해두자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_forest_06_hidden_herb_field",
+    "title": "숲 숨겨진 기록 06",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_forest",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "hidden_herb_field",
+      "threshold": null,
+      "description": "숲 숨겨진 기록 06 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_forest_06_hidden_herb_field_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_forest_06_hidden_herb_field_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_forest_06_hidden_herb_field"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 숲 숨겨진 기록 06",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "표식은 없지만 기록은 남아. 다시 오면 써먹을 수 있겠어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_ruins_01_entry",
+    "title": "폐허 진입 01",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "broken_ruins",
+    "trigger": {
+      "type": "onEnterRegion",
+      "targetId": "broken_ruins",
+      "threshold": null,
+      "description": "폐허 진입 01 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_ruins_01_entry_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_ruins_01_entry_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_ruins_01_entry"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 폐허 진입 01",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[안내] 공기가 달라졌어. 여기부터는 더 조심하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "공기가 달라졌어. 여기부터는 더 조심하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_ruins_02_mock_gate_node_map",
+    "title": "폐허 노드맵 02",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "broken_ruins",
+    "trigger": {
+      "type": "onOpenNodeMap",
+      "targetId": "mock_gate_node_map",
+      "threshold": null,
+      "description": "폐허 노드맵 02 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_ruins_02_mock_gate_node_map_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_ruins_02_mock_gate_node_map_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_ruins_02_mock_gate_node_map"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 폐허 노드맵 02",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[안내] 이 구조를 기억해두자. 다음 경로를 읽는 데 쓸모가 있어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이 구조를 기억해두자. 다음 경로를 읽는 데 쓸모가 있어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_ruins_03_sentinel",
+    "title": "폐허 조우 03",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "broken_ruins",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "ruin_sentinel",
+      "threshold": null,
+      "description": "폐허 조우 03 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_ruins_03_sentinel_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_ruins_03_sentinel_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_ruins_03_sentinel"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 폐허 조우 03",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_ruins_04_rune_doll",
+    "title": "폐허 조우 04",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "broken_ruins",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "rune_doll",
+      "threshold": null,
+      "description": "폐허 조우 04 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_ruins_04_rune_doll_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_ruins_04_rune_doll_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_ruins_04_rune_doll"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 폐허 조우 04",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_ruins_05_hidden_stair_locked",
+    "title": "폐허 잠김 05",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "broken_ruins",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "hidden_stair",
+      "threshold": null,
+      "description": "폐허 잠김 05 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_ruins_05_hidden_stair_locked_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_ruins_05_hidden_stair_locked_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_ruins_05_hidden_stair_locked"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 폐허 잠김 05",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[안내] 지금은 열 수 없어. 조건을 먼저 만들자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "지금은 열 수 없어. 조건을 먼저 만들자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_ruins_06_hidden_treasure_hint",
+    "title": "폐허 단서 06",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "broken_ruins",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "hidden_treasure_hint",
+      "threshold": null,
+      "description": "폐허 단서 06 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_ruins_06_hidden_treasure_hint_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_ruins_06_hidden_treasure_hint_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_ruins_06_hidden_treasure_hint"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 폐허 단서 06",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "숨겨진 단서가 있어. 지금은 위치만 기억해두자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_mine_01_entry",
+    "title": "광산 진입 01",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "mana_mine",
+    "trigger": {
+      "type": "onEnterRegion",
+      "targetId": "mana_mine",
+      "threshold": null,
+      "description": "광산 진입 01 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_mine_01_entry_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_mine_01_entry_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_mine_01_entry"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 광산 진입 01",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[안내] 공기가 달라졌어. 여기부터는 더 조심하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "공기가 달라졌어. 여기부터는 더 조심하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_mine_02_crystal_bug",
+    "title": "광산 조우 02",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "mana_mine",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "crystal_bug",
+      "threshold": null,
+      "description": "광산 조우 02 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_mine_02_crystal_bug_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_mine_02_crystal_bug_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_mine_02_crystal_bug"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 광산 조우 02",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_mine_03_mine_golem",
+    "title": "광산 조우 03",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "mana_mine",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "mine_golem",
+      "threshold": null,
+      "description": "광산 조우 03 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_mine_03_mine_golem_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_mine_03_mine_golem_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_mine_03_mine_golem"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 광산 조우 03",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_mine_04_sealed_box_locked",
+    "title": "광산 잠김 04",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "mana_mine",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "sealed_box",
+      "threshold": null,
+      "description": "광산 잠김 04 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_mine_04_sealed_box_locked_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_mine_04_sealed_box_locked_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_mine_04_sealed_box_locked"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 광산 잠김 04",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[안내] 지금은 열 수 없어. 조건을 먼저 만들자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "지금은 열 수 없어. 조건을 먼저 만들자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_mine_05_core_golem_hidden_elite",
+    "title": "광산 위험 조우 05",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "mana_mine",
+    "trigger": {
+      "type": "onEliteSighted",
+      "targetId": "mine_core_golem",
+      "threshold": null,
+      "description": "광산 위험 조우 05 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_mine_05_core_golem_hidden_elite_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_mine_05_core_golem_hidden_elite_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_mine_05_core_golem_hidden_elite"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 광산 위험 조우 05",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "지금 다시 들어가면 위험해. 위치만 기억해두자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_gate_01_rift_squire",
+    "title": "관문 조우 01",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "rift_squire",
+      "threshold": null,
+      "description": "관문 조우 01 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_gate_01_rift_squire_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_gate_01_rift_squire_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_gate_01_rift_squire"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 관문 조우 01",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_gate_02_shieldbearer",
+    "title": "관문 조우 02",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "rift_shieldbearer",
+      "threshold": null,
+      "description": "관문 조우 02 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_gate_02_shieldbearer_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_gate_02_shieldbearer_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_gate_02_shieldbearer"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 관문 조우 02",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_gate_03_rift_knight",
+    "title": "관문 조우 03",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onDefeatMonster",
+      "targetId": "rift_knight",
+      "threshold": null,
+      "description": "관문 조우 03 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_gate_03_rift_knight_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_gate_03_rift_knight_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_gate_03_rift_knight"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 관문 조우 03",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "움직임을 봤어. 다음 전투를 준비하자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_gate_04_warden_intro",
+    "title": "관문 관문 반응 04",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onBossIntro",
+      "targetId": "rift_warden_intro",
+      "threshold": null,
+      "description": "관문 관문 반응 04 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_gate_04_warden_intro_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_gate_04_warden_intro_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_gate_04_warden_intro"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 관문 관문 반응 04",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "관문 쪽 반응이 커지고 있어. 준비하고 들어가자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "id": "tutorial_1st_gate_05_warden_appears",
+    "title": "관문 관문 반응 05",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onBossAppears",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "관문 관문 반응 05 trigger"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "tutorial_1st_gate_05_warden_appears_seen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorial_1st_gate_05_warden_appears_seen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_1st_gate_05_warden_appears"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[지역 기록] 관문 관문 반응 05",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 지역 전투 단서가 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "관문 쪽 반응이 커지고 있어. 준비하고 들어가자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 이 사건은 지역 진행도에만 남습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "TEST-010 DialogueEvent JSON coverage seed.",
+      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+    ],
+    "qaChecks": [
+      "Required tutorial region event id exists in data/dialogue-events.json.",
+      "Run-1 pre-reality forbidden terms are absent.",
+      "State effect only records a local seen flag and record entry."
     ]
   }
 ]

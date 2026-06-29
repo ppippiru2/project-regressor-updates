@@ -4,7 +4,7 @@ export const KO_KR_TEXT = {
     confirm: "확인",
     next: "다음",
     previous: "이전",
-    systemInitialization: "SYSTEM INITIALIZATION",
+    systemInitialization: "시스템 초기화",
   },
   contentProfile: {
     projectRegressorHunter: {
@@ -882,6 +882,9 @@ export const KO_KR_TEXT = {
     noCooldown: "쿨 없음",
     ready: "사용 가능",
     unavailable: "사용 불가",
+    styleGroupLabel: "전투 스타일",
+    styleActive: "활성",
+    hpCostPercent: "HP {percent}%",
     weaknessPriority: "약점 우선",
     weaknessBonus: "약점 x{multiplier} · 다음 {count}타",
   },

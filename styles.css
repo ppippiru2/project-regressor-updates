@@ -1978,6 +1978,23 @@ select:focus {
   height: 100%;
 }
 
+.combat-style-group {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.28rem;
+  height: 100%;
+  min-width: 4.2rem;
+}
+
+.combat-style-title {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
 .battle-actions {
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -2512,6 +2529,67 @@ select:focus {
   box-shadow: 0 0 18px rgba(57, 228, 255, 0.18), inset 0 0 14px rgba(57, 228, 255, 0.08);
 }
 
+.combat-style-actions {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: var(--stance-button-gap, 0.32rem);
+  align-items: stretch;
+}
+
+.combat-style-action {
+  min-height: 2.35rem;
+  border: 1px solid rgba(80, 220, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(5, 24, 44, 0.82);
+  color: #dffaff;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  align-content: center;
+  justify-items: center;
+  gap: 0.08rem;
+  padding: 0.28rem 0.55rem;
+  text-align: center;
+  box-shadow: inset 0 0 12px rgba(57, 228, 255, 0.04);
+}
+
+.combat-style-action-name {
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.combat-style-action-meta,
+.combat-style-action-state {
+  max-width: 100%;
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 800;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.combat-style-action.is-active,
+.combat-style-action[data-combat-style-active="true"] {
+  border-color: rgba(255, 220, 110, 0.9);
+  color: #fff2ac;
+  box-shadow: 0 0 10px rgba(255, 220, 110, 0.25), inset 0 0 10px rgba(255, 220, 110, 0.08);
+}
+
+.combat-style-action.is-selected {
+  outline: 1px solid rgba(255, 255, 255, 0.42);
+  outline-offset: 2px;
+}
+
+.combat-style-action.is-flashing {
+  animation: skill-flash 0.55s ease;
+}
+
+.combat-style-action:disabled,
+.combat-style-action[aria-disabled="true"] {
+  opacity: 0.52;
+  cursor: not-allowed;
+}
+
 .skill-strip {
   display: grid;
   gap: 0.55rem;
@@ -2744,6 +2822,12 @@ select:focus {
   padding: 0 0.42rem;
   font-size: 0.78rem;
   line-height: 1;
+}
+
+.battlefield[data-card-layout="stage"] .combat-style-action {
+  min-width: 3.5rem;
+  min-height: var(--stance-button-height);
+  padding: 0.18rem 0.42rem;
 }
 
 .skill-info {

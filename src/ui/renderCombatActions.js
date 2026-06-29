@@ -1,6 +1,7 @@
-import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=565";
-import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=565";
-import { t, tf } from "../localization/index.js?v=565";
+import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=571";
+import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=571";
+import { COMBAT_STYLE_ACTION_IDS, isCombatStyleActive } from "../combat/combatStyleActions.js?v=571";
+import { t, tf } from "../localization/index.js?v=571";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;
@@ -23,6 +24,7 @@ export function renderCombatSkillInfo(player, context) {
     button.classList.toggle("is-selected", Boolean(selected));
     button.setAttribute("aria-pressed", String(Boolean(selected)));
   });
+  renderCombatStyles(player, context);
   infoSlot.innerHTML = combatSkillInfoMarkup(player, context);
 }
 
@@ -41,6 +43,20 @@ export function renderCombatSkillsIfNeeded(player, context) {
       return `${action.id}:${availability.available ? 1 : 0}:${availability.reason}:${actionCooldownRenderKey(action, context, now)}`;
     })
     .join("|");
+  const styleAvailabilityKey = COMBAT_STYLE_ACTION_IDS
+    .map((actionId) => {
+      const action = context.getCombatAction(actionId);
+      if (!action || action.id !== actionId) return `${actionId}:missing`;
+      const availability = context.skillAvailability(action, player, false);
+      return [
+        actionId,
+        availability.available ? 1 : 0,
+        availability.reason,
+        actionCooldownRenderKey(action, context, now),
+        isCombatStyleActive(actionId, context.combatRuntime) ? 1 : 0,
+      ].join(":");
+    })
+    .join("|");
   const loadoutKey = (context.skillLoadouts?.() || [])
     .map((loadout) => `${loadout.id}:${loadout.name}:${loadout.actionIds.join(",")}`)
     .join("|");
@@ -56,6 +72,7 @@ export function renderCombatSkillsIfNeeded(player, context) {
     loadoutKey,
     flashActionId,
     availabilityKey,
+    styleAvailabilityKey,
     weaknessUiKey,
   ].join(";");
 
@@ -116,8 +133,59 @@ function renderCombatSkills(player, context) {
     .join("");
 
   container.innerHTML = `${skillLoadoutTabsMarkup(context)}<div class="skill-buttons">${buttons}</div>`;
+  renderCombatStyles(player, context, { now, visibleAction, inputLocked });
   const infoSlot = document.getElementById("combat-skill-info");
   if (infoSlot) infoSlot.innerHTML = combatSkillInfoMarkup(player, context);
+}
+
+function renderCombatStyles(player, context, options = {}) {
+  const container = document.getElementById("combat-style-actions");
+  if (!container) return;
+
+  const now = options.now ?? Date.now();
+  const inputLocked = options.inputLocked ?? context.combatRuntime.inputLocked === true;
+  const visibleAction = options.visibleAction ?? (
+    context.combatRuntime.visibleActionInfoId
+      ? context.getCombatAction(context.combatRuntime.visibleActionInfoId)
+      : null
+  );
+  const buttons = COMBAT_STYLE_ACTION_IDS
+    .map((actionId) => context.getCombatAction(actionId))
+    .filter((action, index) => action && action.id === COMBAT_STYLE_ACTION_IDS[index])
+    .map((action) => {
+      const active = isCombatStyleActive(action.id, context.combatRuntime);
+      const availability = context.skillAvailability(action, player, false);
+      const selected = visibleAction && action.id === visibleAction.id;
+      const lastUsed = context.combatRuntime.lastActionId === action.id;
+      const flashing = lastUsed && now < context.combatRuntime.actionFlashUntil;
+      const cooldownRemainingMs = actionCooldownRemainingMs(action, context, now);
+      const buttonMeta = actionButtonMeta(action, context, availability, now);
+      const stateText = active ? t("combatActions.styleActive", "활성") : buttonMeta.state;
+      const usable = availability.available && !inputLocked && !active;
+      const classes = [
+        "combat-style-action",
+        usable ? "is-usable" : "is-locked",
+        active ? "is-active" : "",
+        inputLocked ? "is-input-locked" : "",
+        selected ? "is-selected" : "",
+        lastUsed ? "is-last-used" : "",
+        flashing ? "is-flashing" : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+      const infoParts = actionInfoParts(action, context, availability, now);
+      const activeText = t("combatActions.styleActive", "활성");
+      const ariaLabel = `${action.name}. ${action.description}. ${infoParts.join(" · ")}${active ? ` · ${activeText}` : ""}`;
+
+      return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-combat-style-action="${escapeHtml(action.id)}" data-combat-style-active="${active ? "true" : "false"}" data-combat-style-cooldown-ms="${Math.ceil(cooldownRemainingMs)}" data-last-used="${lastUsed}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}" aria-disabled="${usable ? "false" : "true"}" ${usable ? "" : "disabled"}>
+        <span class="combat-style-action-name">${escapeHtml(action.name)}</span>
+        <small class="combat-style-action-meta">${escapeHtml(buttonMeta.meta)}</small>
+        <small class="combat-style-action-state ${active ? "is-active" : availability.available ? "is-ready" : "is-blocked"}">${escapeHtml(stateText)}</small>
+      </button>`;
+    })
+    .join("");
+
+  container.innerHTML = buttons;
 }
 
 function skillLoadoutTabsMarkup(context) {
@@ -217,6 +285,11 @@ function weaknessActionInfoText(action, context, now = Date.now()) {
 }
 
 function actionCostText(action) {
+  const hpCostRatio = Number(action?.selfHpCostRatio ?? action?.skill?.selfHpCostRatio ?? 0);
+  if (Number.isFinite(hpCostRatio) && hpCostRatio > 0) {
+    const percent = Math.round(hpCostRatio * 100);
+    return tf("combatActions.hpCostPercent", { percent }, `HP ${percent}%`);
+  }
   const mpCost = Number(action?.mpCost ?? action?.skill?.mpCost ?? 0);
   return tf("combatActions.mpCost", { mp: Number.isFinite(mpCost) ? Math.max(0, mpCost) : 0 });
 }

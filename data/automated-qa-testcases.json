@@ -135,6 +135,26 @@
         "8": "D",
         "9": "A"
       }
+    },
+    {
+      "id": "TEST-010",
+      "name": "Required regional DialogueEvent coverage",
+      "type": "static",
+      "requiredEventCount": 30,
+      "expected": "all required region event IDs exist in DialogueEvent JSON data"
+    },
+    {
+      "id": "TEST-011",
+      "name": "Unresolved placeholder guard",
+      "type": "static",
+      "forbiddenPattern": "\\{[a-zA-Z0-9_]+\\}",
+      "expected": "0 unresolved placeholders after rendering"
+    },
+    {
+      "id": "TEST-012",
+      "name": "Protagonist voice warning scan",
+      "type": "static-warning",
+      "expected": "0 protagonist warning terms in resolved protagonist dialogue"
     }
   ],
   "coverageRequired": {
