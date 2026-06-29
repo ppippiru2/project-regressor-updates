@@ -1,12 +1,15 @@
-import { t, tf } from "../localization/index.js?v=535";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=535";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=535";
+import { t, tf } from "../localization/index.js?v=560";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=560";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=560";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=560";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,
   firstLootDropGuideShown: false,
   firstCodexRecordGuideShown: false,
+  forgottenGodRemnantContacted: false,
   shownRegionCoreEventIds: [],
+  shownTutorialEventIds: [],
 });
 
 export function createTutorialFlags(overrides = {}) {
@@ -68,6 +71,19 @@ export function claimFirstLootDropGuide(state, { item, count = 0 } = {}) {
       count: Math.max(1, Number(count) || 1),
     }),
   ];
+}
+
+export function claimForgottenGodRemnantGuide(state, { region, monster } = {}) {
+  if (region?.id !== "mana_mine" || monster?.id !== "mine_core_golem") return [];
+
+  state.tutorialFlags = normalizeTutorialFlags(state.tutorialFlags);
+  if (state.tutorialFlags.forgottenGodRemnantContacted) return [];
+
+  state.tutorialFlags.forgottenGodRemnantContacted = true;
+  const shownIds = new Set(state.tutorialFlags.shownTutorialEventIds || []);
+  shownIds.add(TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID);
+  state.tutorialFlags.shownTutorialEventIds = [...shownIds];
+  return [t("stateMessages.forgottenGodRemnantContact")];
 }
 
 export function claimRegionCoreEventGuide(state, region) {

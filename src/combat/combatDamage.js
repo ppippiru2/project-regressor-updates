@@ -1,10 +1,14 @@
 import { clamp, rankCombatModifier } from "./combatFormula.js";
-import { ENEMY_DAMAGE_BALANCE, PLAYER_DAMAGE_BALANCE } from "../balance/damageBalance.js?v=535";
+import { ENEMY_DAMAGE_BALANCE, PLAYER_DAMAGE_BALANCE } from "../balance/damageBalance.js?v=560";
 
 export function resolvePlayerAttack(player, enemy, action, hyperActive, random = Math.random) {
   const rankModifier = rankCombatModifier(player.power, enemy.power);
   const b = PLAYER_DAMAGE_BALANCE;
-  const accuracy = clamp(player.accuracy + rankModifier.accuracyBonus, b.accuracyMin, b.accuracyMax);
+  const accuracy = clamp(
+    player.accuracy + rankModifier.accuracyBonus + normalizedAccuracyModifier(action.accuracyModifier),
+    b.accuracyMin,
+    b.accuracyMax,
+  );
   const critChance = clamp(player.critRate + rankModifier.critBonus, b.critChanceMin, b.critChanceMax);
   const missed = random() * 100 > accuracy;
 
@@ -23,6 +27,12 @@ export function resolvePlayerAttack(player, enemy, action, hyperActive, random =
     critical,
     damage: Math.max(b.minDamage, Math.floor(rawDamage)),
   };
+}
+
+function normalizedAccuracyModifier(value) {
+  const numeric = Number(value || 0);
+  if (!Number.isFinite(numeric)) return 0;
+  return Math.abs(numeric) <= 1 ? numeric * 100 : numeric;
 }
 
 export function resolveEnemyAttack(enemy, player, enemyHyperActive, random = Math.random) {

@@ -1,5 +1,5 @@
-import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=535";
-import { t, tf } from "../localization/index.js?v=535";
+import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=560";
+import { t, tf } from "../localization/index.js?v=560";
 
 export function createCombatReadiness({
   region,
@@ -32,17 +32,13 @@ export function createCombatReadiness({
         ? t("combatReadiness.damageThresholdBossTitle")
         : t("combatReadiness.bossTitle"),
       detail: isDamageThresholdBoss
-        ? tf(ready ? "combatReadiness.damageThresholdReadyDetail" : "combatReadiness.damageThresholdLockedDetail", {
-            percent: damageThresholdPercent,
-          })
+        ? t(ready ? "combatReadiness.damageThresholdReadyDetail" : "combatReadiness.damageThresholdLockedDetail")
         : ready
           ? t("combatReadiness.bossReadyDetail")
           : t("combatReadiness.bossLockedDetail"),
       progress,
       meta: [
-        ...(isDamageThresholdBoss
-          ? [tf("combatReadiness.damageThreshold", { percent: damageThresholdPercent })]
-          : []),
+        ...(isDamageThresholdBoss ? [t("combatReadiness.damageThresholdHidden")] : []),
         tf("combatReadiness.recommendedLevel", { level: bossMonster.level }),
         tf("combatReadiness.recommendedRank", { rank: rankFromPower(bossStats.power) }),
         tf("combatReadiness.powerPercent", { percent: progress }),

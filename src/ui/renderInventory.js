@@ -1,6 +1,6 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=535";
-import { buildCodexRecordProgress } from "../state/codexProgress.js?v=535";
-import { getLocaleText, t, tf } from "../localization/index.js?v=535";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=560";
+import { buildCodexRecordProgress } from "../state/codexProgress.js?v=560";
+import { getLocaleText, t, tf } from "../localization/index.js?v=560";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -12,7 +12,16 @@ const RARITY_ORDER = {
   common: 1,
 };
 
-export function renderInventory(equipmentState, inventory, slots, displayName, getItem, optionText, getItemIconPath = () => "") {
+export function renderInventory(
+  equipmentState,
+  inventory,
+  slots,
+  displayName,
+  getItem,
+  optionText,
+  getItemIconPath = () => "",
+  options = {},
+) {
   const equippedCount = slots.reduce((count, slot) => count + (equipmentState[slot] ? 1 : 0), 0);
   const inventoryRows = inventory
     .map((entry) => {
@@ -39,7 +48,7 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
     (count, row) => count + (row.isEquipment && row.scoreDelta > 0 ? row.entry.count : 0),
     0
   );
-  renderCodexProgress(buildCodexRecordProgress(inventory, getItem));
+  renderCodexProgress(buildCodexRecordProgress(inventory, getItem), options.tutorialUnlockState);
 
   const equipmentSummary = byId("equipment-summary");
   if (equipmentSummary) {
@@ -141,24 +150,41 @@ export function renderInventory(equipmentState, inventory, slots, displayName, g
     .join("");
 }
 
-function renderCodexProgress(rows) {
+function renderCodexProgress(rows, tutorialUnlockState = {}) {
   const summary = byId("codex-progress-summary");
   const list = byId("codex-progress-list");
   if (!summary || !list) return;
 
+  const codexAccess = tutorialUnlockState?.codexAccess || "unlocked";
+  summary.dataset.codexAccess = codexAccess;
+  list.dataset.codexAccess = codexAccess;
+  if (tutorialUnlockState?.codexProgressReadable === false || codexAccess === "locked") {
+    summary.textContent = t("inventoryUi.codexProgressLockedSummary");
+    list.innerHTML = `<p class="muted empty-list codex-progress-lock-note">${escapeHtml(t("inventoryUi.codexProgressLockedList"))}</p>`;
+    return;
+  }
+
+  const damagedPartial = codexAccess === "damaged_partial";
   const totalCount = rows.reduce((sum, row) => sum + row.count, 0);
   const readyCount = rows.reduce((sum, row) => sum + (row.isReady ? 1 : 0), 0);
   summary.textContent =
     rows.length > 0
-      ? tf("inventoryUi.codexProgressSummary", { types: rows.length, total: totalCount, ready: readyCount })
+      ? tf(damagedPartial ? "inventoryUi.codexProgressPartialSummary" : "inventoryUi.codexProgressSummary", {
+          types: rows.length,
+          total: totalCount,
+          ready: readyCount,
+        })
       : t("inventoryUi.codexProgressEmptySummary");
 
   if (rows.length === 0) {
-    list.innerHTML = `<p class="muted empty-list">${escapeHtml(t("inventoryUi.codexProgressEmptyList"))}</p>`;
+    list.innerHTML = `<p class="muted empty-list">${escapeHtml(t(damagedPartial ? "inventoryUi.codexProgressPartialEmptyList" : "inventoryUi.codexProgressEmptyList"))}</p>`;
     return;
   }
 
-  list.innerHTML = rows
+  const partialNotice = damagedPartial
+    ? `<p class="codex-progress-lock-note">${escapeHtml(t("inventoryUi.codexProgressPartialNotice"))}</p>`
+    : "";
+  list.innerHTML = partialNotice + rows
     .map(({ item, count, target, remaining, percent, isReady, hintState }) => {
       const statusText = isReady ? t("inventoryUi.codexProgressReady") : t("inventoryUi.codexProgressRecording");
       const hintText = codexProgressHint({ remaining, hintState });

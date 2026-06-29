@@ -3,24 +3,24 @@ import {
   BASIC_ATTACK_ACTION,
   COMBAT_INFO_HIDE_HINT,
   HELP_TEXT,
-} from "./config/helpText.js?v=535";
-import { bindAppEvents } from "./app/appEvents.js?v=535";
-import { renderAppFrame, renderAppRegionList } from "./app/appRenderer.js?v=535";
-import { handleObjectiveActionNavigation } from "./app/objectiveActionNavigation.js?v=535";
+} from "./config/helpText.js?v=560";
+import { bindAppEvents } from "./app/appEvents.js?v=560";
+import { renderAppFrame, renderAppRegionList } from "./app/appRenderer.js?v=560";
+import { handleObjectiveActionNavigation } from "./app/objectiveActionNavigation.js?v=560";
 import {
   ACTIVE_SLOT_SYNC_INTERVAL_MS,
   MAX_LOG_LINES,
   OBJECTIVE_TICKER_INTERVAL_MS,
   SLOW_RENDER_INTERVAL_MS,
-} from "./app/appRuntimeConfig.js?v=535";
-import { finalizeSaveSessionTransition } from "./app/saveSessionFlow.js?v=535";
+} from "./app/appRuntimeConfig.js?v=560";
+import { finalizeSaveSessionTransition } from "./app/saveSessionFlow.js?v=560";
 import { registerServiceWorker } from "./app/serviceWorkerRegistration.js";
-import * as assetRegistryApi from "./assets/assetRegistry.js?v=535";
-import { applyDomLocalization } from "./localization/domText.js?v=535";
-import { t, tf } from "./localization/index.js?v=535";
-import { clearCombatEffectLayers } from "./combat/combatEffects.js?v=535";
-import { BULK_STAT_DEALLOCATE_AMOUNT } from "./balance/playerGrowthBalance.js?v=535";
-import { CONTENT_PROFILE, applyContentProfileToDocument, exposeContentProfile } from "./content/contentProfile.js?v=535";
+import * as assetRegistryApi from "./assets/assetRegistry.js?v=560";
+import { applyDomLocalization } from "./localization/domText.js?v=560";
+import { t, tf } from "./localization/index.js?v=560";
+import { clearCombatEffectLayers } from "./combat/combatEffects.js?v=560";
+import { BULK_STAT_DEALLOCATE_AMOUNT } from "./balance/playerGrowthBalance.js?v=560";
+import { CONTENT_PROFILE, applyContentProfileToDocument, exposeContentProfile } from "./content/contentProfile.js?v=560";
 import {
   clamp,
   enemyHyperChargeMultiplier,
@@ -38,7 +38,7 @@ import {
   createPlayerCombatAction,
   skillAvailability as getCombatSkillAvailability,
   stanceName,
-} from "./combat/combatActions.js?v=535";
+} from "./combat/combatActions.js?v=560";
 import {
   attackEffectType,
   buildCombatActionList,
@@ -46,14 +46,15 @@ import {
   equippedWeapon,
   findCombatAction,
 } from "./combat/combatActionDisplay.js";
-import { queueCombatTextEffect } from "./combat/combatFeedbackState.js?v=535";
+import { queueCombatTextEffect } from "./combat/combatFeedbackState.js?v=560";
 import { resolveEnemyAttack, resolvePlayerAttack } from "./combat/combatDamage.js";
-import { createDefeatedTargetPreview } from "./combat/combatDefeatPreview.js?v=535";
+import { createDefeatedTargetPreview } from "./combat/combatDefeatPreview.js?v=560";
 import {
+  applyBuffAction,
   applyHealAction,
   applyResolvedEnemyAttack,
   applyResolvedPlayerAttack,
-} from "./combat/combatActionResults.js?v=535";
+} from "./combat/combatActionResults.js?v=560";
 import {
   activateTargetWeakness,
   advanceHitCombo,
@@ -61,7 +62,7 @@ import {
   applySkillBreakDamage,
   playerHyperChargeFromSuccessfulHit,
   resetHitComboState,
-} from "./combat/combatHitResults.js?v=535";
+} from "./combat/combatHitResults.js?v=560";
 import {
   AUTO_RESTART_DELAY_MS,
   COMBAT_FRAME_MS,
@@ -69,7 +70,7 @@ import {
   HYP_MAX,
   createCombatRuntime,
   resetCombatRuntime,
-} from "./combat/combatState.js?v=535";
+} from "./combat/combatState.js?v=560";
 import {
   bossBreakMessage,
   combatStartMessage,
@@ -91,12 +92,12 @@ import {
   consumeReadyEnemyAction,
   consumeReadyPlayerAction,
   shouldAdvanceAutoCombatActions,
-} from "./combat/combatTick.js?v=535";
-import { clearIntervalTimer, clearTimeoutTimer, restartIntervalTimer, restartTimeoutTimer } from "./combat/combatTimers.js?v=535";
+} from "./combat/combatTick.js?v=560";
+import { clearIntervalTimer, clearTimeoutTimer, restartIntervalTimer, restartTimeoutTimer } from "./combat/combatTimers.js?v=560";
 import {
   applyIncomingDamageTestOption,
   applyOutgoingDamageTestOption,
-} from "./combat/combatTestOptions.js?v=535";
+} from "./combat/combatTestOptions.js?v=560";
 import {
   displayNames,
   equipment,
@@ -109,7 +110,7 @@ import {
   shopCategories,
   skills,
   slots,
-} from "./data.js?v=535";
+} from "./data.js?v=560";
 import {
   DEFAULT_ACTIVE_SKILL_LOADOUT_ID,
   DEFAULT_COMBAT_FEEDBACK,
@@ -123,32 +124,32 @@ import {
   normalizeUiState,
   saveState as saveStoredState,
   saveUiState as saveStoredUiState,
-} from "./state/save.js?v=535";
+} from "./state/save.js?v=560";
 import {
   developerOptionLabel,
   normalizeDeveloperOptionValue,
   normalizeDeveloperOptions,
-} from "./state/developerOptions.js?v=535";
-import { createInitialState } from "./state/initialState.js?v=535";
-import { applyImportedUiState, exportSavePayloadSnapshot, importSavePayloadText } from "./state/saveLoadActions.js?v=535";
-import { playerStats } from "./state/progression.js?v=535";
-import { starterTraitStatBonuses } from "./state/starterTraitEffects.js?v=535";
+} from "./state/developerOptions.js?v=560";
+import { createInitialState } from "./state/initialState.js?v=560";
+import { applyImportedUiState, exportSavePayloadSnapshot, importSavePayloadText } from "./state/saveLoadActions.js?v=560";
+import { playerStats } from "./state/progression.js?v=560";
+import { starterTraitStatBonuses } from "./state/starterTraitEffects.js?v=560";
 import { addInventoryItem } from "./state/inventory.js";
-import { equipInventoryItem, resolveEquipmentSlot, unequipEquipmentSlot } from "./state/equipmentActions.js?v=535";
-import { equipRecommendedItems } from "./state/recommendedEquipment.js?v=535";
+import { equipInventoryItem, resolveEquipmentSlot, unequipEquipmentSlot } from "./state/equipmentActions.js?v=560";
+import { equipRecommendedItems } from "./state/recommendedEquipment.js?v=560";
 import {
   beginGateReplay,
   ensureGateProgress as ensureGateProgressState,
   isGateProgressComplete,
   moveGateProgress,
-} from "./state/regionProgress.js?v=535";
+} from "./state/regionProgress.js?v=560";
 import {
   applyCharacterProfile,
   applyInitialCreationStats,
   characterIntroLogMessages,
   createCharacterProfile,
   updatePlayerProfileSettings,
-} from "./state/profileActions.js?v=535";
+} from "./state/profileActions.js?v=560";
 import {
   DEFAULT_SAVE_SLOT_ID,
   clearSaveSlot,
@@ -158,108 +159,108 @@ import {
   saveActiveSaveSlotId,
   saveCurrentToSlot,
   saveSlotLabel,
-} from "./state/saveSlots.js?v=535";
+} from "./state/saveSlots.js?v=560";
 import {
   createPendingSlotCreationSnapshot,
   restorePendingSlotCreationSnapshot,
-} from "./state/saveSlotSession.js?v=535";
+} from "./state/saveSlotSession.js?v=560";
 
-import { createGateNodeResolution, resolveGateNodeOutcome } from "./state/gateNodeActions.js?v=535";
+import { createGateNodeResolution, resolveGateNodeOutcome } from "./state/gateNodeActions.js?v=560";
 import {
   shouldContinueAutoHunt,
   shouldRestartAutoHunt,
   startCombatSession,
   stopCombatSession,
   toggleAutoHuntState,
-} from "./state/combatSession.js?v=535";
+} from "./state/combatSession.js?v=560";
 import {
   IDLE_RECOVERY_FRAME_MS,
   applyPassiveRecovery,
   enterRestMode,
   leaveRestMode,
   passiveRecoveryElapsedSeconds,
-} from "./state/passiveRecovery.js?v=535";
-import { applyMonsterDefeatRewards } from "./state/combatRewards.js?v=535";
-import { applyPendingLevelProgression } from "./state/levelUpActions.js?v=535";
+} from "./state/passiveRecovery.js?v=560";
+import { applyMonsterDefeatRewards } from "./state/combatRewards.js?v=560";
+import { applyPendingLevelProgression } from "./state/levelUpActions.js?v=560";
 import { applyPlayerDefeatRecovery } from "./state/defeatRecovery.js";
 import {
   activateEnemyHyperMode,
   activatePlayerHyperMode,
   endEnemyHyperMode as endEnemyHyperModeAction,
   endPlayerHyperMode as endPlayerHyperModeAction,
-} from "./state/hyperActions.js?v=535";
+} from "./state/hyperActions.js?v=560";
 import {
   hideCombatInfoIfAllowed,
   markCombatActionUsed,
   showCombatActionInfo,
   showCombatHelpInfo,
   triggerCombatActionFlash,
-} from "./state/combatRuntimeUi.js?v=535";
+} from "./state/combatRuntimeUi.js?v=560";
 import {
   BATTLE_SPRITE_MOTION_IDS,
   clearBattleSpriteMotions,
   triggerBattleSpriteMotion,
-} from "./ui/battleSpriteMotion.js?v=535";
+} from "./ui/battleSpriteMotion.js?v=560";
 import {
   monsterAttackEffectPlacement,
   monsterAttackEffectType,
   resolveMonsterBattleSpritePreset,
-} from "./config/monsterBattleSpritePresets.js?v=535";
-import { resolveMonsterRuntimeAction } from "./config/monsterRuntimeIntegrationPresets.js?v=535";
-import { resolvePlayerAttackEffectPlacement } from "./config/playerBattleSprites.js?v=535";
+} from "./config/monsterBattleSpritePresets.js?v=560";
+import { resolveMonsterRuntimeAction } from "./config/monsterRuntimeIntegrationPresets.js?v=560";
+import { resolvePlayerAttackEffectPlacement } from "./config/playerBattleSprites.js?v=560";
 import { displayNameFor, equippedItemList, findById, itemOptionText } from "./state/dataLookup.js";
 import { addLogEntry } from "./state/log.js";
-import { buyShopItem, sellInventoryItem } from "./state/shop.js?v=535";
-import { applyStanceSelection } from "./state/stance.js?v=535";
+import { buyShopItem, sellInventoryItem } from "./state/shop.js?v=560";
+import { applyStanceSelection } from "./state/stance.js?v=560";
 import {
   allocatePlayerStat,
   allocateRecommendedStats,
   confirmAllocatedStats,
   deallocatePlayerStat,
   resetAllocatedStats,
-} from "./state/statAllocation.js?v=535";
-import { applyRegionSelection, previewRegionState } from "./state/regionSelection.js?v=535";
+} from "./state/statAllocation.js?v=560";
+import { applyRegionSelection, previewRegionState } from "./state/regionSelection.js?v=560";
 import {
   advanceRegionMonsterEncounter,
   regionMonsterEncounterSeed,
   resolveRegionMonster,
-} from "./state/regionMonsterPool.js?v=535";
+} from "./state/regionMonsterPool.js?v=560";
 import {
   stepObjectiveRotationState,
   toggleObjectiveAlertState,
   toggleObjectiveRotationModeState,
-} from "./state/objectiveUiState.js?v=535";
+} from "./state/objectiveUiState.js?v=560";
 import {
   normalizeHyperRuntime,
   normalizePlayerResources,
   normalizeTargetResources,
   restorePlayerResources,
   shouldResetHitCombo,
-} from "./state/playerResources.js?v=535";
+} from "./state/playerResources.js?v=560";
 import {
   hasSkillLoadout,
   resolveActiveLoadoutActions,
   resolveActiveLoadoutSkills,
   resolveActiveSkillLoadout,
-} from "./state/skillLoadout.js?v=535";
+} from "./state/skillLoadout.js?v=560";
 import {
   claimFirstCombatGuide,
   claimRegionCoreEventGuide,
   createTutorialFlags,
-} from "./state/tutorialGuidance.js?v=535";
-import { claimOfflineAutoHuntReward, stampLastSeen } from "./state/offlineReward.js?v=535";
-import { nodeName } from "./ui/renderRegion.js?v=535";
-import { renderLog } from "./ui/renderCommon.js?v=535";
-import { renderCombatSkillInfo } from "./ui/renderCombatActions.js?v=535";
-import { renderHitCounter } from "./ui/renderCombatPulse.js?v=535";
-import { setupCollapsiblePanels } from "./ui/panels.js?v=535";
-import { setSaveStatus } from "./ui/saveSlotStatus.js?v=535";
+} from "./state/tutorialGuidance.js?v=560";
+import { claimOfflineAutoHuntReward, stampLastSeen } from "./state/offlineReward.js?v=560";
+import { nodeName } from "./ui/renderRegion.js?v=560";
+import { renderLog } from "./ui/renderCommon.js?v=560";
+import { renderCombatSkillInfo } from "./ui/renderCombatActions.js?v=560";
+import { renderHitCounter } from "./ui/renderCombatPulse.js?v=560";
+import { setupCollapsiblePanels } from "./ui/panels.js?v=560";
+import { setSaveStatus } from "./ui/saveSlotStatus.js?v=560";
 import {
   activeViewId,
   activateView,
   resetCharacterCreationWizard,
   setCreationCancelMode,
-} from "./ui/viewNavigation.js?v=535";
+} from "./ui/viewNavigation.js?v=560";
 
 const $ = (selector) => document.querySelector(selector);
 const { loadAssetRegistry, resolveRegionCardImagePath } = assetRegistryApi;
@@ -363,7 +364,10 @@ function resetSkillLoadoutsForNewCharacter(profile) {
   if (!starterActionId || !getSkill(starterActionId)) return;
   const loadout = activeSkillLoadout();
   if (!loadout || loadout.actionIds.includes(starterActionId)) return;
-  if (loadout.actionIds.length >= MAX_SKILL_LOADOUT_ACTIONS) return;
+  if (loadout.actionIds.length >= MAX_SKILL_LOADOUT_ACTIONS) {
+    loadout.actionIds[MAX_SKILL_LOADOUT_ACTIONS - 1] = starterActionId;
+    return;
+  }
   loadout.actionIds.push(starterActionId);
 }
 
@@ -557,7 +561,8 @@ function scheduleCombatCooldownRender() {
     .map((value) => Number(value || 0))
     .filter((value) => Number.isFinite(value) && value > Date.now());
   if (!cooldownUntilValues.length) return;
-  const delayMs = Math.max(80, Math.min(...cooldownUntilValues) - Date.now() + 40);
+  const nextCooldownMs = Math.min(...cooldownUntilValues) - Date.now();
+  const delayMs = Math.max(80, Math.min(250, nextCooldownMs + 40));
   combatCooldownRenderTimer = restartTimeoutTimer(combatCooldownRenderTimer, () => {
     advanceActionCooldowns(combatRuntime);
     render({ combatFrame: true });
@@ -691,6 +696,12 @@ function announceAutoWeaknessPriority(action) {
 }
 
 function resolveAndApplyPlayerAction(action, player, monster, enemy) {
+  if (action.kind === "buff") {
+    const applied = applyPlayerBuffAction(action, player);
+    saveState();
+    return { kind: "buff", playerTurnCompleted: true, hpCost: applied.hpCost };
+  }
+
   if (action.kind === "heal") {
     applyHealAction(state.player, player, action, clamp);
     addLog(playerHealMessage(action));
@@ -699,43 +710,46 @@ function resolveAndApplyPlayerAction(action, player, monster, enemy) {
     return { kind: "heal", playerTurnCompleted: true };
   }
 
-  const effectType = getAttackEffectType(action.skill);
-  const result = applyOutgoingDamageTestOption(resolvePlayerAttack(player, enemy, action, state.hyperActiveTicks > 0), {
+  const resolvedAction = applyOutgoingPlayerBuffs(action);
+  const effectType = getAttackEffectType(resolvedAction.skill);
+  const result = applyOutgoingDamageTestOption(resolvePlayerAttack(player, enemy, resolvedAction, state.hyperActiveTicks > 0), {
     options: developerSettings(),
     targetHp: state.target?.hp,
   });
-  const weaknessBonus = applyWeaknessSkillDamageBonus(result, action.skill, state.target);
+  const weaknessBonus = applyWeaknessSkillDamageBonus(result, resolvedAction.skill, state.target);
   const finalResult = weaknessBonus.result;
   combatRuntime.lastDamage = finalResult.damage || 0;
   const applied = applyResolvedPlayerAttack({
     playerState: state.player,
     targetState: state.target,
-    action,
+    action: resolvedAction,
     result: finalResult,
     monster,
   });
 
   if (applied.missed) {
+    consumeOutgoingPlayerBuffTurn(resolvedAction);
     showCombatText("miss", t("combat.text.miss"), "enemy");
-    addLog(playerMissMessage(action));
+    addLog(playerMissMessage(resolvedAction));
     saveState();
     return { kind: "attack", missed: true, monsterDefeated: false };
   }
 
   addEnemyHyperCharge(applied.enemyHyperCharge, monster);
-  registerPlayerHit(finalResult.damage, finalResult.critical, effectType, action.skill, {
+  registerPlayerHit(finalResult.damage, finalResult.critical, effectType, resolvedAction.skill, {
     monster,
     monsterDefeated: applied.monsterDefeated,
     weaknessApplied: weaknessBonus.applied,
     weaknessStrikeCount: finalResult.weaknessStrikeCount,
   });
-  addLog(playerHitMessage(finalResult, action, monster));
+  addLog(playerHitMessage(finalResult, resolvedAction, monster));
   if (weaknessBonus.applied) {
     addLog(tf("combatMessages.weaknessHit", {
-      skillName: action.skill.name,
+      skillName: resolvedAction.skill.name,
       count: finalResult.weaknessStrikeCount || 1,
     }));
   }
+  consumeOutgoingPlayerBuffTurn(resolvedAction);
 
   if (applied.monsterDefeated) {
     defeatMonster(monster);
@@ -744,6 +758,115 @@ function resolveAndApplyPlayerAction(action, player, monster, enemy) {
 
   saveState();
   return { kind: "attack", missed: false, monsterDefeated: false };
+}
+
+function applyPlayerBuffAction(action, player) {
+  combatRuntime.lastDamage = 0;
+  const applied = applyBuffAction(state.player, player, action, clamp);
+  const buff = createPlayerCombatBuff(action);
+  if (buff) upsertPlayerCombatBuff(buff);
+  addLog(tf("combatMessages.buffApplied", {
+    skillName: action.skill?.name || "",
+    effectText: playerBuffEffectText(action.skill),
+  }));
+  if (applied.hpCost > 0) addLog(tf("combatMessages.selfHpCost", { amount: applied.hpCost }));
+  showCombatText("buff", t("combat.text.buff"), "player", action.skill?.effectType || "holy");
+  return applied;
+}
+
+function createPlayerCombatBuff(action) {
+  const source = action?.skill || {};
+  const buff = action?.buff || source.buff;
+  if (!buff || typeof buff !== "object") return null;
+  const remainingTurns = Math.max(1, Math.floor(Number(buff.duration || buff.remainingTurns || 1)));
+  return {
+    id: buff.id || source.id,
+    label: source.name || buff.id || source.id,
+    remainingTurns,
+    outgoingDamageMultiplier: positiveMultiplier(buff.outgoingDamageMultiplier),
+    incomingDamageMultiplier: positiveMultiplier(buff.incomingDamageMultiplier),
+    consumeOnHit: Boolean(buff.consumeOnHit),
+    sourceActionId: source.id || buff.id,
+  };
+}
+
+function positiveMultiplier(value) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) && numeric > 0 ? numeric : undefined;
+}
+
+function upsertPlayerCombatBuff(buff) {
+  const buffs = activePlayerBuffs().filter((entry) => entry.id !== buff.id);
+  combatRuntime.playerBuffs = [...buffs, buff];
+}
+
+function activePlayerBuffs() {
+  const buffs = Array.isArray(combatRuntime.playerBuffs) ? combatRuntime.playerBuffs : [];
+  combatRuntime.playerBuffs = buffs.filter((buff) => Number(buff?.remainingTurns || 0) > 0);
+  return combatRuntime.playerBuffs;
+}
+
+function applyOutgoingPlayerBuffs(action) {
+  if (action.kind !== "attack") return action;
+  const multiplier = activePlayerBuffs().reduce((total, buff) => (
+    buff.outgoingDamageMultiplier ? total * buff.outgoingDamageMultiplier : total
+  ), 1);
+  if (multiplier === 1) return action;
+  return {
+    ...action,
+    multiplier: Number(action.multiplier || 1) * multiplier,
+    outgoingBuffMultiplier: multiplier,
+  };
+}
+
+function consumeOutgoingPlayerBuffTurn(action) {
+  if (action.kind !== "attack" || !action.outgoingBuffMultiplier || action.outgoingBuffMultiplier === 1) return;
+  for (const buff of activePlayerBuffs()) {
+    if (buff.outgoingDamageMultiplier) buff.remainingTurns = Math.max(0, Number(buff.remainingTurns || 0) - 1);
+  }
+  activePlayerBuffs();
+}
+
+function applyIncomingPlayerBuffs(result) {
+  if (!result || result.evaded || !Number.isFinite(result.damage) || result.damage <= 0) return result;
+  const buffs = activePlayerBuffs();
+  const incomingBuffs = buffs.filter((buff) => buff.incomingDamageMultiplier);
+  if (!incomingBuffs.length) return result;
+
+  const multiplier = incomingBuffs.reduce((total, buff) => total * buff.incomingDamageMultiplier, 1);
+  const adjustedDamage = Math.max(1, Math.floor(result.damage * multiplier));
+  const adjustedResult = {
+    ...result,
+    damage: adjustedDamage,
+    incomingBuffMultiplier: multiplier,
+  };
+
+  const consumedNames = [];
+  for (const buff of incomingBuffs) {
+    if (!buff.consumeOnHit) continue;
+    consumedNames.push(buff.label);
+    buff.remainingTurns = 0;
+  }
+  activePlayerBuffs();
+  addLog(tf("combatMessages.incomingBuffAdjusted", {
+    buffName: playerBuffNames(incomingBuffs),
+    damage: adjustedDamage,
+  }));
+  if (consumedNames.length) {
+    addLog(tf("combatMessages.buffConsumed", { buffName: consumedNames.join(", ") }));
+  }
+  return adjustedResult;
+}
+
+function playerBuffNames(buffs) {
+  return buffs.map((buff) => buff.label).filter(Boolean).join(", ") || t("combatMessages.buffFallbackName");
+}
+
+function playerBuffEffectText(skill) {
+  if (skill?.id === "preserve") return t("combatMessages.preserveEffect");
+  if (skill?.id === "full_power") return t("combatMessages.fullPowerEffect");
+  if (skill?.id === "rampage") return t("combatMessages.rampageEffect");
+  return t("combatMessages.buffEffect");
 }
 
 function performEnemyAction(monster, enemy, player) {
@@ -758,9 +881,10 @@ function performEnemyAction(monster, enemy, player) {
 }
 
 function resolveAndApplyEnemyAction(monster, enemy, player, runtimeAction, enemyHyperActive) {
-  const result = applyIncomingDamageTestOption(resolveEnemyAttack(enemy, player, enemyHyperActive), {
+  let result = applyIncomingDamageTestOption(resolveEnemyAttack(enemy, player, enemyHyperActive), {
     options: developerSettings(),
   });
+  result = applyIncomingPlayerBuffs(result);
   combatRuntime.lastDamage = result.damage || 0;
   const applied = applyResolvedEnemyAttack({
     playerState: state.player,
@@ -816,7 +940,7 @@ function resolveAndApplyEnemyAction(monster, enemy, player, runtimeAction, enemy
 
 async function runManualCombatAction(actionId = BASIC_ATTACK_ACTION.id) {
   if (combatRuntime.inputLocked) return;
-  const requestedAction = combatActionList().find((action) => action.id === actionId) || BASIC_ATTACK_ACTION;
+  const requestedAction = getCombatAction(actionId) || BASIC_ATTACK_ACTION;
   const preCombatAvailability = skillAvailability(requestedAction, derivedPlayer(), false);
   if (!preCombatAvailability.available) {
     selectActionInfo(requestedAction.id);
@@ -826,7 +950,7 @@ async function runManualCombatAction(actionId = BASIC_ATTACK_ACTION.id) {
   if (!state.inCombat) startCombat();
   if (!state.inCombat || !state.target) return;
 
-  const combatAction = combatActionList().find((action) => action.id === requestedAction.id) || requestedAction;
+  const combatAction = getCombatAction(requestedAction.id) || requestedAction;
   const player = derivedPlayer();
   const availability = skillAvailability(combatAction, player, true);
   if (!availability.available) {
@@ -849,7 +973,7 @@ async function runManualCombatAction(actionId = BASIC_ATTACK_ACTION.id) {
 
     const monster = getMonster(state.target.monsterId);
     if (!monster) return;
-    setBattlePhase(action.kind === "heal" ? "player_ready" : "enemy_hit");
+    setBattlePhase(action.kind === "attack" ? "enemy_hit" : "player_ready");
     const playerOutcome = resolveAndApplyPlayerAction(action, derivedPlayer(), monster, monsterStats(monster));
     render({ combatFrame: true });
     if (!isManualBattleLoopCurrent(sequence) || playerOutcome?.monsterDefeated) return;

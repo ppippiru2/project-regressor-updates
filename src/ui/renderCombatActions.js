@@ -1,6 +1,6 @@
-import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=535";
-import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=535";
-import { t, tf } from "../localization/index.js?v=535";
+import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=560";
+import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=560";
+import { t, tf } from "../localization/index.js?v=560";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;
@@ -38,7 +38,7 @@ export function renderCombatSkillsIfNeeded(player, context) {
     .combatActionList()
     .map((action) => {
       const availability = context.skillAvailability(action, player, false);
-      return `${action.id}:${availability.available ? 1 : 0}:${availability.reason}`;
+      return `${action.id}:${availability.available ? 1 : 0}:${availability.reason}:${actionCooldownRenderKey(action, context, now)}`;
     })
     .join("|");
   const loadoutKey = (context.skillLoadouts?.() || [])
@@ -89,8 +89,9 @@ function renderCombatSkills(player, context) {
       const flashing = lastUsed && now < context.combatRuntime.actionFlashUntil;
       const weaknessPriority = action.id === weaknessPriorityActionId;
       const weaknessPriorityLabel = weaknessPriority ? t("combatActions.weaknessPriority") : "";
-      const infoParts = actionInfoParts(action, context, availability);
-      const buttonMeta = actionButtonMeta(action, availability);
+      const infoParts = actionInfoParts(action, context, availability, now);
+      const buttonMeta = actionButtonMeta(action, context, availability, now);
+      const cooldownRemainingMs = actionCooldownRemainingMs(action, context, now);
       const usable = availability.available && !inputLocked;
       const classes = [
         "skill-button",
@@ -105,7 +106,7 @@ function renderCombatSkills(player, context) {
         .join(" ");
       const ariaLabel = `${action.name}. ${action.description}. ${infoParts.join(" · ")}${weaknessPriorityLabel ? ` · ${weaknessPriorityLabel}` : ""}`;
 
-      return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-combat-action="${escapeHtml(action.id)}" data-last-used="${lastUsed}" data-weakness-priority="${weaknessPriority ? "true" : "false"}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}" aria-disabled="${usable ? "false" : "true"}" ${inputLocked ? "disabled" : ""}>
+      return `<button type="button" class="${classes}" data-action-info="${escapeHtml(action.id)}" data-combat-action="${escapeHtml(action.id)}" data-last-used="${lastUsed}" data-cooldown-remaining-ms="${Math.ceil(cooldownRemainingMs)}" data-weakness-priority="${weaknessPriority ? "true" : "false"}" data-flash-key="${flashing ? context.combatRuntime.actionFlashUntil : ""}" aria-label="${escapeHtml(ariaLabel)}" aria-pressed="${selected}" aria-disabled="${usable ? "false" : "true"}" ${inputLocked ? "disabled" : ""}>
         <span class="skill-button-name">${escapeHtml(action.name)}</span>
         <small class="skill-button-meta">${escapeHtml(buttonMeta.meta)}</small>
         <small class="skill-button-state ${availability.available ? "is-ready" : "is-blocked"}">${escapeHtml(buttonMeta.state)}</small>
@@ -161,19 +162,23 @@ function combatSkillInfoMarkup(player, context) {
   </div>`;
 }
 
-function actionInfoParts(action, context, availability) {
+function actionInfoParts(action, context, availability, now = Date.now()) {
+  const cooldownStatus = actionCooldownStatusText(action, context, now);
   return [
     actionCostText(action),
     actionCooldownText(action),
+    actionBuffEffectText(action),
+    cooldownStatus,
     weaknessActionInfoText(action, context),
     context.actionTriggerText(action),
-    availability?.reason ? tf("combatActions.unavailableReason", { reason: availability.reason }) : "",
+    !cooldownStatus && availability?.reason ? tf("combatActions.unavailableReason", { reason: availability.reason }) : "",
   ].filter(Boolean);
 }
 
-function actionButtonMeta(action, availability) {
+function actionButtonMeta(action, context, availability, now = Date.now()) {
   const meta = [actionCostText(action), actionCooldownText(action)].filter(Boolean).join(" · ");
-  const state = availability?.available ? t("combatActions.ready") : availability?.reason || t("combatActions.unavailable");
+  const cooldownStatus = actionCooldownStatusText(action, context, now);
+  const state = cooldownStatus || (availability?.available ? t("combatActions.ready") : availability?.reason || t("combatActions.unavailable"));
   return {
     meta,
     state,
@@ -186,7 +191,7 @@ function combatWeaknessPriorityActionId(actionEntries, state, now = Date.now()) 
     .map(({ action, availability }, index) => ({
       action,
       index,
-      score: availability?.available && action?.id !== "basic_attack" && action?.damageType !== "support"
+        score: availability?.available && action?.id !== "basic_attack" && action?.damageType !== "support" && action?.damageType !== "buff"
         ? weaknessAutoHuntSkillScore(action)
         : -Infinity,
     }))
@@ -202,7 +207,7 @@ function combatWeaknessSkillUiKey(state, now = Date.now()) {
 }
 
 function weaknessActionInfoText(action, context, now = Date.now()) {
-  if (!action || action.id === "basic_attack" || action.damageType === "support") return "";
+  if (!action || action.id === "basic_attack" || action.damageType === "support" || action.damageType === "buff") return "";
   const weaknessInfo = calculateWeaknessSkillDamageMultiplier(action, context.state?.target, now);
   if (!weaknessInfo.active) return "";
   return tf("combatActions.weaknessBonus", {
@@ -220,6 +225,40 @@ function actionCooldownText(action) {
   const cooldown = Number(action?.cooldown ?? action?.skill?.cooldown ?? 0);
   if (!Number.isFinite(cooldown) || cooldown <= 0) return t("combatActions.noCooldown");
   return tf("combatActions.cooldown", { cooldown });
+}
+
+function actionBuffEffectText(action) {
+  const buffId = action?.buff?.id || "";
+  if (buffId === "preserve_guard") return t("combatBuffStatus.preserve.detail", "Next damage x0.5");
+  if (buffId === "full_power") return t("combatBuffStatus.fullPower.detail", "Attack x1.25");
+  if (buffId === "rampage") return t("combatBuffStatus.rampage.detail", "Attack x1.45 / damage x1.2");
+  return "";
+}
+
+function actionCooldownStatusText(action, context, now = Date.now()) {
+  const remainingMs = actionCooldownRemainingMs(action, context, now);
+  if (remainingMs <= 0) return "";
+  return tf("combatActions.cooldownRemainingShort", {
+    seconds: formatCooldownSeconds(remainingMs),
+  }, `CD ${formatCooldownSeconds(remainingMs)}s`);
+}
+
+function actionCooldownRenderKey(action, context, now = Date.now()) {
+  const remainingMs = actionCooldownRemainingMs(action, context, now);
+  if (remainingMs <= 0) return "ready";
+  return `cooldown:${Math.ceil(remainingMs / 100)}`;
+}
+
+function actionCooldownRemainingMs(action, context, now = Date.now()) {
+  const actionId = action?.id || action?.skill?.id || "";
+  if (!actionId) return 0;
+  const cooldownUntil = Number(context?.combatRuntime?.actionCooldowns?.[actionId] || 0);
+  if (!Number.isFinite(cooldownUntil) || cooldownUntil <= now) return 0;
+  return Math.max(0, cooldownUntil - now);
+}
+
+function formatCooldownSeconds(remainingMs) {
+  return Math.max(0.1, remainingMs / 1000).toFixed(1);
 }
 
 function escapeHtml(value) {

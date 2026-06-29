@@ -1,6 +1,6 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=535";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=535";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=535";
+import { getLocaleText, t, tf } from "../localization/index.js?v=560";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=560";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=560";
 
 const SYSTEM_WINDOW_TEXT = getLocaleText().systemWindow;
 const ROUTINE_SYSTEM_PATTERNS = SYSTEM_WINDOW_TEXT.routinePatterns.map((pattern) => new RegExp(pattern, "u"));
@@ -57,6 +57,42 @@ export function createSystemNotice({ log, player, playerProfile, region, inComba
         ? t("systemWindow.notices.combatMessage")
         : t("systemWindow.notices.idleMessage"),
       meta: baseMeta,
+      targetView: "combat",
+    };
+  }
+
+  const tutorialHelpPopup = message.match(regex(SYSTEM_MATCHERS.tutorialHelpPopup));
+  if (tutorialHelpPopup) {
+    return {
+      type: "help",
+      label: t("systemWindow.notices.tutorialHelpLabel"),
+      message: t("systemWindow.notices.tutorialHelpMessage"),
+      meta: [
+        tutorialHelpPopup[2] || tutorialHelpPopup[1],
+        t("systemWindow.notices.tutorialHelpSeparatePopup"),
+        statusText,
+      ],
+      targetView: "combat",
+    };
+  }
+
+  const combatAlert = message.match(regex(SYSTEM_MATCHERS.combatAlert));
+  if (combatAlert) {
+    return {
+      type: "combat",
+      label: t("systemWindow.notices.combatAlertLabel"),
+      message: (combatAlert[1] || t("systemWindow.notices.combatAlertMessage")).replace(/\.$/u, ""),
+      meta: [t("systemWindow.notices.minimumPassOnly"), region?.name || t("systemWindow.unknownRegion"), statusText],
+      targetView: "combat",
+    };
+  }
+
+  if (regex(SYSTEM_MATCHERS.evaluationReveal).test(message)) {
+    return {
+      type: "growth",
+      label: t("systemWindow.notices.evaluationRevealLabel"),
+      message: t("systemWindow.notices.evaluationRevealMessage"),
+      meta: [t("systemWindow.notices.afterClearDisclosure"), region?.name || t("systemWindow.unknownRegion"), statusText],
       targetView: "combat",
     };
   }

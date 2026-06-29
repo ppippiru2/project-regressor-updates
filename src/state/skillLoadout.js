@@ -8,7 +8,7 @@ export function hasSkillLoadout(skillLoadouts = [], loadoutId = "") {
 
 export function resolveActiveLoadoutActions(loadout, actions = [], fallbackAction = null) {
   const selected = (loadout?.actionIds || [])
-    .map((actionId) => actions.find((action) => action.id === actionId))
+    .map((actionId) => actions.find((action) => action.id === actionId || action.actionAlias === actionId))
     .filter((action, index, list) => action && list.findIndex((entry) => entry.id === action.id) === index);
   if (selected.length) return selected;
   return fallbackAction ? [fallbackAction] : [];

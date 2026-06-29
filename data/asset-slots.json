@@ -62,7 +62,17 @@
     },
     "item": {
       "icons": {
-        "rusty_sword": "item_rusty_sword_icon_v1"
+        "rusty_sword": "item_rusty_sword_icon_v1",
+        "lucky_ring": "item_lucky_ring_icon_v1",
+        "wolf_leather_armor": "item_wolf_leather_armor_icon_v1",
+        "worn_gloves": "item_worn_gloves_icon_v1",
+        "swift_boots": "item_swift_boots_icon_v1",
+        "mana_necklace": "item_mana_necklace_icon_v1",
+        "novice_helmet": "item_novice_helmet_icon_v1",
+        "shore_ring": "item_shore_ring_icon_v1",
+        "regressor_charm": "item_regressor_charm_icon_v1",
+        "rift_gauntlets": "item_rift_gauntlets_icon_v1",
+        "rift_blade": "item_rift_blade_icon_v1"
       }
     },
     "skill": {
@@ -78,7 +88,14 @@
     },
     "ui": {
       "appIcon": "app_icon_main",
-      "systemDiceRoll": "ui_system_dice_roll_sheet_v2"
+      "systemDiceRoll": "ui_system_dice_roll_sheet_v2",
+      "appInstall192": "app_icon_install_192_v3",
+      "appInstall512": "app_icon_install_512_v3",
+      "appInstallMaskable512": "app_icon_install_maskable_512_v3",
+      "brandRepresentative": "ui_brand_representative_gate_4x5_v1",
+      "loadingWide": "ui_brand_loading_gate_wide_21x9_v1",
+      "startScreen": "ui_brand_start_gate_16x9_v1",
+      "portraitScreen": "ui_brand_portrait_gate_9x16_v1"
     },
     "world": {
       "tutorialIslandOverview": "world_tutorial_island_overview_v54_actual",

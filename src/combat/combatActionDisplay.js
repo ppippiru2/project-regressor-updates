@@ -1,3 +1,9 @@
+export const COMBAT_ACTION_ALIASES = Object.freeze({
+  heavy_strike: "power_slash",
+  magic_bolt: "mana_bolt",
+  emergency_heal: "emergency_recovery",
+});
+
 export function buildCombatActionList(basicAttackAction, skills) {
   return [
     basicAttackAction,
@@ -5,8 +11,18 @@ export function buildCombatActionList(basicAttackAction, skills) {
   ];
 }
 
+export function normalizeCombatActionId(actionId) {
+  const id = String(actionId || "");
+  return COMBAT_ACTION_ALIASES[id] || id;
+}
+
 export function findCombatAction(actionId, actions) {
-  return actions.find((action) => action.id === actionId) || actions[0];
+  const normalizedActionId = normalizeCombatActionId(actionId);
+  return actions.find((action) => (
+    action.id === normalizedActionId ||
+    action.actionAlias === actionId ||
+    action.actionAlias === normalizedActionId
+  )) || actions[0];
 }
 
 export function combatActionTriggerText(action, { basicAttackAction, triggerText, stanceLabel }) {

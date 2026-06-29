@@ -7,7 +7,7 @@ export const ASSET_MANIFEST = {
     {
       "assetId": "app_icon_main",
       "category": "ui",
-      "sourceFile": "assets/icon-dark.png",
+      "sourceFile": "assets/source/brand/regressor_gate_app_icon_v3_source.jpg",
       "cleanFile": "assets/icon.png",
       "webpFile": null,
       "approved": true,
@@ -15,15 +15,17 @@ export const ASSET_MANIFEST = {
       "tags": [
         "app-icon",
         "representative",
+        "install",
         "dark-background",
-        "ui"
+        "ui",
+        "gate-key-art"
       ],
-      "notes": "Current PWA, install, Android launcher, and header app icon. The 2026-06-28 provided purple-blue emblem is copied to assets/icon.png and kept in sync with assets/icon-dark.png."
+      "notes": "Current PWA, install, Android launcher, and header app icon. Replaced on 2026-06-29 with the rounded blue gate key art supplied for app icon use."
     },
     {
       "assetId": "app_icon_dark",
       "category": "ui",
-      "sourceFile": "assets/icon-dark.png",
+      "sourceFile": "assets/source/brand/regressor_gate_app_icon_v3_source.jpg",
       "cleanFile": "assets/icon-dark.png",
       "webpFile": null,
       "approved": true,
@@ -32,9 +34,10 @@ export const ASSET_MANIFEST = {
         "app-icon",
         "dark-background",
         "source-variant",
-        "ui"
+        "ui",
+        "gate-key-art"
       ],
-      "notes": "Preserved dark-background representative icon source from the 2026-06-28 provided purple-blue emblem."
+      "notes": "Preserved dark-background icon variant synchronized with the 2026-06-29 rounded blue gate app icon."
     },
     {
       "assetId": "app_icon_light",
@@ -51,6 +54,132 @@ export const ASSET_MANIFEST = {
         "ui"
       ],
       "notes": "Preserved light-background icon source from Desktop/icon31.png."
+    },
+    {
+      "assetId": "ui_brand_portrait_gate_9x16_v1",
+      "category": "ui",
+      "sourceFile": "assets/source/brand/regressor_gate_photo_04_9x16.jpg",
+      "cleanFile": "assets/brand/regressor_gate_portrait_9x16.jpg",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "ui",
+        "brand",
+        "portrait",
+        "mobile",
+        "9x16",
+        "gate-key-art"
+      ],
+      "notes": "9:16 blue gate key art used by the character creation/start screen on portrait mobile viewports."
+    },
+    {
+      "assetId": "ui_brand_start_gate_16x9_v1",
+      "category": "ui",
+      "sourceFile": "assets/source/brand/regressor_gate_photo_03_16x9.jpg",
+      "cleanFile": "assets/brand/regressor_gate_start_16x9.jpg",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "ui",
+        "brand",
+        "start-screen",
+        "16x9",
+        "gate-key-art"
+      ],
+      "notes": "16:9 blue gate key art used by the character creation/start screen on landscape and desktop viewports."
+    },
+    {
+      "assetId": "ui_brand_loading_gate_wide_21x9_v1",
+      "category": "ui",
+      "sourceFile": "assets/source/brand/regressor_gate_photo_02_21x9.jpg",
+      "cleanFile": "assets/brand/regressor_gate_loading_wide_21x9.jpg",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "ui",
+        "brand",
+        "loading",
+        "wide",
+        "21x9",
+        "gate-key-art"
+      ],
+      "notes": "Wide blue gate key art used as the subtle runtime/loading backdrop and future loading screen source."
+    },
+    {
+      "assetId": "ui_brand_representative_gate_4x5_v1",
+      "category": "ui",
+      "sourceFile": "assets/source/brand/regressor_gate_photo_01_4x5.jpg",
+      "cleanFile": "assets/brand/regressor_gate_representative_4x5.jpg",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "ui",
+        "brand",
+        "representative",
+        "key-art",
+        "portrait-source",
+        "gate-key-art"
+      ],
+      "notes": "4:5 representative blue gate key art reserved for store cards, social previews, and future title surfaces."
+    },
+    {
+      "assetId": "app_icon_install_maskable_512_v3",
+      "category": "ui",
+      "sourceFile": "assets/source/brand/regressor_gate_app_icon_v3_source.jpg",
+      "cleanFile": "assets/icons/app-install-maskable-512.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "app-icon",
+        "install",
+        "pwa",
+        "maskable",
+        "512",
+        "ui",
+        "gate-key-art"
+      ],
+      "notes": "512px maskable PWA install icon generated from the 2026-06-29 rounded blue gate app icon."
+    },
+    {
+      "assetId": "app_icon_install_512_v3",
+      "category": "ui",
+      "sourceFile": "assets/source/brand/regressor_gate_app_icon_v3_source.jpg",
+      "cleanFile": "assets/icons/app-install-512.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "app-icon",
+        "install",
+        "pwa",
+        "512",
+        "ui",
+        "gate-key-art"
+      ],
+      "notes": "512px PWA install icon generated from the 2026-06-29 rounded blue gate app icon."
+    },
+    {
+      "assetId": "app_icon_install_192_v3",
+      "category": "ui",
+      "sourceFile": "assets/source/brand/regressor_gate_app_icon_v3_source.jpg",
+      "cleanFile": "assets/icons/app-install-192.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "app-icon",
+        "install",
+        "pwa",
+        "192",
+        "ui",
+        "gate-key-art"
+      ],
+      "notes": "192px PWA install icon generated from the 2026-06-29 rounded blue gate app icon."
     },
     {
       "assetId": "world_tutorial_island_overview_v54_actual",
@@ -385,6 +514,176 @@ export const ASSET_MANIFEST = {
         "prototype"
       ],
       "notes": "Temporary test icon for rusty_sword. Replace through the item icon slot when final item art is approved."
+    },
+    {
+      "assetId": "item_lucky_ring_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/lucky_ring.png",
+      "cleanFile": "assets/items/lucky_ring.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "ring",
+        "rare",
+        "approved-icon"
+      ],
+      "notes": "??? ?? ?? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_wolf_leather_armor_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/wolf_leather_armor.png",
+      "cleanFile": "assets/items/wolf_leather_armor.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "armor",
+        "uncommon",
+        "approved-icon"
+      ],
+      "notes": "??? ?? ???? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_worn_gloves_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/worn_gloves.png",
+      "cleanFile": "assets/items/worn_gloves.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "gloves",
+        "common",
+        "approved-icon"
+      ],
+      "notes": "?? ?? ?? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_swift_boots_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/swift_boots.png",
+      "cleanFile": "assets/items/swift_boots.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "boots",
+        "uncommon",
+        "approved-icon"
+      ],
+      "notes": "?? ???? ?? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_mana_necklace_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/mana_necklace.png",
+      "cleanFile": "assets/items/mana_necklace.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "necklace",
+        "rare",
+        "approved-icon"
+      ],
+      "notes": "?? ?? ??? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_novice_helmet_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/novice_helmet.png",
+      "cleanFile": "assets/items/novice_helmet.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "helmet",
+        "common",
+        "approved-icon"
+      ],
+      "notes": "???? ?? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_shore_ring_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/shore_ring.png",
+      "cleanFile": "assets/items/shore_ring.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "ring",
+        "common",
+        "approved-icon"
+      ],
+      "notes": "??? ?? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_regressor_charm_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/regressor_charm.png",
+      "cleanFile": "assets/items/regressor_charm.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "necklace",
+        "legendary",
+        "approved-icon"
+      ],
+      "notes": "???? ?? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_rift_gauntlets_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/rift_gauntlets.png",
+      "cleanFile": "assets/items/rift_gauntlets.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "gloves",
+        "heroic",
+        "approved-icon"
+      ],
+      "notes": "?? ?? ?? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "item_rift_blade_icon_v1",
+      "category": "item-icon",
+      "sourceFile": "assets/items/rift_blade.png",
+      "cleanFile": "assets/items/rift_blade.png",
+      "webpFile": null,
+      "approved": true,
+      "useInGame": true,
+      "tags": [
+        "item",
+        "equipment",
+        "weapon",
+        "heroic",
+        "approved-icon"
+      ],
+      "notes": "?? ??? equipment icon supplied by user and applied on 2026-06-29."
     }
   ]
 };
@@ -453,7 +752,17 @@ export const ASSET_SLOTS = {
     },
     "item": {
       "icons": {
-        "rusty_sword": "item_rusty_sword_icon_v1"
+        "rusty_sword": "item_rusty_sword_icon_v1",
+        "lucky_ring": "item_lucky_ring_icon_v1",
+        "wolf_leather_armor": "item_wolf_leather_armor_icon_v1",
+        "worn_gloves": "item_worn_gloves_icon_v1",
+        "swift_boots": "item_swift_boots_icon_v1",
+        "mana_necklace": "item_mana_necklace_icon_v1",
+        "novice_helmet": "item_novice_helmet_icon_v1",
+        "shore_ring": "item_shore_ring_icon_v1",
+        "regressor_charm": "item_regressor_charm_icon_v1",
+        "rift_gauntlets": "item_rift_gauntlets_icon_v1",
+        "rift_blade": "item_rift_blade_icon_v1"
       }
     },
     "skill": {
@@ -469,7 +778,14 @@ export const ASSET_SLOTS = {
     },
     "ui": {
       "appIcon": "app_icon_main",
-      "systemDiceRoll": "ui_system_dice_roll_sheet_v2"
+      "systemDiceRoll": "ui_system_dice_roll_sheet_v2",
+      "appInstall192": "app_icon_install_192_v3",
+      "appInstall512": "app_icon_install_512_v3",
+      "appInstallMaskable512": "app_icon_install_maskable_512_v3",
+      "brandRepresentative": "ui_brand_representative_gate_4x5_v1",
+      "loadingWide": "ui_brand_loading_gate_wide_21x9_v1",
+      "startScreen": "ui_brand_start_gate_16x9_v1",
+      "portraitScreen": "ui_brand_portrait_gate_9x16_v1"
     },
     "world": {
       "tutorialIslandOverview": "world_tutorial_island_overview_v54_actual",

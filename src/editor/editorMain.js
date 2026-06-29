@@ -1,49 +1,49 @@
-import { applyDomLocalization } from "../localization/domText.js?v=535";
-import { getLocaleText, t, tf } from "../localization/index.js?v=535";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=535";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=535";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=535";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=535";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=535";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=535";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=535";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=535";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=535";
+import { applyDomLocalization } from "../localization/domText.js?v=560";
+import { getLocaleText, t, tf } from "../localization/index.js?v=560";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=560";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=560";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=560";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=560";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=560";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=560";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=560";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=560";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=560";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=535";
+} from "./contentBulkPatchPackageAdapter.js?v=560";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkPackageOverview,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=535";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=535";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=535";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=535";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=535";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=535";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=535";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=535";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=535";
+} from "./contentBulkPackageOverview.js?v=560";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=560";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=560";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=560";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=560";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=560";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=560";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=560";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=560";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=535";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=535";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=535";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=535";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=535";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=535";
+} from "./runtimeVfxBulkIntakePreview.js?v=560";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=560";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=560";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=560";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=560";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=560";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=535";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=535";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=535";
+} from "./monsterSpriteSlotReport.js?v=560";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=560";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=560";
 
-const EDITOR_VERSION = "535";
+const EDITOR_VERSION = "560";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -5305,9 +5305,26 @@ function renderSaveSlotDiagnostics() {
       ${renderSaveSlotEditValidatorRegistryContract(diagnostics)}
       ${renderSaveSlotEditValidatorResultSchemaPreview(diagnostics)}
       ${renderSaveSlotEditValidatorExecutableDryRunPreview(diagnostics)}
+      ${renderSaveSlotEditProposedValueInjectorPreview(diagnostics)}
+      ${renderSaveSlotEditDryRunSampleComparatorPreview(diagnostics)}
+      ${renderSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics)}
+      ${renderSaveSlotEditProducedResultBridgeContractPreview(diagnostics)}
+      ${renderSaveSlotEditBridgeTransitionChecklistPreview(diagnostics)}
+      ${renderSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics)}
+      ${renderSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics)}
+      ${renderSaveSlotEditAdapterRunnerPreflightPreview(diagnostics)}
+      ${renderSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics)}
+      ${renderSaveSlotEditConfirmationInputShellContractPreview(diagnostics)}
+      ${renderSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics)}
+      ${renderSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics)}
+      ${renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics)}
+      ${renderSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics)}
+      ${renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics)}
       ${renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics)}
+      ${renderSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics)}
       ${renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics)}
       ${renderSaveSlotEditConfirmationInputContractPreview(diagnostics)}
+      ${renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics)}
       ${renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics)}
       ${renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics)}
       ${renderSaveSlotEditWriterEnablementRiskSummary(diagnostics)}
@@ -5884,6 +5901,437 @@ function renderSaveSlotEditValidatorExecutableDryRunPreview(diagnostics) {
   `;
 }
 
+function renderSaveSlotEditProposedValueInjectorPreview(diagnostics) {
+  const preview = createSaveSlotEditProposedValueInjectorPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditProposedValueInjector || {};
+  return `
+    <section class="editor-save-edit-proposed-values" data-save-edit-proposed-value-injector data-status="${escapeAttribute(preview.status)}" data-mode="${escapeAttribute(preview.mode)}" data-injector="${escapeAttribute(preview.injector)}" data-apply="${escapeAttribute(preview.apply)}">
+      <div class="editor-save-edit-proposed-values-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit proposed value injector")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(preview.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(preview.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-proposed-values-metrics">
+        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditProposedValueInjector.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`), text.fieldHint || "")}
+        ${metricCard(text.validMetric || "Valid samples", tf("editorPrep.saveEditProposedValueInjector.validValue", { count: preview.validSampleCount }, `${preview.validSampleCount}`), text.validHint || "")}
+        ${metricCard(text.invalidMetric || "Invalid samples", tf("editorPrep.saveEditProposedValueInjector.invalidValue", { count: preview.invalidSampleCount }, `${preview.invalidSampleCount}`), text.invalidHint || "")}
+        ${metricCard(text.injectorMetric || "Injector", preview.injector, text.injectorHint || "")}
+      </div>
+      <div class="editor-save-edit-proposed-values-grid">
+        ${preview.fields.map((field) => renderSaveEditProposedValueInjectorField(field)).join("")}
+      </div>
+      <pre class="editor-save-edit-proposed-values-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditDryRunSampleComparatorPreview(diagnostics) {
+  const preview = createSaveSlotEditDryRunSampleComparatorPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditDryRunSampleComparator || {};
+  return `
+    <section class="editor-save-edit-sample-comparator" data-save-edit-dry-run-sample-comparator data-status="${escapeAttribute(preview.status)}" data-mode="${escapeAttribute(preview.mode)}" data-apply="${escapeAttribute(preview.apply)}">
+      <div class="editor-save-edit-sample-comparator-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit dry-run sample comparator")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(preview.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(preview.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-sample-comparator-metrics">
+        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditDryRunSampleComparator.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`), text.fieldHint || "")}
+        ${metricCard(text.comparableMetric || "Comparable", tf("editorPrep.saveEditDryRunSampleComparator.comparableValue", { count: preview.comparableCount }, `${preview.comparableCount}`), text.comparableHint || "")}
+        ${metricCard(text.readyMetric || "Ready", tf("editorPrep.saveEditDryRunSampleComparator.readyValue", { count: preview.readyComparisonCount }, `${preview.readyComparisonCount}`), text.readyHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditDryRunSampleComparator.blockerValue", { count: preview.blockerCount }, `${preview.blockerCount}`), text.blockerHint || "")}
+      </div>
+      <div class="editor-save-edit-sample-comparator-grid">
+        ${preview.comparisons.map((comparison) => renderSaveEditDryRunSampleComparison(comparison)).join("")}
+      </div>
+      <pre class="editor-save-edit-sample-comparator-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics) {
+  const summary = createSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditSampleBridgeBlockerSummary || {};
+  return `
+    <section class="editor-save-edit-sample-bridge" data-save-edit-sample-bridge-blocker-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
+      <div class="editor-save-edit-sample-bridge-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit sample bridge blocker summary")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(summary.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(summary.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-sample-bridge-metrics">
+        ${metricCard(text.readyMetric || "Ready comparisons", tf("editorPrep.saveEditSampleBridgeBlockerSummary.readyValue", { count: summary.readyComparisonCount }, `${summary.readyComparisonCount}`), text.readyHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditSampleBridgeBlockerSummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.bridgeMetric || "Bridge", summary.bridge.status, text.bridgeHint || "")}
+        ${metricCard(text.applyMetric || "Apply", summary.apply, text.applyHint || "")}
+      </div>
+      <div class="editor-save-edit-sample-bridge-grid">
+        ${summary.blockers.map((blocker) => renderSaveEditSampleBridgeBlocker(blocker)).join("")}
+      </div>
+      <pre class="editor-save-edit-sample-bridge-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditProducedResultBridgeContractPreview(diagnostics) {
+  const contract = createSaveSlotEditProducedResultBridgeContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditProducedResultBridgeContract || {};
+  return `
+    <section class="editor-save-edit-produced-bridge" data-save-edit-produced-result-bridge-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
+      <div class="editor-save-edit-produced-bridge-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit produced result bridge contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-produced-bridge-metrics">
+        ${metricCard(text.resultMetric || "Results", tf("editorPrep.saveEditProducedResultBridgeContract.resultValue", { count: contract.resultCount }, `${contract.resultCount}`), text.resultHint || "")}
+        ${metricCard(text.routeMetric || "Routes", tf("editorPrep.saveEditProducedResultBridgeContract.routeValue", { count: contract.routeCount }, `${contract.routeCount}`), text.routeHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditProducedResultBridgeContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.adapterMetric || "Adapter", contract.adapter.status, text.adapterHint || "")}
+      </div>
+      <div class="editor-save-edit-produced-bridge-grid">
+        ${contract.routes.map((route) => renderSaveEditProducedResultBridgeRoute(route)).join("")}
+      </div>
+      <pre class="editor-save-edit-produced-bridge-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditBridgeTransitionChecklistPreview(diagnostics) {
+  const checklist = createSaveSlotEditBridgeTransitionChecklistPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditProducedResultBridgeTransitionChecklist || {};
+  return `
+    <section class="editor-save-edit-bridge-transition" data-save-edit-produced-result-bridge-transition-checklist data-status="${escapeAttribute(checklist.status)}" data-mode="${escapeAttribute(checklist.mode)}" data-apply="${escapeAttribute(checklist.apply)}">
+      <div class="editor-save-edit-bridge-transition-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit bridge transition checklist")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(checklist.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(checklist.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-bridge-transition-metrics">
+        ${metricCard(text.producedMetric || "Produced", checklist.producedVersion, text.producedHint || "")}
+        ${metricCard(text.legacyMetric || "Legacy bridge", checklist.legacyBridgeVersion, text.legacyHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.checkValue", { count: checklist.checkCount }, `${checklist.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.blockedValue", { count: checklist.blockedCheckCount }, `${checklist.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-bridge-transition-grid">
+        ${checklist.checks.map((check) => renderSaveEditProducedResultBridgeTransitionCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-bridge-transition-code"><code>${escapeHtml(JSON.stringify(checklist.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics) {
+  const plan = createSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditValidatorResultSourceAdapterPlan || {};
+  return `
+    <section class="editor-save-edit-result-source-adapter" data-save-edit-validator-result-source-adapter-plan data-status="${escapeAttribute(plan.status)}" data-mode="${escapeAttribute(plan.mode)}" data-apply="${escapeAttribute(plan.apply)}">
+      <div class="editor-save-edit-result-source-adapter-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit validator result source adapter plan")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(plan.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(plan.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-result-source-adapter-metrics">
+        ${metricCard(text.candidateMetric || "Candidates", tf("editorPrep.saveEditValidatorResultSourceAdapterPlan.candidateValue", { count: plan.candidateCount }, `${plan.candidateCount}`), text.candidateHint || "")}
+        ${metricCard(text.readyMetric || "Ready", tf("editorPrep.saveEditValidatorResultSourceAdapterPlan.readyValue", { count: plan.readyCandidateCount }, `${plan.readyCandidateCount}`), text.readyHint || "")}
+        ${metricCard(text.selectedMetric || "Selected", plan.selectedSource, text.selectedHint || "")}
+        ${metricCard(text.adapterMetric || "Adapter", plan.adapter.status, text.adapterHint || "")}
+      </div>
+      <div class="editor-save-edit-result-source-adapter-grid">
+        ${plan.candidates.map((candidate) => renderSaveEditValidatorResultSourceAdapterCandidate(candidate)).join("")}
+      </div>
+      <pre class="editor-save-edit-result-source-adapter-code"><code>${escapeHtml(JSON.stringify(plan.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics) {
+  const contract = createSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditSelectedSourceHandoffContract || {};
+  return `
+    <section class="editor-save-edit-source-handoff" data-save-edit-selected-source-handoff-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
+      <div class="editor-save-edit-source-handoff-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit selected source handoff contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-source-handoff-metrics">
+        ${metricCard(text.sourceMetric || "Source", contract.selectedSource, text.sourceHint || "")}
+        ${metricCard(text.fieldMetric || "Payload fields", tf("editorPrep.saveEditSelectedSourceHandoffContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`), text.fieldHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditSelectedSourceHandoffContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditSelectedSourceHandoffContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-source-handoff-grid">
+        ${contract.checks.map((check) => renderSaveEditSelectedSourceHandoffCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-source-handoff-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditAdapterRunnerPreflightPreview(diagnostics) {
+  const preflight = createSaveSlotEditAdapterRunnerPreflightPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditAdapterRunnerPreflight || {};
+  return `
+    <section class="editor-save-edit-adapter-preflight" data-save-edit-adapter-runner-preflight data-status="${escapeAttribute(preflight.status)}" data-mode="${escapeAttribute(preflight.mode)}" data-apply="${escapeAttribute(preflight.apply)}">
+      <div class="editor-save-edit-adapter-preflight-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit adapter runner preflight")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(preflight.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(preflight.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-adapter-preflight-metrics">
+        ${metricCard(text.payloadMetric || "Payload", tf("editorPrep.saveEditAdapterRunnerPreflight.payloadValue", { count: preflight.payloadFieldCount }, `${preflight.payloadFieldCount}`), text.payloadHint || "")}
+        ${metricCard(text.gateMetric || "Gate blockers", tf("editorPrep.saveEditAdapterRunnerPreflight.gateValue", { count: preflight.gateBlockerCount }, `${preflight.gateBlockerCount}`), text.gateHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditAdapterRunnerPreflight.checkValue", { count: preflight.checkCount }, `${preflight.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditAdapterRunnerPreflight.blockedValue", { count: preflight.blockedCheckCount }, `${preflight.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-adapter-preflight-grid">
+        ${preflight.checks.map((check) => renderSaveEditAdapterRunnerPreflightCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-adapter-preflight-code"><code>${escapeHtml(JSON.stringify(preflight.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics) {
+  const contract = createSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationSourceSelectionContract || {};
+  return `
+    <section class="editor-save-edit-confirm-source" data-save-edit-confirmation-source-selection-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
+      <div class="editor-save-edit-confirm-source-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit confirmation source selection contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-confirm-source-metrics">
+        ${metricCard(text.phraseMetric || "Phrase", contract.requiredPhrase, text.phraseHint || "")}
+        ${metricCard(text.sourceMetric || "Source", contract.sourceSelection.status, text.sourceHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationSourceSelectionContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationSourceSelectionContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-confirm-source-grid">
+        ${contract.checks.map((check) => renderSaveEditConfirmationSourceSelectionCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-confirm-source-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditConfirmationInputShellContractPreview(diagnostics) {
+  const contract = createSaveSlotEditConfirmationInputShellContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationInputShellContract || {};
+  return `
+    <section class="editor-save-edit-confirm-input-shell" data-save-edit-confirmation-input-shell-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
+      <div class="editor-save-edit-confirm-input-shell-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit confirmation input shell contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-confirm-input-shell-metrics">
+        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditConfirmationInputShellContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`), text.fieldHint || "")}
+        ${metricCard(text.phraseMetric || "Phrase", contract.requiredPhrase, text.phraseHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationInputShellContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationInputShellContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-confirm-input-shell-grid">
+        ${contract.fields.map((field) => renderSaveEditConfirmationInputShellField(field)).join("")}
+      </div>
+      <div class="editor-save-edit-confirm-input-shell-grid">
+        ${contract.checks.map((check) => renderSaveEditConfirmationInputShellCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-confirm-input-shell-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics) {
+  const summary = createSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {};
+  return `
+    <section class="editor-save-edit-confirm-match-review" data-save-edit-confirmation-match-review-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
+      <div class="editor-save-edit-confirm-match-review-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit confirmation match review summary")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(summary.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(summary.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-confirm-match-review-metrics">
+        ${metricCard(text.reviewMetric || "Review rows", tf("editorPrep.saveEditConfirmationMatchReviewSummary.reviewValue", { count: summary.reviewCount }, `${summary.reviewCount}`), text.reviewHint || "")}
+        ${metricCard(text.sourceMetric || "Result source", summary.resultSource, text.sourceHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationMatchReviewSummary.checkValue", { count: summary.checkCount }, `${summary.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockedValue", { count: summary.blockedCheckCount }, `${summary.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-confirm-match-review-grid">
+        ${summary.reviews.map((review) => renderSaveEditConfirmationMatchReviewRow(review)).join("")}
+      </div>
+      <div class="editor-save-edit-confirm-match-review-grid">
+        ${summary.checks.map((check) => renderSaveEditConfirmationMatchReviewCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-confirm-match-review-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics) {
+  const contract = createSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditSubmitRunnerBlockerContract || {};
+  return `
+    <section class="editor-save-edit-submit-runner-blocker" data-save-edit-submit-runner-blocker-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
+      <div class="editor-save-edit-submit-runner-blocker-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit submit runner blocker contract")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(contract.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-submit-runner-blocker-metrics">
+        ${metricCard(text.runnerMetric || "Runner", contract.submitRunner, text.runnerHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditSubmitRunnerBlockerContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-submit-runner-blocker-list">
+        <strong>${escapeHtml(text.blockerList || "Submit runner blockers")}</strong>
+        <div class="editor-chip-list">
+          ${contract.blockers.map((blocker) => chip(blocker)).join("")}
+        </div>
+      </div>
+      <div class="editor-save-edit-submit-runner-blocker-grid">
+        ${contract.checks.map((check) => renderSaveEditSubmitRunnerBlockerCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-submit-runner-blocker-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics) {
+  const checklist = createSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditFinalApplyRunnerHandoffChecklist || {};
+  return `
+    <section class="editor-save-edit-apply-runner-handoff" data-save-edit-final-apply-runner-handoff-checklist data-status="${escapeAttribute(checklist.status)}" data-mode="${escapeAttribute(checklist.mode)}" data-apply="${escapeAttribute(checklist.apply)}">
+      <div class="editor-save-edit-apply-runner-handoff-head">
+        <div>
+          <h4>${escapeHtml(text.title || "Save edit final apply runner handoff checklist")}</h4>
+          <p class="muted">${escapeHtml(text.description || "")}</p>
+        </div>
+        <span data-status="${escapeAttribute(checklist.status)}">
+          ${escapeHtml(saveDiagnosticStatusLabel(checklist.status))}
+        </span>
+      </div>
+      <div class="editor-save-edit-apply-runner-handoff-metrics">
+        ${metricCard(text.handoffMetric || "Handoff", checklist.handoff, text.handoffHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockerValue", { count: checklist.blockerCount }, `${checklist.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.checkValue", { count: checklist.checkCount }, `${checklist.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockedValue", { count: checklist.blockedCheckCount }, `${checklist.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-apply-runner-handoff-grid">
+        ${checklist.checks.map((check) => renderSaveEditFinalApplyRunnerHandoffCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-apply-runner-handoff-code"><code>${escapeHtml(JSON.stringify(checklist.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics) {
+  const preview = createSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {};
+  return `
+    <section class="editor-save-edit-apply-runner-payload" data-save-edit-apply-runner-payload-shape data-status="${escapeAttribute(preview.status)}" data-mode="${escapeAttribute(preview.mode)}" data-runner="${escapeAttribute(preview.applyRunner)}" data-apply="${escapeAttribute(preview.apply)}">
+      <div class="editor-save-edit-apply-runner-payload-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(preview.version)}</span>
+          <h4>${escapeHtml(text.title || "Save edit apply runner payload shape")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only payload shape before any apply runner is created.")}</p>
+        </div>
+        ${chip(preview.status)}
+      </div>
+      <div class="editor-save-edit-apply-runner-payload-metrics">
+        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditApplyRunnerPayloadShape.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`), text.fieldHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditApplyRunnerPayloadShape.checkValue", { count: preview.checkCount }, `${preview.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditApplyRunnerPayloadShape.blockedValue", { count: preview.blockedCheckCount }, `${preview.blockedCheckCount}`), text.blockedHint || "")}
+        ${metricCard(text.runnerMetric || "Runner", preview.applyRunner, text.runnerHint || "")}
+      </div>
+      <div class="editor-save-edit-apply-runner-payload-grid">
+        ${preview.fields.map((field) => renderSaveEditApplyRunnerPayloadField(field)).join("")}
+        ${preview.checks.map((check) => renderSaveEditApplyRunnerPayloadCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-apply-runner-payload-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics) {
+  const summary = createSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditPayloadBridgeCompatibilitySummary || {};
+  return `
+    <section class="editor-save-edit-payload-bridge" data-save-edit-apply-runner-payload-bridge-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
+      <div class="editor-save-edit-payload-bridge-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(summary.version)}</span>
+          <h4>${escapeHtml(text.title || "Payload to bridge compatibility")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only compatibility blockers before the payload can feed the apply bridge.")}</p>
+        </div>
+        ${chip(summary.status)}
+      </div>
+      <div class="editor-save-edit-payload-bridge-metrics">
+        ${metricCard(text.rowMetric || "Rows", tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.rowValue", { count: summary.rowCount }, `${summary.rowCount}`), text.rowHint || "")}
+        ${metricCard(text.readyMetric || "Ready", tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.readyValue", { count: summary.readyRowCount }, `${summary.readyRowCount}`), text.readyHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.bridgeMetric || "Bridge", summary.bridgeVersion, text.bridgeHint || "")}
+      </div>
+      <div class="editor-save-edit-payload-bridge-grid">
+        ${summary.rows.map((row) => renderSaveEditPayloadBridgeCompatibilityRow(row)).join("")}
+      </div>
+      <pre class="editor-save-edit-payload-bridge-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
 function renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
   const bridge = createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics);
   const text = EDITOR_TEXT.saveEditValidatorApplyGateBridge || {};
@@ -5914,6 +6362,36 @@ function renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
         ${bridge.steps.map((step) => renderSaveEditValidatorApplyGateBridgeStep(step)).join("")}
       </div>
       <pre class="editor-save-edit-validator-bridge-code"><code>${escapeHtml(JSON.stringify(bridge.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics) {
+  const rollup = createSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {};
+  return `
+    <section class="editor-save-edit-compat-confirm-rollup" data-save-edit-compatibility-confirmation-rollup data-status="${escapeAttribute(rollup.status)}" data-mode="${escapeAttribute(rollup.mode)}" data-apply="${escapeAttribute(rollup.apply)}">
+      <div class="editor-save-edit-compat-confirm-rollup-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(rollup.version)}</span>
+          <h4>${escapeHtml(text.title || "Save edit compatibility to confirmation rollup")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only blocker rollup before confirmation preflight can be converted into real controls.")}</p>
+        </div>
+        ${chip(rollup.status)}
+      </div>
+      <div class="editor-save-edit-compat-confirm-rollup-metrics">
+        ${metricCard(text.laneMetric || "Lanes", tf("editorPrep.saveEditCompatibilityConfirmationRollup.laneValue", { count: rollup.laneCount }, `${rollup.laneCount}`), text.laneHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerValue", { count: rollup.blockerCount }, `${rollup.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditCompatibilityConfirmationRollup.checkValue", { count: rollup.checkCount }, `${rollup.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockedValue", { count: rollup.blockedCheckCount }, `${rollup.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-compat-confirm-rollup-lanes">
+        ${rollup.lanes.map((lane) => renderSaveEditCompatibilityConfirmationRollupLane(lane)).join("")}
+      </div>
+      <div class="editor-save-edit-compat-confirm-rollup-grid">
+        ${rollup.checks.map((check) => renderSaveEditCompatibilityConfirmationRollupCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-compat-confirm-rollup-code"><code>${escapeHtml(JSON.stringify(rollup.payloadShape, null, 2))}</code></pre>
     </section>
   `;
 }
@@ -5983,6 +6461,36 @@ function renderSaveSlotEditConfirmationInputContractPreview(diagnostics) {
         </div>
       </div>
       <pre class="editor-save-edit-confirmation-contract-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
+    </section>
+  `;
+}
+
+function renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics) {
+  const summary = createSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {};
+  return `
+    <section class="editor-save-edit-confirm-runner-handoff" data-save-edit-confirmation-runner-handoff-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
+      <div class="editor-save-edit-confirm-runner-handoff-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(summary.version)}</span>
+          <h4>${escapeHtml(text.title || "Save edit confirmation to runner handoff")}</h4>
+          <p class="muted">${escapeHtml(text.description || "Read-only blocker summary before confirmation input can hand off to an apply runner.")}</p>
+        </div>
+        ${chip(summary.status)}
+      </div>
+      <div class="editor-save-edit-confirm-runner-handoff-metrics">
+        ${metricCard(text.rowMetric || "Rows", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.rowValue", { count: summary.rowCount }, `${summary.rowCount}`), text.rowHint || "")}
+        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
+        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.checkValue", { count: summary.checkCount }, `${summary.checkCount}`), text.checkHint || "")}
+        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockedValue", { count: summary.blockedCheckCount }, `${summary.blockedCheckCount}`), text.blockedHint || "")}
+      </div>
+      <div class="editor-save-edit-confirm-runner-handoff-grid">
+        ${summary.rows.map((row) => renderSaveEditConfirmationRunnerHandoffRow(row)).join("")}
+      </div>
+      <div class="editor-save-edit-confirm-runner-handoff-checks">
+        ${summary.checks.map((check) => renderSaveEditConfirmationRunnerHandoffCheck(check)).join("")}
+      </div>
+      <pre class="editor-save-edit-confirm-runner-handoff-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
     </section>
   `;
 }
@@ -6445,6 +6953,852 @@ function createSaveSlotEditValidatorExecutableDryRunPreview(diagnostics) {
   };
 }
 
+function createSaveSlotEditProposedValueInjectorPreview(diagnostics) {
+  const sample = createSaveSlotEditSamplePayloadPreview(diagnostics);
+  const registry = createSaveSlotEditValidatorExecutableRegistry(diagnostics);
+  const validatorByRule = new Map(registry.validators.map((validator) => [validator.ruleId, validator]));
+  const fields = sample.groups.flatMap((group) => group.fields.map((field) => {
+    const validator = validatorByRule.get(field.validationRule);
+    const sampleValues = saveEditProposedValueSamplesForField(field);
+    const validResult = validator?.executor
+      ? validator.executor({
+          proposedValue: sampleValues.valid,
+          currentValue: undefined,
+          targetPath: field.path,
+          saveTarget: sample.payloadShape.target,
+        })
+      : saveEditValidatorDryRunResult(field.validationRule, field.path, "not-produced", "not-produced", "validator-missing", []);
+    const invalidResult = validator?.executor
+      ? validator.executor({
+          proposedValue: sampleValues.invalid,
+          currentValue: undefined,
+          targetPath: field.path,
+          saveTarget: sample.payloadShape.target,
+        })
+      : saveEditValidatorDryRunResult(field.validationRule, field.path, "not-produced", "not-produced", "validator-missing", []);
+    return {
+      groupId: group.id,
+      groupLabel: group.label,
+      path: field.path,
+      inputKind: field.inputKind,
+      validationRule: field.validationRule,
+      inputStatus: "not-created",
+      injectorStatus: "disabled",
+      validSample: saveEditSerializePreviewValue(sampleValues.valid),
+      validResult: validResult.resultStatus,
+      invalidSample: saveEditSerializePreviewValue(sampleValues.invalid),
+      invalidResult: invalidResult.resultStatus,
+      blocker: "input-shell-not-created",
+    };
+  }));
+  return {
+    status: "blocked",
+    version: "save-edit-proposed-value-input-shell-sample-injector-v1",
+    mode: "read-only-preview",
+    injector: "disabled",
+    apply: "disabled",
+    fieldCount: fields.length,
+    validSampleCount: fields.filter((field) => field.validResult === "valid").length,
+    invalidSampleCount: fields.filter((field) => field.invalidResult === "invalid").length,
+    fields,
+    payloadShape: {
+      version: "save-edit-proposed-value-input-shell-sample-injector-v1",
+      mode: "read-only-preview",
+      source: sample.payloadShape.version,
+      validatorRegistry: registry.version,
+      inputShell: "not-created",
+      injector: "disabled",
+      writer: "disabled",
+      apply: "disabled",
+      blockers: ["input-shell-not-created", "sample-injector-disabled", "writer-disabled"],
+    },
+  };
+}
+
+function createSaveSlotEditDryRunSampleComparatorPreview(diagnostics) {
+  const dryRun = createSaveSlotEditValidatorExecutableDryRunPreview(diagnostics);
+  const injector = createSaveSlotEditProposedValueInjectorPreview(diagnostics);
+  const dryRunByPath = new Map(dryRun.results.map((result) => [result.path, result]));
+  const comparisons = injector.fields.map((field) => {
+    const missing = dryRunByPath.get(field.path);
+    const missingReady = missing?.blocker === "proposed-values-missing";
+    const validReady = field.validResult === "valid";
+    const invalidReady = field.invalidResult === "invalid";
+    const status = missingReady && validReady && invalidReady ? "ready" : "blocked";
+    const blocker = status === "ready" ? "" : "sample-result-mismatch";
+    return {
+      path: field.path,
+      ruleId: field.validationRule,
+      status,
+      missingResult: missing?.resultStatus || "not-produced",
+      missingBlocker: missing?.blocker || "missing-result-not-found",
+      validResult: field.validResult,
+      invalidResult: field.invalidResult,
+      blocker,
+    };
+  });
+  const blockers = Array.from(new Set(comparisons.map((comparison) => comparison.blocker).filter(Boolean)));
+  return {
+    status: "blocked",
+    version: "save-edit-dry-run-sample-result-comparator-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    fieldCount: comparisons.length,
+    comparableCount: comparisons.filter((comparison) => comparison.missingBlocker === "proposed-values-missing").length,
+    readyComparisonCount: comparisons.filter((comparison) => comparison.status === "ready").length,
+    blockerCount: blockers.length,
+    comparisons,
+    payloadShape: {
+      version: "save-edit-dry-run-sample-result-comparator-v1",
+      mode: "read-only-preview",
+      source: {
+        missing: dryRun.version,
+        samples: injector.version,
+      },
+      expectedStates: {
+        missing: "not-produced/proposed-values-missing",
+        validSample: "valid",
+        invalidSample: "invalid",
+      },
+      bridge: "not-connected",
+      writer: "disabled",
+      apply: "disabled",
+      blockers: ["comparator-read-only", "bridge-not-connected", "writer-disabled"],
+    },
+  };
+}
+
+function createSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics) {
+  const comparator = createSaveSlotEditDryRunSampleComparatorPreview(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const readyComparisonCount = comparator.readyComparisonCount;
+  const blockers = [
+    saveEditSampleBridgeBlocker("sample-results-produced", readyComparisonCount > 0 ? "ready" : "blocked", readyComparisonCount > 0 ? "" : "sample-results-missing"),
+    saveEditSampleBridgeBlocker("sample-results-not-bridged", "blocked", "bridge-not-connected"),
+    saveEditSampleBridgeBlocker("apply-gate-held", gate.applyStatus === "blocked" ? "blocked" : "ready", gate.applyStatus === "blocked" ? "apply-gate-blocked" : ""),
+    saveEditSampleBridgeBlocker("confirmation-input-missing", "blocked", "confirmation-input-missing"),
+    saveEditSampleBridgeBlocker("writer-disabled", "blocked", "writer-disabled"),
+  ];
+  return {
+    status: "blocked",
+    version: "save-edit-sample-result-bridge-blocker-summary-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    readyComparisonCount,
+    blockerCount: blockers.filter((blocker) => blocker.status === "blocked").length,
+    bridge: {
+      status: "not-connected",
+      source: comparator.version,
+      target: "save-edit-validator-result-apply-gate-bridge-v1",
+    },
+    blockers,
+    payloadShape: {
+      version: "save-edit-sample-result-bridge-blocker-summary-v1",
+      mode: "read-only-preview",
+      source: comparator.version,
+      bridge: "not-connected",
+      applyGate: gate.applyStatus,
+      confirmation: "missing",
+      writer: "disabled",
+      apply: "disabled",
+      blockers: blockers.filter((blocker) => blocker.status === "blocked").map((blocker) => blocker.blocker),
+    },
+  };
+}
+
+function createSaveSlotEditProducedResultBridgeContractPreview(diagnostics) {
+  const summary = createSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics);
+  const routes = [
+    saveEditProducedResultBridgeRoute("read-produced-results", "ready", ""),
+    saveEditProducedResultBridgeRoute("map-result-status", "ready", ""),
+    saveEditProducedResultBridgeRoute("replace-legacy-result-schema", "blocked", "legacy-bridge-still-active"),
+    saveEditProducedResultBridgeRoute("open-apply-gate", "blocked", "apply-gate-blocked"),
+    saveEditProducedResultBridgeRoute("keep-writer-disabled", "blocked", "writer-disabled"),
+  ];
+  const blockers = Array.from(new Set(routes.map((route) => route.blocker).filter(Boolean)));
+  return {
+    status: "blocked",
+    version: "save-edit-produced-result-bridge-contract-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    resultCount: summary.readyComparisonCount,
+    routeCount: routes.length,
+    blockerCount: blockers.length,
+    adapter: {
+      status: "not-connected",
+      source: summary.version,
+      target: "save-edit-validator-result-apply-gate-bridge-v1",
+    },
+    routes,
+    payloadShape: {
+      version: "save-edit-produced-result-bridge-contract-v1",
+      mode: "read-only-preview",
+      source: summary.version,
+      adapter: "not-connected",
+      maps: {
+        missing: "blocked",
+        valid: "ready",
+        invalid: "blocked",
+      },
+      legacyBridge: "unchanged",
+      writer: "disabled",
+      apply: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditBridgeTransitionChecklistPreview(diagnostics) {
+  const produced = createSaveSlotEditProducedResultBridgeContractPreview(diagnostics);
+  const legacy = createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditProducedResultBridgeTransitionChecklist || {};
+  const producedReadyRoutes = produced.routes.filter((route) => route.status === "ready").length;
+  const legacyBlockedSteps = legacy.steps.filter((step) => step.status === "blocked").length;
+  const checks = [
+    saveEditProducedResultBridgeTransitionCheck(
+      "produced-contract-readable",
+      produced.version === "save-edit-produced-result-bridge-contract-v1",
+      text.checkLabels?.producedContractReadable,
+      "produced-contract-missing",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "legacy-bridge-readable",
+      legacy.bridgeVersion === "save-edit-validator-result-apply-gate-bridge-v1",
+      text.checkLabels?.legacyBridgeReadable,
+      "legacy-bridge-missing",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "route-statuses-visible",
+      produced.routeCount > 0 && producedReadyRoutes > 0,
+      text.checkLabels?.routeStatusesVisible,
+      "produced-routes-missing",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "legacy-blockers-visible",
+      legacy.blockedStepCount > 0 && legacyBlockedSteps > 0,
+      text.checkLabels?.legacyBlockersVisible,
+      "legacy-blockers-missing",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "adapter-connected",
+      false,
+      text.checkLabels?.adapterConnected,
+      "adapter-not-connected",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "legacy-schema-not-replaced",
+      produced.payloadShape.legacyBridge === "unchanged",
+      text.checkLabels?.legacySchemaNotReplaced,
+      "legacy-bridge-replaced",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "legacy-schema-replacement-approved",
+      false,
+      text.checkLabels?.legacySchemaReplacementApproved,
+      "legacy-bridge-still-active",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "apply-gate-held",
+      produced.apply === "disabled" && legacy.apply === "disabled",
+      text.checkLabels?.applyGateHeld,
+      "apply-gate-open",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "apply-runner-bound",
+      false,
+      text.checkLabels?.applyRunnerBound,
+      "apply-runner-missing",
+    ),
+    saveEditProducedResultBridgeTransitionCheck(
+      "writer-disabled",
+      produced.payloadShape.writer === "disabled" && legacy.payloadShape.blockers.includes("writer-disabled"),
+      text.checkLabels?.writerDisabled,
+      "writer-enabled",
+    ),
+  ];
+  const blockers = Array.from(new Set(checks.map((check) => check.blocker).filter(Boolean)));
+  return {
+    status: "blocked",
+    version: "save-edit-produced-result-bridge-transition-checklist-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    producedVersion: produced.version,
+    legacyBridgeVersion: legacy.bridgeVersion,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    checks,
+    payloadShape: {
+      version: "save-edit-produced-result-bridge-transition-checklist-v1",
+      mode: "read-only-preview",
+      producedSource: produced.version,
+      legacyTarget: legacy.bridgeVersion,
+      producedReadyRoutes,
+      legacyBlockedSteps,
+      adapter: produced.adapter.status,
+      legacyBridge: produced.payloadShape.legacyBridge,
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics) {
+  const schema = createSaveSlotEditValidatorResultSchemaPreview(diagnostics);
+  const executable = createSaveSlotEditValidatorExecutableDryRunPreview(diagnostics);
+  const comparator = createSaveSlotEditDryRunSampleComparatorPreview(diagnostics);
+  const produced = createSaveSlotEditProducedResultBridgeContractPreview(diagnostics);
+  const transition = createSaveSlotEditBridgeTransitionChecklistPreview(diagnostics);
+  const candidates = [
+    saveEditValidatorResultSourceAdapterCandidate(
+      "legacy-result-schema",
+      schema.resultShape.version,
+      "blocked",
+      schema.blockedResultCount > 0 ? "result-not-produced" : "legacy-result-schema-only",
+    ),
+    saveEditValidatorResultSourceAdapterCandidate(
+      "executable-dry-run-results",
+      executable.version,
+      "blocked",
+      executable.blockers[0] || "proposed-values-missing",
+    ),
+    saveEditValidatorResultSourceAdapterCandidate(
+      "dry-run-sample-comparator",
+      comparator.version,
+      comparator.readyComparisonCount > 0 ? "ready" : "blocked",
+      comparator.readyComparisonCount > 0 ? "" : "sample-comparison-missing",
+    ),
+    saveEditValidatorResultSourceAdapterCandidate(
+      "produced-result-bridge-contract",
+      produced.version,
+      produced.adapter.status === "not-connected" ? "blocked" : "ready",
+      produced.adapter.status === "not-connected" ? "adapter-not-connected" : "",
+    ),
+    saveEditValidatorResultSourceAdapterCandidate(
+      "future-live-validator-output",
+      "future-live-validator-output-v1",
+      "blocked",
+      "edit-input-missing",
+    ),
+  ];
+  const blockers = Array.from(new Set([
+    ...candidates.map((candidate) => candidate.blocker).filter(Boolean),
+    ...transition.payloadShape.blockers,
+    "source-selector-not-created",
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-validator-result-source-adapter-plan-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    selectedSource: "none",
+    candidateCount: candidates.length,
+    readyCandidateCount: candidates.filter((candidate) => candidate.status === "ready").length,
+    blockedCandidateCount: candidates.filter((candidate) => candidate.status === "blocked").length,
+    adapter: {
+      status: "not-connected",
+      source: "none",
+      target: transition.legacyBridgeVersion,
+    },
+    candidates,
+    payloadShape: {
+      version: "save-edit-validator-result-source-adapter-plan-v1",
+      mode: "read-only-preview",
+      transitionSource: transition.version,
+      selectedSource: "none",
+      adapter: "not-connected",
+      legacyBridge: "unchanged",
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics) {
+  const plan = createSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditSelectedSourceHandoffContract || {};
+  const payloadFields = [
+    "sourceId",
+    "sourceVersion",
+    "resultStatus",
+    "resultCount",
+    "blockers",
+    "adapterTarget",
+    "confirmationRequired",
+    "writer",
+  ];
+  const checks = [
+    saveEditSelectedSourceHandoffCheck("adapter-plan-readable", true, text.checkLabels?.adapterPlanReadable, ""),
+    saveEditSelectedSourceHandoffCheck("payload-shape-declared", true, text.checkLabels?.payloadShapeDeclared, ""),
+    saveEditSelectedSourceHandoffCheck("result-status-map-declared", true, text.checkLabels?.resultStatusMapDeclared, ""),
+    saveEditSelectedSourceHandoffCheck("legacy-bridge-unchanged", plan.payloadShape.legacyBridge === "unchanged", text.checkLabels?.legacyBridgeUnchanged, "legacy-bridge-replaced"),
+    saveEditSelectedSourceHandoffCheck("source-selected", false, text.checkLabels?.sourceSelected, "source-selector-not-created"),
+    saveEditSelectedSourceHandoffCheck("adapter-runner-bound", false, text.checkLabels?.adapterRunnerBound, "adapter-runner-missing"),
+    saveEditSelectedSourceHandoffCheck("writer-disabled", plan.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...plan.payloadShape.blockers,
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-selected-source-handoff-contract-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    selectedSource: plan.selectedSource,
+    sourceAdapterPlanVersion: plan.version,
+    fieldCount: payloadFields.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    checks,
+    payloadShape: {
+      version: "save-edit-selected-source-handoff-contract-v1",
+      mode: "read-only-preview",
+      sourceAdapterPlan: plan.version,
+      selectedSource: plan.selectedSource,
+      sourceVersion: "not-selected",
+      resultStatusMap: {
+        valid: "ready",
+        invalid: "blocked",
+        warning: "blocked",
+        "not-produced": "blocked",
+      },
+      payloadFields,
+      adapterTarget: plan.adapter.target,
+      adapterRunner: "not-bound",
+      legacyBridge: "unchanged",
+      confirmationRequired: true,
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditAdapterRunnerPreflightPreview(diagnostics) {
+  const handoff = createSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const text = EDITOR_TEXT.saveEditAdapterRunnerPreflight || {};
+  const gateBlockers = gate.checks
+    .filter((check) => check.status === "blocked")
+    .map((check) => check.blocker || check.id)
+    .filter(Boolean);
+  const checks = [
+    saveEditAdapterRunnerPreflightCheck("handoff-readable", true, text.checkLabels?.handoffReadable, ""),
+    saveEditAdapterRunnerPreflightCheck("payload-fields-stable", handoff.fieldCount >= 8, text.checkLabels?.payloadFieldsStable, handoff.fieldCount >= 8 ? "" : "payload-fields-missing"),
+    saveEditAdapterRunnerPreflightCheck("result-status-map-stable", Boolean(handoff.payloadShape.resultStatusMap?.valid), text.checkLabels?.resultStatusMapStable, "result-status-map-missing"),
+    saveEditAdapterRunnerPreflightCheck("gate-blockers-visible", gateBlockers.length > 0, text.checkLabels?.gateBlockersVisible, gateBlockers.length > 0 ? "" : "gate-blockers-missing"),
+    saveEditAdapterRunnerPreflightCheck("source-selected", false, text.checkLabels?.sourceSelected, "source-selector-not-created"),
+    saveEditAdapterRunnerPreflightCheck("confirmation-input-ready", false, text.checkLabels?.confirmationInputReady, "confirmation-input-missing"),
+    saveEditAdapterRunnerPreflightCheck("adapter-runner-bound", false, text.checkLabels?.adapterRunnerBound, "adapter-runner-missing"),
+    saveEditAdapterRunnerPreflightCheck("writer-disabled", handoff.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...handoff.payloadShape.blockers,
+    ...gateBlockers,
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-adapter-runner-preflight-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    sourceHandoffVersion: handoff.version,
+    payloadFieldCount: handoff.fieldCount,
+    gateBlockerCount: gateBlockers.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    checks,
+    payloadShape: {
+      version: "save-edit-adapter-runner-preflight-v1",
+      mode: "read-only-preview",
+      source: handoff.version,
+      selectedSource: handoff.selectedSource,
+      payloadFields: handoff.payloadShape.payloadFields,
+      gateBlockers,
+      confirmationInput: "not-created",
+      adapterRunner: "not-bound",
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics) {
+  const preflight = createSaveSlotEditAdapterRunnerPreflightPreview(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationSourceSelectionContract || {};
+  const checks = [
+    saveEditConfirmationSourceSelectionCheck("preflight-readable", true, text.checkLabels?.preflightReadable, ""),
+    saveEditConfirmationSourceSelectionCheck("confirmation-phrase-visible", Boolean(gate.confirmationPhrase), text.checkLabels?.confirmationPhraseVisible, "confirmation-phrase-missing"),
+    saveEditConfirmationSourceSelectionCheck("source-selection-contract-visible", true, text.checkLabels?.sourceSelectionContractVisible, ""),
+    saveEditConfirmationSourceSelectionCheck("source-selection-created", false, text.checkLabels?.sourceSelectionCreated, "source-selector-not-created"),
+    saveEditConfirmationSourceSelectionCheck("confirmation-input-created", false, text.checkLabels?.confirmationInputCreated, "confirmation-input-missing"),
+    saveEditConfirmationSourceSelectionCheck("selection-confirmed", false, text.checkLabels?.selectionConfirmed, "source-selection-not-confirmed"),
+    saveEditConfirmationSourceSelectionCheck("apply-gate-held", preflight.apply === "disabled", text.checkLabels?.applyGateHeld, "apply-gate-open"),
+    saveEditConfirmationSourceSelectionCheck("writer-disabled", preflight.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...preflight.payloadShape.blockers,
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-confirmation-source-selection-contract-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    requiredPhrase: gate.confirmationPhrase,
+    adapterPreflightVersion: preflight.version,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    sourceSelection: {
+      status: "not-created",
+      selectedSource: "none",
+      requiresPhrase: gate.confirmationPhrase,
+    },
+    checks,
+    payloadShape: {
+      version: "save-edit-confirmation-source-selection-contract-v1",
+      mode: "read-only-preview",
+      source: preflight.version,
+      requiredPhrase: gate.confirmationPhrase,
+      confirmationInput: "not-created",
+      sourceSelection: "not-created",
+      selectedSource: "none",
+      adapterRunner: "not-bound",
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditConfirmationInputShellContractPreview(diagnostics) {
+  const sourceContract = createSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationInputShellContract || {};
+  const fields = [
+    saveEditConfirmationInputShellField("phraseDisplay", text.fieldLabels?.phraseDisplay, "readonly-text", "ready", sourceContract.requiredPhrase, ""),
+    saveEditConfirmationInputShellField("typedConfirmation", text.fieldLabels?.typedConfirmation, "text-input", "not-created", "not-created", "confirmation-input-missing"),
+    saveEditConfirmationInputShellField("sourceSelection", text.fieldLabels?.sourceSelection, "source-selector", "not-created", "none", "source-selector-not-created"),
+    saveEditConfirmationInputShellField("selectionMatch", text.fieldLabels?.selectionMatch, "boolean-match", "not-evaluated", "not-evaluated", "source-selection-not-confirmed"),
+    saveEditConfirmationInputShellField("submitControl", text.fieldLabels?.submitControl, "button", "disabled", "disabled", "apply-runner-missing"),
+  ];
+  const checks = [
+    saveEditConfirmationInputShellCheck("source-contract-readable", true, text.checkLabels?.sourceContractReadable, ""),
+    saveEditConfirmationInputShellCheck("phrase-display-ready", Boolean(sourceContract.requiredPhrase), text.checkLabels?.phraseDisplayReady, "confirmation-phrase-missing"),
+    saveEditConfirmationInputShellCheck("typed-confirmation-created", false, text.checkLabels?.typedConfirmationCreated, "confirmation-input-missing"),
+    saveEditConfirmationInputShellCheck("source-selection-created", false, text.checkLabels?.sourceSelectionCreated, "source-selector-not-created"),
+    saveEditConfirmationInputShellCheck("submit-control-disabled", true, text.checkLabels?.submitControlDisabled, ""),
+    saveEditConfirmationInputShellCheck("apply-path-held", sourceContract.apply === "disabled", text.checkLabels?.applyPathHeld, "apply-gate-open"),
+    saveEditConfirmationInputShellCheck("writer-disabled", sourceContract.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...sourceContract.payloadShape.blockers,
+    ...fields.map((field) => field.blocker).filter(Boolean),
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-confirmation-input-shell-contract-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    requiredPhrase: sourceContract.requiredPhrase,
+    fieldCount: fields.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    fields,
+    checks,
+    payloadShape: {
+      version: "save-edit-confirmation-input-shell-contract-v1",
+      mode: "read-only-preview",
+      source: sourceContract.version,
+      requiredPhrase: sourceContract.requiredPhrase,
+      fields: fields.map((field) => ({
+        id: field.id,
+        kind: field.kind,
+        status: field.status,
+      })),
+      confirmationInput: "not-created",
+      sourceSelection: "not-created",
+      submitControl: "disabled",
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics) {
+  const inputShell = createSaveSlotEditConfirmationInputShellContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {};
+  const reviews = [
+    saveEditConfirmationMatchReviewRow("requiredPhrase", text.reviewLabels?.requiredPhrase, "ready", inputShell.requiredPhrase, ""),
+    saveEditConfirmationMatchReviewRow("typedConfirmation", text.reviewLabels?.typedConfirmation, "blocked", "not-created", "confirmation-input-missing"),
+    saveEditConfirmationMatchReviewRow("phraseMatch", text.reviewLabels?.phraseMatch, "blocked", "not-evaluated", "confirmation-phrase-not-matched"),
+    saveEditConfirmationMatchReviewRow("selectedSource", text.reviewLabels?.selectedSource, "blocked", "none", "source-selector-not-created"),
+    saveEditConfirmationMatchReviewRow("resultSource", text.reviewLabels?.resultSource, "blocked", "not-resolved", "result-source-not-selected"),
+    saveEditConfirmationMatchReviewRow("submitControl", text.reviewLabels?.submitControl, "ready", "disabled", ""),
+  ];
+  const checks = [
+    saveEditConfirmationMatchReviewCheck("input-shell-readable", true, text.checkLabels?.inputShellReadable, ""),
+    saveEditConfirmationMatchReviewCheck("required-phrase-known", Boolean(inputShell.requiredPhrase), text.checkLabels?.requiredPhraseKnown, "confirmation-phrase-missing"),
+    saveEditConfirmationMatchReviewCheck("typed-confirmation-present", false, text.checkLabels?.typedConfirmationPresent, "confirmation-input-missing"),
+    saveEditConfirmationMatchReviewCheck("confirmation-phrase-matches", false, text.checkLabels?.confirmationPhraseMatches, "confirmation-phrase-not-matched"),
+    saveEditConfirmationMatchReviewCheck("source-selection-present", false, text.checkLabels?.sourceSelectionPresent, "source-selector-not-created"),
+    saveEditConfirmationMatchReviewCheck("result-source-resolved", false, text.checkLabels?.resultSourceResolved, "result-source-not-selected"),
+    saveEditConfirmationMatchReviewCheck("submit-control-disabled", true, text.checkLabels?.submitControlDisabled, ""),
+    saveEditConfirmationMatchReviewCheck("apply-path-held", inputShell.apply === "disabled", text.checkLabels?.applyPathHeld, "apply-gate-open"),
+    saveEditConfirmationMatchReviewCheck("writer-disabled", inputShell.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...inputShell.payloadShape.blockers,
+    ...reviews.map((review) => review.blocker).filter(Boolean),
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-confirmation-match-result-source-review-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    resultSource: "not-resolved",
+    requiredPhrase: inputShell.requiredPhrase,
+    reviewCount: reviews.length,
+    blockedReviewCount: reviews.filter((review) => review.status === "blocked").length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    reviews,
+    checks,
+    payloadShape: {
+      version: "save-edit-confirmation-match-result-source-review-v1",
+      mode: "read-only-preview",
+      source: inputShell.version,
+      requiredPhrase: inputShell.requiredPhrase,
+      typedConfirmation: "not-created",
+      phraseMatch: "not-evaluated",
+      selectedSource: "none",
+      resultSource: "not-resolved",
+      submitControl: "disabled",
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics) {
+  const review = createSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditSubmitRunnerBlockerContract || {};
+  const runnerBlockers = [
+    "submit-runner-not-created",
+    "confirmation-input-missing",
+    "confirmation-phrase-not-matched",
+    "result-source-not-selected",
+    "apply-gate-blocked",
+  ];
+  const checks = [
+    saveEditSubmitRunnerBlockerCheck("review-summary-readable", true, text.checkLabels?.reviewSummaryReadable, ""),
+    saveEditSubmitRunnerBlockerCheck("submit-runner-created", false, text.checkLabels?.submitRunnerCreated, "submit-runner-not-created"),
+    saveEditSubmitRunnerBlockerCheck("typed-confirmation-present", false, text.checkLabels?.typedConfirmationPresent, "confirmation-input-missing"),
+    saveEditSubmitRunnerBlockerCheck("confirmation-phrase-matched", false, text.checkLabels?.confirmationPhraseMatched, "confirmation-phrase-not-matched"),
+    saveEditSubmitRunnerBlockerCheck("result-source-selected", false, text.checkLabels?.resultSourceSelected, "result-source-not-selected"),
+    saveEditSubmitRunnerBlockerCheck("apply-gate-held", review.apply === "disabled", text.checkLabels?.applyGateHeld, "apply-gate-open"),
+    saveEditSubmitRunnerBlockerCheck("writer-disabled", review.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...review.payloadShape.blockers,
+    ...runnerBlockers,
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-submit-runner-blocker-contract-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    submitRunner: "not-created",
+    blockerCount: blockers.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    checks,
+    blockers,
+    payloadShape: {
+      version: "save-edit-submit-runner-blocker-contract-v1",
+      mode: "read-only-preview",
+      source: review.version,
+      submitRunner: "not-created",
+      submitControl: "disabled",
+      confirmationInput: "not-created",
+      phraseMatch: "not-evaluated",
+      resultSource: "not-resolved",
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics) {
+  const blockerContract = createSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditFinalApplyRunnerHandoffChecklist || {};
+  const checks = [
+    saveEditFinalApplyRunnerHandoffCheck("blocker-contract-readable", true, text.checkLabels?.blockerContractReadable, ""),
+    saveEditFinalApplyRunnerHandoffCheck("blocker-list-exported", blockerContract.blockerCount > 0, text.checkLabels?.blockerListExported, "blockers-missing"),
+    saveEditFinalApplyRunnerHandoffCheck("confirmation-input-ready", false, text.checkLabels?.confirmationInputReady, "confirmation-input-missing"),
+    saveEditFinalApplyRunnerHandoffCheck("phrase-match-ready", false, text.checkLabels?.phraseMatchReady, "confirmation-phrase-not-matched"),
+    saveEditFinalApplyRunnerHandoffCheck("result-source-ready", false, text.checkLabels?.resultSourceReady, "result-source-not-selected"),
+    saveEditFinalApplyRunnerHandoffCheck("submit-runner-ready", false, text.checkLabels?.submitRunnerReady, "submit-runner-not-created"),
+    saveEditFinalApplyRunnerHandoffCheck("apply-bridge-locked", blockerContract.apply === "disabled", text.checkLabels?.applyBridgeLocked, "apply-gate-open"),
+    saveEditFinalApplyRunnerHandoffCheck("writer-disabled", blockerContract.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+    saveEditFinalApplyRunnerHandoffCheck("handoff-read-only", true, text.checkLabels?.handoffReadOnly, ""),
+  ];
+  const blockers = Array.from(new Set([
+    ...blockerContract.blockers,
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-final-apply-runner-handoff-checklist-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    handoff: "read-only",
+    blockerCount: blockers.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    checks,
+    blockers,
+    payloadShape: {
+      version: "save-edit-final-apply-runner-handoff-checklist-v1",
+      mode: "read-only-preview",
+      source: blockerContract.version,
+      handoff: "read-only",
+      submitRunner: "not-created",
+      submitControl: "disabled",
+      confirmationInput: "not-created",
+      phraseMatch: "not-evaluated",
+      resultSource: "not-resolved",
+      apply: "disabled",
+      writer: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics) {
+  const handoff = createSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics);
+  const gate = createSaveSlotApplyGateChecklist(diagnostics);
+  const text = EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {};
+  const fields = [
+    saveEditApplyRunnerPayloadField("payloadVersion", text.fieldLabels?.payloadVersion, "string", "ready", "save-edit-apply-runner-payload-shape-v1", ""),
+    saveEditApplyRunnerPayloadField("handoffSource", text.fieldLabels?.handoffSource, "source-version", "ready", handoff.version, ""),
+    saveEditApplyRunnerPayloadField("blockerList", text.fieldLabels?.blockerList, "string-list", handoff.blockerCount > 0 ? "ready" : "blocked", `${handoff.blockerCount}`, handoff.blockerCount > 0 ? "" : "blockers-missing"),
+    saveEditApplyRunnerPayloadField("resultSource", text.fieldLabels?.resultSource, "source-selection", "blocked", "not-resolved", "result-source-not-selected"),
+    saveEditApplyRunnerPayloadField("confirmationPhrase", text.fieldLabels?.confirmationPhrase, "readonly-text", gate.confirmationPhrase ? "ready" : "blocked", gate.confirmationPhrase || "not-defined", gate.confirmationPhrase ? "" : "confirmation-phrase-missing"),
+    saveEditApplyRunnerPayloadField("confirmationInput", text.fieldLabels?.confirmationInput, "text-confirmation", "blocked", "not-created", "confirmation-input-missing"),
+    saveEditApplyRunnerPayloadField("applyRunner", text.fieldLabels?.applyRunner, "runner", "blocked", "not-created", "apply-runner-not-created"),
+    saveEditApplyRunnerPayloadField("writer", text.fieldLabels?.writer, "writer-state", "ready", "disabled", ""),
+    saveEditApplyRunnerPayloadField("sideEffects", text.fieldLabels?.sideEffects, "side-effect-contract", "ready", "disabled", ""),
+  ];
+  const checks = [
+    saveEditApplyRunnerPayloadCheck("handoff-readable", true, text.checkLabels?.handoffReadable, ""),
+    saveEditApplyRunnerPayloadCheck("payload-versioned", true, text.checkLabels?.payloadVersioned, ""),
+    saveEditApplyRunnerPayloadCheck("blockers-carried", handoff.blockerCount > 0, text.checkLabels?.blockersCarried, "blockers-missing"),
+    saveEditApplyRunnerPayloadCheck("result-source-resolved", false, text.checkLabels?.resultSourceResolved, "result-source-not-selected"),
+    saveEditApplyRunnerPayloadCheck("confirmation-input-created", false, text.checkLabels?.confirmationInputCreated, "confirmation-input-missing"),
+    saveEditApplyRunnerPayloadCheck("apply-runner-created", false, text.checkLabels?.applyRunnerCreated, "apply-runner-not-created"),
+    saveEditApplyRunnerPayloadCheck("apply-gate-held", handoff.apply === "disabled", text.checkLabels?.applyGateHeld, "apply-gate-open"),
+    saveEditApplyRunnerPayloadCheck("writer-disabled", handoff.payloadShape.writer === "disabled", text.checkLabels?.writerDisabled, "writer-enabled"),
+    saveEditApplyRunnerPayloadCheck("side-effects-disabled", true, text.checkLabels?.sideEffectsDisabled, ""),
+  ];
+  const blockers = Array.from(new Set([
+    ...handoff.blockers,
+    ...fields.map((field) => field.blocker).filter(Boolean),
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-apply-runner-payload-shape-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    applyRunner: "not-created",
+    fieldCount: fields.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    blockerCount: blockers.length,
+    fields,
+    checks,
+    blockers,
+    payloadShape: {
+      version: "save-edit-apply-runner-payload-shape-v1",
+      mode: "read-only-preview",
+      source: handoff.version,
+      requiredPhrase: gate.confirmationPhrase,
+      resultSource: "not-resolved",
+      confirmationInput: "not-created",
+      applyRunner: "not-created",
+      apply: "disabled",
+      writer: "disabled",
+      sideEffects: "disabled",
+      fields: fields.map((field) => ({
+        id: field.id,
+        kind: field.kind,
+        status: field.status,
+      })),
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics) {
+  const payload = createSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics);
+  const bridge = createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditPayloadBridgeCompatibilitySummary || {};
+  const rows = [
+    saveEditPayloadBridgeCompatibilityRow("payload-readable", text.rowLabels?.payloadReadable, "ready", payload.version, bridge.bridgeVersion, ""),
+    saveEditPayloadBridgeCompatibilityRow("blockers-forwarded", text.rowLabels?.blockersForwarded, payload.blockerCount > 0 ? "ready" : "blocked", `${payload.blockerCount}`, `${bridge.payloadShape.blockers.length}`, payload.blockerCount > 0 ? "" : "blockers-missing"),
+    saveEditPayloadBridgeCompatibilityRow("result-source-compatible", text.rowLabels?.resultSourceCompatible, "blocked", payload.payloadShape.resultSource, bridge.payloadShape.resultStatus, "result-source-not-selected"),
+    saveEditPayloadBridgeCompatibilityRow("confirmation-compatible", text.rowLabels?.confirmationCompatible, "blocked", payload.payloadShape.confirmationInput, "confirmation-not-implemented", "confirmation-input-missing"),
+    saveEditPayloadBridgeCompatibilityRow("runner-compatible", text.rowLabels?.runnerCompatible, "blocked", payload.applyRunner, bridge.apply, "apply-runner-not-created"),
+    saveEditPayloadBridgeCompatibilityRow("writer-compatible", text.rowLabels?.writerCompatible, "ready", payload.payloadShape.writer, "writer-disabled", ""),
+    saveEditPayloadBridgeCompatibilityRow("side-effects-compatible", text.rowLabels?.sideEffectsCompatible, "ready", payload.payloadShape.sideEffects, "read-only-preview", ""),
+  ];
+  const blockers = Array.from(new Set([
+    ...payload.blockers,
+    ...bridge.payloadShape.blockers,
+    ...rows.map((row) => row.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-apply-runner-payload-bridge-compatibility-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    payloadVersion: payload.version,
+    bridgeVersion: bridge.bridgeVersion,
+    rowCount: rows.length,
+    readyRowCount: rows.filter((row) => row.status === "ready").length,
+    blockedRowCount: rows.filter((row) => row.status === "blocked").length,
+    blockerCount: blockers.length,
+    rows,
+    blockers,
+    payloadShape: {
+      version: "save-edit-apply-runner-payload-bridge-compatibility-v1",
+      mode: "read-only-preview",
+      source: payload.version,
+      bridge: bridge.bridgeVersion,
+      compatibility: "blocked",
+      apply: "disabled",
+      writer: "disabled",
+      sideEffects: "disabled",
+      rows: rows.map((row) => ({
+        id: row.id,
+        status: row.status,
+        blocker: row.blocker,
+      })),
+      blockers,
+    },
+  };
+}
+
 function createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
   const schema = createSaveSlotEditValidatorResultSchemaPreview(diagnostics);
   const gate = createSaveSlotApplyGateChecklist(diagnostics);
@@ -6492,6 +7846,79 @@ function createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
       resultStatus: schema.resultShape.resultStatus,
       apply: "disabled",
       blockers: ["result-not-produced", "validator-missing", "apply-gate-blocked", "confirmation-not-implemented", "writer-disabled"],
+    },
+  };
+}
+
+function createSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics) {
+  const compatibility = createSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics);
+  const bridge = createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics);
+  const preflight = createSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {};
+  const bridgeBlockers = Array.from(new Set([
+    ...bridge.steps.map((step) => step.blocker).filter(Boolean),
+    ...bridge.gateBlockers.map((item) => item.blocker).filter(Boolean),
+  ]));
+  const confirmationBlockers = preflight.groups.find((group) => group.id === "confirmation")?.blockers || [];
+  const writerBlockers = preflight.groups.find((group) => group.id === "writer")?.blockers || [];
+  const lanes = [
+    saveEditCompatibilityConfirmationRollupLane("payload-compatibility", text.laneLabels?.payloadCompatibility, compatibility.status, compatibility.version, compatibility.blockers),
+    saveEditCompatibilityConfirmationRollupLane("apply-bridge", text.laneLabels?.applyBridge, bridge.status, bridge.bridgeVersion, bridgeBlockers),
+    saveEditCompatibilityConfirmationRollupLane("confirmation-preflight", text.laneLabels?.confirmationPreflight, preflight.status, preflight.version, confirmationBlockers),
+    saveEditCompatibilityConfirmationRollupLane("writer-runner", text.laneLabels?.writerRunner, "blocked", preflight.version, writerBlockers),
+  ];
+  const checks = [
+    saveEditCompatibilityConfirmationRollupCheck("payload-compatibility-readable", true, text.checkLabels?.payloadCompatibilityReadable, text.checkDetails?.payloadCompatibilityReadable, ""),
+    saveEditCompatibilityConfirmationRollupCheck("apply-bridge-readable", true, text.checkLabels?.applyBridgeReadable, text.checkDetails?.applyBridgeReadable, ""),
+    saveEditCompatibilityConfirmationRollupCheck("confirmation-preflight-readable", true, text.checkLabels?.confirmationPreflightReadable, text.checkDetails?.confirmationPreflightReadable, ""),
+    saveEditCompatibilityConfirmationRollupCheck("result-source-resolved", !compatibility.blockers.includes("result-source-not-selected"), text.checkLabels?.resultSourceResolved, text.checkDetails?.resultSourceResolved, "result-source-not-selected"),
+    saveEditCompatibilityConfirmationRollupCheck("confirmation-input-created", false, text.checkLabels?.confirmationInputCreated, text.checkDetails?.confirmationInputCreated, "confirmation-input-missing"),
+    saveEditCompatibilityConfirmationRollupCheck("apply-runner-bound", false, text.checkLabels?.applyRunnerBound, text.checkDetails?.applyRunnerBound, "apply-runner-missing"),
+    saveEditCompatibilityConfirmationRollupCheck("writer-enabled", false, text.checkLabels?.writerEnabled, text.checkDetails?.writerEnabled, "writer-disabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...lanes.flatMap((lane) => lane.blockers),
+    ...preflight.payloadShape.blockers,
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-compatibility-confirmation-rollup-v1",
+    mode: "read-only-preview",
+    apply: "disabled",
+    writer: "disabled",
+    sideEffects: "disabled",
+    laneCount: lanes.length,
+    blockerCount: blockers.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    lanes,
+    checks,
+    blockers,
+    payloadShape: {
+      version: "save-edit-compatibility-confirmation-rollup-v1",
+      mode: "read-only-preview",
+      sources: {
+        compatibility: compatibility.version,
+        bridge: bridge.bridgeVersion,
+        preflight: preflight.version,
+      },
+      compatibility: "blocked",
+      confirmationPreflight: "blocked",
+      apply: "disabled",
+      writer: "disabled",
+      sideEffects: "disabled",
+      lanes: lanes.map((lane) => ({
+        id: lane.id,
+        status: lane.status,
+        blockerCount: lane.blockerCount,
+      })),
+      checks: checks.map((check) => ({
+        id: check.id,
+        status: check.status,
+        blocker: check.blocker,
+      })),
+      blockers,
     },
   };
 }
@@ -6640,6 +8067,78 @@ function createSaveSlotEditConfirmationInputContractPreview(diagnostics) {
       },
       writer: "disabled",
       apply: "disabled",
+      blockers,
+    },
+  };
+}
+
+function createSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics) {
+  const contract = createSaveSlotEditConfirmationInputContractPreview(diagnostics);
+  const checkpoint = createSaveSlotEditWriterPayloadCheckpointPreview(diagnostics);
+  const text = EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {};
+  const rows = [
+    saveEditConfirmationRunnerHandoffRow("contract-readable", text.rowLabels?.contractReadable, "ready", contract.version, contract.mode, ""),
+    saveEditConfirmationRunnerHandoffRow("confirmation-input", text.rowLabels?.confirmationInput, "blocked", contract.payloadShape.confirmationInput.status, contract.payloadShape.confirmationInput.inputKind, "confirmation-input-missing"),
+    saveEditConfirmationRunnerHandoffRow("confirmation-match", text.rowLabels?.confirmationMatch, "blocked", contract.payloadShape.confirmationInput.match, "match-required", "confirmation-input-missing"),
+    saveEditConfirmationRunnerHandoffRow("validator-results", text.rowLabels?.validatorResults, "blocked", "not-produced", "valid-results-required", "result-not-produced"),
+    saveEditConfirmationRunnerHandoffRow("apply-runner", text.rowLabels?.applyRunner, "blocked", contract.applyRunner.status, contract.applyRunner.mode, "apply-runner-missing"),
+    saveEditConfirmationRunnerHandoffRow("writer-checkpoint", text.rowLabels?.writerCheckpoint, "blocked", checkpoint.version, checkpoint.rollbackCheckpoint.status, "writer-disabled"),
+  ];
+  const checks = [
+    saveEditConfirmationRunnerHandoffCheck("contract-readable", true, text.checkLabels?.contractReadable, text.checkDetails?.contractReadable, ""),
+    saveEditConfirmationRunnerHandoffCheck("blockers-forwarded", contract.blockerCount > 0, text.checkLabels?.blockersForwarded, text.checkDetails?.blockersForwarded, contract.blockerCount > 0 ? "" : "blockers-missing"),
+    saveEditConfirmationRunnerHandoffCheck("confirmation-input-created", false, text.checkLabels?.confirmationInputCreated, text.checkDetails?.confirmationInputCreated, "confirmation-input-missing"),
+    saveEditConfirmationRunnerHandoffCheck("confirmation-match-verified", false, text.checkLabels?.confirmationMatchVerified, text.checkDetails?.confirmationMatchVerified, "confirmation-input-missing"),
+    saveEditConfirmationRunnerHandoffCheck("validator-results-valid", false, text.checkLabels?.validatorResultsValid, text.checkDetails?.validatorResultsValid, "result-not-produced"),
+    saveEditConfirmationRunnerHandoffCheck("apply-runner-bound", false, text.checkLabels?.applyRunnerBound, text.checkDetails?.applyRunnerBound, "apply-runner-missing"),
+    saveEditConfirmationRunnerHandoffCheck("writer-enabled", false, text.checkLabels?.writerEnabled, text.checkDetails?.writerEnabled, "writer-disabled"),
+  ];
+  const blockers = Array.from(new Set([
+    ...contract.blockers,
+    ...checkpoint.blockers,
+    ...rows.map((row) => row.blocker).filter(Boolean),
+    ...checks.map((check) => check.blocker).filter(Boolean),
+  ]));
+  return {
+    status: "blocked",
+    version: "save-edit-confirmation-runner-handoff-summary-v1",
+    mode: "read-only-preview",
+    handoff: "blocked",
+    confirmationInput: "not-created",
+    applyRunner: "not-bound",
+    apply: "disabled",
+    writer: "disabled",
+    sideEffects: "disabled",
+    rowCount: rows.length,
+    blockedRowCount: rows.filter((row) => row.status === "blocked").length,
+    blockerCount: blockers.length,
+    checkCount: checks.length,
+    blockedCheckCount: checks.filter((check) => check.status === "blocked").length,
+    rows,
+    checks,
+    blockers,
+    payloadShape: {
+      version: "save-edit-confirmation-runner-handoff-summary-v1",
+      mode: "read-only-preview",
+      source: contract.version,
+      next: checkpoint.version,
+      handoff: "blocked",
+      confirmationInput: "not-created",
+      confirmationMatch: "not-evaluated",
+      applyRunner: "not-bound",
+      apply: "disabled",
+      writer: "disabled",
+      sideEffects: "disabled",
+      rows: rows.map((row) => ({
+        id: row.id,
+        status: row.status,
+        blocker: row.blocker,
+      })),
+      checks: checks.map((check) => ({
+        id: check.id,
+        status: check.status,
+        blocker: check.blocker,
+      })),
       blockers,
     },
   };
@@ -6829,6 +8328,27 @@ function saveEditWriterPayloadCheckpointCheck(id, isReady, label, detail, blocke
   };
 }
 
+function saveEditConfirmationRunnerHandoffRow(id, label, status, sourceValue, targetValue, blocker) {
+  return {
+    id,
+    label: label || id,
+    status,
+    sourceValue,
+    targetValue,
+    blocker,
+  };
+}
+
+function saveEditConfirmationRunnerHandoffCheck(id, isReady, label, detail, blocker) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+    blocker: isReady ? "" : blocker,
+  };
+}
+
 function saveEditConfirmationInputContractField(id, label, inputKind, status, previewValue, blocker) {
   return {
     id,
@@ -6966,6 +8486,215 @@ function saveEditValidatorDryRunResult(ruleId, targetPath, resultStatus, normali
     blocker,
     warnings,
   };
+}
+
+function saveEditSampleBridgeBlocker(id, status, blocker) {
+  return {
+    id,
+    status,
+    blocker,
+  };
+}
+
+function saveEditProducedResultBridgeRoute(id, status, blocker) {
+  return {
+    id,
+    status,
+    blocker,
+  };
+}
+
+function saveEditProducedResultBridgeTransitionCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditValidatorResultSourceAdapterCandidate(id, sourceVersion, status, blocker) {
+  return {
+    id,
+    sourceVersion,
+    status,
+    blocker,
+  };
+}
+
+function saveEditSelectedSourceHandoffCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditAdapterRunnerPreflightCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditConfirmationSourceSelectionCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditConfirmationInputShellField(id, label, kind, status, value, blocker) {
+  return {
+    id,
+    label: label || id,
+    kind,
+    status,
+    value,
+    blocker,
+  };
+}
+
+function saveEditConfirmationInputShellCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditConfirmationMatchReviewRow(id, label, status, value, blocker) {
+  return {
+    id,
+    label: label || id,
+    status,
+    value,
+    blocker,
+  };
+}
+
+function saveEditConfirmationMatchReviewCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditSubmitRunnerBlockerCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditFinalApplyRunnerHandoffCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditApplyRunnerPayloadField(id, label, kind, status, value, blocker) {
+  return {
+    id,
+    label: label || id,
+    kind,
+    status,
+    value,
+    blocker,
+  };
+}
+
+function saveEditApplyRunnerPayloadCheck(id, ready, label, blocker) {
+  return {
+    id,
+    label: label || id,
+    status: ready ? "ready" : "blocked",
+    blocker: ready ? "" : blocker,
+  };
+}
+
+function saveEditPayloadBridgeCompatibilityRow(id, label, status, payloadValue, bridgeValue, blocker) {
+  return {
+    id,
+    label: label || id,
+    status,
+    payloadValue,
+    bridgeValue,
+    blocker,
+  };
+}
+
+function saveEditCompatibilityConfirmationRollupLane(id, label, status, source, blockers) {
+  const uniqueBlockers = Array.from(new Set((blockers || []).filter(Boolean)));
+  return {
+    id,
+    label: label || id,
+    status,
+    source,
+    blockerCount: uniqueBlockers.length,
+    blockers: uniqueBlockers,
+  };
+}
+
+function saveEditCompatibilityConfirmationRollupCheck(id, isReady, label, detail, blocker) {
+  return {
+    id,
+    status: isReady ? "ready" : "blocked",
+    label: label || id,
+    detail: detail || "",
+    blocker: isReady ? "" : blocker,
+  };
+}
+
+function saveEditProposedValueSamplesForField(field) {
+  switch (field.validationRule) {
+    case "min:1":
+      return { valid: 2, invalid: 0 };
+    case "min:0":
+      return { valid: 10, invalid: -1 };
+    case "known-region-id":
+      return { valid: "tutorial_island", invalid: "" };
+    case "known-region-id-list":
+      return { valid: ["tutorial_island"], invalid: "not-array" };
+    case "gate-map-shape":
+      return { valid: { tutorial_island: { currentNodeId: "start" } }, invalid: [] };
+    case "known-item-id-list":
+      return { valid: [], invalid: "not-array" };
+    case "known-equipment-slot-map":
+      return { valid: { weapon: null, armor: null }, invalid: [] };
+    case "profile-text-limit":
+      return { valid: "Regressor", invalid: "" };
+    case "portrait-frame-shape":
+      return { valid: { frameId: "default" }, invalid: [] };
+    default:
+      return saveEditDefaultSamplesForValueType(field.valueType);
+  }
+}
+
+function saveEditDefaultSamplesForValueType(valueType) {
+  if (valueType === "integer") return { valid: 1, invalid: "not-number" };
+  if (valueType.endsWith("[]")) return { valid: [], invalid: "not-array" };
+  if (valueType === "object" || valueType === "slot-map") return { valid: {}, invalid: [] };
+  return { valid: "sample", invalid: "" };
+}
+
+function saveEditSerializePreviewValue(value) {
+  if (typeof value === "string") return value || "\"\"";
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  return JSON.stringify(value);
 }
 
 function saveEditDryRunStage(id, isReady, label, detail) {
@@ -7255,6 +8984,319 @@ function renderSaveEditValidatorExecutableDryRunResult(result) {
   `;
 }
 
+function renderSaveEditProposedValueInjectorField(field) {
+  const text = EDITOR_TEXT.saveEditProposedValueInjector || {};
+  return `
+    <article class="editor-save-edit-proposed-values-field" data-save-edit-proposed-value-field="${escapeAttribute(field.path)}" data-status="${escapeAttribute(field.inputStatus)}">
+      <div>
+        <strong>${escapeHtml(field.path)}</strong>
+        <span>${escapeHtml(field.inputStatus)}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.ruleId || "Rule")}</dt>
+          <dd>${escapeHtml(field.validationRule)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.validSample || "Valid sample")}</dt>
+          <dd>${escapeHtml(`${field.validSample} -> ${field.validResult}`)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.invalidSample || "Invalid sample")}</dt>
+          <dd>${escapeHtml(`${field.invalidSample} -> ${field.invalidResult}`)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
+          <dd>${escapeHtml(field.blocker)}</dd>
+        </div>
+      </dl>
+    </article>
+  `;
+}
+
+function renderSaveEditDryRunSampleComparison(comparison) {
+  const text = EDITOR_TEXT.saveEditDryRunSampleComparator || {};
+  return `
+    <article class="editor-save-edit-sample-comparator-card" data-save-edit-dry-run-sample-comparison="${escapeAttribute(comparison.path)}" data-status="${escapeAttribute(comparison.status)}">
+      <div>
+        <strong>${escapeHtml(comparison.path)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(comparison.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.ruleId || "Rule")}</dt>
+          <dd>${escapeHtml(comparison.ruleId)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.missingResult || "Missing")}</dt>
+          <dd>${escapeHtml(`${comparison.missingResult} / ${comparison.missingBlocker}`)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.validResult || "Valid")}</dt>
+          <dd>${escapeHtml(comparison.validResult)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.invalidResult || "Invalid")}</dt>
+          <dd>${escapeHtml(comparison.invalidResult)}</dd>
+        </div>
+      </dl>
+    </article>
+  `;
+}
+
+function renderSaveEditSampleBridgeBlocker(blocker) {
+  const text = EDITOR_TEXT.saveEditSampleBridgeBlockerSummary || {};
+  return `
+    <article class="editor-save-edit-sample-bridge-card" data-save-edit-sample-bridge-blocker="${escapeAttribute(blocker.id)}" data-status="${escapeAttribute(blocker.status)}">
+      <div>
+        <strong>${escapeHtml(text.blockerLabels?.[blocker.id] || blocker.id)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(blocker.status))}</span>
+      </div>
+      ${blocker.blocker ? chip(tf("editorPrep.saveEditSampleBridgeBlockerSummary.blockerText", { blocker: blocker.blocker }, `${text.blocker || "Blocker"}: ${blocker.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditProducedResultBridgeRoute(route) {
+  const text = EDITOR_TEXT.saveEditProducedResultBridgeContract || {};
+  return `
+    <article class="editor-save-edit-produced-bridge-route" data-save-edit-produced-result-bridge-route="${escapeAttribute(route.id)}" data-status="${escapeAttribute(route.status)}">
+      <div>
+        <strong>${escapeHtml(text.routeLabels?.[route.id] || route.id)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(route.status))}</span>
+      </div>
+      ${route.blocker ? chip(tf("editorPrep.saveEditProducedResultBridgeContract.blockerText", { blocker: route.blocker }, `${text.blocker || "Blocker"}: ${route.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditProducedResultBridgeTransitionCheck(check) {
+  const text = EDITOR_TEXT.saveEditProducedResultBridgeTransitionChecklist || {};
+  return `
+    <article class="editor-save-edit-bridge-transition-check" data-save-edit-produced-result-bridge-transition-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditValidatorResultSourceAdapterCandidate(candidate) {
+  const text = EDITOR_TEXT.saveEditValidatorResultSourceAdapterPlan || {};
+  return `
+    <article class="editor-save-edit-result-source-adapter-candidate" data-save-edit-validator-result-source-adapter-candidate="${escapeAttribute(candidate.id)}" data-status="${escapeAttribute(candidate.status)}">
+      <div>
+        <strong>${escapeHtml(text.candidateLabels?.[candidate.id] || candidate.id)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(candidate.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.sourceVersion || "Source")}</dt>
+          <dd>${escapeHtml(candidate.sourceVersion)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.sourceBlocker || "Blocker")}</dt>
+          <dd>${escapeHtml(candidate.blocker || text.noBlocker || "none")}</dd>
+        </div>
+      </dl>
+    </article>
+  `;
+}
+
+function renderSaveEditSelectedSourceHandoffCheck(check) {
+  const text = EDITOR_TEXT.saveEditSelectedSourceHandoffContract || {};
+  return `
+    <article class="editor-save-edit-source-handoff-check" data-save-edit-selected-source-handoff-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditSelectedSourceHandoffContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditAdapterRunnerPreflightCheck(check) {
+  const text = EDITOR_TEXT.saveEditAdapterRunnerPreflight || {};
+  return `
+    <article class="editor-save-edit-adapter-preflight-check" data-save-edit-adapter-runner-preflight-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditAdapterRunnerPreflight.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationSourceSelectionCheck(check) {
+  const text = EDITOR_TEXT.saveEditConfirmationSourceSelectionContract || {};
+  return `
+    <article class="editor-save-edit-confirm-source-check" data-save-edit-confirmation-source-selection-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationSourceSelectionContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationInputShellField(field) {
+  const text = EDITOR_TEXT.saveEditConfirmationInputShellContract || {};
+  return `
+    <article class="editor-save-edit-confirm-input-shell-card" data-save-edit-confirmation-input-shell-field="${escapeAttribute(field.id)}" data-status="${escapeAttribute(field.status)}">
+      <div>
+        <strong>${escapeHtml(field.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(field.status === "not-created" || field.status === "disabled" || field.status === "not-evaluated" ? "blocked" : "ready"))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.fieldKind || "Kind")}</dt>
+          <dd>${escapeHtml(field.kind)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.fieldValueLabel || "Value")}</dt>
+          <dd>${escapeHtml(`${field.value}`)}</dd>
+        </div>
+      </dl>
+      ${field.blocker ? chip(tf("editorPrep.saveEditConfirmationInputShellContract.blockerText", { blocker: field.blocker }, `${text.blocker || "Blocker"}: ${field.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationInputShellCheck(check) {
+  const text = EDITOR_TEXT.saveEditConfirmationInputShellContract || {};
+  return `
+    <article class="editor-save-edit-confirm-input-shell-card" data-save-edit-confirmation-input-shell-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationInputShellContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationMatchReviewRow(review) {
+  const text = EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {};
+  return `
+    <article class="editor-save-edit-confirm-match-review-card" data-save-edit-confirmation-match-review-row="${escapeAttribute(review.id)}" data-status="${escapeAttribute(review.status)}">
+      <div>
+        <strong>${escapeHtml(review.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(review.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.reviewValueLabel || "Value")}</dt>
+          <dd>${escapeHtml(`${review.value}`)}</dd>
+        </div>
+      </dl>
+      ${review.blocker ? chip(tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockerText", { blocker: review.blocker }, `${text.blocker || "Blocker"}: ${review.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationMatchReviewCheck(check) {
+  const text = EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {};
+  return `
+    <article class="editor-save-edit-confirm-match-review-card" data-save-edit-confirmation-match-review-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditSubmitRunnerBlockerCheck(check) {
+  const text = EDITOR_TEXT.saveEditSubmitRunnerBlockerContract || {};
+  return `
+    <article class="editor-save-edit-submit-runner-blocker-check" data-save-edit-submit-runner-blocker-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditFinalApplyRunnerHandoffCheck(check) {
+  const text = EDITOR_TEXT.saveEditFinalApplyRunnerHandoffChecklist || {};
+  return `
+    <article class="editor-save-edit-apply-runner-handoff-check" data-save-edit-final-apply-runner-handoff-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditApplyRunnerPayloadField(field) {
+  const text = EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {};
+  return `
+    <article class="editor-save-edit-apply-runner-payload-card" data-save-edit-apply-runner-payload-field="${escapeAttribute(field.id)}" data-status="${escapeAttribute(field.status)}">
+      <div>
+        <strong>${escapeHtml(field.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(field.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.fieldKind || "Kind")}</dt>
+          <dd>${escapeHtml(field.kind)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.fieldValueLabel || "Value")}</dt>
+          <dd>${escapeHtml(`${field.value}`)}</dd>
+        </div>
+      </dl>
+      ${field.blocker ? chip(tf("editorPrep.saveEditApplyRunnerPayloadShape.blockerText", { blocker: field.blocker }, `${text.blocker || "Blocker"}: ${field.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditApplyRunnerPayloadCheck(check) {
+  const text = EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {};
+  return `
+    <article class="editor-save-edit-apply-runner-payload-card" data-save-edit-apply-runner-payload-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.blocker ? chip(tf("editorPrep.saveEditApplyRunnerPayloadShape.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditPayloadBridgeCompatibilityRow(row) {
+  const text = EDITOR_TEXT.saveEditPayloadBridgeCompatibilitySummary || {};
+  return `
+    <article class="editor-save-edit-payload-bridge-row" data-save-edit-apply-runner-payload-bridge-row="${escapeAttribute(row.id)}" data-status="${escapeAttribute(row.status)}">
+      <div>
+        <strong>${escapeHtml(row.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(row.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.payloadValueLabel || "Payload")}</dt>
+          <dd>${escapeHtml(`${row.payloadValue}`)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.bridgeValueLabel || "Bridge")}</dt>
+          <dd>${escapeHtml(`${row.bridgeValue}`)}</dd>
+        </div>
+      </dl>
+      ${row.blocker ? chip(tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.blockerText", { blocker: row.blocker }, `${text.blocker || "Blocker"}: ${row.blocker}`)) : ""}
+    </article>
+  `;
+}
+
 function renderSaveEditValidatorApplyGateBridgeStep(step) {
   const text = EDITOR_TEXT.saveEditValidatorApplyGateBridge || {};
   return `
@@ -7265,6 +9307,45 @@ function renderSaveEditValidatorApplyGateBridgeStep(step) {
       </div>
       ${step.detail ? `<p>${escapeHtml(step.detail)}</p>` : ""}
       ${step.blocker ? chip(tf("editorPrep.saveEditValidatorApplyGateBridge.blockerValue", { blocker: step.blocker }, `${text.blocker || "Blocker"}: ${step.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditCompatibilityConfirmationRollupLane(lane) {
+  const text = EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {};
+  return `
+    <article class="editor-save-edit-compat-confirm-rollup-lane" data-save-edit-compat-confirm-rollup-lane="${escapeAttribute(lane.id)}" data-status="${escapeAttribute(lane.status)}">
+      <div>
+        <strong>${escapeHtml(lane.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(lane.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.sourceLabel || "Source")}</dt>
+          <dd>${escapeHtml(lane.source)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.laneBlockerLabel || "Blockers")}</dt>
+          <dd>${escapeHtml(tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerValue", { count: lane.blockerCount }, `${lane.blockerCount}`))}</dd>
+        </div>
+      </dl>
+      <div class="editor-chip-list">
+        ${lane.blockers.map((blocker) => chip(blocker)).join("") || chip(text.noBlocker || "no-blocker")}
+      </div>
+    </article>
+  `;
+}
+
+function renderSaveEditCompatibilityConfirmationRollupCheck(check) {
+  const text = EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {};
+  return `
+    <article class="editor-save-edit-compat-confirm-rollup-check" data-save-edit-compat-confirm-rollup-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
+      ${check.blocker ? chip(tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
     </article>
   `;
 }
@@ -7320,6 +9401,43 @@ function renderSaveEditConfirmationInputContractField(field) {
           <dd>${escapeHtml(field.blocker)}</dd>
         </div>
       </dl>
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationRunnerHandoffRow(row) {
+  const text = EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {};
+  return `
+    <article class="editor-save-edit-confirm-runner-handoff-row" data-save-edit-confirmation-runner-handoff-row="${escapeAttribute(row.id)}" data-status="${escapeAttribute(row.status)}">
+      <div>
+        <strong>${escapeHtml(row.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(row.status))}</span>
+      </div>
+      <dl>
+        <div>
+          <dt>${escapeHtml(text.sourceValueLabel || "Source")}</dt>
+          <dd>${escapeHtml(`${row.sourceValue}`)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(text.targetValueLabel || "Target")}</dt>
+          <dd>${escapeHtml(`${row.targetValue}`)}</dd>
+        </div>
+      </dl>
+      ${row.blocker ? chip(tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerText", { blocker: row.blocker }, `${text.blocker || "Blocker"}: ${row.blocker}`)) : ""}
+    </article>
+  `;
+}
+
+function renderSaveEditConfirmationRunnerHandoffCheck(check) {
+  const text = EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {};
+  return `
+    <article class="editor-save-edit-confirm-runner-handoff-check" data-save-edit-confirmation-runner-handoff-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
+      <div>
+        <strong>${escapeHtml(check.label)}</strong>
+        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
+      </div>
+      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
+      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
     </article>
   `;
 }

@@ -1,13 +1,22 @@
-import { HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=535";
+import { HYPER_CHARGE_BALANCE } from "../balance/combatBalance.js?v=560";
 
 export function applyHealAction(playerState, playerStats, action, clampValue) {
   playerState.hp = clampValue(playerState.hp + action.amount, 1, playerStats.maxHp);
-  playerState.mp -= action.skill.mpCost;
+  spendActionMp(playerState, action);
+}
+
+export function applyBuffAction(playerState, playerStats, action, clampValue) {
+  spendActionMp(playerState, action);
+  const hpCost = Math.max(0, Math.floor(playerStats.maxHp * Number(action.selfHpCostRatio || 0)));
+  if (hpCost > 0) {
+    playerState.hp = clampValue((playerState.hp || 0) - hpCost, 1, playerStats.maxHp);
+  }
+  return { hpCost };
 }
 
 export function spendActionMp(playerState, action) {
   if (action.skill) {
-    playerState.mp -= action.skill.mpCost;
+    playerState.mp = Math.max(0, (playerState.mp || 0) - Number(action.skill.mpCost || 0));
   }
 }
 

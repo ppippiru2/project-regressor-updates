@@ -1,13 +1,13 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=535";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=535";
-import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=535";
-import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=535";
-import { t, tf } from "../localization/index.js?v=535";
+} from "./developerOptions.js?v=560";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=560";
+import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=560";
+import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=560";
+import { t, tf } from "../localization/index.js?v=560";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=535";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=560";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";
@@ -73,7 +73,7 @@ export const DEFAULT_SKILL_LOADOUTS = [
   {
     id: "slot1",
     name: t("saveDefaults.skillLoadouts.slot1"),
-    actionIds: ["basic_attack"],
+    actionIds: ["basic_attack", "power_slash", "mana_bolt", "emergency_recovery"],
   },
 ];
 
@@ -178,7 +178,7 @@ function normalizeSkillLoadouts(savedLoadouts, fallbackLoadouts = DEFAULT_SKILL_
     .map((loadout, index) => {
       const fallback = fallbackLoadouts[index] || DEFAULT_SKILL_LOADOUTS[index] || DEFAULT_SKILL_LOADOUTS[0];
       const rawIds = Array.isArray(loadout?.actionIds) ? loadout.actionIds : fallback.actionIds;
-      const actionIds = [...new Set(rawIds.filter((id) => typeof id === "string"))].slice(0, MAX_SKILL_LOADOUT_ACTIONS);
+      const actionIds = normalizeSkillLoadoutActionIds(rawIds, fallback, index);
       return {
         id: typeof loadout?.id === "string" && loadout.id ? loadout.id : fallback.id || `slot${index + 1}`,
         name: typeof loadout?.name === "string" && loadout.name
@@ -191,6 +191,15 @@ function normalizeSkillLoadouts(savedLoadouts, fallbackLoadouts = DEFAULT_SKILL_
     .slice(0, MAX_SKILL_LOADOUTS);
 
   return normalized.length ? normalized : DEFAULT_SKILL_LOADOUTS.map((loadout) => ({ ...loadout }));
+}
+
+function normalizeSkillLoadoutActionIds(rawIds, fallback, index) {
+  const actionIds = [...new Set(rawIds.filter((id) => typeof id === "string"))].slice(0, MAX_SKILL_LOADOUT_ACTIONS);
+  if (index === 0 && actionIds.length === 1 && actionIds[0] === "basic_attack") {
+    return [...DEFAULT_SKILL_LOADOUTS[0].actionIds];
+  }
+  const fallbackActionIds = Array.isArray(fallback?.actionIds) ? fallback.actionIds : DEFAULT_SKILL_LOADOUTS[0].actionIds;
+  return actionIds.length ? actionIds : [...fallbackActionIds].slice(0, MAX_SKILL_LOADOUT_ACTIONS);
 }
 
 function normalizeActiveSkillLoadoutId(savedLoadoutId, skillLoadouts) {

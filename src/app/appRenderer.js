@@ -1,11 +1,11 @@
-import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=535";
-import { renderCombatEffects } from "../combat/combatEffects.js?v=535";
-import { createCombatFormationState } from "../combat/combatFormation.js?v=535";
+import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=560";
+import { renderCombatEffects } from "../combat/combatEffects.js?v=560";
+import { createCombatFormationState } from "../combat/combatFormation.js?v=560";
 import { rankFromPower } from "../combat/combatFormula.js";
-import { renderInventory } from "../ui/renderInventory.js?v=535";
-import { renderShop } from "../ui/renderShop.js?v=535";
-import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=535";
-import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=535";
+import { renderInventory } from "../ui/renderInventory.js?v=560";
+import { renderShop } from "../ui/renderShop.js?v=560";
+import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=560";
+import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=560";
 import {
   renderCharacterCreation,
   renderAudioSettings,
@@ -15,22 +15,23 @@ import {
   renderLog,
   renderProfileEditSettings,
   renderSaveSlots,
-} from "../ui/renderCommon.js?v=535";
-import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=535";
-import { renderCombatControls } from "../ui/renderCombatControls.js?v=535";
-import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=535";
-import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=535";
-import { renderSystemWindow } from "../ui/systemWindow.js?v=535";
-import { createGrowthObjective } from "../state/growthObjective.js?v=535";
-import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=535";
-import { renderDropPreview } from "../ui/renderDropPreview.js?v=535";
-import { createCombatReadiness } from "../state/combatReadiness.js?v=535";
-import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=535";
-import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=535";
-import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=535";
-import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=535";
-import { resolveMonsterBattleSpritePreset } from "../config/monsterBattleSpritePresets.js?v=535";
-import { syncBattleSpriteMotions } from "../ui/battleSpriteMotion.js?v=535";
+} from "../ui/renderCommon.js?v=560";
+import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=560";
+import { renderCombatControls } from "../ui/renderCombatControls.js?v=560";
+import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=560";
+import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=560";
+import { renderSystemWindow } from "../ui/systemWindow.js?v=560";
+import { createGrowthObjective } from "../state/growthObjective.js?v=560";
+import { createTutorialUnlockState } from "../state/tutorialUnlocks.js?v=560";
+import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=560";
+import { renderDropPreview } from "../ui/renderDropPreview.js?v=560";
+import { createCombatReadiness } from "../state/combatReadiness.js?v=560";
+import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=560";
+import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=560";
+import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=560";
+import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=560";
+import { resolveMonsterBattleSpritePreset } from "../config/monsterBattleSpritePresets.js?v=560";
+import { syncBattleSpriteMotions } from "../ui/battleSpriteMotion.js?v=560";
 
 export function renderAppFrame(context) {
   const now = Date.now();
@@ -175,7 +176,10 @@ function renderSlowAppSections(context, { region, player }) {
     context.displayName,
     context.getItem,
     context.optionText,
-    (item) => context.resolveItemIconPath?.(item, context.assetRegistry) || ""
+    (item) => context.resolveItemIconPath?.(item, context.assetRegistry) || "",
+    {
+      tutorialUnlockState: createTutorialUnlockState(context.state),
+    }
   );
   renderShop({
     state: context.state,

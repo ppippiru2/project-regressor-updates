@@ -1,4 +1,4 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=535";
+import { formatText, getLocaleText } from "../localization/index.js?v=560";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 
@@ -38,6 +38,7 @@ export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
 ]);
 
 export const TUTORIAL_SELF_DESCRIBING_VERSION = "v2.9.1_CODEX_SELF_DESCRIBING";
+export const TUTORIAL_PROTAGONIST_VOICE_POLISH_VERSION = "v2.9.4_FINAL_PROTAGONIST_VOICE_POLISH";
 
 export const TUTORIAL_SELF_DESCRIBING_REQUIRED_SYSTEMS = Object.freeze([
   "eventIdDialogueLoader",
@@ -155,6 +156,62 @@ export const TUTORIAL_SELF_DESCRIBING_UNLOCK_STAGES = Object.freeze({
   }),
 });
 
+export const TUTORIAL_BOSS_EVALUATION_DISCLOSURE = Object.freeze({
+  beforeBattle: "hideExactThresholds",
+  duringBattle: "showMinimumConditionOnlyWhenReached",
+  afterClear: Object.freeze([
+    Object.freeze({ thresholdPercent: 20, label: "C\uAE09 \uD3C9\uAC00" }),
+    Object.freeze({ thresholdPercent: 50, label: "B\uAE09 \uD3C9\uAC00" }),
+    Object.freeze({ thresholdPercent: 80, label: "A\uAE09 \uD3C9\uAC00" }),
+    Object.freeze({ thresholdPercent: 100, label: "S\uAE09 \uD3C9\uAC00" }),
+  ]),
+});
+
+export const TUTORIAL_HELP_POPUP_EVENT_IDS = Object.freeze([
+  "tutorial_1st_mine_01_entry",
+  "tutorial_1st_gate_04_warden_intro",
+]);
+
+export const TUTORIAL_EVALUATION_GRADE_RULES = Object.freeze({
+  scope: "tutorial_only_private_grade",
+  separateFromHunterAssociationRank: true,
+  thresholds: Object.freeze({
+    "20_percent_or_more": "C\uAE09",
+    "50_percent_or_more": "B\uAE09",
+    "80_percent_or_more": "A\uAE09",
+    "100_percent": "S\uAE09",
+  }),
+  visibility: "player_only",
+});
+
+export const TUTORIAL_PROTAGONIST_VOICE_RULES = Object.freeze({
+  avoid: Object.freeze(["~\uAD70", "~\uB2E4", "~\uAC83\uC774\uB2E4", "\uCD08\uAE30\uAC12", "\uB3C4\uAD6C\uC57C", "\uD6C4\uBCF4\uB97C \uBC14\uAFD4", "\uC555\uCD95\uD558\uACE0", "\uD504\uB9AC\uC14B \uACE0\uC815 \uD655\uC778"]),
+  prefer: Object.freeze(["~\uC774\uC57C", "~\uD588\uC5B4", "~\uD558\uC790", "~\uD574\uBCF4\uC790", "~\uD558\uACE0 \uC788\uC5B4", "~\uBCF4\uC774\uAE30 \uC2DC\uC791\uD588\uC5B4", "~\uACA0\uC9C0"]),
+  systemTerminologySpeakers: Object.freeze(["\uC2DC\uC2A4\uD15C", "\uD68C\uADC0\uC790\uC758 \uAE30\uB85D", "\uB3C4\uAC10", "\uC2A4\uD06C\uB7A9\uBD81"]),
+  protagonistRole: "\uC2DC\uC2A4\uD15C \uC6A9\uC5B4\uB97C \uC790\uC5F0\uC2A4\uB7FD\uAC8C \uBC1B\uC544\uB4E4\uC774\uB294 \uC0AC\uB78C \uB9D0\uD22C",
+});
+
+export const TUTORIAL_PROTAGONIST_VOICE_CORRECTIONS = Object.freeze([
+  Object.freeze({ from: "\uC9C4\uC9DC \uD604\uC2E4\uB85C \uB3CC\uC544\uC628 \uAC70\uC57C…….", to: "\uC815\uB9D0 \uD604\uC2E4\uB85C \uB3CC\uC544\uC628 \uAC70\uC57C……." }),
+  Object.freeze({ from: "\uB098\uBCF4\uB2E4 \uBA3C\uC800 \uB3CC\uC544\uC628 \uC0AC\uB78C\uB4E4\uC774 \uC788\uC5C8\uB358 \uAC70\uC57C?", to: "\uB098\uBCF4\uB2E4 \uBA3C\uC800 \uB3CC\uC544\uC628 \uC0AC\uB78C\uB4E4\uC774 \uC788\uC5C8\uB2E4\uB2C8." }),
+  Object.freeze({ from: "\uC774\uC81C \uC774\uB7F0 \uCC28\uC774\uB97C \uD558\uB098\uC529 \uC313\uC544\uAC00\uB294 \uAC70\uC57C.", to: "\uC774\uC81C\uBD80\uD130 \uC774\uB7F0 \uCC28\uC774\uB97C \uD558\uB098\uC529 \uC313\uC544\uAC00\uB294 \uAC70\uC57C." }),
+  Object.freeze({ from: "\uC774\uAC74 \uCE74\uB4DC \uC120\uD0DD\uC9C0\uAC00 \uC544\uB2C8\uB77C, \uC774 \uC12C\uC5D0 \uC228\uACA8\uC838 \uC788\uB358 \uBCF4\uC0C1\uC774\uC57C.", to: "\uC774\uAC74 \uCC98\uC74C \uC120\uD0DD\uD588\uB358 \uD2B9\uC131 \uCE74\uB4DC\uAC00 \uC544\uB2C8\uB77C, \uC774 \uC12C\uC5D0 \uC228\uACA8\uC838 \uC788\uB358 \uBCF4\uC0C1\uC774\uC57C." }),
+  Object.freeze({ from: "\uC774\uC81C \uC774\uACF3\uC744 \uBCF4\uACE0 \uB180\uB77C\uC9C4 \uC54A\uC544.", to: "\uC774\uC81C \uC774\uACF3\uC758 \uD48D\uACBD\uB3C4 \uC775\uC219\uD574\uC9C0\uACE0 \uC788\uC5B4." }),
+  Object.freeze({ from: "\uD558\uC9C0\uB9CC \uC775\uC219\uD574\uC84C\uB2E4\uACE0 \uAC00\uBCBC\uC6CC\uC9C0\uB294 \uAC74 \uC544\uB2C8\uC57C.", to: "\uD558\uC9C0\uB9CC \uC775\uC219\uD574\uC84C\uB2E4\uACE0 \uC808\uB300 \uBC29\uC2EC\uD574\uC120 \uC548 \uB418\uACA0\uC9C0." }),
+  Object.freeze({ from: "\uD558\uC9C0\uB9CC \uC9C0\uAE08\uC740 \uCE74\uB974\uB9C8\uC640 \uAE30\uB85D\uC774 \uD6C4\uBCF4\uB97C \uBC14\uAFD4.", to: "\uD558\uC9C0\uB9CC \uC9C0\uAE08\uC740 \uCE74\uB974\uB9C8\uC640 \uAE30\uB85D\uC774 \uC601\uD5A5\uC744 \uB07C\uCE58\uACE0 \uC788\uC5B4." }),
+  Object.freeze({ from: "\uCC98\uC74C\uC5D4 \uBCF4\uC774\uC9C0 \uC54A\uC558\uB358 \uD2C8\uC774 \uBCF4\uC5EC.", to: "\uCC98\uC74C\uC5D4 \uBCF4\uC774\uC9C0 \uC54A\uC558\uB358 \uD2C8\uC774 \uBCF4\uC774\uACE0 \uC788\uC5B4." }),
+  Object.freeze({ from: "\uC544\uC9C1 \uC4F0\uB7EC\uB728\uB9AC\uC9C4 \uBABB\uD588\uC5B4.", to: "\uC544\uC9C1 \uC4F0\uB7EC\uB728\uB9AC\uC9C4 \uBABB\uD588\uC9C0\uB9CC." }),
+  Object.freeze({ from: "\uD558\uC9C0\uB9CC \uBCBD\uC758 \uB192\uC774\uB294 \uC774\uC81C \uBCF4\uC5EC.", to: "\uC774\uC81C \uBCBD\uC758 \uB192\uC774\uAC00 \uBCF4\uC774\uAE30 \uC2DC\uC791\uD588\uC5B4." }),
+  Object.freeze({ from: "\uC774\uC81C \uD29C\uD1A0\uB9AC\uC5BC\uC740 \uC644\uC804\uD788 \uB0AF\uC120 \uACF3\uC740 \uC544\uB2C8\uC57C.", to: "\uC774\uC81C \uD29C\uD1A0\uB9AC\uC5BC\uB3C4 \uB0AF\uC124\uC9C0 \uC54A\uB124." }),
+  Object.freeze({ from: "\uD558\uC9C0\uB9CC \uCE74\uB4DC\uB294 \uB2E4\uC2DC \uD3BC\uCCD0\uC838.", to: "\uD558\uC9C0\uB9CC \uCE74\uB4DC\uB294 \uB2E4\uC2DC \uC120\uD0DD\uD560 \uC218 \uC788\uC5B4." }),
+  Object.freeze({ from: "\uD68C\uADC0\uD560\uC218\uB85D \uB0B4\uAC00 \uAC00\uC838\uAC08 \uCD9C\uBC1C\uC810\uB3C4 \uB2EC\uB77C\uC838.", to: "\uD68C\uADC0\uD560\uC218\uB85D \uB098\uC758 \uCD9C\uBC1C\uC120\uB3C4 \uB2EC\uB77C\uC9C0\uACE0 \uC788\uC5B4." }),
+  Object.freeze({ from: "\uADF8\uB798\uC11C \uB354 \uC808\uCC28\uB300\uB85C \uAC00\uC790.", to: "\uADF8\uB7EC\uB2C8\uAE4C \uC11C\uB450\uB974\uC9C0 \uB9D0\uACE0 \uC21C\uC11C\uB300\uB85C \uC9C4\uD589\uD558\uC790." }),
+  Object.freeze({ from: "\uCC98\uC74C\uC758 \uAFC8\uC740 \uBB38\uC774\uC5C8\uC5B4.", to: "\uCC98\uC74C\uC5D0\uB294 \uB098\uD55C\uD14C \uBB34\uC2A8 \uC77C\uC774 \uC77C\uC5B4\uB09C \uAC74\uC9C0 \uBAB0\uB790\uC9C0\uB9CC." }),
+  Object.freeze({ from: "\uC774\uC81C \uCE74\uB4DC\uC640 \uAE30\uB85D\uC740 \uB9E4 \uD68C\uCC28\uC758 \uCD08\uAE30\uAC12\uC744 \uC870\uC815\uD558\uB294 \uB3C4\uAD6C\uC57C.", to: "\uC774\uC81C\uB294 \uCE74\uB4DC \uC120\uD0DD\uACFC \uAE30\uB85D\uC774 \uC2DC\uC791\uC744 \uC704\uD55C \uC900\uBE44 \uACFC\uC815\uC774\uB780 \uAC78 \uC54C\uACA0\uC5B4." }),
+  Object.freeze({ from: "\uADF8\uB7FC \uD29C\uD1A0\uB9AC\uC5BC\uC740 \uBE60\uB974\uAC8C \uC555\uCD95\uD558\uACE0, \uD604\uC2E4 \uC815\uBCF4\uB9DD\uC744 \uD655\uC778\uD558\uC790.", to: "\uADF8\uB7FC \uC774\uC81C \uD29C\uD1A0\uB9AC\uC5BC\uC740 \uBE60\uB974\uAC8C \uC9C4\uD589\uD558\uACE0 \uBC14\uB85C \uD604\uC2E4\uB85C \uB3CC\uC544\uAC00\uC790." }),
+  Object.freeze({ from: "\uCE74\uB4DC \uD6C4\uBCF4\uB294 \uC870\uAE08\uC529 \uB2EC\uB77C\uC9C0\uACE0, \uB4DC\uB78D\uB3C4 \uD754\uB4E4\uB824.", to: "\uCE74\uB4DC\uB4E4\uB3C4 \uB2E4\uC591\uD574\uC9C0\uACE0 \uCE74\uB4DC \uB4F1\uAE09\uB4E4\uB3C4 \uBCC0\uD654\uD558\uACE0 \uC788\uC5B4." }),
+]);
+
 export const TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS = Object.freeze([
   "hunterAssociation",
   "hunterAssociationSpaced",
@@ -257,6 +314,13 @@ export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
     policy: "condition_locked",
   },
   {
+    id: "tutorial_1st_mine_01_entry",
+    phase: "mana_mine_run1",
+    run: 1,
+    policy: "tutorial_help_popup",
+    textKey: "mineEnvironmentalRisk",
+  },
+  {
     id: "tutorial_1st_mine_04_sealed_box_locked",
     phase: "mana_mine_run1",
     run: 1,
@@ -279,12 +343,14 @@ export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
     phase: "rift_gate_run1",
     run: 1,
     policy: "damage_threshold_intro",
+    textKey: "gateWardenIntro",
   },
   {
     id: "tutorial_1st_gate_06_warden_20_clear",
     phase: "rift_gate_run1",
     run: 1,
     policy: "damage_threshold_pass",
+    textKey: "wardenMinimumPass",
   },
   {
     id: "tutorial_2nd_01_regressor_record",
@@ -315,20 +381,27 @@ export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
     phase: "tutorial_run2",
     run: 2,
     policy: "damage_threshold_good",
+    textKey: "wardenGoodPass",
   },
   {
     id: "tutorial_3rd_warden_80",
     phase: "tutorial_run3_4",
     run: 3,
     policy: "damage_threshold_semi_ranker",
+    textKey: "wardenSemiRanker",
   },
   {
     id: "tutorial_4th_warden_100",
     phase: "tutorial_run3_4",
     run: 4,
     policy: "final_warden_clear",
+    textKey: "wardenFullClear",
   },
 ]);
+
+export const TUTORIAL_DIALOGUE_EVENT_ALIASES = Object.freeze({
+  tutorial_2nd_01_wake_record_restored: "tutorial_2nd_01_regressor_record",
+});
 
 const STARTER_CARD_DIALOGUE_IDS = Object.freeze({
   starter_weapon_sense: "weaponSense",
@@ -448,11 +521,16 @@ export function resolveTutorialLoopDialogue(regressionCount, { scene = "wake", l
   };
 }
 
+export function resolveTutorialDialogueEventId(eventId) {
+  return TUTORIAL_DIALOGUE_EVENT_ALIASES[eventId] || eventId;
+}
+
 export function resolveTutorialKeyEventDialogue(
   eventId,
   { localeText = getLocaleText(), templateValues = {} } = {},
 ) {
-  const event = TUTORIAL_DIALOGUE_KEY_EVENTS.find((entry) => entry.id === eventId);
+  const canonicalEventId = resolveTutorialDialogueEventId(eventId);
+  const event = TUTORIAL_DIALOGUE_KEY_EVENTS.find((entry) => entry.id === canonicalEventId);
   if (!event?.textKey) return null;
 
   const detail = localeText.story?.tutorialDialogue?.keyEventDetails?.[event.textKey];
@@ -460,6 +538,9 @@ export function resolveTutorialKeyEventDialogue(
 
   return {
     event,
+    eventId,
+    canonicalEventId,
+    aliasOf: canonicalEventId !== eventId ? canonicalEventId : null,
     textKey: event.textKey,
     title: formatTextValue(detail.title, templateValues),
     detail: formatTextValue(detail, templateValues),
@@ -475,6 +556,9 @@ export function buildTutorialDialogueCoverageReport({ implementedEventIds = [] }
     ...TUTORIAL_DIALOGUE_KEY_EVENTS.map((event) => event.id),
     ...implementedEventIds,
   ]);
+  for (const [aliasId, canonicalEventId] of Object.entries(TUTORIAL_DIALOGUE_EVENT_ALIASES)) {
+    if (implemented.has(canonicalEventId)) implemented.add(aliasId);
+  }
 
   return Object.entries(TUTORIAL_SELF_DESCRIBING_COVERAGE_REQUIRED).flatMap(([regionKey, eventIds]) =>
     eventIds.map((eventId) => ({
@@ -490,17 +574,27 @@ export function getTutorialDialogueEventCatalog() {
   return {
     version: TUTORIAL_DIALOGUE_VERSION,
     selfDescribingVersion: TUTORIAL_SELF_DESCRIBING_VERSION,
+    protagonistVoicePolishVersion: TUTORIAL_PROTAGONIST_VOICE_POLISH_VERSION,
     newGameFlow: TUTORIAL_FINAL_NEW_GAME_FLOW,
     phases: TUTORIAL_DIALOGUE_PHASES,
     dynamicPlaceholders: TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS,
     preRealityForbiddenTermKeys: TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS,
     keyFlags: TUTORIAL_FINAL_KEY_FLAGS,
     keyEvents: TUTORIAL_DIALOGUE_KEY_EVENTS,
+    eventAliases: TUTORIAL_DIALOGUE_EVENT_ALIASES,
     loopDialogue: {
       startRun: TUTORIAL_LOOP_START_RUN,
       variants: TUTORIAL_LOOP_DIALOGUE_VARIANTS,
     },
     starterSkillAliases: TUTORIAL_FINAL_STARTER_SKILL_ALIASES,
+    protagonistVoicePolish: {
+      version: TUTORIAL_PROTAGONIST_VOICE_POLISH_VERSION,
+      rules: TUTORIAL_PROTAGONIST_VOICE_RULES,
+      corrections: TUTORIAL_PROTAGONIST_VOICE_CORRECTIONS,
+      bossEvaluationDisclosure: TUTORIAL_BOSS_EVALUATION_DISCLOSURE,
+      tutorialHelpPopupEventIds: TUTORIAL_HELP_POPUP_EVENT_IDS,
+      tutorialEvaluationGrade: TUTORIAL_EVALUATION_GRADE_RULES,
+    },
     selfDescribing: {
       version: TUTORIAL_SELF_DESCRIBING_VERSION,
       requiredSystems: TUTORIAL_SELF_DESCRIBING_REQUIRED_SYSTEMS,

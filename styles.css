@@ -25,6 +25,9 @@
   --panel-pad: clamp(0.82rem, 1.2vw, 1rem);
   --tap-target: 2.75rem;
   --mobile-panel-pad: 0.72rem;
+  --brand-loading-image: url("assets/brand/regressor_gate_loading_wide_21x9.jpg");
+  --brand-start-image: url("assets/brand/regressor_gate_start_16x9.jpg");
+  --brand-portrait-image: url("assets/brand/regressor_gate_portrait_9x16.jpg");
 }
 
 * {
@@ -44,6 +47,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  position: relative;
+  isolation: isolate;
   background:
     linear-gradient(rgba(57, 228, 255, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(57, 228, 255, 0.035) 1px, transparent 1px),
@@ -58,6 +63,18 @@ body {
   -webkit-user-select: none;
   user-select: none;
   overscroll-behavior-x: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 18, 0.42), rgba(2, 6, 18, 0.84)),
+    var(--brand-loading-image) center top / cover no-repeat;
+  opacity: 0.18;
 }
 
 button {
@@ -141,12 +158,37 @@ select:focus {
   display: grid;
   place-items: center;
   padding: 1rem;
+  overflow: hidden;
+  isolation: isolate;
+  background: #030712;
+  background-size: 40px 40px, 40px 40px, auto, auto;
+}
+
+.creation-screen::before,
+.creation-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.creation-screen::before {
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(2, 6, 18, 0.52), rgba(2, 6, 18, 0.12) 42%, rgba(2, 6, 18, 0.64)),
+    linear-gradient(180deg, rgba(2, 6, 18, 0.08), rgba(2, 6, 18, 0.78)),
+    var(--brand-start-image) center center / cover no-repeat;
+  filter: saturate(1.08) contrast(1.04);
+  transform: scale(1.015);
+}
+
+.creation-screen::after {
+  z-index: -1;
   background:
     linear-gradient(rgba(57, 228, 255, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(57, 228, 255, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at 50% 0%, rgba(57, 228, 255, 0.2), transparent 34rem),
-    rgba(3, 7, 18, 0.94);
-  background-size: 40px 40px, 40px 40px, auto, auto;
+    radial-gradient(circle at 50% 0%, rgba(57, 228, 255, 0.22), transparent 34rem);
+  background-size: 40px 40px, 40px 40px, auto;
 }
 
 .creation-screen.is-hidden {
@@ -768,6 +810,8 @@ select:focus {
   display: grid;
   grid-template-columns: minmax(16rem, 18rem) minmax(0, 1fr);
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 .sidebar {
@@ -2248,6 +2292,72 @@ select:focus {
 .battlefield[data-card-layout="stage"] .combatant h4 {
   font-size: clamp(0.84rem, 1.7vw, 0.98rem);
   line-height: 1.28;
+}
+
+.combat-buff-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.24rem;
+  min-height: 1.25rem;
+  margin: 0.18rem 0 0.24rem;
+  pointer-events: none;
+}
+
+.combat-buff-strip[hidden] {
+  display: none;
+}
+
+.combat-buff-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 1.15rem;
+  gap: 0.22rem;
+  padding: 0.12rem 0.42rem;
+  border: 1px solid rgba(80, 220, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(4, 20, 36, 0.78);
+  color: #dffaff;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.25;
+  box-shadow: 0 0 8px rgba(42, 210, 255, 0.22), inset 0 0 8px rgba(42, 210, 255, 0.08);
+  text-shadow: 0 0 8px rgba(42, 210, 255, 0.32);
+  white-space: nowrap;
+}
+
+.combat-buff-chip small,
+.combat-buff-chip b {
+  font-size: 0.62rem;
+  line-height: 1;
+}
+
+.combat-buff-chip small {
+  color: inherit;
+  opacity: 0.86;
+}
+
+.combat-buff-chip b {
+  color: #ffffff;
+}
+
+.combat-buff-chip--guard {
+  border-color: rgba(111, 240, 255, 0.72);
+}
+
+.combat-buff-chip--power {
+  border-color: rgba(255, 215, 91, 0.72);
+  color: #fff0b8;
+  box-shadow: 0 0 8px rgba(255, 215, 91, 0.18), inset 0 0 8px rgba(255, 215, 91, 0.08);
+}
+
+.combat-buff-chip--risk {
+  border-color: rgba(255, 83, 111, 0.72);
+  color: #ffd4dd;
+  box-shadow: 0 0 8px rgba(255, 83, 111, 0.18), inset 0 0 8px rgba(255, 83, 111, 0.08);
 }
 
 .battlefield[data-card-layout="stage"] .bar {
@@ -4923,6 +5033,1411 @@ select:focus {
   padding: 0.75rem;
 }
 
+.editor-save-edit-proposed-values {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(149, 255, 185, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 28, 32, 0.28);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-proposed-values-head,
+.editor-save-edit-proposed-values-field > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-proposed-values h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-proposed-values-head span,
+.editor-save-edit-proposed-values-field span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(149, 255, 185, 0.46);
+  border-radius: 999px;
+  color: #95ffb9;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-proposed-values-metrics,
+.editor-save-edit-proposed-values-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-proposed-values-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-proposed-values-field {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(149, 255, 185, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-proposed-values-field strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-proposed-values-field dl {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-edit-proposed-values-field dt {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-proposed-values-field dd {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-proposed-values-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(149, 255, 185, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #e2ffe9;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-sample-comparator {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(244, 211, 94, 0.2);
+  border-radius: 6px;
+  background: rgba(30, 22, 6, 0.26);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-sample-comparator-head,
+.editor-save-edit-sample-comparator-card > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-sample-comparator h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-sample-comparator-head span,
+.editor-save-edit-sample-comparator-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(244, 211, 94, 0.58);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-sample-comparator-metrics,
+.editor-save-edit-sample-comparator-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-sample-comparator-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-sample-comparator-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(244, 211, 94, 0.14);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-sample-comparator-card strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-sample-comparator-card dl {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-edit-sample-comparator-card dt {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-sample-comparator-card dd {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-sample-comparator-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(244, 211, 94, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #fff8d7;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-sample-bridge {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 99, 132, 0.2);
+  border-radius: 6px;
+  background: rgba(33, 8, 18, 0.24);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-sample-bridge-head,
+.editor-save-edit-sample-bridge-card > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-sample-bridge h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-sample-bridge-head span,
+.editor-save-edit-sample-bridge-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 99, 132, 0.58);
+  border-radius: 999px;
+  color: #ff9bb1;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-sample-bridge-metrics,
+.editor-save-edit-sample-bridge-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-sample-bridge-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-sample-bridge-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(255, 99, 132, 0.14);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-sample-bridge-card strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-sample-bridge-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(255, 99, 132, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #ffe4ec;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-produced-bridge {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(108, 210, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(4, 18, 36, 0.3);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-produced-bridge-head,
+.editor-save-edit-produced-bridge-route > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-produced-bridge h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-produced-bridge-head span,
+.editor-save-edit-produced-bridge-route span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(108, 210, 255, 0.58);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-produced-bridge-metrics,
+.editor-save-edit-produced-bridge-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-produced-bridge-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-produced-bridge-route {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 13, 29, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-produced-bridge-route strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-produced-bridge-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(108, 210, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #dff8ff;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-bridge-transition {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(151, 219, 190, 0.2);
+  border-radius: 6px;
+  background: rgba(7, 25, 30, 0.32);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-bridge-transition-head,
+.editor-save-edit-bridge-transition-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-bridge-transition h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-bridge-transition-head span,
+.editor-save-edit-bridge-transition-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(151, 219, 190, 0.54);
+  border-radius: 999px;
+  color: #9af0ca;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-bridge-transition-metrics,
+.editor-save-edit-bridge-transition-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-bridge-transition-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-bridge-transition-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(151, 219, 190, 0.16);
+  border-radius: 6px;
+  background: rgba(5, 18, 24, 0.6);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-bridge-transition-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-bridge-transition-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(151, 219, 190, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #dff8ff;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-result-source-adapter {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 214, 112, 0.2);
+  border-radius: 6px;
+  background: rgba(32, 25, 7, 0.32);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-result-source-adapter-head,
+.editor-save-edit-result-source-adapter-candidate > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-result-source-adapter h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-result-source-adapter-head span,
+.editor-save-edit-result-source-adapter-candidate span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 214, 112, 0.54);
+  border-radius: 999px;
+  color: #ffe08a;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-result-source-adapter-metrics,
+.editor-save-edit-result-source-adapter-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-result-source-adapter-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-result-source-adapter-candidate {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(255, 214, 112, 0.16);
+  border-radius: 6px;
+  background: rgba(21, 16, 7, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-result-source-adapter-candidate strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-result-source-adapter-candidate dl {
+  display: grid;
+  gap: 0.4rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-edit-result-source-adapter-candidate dt {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.editor-save-edit-result-source-adapter-candidate dd {
+  color: var(--text);
+  font-size: 0.76rem;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-result-source-adapter-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(255, 214, 112, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #fff5d6;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-source-handoff {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 176, 112, 0.2);
+  border-radius: 6px;
+  background: rgba(35, 18, 7, 0.32);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-source-handoff-head,
+.editor-save-edit-source-handoff-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-source-handoff h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-source-handoff-head span,
+.editor-save-edit-source-handoff-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 176, 112, 0.54);
+  border-radius: 999px;
+  color: #ffc58a;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-source-handoff-metrics,
+.editor-save-edit-source-handoff-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-source-handoff-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-source-handoff-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(255, 176, 112, 0.16);
+  border-radius: 6px;
+  background: rgba(24, 12, 7, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-source-handoff-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-source-handoff-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(255, 176, 112, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #ffecd6;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-adapter-preflight {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 133, 112, 0.2);
+  border-radius: 6px;
+  background: rgba(37, 13, 10, 0.32);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-adapter-preflight-head,
+.editor-save-edit-adapter-preflight-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-adapter-preflight h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-adapter-preflight-head span,
+.editor-save-edit-adapter-preflight-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 133, 112, 0.54);
+  border-radius: 999px;
+  color: #ffad9d;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-adapter-preflight-metrics,
+.editor-save-edit-adapter-preflight-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-adapter-preflight-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-adapter-preflight-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(255, 133, 112, 0.16);
+  border-radius: 6px;
+  background: rgba(25, 10, 8, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-adapter-preflight-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-adapter-preflight-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(255, 133, 112, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #ffe0d9;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-confirm-source {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 112, 149, 0.2);
+  border-radius: 6px;
+  background: rgba(38, 9, 20, 0.32);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-confirm-source-head,
+.editor-save-edit-confirm-source-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-confirm-source h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-confirm-source-head span,
+.editor-save-edit-confirm-source-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 112, 149, 0.54);
+  border-radius: 999px;
+  color: #ff9bb6;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-confirm-source-metrics,
+.editor-save-edit-confirm-source-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-source-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-source-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(255, 112, 149, 0.16);
+  border-radius: 6px;
+  background: rgba(26, 8, 15, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-confirm-source-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-confirm-source-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(255, 112, 149, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #ffe0e9;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-confirm-input-shell {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(216, 112, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(28, 9, 38, 0.32);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-confirm-input-shell-head,
+.editor-save-edit-confirm-input-shell-card > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-confirm-input-shell h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-confirm-input-shell-head span,
+.editor-save-edit-confirm-input-shell-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(216, 112, 255, 0.54);
+  border-radius: 999px;
+  color: #d99bff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-confirm-input-shell-metrics,
+.editor-save-edit-confirm-input-shell-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-input-shell-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-input-shell-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(216, 112, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(19, 8, 28, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-confirm-input-shell-card strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-confirm-input-shell-card dl {
+  display: grid;
+  gap: 0.4rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.editor-save-edit-confirm-input-shell-card dt {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.editor-save-edit-confirm-input-shell-card dd {
+  color: var(--text);
+  font-size: 0.76rem;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-confirm-input-shell-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(216, 112, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #f1ddff;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-confirm-match-review {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(92, 224, 206, 0.2);
+  border-radius: 6px;
+  background: rgba(5, 32, 36, 0.34);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-confirm-match-review-head,
+.editor-save-edit-confirm-match-review-card > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-confirm-match-review h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-confirm-match-review-head span,
+.editor-save-edit-confirm-match-review-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(92, 224, 206, 0.52);
+  border-radius: 999px;
+  color: #7be8d6;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-confirm-match-review-metrics,
+.editor-save-edit-confirm-match-review-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-match-review-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-match-review-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(92, 224, 206, 0.15);
+  border-radius: 6px;
+  background: rgba(2, 18, 24, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-confirm-match-review-card strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-confirm-match-review-card dl {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.editor-save-edit-confirm-match-review-card dt {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.editor-save-edit-confirm-match-review-card dd {
+  color: var(--text);
+  font-size: 0.76rem;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-confirm-match-review-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(92, 224, 206, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #d8fff9;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-submit-runner-blocker {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(248, 178, 92, 0.22);
+  border-radius: 6px;
+  background: rgba(39, 24, 6, 0.34);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-submit-runner-blocker-head,
+.editor-save-edit-submit-runner-blocker-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-submit-runner-blocker h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-submit-runner-blocker-head span,
+.editor-save-edit-submit-runner-blocker-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(248, 178, 92, 0.5);
+  border-radius: 999px;
+  color: #ffd184;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-submit-runner-blocker-metrics,
+.editor-save-edit-submit-runner-blocker-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-submit-runner-blocker-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-submit-runner-blocker-list,
+.editor-save-edit-submit-runner-blocker-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(248, 178, 92, 0.16);
+  border-radius: 6px;
+  background: rgba(25, 14, 4, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-submit-runner-blocker-list strong,
+.editor-save-edit-submit-runner-blocker-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-submit-runner-blocker-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(248, 178, 92, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #ffe5ba;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-apply-runner-handoff {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(140, 178, 255, 0.22);
+  border-radius: 6px;
+  background: rgba(10, 18, 42, 0.36);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-apply-runner-handoff-head,
+.editor-save-edit-apply-runner-handoff-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-apply-runner-handoff h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-apply-runner-handoff-head span,
+.editor-save-edit-apply-runner-handoff-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(140, 178, 255, 0.5);
+  border-radius: 999px;
+  color: #b8ccff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-apply-runner-handoff-metrics,
+.editor-save-edit-apply-runner-handoff-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-apply-runner-handoff-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-apply-runner-handoff-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(140, 178, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(6, 13, 30, 0.64);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-apply-runner-handoff-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-apply-runner-handoff-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(140, 178, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #dfe8ff;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-apply-runner-payload {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(166, 222, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(6, 22, 42, 0.36);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-apply-runner-payload-head,
+.editor-save-edit-apply-runner-payload-card > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-apply-runner-payload h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-apply-runner-payload-head span,
+.editor-save-edit-apply-runner-payload-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(166, 222, 255, 0.44);
+  border-radius: 999px;
+  color: #c5edff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-apply-runner-payload-metrics,
+.editor-save-edit-apply-runner-payload-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-apply-runner-payload-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-apply-runner-payload-card {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(166, 222, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(4, 15, 32, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-apply-runner-payload-card strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-apply-runner-payload-card dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.editor-save-edit-apply-runner-payload-card dt {
+  color: rgba(197, 237, 255, 0.72);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-apply-runner-payload-card dd {
+  margin: 0.12rem 0 0;
+  color: #dff6ff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-apply-runner-payload-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(166, 222, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #e2f7ff;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-payload-bridge {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(119, 235, 194, 0.2);
+  border-radius: 6px;
+  background: rgba(6, 34, 32, 0.32);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-payload-bridge-head,
+.editor-save-edit-payload-bridge-row > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-payload-bridge h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-payload-bridge-head span,
+.editor-save-edit-payload-bridge-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(119, 235, 194, 0.44);
+  border-radius: 999px;
+  color: #aaf8df;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-payload-bridge-metrics,
+.editor-save-edit-payload-bridge-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-payload-bridge-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-payload-bridge-row {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(119, 235, 194, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 22, 25, 0.62);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-payload-bridge-row strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-payload-bridge-row dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.editor-save-edit-payload-bridge-row dt {
+  color: rgba(170, 248, 223, 0.72);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-payload-bridge-row dd {
+  margin: 0.12rem 0 0;
+  color: #dffaf0;
+  font-size: 0.78rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-payload-bridge-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(119, 235, 194, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #dcfff3;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.editor-save-edit-compat-confirm-rollup {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 183, 77, 0.22);
+  border-radius: 6px;
+  background: rgba(35, 20, 5, 0.3);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-compat-confirm-rollup-head,
+.editor-save-edit-compat-confirm-rollup-lane > div:first-child,
+.editor-save-edit-compat-confirm-rollup-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-compat-confirm-rollup h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-compat-confirm-rollup-head span,
+.editor-save-edit-compat-confirm-rollup-lane span,
+.editor-save-edit-compat-confirm-rollup-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 183, 77, 0.48);
+  border-radius: 999px;
+  color: #ffd9a3;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-compat-confirm-rollup-metrics,
+.editor-save-edit-compat-confirm-rollup-lanes,
+.editor-save-edit-compat-confirm-rollup-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-compat-confirm-rollup-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-compat-confirm-rollup-lane,
+.editor-save-edit-compat-confirm-rollup-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(255, 183, 77, 0.14);
+  border-radius: 6px;
+  background: rgba(10, 12, 24, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-compat-confirm-rollup-lane strong,
+.editor-save-edit-compat-confirm-rollup-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-compat-confirm-rollup-lane dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.editor-save-edit-compat-confirm-rollup-lane dt {
+  color: rgba(255, 217, 163, 0.74);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-compat-confirm-rollup-lane dd {
+  margin: 0.12rem 0 0;
+  color: #fff2dc;
+  font-size: 0.78rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-compat-confirm-rollup-check p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.editor-save-edit-compat-confirm-rollup-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(255, 183, 77, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #fff3dd;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
 .editor-save-edit-validator-bridge {
   display: grid;
   gap: 0.75rem;
@@ -5199,6 +6714,117 @@ select:focus {
   padding: 0.75rem;
 }
 
+.editor-save-edit-confirm-runner-handoff {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 135, 186, 0.2);
+  border-radius: 6px;
+  background: rgba(34, 8, 24, 0.28);
+  padding: 0.85rem;
+}
+
+.editor-save-edit-confirm-runner-handoff-head,
+.editor-save-edit-confirm-runner-handoff-row > div:first-child,
+.editor-save-edit-confirm-runner-handoff-check > div:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.editor-save-edit-confirm-runner-handoff h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.editor-save-edit-confirm-runner-handoff-head span,
+.editor-save-edit-confirm-runner-handoff-row span,
+.editor-save-edit-confirm-runner-handoff-check span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 135, 186, 0.48);
+  border-radius: 999px;
+  color: #ffd6e7;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 0.55rem;
+  white-space: nowrap;
+}
+
+.editor-save-edit-confirm-runner-handoff-metrics,
+.editor-save-edit-confirm-runner-handoff-grid,
+.editor-save-edit-confirm-runner-handoff-checks {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-runner-handoff-grid,
+.editor-save-edit-confirm-runner-handoff-checks {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-save-edit-confirm-runner-handoff-row,
+.editor-save-edit-confirm-runner-handoff-check {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  border: 1px solid rgba(255, 135, 186, 0.14);
+  border-radius: 6px;
+  background: rgba(9, 12, 24, 0.58);
+  padding: 0.7rem;
+}
+
+.editor-save-edit-confirm-runner-handoff-row strong,
+.editor-save-edit-confirm-runner-handoff-check strong {
+  color: var(--text);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-confirm-runner-handoff-row dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.editor-save-edit-confirm-runner-handoff-row dt {
+  color: rgba(255, 214, 231, 0.74);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.editor-save-edit-confirm-runner-handoff-row dd {
+  margin: 0.12rem 0 0;
+  color: #fff0f6;
+  font-size: 0.78rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.editor-save-edit-confirm-runner-handoff-check p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.editor-save-edit-confirm-runner-handoff-code {
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid rgba(255, 135, 186, 0.14);
+  border-radius: 6px;
+  background: rgba(3, 11, 24, 0.68);
+  color: #ffeef6;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0.75rem;
+}
+
 .editor-save-edit-writer-checkpoint {
   display: grid;
   gap: 0.75rem;
@@ -5467,6 +7093,39 @@ select:focus {
   .editor-save-edit-validator-result-grid,
   .editor-save-edit-validator-execution-metrics,
   .editor-save-edit-validator-execution-grid,
+  .editor-save-edit-proposed-values-metrics,
+  .editor-save-edit-proposed-values-grid,
+  .editor-save-edit-sample-comparator-metrics,
+  .editor-save-edit-sample-comparator-grid,
+  .editor-save-edit-sample-bridge-metrics,
+  .editor-save-edit-sample-bridge-grid,
+  .editor-save-edit-produced-bridge-metrics,
+  .editor-save-edit-produced-bridge-grid,
+  .editor-save-edit-bridge-transition-metrics,
+  .editor-save-edit-bridge-transition-grid,
+  .editor-save-edit-result-source-adapter-metrics,
+  .editor-save-edit-result-source-adapter-grid,
+  .editor-save-edit-source-handoff-metrics,
+  .editor-save-edit-source-handoff-grid,
+  .editor-save-edit-adapter-preflight-metrics,
+  .editor-save-edit-adapter-preflight-grid,
+  .editor-save-edit-confirm-source-metrics,
+  .editor-save-edit-confirm-source-grid,
+  .editor-save-edit-confirm-input-shell-metrics,
+  .editor-save-edit-confirm-input-shell-grid,
+  .editor-save-edit-confirm-match-review-metrics,
+  .editor-save-edit-confirm-match-review-grid,
+  .editor-save-edit-submit-runner-blocker-metrics,
+  .editor-save-edit-submit-runner-blocker-grid,
+  .editor-save-edit-apply-runner-handoff-metrics,
+  .editor-save-edit-apply-runner-handoff-grid,
+  .editor-save-edit-apply-runner-payload-metrics,
+  .editor-save-edit-apply-runner-payload-grid,
+  .editor-save-edit-payload-bridge-metrics,
+  .editor-save-edit-payload-bridge-grid,
+  .editor-save-edit-compat-confirm-rollup-metrics,
+  .editor-save-edit-compat-confirm-rollup-lanes,
+  .editor-save-edit-compat-confirm-rollup-grid,
   .editor-save-edit-validator-bridge-metrics,
   .editor-save-edit-validator-bridge-grid,
   .editor-save-edit-validator-preflight-metrics,
@@ -5474,6 +7133,9 @@ select:focus {
   .editor-save-edit-validator-preflight-grid,
   .editor-save-edit-confirmation-contract-metrics,
   .editor-save-edit-confirmation-contract-grid,
+  .editor-save-edit-confirm-runner-handoff-metrics,
+  .editor-save-edit-confirm-runner-handoff-grid,
+  .editor-save-edit-confirm-runner-handoff-checks,
   .editor-save-edit-writer-checkpoint-metrics,
   .editor-save-edit-writer-checkpoint-grid,
   .editor-save-edit-postwrite-restore-metrics,
@@ -5499,6 +7161,39 @@ select:focus {
   .editor-save-edit-validator-result-card > div:first-child,
   .editor-save-edit-validator-execution-head,
   .editor-save-edit-validator-execution-result > div:first-child,
+  .editor-save-edit-proposed-values-head,
+  .editor-save-edit-proposed-values-field > div:first-child,
+  .editor-save-edit-sample-comparator-head,
+  .editor-save-edit-sample-comparator-card > div:first-child,
+  .editor-save-edit-sample-bridge-head,
+  .editor-save-edit-sample-bridge-card > div:first-child,
+  .editor-save-edit-produced-bridge-head,
+  .editor-save-edit-produced-bridge-route > div:first-child,
+  .editor-save-edit-bridge-transition-head,
+  .editor-save-edit-bridge-transition-check > div:first-child,
+  .editor-save-edit-result-source-adapter-head,
+  .editor-save-edit-result-source-adapter-candidate > div:first-child,
+  .editor-save-edit-source-handoff-head,
+  .editor-save-edit-source-handoff-check > div:first-child,
+  .editor-save-edit-adapter-preflight-head,
+  .editor-save-edit-adapter-preflight-check > div:first-child,
+  .editor-save-edit-confirm-source-head,
+  .editor-save-edit-confirm-source-check > div:first-child,
+  .editor-save-edit-confirm-input-shell-head,
+  .editor-save-edit-confirm-input-shell-card > div:first-child,
+  .editor-save-edit-confirm-match-review-head,
+  .editor-save-edit-confirm-match-review-card > div:first-child,
+  .editor-save-edit-submit-runner-blocker-head,
+  .editor-save-edit-submit-runner-blocker-check > div:first-child,
+  .editor-save-edit-apply-runner-handoff-head,
+  .editor-save-edit-apply-runner-handoff-check > div:first-child,
+  .editor-save-edit-apply-runner-payload-head,
+  .editor-save-edit-apply-runner-payload-card > div:first-child,
+  .editor-save-edit-payload-bridge-head,
+  .editor-save-edit-payload-bridge-row > div:first-child,
+  .editor-save-edit-compat-confirm-rollup-head,
+  .editor-save-edit-compat-confirm-rollup-lane > div:first-child,
+  .editor-save-edit-compat-confirm-rollup-check > div:first-child,
   .editor-save-edit-validator-bridge-head,
   .editor-save-edit-validator-bridge-step > div:first-child,
   .editor-save-edit-validator-preflight-head,
@@ -5506,6 +7201,9 @@ select:focus {
   .editor-save-edit-validator-preflight-check > div:first-child,
   .editor-save-edit-confirmation-contract-head,
   .editor-save-edit-confirmation-contract-field > div:first-child,
+  .editor-save-edit-confirm-runner-handoff-head,
+  .editor-save-edit-confirm-runner-handoff-row > div:first-child,
+  .editor-save-edit-confirm-runner-handoff-check > div:first-child,
   .editor-save-edit-confirmation-runner > div:first-child,
   .editor-save-edit-writer-checkpoint-head,
   .editor-save-edit-writer-checkpoint-check > div:first-child,
@@ -5534,6 +7232,47 @@ select:focus {
   .editor-save-edit-validator-execution-metrics,
   .editor-save-edit-validator-execution-grid,
   .editor-save-edit-validator-execution-result dl,
+  .editor-save-edit-proposed-values-metrics,
+  .editor-save-edit-proposed-values-grid,
+  .editor-save-edit-proposed-values-field dl,
+  .editor-save-edit-sample-comparator-metrics,
+  .editor-save-edit-sample-comparator-grid,
+  .editor-save-edit-sample-comparator-card dl,
+  .editor-save-edit-sample-bridge-metrics,
+  .editor-save-edit-sample-bridge-grid,
+  .editor-save-edit-produced-bridge-metrics,
+  .editor-save-edit-produced-bridge-grid,
+  .editor-save-edit-bridge-transition-metrics,
+  .editor-save-edit-bridge-transition-grid,
+  .editor-save-edit-result-source-adapter-metrics,
+  .editor-save-edit-result-source-adapter-grid,
+  .editor-save-edit-result-source-adapter-candidate dl,
+  .editor-save-edit-source-handoff-metrics,
+  .editor-save-edit-source-handoff-grid,
+  .editor-save-edit-adapter-preflight-metrics,
+  .editor-save-edit-adapter-preflight-grid,
+  .editor-save-edit-confirm-source-metrics,
+  .editor-save-edit-confirm-source-grid,
+  .editor-save-edit-confirm-input-shell-metrics,
+  .editor-save-edit-confirm-input-shell-grid,
+  .editor-save-edit-confirm-input-shell-card dl,
+  .editor-save-edit-confirm-match-review-metrics,
+  .editor-save-edit-confirm-match-review-grid,
+  .editor-save-edit-confirm-match-review-card dl,
+  .editor-save-edit-submit-runner-blocker-metrics,
+  .editor-save-edit-submit-runner-blocker-grid,
+  .editor-save-edit-apply-runner-handoff-metrics,
+  .editor-save-edit-apply-runner-handoff-grid,
+  .editor-save-edit-apply-runner-payload-metrics,
+  .editor-save-edit-apply-runner-payload-grid,
+  .editor-save-edit-apply-runner-payload-card dl,
+  .editor-save-edit-payload-bridge-metrics,
+  .editor-save-edit-payload-bridge-grid,
+  .editor-save-edit-payload-bridge-row dl,
+  .editor-save-edit-compat-confirm-rollup-metrics,
+  .editor-save-edit-compat-confirm-rollup-lanes,
+  .editor-save-edit-compat-confirm-rollup-grid,
+  .editor-save-edit-compat-confirm-rollup-lane dl,
   .editor-save-edit-validator-bridge-metrics,
   .editor-save-edit-validator-bridge-grid,
   .editor-save-edit-validator-preflight-metrics,
@@ -5542,6 +7281,10 @@ select:focus {
   .editor-save-edit-confirmation-contract-metrics,
   .editor-save-edit-confirmation-contract-grid,
   .editor-save-edit-confirmation-contract-field dl,
+  .editor-save-edit-confirm-runner-handoff-metrics,
+  .editor-save-edit-confirm-runner-handoff-grid,
+  .editor-save-edit-confirm-runner-handoff-checks,
+  .editor-save-edit-confirm-runner-handoff-row dl,
   .editor-save-edit-writer-checkpoint-metrics,
   .editor-save-edit-writer-checkpoint-grid,
   .editor-save-edit-postwrite-restore-metrics,
@@ -11423,6 +13166,16 @@ body[data-info-tooltips="off"] .info-term {
   line-height: 1.35;
 }
 
+.codex-progress-lock-note {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 8px;
+  padding: 0.68rem 0.75rem;
+  background: rgba(5, 16, 34, 0.66);
+  color: rgba(184, 236, 255, 0.82);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
 .rarity-frame-uncommon {
   border-color: rgba(91, 229, 132, 0.42);
   box-shadow:
@@ -13218,6 +14971,14 @@ body[data-info-tooltips="off"] .info-term {
     padding: 0.55rem;
     min-height: 100svh;
     overflow: hidden;
+  }
+
+  .creation-screen::before {
+    background:
+      linear-gradient(90deg, rgba(2, 6, 18, 0.48), rgba(2, 6, 18, 0.08) 46%, rgba(2, 6, 18, 0.54)),
+      linear-gradient(180deg, rgba(2, 6, 18, 0.1), rgba(2, 6, 18, 0.76)),
+      var(--brand-portrait-image) center center / cover no-repeat;
+    transform: scale(1.01);
   }
 
   .creation-panel {

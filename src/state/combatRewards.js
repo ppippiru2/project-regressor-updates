@@ -1,9 +1,13 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=535";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=535";
-import { claimFirstCodexRecordGuide, claimFirstLootDropGuide } from "./tutorialGuidance.js?v=535";
-import { t, tf } from "../localization/index.js?v=535";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=535";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=560";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=560";
+import {
+  claimFirstCodexRecordGuide,
+  claimFirstLootDropGuide,
+  claimForgottenGodRemnantGuide,
+} from "./tutorialGuidance.js?v=560";
+import { t, tf } from "../localization/index.js?v=560";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=560";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
@@ -49,6 +53,8 @@ export function applyMonsterDefeatRewards(state, monster, context) {
     const insight = item?.slot ? droppedEquipmentInsight(item, equipmentState, getItem) : null;
     if (insight) messages.push(insight.message);
   }
+
+  messages.push(...claimForgottenGodRemnantGuide(state, { region, monster }));
 
   if (monster.isBoss && region && markRegionCompleted(state.completedRegions, region.id)) {
     messages.push(tf("combatRewards.bossCleared", { regionName: region.name }));

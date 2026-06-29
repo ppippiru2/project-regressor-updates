@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="한국 판타지 헌터물 스타일 방치형 RPG" />
     <meta name="theme-color" content="#071b3d" />
+    <meta property="og:image" content="assets/brand/regressor_gate_representative_4x5.jpg" />
+    <meta name="twitter:image" content="assets/brand/regressor_gate_representative_4x5.jpg" />
     <title>Project Regressor</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" href="assets/icon.png" type="image/png" />
-    <link rel="stylesheet" href="styles.css?v=535" />
+    <link rel="apple-touch-icon" href="assets/icons/app-install-192.png" />
+    <link rel="preload" as="image" href="assets/brand/regressor_gate_start_16x9.jpg" />
+    <link rel="preload" as="image" href="assets/brand/regressor_gate_portrait_9x16.jpg" media="(orientation: portrait)" />
+    <link rel="stylesheet" href="styles.css?v=560" />
   </head>
   <body>
     <section class="creation-screen is-hidden" id="character-creation" aria-label="Character creation" data-i18n-attr="aria-label:staticHtml.characterCreation.ariaLabel">
@@ -57,7 +62,7 @@
             </select>
           </label>
           <label>
-            <span data-i18n="staticHtml.characterCreation.q2">How do you view laws and hunter association rules?</span>
+            <span data-i18n="staticHtml.characterCreation.q2">How do you view community rules and unfamiliar trial rules?</span>
             <select name="q2">
               <option value="lawful" data-i18n="staticHtml.characterCreation.q2Lawful">They must be kept.</option>
               <option value="pragmatic" data-i18n="staticHtml.characterCreation.q2Pragmatic">They should be flexible.</option>
@@ -73,7 +78,7 @@
             </select>
           </label>
           <label>
-            <span data-i18n="staticHtml.characterCreation.q4">Your guild master gives an unjust order.</span>
+            <span data-i18n="staticHtml.characterCreation.q4">The leader of your traveling group gives an unjust order.</span>
             <select name="q4">
               <option value="lawful" data-i18n="staticHtml.characterCreation.q4Lawful">Obey by principle.</option>
               <option value="pragmatic" data-i18n="staticHtml.characterCreation.q4Pragmatic">Check my interests first.</option>
@@ -206,6 +211,7 @@
                       </button>
                       <span class="effect-layer" id="player-effect-layer"></span>
                       <h4 id="player-name" data-i18n="staticHtml.app.combat.playerName">Player</h4>
+                      <div class="combat-buff-strip" id="player-buff-strip" data-combat-buff-strip="player" aria-live="polite" hidden></div>
                       <div class="bar">
                         <div class="bar-fill hp" id="player-hp-bar"></div>
                         <span id="player-hp-text">0 / 0</span>
@@ -522,15 +528,15 @@
               </div>
               <div class="build-info-line wide">
                 <span>현재 주소</span>
-                <strong id="build-address-label">http://127.0.0.1:5173/?v=535</strong>
+                <strong id="build-address-label">http://127.0.0.1:5173/?v=560</strong>
               </div>
               <div class="build-info-line wide">
                 <span>모바일 확인</span>
-                <strong id="build-mobile-label">PC LAN IP:5173/?v=535</strong>
+                <strong id="build-mobile-label">PC LAN IP:5173/?v=560</strong>
               </div>
               <div class="build-info-line wide build-info-action">
                 <span>개발 도구</span>
-                <a class="editor-launch-button" href="editor.html?v=535&cachebust=535" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
+                <a class="editor-launch-button" href="editor.html?v=560&cachebust=560" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
               </div>
             </div>
           </section>
@@ -632,9 +638,10 @@
       </main>
     </div>
 
-    <script type="module" src="src/main.js?v=535"></script>
+    <script type="module" src="src/main.js?v=560"></script>
   </body>
 </html>
+
 
 
 

@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 535,
-  "displayVersion": "v535",
-  "cacheVersion": "535",
-  "updatedAt": "2026-06-29T06:45:00.000+09:00",
+  "versionCode": 560,
+  "displayVersion": "v560",
+  "cacheVersion": "560",
+  "updatedAt": "2026-06-29T12:45:00.000+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=535&cachebust=535",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=560&cachebust=560",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "?? ?? validator dry-run ?? preview? ?? ???? ??????.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk",
+  "notes": "Local v560: added the combat buff status strip for preserve/full_power/rampage, clarified seconds-based cooldown display on combat buttons, and added a buff status UI regression check. Remote upload is batched for the next milestone.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v560-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v560-debug.apk"
   },
-  "version": "5.35.0",
+  "version": "5.60.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v560-debug.apk"
   },
   "android": {
-    "code": 535,
-    "name": "5.35.0",
-    "displayName": "v535",
+    "code": 560,
+    "name": "5.60.0",
+    "displayName": "v560",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v560-debug.apk"
     },
     "version": {
-      "code": 535,
-      "name": "5.35.0",
-      "displayName": "v535"
+      "code": 560,
+      "name": "5.60.0",
+      "displayName": "v560"
     },
-    "versionCode": 535,
-    "versionName": "5.35.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-release.apk"
+    "versionCode": 560,
+    "versionName": "5.60.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v560-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v560-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v535-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v560-debug.apk"
   },
-  "versionName": "5.35.0"
+  "versionName": "5.60.0"
 }
