@@ -1,9 +1,14 @@
-import { t } from "../localization/index.js?v=572";
-import { karmaValue } from "./karma.js?v=572";
+import { t } from "../localization/index.js?v=573";
+import { karmaValue } from "./karma.js?v=573";
+import {
+  getCardCandidateCountByKarma,
+  getCardGradeWeightSummary,
+  getFateCardHintLevel,
+} from "./fateCardRoller.js?v=573";
 
 export const DEFAULT_REGRESSION_CARD_STATE = Object.freeze({
   karmaValue: 0,
-  cardCandidateCount: 3,
+  cardCandidateCount: 4,
   cardGradeWeightSummary: t("regressionCardResync.gradeWeightBlue"),
   selectedCardName: "",
   selectedTraitName: "",
@@ -11,6 +16,7 @@ export const DEFAULT_REGRESSION_CARD_STATE = Object.freeze({
   rerollCount: 0,
   lockedCards: Object.freeze([]),
   lastResyncRegressionCount: 0,
+  hintLevel: 0,
 });
 
 export function normalizeRegressionCardState(raw, state = {}) {
@@ -32,6 +38,7 @@ export function normalizeRegressionCardState(raw, state = {}) {
       ? [...new Set(source.lockedCards.filter(Boolean).map(String))].slice(0, 20)
       : [],
     lastResyncRegressionCount: normalizeCount(source.lastResyncRegressionCount),
+    hintLevel: normalizeHintLevel(source.hintLevel ?? getFateCardHintLevel(state)),
   };
 }
 
@@ -54,22 +61,11 @@ export function createRegressionCardResyncState(state = {}) {
     karmaValue: currentKarma,
     cardCandidateCount: getCardCandidateCountByKarma(currentKarma),
     cardGradeWeightSummary: getCardGradeWeightSummary(currentKarma),
+    hintLevel: getFateCardHintLevel({
+      ...state,
+      karmaValue: currentKarma,
+    }),
   };
-}
-
-export function getCardCandidateCountByKarma(value) {
-  const currentKarma = normalizeCount(value);
-  if (currentKarma >= 60) return 6;
-  if (currentKarma >= 30) return 5;
-  if (currentKarma >= 10) return 4;
-  return 3;
-}
-
-export function getCardGradeWeightSummary(value) {
-  const currentKarma = normalizeCount(value);
-  if (currentKarma >= 50) return t("regressionCardResync.gradeWeightHigh");
-  if (currentKarma >= 20) return t("regressionCardResync.gradeWeightMid");
-  return t("regressionCardResync.gradeWeightBlue");
 }
 
 export function applyRegressionCardSelection(state, selectedCard) {
@@ -130,7 +126,15 @@ function normalizeCount(value) {
   return Number.isFinite(count) && count > 0 ? count : 0;
 }
 
+function normalizeHintLevel(value) {
+  const level = Math.floor(Number(value));
+  if (!Number.isFinite(level)) return 0;
+  return Math.max(0, Math.min(4, level));
+}
+
 function sanitizeText(value, fallback = "", maxLength = 40) {
   const text = String(value || "").trim();
   return (text || fallback).slice(0, maxLength);
 }
+
+export { getCardCandidateCountByKarma, getCardGradeWeightSummary };

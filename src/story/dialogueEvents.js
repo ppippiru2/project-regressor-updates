@@ -1,4 +1,4 @@
-import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=572";
+import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=573";
 
 export const DIALOGUE_EVENT_DATA_VERSION = "v1.2";
 

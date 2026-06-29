@@ -1,11 +1,15 @@
-import { t, tf } from "../localization/index.js?v=572";
-import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=572";
+import { t, tf } from "../localization/index.js?v=573";
 import {
   REGRESSION_CARD_DRAW_TEST_PRESETS,
   createRegressionCardCandidateSlots,
   createRegressionCardDrawTestSnapshot,
   normalizeRegressionCardDrawTestState,
-} from "../state/regressionCardDraw.js?v=572";
+} from "../state/regressionCardDraw.js?v=573";
+import {
+  FATE_CARD_RENDER_MODES,
+  getFateCardHintLevel,
+} from "../state/fateCardRoller.js?v=573";
+import { renderFateCardButton } from "./fateCardRenderer.js?v=573";
 
 export function renderRegressionCardDrawTest(testState = {}, cards = []) {
   const container = document.getElementById("regression-card-draw-test");
@@ -25,6 +29,7 @@ export function renderRegressionCardDrawTest(testState = {}, cards = []) {
         <span class="eyebrow">${escapeHtml(t("cardDrawTest.eyebrow"))}</span>
         <h4>${escapeHtml(t("cardDrawTest.title"))}</h4>
         <p class="muted">${escapeHtml(t("cardDrawTest.description"))}</p>
+        <p class="muted">${escapeHtml(t("cardDrawTest.progressiveHintNotice"))}</p>
       </div>
       <button class="secondary-button" type="button" data-card-draw-test-action="${state.open ? "close" : "open"}">
         ${escapeHtml(state.open ? t("cardDrawTest.close") : t("cardDrawTest.open"))}
@@ -47,7 +52,7 @@ function renderBody(state, snapshot, slots, selectedSlot) {
         <span>${escapeHtml(snapshot.cardGradeWeightSummary)}</span>
       </div>
       <div class="regression-card-list card-draw-test-card-list">
-        ${slots.map((slot) => renderCardSlot(slot, selectedSlot?.index === slot.index)).join("")}
+        ${slots.map((slot) => renderCardSlot(slot, selectedSlot?.index === slot.index, snapshot)).join("")}
       </div>
       <div class="card-draw-test-actions">
         <button class="ghost-button" type="button" data-card-draw-test-action="shuffle">${escapeHtml(t("cardDrawTest.shuffle"))}</button>
@@ -64,14 +69,24 @@ function renderPresetButton(preset, activePresetId) {
   return `<button class="ghost-button ${active ? "is-active" : ""}" type="button" data-card-draw-test-preset="${escapeAttr(preset.id)}" aria-pressed="${active ? "true" : "false"}">${escapeHtml(label)}</button>`;
 }
 
-function renderCardSlot(slot, selected) {
-  const auraClass = resolveCardGradeAuraClass(slot.auraCard);
-  const revealed = selected && slot.card;
-  return `<button class="regression-card-option card-draw-test-card is-hidden-card ${auraClass} ${selected ? "selected" : ""}" type="button" data-card-draw-test-slot="${slot.index}" aria-pressed="${selected ? "true" : "false"}">
-    <span class="creation-starter-card-glow">${escapeHtml(t("regressionCardResync.hiddenGlow"))}</span>
-    <strong>${escapeHtml(tf("cardDrawTest.hiddenCard", { number: slot.index + 1 }))}</strong>
-    <small>${escapeHtml(revealed ? t("cardDrawTest.revealed") : t("cardDrawTest.pick"))}</small>
-  </button>`;
+function renderCardSlot(slot, selected, snapshot) {
+  const hintLevel = getFateCardHintLevel({
+    regressionCount: snapshot.regressionCount,
+    karmaValue: snapshot.karmaValue,
+  });
+  return renderFateCardButton(slot, {
+    mode: FATE_CARD_RENDER_MODES.devPreview,
+    hintLevel,
+    selected,
+    revealed: selected,
+    className: "regression-card-option card-draw-test-card",
+    attributes: {
+      "data-card-draw-test-slot": slot.index,
+    },
+    hiddenTitle: tf("cardDrawTest.hiddenCard", { number: slot.index + 1 }),
+    hiddenHint: selected ? t("cardDrawTest.revealed") : t("cardDrawTest.pick"),
+    revealedHint: selected ? t("cardDrawTest.revealed") : t("cardDrawTest.pick"),
+  });
 }
 
 function renderSelectedResult(selectedSlot) {

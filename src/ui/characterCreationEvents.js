@@ -1,42 +1,43 @@
-import { getLocaleText, tf } from "../localization/index.js?v=572";
+import { getLocaleText, tf } from "../localization/index.js?v=573";
 import {
   PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
   resolveAlignment,
   resolveDispositionResult,
-} from "../state/profile.js?v=572";
+} from "../state/profile.js?v=573";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=572";
+} from "../state/portraitFrame.js?v=573";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=572";
+} from "./portraitFrameView.js?v=573";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=572";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=572";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=572";
+} from "./diceSpriteRenderer.js?v=573";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=573";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=573";
 import {
   createHiddenCardSlots,
   createWeightedStarterCards,
   resolveRecommendedStarterCardDraw,
-} from "../state/starterCardDraw.js?v=572";
-import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=572";
+} from "../state/starterCardDraw.js?v=573";
+import { FATE_CARD_RENDER_MODES } from "../state/fateCardRoller.js?v=573";
+import { renderFateCardButton } from "./fateCardRenderer.js?v=573";
 import {
   renderTutorialDialogueTemplate,
   resolveTutorialDispositionDialogue,
   resolveTutorialKeyEventDialogue,
   resolveTutorialStarterCardDialogue,
   TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW,
-} from "../story/tutorialDialogueEvents.js?v=572";
+} from "../story/tutorialDialogueEvents.js?v=573";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -600,13 +601,32 @@ function renderStarterCardStep(draft) {
     <div class="creation-starter-card-list">
       ${cardSlots.map((slot) => {
         const selected = revealed && draft.starterCardSlotIndex === slot.index;
-        const slotCard = selected ? selectedCard : EMPTY_STARTER_CARD;
-        const auraClass = selected ? resolveCardGradeAuraClass(slotCard) : "card-aura-hidden";
-        return `<button class="creation-starter-card ${auraClass} ${selected ? "selected is-revealed" : "is-hidden-card"}" type="button" data-starter-card-slot="${slot.index}" aria-pressed="${selected ? "true" : "false"}" ${revealed ? "disabled" : ""}>
-          <span class="creation-starter-card-glow">${escapeHtml(selected ? slotCard.glow : CREATION_TEXT.starterCards.hiddenGlow)}</span>
-          <strong>${escapeHtml(selected ? slotCard.card : tf("characterCreation.starterCards.hiddenCard", { number: slot.index + 1 }))}</strong>
-          <small>${escapeHtml(selected ? CREATION_TEXT.starterCards.revealedHint : CREATION_TEXT.starterCards.hiddenHint)}</small>
-        </button>`;
+        const slotCard = selected ? selectedCard : null;
+        return renderFateCardButton({
+          ...slot,
+          card: slotCard,
+          cardId: slotCard?.id || "",
+          cardName: slotCard?.card || "",
+          traitName: slotCard?.trait || "",
+          skillName: slotCard?.skill || "",
+          grade: slotCard?.grade || slotCard?.rarity || slotCard?.glow || "D",
+          auraCard: slotCard || {},
+        }, {
+          mode: FATE_CARD_RENDER_MODES.productionProgressiveHint,
+          hintLevel: 0,
+          selected,
+          revealed: selected,
+          disabled: revealed,
+          className: "creation-starter-card",
+          attributes: {
+            "data-starter-card-slot": slot.index,
+          },
+          hiddenTitle: tf("characterCreation.starterCards.hiddenCard", { number: slot.index + 1 }),
+          hiddenGlow: CREATION_TEXT.starterCards.hiddenGlow,
+          hiddenHint: selected ? CREATION_TEXT.starterCards.revealedHint : CREATION_TEXT.starterCards.hiddenHint,
+          revealedHint: CREATION_TEXT.starterCards.revealedHint,
+          showIdentityDetails: false,
+        });
       }).join("")}
     </div>
     <div class="creation-summary-grid creation-card-result" ${revealed ? "" : "hidden"}>

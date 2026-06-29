@@ -34,6 +34,7 @@ export function bindDelegatedClickEvents({
     const combatStyleAction = event.target.closest("[data-combat-style-action]");
     const combatAction = event.target.closest("[data-combat-action]");
     const regressionCard = event.target.closest("[data-regression-card]");
+    const regressionCardSlot = event.target.closest("[data-regression-card-slot]");
     const equip = event.target.closest("[data-equip]");
     const equipRecommended = event.target.closest("[data-equip-recommended]");
     const unequip = event.target.closest("[data-unequip]");
@@ -87,6 +88,12 @@ export function bindDelegatedClickEvents({
     if (combatAction) {
       event.preventDefault();
       onCombatAction?.(combatAction.dataset.combatAction);
+      return;
+    }
+
+    if (regressionCardSlot) {
+      event.preventDefault();
+      onRegressionCardSelect?.(regressionCardSlot.dataset.regressionCardSlot);
       return;
     }
 

@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=572";
-import { portraitFrameFromFormData } from "./portraitFrame.js?v=572";
+import { getLocaleText } from "../localization/index.js?v=573";
+import { portraitFrameFromFormData } from "./portraitFrame.js?v=573";
 
 export const PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID = "character_customization_profile_image_v1";
 

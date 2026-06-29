@@ -2,10 +2,10 @@ import {
   normalizeDialogueEvents,
   renderDialogueEventLines,
   resolveDialogueEvent,
-} from "./dialogueEvents.js?v=572";
-import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=572";
-import { karmaValue } from "../state/karma.js?v=572";
-import { createRegressionCardResyncState } from "../state/regressionCardState.js?v=572";
+} from "./dialogueEvents.js?v=573";
+import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=573";
+import { karmaValue } from "../state/karma.js?v=573";
+import { createRegressionCardResyncState } from "../state/regressionCardState.js?v=573";
 
 export const DIALOGUE_EVENT_RUNTIME_VERSION = "v1.0-live-json-bridge";
 

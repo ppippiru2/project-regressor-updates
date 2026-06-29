@@ -1,8 +1,8 @@
-import { t } from "../localization/index.js?v=572";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=572";
-import { normalizeKarmaState } from "./karma.js?v=572";
-import { normalizeRegressionCardState } from "./regressionCardState.js?v=572";
-import { createTutorialFlags } from "./tutorialGuidance.js?v=572";
+import { t } from "../localization/index.js?v=573";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=573";
+import { normalizeKarmaState } from "./karma.js?v=573";
+import { normalizeRegressionCardState } from "./regressionCardState.js?v=573";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=573";
 
 export function createInitialState({
   slots,
@@ -37,7 +37,7 @@ export function createInitialState({
     karma: normalizeKarmaState(null),
     karmaValue: 0,
     regressionCardState: normalizeRegressionCardState(null),
-    cardCandidateCount: 3,
+    cardCandidateCount: 4,
     cardGradeWeightSummary: t("regressionCardResync.gradeWeightBlue"),
     selectedCardName: "",
     selectedTraitName: "",

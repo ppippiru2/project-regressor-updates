@@ -1,10 +1,11 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=572";
+import { getLocaleText, t, tf } from "../localization/index.js?v=573";
 import {
   createRegressionCardResyncState,
   shouldShowRegressionCardResync,
-} from "../state/regressionCardState.js?v=572";
-import { createRegressionCardCandidateSlots } from "../state/regressionCardDraw.js?v=572";
-import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=572";
+} from "../state/regressionCardState.js?v=573";
+import { createRegressionCardCandidateSlots } from "../state/regressionCardDraw.js?v=573";
+import { FATE_CARD_RENDER_MODES } from "../state/fateCardRoller.js?v=573";
+import { renderFateCardButton } from "./fateCardRenderer.js?v=573";
 
 export function regressionStarterCards(localeText = getLocaleText()) {
   return Array.isArray(localeText.characterCreation?.starterCards?.items)
@@ -56,15 +57,18 @@ export function renderRegressionCardResync(state, cards = regressionStarterCards
 }
 
 function renderCardButton(slot, snapshot) {
-  const card = slot.card || {};
-  const selected = card.card === snapshot.selectedCardName;
-  const auraClass = resolveCardGradeAuraClass(slot.auraCard);
-  return `<button class="regression-card-option is-hidden-card ${auraClass} ${selected ? "selected" : ""}" type="button" data-regression-card="${escapeAttr(card.id)}" aria-pressed="${selected ? "true" : "false"}">
-    <span class="creation-starter-card-glow">${escapeHtml(t("regressionCardResync.hiddenGlow"))}</span>
-    <strong>${escapeHtml(tf("regressionCardResync.hiddenCard", { number: slot.index + 1 }))}</strong>
-    <small>${escapeHtml(t("regressionCardResync.hiddenHint"))}</small>
-    <small>${escapeHtml(t("regressionCardResync.karmaHint"))}</small>
-  </button>`;
+  return renderFateCardButton(slot, {
+    mode: FATE_CARD_RENDER_MODES.productionProgressiveHint,
+    hintLevel: snapshot.hintLevel,
+    className: "regression-card-option",
+    attributes: {
+      "data-regression-card-slot": slot.index,
+    },
+    hiddenTitle: tf("regressionCardResync.hiddenCard", { number: slot.index + 1 }),
+    hiddenGlow: t("regressionCardResync.hiddenGlow"),
+    hiddenHint: t("regressionCardResync.hiddenHint"),
+    extraLines: [t("regressionCardResync.karmaHint")],
+  });
 }
 
 function escapeHtml(value) {

@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 572,
-  "displayVersion": "v572",
-  "cacheVersion": "572",
-  "updatedAt": "2026-06-29T21:30:59.555+09:00",
+  "versionCode": 573,
+  "displayVersion": "v573",
+  "cacheVersion": "573",
+  "updatedAt": "2026-06-29T22:55:37+09:00",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=572&cachebust=572",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=573&cachebust=573",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "v572 build: changed Android launch splash from centered app icon on black background to full-screen game image, kept hidden persona card draw test updates, rebuilt APK, and prepared GitHub Pages update payload.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v572-debug.apk",
+  "notes": "v573 build: applied progressive fate card hints, expanded fate card candidates to 4-8 cards, kept card identity hidden before selection, rebuilt APK, and prepared GitHub Pages update payload.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v572-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
   },
-  "version": "5.72.0",
+  "version": "5.73.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v572-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
   },
   "android": {
-    "code": 572,
-    "name": "5.72.0",
-    "displayName": "v572",
+    "code": 573,
+    "name": "5.73.0",
+    "displayName": "v573",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v572-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
     },
     "version": {
-      "code": 572,
-      "name": "5.72.0",
-      "displayName": "v572"
+      "code": 573,
+      "name": "5.73.0",
+      "displayName": "v573"
     },
-    "versionCode": 572,
-    "versionName": "5.72.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v572-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v572-release.apk"
+    "versionCode": 573,
+    "versionName": "5.73.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v572-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
   },
-  "versionName": "5.72.0"
+  "versionName": "5.73.0"
 }
