@@ -107,9 +107,9 @@
       "헌터협회/길드/헌터 등급 용어 금지."
     ],
     "qaChecks": [
-      "prologueCompleted=false일 때만 실행되는가\u8005",
-      "{playerName}, {age}, {gender}, {country}, {profileImage}가 실제 입력값으로 치환되는가\u8005",
-      "주인공 독백이 출력되지 않는가\u8005"
+      "prologueCompleted=false일 때만 실행되는가?",
+      "{playerName}, {age}, {gender}, {country}, {profileImage}가 실제 입력값으로 치환되는가?",
+      "주인공 독백이 출력되지 않는가?"
     ]
   },
   {
@@ -364,7 +364,7 @@
       {
         "speaker": "주인공",
         "lineType": "dialogue",
-        "text": "하지만 출발점의 특성은 다시 조정할 수 있다\u8005",
+        "text": "하지만 출발점의 특성은 다시 조정할 수 있다는 건가.",
         "branchKey": null,
         "requires": {},
         "notesForCodex": null
@@ -392,10 +392,10 @@
       "선택 결과는 selectedCardName, selectedTraitName, selectedSkillName에 저장한다."
     ],
     "qaChecks": [
-      "2회차 해안 각성 전에 실행되는가\u8005",
-      "프로필 질문이 반복되지 않는가\u8005",
-      "카르마 값이 표시되는가\u8005",
-      "카드 후보 수/등급 가중치가 표시되는가\u8005"
+      "2회차 해안 각성 전에 실행되는가?",
+      "프로필 질문이 반복되지 않는가?",
+      "카르마 값이 표시되는가?",
+      "카드 후보 수/등급 가중치가 표시되는가?"
     ]
   },
   {
@@ -717,7 +717,7 @@
       "grantItems": [],
       "grantSkills": [],
       "grantTraits": [
-        "▒록□\u8005\u8005"
+        "▒록□者?"
       ],
       "recordEntries": [
         "forgotten_god_remnant_contact"
@@ -759,7 +759,7 @@
       {
         "speaker": "주인공",
         "lineType": "dialogue",
-        "text": "누구야\u8005",
+        "text": "누구야?",
         "branchKey": null,
         "requires": {},
         "notesForCodex": null
@@ -783,7 +783,7 @@
       {
         "speaker": "시스템",
         "lineType": "system",
-        "text": "[특성] ▒록□\u8005\u8005",
+        "text": "[특성] ▒록□者?",
         "branchKey": null,
         "requires": {},
         "notesForCodex": "1회차에는 회귀자의 기록 정상명 표시 금지"
@@ -803,9 +803,9 @@
       "2회차 시작부터 regressorRecordUnlocked=true."
     ],
     "qaChecks": [
-      "광산 핵 골렘 우회 노드에서만 발생하는가\u8005",
-      "특성명은 깨진 글자로 표시되는가\u8005",
-      "도감 정상 메시지가 아니라 손상된 기록으로 표시되는가\u8005"
+      "광산 핵 골렘 우회 노드에서만 발생하는가?",
+      "특성명은 깨진 글자로 표시되는가?",
+      "도감 정상 메시지가 아니라 손상된 기록으로 표시되는가?"
     ]
   },
   {
@@ -920,9 +920,9 @@
       "클리어 후 C/B/A/S 평가 기준 공개."
     ],
     "qaChecks": [
-      "전투 전 평가 기준이 공개되지 않는가\u8005",
-      "클리어 후 C/B/A/S 기준이 공개되는가\u8005",
-      "주인공이 강자/랭커 비교를 하지 않는가\u8005"
+      "전투 전 평가 기준이 공개되지 않는가?",
+      "클리어 후 C/B/A/S 기준이 공개되는가?",
+      "주인공이 강자/랭커 비교를 하지 않는가?"
     ]
   },
   {

@@ -1,36 +1,42 @@
-import { getLocaleText, tf } from "../localization/index.js?v=571";
+import { getLocaleText, tf } from "../localization/index.js?v=572";
 import {
   PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
   resolveAlignment,
   resolveDispositionResult,
-} from "../state/profile.js?v=571";
+} from "../state/profile.js?v=572";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=571";
+} from "../state/portraitFrame.js?v=572";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=571";
+} from "./portraitFrameView.js?v=572";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=571";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=571";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=571";
+} from "./diceSpriteRenderer.js?v=572";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=572";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=572";
+import {
+  createHiddenCardSlots,
+  createWeightedStarterCards,
+  resolveRecommendedStarterCardDraw,
+} from "../state/starterCardDraw.js?v=572";
+import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=572";
 import {
   renderTutorialDialogueTemplate,
   resolveTutorialDispositionDialogue,
   resolveTutorialKeyEventDialogue,
   resolveTutorialStarterCardDialogue,
   TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW,
-} from "../story/tutorialDialogueEvents.js?v=571";
+} from "../story/tutorialDialogueEvents.js?v=572";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -41,7 +47,14 @@ const GENDER_OPTIONS = CREATION_TEXT.profile.genderOptions;
 const COUNTRY_OPTIONS = CREATION_TEXT.profile.countryOptions;
 const QUESTIONS = CREATION_TEXT.questions.items;
 const STARTER_CARDS = CREATION_TEXT.starterCards.items;
-const DEFAULT_STARTER_CARD_ID = STARTER_CARDS[0]?.id || "";
+const EMPTY_STARTER_CARD = Object.freeze({
+  id: "",
+  card: "",
+  trait: "",
+  skill: "",
+  glow: "",
+  unlock: "",
+});
 const INITIAL_STAT_TOTAL = INITIAL_CREATION_STAT_BALANCE.total;
 const INITIAL_STAT_TOTAL_RANGE = INITIAL_CREATION_STAT_BALANCE.totalRange || {
   min: INITIAL_STAT_TOTAL,
@@ -61,13 +74,6 @@ const CREATION_PROLOGUE_EVENT_STEPS = Object.freeze({
   "prologue_card_{starterCardId}": "starterCards",
   prologue_transfer_to_tutorial: "result",
 });
-const STARTER_CARD_DISPOSITION_WEIGHTS = Object.freeze({
-  starter_weapon_sense: Object.freeze({ coldCalculation: 20, practicalBalance: 10 }),
-  starter_light_step: Object.freeze({ freeSurvival: 20, practicalBalance: 10 }),
-  starter_enduring_body: Object.freeze({ devotedOrder: 20, practicalBalance: 10 }),
-  starter_faint_mana: Object.freeze({ inquiryRecord: 20, practicalBalance: 10 }),
-});
-
 export function bindCharacterCreationEvents(onCreateCharacter, onCancelCreation) {
   const form = document.getElementById("character-create-form");
   if (!form) return;
@@ -166,15 +172,16 @@ export function bindCharacterCreationEvents(onCreateCharacter, onCancelCreation)
       return;
     }
 
-    if (button.dataset.starterCard) {
+    if (button.dataset.starterCardSlot) {
       event.preventDefault();
-      draft.starterCardId = button.dataset.starterCard;
+      revealStarterCard(draft, Number(button.dataset.starterCardSlot));
       renderCreationWizard(form, draft);
       return;
     }
 
     if (button.dataset.confirmStarterCard !== undefined) {
       event.preventDefault();
+      if (!isStarterCardRevealed(draft)) return;
       draft.step = "result";
       renderCreationWizard(form, draft);
       return;
@@ -261,7 +268,9 @@ function createInitialDraft() {
     diceRollSequence: 0,
     questionIndex: 0,
     answers: {},
-    starterCardId: DEFAULT_STARTER_CARD_ID,
+    starterCardId: "",
+    starterCardRevealed: false,
+    starterCardSlotIndex: -1,
   };
 }
 
@@ -364,6 +373,7 @@ function resolveCreationDispositionEvent(draft, templateValues) {
 }
 
 function resolveCreationStarterCardEvent(draft, templateValues) {
+  if (!isStarterCardRevealed(draft)) return null;
   const selectedCard = selectedStarterCard(draft);
   const resolved = resolveTutorialStarterCardDialogue({ starterCardId: selectedCard.id }, { localeText: TEXT });
   if (!resolved) return null;
@@ -390,9 +400,19 @@ function renderCreationPrologueEvent(event) {
   return `<div class="creation-prologue-event" data-creation-event-id="${escapeAttr(event.eventId)}" data-speaker-type="${escapeAttr(event.speakerType || "system")}">
     <strong>${escapeHtml(event.title || event.eventId)}</strong>
     <div class="creation-prologue-lines">
-      ${lines.map((line) => `<span>${escapeHtml(line)}</span>`).join("")}
+      ${lines.map((line) => `<span>${escapeHtml(compactStarterCardLine(event.eventId, line))}</span>`).join("")}
     </div>
   </div>`;
+}
+
+function compactStarterCardLine(eventId, line) {
+  if (eventId !== "prologue_card_01_show_cards") return line;
+  if (line.includes(CREATION_TEXT.starterCards.basicAttackKeyword)) return CREATION_TEXT.starterCards.basicAttackGuaranteed;
+  if (line.includes(CREATION_TEXT.starterCards.candidateKeyword)) {
+    return tf("regressionCardResync.candidateCount", { count: STARTER_CARDS.length });
+  }
+  if (line.includes(CREATION_TEXT.starterCards.dispositionKeyword)) return CREATION_TEXT.starterCards.weightSummary;
+  return line;
 }
 
 function creationPrologueTemplateValues(draft) {
@@ -421,7 +441,7 @@ function creationPrologueTemplateValues(draft) {
     starterSkillName: selectedCard.skill,
     karmaValue: 0,
     cardCandidateCount: STARTER_CARDS.length,
-    cardGradeWeightSummary: CREATION_TEXT.starterCards.basicAttackGuaranteed,
+    cardGradeWeightSummary: CREATION_TEXT.starterCards.weightSummary,
     selectedCardName: selectedCard.card,
     selectedTraitName: selectedCard.trait,
     selectedSkillName: selectedCard.skill,
@@ -572,33 +592,31 @@ function renderQuestionStep(draft) {
 }
 
 function renderStarterCardStep(draft) {
-  const selectedCard = selectedStarterCard(draft);
-  const weightedCards = weightedStarterCards(draft);
+  const revealed = isStarterCardRevealed(draft);
+  const selectedCard = revealed ? selectedStarterCard(draft) : EMPTY_STARTER_CARD;
+  const cardSlots = createHiddenCardSlots(STARTER_CARDS);
   return `<div class="creation-body creation-starter-body">
-    <p class="muted">${escapeHtml(CREATION_TEXT.starterCards.basicAttackGuaranteed)}</p>
+    <p class="muted creation-starter-brief">${escapeHtml(CREATION_TEXT.starterCards.brief)}</p>
     <div class="creation-starter-card-list">
-      ${weightedCards.map(({ card, weight }) => {
-        const selected = card.id === selectedCard.id;
-        return `<button class="creation-starter-card ${selected ? "selected" : ""}" type="button" data-starter-card="${escapeAttr(card.id)}" data-card-weight="${weight}" aria-pressed="${selected ? "true" : "false"}">
-          <span class="creation-starter-card-glow">${escapeHtml(card.glow)}</span>
-          <strong>${escapeHtml(card.card)}</strong>
-          <small>${escapeHtml(tf("characterCreation.starterCards.traitSkill", {
-            trait: card.trait,
-            skill: card.skill,
-          }))}</small>
-          <small>${escapeHtml(tf("characterCreation.starterCards.dispositionWeight", { weight }))}</small>
+      ${cardSlots.map((slot) => {
+        const selected = revealed && draft.starterCardSlotIndex === slot.index;
+        const slotCard = selected ? selectedCard : EMPTY_STARTER_CARD;
+        const auraClass = selected ? resolveCardGradeAuraClass(slotCard) : "card-aura-hidden";
+        return `<button class="creation-starter-card ${auraClass} ${selected ? "selected is-revealed" : "is-hidden-card"}" type="button" data-starter-card-slot="${slot.index}" aria-pressed="${selected ? "true" : "false"}" ${revealed ? "disabled" : ""}>
+          <span class="creation-starter-card-glow">${escapeHtml(selected ? slotCard.glow : CREATION_TEXT.starterCards.hiddenGlow)}</span>
+          <strong>${escapeHtml(selected ? slotCard.card : tf("characterCreation.starterCards.hiddenCard", { number: slot.index + 1 }))}</strong>
+          <small>${escapeHtml(selected ? CREATION_TEXT.starterCards.revealedHint : CREATION_TEXT.starterCards.hiddenHint)}</small>
         </button>`;
       }).join("")}
     </div>
-    <div class="creation-summary-grid">
-      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedCard)}</span><strong>${escapeHtml(selectedCard.card)}</strong></div>
-      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedTrait)}</span><strong>${escapeHtml(selectedCard.trait)}</strong></div>
-      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedSkill)}</span><strong>${escapeHtml(selectedCard.skill)}</strong></div>
-      <div><span>${escapeHtml(CREATION_TEXT.starterCards.unlock)}</span><strong>${escapeHtml(selectedCard.unlock)}</strong></div>
+    <div class="creation-summary-grid creation-card-result" ${revealed ? "" : "hidden"}>
+      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedCard)}</span><strong>${escapeHtml(revealed ? selectedCard.card : CREATION_TEXT.starterCards.hiddenSelection)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedTrait)}</span><strong>${escapeHtml(revealed ? selectedCard.trait : CREATION_TEXT.starterCards.hiddenSelection)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.starterCards.selectedSkill)}</span><strong>${escapeHtml(revealed ? selectedCard.skill : CREATION_TEXT.starterCards.hiddenSelection)}</strong></div>
     </div>
     <div class="creation-actions creation-actions-split">
       <button class="ghost-button" type="button" data-creation-back>${escapeHtml(COMMON_TEXT.previous)}</button>
-      <button class="primary-button" type="button" data-confirm-starter-card>${escapeHtml(CREATION_TEXT.starterCards.confirmNext)}</button>
+      <button class="primary-button" type="button" data-confirm-starter-card ${revealed ? "" : "disabled"}>${escapeHtml(CREATION_TEXT.starterCards.confirmNext)}</button>
     </div>
   </div>`;
 }
@@ -651,7 +669,7 @@ function answerQuestion(draft, value) {
   draft.answers[question.id] = value;
   if (draft.questionIndex >= QUESTIONS.length - 1) {
     draft.step = "starterCards";
-    draft.starterCardId = weightedStarterCards(draft)[0]?.card.id || draft.starterCardId;
+    clearStarterCardReveal(draft);
     return;
   }
   draft.questionIndex += 1;
@@ -671,6 +689,7 @@ function moveBack(draft) {
     return;
   }
   if (draft.step === "starterCards") {
+    clearStarterCardReveal(draft);
     draft.step = "questions";
     draft.questionIndex = QUESTIONS.length - 1;
     return;
@@ -722,22 +741,33 @@ function syncHiddenFields(form, draft) {
 }
 
 function selectedStarterCard(draft) {
-  return STARTER_CARDS.find((card) => card.id === draft.starterCardId) || STARTER_CARDS[0] || {
-    id: "",
-    card: "",
-    trait: "",
-    skill: "",
-    glow: "",
-    unlock: "",
-  };
+  if (!draft?.starterCardId) return EMPTY_STARTER_CARD;
+  return STARTER_CARDS.find((card) => card.id === draft.starterCardId) || EMPTY_STARTER_CARD;
 }
 
 function weightedStarterCards(draft) {
   const disposition = resolveDispositionResult(Object.values(draft.answers || {}));
-  return STARTER_CARDS.map((card, index) => {
-    const weight = 100 + (STARTER_CARD_DISPOSITION_WEIGHTS[card.id]?.[disposition.id] || 0);
-    return { card, weight, index };
-  }).sort((left, right) => right.weight - left.weight || left.index - right.index);
+  return createWeightedStarterCards(STARTER_CARDS, disposition.id);
+}
+
+function revealStarterCard(draft, slotIndex) {
+  if (isStarterCardRevealed(draft)) return;
+  const normalizedSlot = Math.max(0, Math.min(STARTER_CARDS.length - 1, Math.floor(Number(slotIndex)) || 0));
+  const disposition = resolveDispositionResult(Object.values(draft.answers || {}));
+  const draw = resolveRecommendedStarterCardDraw(STARTER_CARDS, disposition.id);
+  draft.starterCardId = draw.card?.id || STARTER_CARDS[0]?.id || "";
+  draft.starterCardRevealed = Boolean(draft.starterCardId);
+  draft.starterCardSlotIndex = normalizedSlot;
+}
+
+function clearStarterCardReveal(draft) {
+  draft.starterCardId = "";
+  draft.starterCardRevealed = false;
+  draft.starterCardSlotIndex = -1;
+}
+
+function isStarterCardRevealed(draft) {
+  return Boolean(draft?.starterCardRevealed && draft.starterCardId);
 }
 
 function dispositionScoreSummary(disposition) {

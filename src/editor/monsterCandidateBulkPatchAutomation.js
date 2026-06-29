@@ -1,19 +1,19 @@
-import { STATIC_ASSET_REGISTRY } from "../assets/assetRegistry.js?v=571";
+import { STATIC_ASSET_REGISTRY } from "../assets/assetRegistry.js?v=572";
 import {
   MONSTER_BATTLE_SPRITE_PRESETS,
   MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
   MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
   resolveMonsterBattleSpritePreset,
-} from "../config/monsterBattleSpritePresets.js?v=571";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=571";
-import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=571";
+} from "../config/monsterBattleSpritePresets.js?v=572";
+import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=572";
+import { MONSTER_BALANCE_DATA } from "../balance/monsterBalanceData.js?v=572";
 import {
   candidateMonsterRewardLinkFor,
   TUTORIAL_MONSTER_POOL_DATA,
   TUTORIAL_MONSTER_POOL_REGIONS,
   TUTORIAL_MONSTER_POOL_VERSION,
-} from "../balance/monsterCandidatePool.js?v=571";
-import { monsters, regions } from "../data/worldData.js?v=571";
+} from "../balance/monsterCandidatePool.js?v=572";
+import { monsters, regions } from "../data/worldData.js?v=572";
 
 export const MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION_VERSION = "monster-candidate-bulk-patch-automation-v1";
 

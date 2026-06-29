@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="assets/icons/app-install-192.png" />
     <link rel="preload" as="image" href="assets/brand/regressor_gate_start_16x9.jpg" />
     <link rel="preload" as="image" href="assets/brand/regressor_gate_portrait_9x16.jpg" media="(orientation: portrait)" />
-    <link rel="stylesheet" href="styles.css?v=571" />
+    <link rel="stylesheet" href="styles.css?v=572" />
   </head>
   <body>
     <section class="creation-screen is-hidden" id="character-creation" aria-label="캐릭터 생성" data-i18n-attr="aria-label:staticHtml.characterCreation.ariaLabel">
@@ -166,6 +166,14 @@
           </div>
           <button class="collapse-toggle objective-collapse-button" id="growth-objective-toggle" type="button" aria-expanded="true" aria-label="목표 접기" data-i18n-attr="aria-label:staticHtml.app.objective.collapse">−</button>
         </section>
+
+        <section
+          class="regression-card-resync"
+          id="regression-card-resync"
+          data-resync-state="hidden"
+          aria-live="polite"
+          hidden
+        ></section>
 
         <header class="topbar">
           <div>
@@ -523,23 +531,23 @@
             <div class="build-info-grid">
               <div class="build-info-line">
                 <span>화면 버전</span>
-                <strong id="build-version-label">v571</strong>
+                <strong id="build-version-label">v572</strong>
               </div>
               <div class="build-info-line">
                 <span>캐시</span>
-                <strong id="build-cache-label">캐시 v571</strong>
+                <strong id="build-cache-label">캐시 v572</strong>
               </div>
               <div class="build-info-line wide">
                 <span>현재 주소</span>
-                <strong id="build-address-label">http://127.0.0.1:5173/?v=571</strong>
+                <strong id="build-address-label">http://127.0.0.1:5173/?v=572</strong>
               </div>
               <div class="build-info-line wide">
                 <span>모바일 확인</span>
-                <strong id="build-mobile-label">PC LAN IP:5173/?v=571</strong>
+                <strong id="build-mobile-label">PC LAN IP:5173/?v=572</strong>
               </div>
               <div class="build-info-line wide build-info-action">
                 <span>개발 도구</span>
-                <a class="editor-launch-button" href="editor.html?v=571&cachebust=571" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
+                <a class="editor-launch-button" href="editor.html?v=572&cachebust=572" target="_blank" rel="noopener">기초 에디터 준비판 열기</a>
               </div>
             </div>
           </section>
@@ -548,6 +556,7 @@
             <h3>치트/테스트 옵션</h3>
             <p class="muted">테스트 편의용 옵션입니다. 완성 후 치트 메뉴로 재사용합니다.</p>
             <div class="settings-grid developer-settings" id="developer-settings"></div>
+            <div class="regression-card-draw-test" id="regression-card-draw-test"></div>
           </section>
           <section class="panel" data-panel-id="settings-save-load" data-panel-title="저장 관리">
             <span class="eyebrow">차원 데이터</span>
@@ -641,7 +650,7 @@
       </main>
     </div>
 
-    <script type="module" src="src/main.js?v=571"></script>
+    <script type="module" src="src/main.js?v=572"></script>
   </body>
 </html>
 

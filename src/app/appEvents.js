@@ -1,10 +1,10 @@
-import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=571";
-import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=571";
-import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=571";
-import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=571";
-import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=571";
-import { bindNavigationEvents } from "../ui/navigationEvents.js?v=571";
-import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=571";
+import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=572";
+import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=572";
+import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=572";
+import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=572";
+import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=572";
+import { bindNavigationEvents } from "../ui/navigationEvents.js?v=572";
+import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=572";
 
 export function bindAppEvents(handlers) {
   bindCharacterCreationEvents(handlers.onCreateCharacter, handlers.onCancelCharacterCreation);
@@ -41,9 +41,13 @@ export function bindAppEvents(handlers) {
     onSellShopItem: handlers.onSellShopItem,
     onDeveloperAction: handlers.onDeveloperAction,
     onDeveloperOptionChange: handlers.onDeveloperOptionChange,
+    onCardDrawTestAction: handlers.onCardDrawTestAction,
+    onCardDrawTestPreset: handlers.onCardDrawTestPreset,
+    onCardDrawTestSlot: handlers.onCardDrawTestSlot,
     onNavigateToView: handlers.onNavigateToView,
     onCombatAction: handlers.onCombatAction,
     onCombatStyleAction: handlers.onCombatStyleAction,
+    onRegressionCardSelect: handlers.onRegressionCardSelect,
   });
 
   bindCombatInfoEvents({

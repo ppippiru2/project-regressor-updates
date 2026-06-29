@@ -1,14 +1,14 @@
-import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=571";
+import { STATIC_ASSET_REGISTRY, resolveAssetPath } from "../assets/assetRegistry.js?v=572";
 import {
   MONSTER_RUNTIME_ID_ALIASES,
   MONSTER_RUNTIME_INTEGRATION_PACK_VERSION,
   MONSTER_RUNTIME_INTEGRATION_PRESETS,
   MONSTER_RUNTIME_MOTION_ID_MAP,
   resolveMonsterRuntimeIntegrationPreset,
-} from "../config/monsterRuntimeIntegrationPresets.js?v=571";
-import { MONSTER_BATTLE_SPRITE_PRESETS } from "../config/monsterBattleSpritePresets.js?v=571";
-import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=571";
-import { monsters } from "../data/worldData.js?v=571";
+} from "../config/monsterRuntimeIntegrationPresets.js?v=572";
+import { MONSTER_BATTLE_SPRITE_PRESETS } from "../config/monsterBattleSpritePresets.js?v=572";
+import { MONSTER_COMBAT_POSES } from "../config/monsterCombatDisplay.js?v=572";
+import { monsters } from "../data/worldData.js?v=572";
 
 export function createMonsterRuntimeIntegrationPreview(registry = STATIC_ASSET_REGISTRY, options = {}) {
   const monsterById = new Map(monsters.map((monster) => [monster.id, monster]));

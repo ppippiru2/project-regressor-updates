@@ -1,6 +1,8 @@
-import { t } from "../localization/index.js?v=571";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=571";
-import { createTutorialFlags } from "./tutorialGuidance.js?v=571";
+import { t } from "../localization/index.js?v=572";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=572";
+import { normalizeKarmaState } from "./karma.js?v=572";
+import { normalizeRegressionCardState } from "./regressionCardState.js?v=572";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=572";
 
 export function createInitialState({
   slots,
@@ -32,6 +34,14 @@ export function createInitialState({
     regionEncounterCounts: {},
     regressionCount: 1,
     tutorialRun: 1,
+    karma: normalizeKarmaState(null),
+    karmaValue: 0,
+    regressionCardState: normalizeRegressionCardState(null),
+    cardCandidateCount: 3,
+    cardGradeWeightSummary: t("regressionCardResync.gradeWeightBlue"),
+    selectedCardName: "",
+    selectedTraitName: "",
+    selectedSkillName: "",
     skillLoadouts: defaultSkillLoadouts.map((loadout) => ({ ...loadout, actionIds: [...loadout.actionIds] })),
     activeSkillLoadoutId: defaultActiveSkillLoadoutId,
     target: null,

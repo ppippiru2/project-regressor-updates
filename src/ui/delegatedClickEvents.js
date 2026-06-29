@@ -22,13 +22,18 @@ export function bindDelegatedClickEvents({
   onSellShopItem,
   onDeveloperAction,
   onDeveloperOptionChange,
+  onCardDrawTestAction,
+  onCardDrawTestPreset,
+  onCardDrawTestSlot,
   onNavigateToView,
   onCombatAction,
   onCombatStyleAction,
+  onRegressionCardSelect,
 } = {}) {
   root.addEventListener("click", (event) => {
     const combatStyleAction = event.target.closest("[data-combat-style-action]");
     const combatAction = event.target.closest("[data-combat-action]");
+    const regressionCard = event.target.closest("[data-regression-card]");
     const equip = event.target.closest("[data-equip]");
     const equipRecommended = event.target.closest("[data-equip-recommended]");
     const unequip = event.target.closest("[data-unequip]");
@@ -50,7 +55,28 @@ export function bindDelegatedClickEvents({
     const shopBuy = event.target.closest("[data-shop-buy]");
     const shopSell = event.target.closest("[data-shop-sell]");
     const developerAction = event.target.closest("[data-developer-action]");
+    const cardDrawTestAction = event.target.closest("[data-card-draw-test-action]");
+    const cardDrawTestPreset = event.target.closest("[data-card-draw-test-preset]");
+    const cardDrawTestSlot = event.target.closest("[data-card-draw-test-slot]");
     const systemTarget = event.target.closest("[data-system-target-view]");
+
+    if (cardDrawTestAction) {
+      event.preventDefault();
+      onCardDrawTestAction?.(cardDrawTestAction.dataset.cardDrawTestAction);
+      return;
+    }
+
+    if (cardDrawTestPreset) {
+      event.preventDefault();
+      onCardDrawTestPreset?.(cardDrawTestPreset.dataset.cardDrawTestPreset);
+      return;
+    }
+
+    if (cardDrawTestSlot) {
+      event.preventDefault();
+      onCardDrawTestSlot?.(cardDrawTestSlot.dataset.cardDrawTestSlot);
+      return;
+    }
 
     if (combatStyleAction) {
       event.preventDefault();
@@ -61,6 +87,12 @@ export function bindDelegatedClickEvents({
     if (combatAction) {
       event.preventDefault();
       onCombatAction?.(combatAction.dataset.combatAction);
+      return;
+    }
+
+    if (regressionCard) {
+      event.preventDefault();
+      onRegressionCardSelect?.(regressionCard.dataset.regressionCard);
       return;
     }
 

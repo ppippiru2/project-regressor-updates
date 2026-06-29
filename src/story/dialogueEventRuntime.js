@@ -2,8 +2,10 @@ import {
   normalizeDialogueEvents,
   renderDialogueEventLines,
   resolveDialogueEvent,
-} from "./dialogueEvents.js?v=571";
-import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=571";
+} from "./dialogueEvents.js?v=572";
+import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=572";
+import { karmaValue } from "../state/karma.js?v=572";
+import { createRegressionCardResyncState } from "../state/regressionCardState.js?v=572";
 
 export const DIALOGUE_EVENT_RUNTIME_VERSION = "v1.0-live-json-bridge";
 
@@ -116,6 +118,8 @@ export function createDialogueRuntimeTemplateValues(state = {}, options = {}) {
   const player = state.player || {};
   const profile = state.playerProfile || {};
   const stats = player.stats || {};
+  const regressionCardState = createRegressionCardResyncState(state);
+  const currentKarmaValue = options.karmaValue ?? regressionCardState.karmaValue ?? karmaValue(state);
   const statSummary = options.statSummary
     || Object.entries(stats)
       .filter(([, value]) => Number.isFinite(Number(value)))
@@ -134,14 +138,14 @@ export function createDialogueRuntimeTemplateValues(state = {}, options = {}) {
     LUK: stats.luk ?? stats.LUK ?? options.LUK ?? 0,
     dispositionName: profile.alignment || options.dispositionName || "",
     starterCardName: profile.starterCardName || options.starterCardName || "",
-    starterTraitName: profile.starterTraitName || options.starterTraitName || "",
-    starterSkillName: profile.starterSkillName || options.starterSkillName || "",
-    karmaValue: options.karmaValue ?? 0,
-    cardCandidateCount: options.cardCandidateCount ?? 0,
-    cardGradeWeightSummary: options.cardGradeWeightSummary || "",
-    selectedCardName: profile.starterCardName || options.selectedCardName || "",
-    selectedTraitName: profile.starterTraitName || options.selectedTraitName || "",
-    selectedSkillName: profile.starterSkillName || options.selectedSkillName || "",
+    starterTraitName: profile.starterTrait || options.starterTraitName || "",
+    starterSkillName: profile.starterSkill || options.starterSkillName || "",
+    karmaValue: currentKarmaValue,
+    cardCandidateCount: options.cardCandidateCount ?? regressionCardState.cardCandidateCount,
+    cardGradeWeightSummary: options.cardGradeWeightSummary || regressionCardState.cardGradeWeightSummary,
+    selectedCardName: regressionCardState.selectedCardName || profile.starterCardName || options.selectedCardName || "",
+    selectedTraitName: regressionCardState.selectedTraitName || profile.starterTrait || options.selectedTraitName || "",
+    selectedSkillName: regressionCardState.selectedSkillName || profile.starterSkill || options.selectedSkillName || "",
     nextCalamityName: options.nextCalamityName || "",
     savedTime: options.savedTime || "",
     clearTime: options.clearTime || "",

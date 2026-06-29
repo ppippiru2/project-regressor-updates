@@ -1,14 +1,16 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=571";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=571";
-import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "./profile.js?v=571";
-import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=571";
-import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=571";
-import { t, tf } from "../localization/index.js?v=571";
+} from "./developerOptions.js?v=572";
+import { normalizeKarmaState } from "./karma.js?v=572";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=572";
+import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "./profile.js?v=572";
+import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=572";
+import { normalizeRegressionCardState } from "./regressionCardState.js?v=572";
+import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=572";
+import { t, tf } from "../localization/index.js?v=572";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=571";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=572";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";
@@ -102,6 +104,15 @@ export function normalizeSavedState(saved, createInitialState) {
   const savedState = saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
   const skillLoadouts = normalizeSkillLoadouts(savedState.skillLoadouts, base.skillLoadouts);
   const activeSkillLoadoutId = normalizeActiveSkillLoadoutId(savedState.activeSkillLoadoutId, skillLoadouts);
+  const karma = normalizeKarmaState(savedState.karma ?? { value: savedState.karmaValue });
+  const playerProfile = normalizePlayerProfile(savedState.playerProfile, savedState.player?.name || base.player.name);
+  const regressionCardState = normalizeRegressionCardState(savedState.regressionCardState, {
+    ...savedState,
+    karma,
+    selectedCardName: savedState.selectedCardName ?? playerProfile.starterCardName,
+    selectedTraitName: savedState.selectedTraitName ?? playerProfile.starterTrait,
+    selectedSkillName: savedState.selectedSkillName ?? playerProfile.starterSkill,
+  });
   return {
     ...base,
     ...savedState,
@@ -114,7 +125,7 @@ export function normalizeSavedState(saved, createInitialState) {
         base.player.stats
       ),
     },
-    playerProfile: normalizePlayerProfile(savedState.playerProfile, savedState.player?.name || base.player.name),
+    playerProfile,
     equipment: { ...base.equipment, ...savedState.equipment },
     inventory: Array.isArray(savedState.inventory) ? savedState.inventory : base.inventory,
     completedRegions: Array.isArray(savedState.completedRegions) ? savedState.completedRegions : base.completedRegions,
@@ -131,6 +142,14 @@ export function normalizeSavedState(saved, createInitialState) {
         savedState.tutorialFlags?.tutorialRun ??
         base.tutorialRun,
     ),
+    karma,
+    karmaValue: karma.value,
+    regressionCardState,
+    cardCandidateCount: regressionCardState.cardCandidateCount,
+    cardGradeWeightSummary: regressionCardState.cardGradeWeightSummary,
+    selectedCardName: regressionCardState.selectedCardName,
+    selectedTraitName: regressionCardState.selectedTraitName,
+    selectedSkillName: regressionCardState.selectedSkillName,
     resting: Boolean(savedState.resting ?? base.resting),
     autoHunt: Boolean(savedState.autoHunt ?? base.autoHunt),
     offlineAutoHuntEligible: Boolean(savedState.offlineAutoHuntEligible ?? base.offlineAutoHuntEligible),

@@ -751,9 +751,14 @@ select:focus {
   text-align: left;
 }
 
+.creation-starter-brief {
+  margin: 0 0 0.75rem;
+  text-align: center;
+}
+
 .creation-starter-card-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   gap: 0.65rem;
 }
 
@@ -761,7 +766,7 @@ select:focus {
   display: grid;
   gap: 0.3rem;
   width: 100%;
-  min-height: 6.2rem;
+  min-height: 8.4rem;
   justify-items: start;
   border: 1px solid rgba(57, 228, 255, 0.24);
   border-radius: 6px;
@@ -771,6 +776,95 @@ select:focus {
   color: var(--text);
   padding: 0.8rem;
   text-align: left;
+}
+
+.creation-starter-card.is-hidden-card,
+.regression-card-option.is-hidden-card {
+  position: relative;
+  overflow: hidden;
+  place-items: center;
+  justify-items: center;
+  text-align: center;
+  background:
+    linear-gradient(145deg, rgba(18, 42, 80, 0.92), rgba(8, 15, 35, 0.96)),
+    rgba(7, 28, 58, 0.74);
+}
+
+.creation-starter-card.is-hidden-card::before,
+.regression-card-option.is-hidden-card::before {
+  content: "";
+  position: absolute;
+  inset: 0.62rem;
+  border: 1px solid rgba(111, 217, 255, 0.34);
+  border-radius: 5px;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(77, 222, 255, 0.24), transparent 32%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 9px),
+    linear-gradient(160deg, rgba(76, 194, 255, 0.14), rgba(255, 215, 128, 0.08));
+  pointer-events: none;
+}
+
+.creation-starter-card.is-hidden-card > *,
+.regression-card-option.is-hidden-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.creation-starter-card.is-hidden-card strong,
+.regression-card-option.is-hidden-card strong {
+  margin-top: 0.7rem;
+  letter-spacing: 0;
+}
+
+.creation-starter-card.is-hidden-card:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.creation-starter-card.is-revealed {
+  justify-items: start;
+  text-align: left;
+}
+
+.creation-card-result[hidden] {
+  display: none;
+}
+
+.creation-starter-card.card-aura-hidden,
+.regression-card-option.card-aura-hidden {
+  box-shadow: inset 0 0 0 1px rgba(111, 217, 255, 0.12);
+}
+
+.creation-starter-card.card-aura-blue,
+.regression-card-option.card-aura-blue {
+  border-color: rgba(67, 220, 255, 0.6);
+  box-shadow: 0 0 18px rgba(67, 220, 255, 0.18);
+}
+
+.creation-starter-card.card-aura-rare,
+.regression-card-option.card-aura-rare {
+  border-color: rgba(90, 255, 158, 0.7);
+  box-shadow: 0 0 20px rgba(90, 255, 158, 0.22);
+}
+
+.creation-starter-card.card-aura-purple,
+.regression-card-option.card-aura-purple {
+  border-color: rgba(181, 117, 255, 0.76);
+  box-shadow: 0 0 24px rgba(181, 117, 255, 0.28);
+}
+
+.creation-starter-card.card-aura-epic,
+.regression-card-option.card-aura-epic {
+  border-color: rgba(255, 104, 215, 0.82);
+  box-shadow: 0 0 28px rgba(255, 104, 215, 0.32);
+}
+
+.creation-starter-card.card-aura-legendary,
+.regression-card-option.card-aura-legendary {
+  border-color: rgba(255, 217, 112, 0.9);
+  box-shadow:
+    0 0 18px rgba(255, 217, 112, 0.28),
+    0 0 34px rgba(255, 159, 67, 0.22);
 }
 
 .creation-starter-card.selected,
@@ -1357,6 +1451,114 @@ select:focus {
 .growth-objective[data-objective-state="growth"] .growth-objective-meter span {
   background: linear-gradient(90deg, #5be584, #c5ffd6);
   box-shadow: 0 0 14px rgba(91, 229, 132, 0.3);
+}
+
+.regression-card-resync {
+  display: grid;
+  gap: 0.78rem;
+  margin: 0 0 1rem;
+  padding: var(--panel-pad);
+  border: 1px solid rgba(92, 201, 255, 0.34);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(14, 47, 102, 0.9), rgba(8, 21, 54, 0.92)),
+    rgba(4, 15, 42, 0.92);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+}
+
+.regression-card-resync[hidden] {
+  display: none;
+}
+
+.regression-card-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.regression-card-heading h3 {
+  margin: 0.12rem 0 0;
+  font-size: 1.02rem;
+}
+
+.regression-card-heading p {
+  margin: 0.28rem 0 0;
+  color: var(--muted);
+}
+
+.regression-card-karmabar {
+  display: grid;
+  justify-items: end;
+  gap: 0.1rem;
+  min-width: 4.6rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(255, 224, 138, 0.34);
+  border-radius: 8px;
+  background: rgba(255, 213, 128, 0.08);
+}
+
+.regression-card-karmabar span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.regression-card-karmabar strong {
+  color: #ffe08a;
+  font-size: 1.28rem;
+  line-height: 1;
+}
+
+.regression-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.regression-card-meta span {
+  min-height: 1.72rem;
+  padding: 0.4rem 0.58rem;
+  border: 1px solid rgba(148, 192, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(148, 192, 255, 0.08);
+  color: var(--text);
+  font-size: 0.78rem;
+}
+
+.regression-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.65rem;
+}
+
+.regression-card-option {
+  display: grid;
+  gap: 0.35rem;
+  min-height: 7.2rem;
+  padding: 0.72rem;
+  border: 1px solid rgba(148, 192, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(10, 30, 70, 0.7);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.regression-card-option:hover,
+.regression-card-option:focus-visible,
+.regression-card-option.selected {
+  border-color: rgba(103, 232, 249, 0.72);
+  background: rgba(19, 70, 128, 0.82);
+  outline: none;
+}
+
+.regression-card-option strong {
+  font-size: 0.92rem;
+}
+
+.regression-card-option small {
+  color: var(--muted);
+  line-height: 1.35;
 }
 
 .topbar {
@@ -3655,6 +3857,79 @@ select:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.regression-card-draw-test {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  padding: 0.85rem;
+  background: rgba(4, 16, 40, 0.42);
+}
+
+.card-draw-test-head,
+.card-draw-test-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.card-draw-test-head h4 {
+  margin: 0.2rem 0 0.2rem;
+}
+
+.card-draw-test-body {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card-draw-test-presets,
+.card-draw-test-meta,
+.card-draw-test-actions {
+  flex-wrap: wrap;
+}
+
+.card-draw-test-presets {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.card-draw-test-presets .is-active {
+  border-color: rgba(51, 239, 255, 0.85);
+  color: var(--cyan);
+  box-shadow: 0 0 14px rgba(51, 239, 255, 0.16);
+}
+
+.card-draw-test-card-list {
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+
+.card-draw-test-card {
+  min-height: 7.2rem;
+}
+
+.card-draw-test-result {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid rgba(57, 228, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: rgba(5, 18, 45, 0.62);
+}
+
+.card-draw-test-result strong {
+  color: #f2fbff;
+}
+
+.card-draw-test-result small,
+.card-draw-test-actions span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .deployment-update-actions .secondary-button,
