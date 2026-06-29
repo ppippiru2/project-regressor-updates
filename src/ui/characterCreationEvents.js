@@ -1,25 +1,26 @@
-import { getLocaleText, tf } from "../localization/index.js?v=560";
-import { resolveAlignment } from "../state/profile.js?v=560";
+import { getLocaleText, tf } from "../localization/index.js?v=565";
+import { resolveAlignment, resolveDispositionResult } from "../state/profile.js?v=565";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=560";
+} from "../state/portraitFrame.js?v=565";
 import {
   applyPortraitFrameToElement,
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=560";
+} from "./portraitFrameView.js?v=565";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
   renderDiceSprite,
-} from "./diceSpriteRenderer.js?v=560";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=560";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=560";
+} from "./diceSpriteRenderer.js?v=565";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=565";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=565";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=565";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -40,6 +41,19 @@ const INITIAL_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.startingStats;
 const MIN_STAT_VALUES = INITIAL_CREATION_STAT_BALANCE.minValues || INITIAL_STAT_VALUES;
 const MAX_STAT_VALUE = 10;
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
+const CREATION_PROLOGUE_EVENTS_BY_STEP = Object.freeze({
+  profile: Object.freeze(["prologue_dream_01_falling_consciousness", "prologue_dream_02_profile_record"]),
+  stats: Object.freeze(["prologue_dream_03_initial_stat_sync"]),
+  questions: Object.freeze(["prologue_dream_04_abyss_questions_start"]),
+  starterCards: Object.freeze(["prologue_card_01_show_cards"]),
+  result: Object.freeze(["prologue_transfer_to_tutorial"]),
+});
+const STARTER_CARD_DISPOSITION_WEIGHTS = Object.freeze({
+  starter_weapon_sense: Object.freeze({ coldCalculation: 20, practicalBalance: 10 }),
+  starter_light_step: Object.freeze({ freeSurvival: 20, practicalBalance: 10 }),
+  starter_enduring_body: Object.freeze({ devotedOrder: 20, practicalBalance: 10 }),
+  starter_faint_mana: Object.freeze({ inquiryRecord: 20, practicalBalance: 10 }),
+});
 
 export function bindCharacterCreationEvents(onCreateCharacter, onCancelCreation) {
   const form = document.getElementById("character-create-form");
@@ -276,6 +290,7 @@ function renderStepHeader(draft) {
     <span class="eyebrow">${escapeHtml(COMMON_TEXT.systemInitialization)}</span>
     <h2>[ ${escapeHtml(stepText.title)} ]</h2>
     <p class="muted">${escapeHtml(stepText.description)}</p>
+    ${renderCreationProloguePanel(draft)}
   </div>`;
 }
 
@@ -285,6 +300,87 @@ function renderStepBody(draft) {
   if (draft.step === "starterCards") return renderStarterCardStep(draft);
   if (draft.step === "result") return renderResultStep(draft);
   return renderProfileStep(draft);
+}
+
+function renderCreationProloguePanel(draft) {
+  const eventIds = CREATION_PROLOGUE_EVENTS_BY_STEP[draft.step] || [];
+  if (!eventIds.length) return "";
+
+  const templateValues = creationPrologueTemplateValues(draft);
+  const events = eventIds
+    .map((eventId) => resolveTutorialKeyEventDialogue(eventId, { localeText: TEXT, templateValues }))
+    .filter(Boolean);
+  if (!events.length) return "";
+
+  return `<div class="creation-prologue-panel" data-creation-prologue-step="${escapeAttr(draft.step)}">
+    ${events.map(renderCreationPrologueEvent).join("")}
+  </div>`;
+}
+
+function renderCreationPrologueEvent(event) {
+  const lines = prologueLinesFromDetail(event.detail).slice(0, 4);
+  return `<div class="creation-prologue-event" data-creation-event-id="${escapeAttr(event.eventId)}" data-speaker-type="${escapeAttr(event.speakerType || "system")}">
+    <strong>${escapeHtml(event.title || event.eventId)}</strong>
+    <div class="creation-prologue-lines">
+      ${lines.map((line) => `<span>${escapeHtml(line)}</span>`).join("")}
+    </div>
+  </div>`;
+}
+
+function creationPrologueTemplateValues(draft) {
+  const selectedCard = selectedStarterCard(draft);
+  const alignment = resolveAlignment(Object.values(draft.answers || {}));
+  const total = statTotal(draft.stats);
+  const statusGrade = statusGradeFromStats(draft.stats);
+  return {
+    playerName: draft.name,
+    age: draft.age,
+    gender: draft.gender,
+    country: draft.country,
+    profileImage: draft.portraitFileName || CREATION_TEXT.profile.emptyImage,
+    statSummary: STAT_KEYS.map((stat) => `${STAT_LABELS[stat]} ${draft.stats[stat] ?? 0}`).join(" / "),
+    statTotal: total,
+    statusGrade,
+    STR: draft.stats.STR ?? 0,
+    AGI: draft.stats.AGI ?? 0,
+    VIT: draft.stats.VIT ?? 0,
+    INT: draft.stats.INT ?? 0,
+    WIS: draft.stats.WIS ?? 0,
+    LUK: draft.stats.LUK ?? 0,
+    dispositionName: alignment,
+    starterCardName: selectedCard.card,
+    starterTraitName: selectedCard.trait,
+    starterSkillName: selectedCard.skill,
+    karmaValue: 0,
+    cardCandidateCount: STARTER_CARDS.length,
+    cardGradeWeightSummary: CREATION_TEXT.starterCards.basicAttackGuaranteed,
+    selectedCardName: selectedCard.card,
+    selectedTraitName: selectedCard.trait,
+    selectedSkillName: selectedCard.skill,
+    nextCalamityName: CREATION_TEXT.result.tutorialIsland,
+  };
+}
+
+function prologueLinesFromDetail(detail) {
+  const lines = [];
+  collectPrologueLines(detail, lines);
+  return lines.filter(Boolean);
+}
+
+function collectPrologueLines(value, lines, key = "") {
+  if (!value) return;
+  if (key === "title" || key === "displayMode" || key === "speakerType" || key === "afterClearReveal") return;
+  if (typeof value === "string") {
+    lines.push(value);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((entry) => collectPrologueLines(entry, lines));
+    return;
+  }
+  if (typeof value === "object") {
+    Object.entries(value).forEach(([entryKey, entry]) => collectPrologueLines(entry, lines, entryKey));
+  }
 }
 
 function renderProfileStep(draft) {
@@ -409,18 +505,20 @@ function renderQuestionStep(draft) {
 
 function renderStarterCardStep(draft) {
   const selectedCard = selectedStarterCard(draft);
+  const weightedCards = weightedStarterCards(draft);
   return `<div class="creation-body creation-starter-body">
     <p class="muted">${escapeHtml(CREATION_TEXT.starterCards.basicAttackGuaranteed)}</p>
     <div class="creation-starter-card-list">
-      ${STARTER_CARDS.map((card) => {
+      ${weightedCards.map(({ card, weight }) => {
         const selected = card.id === selectedCard.id;
-        return `<button class="creation-starter-card ${selected ? "selected" : ""}" type="button" data-starter-card="${escapeAttr(card.id)}" aria-pressed="${selected ? "true" : "false"}">
+        return `<button class="creation-starter-card ${selected ? "selected" : ""}" type="button" data-starter-card="${escapeAttr(card.id)}" data-card-weight="${weight}" aria-pressed="${selected ? "true" : "false"}">
           <span class="creation-starter-card-glow">${escapeHtml(card.glow)}</span>
           <strong>${escapeHtml(card.card)}</strong>
           <small>${escapeHtml(tf("characterCreation.starterCards.traitSkill", {
             trait: card.trait,
             skill: card.skill,
           }))}</small>
+          <small>${escapeHtml(tf("characterCreation.starterCards.dispositionWeight", { weight }))}</small>
         </button>`;
       }).join("")}
     </div>
@@ -438,7 +536,8 @@ function renderStarterCardStep(draft) {
 }
 
 function renderResultStep(draft) {
-  const alignment = resolveAlignment(Object.values(draft.answers));
+  const disposition = resolveDispositionResult(Object.values(draft.answers));
+  const alignment = disposition.name;
   const selectedCard = selectedStarterCard(draft);
   const statusGrade = statusGradeFromStats(draft.stats);
   return `<div class="creation-body creation-result-panel">
@@ -454,6 +553,7 @@ function renderResultStep(draft) {
       <div><span>${escapeHtml(CREATION_TEXT.result.starterTrait)}</span><strong>${escapeHtml(selectedCard.trait)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.starterSkill)}</span><strong>${escapeHtml(selectedCard.skill)}</strong></div>
       <div><span>${escapeHtml(CREATION_TEXT.result.startRegion)}</span><strong>${escapeHtml(CREATION_TEXT.result.tutorialIsland)}</strong></div>
+      <div><span>${escapeHtml(CREATION_TEXT.result.dispositionScore)}</span><strong>${escapeHtml(dispositionScoreSummary(disposition))}</strong></div>
     </div>
     <div class="creation-stat-grid compact">
       ${STAT_KEYS.map((stat) => `<div class="creation-stat-line">
@@ -483,6 +583,7 @@ function answerQuestion(draft, value) {
   draft.answers[question.id] = value;
   if (draft.questionIndex >= QUESTIONS.length - 1) {
     draft.step = "starterCards";
+    draft.starterCardId = weightedStarterCards(draft)[0]?.card.id || draft.starterCardId;
     return;
   }
   draft.questionIndex += 1;
@@ -559,6 +660,20 @@ function selectedStarterCard(draft) {
     glow: "",
     unlock: "",
   };
+}
+
+function weightedStarterCards(draft) {
+  const disposition = resolveDispositionResult(Object.values(draft.answers || {}));
+  return STARTER_CARDS.map((card, index) => {
+    const weight = 100 + (STARTER_CARD_DISPOSITION_WEIGHTS[card.id]?.[disposition.id] || 0);
+    return { card, weight, index };
+  }).sort((left, right) => right.weight - left.weight || left.index - right.index);
+}
+
+function dispositionScoreSummary(disposition) {
+  const entries = (disposition?.scoreEntries || []).filter((entry) => entry.score > 0);
+  const visibleEntries = entries.length ? entries : disposition?.scoreEntries || [];
+  return visibleEntries.map((entry) => `${entry.name} ${entry.score}`).join(" / ");
 }
 
 function starterCardFormValues(draft) {

@@ -1,5 +1,21 @@
-import { getLocaleText } from "../localization/index.js?v=560";
-import { portraitFrameFromFormData } from "./portraitFrame.js?v=560";
+import { getLocaleText } from "../localization/index.js?v=565";
+import { portraitFrameFromFormData } from "./portraitFrame.js?v=565";
+
+const DISPOSITION_SCORE_KEYS = Object.freeze([
+  "devotedOrder",
+  "practicalBalance",
+  "coldCalculation",
+  "freeSurvival",
+  "inquiryRecord",
+]);
+
+const ANSWER_DISPOSITION_WEIGHTS = Object.freeze({
+  hero: Object.freeze({ devotedOrder: 2 }),
+  lawful: Object.freeze({ devotedOrder: 2 }),
+  pragmatic: Object.freeze({ practicalBalance: 2, inquiryRecord: 1 }),
+  vengeful: Object.freeze({ coldCalculation: 2 }),
+  chaotic: Object.freeze({ freeSurvival: 2 }),
+});
 
 export function buildPlayerProfileInput(formData, defaultProfile) {
   return {
@@ -26,37 +42,37 @@ export function buildPlayerProfileInput(formData, defaultProfile) {
 }
 
 export function resolveAlignment(answers) {
-  const alignmentText = getLocaleText().profile.alignments;
-  const score = {
-    hero: 0,
-    pragmatic: 0,
-    vengeful: 0,
-    lawful: 0,
-    chaotic: 0,
-  };
-  for (const answer of answers) {
-    if (answer in score) score[answer] += 1;
+  return resolveDispositionResult(answers).name;
+}
+
+export function resolveDispositionResult(answers = [], { localeText = getLocaleText() } = {}) {
+  const scores = Object.fromEntries(DISPOSITION_SCORE_KEYS.map((key) => [key, 0]));
+  for (const answer of Array.isArray(answers) ? answers : []) {
+    const weights = ANSWER_DISPOSITION_WEIGHTS[answer];
+    if (!weights) continue;
+    for (const [key, value] of Object.entries(weights)) {
+      scores[key] = (scores[key] || 0) + value;
+    }
   }
 
-  const order = ["hero", "pragmatic", "vengeful", "lawful", "chaotic"];
-  const best = order.reduce((winner, key) => (score[key] > score[winner] ? key : winner), "pragmatic");
-  const second = order
-    .filter((key) => key !== best)
-    .sort((a, b) => score[b] - score[a])[0];
-
-  if (score[best] === 0) return alignmentText.neutral;
-  if (best === "chaotic" && second === "pragmatic" && score[second] > 0) return alignmentText.chaoticPragmatic;
-  if (best === "lawful" && second === "hero" && score[second] > 0) return alignmentText.lawfulHero;
-  if (best === "hero" && second === "lawful" && score[second] > 0) return alignmentText.heroLawful;
-  if (best === "vengeful" && second === "chaotic" && score[second] > 0) return alignmentText.vengefulChaotic;
+  const bestId = DISPOSITION_SCORE_KEYS.reduce(
+    (winner, key) => (scores[key] > scores[winner] ? key : winner),
+    "inquiryRecord",
+  );
+  const id = scores[bestId] > 0 ? bestId : "inquiryRecord";
+  const dispositions = localeText.story?.tutorialDialogue?.dispositions || {};
+  const name = dispositions[id]?.name || localeText.profile?.alignments?.neutral || id;
 
   return {
-    hero: alignmentText.hero,
-    pragmatic: alignmentText.pragmatic,
-    vengeful: alignmentText.vengeful,
-    lawful: alignmentText.lawful,
-    chaotic: alignmentText.chaotic,
-  }[best] || alignmentText.neutral;
+    id,
+    name,
+    scores,
+    scoreEntries: DISPOSITION_SCORE_KEYS.map((key) => ({
+      id: key,
+      name: dispositions[key]?.name || key,
+      score: scores[key] || 0,
+    })),
+  };
 }
 
 

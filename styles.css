@@ -255,6 +255,36 @@ select:focus {
   text-shadow: 0 0 18px rgba(51, 239, 255, 0.56);
 }
 
+.creation-prologue-panel {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.45rem;
+  text-align: left;
+}
+
+.creation-prologue-event {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid rgba(91, 141, 255, 0.34);
+  border-radius: 8px;
+  background: rgba(2, 12, 34, 0.58);
+  box-shadow: inset 0 0 18px rgba(57, 228, 255, 0.05);
+  padding: 0.65rem 0.75rem;
+}
+
+.creation-prologue-event strong {
+  color: #a7f3ff;
+  font-size: 0.82rem;
+}
+
+.creation-prologue-lines {
+  display: grid;
+  gap: 0.22rem;
+  color: rgba(226, 241, 255, 0.86);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
 .creation-body {
   display: grid;
   gap: 1rem;
@@ -14995,6 +15025,14 @@ body[data-info-tooltips="off"] .info-term {
   .creation-step-header h2 {
     font-size: clamp(1.5rem, 7vw, 2rem);
     line-height: 1.2;
+  }
+
+  .creation-prologue-event {
+    padding: 0.6rem;
+  }
+
+  .creation-prologue-lines {
+    font-size: 0.8rem;
   }
 
   .creation-body {

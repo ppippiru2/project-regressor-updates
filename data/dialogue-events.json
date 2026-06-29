@@ -1,0 +1,644 @@
+[
+  {
+    "id": "prologue_dream_02_profile_record",
+    "title": "프로필 기록",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 시작 후 꿈속 프롤로그에서 실행"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "profile"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[SYSTEM INITIALIZATION]",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[기록 대상 동기화]",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "네가 기억할 이름을 남겨라.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "주인공 독백 금지. 이 단계는 꿈속 나레이션."
+      },
+      {
+        "speaker": "UI",
+        "lineType": "system",
+        "text": "등록명: {playerName}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "프로필 입력 UI와 연결"
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "네 형상을 기록한다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "UI",
+        "lineType": "system",
+        "text": "나이: {age}\n성별: {gender}\n국가: {country}\n프로필 이미지: {profileImage}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "플레이스홀더 치환 필요"
+      },
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "손끝이 움직인다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "내가 직접 적고 있는 건지, 누군가가 내 안쪽에서 답을 끌어내는 건지 알 수 없다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "이 이벤트는 1회차 새게임에서만 실행한다.",
+      "회귀 시 반복하지 않는다.",
+      "헌터협회/길드/헌터 등급 용어 금지."
+    ],
+    "qaChecks": [
+      "prologueCompleted=false일 때만 실행되는가?",
+      "{playerName}, {age}, {gender}, {country}, {profileImage}가 실제 입력값으로 치환되는가?",
+      "주인공 독백이 출력되지 않는가?"
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_status_after_dream",
+    "title": "초심자의 해안 상태창 재확인",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "auto",
+      "targetId": "tutorial_shore",
+      "threshold": null,
+      "description": "해안에서 깨어난 직후"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "prologueCompleted"
+      ],
+      "flagsFalse": [
+        "forgottenGodRemnantContacted",
+        "regressorRecordUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": []
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[상태창] 기본 정보가 활성화됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "능력치: {statSummary}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "고정 스탯 출력 금지"
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "능력치 총합: {statTotal}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "상태창 등급: {statusGrade}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "확정 스킬: 기본 공격.\n스타터 스킬: {starterSkillName}.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "숫자만 봐도 대충 알겠어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "주인공은 자연스러운 구어체 유지"
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "나는 강한 편이 아니야.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "아니, 그냥 강하지 않아.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이 수치로 무턱대고 움직이면 바로 죽겠어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "튜토리얼 도움말 팝업",
+        "lineType": "popup",
+        "text": "[튜토리얼 도움말]\n본 시험의 목표는 생존과 최종 관문 평가 조건 달성입니다.\n본 시험은 생명 활동의 안전을 보장하지 않습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "전투 로그가 아니라 별도 팝업/일시정지 도움말로 출력"
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "……죽을 수도 있다는 뜻이겠지.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "잔재 접촉 전이므로 도감/스크랩북/회귀자의 기록 정상 메시지 금지.",
+      "튜토리얼 도움말 팝업은 전투 로그와 분리한다."
+    ],
+    "qaChecks": [
+      "{statSummary}, {statTotal}, {statusGrade}, {starterSkillName} 치환 확인",
+      "도감/스크랩북 메시지 미출력 확인",
+      "헌터협회/길드 용어 미출력 확인"
+    ]
+  },
+  {
+    "id": "regression_2nd_pre_shore_card_resync",
+    "title": "2회차 회귀 전 운명 카드 재동기화",
+    "phase": "regression_pre_shore",
+    "runRequirement": {
+      "exactRun": 2,
+      "minRun": 2,
+      "maxRun": 2,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onDeath",
+      "targetId": "first_calamity",
+      "threshold": null,
+      "description": "1차 재앙 사망 후, 해안에서 눈뜨기 전"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "firstDeathCauseRecorded"
+      ],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "traitCardResyncAvailable"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "deathCause:first_calamity",
+        "karmaSettlement"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[회귀자의 기록] 사망 원인을 압축합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[카르마 정산] 최초 사망 기록이 등록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[카르마] {karmaValue}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "카르마 시스템이 아직 없으면 스텁 구현"
+      },
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "의식이 다시 가라앉는다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[운명 카드 재동기화] 이전 선택과 사망 기록을 대조합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 프로필과 성향은 유지됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "프로필/심연의 질문 반복 금지"
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 운명 카드는 회귀마다 재동기화될 수 있습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "중요 고정 규칙"
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "또…… 선택하라는 건가.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이름과 성향은 그대로.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "하지만 출발점의 특성은 다시 조정할 수 있다?",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[카드 후보] {cardCandidateCount}장.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[등급 가중치] {cardGradeWeightSummary}",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2회차 이후에도 운명 카드 재동기화는 반복 가능하다.",
+      "프로필/심연의 질문은 반복하지 않는다.",
+      "선택 결과는 selectedCardName, selectedTraitName, selectedSkillName에 저장한다."
+    ],
+    "qaChecks": [
+      "2회차 해안 각성 전에 실행되는가?",
+      "프로필 질문이 반복되지 않는가?",
+      "카르마 값이 표시되는가?",
+      "카드 후보 수/등급 가중치가 표시되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_1st_mine_06_forgotten_god_remnant",
+    "title": "이름 잊힌 신의 잔재",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "mana_mine",
+    "trigger": {
+      "type": "onEnterRegion",
+      "targetId": "mine_elite_bypass_node",
+      "threshold": null,
+      "description": "광산 핵 골렘을 피해서 우회 노드 진입"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "forgottenGodRemnantContacted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "forgottenGodRemnantContacted",
+        "damagedRecordEnabled"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [
+        "▒록□\u8005?"
+      ],
+      "recordEntries": [
+        "forgotten_god_remnant_contact"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[경고] 정규 시험 데이터에 존재하지 않는 잔류 반응을 감지했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "여긴…… 아까 그 골렘을 피해서 들어온 길인데.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "공기가 다르다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "이름은 잊혔다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "누구야?",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "그러나 기록은 지워지지 않는다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[특성 목록] 해독 불가능한 항목이 생성되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[특성] ▒록□\u8005?",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "1회차에는 회귀자의 기록 정상명 표시 금지"
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[손상된 기록] 관찰 정보가 비정상적으로 정리되기 시작합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "정상 도감이 아니라 손상된 기록"
+      }
+    ],
+    "implementationNotes": [
+      "잔재 접촉 전까지 도감/스크랩북 정상 메시지 금지.",
+      "이 이벤트 이후 손상된 기록 일부 메시지만 허용.",
+      "2회차 시작부터 regressorRecordUnlocked=true."
+    ],
+    "qaChecks": [
+      "광산 핵 골렘 우회 노드에서만 발생하는가?",
+      "특성명은 깨진 글자로 표시되는가?",
+      "도감 정상 메시지가 아니라 손상된 기록으로 표시되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_1st_gate_06_warden_20_clear",
+    "title": "1회차 관문 파수꾼 20% 통과",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": 0.2,
+      "description": "제한시간 종료 후 20% 이상 피해"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "forgottenGodRemnantContacted"
+      ],
+      "flagsFalse": [
+        "regressorRecordUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialClearedRun1"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorialGrade:C"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 제한시간 내 관문 파수꾼에게 최소 통과 조건을 충족하는 피해를 입혔습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "전투 전 평가 기준 공개 금지. 결과 후 공개."
+      },
+      {
+        "speaker": "검은 관문의 파수꾼",
+        "lineType": "dialogue",
+        "text": "최소 통과 조건을 충족했다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "살았다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "그거면 지금은 충분해.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "손상된 기록",
+        "lineType": "system",
+        "text": "[전투 관찰] 방어막 흔들림. 세 번째 충격 이후 짧은 노출.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "1회차는 손상된 기록"
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[튜토리얼 클리어] C급 평가로 기록되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "튜토리얼 평가등급. 협회 등급과 별개."
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[평가 기준]\n20% 이상: C급 평가.\n50% 이상: B급 평가.\n80% 이상: A급 평가.\n100%: S급 평가.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "클리어 후에만 공개"
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "좋은 성적은 아니겠지만…… 일단 살아서 나간다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": "1회차에는 강자 비교 금지"
+      }
+    ],
+    "implementationNotes": [
+      "전투 전 20/50/80/100 기준 공개 금지.",
+      "전투 중에는 최소 통과 조건 달성 알림만 표시.",
+      "클리어 후 C/B/A/S 평가 기준 공개."
+    ],
+    "qaChecks": [
+      "전투 전 평가 기준이 공개되지 않는가?",
+      "클리어 후 C/B/A/S 기준이 공개되는가?",
+      "주인공이 강자/랭커 비교를 하지 않는가?"
+    ]
+  }
+]

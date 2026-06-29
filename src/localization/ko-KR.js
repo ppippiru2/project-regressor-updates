@@ -363,6 +363,7 @@ export const KO_KR_TEXT = {
       selectedSkill: "카드 스킬",
       unlock: "해금",
       traitSkill: "{trait} / {skill}",
+      dispositionWeight: "성향 가중치 {weight}",
       items: [
         {
           id: "starter_weapon_sense",
@@ -421,6 +422,7 @@ export const KO_KR_TEXT = {
       starterSkill: "스타터 스킬",
       startRegion: "시작 지역",
       tutorialIsland: "튜토리얼 섬",
+      dispositionScore: "성향 점수",
       awakeningStart: "각성 시작",
     },
   },
@@ -983,20 +985,33 @@ export const KO_KR_TEXT = {
     tutorialDialogue: {
       rules: {
         version: "v2.6.3_FINAL",
+        placeholderFallback: "미확인",
         dynamicPlaceholders: [
           "playerName",
-          "dispositionName",
+          "age",
+          "gender",
+          "country",
+          "profileImage",
           "statSummary",
           "statTotal",
           "statusGrade",
+          "LUK",
+          "dispositionName",
+          "starterCardName",
+          "starterTraitName",
+          "starterSkillName",
+          "karmaValue",
+          "cardCandidateCount",
+          "cardGradeWeightSummary",
+          "selectedCardName",
+          "selectedTraitName",
+          "selectedSkillName",
+          "nextCalamityName",
           "STR",
           "AGI",
           "VIT",
           "INT",
           "WIS",
-          "LUK",
-          "starterTraitName",
-          "starterSkillName",
           "itemName",
           "count",
           "target",
@@ -1067,6 +1082,88 @@ export const KO_KR_TEXT = {
         run4WardenClear: "최종 관문 파수꾼은 누적 성장으로 완전 돌파합니다.",
       },
       keyEventDetails: {
+        prologueFallingConsciousness: {
+          title: "떨어지는 의식",
+          speakerType: "unknownVoice",
+          voiceLines: [
+            "너는 선택되었다.",
+            "아직 이름도, 기록도, 길도 완성되지 않았다.",
+            "그러니 먼저 네가 누구인지 동기화한다.",
+          ],
+          narrationLines: [
+            "눈을 뜨기 전, 끝을 알 수 없는 어둠 속에서 목소리가 들려왔다.",
+          ],
+        },
+        prologueProfileRecord: {
+          title: "프로필 기록",
+          speakerType: "system",
+          systemLines: [
+            "[시스템] 최초 세계선의 기본 정보를 기록합니다.",
+            "이름: {playerName}. 나이: {age}. 성별: {gender}. 국가: {country}.",
+            "초상 기록: {profileImage}.",
+          ],
+        },
+        prologueInitialStatSync: {
+          title: "초기 능력치 동기화",
+          speakerType: "system",
+          systemLines: [
+            "[시스템] 초기 능력치가 동기화되었습니다.",
+            "능력치: {statSummary}. 총합: {statTotal}. 상태창 등급: {statusGrade}.",
+            "이 등급은 외부 조직의 평가가 아니라 현재 상태창의 내부 동기화 값입니다.",
+          ],
+        },
+        prologueAbyssQuestionsStart: {
+          title: "심연의 질문",
+          speakerType: "unknownVoice",
+          voiceLines: [
+            "힘은 질문에 반응한다.",
+            "대답은 네 성향을 기록하고, 첫 카드의 흐름에 영향을 준다.",
+            "거짓으로 답해도 좋다. 다만 그 거짓도 기록된다.",
+          ],
+        },
+        prologueCardShowCards: {
+          title: "운명 카드 후보",
+          speakerType: "system",
+          systemLines: [
+            "[시스템] 기본 공격은 확정 등록됩니다.",
+            "카드 후보 {cardCandidateCount}장이 표시됩니다.",
+            "성향 기록: {dispositionName}. 카드 등급 가중치: {cardGradeWeightSummary}.",
+          ],
+        },
+        prologueTransferToTutorial: {
+          title: "초심자의 해안 전송",
+          speakerType: "system",
+          systemLines: [
+            "[시스템] 선택 카드: {selectedCardName}. 선택 특성: {selectedTraitName}. 선택 스킬: {selectedSkillName}.",
+            "첫 시험 지역으로 전송합니다.",
+          ],
+          protagonistLines: [
+            "선택은 끝났어.",
+            "이제 버티면서 확인해보자.",
+          ],
+        },
+        shoreWakeAfterDream: {
+          title: "해안의 각성",
+          speakerType: "protagonist",
+          narrationLines: [
+            "차가운 파도 소리가 귀를 때렸다.",
+            "눈을 뜨자 낯선 해안과 무너진 잔해가 시야에 들어왔다.",
+          ],
+          protagonistLines: [
+            "꿈이 아니었나.",
+            "방금 목소리와 시스템 알림이 아직 머리에 남아 있어.",
+            "먼저 살아남아야 해.",
+          ],
+        },
+        shoreStatusAfterDream: {
+          title: "해안 상태 재확인",
+          speakerType: "system",
+          systemLines: [
+            "[상태창] 현재 상태가 표시됩니다.",
+            "능력치: {statSummary}. 상태창 등급: {statusGrade}. 카드 스킬: {starterSkillName}.",
+            "주변 위협을 처치해 성장하고 다음 지역으로 이동하십시오.",
+          ],
+        },
         shoreStatusHelp: {
           title: "상태창 재확인",
           systemLines: [

@@ -1,0 +1,147 @@
+{
+  "version": "v1.0",
+  "tests": [
+    {
+      "id": "TEST-001",
+      "name": "새게임 전 금지어 검사",
+      "type": "static",
+      "eventPattern": [
+        "prologue_*",
+        "tutorial_1st_shore_wake_after_dream",
+        "tutorial_1st_shore_status_after_dream"
+      ],
+      "forbiddenTerms": [
+        "헌터협회",
+        "헌터 협회",
+        "헌터 등급",
+        "헌터 자유게시판",
+        "소속 길드",
+        "길드 마스터",
+        "공식 헌터 등록"
+      ],
+      "expected": "0 matches"
+    },
+    {
+      "id": "TEST-002",
+      "name": "1회차 잔재 접촉 전 기록 시스템 금지",
+      "type": "runtime",
+      "conditions": {
+        "run": 1,
+        "forgottenGodRemnantContacted": false
+      },
+      "forbiddenOutputs": [
+        "도감",
+        "스크랩북",
+        "회귀자의 기록",
+        "패턴 완성도"
+      ],
+      "allowedOutputs": [
+        "시스템 도움말",
+        "전투 기록",
+        "위험 경고"
+      ]
+    },
+    {
+      "id": "TEST-003",
+      "name": "잔재 접촉 위치",
+      "type": "runtime",
+      "conditions": {
+        "run": 1,
+        "region": "mana_mine",
+        "avoidedElite": true,
+        "enteredAlternateNode": true
+      },
+      "expectedEvent": "tutorial_1st_mine_06_forgotten_god_remnant",
+      "expectedFlags": {
+        "forgottenGodRemnantContacted": true,
+        "damagedRecordEnabled": true,
+        "regressorRecordUnlocked": false
+      }
+    },
+    {
+      "id": "TEST-004",
+      "name": "1회차 황금 카드 획득 금지",
+      "type": "runtime",
+      "conditions": {
+        "run": 1,
+        "northRockInteraction": true
+      },
+      "forbiddenStateEffect": {
+        "goldenCardObtained": true
+      }
+    },
+    {
+      "id": "TEST-005",
+      "name": "2회차 황금 카드 획득",
+      "type": "runtime",
+      "conditions": {
+        "run": 2,
+        "regressorRecordUnlocked": true,
+        "hasSeenGoldenCardNews": true,
+        "northRockInteraction": true
+      },
+      "expectedStateEffect": {
+        "goldenCardObtained": true
+      }
+    },
+    {
+      "id": "TEST-006",
+      "name": "보스 평가 기준 공개 타이밍",
+      "type": "runtime",
+      "conditions": {
+        "phase": "beforeBossBattle"
+      },
+      "forbiddenOutputs": [
+        "20% 이상",
+        "50% 이상",
+        "80% 이상",
+        "100%",
+        "C급 평가",
+        "B급 평가",
+        "A급 평가",
+        "S급 평가"
+      ]
+    },
+    {
+      "id": "TEST-007",
+      "name": "프로필/심연의 질문 회귀 반복 금지",
+      "type": "runtime",
+      "conditions": {
+        "regressionCount": ">=2"
+      },
+      "forbiddenEvents": [
+        "prologue_dream_02_profile_record",
+        "prologue_dream_04_abyss_questions_start"
+      ]
+    },
+    {
+      "id": "TEST-008",
+      "name": "카드 재동기화 반복",
+      "type": "runtime",
+      "conditions": {
+        "regressionCount": ">=2"
+      },
+      "expected": "pre-shore card resync event occurs"
+    },
+    {
+      "id": "TEST-009",
+      "name": "5회차 이후 루프",
+      "type": "unit",
+      "formula": "(regressionCount - 5) % 4",
+      "expected": {
+        "5": "A",
+        "6": "B",
+        "7": "C",
+        "8": "D",
+        "9": "A"
+      }
+    }
+  ],
+  "coverageRequired": {
+    "shore": 6,
+    "forest": 6,
+    "ruins": 6,
+    "mine": 6,
+    "gate": 6
+  }
+}

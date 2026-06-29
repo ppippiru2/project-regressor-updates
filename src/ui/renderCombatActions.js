@@ -1,6 +1,6 @@
-import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=560";
-import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=560";
-import { t, tf } from "../localization/index.js?v=560";
+import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=565";
+import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=565";
+import { t, tf } from "../localization/index.js?v=565";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;

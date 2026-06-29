@@ -1,23 +1,18 @@
-import { formatText, getLocaleText } from "../localization/index.js?v=560";
+import { formatText, getLocaleText } from "../localization/index.js?v=565";
 
 export const TUTORIAL_DIALOGUE_VERSION = "v2.6.3_FINAL";
 
-export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
+export const TUTORIAL_DIALOGUE_REQUIRED_PLACEHOLDERS = Object.freeze([
   "playerName",
   "age",
   "gender",
   "country",
   "profileImage",
-  "dispositionName",
   "statSummary",
   "statTotal",
   "statusGrade",
-  "STR",
-  "AGI",
-  "VIT",
-  "INT",
-  "WIS",
   "LUK",
+  "dispositionName",
   "starterCardName",
   "starterTraitName",
   "starterSkillName",
@@ -28,6 +23,15 @@ export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
   "selectedTraitName",
   "selectedSkillName",
   "nextCalamityName",
+]);
+
+export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
+  ...TUTORIAL_DIALOGUE_REQUIRED_PLACEHOLDERS,
+  "STR",
+  "AGI",
+  "VIT",
+  "INT",
+  "WIS",
   "savedTime",
   "clearTime",
   "timeDiff",
@@ -36,6 +40,14 @@ export const TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS = Object.freeze([
   "target",
   "remaining",
 ]);
+
+export const TUTORIAL_DIALOGUE_FALLBACK_VALUE = "unknown";
+
+export const TUTORIAL_DIALOGUE_PLACEHOLDER_FALLBACKS = Object.freeze(
+  Object.fromEntries(
+    TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS.map((placeholder) => [placeholder, TUTORIAL_DIALOGUE_FALLBACK_VALUE]),
+  ),
+);
 
 export const TUTORIAL_SELF_DESCRIBING_VERSION = "v2.9.1_CODEX_SELF_DESCRIBING";
 export const TUTORIAL_PROTAGONIST_VOICE_POLISH_VERSION = "v2.9.4_FINAL_PROTAGONIST_VOICE_POLISH";
@@ -261,7 +273,85 @@ export const TUTORIAL_DIALOGUE_PHASES = Object.freeze([
   "tutorial_loop_5_plus",
 ]);
 
+export const TUTORIAL_DIALOGUE_SPEAKER_TYPES = Object.freeze([
+  "system",
+  "protagonist",
+  "narration",
+  "unknownVoice",
+  "regressorRecord",
+  "codex",
+  "scrapbook",
+]);
+
+export const TUTORIAL_DIALOGUE_NEW_GAME_EVENT_BLOCKS = Object.freeze([
+  {
+    id: "prologue_dream_01_falling_consciousness",
+    phase: "system_initialization",
+    run: 1,
+    policy: "dream_prologue",
+    speakerType: "unknownVoice",
+    textKey: "prologueFallingConsciousness",
+  },
+  {
+    id: "prologue_dream_02_profile_record",
+    phase: "system_initialization",
+    run: 1,
+    policy: "profile_record",
+    speakerType: "system",
+    textKey: "prologueProfileRecord",
+  },
+  {
+    id: "prologue_dream_03_initial_stat_sync",
+    phase: "system_initialization",
+    run: 1,
+    policy: "initial_stat_sync",
+    speakerType: "system",
+    textKey: "prologueInitialStatSync",
+  },
+  {
+    id: "prologue_dream_04_abyss_questions_start",
+    phase: "system_initialization",
+    run: 1,
+    policy: "abyss_questions_start",
+    speakerType: "unknownVoice",
+    textKey: "prologueAbyssQuestionsStart",
+  },
+  {
+    id: "prologue_card_01_show_cards",
+    phase: "starter_card_selection",
+    run: 1,
+    policy: "starter_card_candidates",
+    speakerType: "system",
+    textKey: "prologueCardShowCards",
+  },
+  {
+    id: "prologue_transfer_to_tutorial",
+    phase: "starter_card_selection",
+    run: 1,
+    policy: "tutorial_transfer",
+    speakerType: "system",
+    textKey: "prologueTransferToTutorial",
+  },
+  {
+    id: "tutorial_1st_shore_wake_after_dream",
+    phase: "tutorial_shore_run1",
+    run: 1,
+    policy: "wake_after_dream",
+    speakerType: "protagonist",
+    textKey: "shoreWakeAfterDream",
+  },
+  {
+    id: "tutorial_1st_shore_status_after_dream",
+    phase: "tutorial_shore_run1",
+    run: 1,
+    policy: "status_after_dream",
+    speakerType: "system",
+    textKey: "shoreStatusAfterDream",
+  },
+]);
+
 export const TUTORIAL_DIALOGUE_KEY_EVENTS = Object.freeze([
+  ...TUTORIAL_DIALOGUE_NEW_GAME_EVENT_BLOCKS,
   {
     id: "tutorial_1st_shore_02_status_help",
     phase: "tutorial_shore_run1",
@@ -457,23 +547,24 @@ export function buildTutorialIntroDialogueLogs(profile, { localeText = getLocale
 
   const disposition = resolveTutorialDispositionDialogue(profile, { localeText });
   const starterCard = resolveTutorialStarterCardDialogue(profile, { localeText });
+  const safeTemplateValues = createTutorialDialogueTemplateValues(templateValues, { localeText });
   const messages = [];
 
   if (disposition?.log) {
     messages.push(
-      formatText(text.introLog.disposition, {
+      formatTutorialText(text.introLog.disposition, {
         disposition: disposition.name,
-        reaction: formatText(disposition.log, templateValues),
-      }),
+        reaction: formatTutorialText(disposition.log, safeTemplateValues, { localeText }),
+      }, { localeText }),
     );
   }
 
   if (starterCard?.log) {
     messages.push(
-      formatText(text.introLog.starterCard, {
+      formatTutorialText(text.introLog.starterCard, {
         cardName: starterCard.cardName,
-        reaction: formatText(starterCard.log, templateValues),
-      }),
+        reaction: formatTutorialText(starterCard.log, safeTemplateValues, { localeText }),
+      }, { localeText }),
     );
   }
 
@@ -542,13 +633,28 @@ export function resolveTutorialKeyEventDialogue(
     canonicalEventId,
     aliasOf: canonicalEventId !== eventId ? canonicalEventId : null,
     textKey: event.textKey,
-    title: formatTextValue(detail.title, templateValues),
-    detail: formatTextValue(detail, templateValues),
+    speakerType: event.speakerType || "system",
+    title: formatTextValue(detail.title, templateValues, { localeText }),
+    detail: formatTextValue(detail, templateValues, { localeText }),
   };
 }
 
-export function renderTutorialDialogueTemplate(template, templateValues = {}) {
-  return formatText(template, templateValues);
+export function renderTutorialDialogueTemplate(template, templateValues = {}, options = {}) {
+  return formatTutorialText(template, templateValues, options);
+}
+
+export function createTutorialDialogueTemplateValues(templateValues = {}, { localeText = getLocaleText(), fallbackValue } = {}) {
+  const source = templateValues && typeof templateValues === "object" ? templateValues : {};
+  const resolvedFallbackValue = resolveTutorialDialogueFallbackValue({ localeText, fallbackValue });
+  const safeValues = Object.fromEntries(
+    TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS.map((placeholder) => [placeholder, resolvedFallbackValue]),
+  );
+
+  for (const [key, value] of Object.entries(source)) {
+    safeValues[key] = normalizeTutorialTemplateValue(value, resolvedFallbackValue);
+  }
+
+  return safeValues;
 }
 
 export function buildTutorialDialogueCoverageReport({ implementedEventIds = [] } = {}) {
@@ -577,10 +683,15 @@ export function getTutorialDialogueEventCatalog() {
     protagonistVoicePolishVersion: TUTORIAL_PROTAGONIST_VOICE_POLISH_VERSION,
     newGameFlow: TUTORIAL_FINAL_NEW_GAME_FLOW,
     phases: TUTORIAL_DIALOGUE_PHASES,
+    speakerTypes: TUTORIAL_DIALOGUE_SPEAKER_TYPES,
+    requiredPlaceholders: TUTORIAL_DIALOGUE_REQUIRED_PLACEHOLDERS,
     dynamicPlaceholders: TUTORIAL_DIALOGUE_DYNAMIC_PLACEHOLDERS,
+    placeholderFallbackValue: TUTORIAL_DIALOGUE_FALLBACK_VALUE,
+    placeholderFallbacks: TUTORIAL_DIALOGUE_PLACEHOLDER_FALLBACKS,
     preRealityForbiddenTermKeys: TUTORIAL_DIALOGUE_PRE_REALITY_FORBIDDEN_TERM_KEYS,
     keyFlags: TUTORIAL_FINAL_KEY_FLAGS,
     keyEvents: TUTORIAL_DIALOGUE_KEY_EVENTS,
+    newGameEventBlocks: TUTORIAL_DIALOGUE_NEW_GAME_EVENT_BLOCKS,
     eventAliases: TUTORIAL_DIALOGUE_EVENT_ALIASES,
     loopDialogue: {
       startRun: TUTORIAL_LOOP_START_RUN,
@@ -608,16 +719,44 @@ export function getTutorialDialogueEventCatalog() {
   };
 }
 
-function formatTextValue(value, templateValues) {
-  if (typeof value === "string") return formatText(value, templateValues);
-  if (Array.isArray(value)) return value.map((entry) => formatTextValue(entry, templateValues));
+function formatTextValue(value, templateValues, options = {}) {
+  if (typeof value === "string") return formatTutorialText(value, templateValues, options);
+  if (Array.isArray(value)) return value.map((entry) => formatTextValue(entry, templateValues, options));
   if (value && typeof value === "object") {
     return Object.fromEntries(
-      Object.entries(value).map(([key, entry]) => [key, formatTextValue(entry, templateValues)]),
+      Object.entries(value).map(([key, entry]) => [key, formatTextValue(entry, templateValues, options)]),
     );
   }
   return value;
 }
 
+function formatTutorialText(template, templateValues = {}, options = {}) {
+  const fallbackValue = resolveTutorialDialogueFallbackValue(options);
+  const safeValues = createTutorialDialogueTemplateValues(templateValues, {
+    ...options,
+    fallbackValue,
+  });
+  const rendered = formatText(template, safeValues);
+  return replaceUnresolvedTutorialPlaceholders(rendered, fallbackValue);
+}
+
+function normalizeTutorialTemplateValue(value, fallbackValue) {
+  if (value === null || value === undefined) return fallbackValue;
+  if (typeof value === "string" && value.trim() === "") return fallbackValue;
+  return value;
+}
+
+function replaceUnresolvedTutorialPlaceholders(text, fallbackValue) {
+  return String(text)
+    .replace(/\{\{(\w+)\}\}/g, fallbackValue)
+    .replace(/\{(\w+)\}/g, fallbackValue);
+}
+
+function resolveTutorialDialogueFallbackValue({ localeText = getLocaleText(), fallbackValue } = {}) {
+  if (typeof fallbackValue === "string" && fallbackValue.trim()) return fallbackValue;
+  const localizedFallback = localeText?.story?.tutorialDialogue?.rules?.placeholderFallback;
+  if (typeof localizedFallback === "string" && localizedFallback.trim()) return localizedFallback;
+  return TUTORIAL_DIALOGUE_FALLBACK_VALUE;
+}
 
 

@@ -1,7 +1,7 @@
-import { t, tf } from "../localization/index.js?v=560";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=560";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=560";
-import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=560";
+import { t, tf } from "../localization/index.js?v=565";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=565";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=565";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=565";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstCombatGuideShown: false,

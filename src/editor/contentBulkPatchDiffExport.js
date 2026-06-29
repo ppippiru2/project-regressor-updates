@@ -1,5 +1,5 @@
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=560";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=560";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=565";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=565";
 
 export const CONTENT_BULK_PATCH_DIFF_EXPORT_VERSION = "content-bulk-patch-diff-export-v1";
 
