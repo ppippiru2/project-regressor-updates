@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines metadata-level visual QA gates for generated weapon/class source and pixel sprite files.",
+  "rules": [
+    "Metadata QA only runs on files that exist in the planned output manifest.",
+    "Missing files remain waiting_file until generated art is dropped into the planned path.",
+    "Existing files must be PNG, match the 1254x1254 source canvas, and use RGBA color type for transparency.",
+    "Passing metadata QA does not approve the image visually; it only makes the file ready for visual anchor review."
+  ],
+  "imageRequirements": {
+    "extension": ".png",
+    "canvas": [1254, 1254],
+    "pngBitDepth": 8,
+    "pngColorType": 6,
+    "transparentPreferred": true
+  },
+  "outputTypeRules": [
+    {
+      "outputType": "source",
+      "metadataPassState": "ready_for_source_visual_review",
+      "notes": "Source files should preserve high-detail source-body lighting and anatomy before pixel conversion."
+    },
+    {
+      "outputType": "pixel",
+      "metadataPassState": "ready_for_pixel_visual_review",
+      "notes": "Pixel files should preserve source silhouette and anchor positions by normalized coordinates."
+    }
+  ]
+}

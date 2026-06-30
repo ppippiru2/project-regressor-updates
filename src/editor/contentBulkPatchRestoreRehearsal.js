@@ -1,4 +1,5 @@
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=573";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=675";
+import { createContentBulkPatchFileIssueSummary } from "./contentBulkPatchIssueSummary.js?v=675";
 
 export const CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VERSION = "content-bulk-patch-restore-rehearsal-v1";
 const RESTORE_FILE_REHEARSAL_BLOCKERS = Object.freeze([
@@ -20,9 +21,10 @@ export function createContentBulkPatchRestoreRehearsal(backupPlan = createConten
     "restore-writer-not-implemented",
     "actual-snapshot-not-created",
   ];
-  const issueSummary = createRestoreRehearsalIssueSummary({
+  const issueSummary = createContentBulkPatchFileIssueSummary({
     blockedReasons,
-    restoreActions,
+    fileItems: restoreActions,
+    blockerCodeKey: "rehearsalBlockerCodes",
     preApplyReviewItems: backupPlan.preApplyReviewItems || [],
   });
 
@@ -67,42 +69,6 @@ export function createContentBulkPatchRestoreRehearsal(backupPlan = createConten
     })),
     validationSteps,
     restoreActions,
-  };
-}
-
-function createRestoreRehearsalIssueSummary({ blockedReasons = [], restoreActions = [], preApplyReviewItems = [] } = {}) {
-  const blockingIssueCodes = new Set(blockedReasons);
-  const warningIssueCodes = new Set();
-  const affectedDomainIds = new Set();
-  let affectedFileCount = 0;
-
-  for (const action of restoreActions) {
-    const blockers = Array.isArray(action.rehearsalBlockerCodes) ? action.rehearsalBlockerCodes.filter(Boolean) : [];
-    if (!blockers.length) continue;
-    affectedFileCount += 1;
-    for (const code of blockers) blockingIssueCodes.add(code);
-    for (const domainId of action.domainIds || []) affectedDomainIds.add(domainId);
-  }
-
-  let affectedReviewItemCount = 0;
-  for (const item of preApplyReviewItems) {
-    if (item.state === "blocked") {
-      blockingIssueCodes.add(item.id);
-      affectedReviewItemCount += 1;
-    }
-    if (item.state === "review") {
-      warningIssueCodes.add(item.id);
-      affectedReviewItemCount += 1;
-    }
-  }
-
-  return {
-    blockingIssueCodes: [...blockingIssueCodes],
-    warningIssueCodes: [...warningIssueCodes],
-    affectedDomainCount: affectedDomainIds.size,
-    affectedRowCount: affectedFileCount,
-    affectedFileCount,
-    affectedReviewItemCount,
   };
 }
 

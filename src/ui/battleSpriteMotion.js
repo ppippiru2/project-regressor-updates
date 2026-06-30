@@ -24,6 +24,7 @@ export function triggerBattleSpriteMotion(combatRuntime, side, motionId, options
 
   const keyPrefix = side === "player" ? "playerSpriteMotion" : "enemySpriteMotion";
   combatRuntime[`${keyPrefix}Id`] = motionId;
+  combatRuntime[`${keyPrefix}StartedAt`] = now;
   combatRuntime[`${keyPrefix}Until`] = now + durationMs;
   combatRuntime[`${keyPrefix}Sequence`] = (Number(combatRuntime[`${keyPrefix}Sequence`]) || 0) + 1;
   combatRuntime[`${keyPrefix}Sfx`] = options.sfxId || null;
@@ -34,6 +35,7 @@ export function clearBattleSpriteMotions(combatRuntime) {
     for (const side of MOTION_SIDES) {
       const keyPrefix = side === "player" ? "playerSpriteMotion" : "enemySpriteMotion";
       combatRuntime[`${keyPrefix}Id`] = null;
+      combatRuntime[`${keyPrefix}StartedAt`] = 0;
       combatRuntime[`${keyPrefix}Until`] = 0;
       combatRuntime[`${keyPrefix}Sfx`] = null;
     }
@@ -66,6 +68,7 @@ function syncBattleSpriteMotionSide(combatRuntime, side, now) {
     clearCombatantMotion(combatant);
     if (now >= motionUntil) {
       combatRuntime[`${keyPrefix}Id`] = null;
+      combatRuntime[`${keyPrefix}StartedAt`] = 0;
       combatRuntime[`${keyPrefix}Sfx`] = null;
     }
     return;

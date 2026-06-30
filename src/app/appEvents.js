@@ -1,10 +1,10 @@
-import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=573";
-import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=573";
-import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=573";
-import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=573";
-import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=573";
-import { bindNavigationEvents } from "../ui/navigationEvents.js?v=573";
-import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=573";
+import { bindCharacterCreationEvents } from "../ui/characterCreationEvents.js?v=675";
+import { bindCombatControlEvents } from "../ui/combatControlEvents.js?v=675";
+import { bindCombatInfoEvents } from "../ui/combatInfoEvents.js?v=675";
+import { bindDelegatedClickEvents } from "../ui/delegatedClickEvents.js?v=675";
+import { bindInfoTooltipEvents } from "../ui/infoTooltipEvents.js?v=675";
+import { bindNavigationEvents } from "../ui/navigationEvents.js?v=675";
+import { bindSaveLoadEvents } from "../ui/saveLoadEvents.js?v=675";
 
 export function bindAppEvents(handlers) {
   bindCharacterCreationEvents(handlers.onCreateCharacter, handlers.onCancelCharacterCreation);
@@ -70,6 +70,3 @@ export function bindAppEvents(handlers) {
     onAudioVolumeChange: handlers.onAudioVolumeChange,
   });
 }
-
-
-

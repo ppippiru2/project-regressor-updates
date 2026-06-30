@@ -2,7 +2,7 @@ import {
   createFateCardCandidateSlots,
   getCardCandidateCountByKarma,
   getCardGradeWeightSummary,
-} from "./fateCardRoller.js?v=573";
+} from "./fateCardRoller.js?v=675";
 
 export const MAX_REGRESSION_CARD_CANDIDATES = 8;
 

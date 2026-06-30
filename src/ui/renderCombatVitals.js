@@ -1,5 +1,5 @@
-import { t, tf } from "../localization/index.js?v=573";
-import { WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=573";
+import { t, tf } from "../localization/index.js?v=675";
+import { WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=675";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
@@ -54,13 +54,14 @@ export function renderCombatVitals({
   battleBackgroundPath = "",
   playerSpritePath = "",
   playerSpritePlacement = null,
+  playerEquipmentAttachmentPlan = null,
   enemySpritePath = "",
   enemySpritePlacement = null,
   formation,
 }) {
   renderBattlefieldBackground(battleBackgroundPath, formation);
   renderCombatViewMode(state.settings?.combatView);
-  renderActorSprite("player-portrait", playerSpritePath, playerSpritePlacement);
+  renderActorSprite("player-portrait", playerSpritePath, playerSpritePlacement, playerEquipmentAttachmentPlan);
   renderActorSprite("enemy-portrait", enemySpritePath, enemySpritePlacement);
   syncClearSpriteFrameBackground(battleBackgroundPath);
   byId("region-title").textContent = region.name;
@@ -246,7 +247,7 @@ function renderCombatViewMode(combatView = {}) {
   battlefield.dataset.spriteFramePreview = usesClearSpriteFrame() ? "clear" : "default";
 }
 
-function renderActorSprite(portraitId, spritePath, placement = null) {
+function renderActorSprite(portraitId, spritePath, placement = null, equipmentAttachmentPlan = null) {
   const portrait = byId(portraitId);
   if (!portrait) return;
 
@@ -257,6 +258,7 @@ function renderActorSprite(portraitId, spritePath, placement = null) {
     portrait.style.removeProperty("--actor-sprite-image");
   }
   renderActorSpritePlacement(portrait, placement);
+  renderActorSpriteEquipmentAttachments(portrait, equipmentAttachmentPlan);
 }
 
 function renderActorSpritePlacement(portrait, placement) {
@@ -289,6 +291,72 @@ function renderActorSpritePlacement(portrait, placement) {
     combatant?.setAttribute("data-runtime-sprite-safe-x", String(Number(placement.motionSafeMargin.x) || 0));
     combatant?.setAttribute("data-runtime-sprite-safe-y", String(Number(placement.motionSafeMargin.y) || 0));
   }
+}
+
+function renderActorSpriteEquipmentAttachments(portrait, plan = null) {
+  const slot = portrait.querySelector(".sprite-slot");
+  const combatant = portrait.closest(".combatant");
+  const isPlayer = combatant?.classList.contains("player");
+  if (!slot || !isPlayer) return;
+
+  const layers = Array.isArray(plan?.layers) ? plan.layers : [];
+  const warnings = Array.isArray(plan?.warnings) ? plan.warnings : [];
+  const previewMode = usesEquipmentAttachmentPreview();
+  const previewEnabled = previewMode !== "off";
+  combatant.dataset.equipmentAttachmentLayerCount = String(layers.length);
+  combatant.dataset.equipmentAttachmentWarningCount = String(warnings.length);
+  combatant.dataset.equipmentAttachmentMotion = plan?.motionId || "";
+  combatant.dataset.equipmentAttachmentFrame = plan?.frameId || "";
+  combatant.dataset.equipmentAttachmentPreview = previewMode;
+
+  if (!previewEnabled || !layers.length) {
+    slot.innerHTML = "";
+    return;
+  }
+
+  slot.innerHTML = layers.map((layer) => equipmentAttachmentLayerMarkup(layer, plan?.canvas)).join("");
+}
+
+function equipmentAttachmentLayerMarkup(layer, canvas) {
+  const visual = equipmentAttachmentLayerVisual(layer, canvas);
+  const style = [
+    `--attachment-left:${visual.leftPercent}%`,
+    `--attachment-top:${visual.topPercent}%`,
+    `--attachment-width:${visual.widthPercent}%`,
+    `--attachment-height:${visual.heightPercent}%`,
+    `--attachment-origin-x:${visual.originXPercent}%`,
+    `--attachment-origin-y:${visual.originYPercent}%`,
+    `--attachment-rotation:${visual.rotationDegrees}deg`,
+    `--attachment-scale:${visual.scale}`,
+    layer.cleanFile ? `--attachment-image:${cssUrl(layer.cleanFile)}` : "",
+  ]
+    .filter(Boolean)
+    .join(";");
+  return `<span class="equipment-attachment-layer" data-equipment-layer="${escapeHtml(layer.layerId)}" data-equipment-slot="${escapeHtml(layer.slotId)}" data-equipment-category="${escapeHtml(layer.category || "")}" data-equipment-item="${escapeHtml(layer.itemId || "")}" data-equipment-image="${layer.cleanFile ? "1" : "0"}" style="${escapeHtml(style)}"></span>`;
+}
+
+function equipmentAttachmentLayerVisual(layer, canvas = [1254, 1254]) {
+  const canvasWidth = Number(canvas?.[0]) || 1254;
+  const canvasHeight = Number(canvas?.[1]) || 1254;
+  const itemAnchors = layer.transform?.itemAnchors || {};
+  const bounds = Array.isArray(itemAnchors.bounds) ? itemAnchors.bounds : [0, 0, 64, 64];
+  const translation = Array.isArray(layer.transform?.translation) ? layer.transform.translation : [0, 0];
+  const primaryItem = itemAnchors[layer.transform?.primaryItemAnchor] || [bounds[0], bounds[1]];
+  const left = Number(translation[0] || 0) + Number(bounds[0] || 0);
+  const top = Number(translation[1] || 0) + Number(bounds[1] || 0);
+  const width = Math.max(1, Number(bounds[2] || 1));
+  const height = Math.max(1, Number(bounds[3] || 1));
+
+  return {
+    leftPercent: roundStyleNumber((left / canvasWidth) * 100),
+    topPercent: roundStyleNumber((top / canvasHeight) * 100),
+    widthPercent: roundStyleNumber((width / canvasWidth) * 100),
+    heightPercent: roundStyleNumber((height / canvasHeight) * 100),
+    originXPercent: roundStyleNumber(((Number(primaryItem[0] || 0) - Number(bounds[0] || 0)) / width) * 100),
+    originYPercent: roundStyleNumber(((Number(primaryItem[1] || 0) - Number(bounds[1] || 0)) / height) * 100),
+    rotationDegrees: roundStyleNumber(Number(layer.transform?.rotationDegrees || 0)),
+    scale: roundStyleNumber(Number(layer.transform?.scale || 1)),
+  };
 }
 
 function renderBattlefieldBackground(battleBackgroundPath, formation) {
@@ -399,4 +467,16 @@ function cssUrl(path) {
 function usesClearSpriteFrame() {
   const params = new URLSearchParams(window.location.search);
   return params.get("spriteFramePreview") !== "default";
+}
+
+function usesEquipmentAttachmentPreview() {
+  const params = new URLSearchParams(window.location.search);
+  const value = params.get("equipmentAttachmentPreview") || params.get("attachmentPreview");
+  if (value === "sample") return "sample";
+  if (value === "1" || value === "debug") return "debug";
+  return "off";
+}
+
+function roundStyleNumber(value) {
+  return Math.round(Number(value || 0) * 1000) / 1000;
 }

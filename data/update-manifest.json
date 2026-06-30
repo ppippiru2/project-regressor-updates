@@ -1,42 +1,43 @@
 {
-  "schemaVersion": 1,
-  "project": "Project Regressor",
-  "versionCode": 573,
-  "displayVersion": "v573",
-  "cacheVersion": "573",
-  "updatedAt": "2026-06-29T22:55:37+09:00",
-  "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
-  "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=573&cachebust=573",
-  "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "v573 build: applied progressive fate card hints, expanded fate card candidates to 4-8 cards, kept card identity hidden before selection, rebuilt APK, and prepared GitHub Pages update payload.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk",
-  "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
-  },
-  "version": "5.73.0",
-  "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
-  },
-  "android": {
-    "code": 573,
-    "name": "5.73.0",
-    "displayName": "v573",
-    "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
-    },
-    "version": {
-      "code": 573,
-      "name": "5.73.0",
-      "displayName": "v573"
-    },
-    "versionCode": 573,
-    "versionName": "5.73.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-release.apk"
-  },
-  "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v573-debug.apk"
-  },
-  "versionName": "5.73.0"
+    "schemaVersion":  1,
+    "project":  "Project Regressor",
+    "versionCode":  675,
+    "displayVersion":  "v675",
+    "cacheVersion":  675,
+    "updatedAt":  "2026-06-30T05:45:58Z",
+    "repositoryUrl":  "https://github.com/ppippiru2/project-regressor-updates",
+    "pagesUrl":  "https://ppippiru2.github.io/project-regressor-updates/",
+    "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=675\u0026cachebust=675",
+    "recommendedAndroidShell":  "Trusted Web Activity",
+    "notes":  "v675 build: split the editor overview asset/save/backlog/prototype list renderers into a dedicated view module while keeping data loading and editor state unchanged.",
+    "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk",
+    "downloads":  {
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk"
+                  },
+    "version":  "6.75.0",
+    "artifacts":  {
+                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk"
+                  },
+    "android":  {
+                    "code":  675,
+                    "name":  "6.75.0",
+                    "displayName":  "v675",
+                    "artifacts":  {
+                                      "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk"
+                                  },
+                    "version":  {
+                                    "code":  675,
+                                    "name":  "6.75.0",
+                                    "displayName":  "v675"
+                                },
+                    "versionCode":  675,
+                    "versionName":  "6.75.0",
+                    "apkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk",
+                    "releaseApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-release.apk"
+                },
+    "apk":  {
+                "url":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk",
+                "fileName":  "project-regressor-v675-debug.apk"
+            },
+    "versionName":  "6.75.0"
 }

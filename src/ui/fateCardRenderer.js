@@ -1,9 +1,9 @@
-import { t, tf } from "../localization/index.js?v=573";
-import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=573";
+import { t, tf } from "../localization/index.js?v=675";
+import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=675";
 import {
   FATE_CARD_RENDER_MODES,
   resolveFateCardAuraTier,
-} from "../state/fateCardRoller.js?v=573";
+} from "../state/fateCardRoller.js?v=675";
 
 export function resolveFateCardRenderState(slot = {}, options = {}) {
   const mode = options.mode || FATE_CARD_RENDER_MODES.productionProgressiveHint;

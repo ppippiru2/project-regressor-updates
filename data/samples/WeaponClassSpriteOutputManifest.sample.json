@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines deterministic planned output paths for weapon/class source and pixel sprite production slots.",
+  "rules": [
+    "Do not treat planned paths as approved art until files pass source/pixel visual QA.",
+    "Source outputs must be approved before matching pixel outputs are promoted.",
+    "The output manifest should preserve one file per gender, skin tone, motion, frame, and output type.",
+    "Generated file paths must remain deterministic so missing files can be checked without opening image editors."
+  ],
+  "pathRules": [
+    {
+      "outputType": "source",
+      "root": "assets/characters/player/weapon-class/source",
+      "fileNameTemplate": "{gender}_{skinToneId}_{motionId}_{frameId}_source.png",
+      "approvalState": "planned"
+    },
+    {
+      "outputType": "pixel",
+      "root": "assets/characters/player/weapon-class/pixel",
+      "fileNameTemplate": "{gender}_{skinToneId}_{motionId}_{frameId}_pixel.png",
+      "approvalState": "planned"
+    }
+  ]
+}

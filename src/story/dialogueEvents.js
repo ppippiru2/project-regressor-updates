@@ -1,16 +1,21 @@
-import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=573";
+import { POST_TUTORIAL_EVENT_IDS } from "./postTutorialEvents.js?v=675";
+import { PROLOGUE_DIALOGUE_EVENT_IDS } from "./prologueDialogueEvents.js?v=675";
+import { REGRESSION_ROUTE_EVENT_IDS, TUTORIAL_LOOP_VARIANT_EVENT_IDS } from "./regressionRouteEvents.js?v=675";
+import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=675";
 
-export const DIALOGUE_EVENT_DATA_VERSION = "v1.2";
+export const DIALOGUE_EVENT_DATA_VERSION = "v1.3";
 
 export const DIALOGUE_EVENT_REQUIRED_IDS = Object.freeze([
-  "prologue_dream_02_profile_record",
-  "tutorial_1st_shore_status_after_dream",
+  ...PROLOGUE_DIALOGUE_EVENT_IDS,
   "regression_2nd_pre_shore_card_resync",
   "regression_3rd_pre_shore_card_resync",
   "regression_4th_pre_shore_card_resync",
   "tutorial_loop_common_pre_shore_card_resync",
   "tutorial_1st_mine_06_forgotten_god_remnant",
   "tutorial_1st_gate_06_warden_20_clear",
+  ...POST_TUTORIAL_EVENT_IDS,
+  ...REGRESSION_ROUTE_EVENT_IDS,
+  ...TUTORIAL_LOOP_VARIANT_EVENT_IDS,
   "tutorial_2nd_03_golden_card",
 ]);
 
@@ -112,7 +117,20 @@ export function isDialogueRunAllowed(event, run = 1) {
   }
   if (requirement.minRun !== undefined && currentRun < requirement.minRun) return false;
   if (requirement.maxRun !== null && requirement.maxRun !== undefined && currentRun > requirement.maxRun) return false;
+  if (!isDialogueLoopIndexAllowed(requirement, currentRun)) return false;
   return true;
+}
+
+function isDialogueLoopIndexAllowed(requirement, currentRun) {
+  const loopModulo = Math.floor(Number(requirement?.loopModulo));
+  if (!Number.isFinite(loopModulo) || loopModulo <= 0) return true;
+
+  const loopStart = Math.floor(Number(requirement.loopStart ?? requirement.minRun ?? 1));
+  const loopIndex = Math.floor(Number(requirement.loopIndex));
+  if (!Number.isFinite(loopStart) || !Number.isFinite(loopIndex)) return true;
+  if (currentRun < loopStart) return false;
+
+  return (currentRun - loopStart) % loopModulo === loopIndex;
 }
 
 export function areDialoguePreconditionsMet(event, context = {}) {

@@ -1,11 +1,11 @@
-import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=573";
-import { renderCombatEffects } from "../combat/combatEffects.js?v=573";
-import { createCombatFormationState } from "../combat/combatFormation.js?v=573";
+import { COMBAT_VIEW_OPTIONS, FEEDBACK_OPTIONS } from "../config/helpText.js?v=675";
+import { renderCombatEffects } from "../combat/combatEffects.js?v=675";
+import { createCombatFormationState } from "../combat/combatFormation.js?v=675";
 import { rankFromPower } from "../combat/combatFormula.js";
-import { renderInventory } from "../ui/renderInventory.js?v=573";
-import { renderShop } from "../ui/renderShop.js?v=573";
-import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=573";
-import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=573";
+import { renderInventory } from "../ui/renderInventory.js?v=675";
+import { renderShop } from "../ui/renderShop.js?v=675";
+import { renderProfile, renderResistances, renderStats } from "../ui/renderStatus.js?v=675";
+import { renderGateMap, renderRegions } from "../ui/renderRegion.js?v=675";
 import {
   renderCharacterCreation,
   renderAudioSettings,
@@ -15,25 +15,26 @@ import {
   renderLog,
   renderProfileEditSettings,
   renderSaveSlots,
-} from "../ui/renderCommon.js?v=573";
-import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=573";
-import { renderCombatControls } from "../ui/renderCombatControls.js?v=573";
-import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=573";
-import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=573";
-import { renderSystemWindow } from "../ui/systemWindow.js?v=573";
-import { createGrowthObjective } from "../state/growthObjective.js?v=573";
-import { createTutorialUnlockState } from "../state/tutorialUnlocks.js?v=573";
-import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=573";
-import { renderRegressionCardResync } from "../ui/regressionCardResync.js?v=573";
-import { renderDropPreview } from "../ui/renderDropPreview.js?v=573";
-import { createCombatReadiness } from "../state/combatReadiness.js?v=573";
-import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=573";
-import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=573";
-import { renderRegressionCardDrawTest } from "../ui/regressionCardDrawTest.js?v=573";
-import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=573";
-import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=573";
-import { resolveMonsterBattleSpritePreset } from "../config/monsterBattleSpritePresets.js?v=573";
-import { syncBattleSpriteMotions } from "../ui/battleSpriteMotion.js?v=573";
+} from "../ui/renderCommon.js?v=675";
+import { renderCombatSkillsIfNeeded } from "../ui/renderCombatActions.js?v=675";
+import { renderCombatControls } from "../ui/renderCombatControls.js?v=675";
+import { renderHitCounter, updateCombatPulseClasses } from "../ui/renderCombatPulse.js?v=675";
+import { renderCombatVitals } from "../ui/renderCombatVitals.js?v=675";
+import { renderSystemWindow } from "../ui/systemWindow.js?v=675";
+import { createGrowthObjective } from "../state/growthObjective.js?v=675";
+import { createTutorialUnlockState } from "../state/tutorialUnlocks.js?v=675";
+import { renderGrowthObjective } from "../ui/renderGrowthObjective.js?v=675";
+import { renderRegressionCardResync } from "../ui/regressionCardResync.js?v=675";
+import { renderDropPreview } from "../ui/renderDropPreview.js?v=675";
+import { createCombatReadiness } from "../state/combatReadiness.js?v=675";
+import { renderCombatReadiness } from "../ui/renderCombatReadiness.js?v=675";
+import { renderBuildInfo } from "../ui/renderBuildInfo.js?v=675";
+import { renderRegressionCardDrawTest } from "../ui/regressionCardDrawTest.js?v=675";
+import { DEVELOPER_MULTIPLIER_OPTIONS } from "../state/developerOptions.js?v=675";
+import { resolvePlayerBattleSpritePreset } from "../config/playerBattleSprites.js?v=675";
+import { resolveMonsterBattleSpritePreset } from "../config/monsterBattleSpritePresets.js?v=675";
+import { syncBattleSpriteMotions } from "../ui/battleSpriteMotion.js?v=675";
+import { createPlayerEquipmentAttachmentPlan } from "../assets/playerEquipmentAttachments.js?v=675";
 
 export function renderAppFrame(context) {
   const now = Date.now();
@@ -56,6 +57,15 @@ export function renderAppFrame(context) {
   const formation = createCombatFormationState(context.state);
   const playerBattleSprite = resolvePlayerBattleSpritePreset(context.state.playerProfile);
   const enemyBattleSprite = resolveMonsterBattleSpritePreset(targetMonster);
+  const playerEquipmentAttachmentPlan = createPlayerEquipmentAttachmentPlan({
+    equipmentState: context.state.equipment,
+    getItem: context.getItem,
+    playerProfile: context.state.playerProfile,
+    combatRuntime: context.combatRuntime,
+    now,
+    previewMode: resolveEquipmentAttachmentPreviewMode(),
+    assetRegistry: context.assetRegistry,
+  });
 
   const { enemyHp } = renderCombatVitals({
     state: context.state,
@@ -68,6 +78,7 @@ export function renderAppFrame(context) {
     battleBackgroundPath: context.resolveRegionBattleBackgroundPath?.(region, context.assetRegistry) || "",
     playerSpritePath: playerBattleSprite.path || context.resolvePlayerCombatSpritePath?.(context.assetRegistry) || "",
     playerSpritePlacement: playerBattleSprite,
+    playerEquipmentAttachmentPlan,
     enemySpritePath: context.resolveMonsterCombatSpritePath?.(targetMonster, context.assetRegistry) || "",
     enemySpritePlacement: enemyBattleSprite,
     formation,
@@ -100,6 +111,7 @@ export function renderAppFrame(context) {
   renderDropPreview(targetMonster, context.getItem, context.state.equipment);
   renderSystemWindow({
     log: context.state.log,
+    dialogueRecords: context.latestDialogueEventRecords,
     player: context.state.player,
     playerProfile: context.state.playerProfile,
     region,
@@ -139,6 +151,15 @@ function resolveVisibleDefeatedTarget(state, combatRuntime, now = Date.now()) {
   if (state.inCombat || !defeatedTarget?.monsterId) return null;
   if (defeatedTarget.visibleUntil && defeatedTarget.visibleUntil < now) return null;
   return defeatedTarget;
+}
+
+function resolveEquipmentAttachmentPreviewMode() {
+  if (typeof window === "undefined") return "off";
+  const params = new URLSearchParams(window.location.search);
+  const value = params.get("equipmentAttachmentPreview") || params.get("attachmentPreview") || "";
+  if (value === "sample") return "sample";
+  if (value === "1" || value === "debug") return "debug";
+  return "off";
 }
 
 export function renderAppRegionList(context) {
@@ -182,6 +203,7 @@ function renderSlowAppSections(context, { region, player }) {
     (item) => context.resolveItemIconPath?.(item, context.assetRegistry) || "",
     {
       tutorialUnlockState: createTutorialUnlockState(context.state),
+      dialogueRecords: context.latestDialogueEventRecords,
     }
   );
   renderShop({
@@ -211,6 +233,3 @@ function renderSlowAppSections(context, { region, player }) {
   renderCharacterCreation(context.state.playerProfile);
   renderLog(context.state.log, context.state.settings.combatView);
 }
-
-
-

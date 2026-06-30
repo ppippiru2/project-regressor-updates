@@ -1,8 +1,8 @@
-import { t } from "../localization/index.js?v=573";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=573";
-import { normalizeKarmaState } from "./karma.js?v=573";
-import { normalizeRegressionCardState } from "./regressionCardState.js?v=573";
-import { createTutorialFlags } from "./tutorialGuidance.js?v=573";
+import { t } from "../localization/index.js?v=675";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=675";
+import { normalizeKarmaState } from "./karma.js?v=675";
+import { normalizeRegressionCardState } from "./regressionCardState.js?v=675";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=675";
 
 export function createInitialState({
   slots,
@@ -42,6 +42,9 @@ export function createInitialState({
     selectedCardName: "",
     selectedTraitName: "",
     selectedSkillName: "",
+    tutorialBossDamageRate: 0,
+    tutorialBossBestDamageRate: 0,
+    tutorialEvaluationGrade: "",
     skillLoadouts: defaultSkillLoadouts.map((loadout) => ({ ...loadout, actionIds: [...loadout.actionIds] })),
     activeSkillLoadoutId: defaultActiveSkillLoadoutId,
     target: null,
@@ -69,6 +72,3 @@ export function createInitialState({
     offlineAutoHuntEngagedAt: 0,
   };
 }
-
-
-

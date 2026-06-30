@@ -1,5 +1,5 @@
-import { itemSellPrice, shopBuyPrice } from "../state/shop.js?v=573";
-import { getLocaleText, t, tf } from "../localization/index.js?v=573";
+import { itemSellPrice, shopBuyPrice } from "../state/shop.js?v=675";
+import { getLocaleText, t, tf } from "../localization/index.js?v=675";
 
 const byId = (id) => document.getElementById(id);
 const INVENTORY_TEXT = getLocaleText().inventoryUi;
@@ -156,6 +156,3 @@ function escapeHtml(value) {
     return entities[char];
   });
 }
-
-
-

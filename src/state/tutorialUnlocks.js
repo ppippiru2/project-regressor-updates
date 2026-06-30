@@ -1,3 +1,6 @@
+import { createPostTutorialWorldUnlockState } from "./postTutorialUnlocks.js?v=675";
+import { createTutorialRouteFlagState } from "./tutorialRouteFlags.js?v=675";
+
 export const TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID = "tutorial_1st_mine_06_forgotten_god_remnant";
 
 export const TUTORIAL_UNLOCK_ACCESS = Object.freeze({
@@ -23,6 +26,8 @@ export function createTutorialUnlockState(state = {}) {
     : forgottenGodRemnantContacted
       ? TUTORIAL_UNLOCK_ACCESS.damagedPartial
       : TUTORIAL_UNLOCK_ACCESS.locked;
+  const postTutorialUnlocks = createPostTutorialWorldUnlockState(state);
+  const tutorialRouteFlags = createTutorialRouteFlagState(state);
 
   return {
     regressionCount,
@@ -38,6 +43,8 @@ export function createTutorialUnlockState(state = {}) {
     traitCardResyncAvailable: run2Plus,
     goldenCardKnown: run2Plus,
     goldenCardObtained: run2Plus && Boolean(state.goldenCardObtained || flags.goldenCardObtained),
+    ...postTutorialUnlocks,
+    ...tutorialRouteFlags,
   };
 }
 
@@ -67,4 +74,3 @@ function hasEventId(value, eventId) {
   if (!Array.isArray(value)) return false;
   return value.includes(eventId);
 }
-

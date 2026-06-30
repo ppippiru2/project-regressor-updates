@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines draft per-frame anchor offsets for weapon/class attack motions before final source and pixel animation sprites are produced.",
+  "coordinateMode": "source_pixel_delta_from_pose_template",
+  "rules": [
+    "Frame anchor offsets are applied after the weapon/class pose template anchors are resolved.",
+    "attack_hit owns the damage_window event tag and resolves hitboxes from transformed anchors.",
+    "Standing attack frames keep foot baselines locked unless a future movement template explicitly allows foot motion.",
+    "These frame offsets are sprite-production QA references, not final animation easing or combat balance values."
+  ],
+  "motions": [
+    {
+      "motionId": "sword_shield_slash_v1",
+      "poseTemplateId": "sword_shield_idle",
+      "frames": [
+        {
+          "frameId": "attack_ready",
+          "durationMs": 140,
+          "anchorOffsets": {
+            "Shoulder_ScreenLeft": [-4, -3],
+            "Elbow_ScreenLeft": [-18, -10],
+            "Wrist_ScreenLeft": [-22, -16],
+            "Hand_ScreenLeft_Grip": [-24, -18],
+            "Chest_Center": [-3, 0]
+          },
+          "eventTags": ["windup"]
+        },
+        {
+          "frameId": "attack_hit",
+          "durationMs": 120,
+          "anchorOffsets": {
+            "Shoulder_ScreenLeft": [8, 2],
+            "Elbow_ScreenLeft": [36, 4],
+            "Wrist_ScreenLeft": [50, 4],
+            "Hand_ScreenLeft_Grip": [60, 4],
+            "Chest_Center": [8, 0],
+            "Hip_Center": [3, 0]
+          },
+          "eventTags": ["damage_window", "vfx_spawn.basic_slash", "sfx.weapon_swing"]
+        },
+        {
+          "frameId": "attack_recover",
+          "durationMs": 220,
+          "anchorOffsets": {
+            "Shoulder_ScreenLeft": [0, 0],
+            "Elbow_ScreenLeft": [0, 0],
+            "Wrist_ScreenLeft": [0, 0],
+            "Hand_ScreenLeft_Grip": [0, 0],
+            "Chest_Center": [0, 0],
+            "Hip_Center": [0, 0]
+          },
+          "eventTags": ["recover"]
+        }
+      ]
+    },
+    {
+      "motionId": "great_weapon_sweep_v1",
+      "poseTemplateId": "great_weapon_guard",
+      "frames": [
+        {
+          "frameId": "attack_ready",
+          "durationMs": 180,
+          "anchorOffsets": {
+            "TwoHand_LowerGrip": [-24, 20],
+            "TwoHand_UpperGrip": [-18, -20],
+            "Weapon_Tip": [-30, -28],
+            "Weapon_Back_End": [-20, 22],
+            "Mass_Center": [-20, 0]
+          },
+          "eventTags": ["windup", "weight_shift"]
+        },
+        {
+          "frameId": "attack_hit",
+          "durationMs": 150,
+          "anchorOffsets": {
+            "TwoHand_LowerGrip": [18, -8],
+            "TwoHand_UpperGrip": [52, -10],
+            "Weapon_Tip": [84, 12],
+            "Weapon_Back_End": [8, -6],
+            "Mass_Center": [28, -7]
+          },
+          "eventTags": ["damage_window", "vfx_spawn.heavy_arc", "sfx.heavy_weapon_swing"]
+        },
+        {
+          "frameId": "attack_recover",
+          "durationMs": 260,
+          "anchorOffsets": {
+            "TwoHand_LowerGrip": [0, 0],
+            "TwoHand_UpperGrip": [0, 0],
+            "Weapon_Tip": [0, 0],
+            "Weapon_Back_End": [0, 0],
+            "Mass_Center": [0, 0]
+          },
+          "eventTags": ["recover"]
+        }
+      ]
+    },
+    {
+      "motionId": "bow_release_v1",
+      "poseTemplateId": "bow_draw",
+      "frames": [
+        {
+          "frameId": "attack_ready",
+          "durationMs": 170,
+          "anchorOffsets": {
+            "Bow_Grip": [-6, 0],
+            "Draw_Hand": [-36, 0],
+            "Arrow_Nock": [-32, 0],
+            "Arrow_Tip": [-4, 0],
+            "Bow_String_Top": [-12, 0],
+            "Bow_String_Bottom": [-12, 0]
+          },
+          "eventTags": ["windup", "string_draw"]
+        },
+        {
+          "frameId": "attack_hit",
+          "durationMs": 90,
+          "anchorOffsets": {
+            "Bow_Grip": [4, 0],
+            "Draw_Hand": [18, 0],
+            "Arrow_Nock": [44, 0],
+            "Arrow_Tip": [82, 0],
+            "Bow_String_Top": [0, 0],
+            "Bow_String_Bottom": [0, 0]
+          },
+          "eventTags": ["damage_window", "projectile_spawn.arrow", "sfx.bow_release"]
+        },
+        {
+          "frameId": "attack_recover",
+          "durationMs": 190,
+          "anchorOffsets": {
+            "Bow_Grip": [0, 0],
+            "Draw_Hand": [0, 0],
+            "Arrow_Nock": [0, 0],
+            "Arrow_Tip": [0, 0],
+            "Bow_String_Top": [0, 0],
+            "Bow_String_Bottom": [0, 0]
+          },
+          "eventTags": ["recover"]
+        }
+      ]
+    },
+    {
+      "motionId": "staff_cast_v1",
+      "poseTemplateId": "staff_stand",
+      "frames": [
+        {
+          "frameId": "attack_ready",
+          "durationMs": 170,
+          "anchorOffsets": {
+            "Cast_Hand": [-18, -18],
+            "Staff_Top": [0, -8],
+            "Staff_Grip": [0, 0],
+            "Staff_Base": [0, 0]
+          },
+          "eventTags": ["windup", "mana_gather"]
+        },
+        {
+          "frameId": "attack_hit",
+          "durationMs": 130,
+          "anchorOffsets": {
+            "Cast_Hand": [20, -34],
+            "Staff_Top": [10, -34],
+            "Staff_Grip": [4, -6],
+            "Staff_Base": [0, 0]
+          },
+          "eventTags": ["damage_window", "vfx_spawn.staff_bolt", "sfx.staff_cast"]
+        },
+        {
+          "frameId": "attack_recover",
+          "durationMs": 210,
+          "anchorOffsets": {
+            "Cast_Hand": [0, 0],
+            "Staff_Top": [0, 0],
+            "Staff_Grip": [0, 0],
+            "Staff_Base": [0, 0]
+          },
+          "eventTags": ["recover"]
+        }
+      ]
+    },
+    {
+      "motionId": "fist_combo_v1",
+      "poseTemplateId": "fist_guard_idle",
+      "frames": [
+        {
+          "frameId": "attack_ready",
+          "durationMs": 110,
+          "anchorOffsets": {
+            "Fist_ScreenLeft": [-38, -12],
+            "Fist_ScreenRight": [-10, -8],
+            "Guard_Center": [-12, -10],
+            "Wrist_ScreenLeft": [-18, -8],
+            "Wrist_ScreenRight": [-6, -4]
+          },
+          "eventTags": ["windup"]
+        },
+        {
+          "frameId": "attack_hit",
+          "durationMs": 90,
+          "anchorOffsets": {
+            "Fist_ScreenLeft": [72, 0],
+            "Fist_ScreenRight": [22, -4],
+            "Guard_Center": [30, -2],
+            "Wrist_ScreenLeft": [48, 0],
+            "Wrist_ScreenRight": [12, -4]
+          },
+          "eventTags": ["damage_window", "vfx_spawn.fist_impact", "sfx.fist_hit"]
+        },
+        {
+          "frameId": "attack_recover",
+          "durationMs": 150,
+          "anchorOffsets": {
+            "Fist_ScreenLeft": [0, 0],
+            "Fist_ScreenRight": [0, 0],
+            "Guard_Center": [0, 0],
+            "Wrist_ScreenLeft": [0, 0],
+            "Wrist_ScreenRight": [0, 0]
+          },
+          "eventTags": ["recover"]
+        }
+      ]
+    }
+  ]
+}

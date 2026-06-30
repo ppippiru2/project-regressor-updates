@@ -2,10 +2,12 @@ import {
   normalizeDialogueEvents,
   renderDialogueEventLines,
   resolveDialogueEvent,
-} from "./dialogueEvents.js?v=573";
-import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=573";
-import { karmaValue } from "../state/karma.js?v=573";
-import { createRegressionCardResyncState } from "../state/regressionCardState.js?v=573";
+} from "./dialogueEvents.js?v=675";
+import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=675";
+import { karmaValue } from "../state/karma.js?v=675";
+import { POST_TUTORIAL_WORLD_UNLOCK_FLAGS } from "../state/postTutorialUnlocks.js?v=675";
+import { createRegressionCardResyncState } from "../state/regressionCardState.js?v=675";
+import { TUTORIAL_ROUTE_STATE_FLAGS } from "../state/tutorialRouteFlags.js?v=675";
 
 export const DIALOGUE_EVENT_RUNTIME_VERSION = "v1.0-live-json-bridge";
 
@@ -50,6 +52,8 @@ const DIALOGUE_EVENT_RUNTIME_MIRRORED_FLAGS = Object.freeze([
   "traitCardResyncAvailable",
   "goldenCardObtained",
   "forgottenGodRemnantContacted",
+  ...POST_TUTORIAL_WORLD_UNLOCK_FLAGS,
+  ...TUTORIAL_ROUTE_STATE_FLAGS,
 ]);
 
 const DIALOGUE_EVENT_DATA_URL = new URL("../../data/dialogue-events.json", import.meta.url);
@@ -92,13 +96,21 @@ export function getDialogueEventRuntimeStatus() {
 }
 
 export function claimDialogueEventById(state, eventId, options = {}) {
+  return dialogueEventRecordsToMessages(claimDialogueEventRecordsById(state, eventId, options));
+}
+
+export function claimDialogueEventRecordsById(state, eventId, options = {}) {
   if (!eventId) return [];
   const event = runtimeDialogueEvents.find((entry) => entry.id === eventId);
   if (!event) return [];
-  return claimDialogueEvent(state, event, options);
+  return claimDialogueEventRecords(state, event, options);
 }
 
 export function claimDialogueEventsForTrigger(state, trigger = {}, options = {}) {
+  return dialogueEventRecordsToMessages(claimDialogueEventRecordsForTrigger(state, trigger, options));
+}
+
+export function claimDialogueEventRecordsForTrigger(state, trigger = {}, options = {}) {
   const triggerType = String(trigger.type || "");
   if (!DIALOGUE_EVENT_TRIGGER_TYPES.includes(triggerType)) return [];
 
@@ -111,7 +123,13 @@ export function claimDialogueEventsForTrigger(state, trigger = {}, options = {})
     return targetIds.has(event.trigger.targetId);
   });
 
-  return matchingEvents.flatMap((event) => claimDialogueEvent(state, event, options));
+  return matchingEvents.flatMap((event) => claimDialogueEventRecords(state, event, options));
+}
+
+export function dialogueEventRecordsToMessages(records = []) {
+  return records
+    .map((record) => record?.text)
+    .filter(Boolean);
 }
 
 export function createDialogueRuntimeTemplateValues(state = {}, options = {}) {
@@ -158,7 +176,7 @@ export function createDialogueRuntimeTemplateValues(state = {}, options = {}) {
   });
 }
 
-function claimDialogueEvent(state, event, options = {}) {
+function claimDialogueEventRecords(state, event, options = {}) {
   if (!state || !event?.id) return [];
   const tutorialFlags = ensureTutorialFlags(state);
   if (hasShownDialogueEvent(tutorialFlags, event.id) && options.allowRepeat !== true) return [];
@@ -181,8 +199,25 @@ function claimDialogueEvent(state, event, options = {}) {
   return renderDialogueEventLines(resolved.event, {
     templateValues: createDialogueRuntimeTemplateValues(state, options),
   })
-    .map((line) => line.text)
-    .filter(Boolean);
+    .map((line, index) => createDialogueEventRuntimeRecord(resolved.event, line, index))
+    .filter((record) => record.text);
+}
+
+function createDialogueEventRuntimeRecord(event, line, index) {
+  return {
+    eventId: event.id,
+    phase: event.phase || "",
+    title: event.title || "",
+    triggerType: event.trigger?.type || "",
+    triggerTargetId: event.trigger?.targetId || "",
+    locationId: event.locationId || "",
+    lineIndex: index,
+    lineType: line.lineType || "dialogue",
+    outputChannel: line.outputChannel || "dialogue",
+    speaker: line.speaker || "",
+    text: line.text || "",
+    recordEntries: Array.isArray(event.stateEffects?.recordEntries) ? [...event.stateEffects.recordEntries] : [],
+  };
 }
 
 function applyDialogueEventRuntimeEffects(state, event) {

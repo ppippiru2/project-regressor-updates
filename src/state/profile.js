@@ -1,5 +1,5 @@
-import { getLocaleText } from "../localization/index.js?v=573";
-import { portraitFrameFromFormData } from "./portraitFrame.js?v=573";
+import { getLocaleText } from "../localization/index.js?v=675";
+import { portraitFrameFromFormData } from "./portraitFrame.js?v=675";
 
 export const PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID = "character_customization_profile_image_v1";
 
@@ -77,6 +77,3 @@ export function resolveDispositionResult(answers = [], { localeText = getLocaleT
     })),
   };
 }
-
-
-

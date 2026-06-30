@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=573";
+import { getLocaleText } from "../localization/index.js?v=675";
 
 const COMBAT_LOG_TEXT = getLocaleText().combatLogFormatter;
 const CLASS_PATTERNS = COMBAT_LOG_TEXT.classPatterns;
@@ -112,6 +112,3 @@ function escapeHtml(value) {
     return entities[char];
   });
 }
-
-
-

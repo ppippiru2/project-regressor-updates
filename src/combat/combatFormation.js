@@ -1,4 +1,4 @@
-import { COMBAT_FORMATION_LIMITS } from "./combatDisplayConfig.js?v=573";
+import { COMBAT_FORMATION_LIMITS } from "./combatDisplayConfig.js?v=675";
 
 export function createCombatFormationState(state) {
   return {
@@ -9,6 +9,3 @@ export function createCombatFormationState(state) {
     compressedActorsPerSide: COMBAT_FORMATION_LIMITS.compressedActorsPerSide,
   };
 }
-
-
-

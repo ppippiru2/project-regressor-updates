@@ -1,12 +1,13 @@
 import {
   COMBAT_VFX_PREVIEW_EFFECT_TYPES,
   createCombatVfxPlacementPreview,
-} from "./combatVfxPlacementPreview.js?v=573";
+} from "./combatVfxPlacementPreview.js?v=675";
 import {
   MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
   MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
-} from "../config/monsterBattleSpritePresets.js?v=573";
-import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=573";
+} from "../config/monsterBattleSpritePresets.js?v=675";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=675";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=675";
 
 export const RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION = "runtime-vfx-bulk-intake-preview-v1";
 
@@ -229,6 +230,11 @@ function createRuntimeVfxPreviewRow(row, rowIndex, combatPreview) {
   const profileMonsterCount = countMonstersForMotionProfile(combatPreview, motionProfile);
   const blockingIssueCodes = Array.from(issues);
   const warningIssueCodes = runtimeVfxWarningIssueCodes({ kind, existing, signals, blockingIssueCodes });
+  const bulkState = existing ? "staged-update" : "staged-append";
+  const targetSurface = kind === "profile-placement"
+    ? `MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.${motionProfile || "unknown"}`
+    : `MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE.${motionProfile || "unknown"}.${effectType || "unknown"}`;
+  const targetSurfaceCount = blockingIssueCodes.length ? 0 : 1;
 
   return {
     rowIndex,
@@ -237,18 +243,24 @@ function createRuntimeVfxPreviewRow(row, rowIndex, combatPreview) {
     effectType,
     kind,
     sourceMonsterId: firstValue(row.sourceMonsterId, row.monsterId, row.enemyId),
-    targetSurface: kind === "profile-placement"
-      ? `MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE.${motionProfile || "unknown"}`
-      : `MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE.${motionProfile || "unknown"}.${effectType || "unknown"}`,
+    targetSurface,
     placement,
     modifier,
     currentPlacement: summarizeCurrentPlacement(currentProfilePlacement),
     currentModifier: summarizeCurrentModifier(currentModifier),
     profileMonsterCount,
-    bulkState: existing ? "staged-update" : "staged-append",
-    targetSurfaceCount: blockingIssueCodes.length ? 0 : 1,
+    bulkState,
+    targetSurfaceCount,
     blockingIssueCodes,
     warningIssueCodes,
+    contractReview: createContentBulkRowContractReview({
+      domainId: "runtime_vfx",
+      state: blockingIssueCodes.length ? "withheld-blocked" : bulkState,
+      targetSurface,
+      targetSurfaceCount,
+      blockingIssueCodes,
+      warningIssueCodes,
+    }),
     intakeState: runtimeVfxIntakeState({ motionProfile, effectType, kind, issues, existing, signals }),
     issues,
     signals,

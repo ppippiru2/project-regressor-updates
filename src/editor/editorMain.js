@@ -1,49 +1,137 @@
-import { applyDomLocalization } from "../localization/domText.js?v=573";
-import { getLocaleText, t, tf } from "../localization/index.js?v=573";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=573";
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=573";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=573";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=573";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=573";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=573";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=573";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=573";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=573";
+import { applyDomLocalization } from "../localization/domText.js?v=675";
+import { getLocaleText, t, tf } from "../localization/index.js?v=675";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=675";
+import { renderRetargetPreviewDetailView } from "./retargetPreviewDetailView.js?v=675";
+import {
+  renderEditorAssetSections,
+  renderEditorBacklogCards,
+  renderEditorPrototypeCards,
+  renderEditorSaveKeyCards,
+} from "./editorOverviewListView.js?v=675";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=675";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=675";
+import { renderBalanceTuningDetailView } from "./balanceTuningDetailView.js?v=675";
+import {
+  renderActiveBalanceCandidateSummary,
+  renderBalanceDomainSummaries,
+  renderBalanceTuningCandidates,
+} from "./balanceCandidateSummaryView.js?v=675";
+import {
+  renderBalanceGroupRow,
+  renderBalancePacingSnapshot,
+  renderBalanceRelatedChecks,
+} from "./balanceRegistryDetailView.js?v=675";
+import {
+  renderBalanceFilterControls,
+  renderEmptyBalanceRows,
+} from "./balanceFilterControlsView.js?v=675";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=675";
+import { renderContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlanView.js?v=675";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=675";
+import { renderContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlanView.js?v=675";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=675";
+import { renderContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlanView.js?v=675";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=675";
+import { renderContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsalView.js?v=675";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=675";
+import { renderContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunView.js?v=675";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=675";
+import { renderContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContractView.js?v=675";
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=573";
+} from "./contentBulkPatchPackageAdapter.js?v=675";
+import { renderContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapterView.js?v=675";
+import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=675";
+import { renderContentBulkPackageOverview } from "./contentBulkPackageOverviewView.js?v=675";
+import { renderContentBulkFilterControls } from "./contentBulkFilterControlsView.js?v=675";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=675";
+import { renderLootSkillBulkIntakePreview } from "./lootSkillBulkIntakeView.js?v=675";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=675";
+import { renderContentBulkPatchDiffExport } from "./contentBulkPatchDiffExportView.js?v=675";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=675";
+import { renderContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraftView.js?v=675";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=675";
+import { renderContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExportView.js?v=675";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=675";
+import { renderContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklistView.js?v=675";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=675";
+import { renderContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportView.js?v=675";
+import { renderContentBulkMassApplyReadiness } from "./contentBulkMassApplyReadinessView.js?v=675";
+import { renderContentBulkStagedApplyRehearsal } from "./contentBulkStagedApplyRehearsalView.js?v=675";
+import { renderContentBulkDomainApplyReadiness } from "./contentBulkDomainApplyReadinessView.js?v=675";
+import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=675";
+import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=675";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=675";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=675";
 import {
-  CONTENT_BULK_ROW_TARGET_SCOPES,
-  createContentBulkPackageOverview,
-  createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=573";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=573";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=573";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=573";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=573";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=573";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=573";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=573";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=573";
+  formatCombatVfxPlacement,
+  renderCombatVfxPlacementDetailView,
+} from "./combatVfxPlacementView.js?v=675";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=573";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=573";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=573";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=573";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=573";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=573";
+} from "./runtimeVfxBulkIntakePreview.js?v=675";
+import { renderRuntimeVfxBulkIntakePreview } from "./runtimeVfxBulkIntakeView.js?v=675";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=675";
+import { renderMonsterCandidateRewardPreview } from "./monsterCandidateRewardView.js?v=675";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=675";
+import { renderMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionView.js?v=675";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=675";
+import { renderMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionView.js?v=675";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=675";
+import { renderMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraftView.js?v=675";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=675";
+import { renderMonsterCandidateBulkPatchAutomation } from "./monsterCandidateBulkPatchAutomationView.js?v=675";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=573";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=573";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=573";
+} from "./monsterSpriteSlotReport.js?v=675";
+import { renderMonsterSpriteSlotReportView } from "./monsterSpriteSlotReportView.js?v=675";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=675";
+import { renderMonsterRuntimeIntegrationView } from "./monsterRuntimeIntegrationView.js?v=675";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=675";
+import { renderMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakeView.js?v=675";
+import { renderSaveSlotDiagnosticsShell } from "./saveSlotDiagnosticsView.js?v=675";
+import { renderSaveSlotValidationPlanView } from "./saveSlotValidationPlanView.js?v=675";
+import { renderSaveSlotDraftPayloadView } from "./saveSlotDraftPayloadView.js?v=675";
+import { renderSaveSlotDraftDiffSummaryView } from "./saveSlotDraftDiffSummaryView.js?v=675";
+import { renderSaveSlotApplyGateChecklistView } from "./saveSlotApplyGateChecklistView.js?v=675";
+import { renderSaveSlotRecoveryRehearsalView } from "./saveSlotRecoveryRehearsalView.js?v=675";
+import { renderSaveSlotEditInputSchemaView } from "./saveSlotEditInputSchemaView.js?v=675";
+import { renderSaveSlotEditValidationMatrixView } from "./saveSlotEditValidationMatrixView.js?v=675";
+import { renderSaveSlotEditRuleDrilldownView } from "./saveSlotEditRuleDrilldownView.js?v=675";
+import { renderSaveSlotEditSamplePayloadView } from "./saveSlotEditSamplePayloadView.js?v=675";
+import { renderSaveSlotEditValidatorDryRunView } from "./saveSlotEditValidatorDryRunView.js?v=675";
+import { renderSaveSlotEditValidatorRegistryView } from "./saveSlotEditValidatorRegistryView.js?v=675";
+import { renderSaveSlotEditValidatorResultView } from "./saveSlotEditValidatorResultView.js?v=675";
+import { renderSaveSlotEditValidatorExecutableDryRunView } from "./saveSlotEditValidatorExecutableDryRunView.js?v=675";
+import { renderSaveSlotEditProposedValueInjectorView } from "./saveSlotEditProposedValueInjectorView.js?v=675";
+import { renderSaveSlotEditDryRunSampleComparatorView } from "./saveSlotEditDryRunSampleComparatorView.js?v=675";
+import { renderSaveSlotEditSampleBridgeBlockerView } from "./saveSlotEditSampleBridgeBlockerView.js?v=675";
+import { renderSaveSlotEditProducedResultBridgeView } from "./saveSlotEditProducedResultBridgeView.js?v=675";
+import { renderSaveSlotEditBridgeTransitionView } from "./saveSlotEditBridgeTransitionView.js?v=675";
+import { renderSaveSlotEditValidatorResultSourceAdapterView } from "./saveSlotEditValidatorResultSourceAdapterView.js?v=675";
+import { renderSaveSlotEditSelectedSourceHandoffView } from "./saveSlotEditSelectedSourceHandoffView.js?v=675";
+import { renderSaveSlotEditAdapterRunnerPreflightView } from "./saveSlotEditAdapterRunnerPreflightView.js?v=675";
+import { renderSaveSlotEditConfirmationSourceSelectionView } from "./saveSlotEditConfirmationSourceSelectionView.js?v=675";
+import { renderSaveSlotEditConfirmationInputShellView } from "./saveSlotEditConfirmationInputShellView.js?v=675";
+import { renderSaveSlotEditConfirmationMatchReviewView } from "./saveSlotEditConfirmationMatchReviewView.js?v=675";
+import { renderSaveSlotEditSubmitRunnerBlockerView } from "./saveSlotEditSubmitRunnerBlockerView.js?v=675";
+import { renderSaveSlotEditFinalApplyRunnerHandoffView } from "./saveSlotEditFinalApplyRunnerHandoffView.js?v=675";
+import { renderSaveSlotEditApplyRunnerPayloadShapeView } from "./saveSlotEditApplyRunnerPayloadShapeView.js?v=675";
+import { renderSaveSlotEditPayloadBridgeCompatibilityView } from "./saveSlotEditPayloadBridgeCompatibilityView.js?v=675";
+import { renderSaveSlotEditValidatorApplyGateBridgeView } from "./saveSlotEditValidatorApplyGateBridgeView.js?v=675";
+import { renderSaveSlotEditCompatibilityConfirmationRollupView } from "./saveSlotEditCompatibilityConfirmationRollupView.js?v=675";
+import { renderSaveSlotEditValidatorConfirmationPreflightView } from "./saveSlotEditValidatorConfirmationPreflightView.js?v=675";
+import { renderSaveSlotEditConfirmationInputContractView } from "./saveSlotEditConfirmationInputContractView.js?v=675";
+import { renderSaveSlotEditConfirmationRunnerHandoffView } from "./saveSlotEditConfirmationRunnerHandoffView.js?v=675";
+import { renderSaveSlotEditWriterPayloadCheckpointView } from "./saveSlotEditWriterPayloadCheckpointView.js?v=675";
+import { renderSaveSlotEditPostWriteRestoreContractView } from "./saveSlotEditPostWriteRestoreContractView.js?v=675";
+import { renderSaveSlotEditWriterEnablementRiskView } from "./saveSlotEditWriterEnablementRiskView.js?v=675";
 
-const EDITOR_VERSION = "573";
+const EDITOR_VERSION = "675";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const EDITOR_TEXT = getLocaleText().editorPrep;
@@ -683,54 +771,8 @@ function renderPanelDetail() {
 
 function renderMonsterRuntimeIntegrationPreview() {
   const preview = MONSTER_RUNTIME_INTEGRATION_PREVIEW;
-  const summary = preview.summary || {};
   const detailText = EDITOR_TEXT.monsterRuntimeIntegrationPreview || {};
-  return `
-    <section class="editor-monster-runtime-preview" aria-label="${escapeAttribute(detailText.title || "Monster runtime integration")}">
-      <div class="editor-monster-runtime-head">
-        <div>
-          <h3>${escapeHtml(detailText.title || "Monster runtime integration")}</h3>
-          <p class="muted">${escapeHtml(detailText.description || "")}</p>
-        </div>
-        <span>${escapeHtml(preview.sourcePack || "")}</span>
-      </div>
-      <div class="editor-monster-sprite-summary">
-        ${combatVfxSummaryCard(detailText.presetMetric || "Runtime presets", String(summary.runtimePresets || 0))}
-        ${combatVfxSummaryCard(detailText.mappedMetric || "Mapped monsters", String(summary.mappedMonsters || 0))}
-        ${combatVfxSummaryCard(detailText.actionMetric || "Action patterns", String(summary.actionPatterns || 0))}
-        ${combatVfxSummaryCard(detailText.waitingFileMetric || "Waiting files", String(summary.waitingSpriteFiles || 0))}
-      </div>
-      <div class="editor-monster-runtime-list">
-        ${(preview.rows || []).map((row) => renderMonsterRuntimeIntegrationRow(row, detailText)).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterRuntimeIntegrationRow(row, detailText = {}) {
-  const noMissingLabel = detailText.noMissingFiles || "Transparent sprite files connectable";
-  return `
-    <article class="editor-monster-runtime-row" data-status="${escapeAttribute(row.mappingStatus)}" data-sprite-status="${escapeAttribute(row.spriteStatus)}">
-      <div>
-        <strong>${escapeHtml(row.liveMonsterName)}</strong>
-        <span>${escapeHtml(row.externalMonsterId)} -> ${escapeHtml(row.liveMonsterId)}</span>
-      </div>
-      <div class="editor-monster-runtime-grid">
-        ${combatVfxFieldBlock(detailText.cardMetric || "Battle card", [row.cardSlot, row.runtimeClass, row.pivot])}
-        ${combatVfxFieldBlock(detailText.scaleMetric || "Scale", [
-          `${detailText.packScaleLabel || "Pack"} ${row.sourceInitialScale}`,
-          `${detailText.currentScaleLabel || "Current"} ${row.currentRuntimeScale}`,
-        ])}
-        ${combatVfxFieldBlock(detailText.motionMetric || "Motion", (row.motions || []).map((motion) => `${motion.phase}: ${motion.externalMotionId} -> ${motion.runtimeMotionId}`))}
-        ${combatVfxFieldBlock(detailText.actionListMetric || "Actions", (row.actions || []).map((action) => {
-          const label = action.nameKey ? t(action.nameKey, action.id) : action.id;
-          const optionalLabel = action.optional ? ` ${detailText.optionalTag || "optional"}` : "";
-          return `${label} · ${action.effectType}${optionalLabel}`;
-        }))}
-        ${combatVfxFieldBlock(detailText.waitingFileListMetric || "Waiting files", row.missingSpriteFiles?.length ? row.missingSpriteFiles : [noMissingLabel])}
-      </div>
-    </article>
-  `;
+  return renderMonsterRuntimeIntegrationView(preview, detailText);
 }
 
 function renderMonsterSpriteSlotReport() {
@@ -739,227 +781,14 @@ function renderMonsterSpriteSlotReport() {
     ...(EDITOR_TEXT.monsterSpriteSlotReport || {})
   };
   const report = MONSTER_SPRITE_SLOT_REPORT;
-  const totals = report.totals || {};
-  const statusLabels = {
-    ...MONSTER_SPRITE_REPORT_TEXT.statusLabels,
-    ...(detailText.statusLabels || {})
-  };
-  const fileStatusLabels = {
-    ...MONSTER_SPRITE_REPORT_TEXT.fileStatusLabels,
-    ...(detailText.fileStatusLabels || {})
-  };
   const readiness = manifest?.monsterSpriteSlotReadiness || {};
-
-  return `
-    <section class="editor-monster-sprite-report" aria-label="${escapeAttribute(detailText.title)}">
-      <div class="editor-monster-sprite-head">
-        <div>
-          <h3>${escapeHtml(detailText.title)}</h3>
-          <p class="muted">${escapeHtml(detailText.description)}</p>
-        </div>
-        <span>${escapeHtml(`${totals.monsters || 0} monsters / ${totals.poses || 0} poses`)}</span>
-      </div>
-      <div class="editor-monster-sprite-summary">
-        ${combatVfxSummaryCard(detailText.slotMetric, String(totals.slots || 0))}
-        ${combatVfxSummaryCard(detailText.assignedMetric, String(totals.assignedSlots || 0))}
-        ${combatVfxSummaryCard(detailText.connectableMetric, String(totals.connectableSlots || 0))}
-        ${combatVfxSummaryCard(detailText.missingMetric, String(totals.missingSlots || 0))}
-        ${combatVfxSummaryCard(detailText.fileScanMetric, String(totals.fileReadySlots || 0))}
-        ${combatVfxSummaryCard(detailText.fallbackMetric, String(totals.cssPlaceholderSlots || 0))}
-        ${combatVfxSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
-      </div>
-      ${renderMonsterSpriteConnectionPlan(readiness, detailText)}
-      ${renderMonsterSpriteFallbackSummary(report, detailText)}
-      <div class="editor-monster-sprite-list">
-        ${(report.byMonster || []).map((group) => renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels)).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {}) {
-  const plan = MONSTER_SPRITE_READY_CONNECTION_PLAN;
-  const review = MONSTER_SPRITE_READY_CONNECTION_REVIEW;
-  const readySlotPatches = numberOrFallback(readiness.readyAssetSlotPatchEntries, plan.assetSlotPatches.length);
-  const readyManifestEntries = numberOrFallback(readiness.readyAssetManifestPatchEntries, plan.assetManifestEntries.length);
-  const readyFiles = numberOrFallback(readiness.fileReadySlots, plan.summary?.fileReadySlots || 0);
-  const missingFiles = numberOrFallback(readiness.fileMissingSlots, plan.summary?.fileMissingSlots || 0);
-  const applyMode = readiness.readyConnectionApplyMode || plan.applyMode || "file-ready-only";
-  const status = readiness.readyConnectionReviewStatus || review.status || "waiting-for-monster-files";
-  const statusLabel = detailText.statusLabels?.[status] || status;
-  const nextStepKey = review.nextStep || "add-monster-files";
-  const nextStepLabel = detailText.nextStepLabels?.[nextStepKey] || nextStepKey;
-
-  return `
-    <div class="editor-monster-sprite-plan" data-ready-patches="${escapeAttribute(String(readySlotPatches))}" data-review-status="${escapeAttribute(status)}">
-      <div class="editor-monster-sprite-plan-copy">
-        <strong>${escapeHtml(detailText.connectionPlanTitle || "Ready Connection Plan")}</strong>
-        <span>${escapeHtml(detailText.connectionPlanDescription || "")}</span>
-      </div>
-      <div class="editor-monster-sprite-plan-state">
-        <span>${escapeHtml(detailText.reviewStatusMetric || "Review status")}</span>
-        <strong>${escapeHtml(statusLabel)}</strong>
-      </div>
-      <p class="editor-monster-sprite-plan-next">${escapeHtml(nextStepLabel)}</p>
-      <div class="editor-monster-sprite-plan-grid">
-        ${combatVfxSummaryCard(detailText.readyPatchMetric || "Ready patches", String(readySlotPatches))}
-        ${combatVfxSummaryCard(detailText.readyManifestMetric || "Manifest entries", String(readyManifestEntries))}
-        ${combatVfxSummaryCard(detailText.readyFileMetric || "Ready files", String(readyFiles))}
-        ${combatVfxSummaryCard(detailText.missingFileMetric || "Missing files", String(missingFiles))}
-        ${combatVfxSummaryCard(detailText.applyModeMetric || "Apply mode", applyMode)}
-      </div>
-      ${renderMonsterSpriteReviewChecks(review, detailText)}
-      ${renderMonsterSpriteApplyPreview(readiness, detailText)}
-      ${renderMonsterSpriteMissingFileHandoff(readiness, detailText)}
-    </div>
-  `;
-}
-
-function numberOrFallback(value, fallback) {
-  const number = Number(value);
-  return Number.isFinite(number) ? number : fallback;
-}
-
-function renderMonsterSpriteReviewChecks(review = {}, detailText = {}) {
-  const checks = Array.isArray(review.checks) ? review.checks : [];
-  if (!checks.length) return "";
-  const passedLabel = detailText.reviewCheckPassed || "OK";
-  const pendingLabel = detailText.reviewCheckPending || "Pending";
-
-  return `
-    <div class="editor-monster-sprite-review">
-      <strong>${escapeHtml(detailText.reviewChecklistTitle || "Review gate")}</strong>
-      <div class="editor-monster-sprite-review-list">
-        ${checks.map((check) => {
-          const label = detailText.reviewCheckLabels?.[check.id] || check.id;
-          return `
-            <span data-passed="${escapeAttribute(check.passed ? "true" : "false")}">
-              ${escapeHtml(label)}
-              <b>${escapeHtml(check.passed ? passedLabel : pendingLabel)}</b>
-            </span>
-          `;
-        }).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function renderMonsterSpriteMissingFileHandoff(readiness = {}, detailText = {}) {
-  if (!readiness.missingFileHandoffArtifact) return "";
-  return `
-    <div class="editor-monster-sprite-handoff">
-      <div class="editor-monster-sprite-handoff-copy">
-        <strong>${escapeHtml(detailText.handoffTitle || "Missing File Handoff")}</strong>
-        <span>${escapeHtml(detailText.handoffDescription || "")}</span>
-      </div>
-      <div class="editor-monster-sprite-handoff-grid">
-        ${combatVfxFieldBlock(detailText.handoffArtifactMetric || "Artifact", [readiness.missingFileHandoffArtifact])}
-        ${combatVfxFieldBlock(detailText.handoffScriptMetric || "Script", [readiness.missingFileHandoffExportScript || "-"])}
-        ${combatVfxFieldBlock(detailText.handoffMissingMetric || "Missing files", [String(readiness.missingFileHandoffMissingFiles ?? "-")])}
-        ${combatVfxFieldBlock(detailText.handoffGroupsMetric || "Monster groups", [String(readiness.missingFileHandoffMonsterGroups ?? "-")])}
-      </div>
-    </div>
-  `;
-}
-
-function renderMonsterSpriteApplyPreview(readiness = {}, detailText = {}) {
-  if (!readiness.applyPreviewArtifact) return "";
-  const status = readiness.applyPreviewStatus || "waiting-for-monster-files";
-  const statusLabel = detailText.statusLabels?.[status] || status;
-  const manualReviewLabel = readiness.applyPreviewManualReviewRequired
-    ? detailText.applyPreviewManualReviewRequired || "Manual review"
-    : detailText.applyPreviewManualReviewOptional || "Optional";
-  const compareLabel = readiness.applyPreviewComparesMissingFileHandoff
-    ? detailText.applyPreviewCompareEnabled || "Compared"
-    : detailText.applyPreviewCompareDisabled || "Not compared";
-
-  return `
-    <div class="editor-monster-sprite-apply-preview" data-apply-preview-status="${escapeAttribute(status)}">
-      <div class="editor-monster-sprite-apply-preview-copy">
-        <strong>${escapeHtml(detailText.applyPreviewTitle || "Apply Preview")}</strong>
-        <span>${escapeHtml(detailText.applyPreviewDescription || "")}</span>
-      </div>
-      <div class="editor-monster-sprite-apply-preview-grid">
-        ${combatVfxFieldBlock(detailText.applyPreviewArtifactMetric || "Artifact", [readiness.applyPreviewArtifact])}
-        ${combatVfxFieldBlock(detailText.applyPreviewScriptMetric || "Script", [readiness.applyPreviewExportScript || "-"])}
-        ${combatVfxFieldBlock(detailText.applyPreviewStatusMetric || "Status", [statusLabel])}
-        ${combatVfxFieldBlock(detailText.applyPreviewReadyPatchMetric || "Ready patches", [String(readiness.applyPreviewReadyPatchCount ?? "-")])}
-        ${combatVfxFieldBlock(detailText.applyPreviewPolicyMetric || "Policy", [manualReviewLabel, compareLabel])}
-      </div>
-    </div>
-  `;
-}
-
-function renderMonsterSpriteSlotGroup(group, detailText, statusLabels, fileStatusLabels) {
-  return `
-    <article class="editor-monster-sprite-group" data-fallback-mode="${escapeAttribute(group.dominantFallbackMode || "")}">
-      <div class="editor-monster-sprite-group-head">
-        <div>
-          <h4>${escapeHtml(group.monsterName || group.monsterId)}</h4>
-          <span>${escapeHtml(group.monsterId)}</span>
-        </div>
-        <strong>${escapeHtml(`${group.assignedSlots}/${group.rows.length}`)}</strong>
-      </div>
-      ${renderMonsterSpriteFallbackChips(group.fallbackModeSummary, detailText, "editor-monster-sprite-group-modes")}
-      <div class="editor-monster-sprite-pose-grid">
-        ${group.rows.map((row) => renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLabels)).join("")}
-      </div>
-    </article>
-  `;
-}
-
-function renderMonsterSpriteFallbackSummary(report = {}, detailText = {}) {
-  const summary = report.fallbackModeSummary || [];
-  if (!summary.length) return "";
-  return `
-    <div class="editor-monster-sprite-fallback-summary">
-      <div>
-        <strong>${escapeHtml(detailText.fallbackSummaryTitle || "Fallback summary")}</strong>
-        <span>${escapeHtml(detailText.fallbackSummaryDescription || "")}</span>
-      </div>
-      ${renderMonsterSpriteFallbackChips(summary, detailText, "editor-monster-sprite-fallback-chips")}
-    </div>
-  `;
-}
-
-function renderMonsterSpriteFallbackChips(summary = [], detailText = {}, className = "editor-monster-sprite-fallback-chips") {
-  const labels = detailText.fallbackModeLabels || {};
-  return `
-    <div class="${escapeAttribute(className)}">
-      ${summary.map((entry) => `
-        <span data-fallback-mode="${escapeAttribute(entry.mode)}" data-count="${escapeAttribute(String(entry.count || 0))}">
-          <b>${escapeHtml(labels[entry.mode] || entry.mode)}</b>
-          <em>${escapeHtml(String(entry.count || 0))}</em>
-        </span>
-      `).join("")}
-    </div>
-  `;
-}
-
-function renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLabels) {
-  const status = statusLabels[row.status] || row.status;
-  const fileStatus = fileStatusLabels[row.fileStatus] || row.fileStatus;
-  const fallbackMode = detailText.fallbackModeLabels?.[row.runtimeFallbackMode] || row.runtimeFallbackMode;
-  const assetValue = row.assetId || "-";
-  const runtimePath = row.resolvedPath || "-";
-  const runtimePreviewPath = row.runtimePreviewPath || "-";
-  return `
-    <div class="editor-monster-sprite-pose" data-status="${escapeAttribute(row.status)}">
-      <div>
-        <strong>${escapeHtml(row.pose)}</strong>
-        <span>${escapeHtml(status)}</span>
-      </div>
-      ${combatVfxFieldBlock(detailText.expectedPath, [row.expectedPath])}
-      ${combatVfxFieldBlock(detailText.fileStatus, [fileStatus])}
-      ${combatVfxFieldBlock(detailText.fallbackMode || "Fallback", [fallbackMode])}
-      ${combatVfxFieldBlock(detailText.assignedAsset, [assetValue])}
-      ${!row.assetId ? combatVfxFieldBlock(detailText.suggestedAsset, [row.draftAssetId]) : ""}
-      ${!row.assetId ? combatVfxFieldBlock(detailText.defaultSlot || "Default slot", [row.defaultSlotKey || "-"]) : ""}
-      ${!row.assetId ? combatVfxFieldBlock(detailText.slotPatch, [row.slotPatchPath]) : ""}
-      ${row.runtimePreviewPath ? combatVfxFieldBlock(detailText.runtimePreview || "Runtime preview", [runtimePreviewPath]) : ""}
-      ${row.resolvedPath ? combatVfxFieldBlock(detailText.runtimePath, [runtimePath]) : ""}
-    </div>
-  `;
+  return renderMonsterSpriteSlotReportView({
+    report,
+    readiness,
+    plan: MONSTER_SPRITE_READY_CONNECTION_PLAN,
+    review: MONSTER_SPRITE_READY_CONNECTION_REVIEW,
+    detailText,
+  });
 }
 
 function renderCombatVfxPlacementDetail() {
@@ -968,256 +797,35 @@ function renderCombatVfxPlacementDetail() {
     ...(EDITOR_TEXT.combatVfxPlacementDetail || {})
   };
   const preview = COMBAT_VFX_PLACEMENT_PREVIEW;
-  const totals = preview.totals || {};
   const playerRows = preview.playerRows || [];
   const monsterRows = preview.monsterRows || [];
-  const monsterMotionProfileRows = preview.monsterMotionProfileRows || [];
   const visiblePlayerRows = playerRows.filter((row) => matchesCombatVfxFilter("player", combatVfxPlayerSearchText(row)));
   const visibleMonsterRows = monsterRows.filter((row) => matchesCombatVfxFilter("monster", combatVfxMonsterSearchText(row)));
-  const visibleCount = visiblePlayerRows.length + visibleMonsterRows.length;
-  const totalCount = playerRows.length + monsterRows.length;
-  const tuningCandidates = preview.tuningCandidates || [];
-
-  return `
-    <section class="editor-combat-vfx-detail" aria-label="${escapeAttribute(detailText.title)}">
-      <div class="editor-combat-vfx-head">
-        <div>
-          <h3>${escapeHtml(detailText.title)}</h3>
-          <p class="muted">${escapeHtml(detailText.description)}</p>
-        </div>
-        <span>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.summary", {
-          playerRows: totals.playerRows || playerRows.length,
-          monsterRows: totals.monsterRows || monsterRows.length,
-          effectTypes: totals.effectTypes || 0
-        }, detailText.summary))}</span>
-      </div>
-      <div class="editor-combat-vfx-summary">
-        ${combatVfxSummaryCard(detailText.playerMetric, String(totals.playerRows || playerRows.length))}
-        ${combatVfxSummaryCard(detailText.monsterMetric, String(totals.monsterRows || monsterRows.length))}
-        ${combatVfxSummaryCard(detailText.profileMetric || "Motion Profiles", String(totals.monsterMotionProfiles || monsterMotionProfileRows.length))}
-        ${combatVfxSummaryCard(detailText.profileTuningMetric || "Profile Signals", String(totals.monsterProfileTuningRows || 0))}
-        ${combatVfxSummaryCard(detailText.effectMetric, String(totals.effectTypes || 0))}
-        ${combatVfxSummaryCard(detailText.tuningMetric, String(totals.tuningCandidates || tuningCandidates.length))}
-      </div>
-      ${renderCombatVfxTuningSignals(tuningCandidates, detailText)}
-      ${renderMonsterMotionProfileSummary(monsterMotionProfileRows, detailText)}
-      ${renderCombatVfxFilterControls(detailText, visibleCount, totalCount)}
-      <div class="editor-combat-vfx-grid">
-        <section>
-          <h4>${escapeHtml(detailText.playerTitle)}</h4>
-          <div class="editor-combat-vfx-list">
-            ${visiblePlayerRows.map((row) => renderPlayerVfxPreviewRow(row, detailText)).join("") || emptyCombatVfxRows(detailText, "player")}
-          </div>
-        </section>
-        <section>
-          <h4>${escapeHtml(detailText.monsterTitle)}</h4>
-          <div class="editor-combat-vfx-list">
-            ${visibleMonsterRows.map((row) => renderMonsterVfxPreviewRow(row, detailText)).join("") || emptyCombatVfxRows(detailText, "monster")}
-          </div>
-        </section>
-      </div>
-    </section>
-  `;
-}
-
-function renderCombatVfxTuningSignals(candidates = [], detailText = {}) {
-  const signalLabels = {
-    ...COMBAT_VFX_SIGNAL_LABELS,
-    ...(detailText.signalLabels || {})
-  };
-  return `
-    <section class="editor-combat-vfx-tuning" aria-label="${escapeAttribute(detailText.tuningTitle || "Tuning Signals")}">
-      <div class="editor-combat-vfx-tuning-head">
-        <div>
-          <h4>${escapeHtml(detailText.tuningTitle || "Tuning Signals")}</h4>
-          <p class="muted">${escapeHtml(detailText.tuningDescription || "")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.candidateCount", {
-          count: candidates.length
-        }, `${candidates.length}`))}</strong>
-      </div>
-      <div class="editor-combat-vfx-tuning-list">
-        ${candidates.map((candidate) => renderCombatVfxTuningCandidate(candidate, detailText, signalLabels)).join("") || `<p class="editor-combat-vfx-empty"><span>${escapeHtml(detailText.noTuningCandidates || "No tuning signals")}</span></p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderCombatVfxTuningCandidate(candidate = {}, detailText = {}, signalLabels = COMBAT_VFX_SIGNAL_LABELS) {
-  const kindLabel = candidate.kind === "monster" ? (detailText.monsterOnly || "Monster") : (detailText.playerOnly || "Player");
-  const signalChips = (candidate.signals || []).map((signal) => chip(signalLabels[signal] || signal)).join("");
-  return `
-    <article class="editor-combat-vfx-tuning-card" data-priority="${escapeAttribute(String(candidate.priority || 3))}">
-      <div>
-        <strong>${escapeHtml(`${kindLabel} · ${candidate.label || candidate.targetId || ""}`)}</strong>
-        <span>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.candidatePriority", {
-          priority: candidate.priority || "-"
-        }, `Priority ${candidate.priority || "-"}`))}</span>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.candidateSignals || "Signals")}</span>
-        <div class="editor-chip-list">${signalChips}</div>
-      </div>
-      ${combatVfxFieldBlock(detailText.candidatePlacement || "Placement", [formatCombatVfxPlacement(candidate.placement)])}
-    </article>
-  `;
-}
-
-function renderMonsterMotionProfileSummary(rows = [], detailText = {}) {
-  const signalLabels = {
-    ...COMBAT_VFX_SIGNAL_LABELS,
-    ...(detailText.signalLabels || {})
-  };
-  return `
-    <section class="editor-combat-vfx-profile-summary" aria-label="${escapeAttribute(detailText.profileTitle || "Monster Motion Profile Summary")}">
-      <div class="editor-combat-vfx-profile-head">
-        <div>
-          <h4>${escapeHtml(detailText.profileTitle || "Monster Motion Profile Summary")}</h4>
-          <p class="muted">${escapeHtml(detailText.profileDescription || "")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.profileCount", {
-          count: rows.length
-        }, `${rows.length}`))}</strong>
-      </div>
-      <div class="editor-combat-vfx-profile-list">
-        ${rows.map((row) => renderMonsterMotionProfileCard(row, detailText, signalLabels)).join("") || `<p class="editor-combat-vfx-empty"><span>${escapeHtml(detailText.empty || "No rows")}</span></p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterMotionProfileCard(row = {}, detailText = {}, signalLabels = COMBAT_VFX_SIGNAL_LABELS) {
-  const effectLabels = {
-    ...COMBAT_VFX_EFFECT_LABELS,
-    ...(detailText.effectLabels || {})
-  };
-  const monsterChips = (row.monsterNames || []).map((name) => chip(name)).join("");
-  const classChips = (row.classIds || []).map((classId) => chip(classId)).join("");
-  const sfxChips = (row.sfxProfiles || []).map((sfxProfile) => chip(sfxProfile)).join("");
-  const defaultEffectChips = (row.defaultEffectTypes || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
-  const modifierChips = (row.effectModifiers || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
-  const signalChips = (row.signals || []).length
-    ? row.signals.map((signal) => chip(signalLabels[signal] || signal)).join("")
-    : chip(detailText.noProfileSignals || "Stable range");
-  const effectRangeChips = Object.entries(row.effectRanges || {})
-    .map(([effectType, range]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacementRange(range)}`))
-    .join("");
-  return `
-    <article class="editor-combat-vfx-profile-card" data-priority="${escapeAttribute(String(row.priority || 0))}">
-      <div class="editor-combat-vfx-profile-card-head">
-        <div>
-          <h4>${escapeHtml(row.motionProfile || row.id || "")}</h4>
-          <span>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.profileMonsterCount", {
-            count: row.monsterCount || 0
-          }, `${row.monsterCount || 0}`))}</span>
-        </div>
-        <strong>${escapeHtml(row.id || "")}</strong>
-      </div>
-      ${combatVfxFieldBlock(detailText.profileBaseRange || "Base range", [formatCombatVfxPlacementRange(row.baseRange)])}
-      ${combatVfxFieldBlock(detailText.profileHyperRange || "Hyper range", [formatCombatVfxPlacementRange(row.hyperRange)])}
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.monsterOnly || "Monster")}</span>
-        <div class="editor-chip-list">${monsterChips}</div>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.sprite || "Sprite")}</span>
-        <div class="editor-chip-list">${classChips}</div>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.sfx || "SFX")}</span>
-        <div class="editor-chip-list">${sfxChips}</div>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.profileDefaultEffects || "Default effects")}</span>
-        <div class="editor-chip-list">${defaultEffectChips}</div>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.profileModifiers || "Profile modifiers")}</span>
-        <div class="editor-chip-list">${modifierChips}</div>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.profileSignals || "Profile signals")}</span>
-        <div class="editor-chip-list">${signalChips}</div>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.profileEffects || "Effect ranges")}</span>
-        <div class="editor-chip-list">${effectRangeChips}</div>
-      </div>
-    </article>
-  `;
-}
-
-function renderCombatVfxFilterControls(detailText = {}, visibleCount = 0, totalCount = 0) {
-  const filterSummary = combatVfxFilterSummary(detailText);
-  return `
-    <div class="editor-combat-vfx-controls">
-      <label class="editor-combat-vfx-search">
-        <span>${escapeHtml(detailText.searchLabel || "Search")}</span>
-        <input type="search" data-combat-vfx-search value="${escapeAttribute(combatVfxDetailFilter.query)}" placeholder="${escapeAttribute(detailText.searchPlaceholder || "")}" />
-      </label>
-      <div class="editor-combat-vfx-filter-buttons" role="group" aria-label="${escapeAttribute(detailText.kindFilter || "Kind Filter")}">
-        ${combatVfxKindButton("all", detailText.all || "All")}
-        ${combatVfxKindButton("player", detailText.playerOnly || "Player")}
-        ${combatVfxKindButton("monster", detailText.monsterOnly || "Monster")}
-      </div>
-      <button class="editor-combat-vfx-reset" type="button" data-combat-vfx-reset>
-        ${escapeHtml(detailText.reset || "Reset")}
-      </button>
-      <span class="editor-combat-vfx-count">
-        <strong>${escapeHtml(tf("editorPrep.combatVfxPlacementDetail.visibleCount", {
-          visible: visibleCount,
-          total: totalCount
-        }, `${visibleCount}/${totalCount}`))}</strong>
-        ${filterSummary ? `<small>${escapeHtml(filterSummary)}</small>` : ""}
-      </span>
-    </div>
-  `;
-}
-
-function combatVfxKindButton(kind, label) {
-  const active = normalizeCombatVfxKind(combatVfxDetailFilter.kind) === kind;
-  return `
-    <button class="editor-combat-vfx-filter${active ? " is-active" : ""}" type="button" data-combat-vfx-kind="${escapeAttribute(kind)}" aria-pressed="${active ? "true" : "false"}">
-      ${escapeHtml(label)}
-    </button>
-  `;
-}
-
-function combatVfxFilterSummary(detailText = {}) {
-  const kind = normalizeCombatVfxKind(combatVfxDetailFilter.kind);
-  const query = String(combatVfxDetailFilter.query || "").trim();
-  const filterLabel = kind === "player"
-    ? (detailText.playerOnly || "Player")
-    : kind === "monster"
-      ? (detailText.monsterOnly || "Monster")
-      : "";
-
-  if (kind !== "all" && query) {
-    return tf("editorPrep.combatVfxPlacementDetail.activeFilterAndSearch", {
-      filter: filterLabel,
-      query
-    }, `${filterLabel} / ${query}`);
-  }
-  if (kind !== "all") {
-    return tf("editorPrep.combatVfxPlacementDetail.activeFilter", {
-      filter: filterLabel
-    }, filterLabel);
-  }
-  if (query) {
-    return tf("editorPrep.combatVfxPlacementDetail.activeSearch", {
-      query
-    }, query);
-  }
-  return "";
-}
-
-function combatVfxSummaryCard(label, value) {
-  return `
-    <span>
-      <small>${escapeHtml(label)}</small>
-      <b>${escapeHtml(value)}</b>
-    </span>
-  `;
+  return renderCombatVfxPlacementDetailView({
+    preview,
+    visiblePlayerRows,
+    visibleMonsterRows,
+    detailText,
+    filter: combatVfxDetailFilter,
+    labels: {
+      classLabels: {
+        ...COMBAT_VFX_CLASS_LABELS,
+        ...(detailText.classLabels || {})
+      },
+      genderLabels: {
+        ...COMBAT_VFX_GENDER_LABELS,
+        ...(detailText.genderLabels || {})
+      },
+      effectLabels: {
+        ...COMBAT_VFX_EFFECT_LABELS,
+        ...(detailText.effectLabels || {})
+      },
+      signalLabels: {
+        ...COMBAT_VFX_SIGNAL_LABELS,
+        ...(detailText.signalLabels || {})
+      },
+    },
+  });
 }
 
 function matchesCombatVfxFilter(kind, searchText) {
@@ -1257,128 +865,6 @@ function combatVfxMonsterSearchText(row) {
   ].join(" ").toLowerCase();
 }
 
-function emptyCombatVfxRows(detailText = {}, sectionKind = "player") {
-  const kind = normalizeCombatVfxKind(combatVfxDetailFilter.kind);
-  const query = String(combatVfxDetailFilter.query || "").trim();
-  const sectionLabel = sectionKind === "monster" ? (detailText.monsterOnly || "Monster") : (detailText.playerOnly || "Player");
-  const filterLabel = kind === "monster" ? (detailText.monsterOnly || "Monster") : (detailText.playerOnly || "Player");
-  let message = detailText.empty || "No rows";
-  let showResetHint = false;
-  if (kind !== "all" && kind !== sectionKind) {
-    message = tf("editorPrep.combatVfxPlacementDetail.emptyByType", {
-      filter: filterLabel,
-      section: sectionLabel
-    }, message);
-    showResetHint = true;
-  } else if (query) {
-    message = tf("editorPrep.combatVfxPlacementDetail.emptyBySearch", {
-      query
-    }, message);
-    showResetHint = true;
-  }
-  return `
-    <p class="editor-combat-vfx-empty">
-      <span>${escapeHtml(message)}</span>
-      ${showResetHint ? `<small>${escapeHtml(detailText.emptyResetHint || "")}</small>` : ""}
-    </p>
-  `;
-}
-
-function renderPlayerVfxPreviewRow(row, detailText = COMBAT_VFX_DETAIL_TEXT) {
-  const classLabels = {
-    ...COMBAT_VFX_CLASS_LABELS,
-    ...(detailText.classLabels || {})
-  };
-  const genderLabels = {
-    ...COMBAT_VFX_GENDER_LABELS,
-    ...(detailText.genderLabels || {})
-  };
-  const effectLabels = {
-    ...COMBAT_VFX_EFFECT_LABELS,
-    ...(detailText.effectLabels || {})
-  };
-  const classLabel = classLabels[row.classId] || row.classId;
-  const genderLabel = genderLabels[row.gender] || row.gender;
-  const effectChips = Object.entries(row.effects || {})
-    .map(([effectType, placement]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`))
-    .join("");
-  return `
-    <article class="editor-combat-vfx-row">
-      <div class="editor-combat-vfx-row-head">
-        <div>
-          <h4>${escapeHtml(`${classLabel} / ${genderLabel}`)}</h4>
-          <span>${escapeHtml(row.spritePath || "")}</span>
-        </div>
-        <strong>${escapeHtml(row.id)}</strong>
-      </div>
-      ${combatVfxFieldBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)])}
-      ${combatVfxFieldBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)])}
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.effects)}</span>
-        <div class="editor-chip-list">${effectChips}</div>
-      </div>
-    </article>
-  `;
-}
-
-function renderMonsterVfxPreviewRow(row, detailText = COMBAT_VFX_DETAIL_TEXT) {
-  const effectLabels = {
-    ...COMBAT_VFX_EFFECT_LABELS,
-    ...(detailText.effectLabels || {})
-  };
-  const effectLabel = effectLabels[row.effectType] || row.effectType || "";
-  const effectChips = Object.entries(row.effects || {})
-    .map(([effectType, placement]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`))
-    .join("");
-  const modifierChips = (row.effectModifiers || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
-  return `
-    <article class="editor-combat-vfx-row">
-      <div class="editor-combat-vfx-row-head">
-        <div>
-          <h4>${escapeHtml(row.name || row.id)}</h4>
-          <span>${escapeHtml(`${row.classId || ""} / ${effectLabel}`)}</span>
-        </div>
-        <strong>${escapeHtml(row.id)}</strong>
-      </div>
-      ${combatVfxFieldBlock(detailText.motion, [row.motionProfile])}
-      ${combatVfxFieldBlock(detailText.sfx, [row.sfxProfile])}
-      ${combatVfxFieldBlock(detailText.motionBase || "Motion base", [formatCombatVfxPlacement(row.profilePlacement)])}
-      ${combatVfxFieldBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)])}
-      ${combatVfxFieldBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)])}
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.motionModifiers || "Motion modifiers")}</span>
-        <div class="editor-chip-list">${modifierChips}</div>
-      </div>
-      <div class="editor-combat-vfx-chip-block">
-        <span>${escapeHtml(detailText.effects)}</span>
-        <div class="editor-chip-list">${effectChips}</div>
-      </div>
-    </article>
-  `;
-}
-
-function combatVfxFieldBlock(title, values = []) {
-  return `
-    <div class="editor-combat-vfx-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.filter(Boolean).map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function formatCombatVfxPlacement(placement = {}) {
-  return `x ${Number(placement.offsetX || 0)} / y ${Number(placement.offsetY || 0)} / txt ${Number(placement.textOffsetY || 0)} / slash ${Number(placement.slashWidth || 0)}/${Number(placement.expandedSlashWidth || 0)}`;
-}
-
-function formatCombatVfxPlacementRange(range = {}) {
-  const rangeValue = (entry = {}) => {
-    const min = Number(entry.min || 0);
-    const max = Number(entry.max || 0);
-    return min === max ? String(min) : `${min}..${max}`;
-  };
-  return `x ${rangeValue(range.offsetX)} / y ${rangeValue(range.offsetY)} / txt ${rangeValue(range.textOffsetY)} / slash ${rangeValue(range.slashWidth)}/${rangeValue(range.expandedSlashWidth)}`;
-}
-
 function renderBalanceTuningDetail() {
   const detailText = EDITOR_TEXT.balanceTuningDetail || {};
   const registryMeta = manifest.balanceTuningRegistry || {};
@@ -1388,7 +874,9 @@ function renderBalanceTuningDetail() {
   const fileCount = new Set(BALANCE_TUNING_GROUPS.flatMap((group) => group.files)).size;
   const exportCount = BALANCE_TUNING_GROUPS.reduce((sum, group) => sum + group.exports.length, 0);
   const visibleGroups = BALANCE_TUNING_GROUPS.filter((group) => matchesBalanceDetailFilter(group));
-  const rows = visibleGroups.map((group) => renderBalanceGroupRow(group, detailText)).join("");
+  const rows = visibleGroups.map((group) => renderBalanceGroupRow(group, detailText, {
+    previewById: BALANCE_TUNING_PREVIEW_BY_ID,
+  })).join("");
   const lootSkillBulkIntakePreview = createLootSkillBulkIntakePreview(contentBulkPatchPackageAdapterPreview);
   const runtimeVfxBulkIntakePreview = createRuntimeVfxBulkIntakePreviewFromInput();
   const contentBulkPackageOverview = createContentBulkPackageOverview({
@@ -1404,183 +892,107 @@ function renderBalanceTuningDetail() {
     runtimeVfxPreview: runtimeVfxBulkIntakePreview,
   });
 
-  return `
-    <section class="editor-balance-detail" aria-label="${escapeAttribute(detailText.title || "Balance Tuning Detail")}">
-      <div class="editor-balance-head">
-        <div>
-          <h3>${escapeHtml(detailText.title || "")}</h3>
-          <p class="muted">${escapeHtml(detailText.description || "")}</p>
-        </div>
-        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.summary", {
-          groupCount: BALANCE_TUNING_GROUPS.length,
-          fileCount,
-          exportCount
-        }, ""))}</span>
-      </div>
-      ${renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length)}
-      ${renderActiveBalanceCandidateSummary(detailText, relatedChecks, tuningCandidates, visibleGroups)}
-      ${renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks)}
-      ${renderBalancePacingSnapshot(pacingSnapshot, detailText)}
-      ${renderMonsterCandidateRewardPreview(MONSTER_CANDIDATE_REWARD_PREVIEW, detailText)}
-      ${renderMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_PROMOTION_CHECKLIST, detailText)}
-      ${renderMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN, detailText)}
-      ${renderMonsterCandidateLivePatchDraft(MONSTER_CANDIDATE_LIVE_PATCH_DRAFT, detailText)}
-      ${renderMonsterCandidateBulkPatchAutomation(MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION, detailText)}
-      ${renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText)}
-      ${renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText)}
-      ${renderContentBulkPackageOverview(contentBulkPackageOverview, detailText, contentBulkFilterCounts)}
-      ${renderContentBulkPatchPackageAdapterPreview(contentBulkPatchPackageAdapterPreview, detailText)}
-      ${renderLootSkillBulkIntakePreview(lootSkillBulkIntakePreview, detailText)}
-      ${renderMonsterRuntimeBulkIntakePreview(MONSTER_RUNTIME_BULK_INTAKE_PREVIEW, detailText)}
-      ${renderRuntimeVfxBulkIntakePreview(runtimeVfxBulkIntakePreview, detailText)}
-      ${renderContentBulkMassApplyReadiness({
+  return renderBalanceTuningDetailView({
+    detailText,
+    groupCount: BALANCE_TUNING_GROUPS.length,
+    fileCount,
+    exportCount,
+    sections: [
+      renderBalanceFilterControls(detailText, visibleGroups.length, BALANCE_TUNING_GROUPS.length, {
+        filter: balanceDetailFilter,
+      }),
+      renderActiveBalanceCandidateSummary(detailText, relatedChecks, tuningCandidates, visibleGroups, {
+        activeCandidate: selectedBalanceTuningCandidate(),
+        groups: BALANCE_TUNING_GROUPS,
+        previewById: BALANCE_TUNING_PREVIEW_BY_ID,
+      }),
+      renderBalanceDomainSummaries(BALANCE_TUNING_DOMAIN_SUMMARIES, detailText, relatedChecks, {
+        groups: BALANCE_TUNING_GROUPS,
+        previewById: BALANCE_TUNING_PREVIEW_BY_ID,
+      }),
+      renderBalancePacingSnapshot(pacingSnapshot, detailText),
+      renderMonsterCandidateRewardPreview(MONSTER_CANDIDATE_REWARD_PREVIEW, detailText),
+      renderMonsterCandidatePromotionChecklist(MONSTER_CANDIDATE_PROMOTION_CHECKLIST, detailText),
+      renderMonsterCandidateLivePromotionPlan(MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN, detailText),
+      renderMonsterCandidateLivePatchDraft(MONSTER_CANDIDATE_LIVE_PATCH_DRAFT, detailText),
+      renderMonsterCandidateBulkPatchAutomation(MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION, detailText),
+      renderContentBulkPatchAutomationPlan(CONTENT_BULK_PATCH_AUTOMATION_PLAN, detailText),
+      renderContentBulkPatchIntakeContract(CONTENT_BULK_PATCH_INTAKE_CONTRACT, detailText),
+      renderContentBulkPackageOverview(contentBulkPackageOverview, detailText, contentBulkFilterCounts, {
+        renderFilterControls: (text, counts) => renderContentBulkFilterControls(text, counts, {
+          filter: contentBulkDetailFilter,
+          domainFilters: CONTENT_BULK_DOMAIN_FILTERS,
+        }),
+      }),
+      renderContentBulkPatchPackageAdapterPreview(contentBulkPatchPackageAdapterPreview, detailText, {
+        input: contentBulkPatchPackageInput,
+        parseError: contentBulkPatchPackageParseError,
+        isMappingVisible: (mapping, text = {}) => matchesContentBulkFilterRow(Number(mapping.rowCount || 0) > 0 ? "active" : "empty", [
+          mapping,
+          contentBulkPatchDomainLabel(mapping.domainId, text),
+        ], [mapping.domainId]),
+      }),
+      renderLootSkillBulkIntakePreview(lootSkillBulkIntakePreview, detailText, {
+        matchesFilterRow: (state, values, domains) => matchesContentBulkFilterRow(state, values, domains),
+      }),
+      renderMonsterRuntimeBulkIntakePreview(MONSTER_RUNTIME_BULK_INTAKE_PREVIEW, detailText, {
+        matchesFilterRow: (state, values, domains) => matchesContentBulkFilterRow(state, values, domains),
+      }),
+      renderRuntimeVfxBulkIntakePreview(runtimeVfxBulkIntakePreview, detailText, {
+        matchesFilterRow: (state, values, domains) => matchesContentBulkFilterRow(state, values, domains),
+        formatPlacement: (placement) => formatCombatVfxPlacement(placement),
+      }),
+      renderContentBulkMassApplyReadiness({
         dryRun: CONTENT_BULK_PATCH_DRY_RUN_PREVIEW,
         stagedImport: CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW,
         applyGate: contentBulkPatchApplyGatePlan,
         backupPlan: contentBulkPatchBackupPlan,
         restoreRehearsal: contentBulkPatchRestoreRehearsal,
-      }, detailText)}
-      ${renderContentBulkStagedApplyRehearsal({
+      }, detailText),
+      renderContentBulkStagedApplyRehearsal({
         stagedImport: CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW,
         filePatchDraftExport: contentBulkPatchFilePatchDraftExport,
         backupPlan: contentBulkPatchBackupPlan,
         restoreRehearsal: contentBulkPatchRestoreRehearsal,
-      }, detailText)}
-      ${renderContentBulkDomainApplyReadiness({
+      }, detailText),
+      renderContentBulkDomainApplyReadiness({
         dryRun: CONTENT_BULK_PATCH_DRY_RUN_PREVIEW,
         stagedImport: CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW,
         filePatchDraftExport: contentBulkPatchFilePatchDraftExport,
         backupPlan: contentBulkPatchBackupPlan,
         restoreRehearsal: contentBulkPatchRestoreRehearsal,
         filterCounts: contentBulkFilterCounts,
-      }, detailText)}
-      ${renderContentBulkPatchDryRunPreview(CONTENT_BULK_PATCH_DRY_RUN_PREVIEW, detailText)}
-      ${renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText)}
-      ${renderContentBulkPatchDiffExport(CONTENT_BULK_PATCH_DIFF_EXPORT, detailText)}
-      ${renderContentBulkPatchManualApplyChecklist(CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST, detailText)}
-      ${renderContentBulkPatchFilePatchDraft(contentBulkPatchFilePatchDraftExport.draft || CONTENT_BULK_PATCH_FILE_PATCH_DRAFT, detailText, {
+      }, detailText, {
+        activeFilter: (text) => contentBulkActiveFilterSummary(text),
+        matchesFilterRow: (state, values, domains) => matchesContentBulkFilterRow(state, values, domains),
+        domainLabel: (id, text) => contentBulkPatchDomainLabel(id, text),
+      }),
+      renderContentBulkPatchDryRunPreview(CONTENT_BULK_PATCH_DRY_RUN_PREVIEW, detailText),
+      renderContentBulkPatchStagedImportPreview(CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW, detailText),
+      renderContentBulkPatchDiffExport(CONTENT_BULK_PATCH_DIFF_EXPORT, detailText),
+      renderContentBulkPatchManualApplyChecklist(CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST, detailText),
+      renderContentBulkPatchFilePatchDraft(contentBulkPatchFilePatchDraftExport.draft || CONTENT_BULK_PATCH_FILE_PATCH_DRAFT, detailText, {
         backupPlan: contentBulkPatchBackupPlan,
         restoreRehearsal: contentBulkPatchRestoreRehearsal,
-      })}
-      ${renderContentBulkPatchFilePatchDraftExport(contentBulkPatchFilePatchDraftExport, detailText, {
+      }),
+      renderContentBulkPatchFilePatchDraftExport(contentBulkPatchFilePatchDraftExport, detailText, {
         backupPlan: contentBulkPatchBackupPlan,
         restoreRehearsal: contentBulkPatchRestoreRehearsal,
-      })}
-      ${renderContentBulkPatchApplyGatePlan(contentBulkPatchApplyGatePlan, detailText)}
-      ${renderContentBulkPatchBackupPlan(contentBulkPatchBackupPlan, detailText)}
-      ${renderContentBulkPatchRestoreRehearsal(contentBulkPatchRestoreRehearsal, detailText)}
-      ${renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks)}
-      ${renderBalanceRelatedChecks(relatedChecks, detailText)}
-      <div class="editor-balance-list">
-        ${rows || emptyBalanceRows(detailText)}
-      </div>
-    </section>
-  `;
-}
-
-function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = [], candidates = [], visibleGroups = []) {
-  const candidate = selectedBalanceTuningCandidate();
-  if (!candidate) {
-    const overview = balanceCandidateOverviewSummary(candidates, relatedChecks);
-    return `
-      <section class="editor-balance-active-candidate" data-balance-active-summary data-state="overview" aria-label="${escapeAttribute(detailText.candidatePinnedOverview || "Tuning candidate summary")}">
-        <div class="editor-balance-active-candidate-head">
-          <div>
-            <span>${escapeHtml(detailText.candidatePinnedOverview || "")}</span>
-            <h4>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidateOverviewCount", {
-              count: overview.candidateCount
-            }, `${overview.candidateCount}`))}</h4>
-            <p>${escapeHtml(detailText.candidatePinnedOverviewDescription || "")}</p>
-          </div>
-          <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidatePriorityValue", {
-            priority: overview.topPriority || "-"
-          }, `#${overview.topPriority || "-"}`))}</strong>
-        </div>
-        <div class="editor-balance-active-candidate-metrics">
-          ${balanceActiveCandidateMetric(detailText.candidatePriority || "Priority", tf("editorPrep.balanceTuningDetail.candidateOverviewPriority", {
-            priority: overview.topPriority || "-"
-          }, `#${overview.topPriority || "-"}`))}
-          ${balanceActiveCandidateMetric(detailText.candidateGroups || "Groups", tf("editorPrep.balanceTuningDetail.candidateOverviewGroups", {
-            count: overview.groupCount
-          }, `${overview.groupCount}`))}
-          ${balanceActiveCandidateMetric(detailText.candidateChecks || "Checks", tf("editorPrep.balanceTuningDetail.candidateOverviewChecks", {
-            count: overview.checkCount
-          }, `${overview.checkCount}`))}
-        </div>
-        ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", overview.signals)}
-      </section>
-    `;
-  }
-  const impact = balanceCandidateImpactSummary(candidate);
-  const visibleImpact = balanceGroupCollectionSummary(visibleGroups);
-  const valueRanges = balanceCandidateValueRangeLabels(candidate, detailText);
-  const checkLabels = balanceCandidateCheckLabels(candidate, relatedChecks);
-  return `
-    <section class="editor-balance-active-candidate" data-balance-active-summary data-state="selected" aria-label="${escapeAttribute(detailText.activeCandidateSummary || "Selected tuning candidate")}">
-      <div class="editor-balance-active-candidate-head">
-        <div>
-          <span>${escapeHtml(detailText.activeCandidateSummary || "")}</span>
-          <h4>${escapeHtml(candidate.label || candidate.id || "")}</h4>
-          <p>${escapeHtml(candidate.purpose || "")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidatePriorityValue", {
-          priority: candidate.priority || "-"
-        }, `#${candidate.priority || "-"}`))}</strong>
-      </div>
-      <div class="editor-balance-active-candidate-metrics">
-        ${balanceActiveCandidateMetric(detailText.candidateImpact || "Impact", tf("editorPrep.balanceTuningDetail.candidateImpactSummary", {
-          groups: impact.groupCount,
-          files: impact.fileCount,
-          exports: impact.exportCount
-        }, `${impact.groupCount} · ${impact.fileCount} · ${impact.exportCount}`))}
-        ${balanceActiveCandidateMetric(detailText.candidateVisibleGroups || "Visible groups", tf("editorPrep.balanceTuningDetail.candidateVisibleGroupSummary", {
-          visible: visibleImpact.groupCount,
-          total: impact.groupCount,
-          files: visibleImpact.fileCount,
-          exports: visibleImpact.exportCount
-        }, `${visibleImpact.groupCount}/${impact.groupCount}`))}
-        ${balanceActiveCandidateMetric(detailText.candidateValueRanges || "Value Ranges", valueRanges.join(" / "))}
-        ${balanceActiveCandidateMetric(detailText.candidateChecks || "Checks", checkLabels.join(" / ") || "-")}
-      </div>
-      ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [])}
-      ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
-    </section>
-  `;
-}
-
-function balanceCandidateOverviewSummary(candidates = [], relatedChecks = []) {
-  const candidateList = Array.isArray(candidates) ? candidates : [];
-  const groups = new Set(candidateList.flatMap((candidate) => normalizeBalanceCandidateGroups(candidate.groups)));
-  const checkIds = new Set((relatedChecks || []).map((check) => check.id));
-  const checks = new Set();
-  const signals = new Set();
-  const priorities = [];
-  for (const candidate of candidateList) {
-    if (Number.isFinite(Number(candidate.priority))) priorities.push(Number(candidate.priority));
-    for (const checkId of candidate.checks || []) {
-      if (!checkIds.size || checkIds.has(checkId)) checks.add(checkId);
-    }
-    for (const signal of candidate.signals || []) {
-      signals.add(signal);
-    }
-  }
-  return {
-    candidateCount: candidateList.length,
-    groupCount: groups.size,
-    checkCount: checks.size,
-    signalCount: signals.size,
-    topPriority: priorities.length ? Math.min(...priorities) : 0,
-    signals: [...signals].slice(0, 6)
-  };
-}
-
-function balanceActiveCandidateMetric(label, value) {
-  return `
-    <span>
-      <small>${escapeHtml(label)}</small>
-      <b>${escapeHtml(value || "-")}</b>
-    </span>
-  `;
+      }),
+      renderContentBulkPatchApplyGatePlan(contentBulkPatchApplyGatePlan, detailText),
+      renderContentBulkPatchBackupPlan(contentBulkPatchBackupPlan, detailText),
+      renderContentBulkPatchRestoreRehearsal(contentBulkPatchRestoreRehearsal, detailText),
+      renderBalanceTuningCandidates(tuningCandidates, detailText, relatedChecks, {
+        activeCandidateId: balanceDetailFilter.candidateId,
+        groups: BALANCE_TUNING_GROUPS,
+        previewById: BALANCE_TUNING_PREVIEW_BY_ID,
+      }),
+      renderBalanceRelatedChecks(relatedChecks, detailText),
+    ],
+    rowsHtml: rows || renderEmptyBalanceRows(detailText, {
+      filter: balanceDetailFilter,
+    }),
+  });
 }
 
 function scrollBalanceCandidateSummaryIntoView() {
@@ -1597,1111 +1009,8 @@ function scrollContentBulkPackageIntoView() {
   });
 }
 
-function renderBalanceDomainSummaries(domains = [], detailText = {}, relatedChecks = []) {
-  if (!domains.length) return "";
-  const labels = detailText.domainLabels || {};
-  const descriptions = detailText.domainDescriptions || {};
-  return `
-    <section class="editor-balance-domain-list" aria-label="${escapeAttribute(detailText.domainSummaries || "Balance domains")}">
-      <strong>${escapeHtml(detailText.domainSummaries || "")}</strong>
-      ${domains.map((domain) => {
-        const summary = balanceDomainImpactSummary(domain);
-        return `
-          <article class="editor-balance-domain">
-            <div class="editor-balance-domain-head">
-              <div>
-                <h4>${escapeHtml(labels[domain.id] || domain.id || "")}</h4>
-                <p>${escapeHtml(descriptions[domain.id] || "")}</p>
-              </div>
-              <span>${escapeHtml(domain.scope || "")}</span>
-            </div>
-            <div class="editor-balance-domain-impact">
-              <span>${escapeHtml(detailText.domainImpact || "Impact")}</span>
-              <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.domainImpactSummary", {
-                groups: summary.groupCount,
-                files: summary.fileCount,
-                exports: summary.exportCount
-              }, `${summary.groupCount} · ${summary.fileCount} · ${summary.exportCount}`))}</strong>
-            </div>
-            <div class="editor-balance-domain-impact">
-              <span>${escapeHtml(detailText.domainPriority || "Priority")}</span>
-              <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.domainPriorityValue", {
-                priority: domain.priority || "-"
-              }, `#${domain.priority || "-"}`))}</strong>
-            </div>
-            ${balanceDetailChipBlock(detailText.domainGroups || "Groups", domain.groups || [])}
-            ${balanceDetailChipBlock(detailText.domainExports || "Exports", balanceDomainExportNames(domain))}
-            ${balanceDetailChipBlock(detailText.domainValueShapes || "Value Shapes", balanceDomainValueShapeLabels(domain, detailText))}
-            ${balanceDetailChipBlock(detailText.domainValueRanges || "Value Ranges", balanceDomainValueRangeLabels(domain, detailText))}
-            ${balanceDetailChipBlock(detailText.domainChecks || "Checks", balanceDomainCheckLabels(domain, relatedChecks))}
-            ${balanceDetailChipBlock(detailText.domainSignals || "Signals", balanceDomainSignalLabels(domain, detailText))}
-            ${balanceDetailChipBlock(detailText.domainWatch || "Watch", domain.watch || [])}
-          </article>
-        `;
-      }).join("")}
-    </section>
-  `;
-}
-
-function balanceDomainImpactSummary(domain = {}) {
-  return balanceLinkedGroupSummary(domain.groups || []);
-}
-
-function balanceDomainExportNames(domain = {}) {
-  const groupIds = new Set(domain.groups || []);
-  return [...new Set(BALANCE_TUNING_GROUPS
-    .filter((group) => groupIds.has(group.id))
-    .flatMap((group) => group.exports || []))];
-}
-
-function balanceDomainValueShapeLabels(domain = {}, detailText = {}) {
-  const groupIds = new Set(domain.groups || []);
-  const counts = new Map();
-  for (const group of BALANCE_TUNING_GROUPS.filter((entry) => groupIds.has(entry.id))) {
-    const preview = BALANCE_TUNING_PREVIEW_BY_ID.get(group.id);
-    for (const item of preview?.items || []) {
-      const type = item.type || "unknown";
-      counts.set(type, (counts.get(type) || 0) + 1);
-    }
-  }
-  return [...counts.entries()]
-    .sort(([leftType], [rightType]) => leftType.localeCompare(rightType))
-    .map(([type, count]) => tf("editorPrep.balanceTuningDetail.domainValueShapeItem", {
-      type: balanceValueTypeLabel(type, detailText),
-      count
-    }, `${type} ${count}`));
-}
-
-function balanceDomainValueRangeLabels(domain = {}, detailText = {}) {
-  return balanceGroupValueRangeLabels(domain.groups || [], detailText);
-}
-
-function balanceGroupValueRangeLabels(groupLinks = [], detailText = {}) {
-  const groupIds = new Set(groupLinks || []);
-  const numericValues = [];
-  let objectFieldCount = 0;
-  let arrayItemCount = 0;
-  for (const group of BALANCE_TUNING_GROUPS.filter((entry) => groupIds.has(entry.id))) {
-    const preview = BALANCE_TUNING_PREVIEW_BY_ID.get(group.id);
-    for (const item of preview?.items || []) {
-      if (item.type === "number") {
-        const value = Number(item.value);
-        if (Number.isFinite(value)) numericValues.push(value);
-      }
-      if (item.type === "object") objectFieldCount += Number(item.count || 0);
-      if (item.type === "array") arrayItemCount += Number(item.count || 0);
-    }
-  }
-  const labels = [];
-  if (numericValues.length) {
-    labels.push(tf("editorPrep.balanceTuningDetail.domainValueRangeNumber", {
-      min: Math.min(...numericValues),
-      max: Math.max(...numericValues)
-    }, `${Math.min(...numericValues)}~${Math.max(...numericValues)}`));
-  }
-  if (objectFieldCount) {
-    labels.push(tf("editorPrep.balanceTuningDetail.domainValueRangeObject", { count: objectFieldCount }, `${objectFieldCount} fields`));
-  }
-  if (arrayItemCount) {
-    labels.push(tf("editorPrep.balanceTuningDetail.domainValueRangeArray", { count: arrayItemCount }, `${arrayItemCount} items`));
-  }
-  return labels.length ? labels : [detailText.domainValueRangeEmpty || "No range"];
-}
-
-function balanceDomainCheckLabels(domain = {}, relatedChecks = []) {
-  return balanceCheckLabels(domain.checks || [], relatedChecks);
-}
-
-function balanceDomainSignalLabels(domain = {}, detailText = {}) {
-  const labels = detailText.domainSignalLabels || {};
-  return (domain.signals || []).map((signal) => labels[signal] || signal);
-}
-
-function balanceValueTypeLabel(type, detailText = {}) {
-  return detailText.valueTypeLabels?.[type] || type;
-}
-
-function renderBalanceTuningCandidates(candidates = [], detailText = {}, relatedChecks = []) {
-  if (!candidates.length) return "";
-  return `
-    <section class="editor-balance-candidate-list" aria-label="${escapeAttribute(detailText.tuningCandidates || "Tuning candidates")}">
-      <strong>${escapeHtml(detailText.tuningCandidates || "")}</strong>
-      ${candidates.map((candidate) => `
-        <button class="editor-balance-candidate${balanceDetailFilter.candidateId === candidate.id ? " is-active" : ""}" type="button" data-balance-candidate="${escapeAttribute(candidate.id || "")}" aria-pressed="${balanceDetailFilter.candidateId === candidate.id ? "true" : "false"}">
-          <div>
-            <h4>${escapeHtml(candidate.label || candidate.id || "")}</h4>
-            <p>${escapeHtml(candidate.purpose || "")}</p>
-          </div>
-          ${balanceCandidatePriorityBlock(candidate, detailText)}
-          ${balanceCandidateImpactBlock(balanceCandidateImpactSummary(candidate), detailText)}
-          ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [])}
-          ${balanceDetailChipBlock(detailText.candidateValueRanges || "Value Ranges", balanceCandidateValueRangeLabels(candidate, detailText))}
-          ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
-          ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", balanceCandidateCheckLabels(candidate, relatedChecks))}
-        </button>
-      `).join("")}
-    </section>
-  `;
-}
-
-function balanceCandidatePriorityBlock(candidate = {}, detailText = {}) {
-  return `
-    <div class="editor-balance-candidate-impact">
-      <span>${escapeHtml(detailText.candidatePriority || "Priority")}</span>
-      <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidatePriorityValue", {
-        priority: candidate.priority || "-"
-      }, `#${candidate.priority || "-"}`))}</strong>
-    </div>
-  `;
-}
-
-function balanceCandidateCheckLabels(candidate = {}, relatedChecks = []) {
-  return balanceCheckLabels(candidate.checks || [], relatedChecks);
-}
-
-function balanceCandidateValueRangeLabels(candidate = {}, detailText = {}) {
-  return balanceGroupValueRangeLabels(normalizeBalanceCandidateGroups(candidate.groups), detailText);
-}
-
-function balanceCheckLabels(checkIds = [], relatedChecks = []) {
-  const checkLabels = new Map((relatedChecks || []).map((check) => [check.id, check.label || check.id]));
-  return (checkIds || []).map((checkId) => checkLabels.get(checkId) || checkId);
-}
-
-function balanceCandidateImpactBlock(summary, detailText = {}) {
-  return `
-    <div class="editor-balance-candidate-impact">
-      <span>${escapeHtml(detailText.candidateImpact || "Impact")}</span>
-      <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.candidateImpactSummary", {
-        groups: summary.groupCount,
-        files: summary.fileCount,
-        exports: summary.exportCount
-      }, `${summary.groupCount} · ${summary.fileCount} · ${summary.exportCount}`))}</strong>
-    </div>
-  `;
-}
-
-function balanceCandidateImpactSummary(candidate = {}) {
-  return balanceLinkedGroupSummary(normalizeBalanceCandidateGroups(candidate.groups));
-}
-
-function balanceLinkedGroupSummary(groupLinks = []) {
-  const groupIds = new Set(groupLinks);
-  const linkedGroups = BALANCE_TUNING_GROUPS.filter((group) => groupIds.has(group.id));
-  return balanceGroupCollectionSummary(linkedGroups);
-}
-
-function balanceGroupCollectionSummary(groups = []) {
-  const linkedGroups = Array.isArray(groups) ? groups : [];
-  const files = new Set(linkedGroups.flatMap((group) => group.files || []));
-  const exports = new Set(linkedGroups.flatMap((group) => group.exports || []));
-  return {
-    groupCount: linkedGroups.length,
-    fileCount: files.size,
-    exportCount: exports.size
-  };
-}
-
-function renderBalancePacingSnapshot(snapshot, detailText = {}) {
-  const metrics = [
-    [detailText.pacingKills || "Kills", `${snapshot.totalKills}`],
-    [detailText.pacingRequiredKillSeconds || "Required Avg", `${snapshot.requiredAverageKillSeconds}s`],
-    [detailText.pacingPowerSlashMinutes || "Power Slash", `${snapshot.noGearPowerSlashMinutes}min`],
-    [detailText.pacingGold || "Gold", `${snapshot.totalGold} G`],
-  ];
-  return `
-    <section class="editor-balance-pacing" data-valid="${snapshot.isValid ? "true" : "false"}" aria-label="${escapeAttribute(detailText.pacingTitle || "Tutorial pacing")}">
-      <div class="editor-balance-pacing-head">
-        <div>
-          <h4>${escapeHtml(detailText.pacingTitle || "")}</h4>
-          <p class="muted">${escapeHtml(detailText.pacingDescription || "")}</p>
-        </div>
-        <strong>${escapeHtml(snapshot.isValid ? (detailText.pacingStatusOk || "") : (detailText.pacingStatusReview || ""))}</strong>
-      </div>
-      <div class="editor-balance-pacing-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${snapshot.isValid ? "" : `<p class="editor-balance-pacing-error">${escapeHtml(snapshot.errors.slice(0, 2).join(" / "))}</p>`}
-    </section>
-  `;
-}
-
-function renderMonsterCandidateRewardPreview(preview, detailText = {}) {
-  const text = detailText.monsterCandidateRewards || {};
-  const summary = preview.summary || {};
-  const metrics = [
-    [text.candidates || "Candidates", `${summary.candidateCount || 0}`],
-    [text.livePending || "Live/Pending", `${summary.liveCandidateCount || 0}/${summary.pendingCandidateCount || 0}`],
-    [text.codex || "Codex", `${summary.codexFragmentCount || 0}`],
-    [text.materials || "Materials", `${summary.materialItemCount || 0}`],
-    [text.skills || "Skills/Runes", `${summary.skillFragmentCount || 0}/${summary.skillRuneCount || 0}`],
-  ];
-  const unresolved = Array.isArray(preview.unresolvedItemIds) ? preview.unresolvedItemIds : [];
-
-  return `
-    <section class="editor-monster-candidate-rewards" data-valid="${unresolved.length ? "false" : "true"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Reward Preview")}">
-      <div class="editor-monster-candidate-rewards-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Monster Candidate Reward Preview")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only reward links for candidate monsters.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateRewards.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-monster-candidate-reward-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${unresolved.length ? `<p class="editor-monster-candidate-reward-warning">${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateRewards.unresolved", {
-        items: unresolved.join(", ")
-      }, `Missing items ${unresolved.join(", ")}`))}</p>` : ""}
-      <div class="editor-monster-candidate-reward-groups">
-        ${(preview.groups || []).map((group) => renderMonsterCandidateRewardGroup(group, text)).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterCandidateRewardGroup(group, text = {}) {
-  return `
-    <article class="editor-monster-candidate-reward-group">
-      <div class="editor-monster-candidate-reward-group-head">
-        <div>
-          <h5>${escapeHtml(group.regionName || group.regionId || "")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateRewards.representative", {
-            monster: group.representativeMonsterName || group.representativeMonsterId || "-"
-          }, `Representative ${group.representativeMonsterName || group.representativeMonsterId || "-"}`))}</p>
-        </div>
-        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateRewards.groupSummary", {
-          live: group.liveCount || 0,
-          pending: group.pendingCount || 0
-        }, `${group.liveCount || 0}/${group.pendingCount || 0}`))}</span>
-      </div>
-      <div class="editor-monster-candidate-reward-row-list">
-        ${(group.rows || []).map((row) => renderMonsterCandidateRewardRow(row, text)).join("")}
-      </div>
-    </article>
-  `;
-}
-
-function renderMonsterCandidateRewardRow(row, text = {}) {
-  const roles = [
-    row.isLive ? (text.live || "Live") : (text.pending || "Pending"),
-    row.isRepresentative ? (text.representativeRole || "Representative") : "",
-    row.isBoss ? (text.boss || "Boss") : "",
-  ].filter(Boolean);
-  const materialItems = row.materialItems?.length ? row.materialItems : [];
-  const skillItems = row.skillItems?.length ? row.skillItems : [];
-
-  return `
-    <article class="editor-monster-candidate-reward-row" data-state="${row.isLive ? "live" : "pending"}">
-      <div class="editor-monster-candidate-reward-row-head">
-        <div>
-          <h6>${escapeHtml(row.name || row.id || "")}</h6>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateRewards.rowMeta", {
-            level: row.level || 0,
-            source: row.sourceMonsterName || row.sourceMonsterId || "-"
-          }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
-        </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
-      </div>
-      <div class="editor-monster-candidate-reward-item-grid">
-        ${renderMonsterCandidateRewardItemBlock(text.codex || "Codex", [row.codexFragment].filter(Boolean), text)}
-        ${renderMonsterCandidateRewardItemBlock(text.materials || "Materials", materialItems, text)}
-        ${renderMonsterCandidateRewardItemBlock(text.skills || "Skills/Runes", skillItems, text)}
-      </div>
-      <div class="editor-monster-candidate-reward-coverage">
-        <span>${escapeHtml(text.dropCoverage || "Live drops")}</span>
-        <strong>${escapeHtml(monsterCandidateDropCoverageLabel(row, text))}</strong>
-      </div>
-    </article>
-  `;
-}
-
-function renderMonsterCandidateRewardItemBlock(label, items = [], text = {}) {
-  const values = items.length
-    ? items.map((item) => `${item.typeLabel || item.type || "-"} · ${item.name || item.id || "-"}`)
-    : [text.emptyReward || "None"];
-  return balanceDetailChipBlock(label, values);
-}
-
-function monsterCandidateDropCoverageLabel(row, text = {}) {
-  if (!row.isLive) return text.pendingDropCoverage || "Candidate rewards only";
-  const materialTotal = row.materialItems?.length || 0;
-  const skillTotal = row.skillItems?.length || 0;
-  return tf("editorPrep.balanceTuningDetail.monsterCandidateRewards.dropCoverageValue", {
-    codex: row.liveDropCoverage?.codex ? (text.connected || "Connected") : (text.candidateOnly || "Candidate"),
-    material: `${row.liveDropCoverage?.materialCount || 0}/${materialTotal}`,
-    skill: `${row.liveDropCoverage?.skillCount || 0}/${skillTotal}`,
-  }, `${row.liveDropCoverage?.codex ? "Connected" : "Candidate"} / ${row.liveDropCoverage?.materialCount || 0}/${materialTotal} / ${row.liveDropCoverage?.skillCount || 0}/${skillTotal}`);
-}
-
-function renderMonsterCandidatePromotionChecklist(checklist, detailText = {}) {
-  const text = detailText.monsterCandidatePromotion || {};
-  const summary = checklist.summary || {};
-  const metrics = [
-    [text.pending || "Pending", `${summary.pendingCandidateCount || 0}`],
-    [text.ready || "Ready", `${summary.readyReviewCount || 0}`],
-    [text.actions || "Actions", `${summary.requiredActionCount || 0}`],
-    [text.rewardLinks || "Reward links", `${summary.uniqueRewardItemCount || 0}`],
-    [text.codexRecord || "Codex record", `${summary.codexRecordTargetCount || 0}`],
-    [text.fullRewardLinks || "Full links", `${summary.fullRewardLinkCount || 0}`],
-    [text.partialRewardLinks || "Partial links", `${summary.partialRewardLinkCount || 0}`],
-    [text.risks || "Signals", `${summary.riskSignalCount || 0}`],
-  ];
-
-  return `
-    <section class="editor-monster-candidate-promotion" data-readonly="${checklist.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Promotion Checklist")}">
-      <div class="editor-monster-candidate-promotion-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Monster Candidate Promotion Checklist")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only checklist before moving pending candidates into live drops.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.version", {
-          version: checklist.version || "-"
-        }, checklist.version || "-"))}</strong>
-      </div>
-      <div class="editor-monster-candidate-promotion-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderMonsterCandidatePromotionActions(checklist.requiredActions || [], text)}
-      <div class="editor-monster-candidate-promotion-groups">
-        ${(checklist.groups || []).map((group) => renderMonsterCandidatePromotionGroup(group, text)).join("") || `<p class="muted">${escapeHtml(text.empty || "No pending candidates.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterCandidatePromotionActions(actions = [], text = {}) {
-  if (!actions.length) return "";
-  return `
-    <div class="editor-monster-candidate-promotion-actions">
-      <strong>${escapeHtml(text.actionPlan || "Promotion action plan")}</strong>
-      <div>
-        ${actions.map((action) => `
-          <span>
-            <b>${escapeHtml(monsterCandidatePromotionActionLabel(action.id, text))}</b>
-            <small>${escapeHtml(action.file || "")}</small>
-          </span>
-        `).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function renderMonsterCandidatePromotionGroup(group, text = {}) {
-  return `
-    <article class="editor-monster-candidate-promotion-group">
-      <div class="editor-monster-candidate-promotion-group-head">
-        <div>
-          <h5>${escapeHtml(group.regionName || group.regionId || "")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.representative", {
-            monster: group.representativeMonsterName || group.representativeMonsterId || "-"
-          }, `Representative ${group.representativeMonsterName || group.representativeMonsterId || "-"}`))}</p>
-        </div>
-        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.groupSummary", {
-          pending: group.pendingCount || 0,
-          ready: group.readyReviewCount || 0
-        }, `${group.readyReviewCount || 0}/${group.pendingCount || 0}`))}</span>
-      </div>
-      <div class="editor-monster-candidate-promotion-row-list">
-        ${(group.rows || []).map((row) => renderMonsterCandidatePromotionRow(row, text)).join("")}
-      </div>
-    </article>
-  `;
-}
-
-function renderMonsterCandidatePromotionRow(row, text = {}) {
-  const roles = [
-    row.readyForReview ? (text.readyForReview || "Ready for review") : (text.blocked || "Blocked"),
-    monsterCandidatePromotionStageLabel(row.promotionStageId, text),
-    row.isBoss ? (text.boss || "Boss") : "",
-  ].filter(Boolean);
-  const actionLabels = (row.requiredActionIds || []).map((actionId) => monsterCandidatePromotionActionLabel(actionId, text));
-  const riskLabels = (row.riskSignalIds || []).map((signalId) => monsterCandidatePromotionRiskLabel(signalId, text));
-
-  return `
-    <article class="editor-monster-candidate-promotion-row" data-state="${row.readyForReview ? "ready" : "blocked"}" data-stage="${escapeAttribute(row.promotionStageId || "unknown")}">
-      <div class="editor-monster-candidate-promotion-row-head">
-        <div>
-          <h6>${escapeHtml(row.name || row.id || "")}</h6>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.rowMeta", {
-            level: row.level || 0,
-            source: row.sourceMonsterName || row.sourceMonsterId || "-"
-          }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
-        </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
-      </div>
-      <div class="editor-monster-candidate-promotion-grid">
-        ${balanceDetailChipBlock(text.promotionStage || "Promotion stage", [monsterCandidatePromotionStageLabel(row.promotionStageId, text)])}
-        ${balanceDetailChipBlock(text.actionPlan || "Actions", actionLabels)}
-        ${balanceDetailChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
-        ${balanceDetailChipBlock(text.rewardCoverage || "Reward coverage", monsterCandidatePromotionRewardCoverageValues(row, text))}
-        ${balanceDetailChipBlock(text.codexRecord || "Codex record", monsterCandidatePromotionCodexRecordValues(row, text))}
-        ${balanceDetailChipBlock(text.risks || "Signals", riskLabels.length ? riskLabels : [text.noRisks || "No blocking signals"])}
-      </div>
-    </article>
-  `;
-}
-
-function monsterCandidatePromotionActionLabel(actionId, text = {}) {
-  return text.actionLabels?.[actionId] || actionId;
-}
-
-function monsterCandidatePromotionRiskLabel(signalId, text = {}) {
-  return text.riskLabels?.[signalId] || signalId;
-}
-
-function monsterCandidatePromotionCodexRecordValues(row, text = {}) {
-  if (!row.codexRecord) return [text.codexRecordMissing || "No codex record target"];
-  return [
-    tf("editorPrep.balanceTuningDetail.monsterCandidatePromotion.codexRecordTarget", {
-      item: row.codexRecord.itemName || row.codexRecord.itemId || "-",
-      target: row.codexRecord.target || 0
-    }, `${row.codexRecord.itemName || row.codexRecord.itemId || "-"} / ${row.codexRecord.target || 0}`),
-  ];
-}
-
-function monsterCandidatePromotionRewardCoverageValues(row, text = {}) {
-  const coverage = row.rewardCoverage || {};
-  const labels = text.coverageLabels || {};
-  return [
-    `${labels.codex || "Codex"}: ${coverage.codex ? (labels.connected || "Connected") : (labels.missing || "Missing")}`,
-    `${labels.material || "Material"}: ${coverage.material ? (labels.connected || "Connected") : (labels.missing || "Missing")}`,
-    `${labels.skill || "Skill"}: ${coverage.skill ? (labels.connected || "Connected") : (labels.missing || "Missing")}`,
-  ];
-}
-
-function monsterCandidatePromotionStageLabel(stageId, text = {}) {
-  return text.stageLabels?.[stageId] || stageId || "unknown";
-}
-
-function renderMonsterCandidateLivePromotionPlan(plan, detailText = {}) {
-  const text = detailText.monsterCandidateLivePromotion || {};
-  const summary = plan.summary || {};
-  const metrics = [
-    [text.candidates || "Candidates", `${summary.candidateCount || 0}`],
-    [text.phases || "Phases", `${summary.phaseCount || 0}`],
-    [text.regions || "Regions", `${summary.regionCount || 0}`],
-    [text.deferred || "Deferred", `${summary.deferredCandidateCount || 0}`],
-    [text.writes || "Writes", plan.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-
-  return `
-    <section class="editor-monster-candidate-live-promotion" data-readonly="${plan.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Live Promotion Plan")}">
-      <div class="editor-monster-candidate-live-promotion-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Monster Candidate Live Promotion Plan")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only live-data promotion phases for complete reward candidates.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.version", {
-          version: plan.version || "-"
-        }, plan.version || "-"))}</strong>
-      </div>
-      <div class="editor-monster-candidate-live-promotion-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-monster-candidate-live-promotion-phases">
-        ${(plan.phases || []).map((phase) => renderMonsterCandidateLivePromotionPhase(phase, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No promotion-ready candidates.")}</p>`}
-      </div>
-      ${renderMonsterCandidateLivePromotionDeferred(plan.deferredRows || [], text)}
-    </section>
-  `;
-}
-
-function renderMonsterCandidateLivePromotionPhase(phase, text = {}) {
-  return `
-    <article class="editor-monster-candidate-live-promotion-phase" data-phase="${escapeAttribute(phase.id || "")}">
-      <div class="editor-monster-candidate-live-promotion-phase-head">
-        <div>
-          <h5>${escapeHtml(monsterCandidateLivePromotionPhaseTitle(phase, text))}</h5>
-          <p>${escapeHtml(monsterCandidateLivePromotionPriorityLabel(phase.priority, text))}</p>
-        </div>
-        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.phaseCandidateCount", {
-          count: phase.candidateCount || 0
-        }, `${phase.candidateCount || 0}`))}</span>
-      </div>
-      <div class="editor-monster-candidate-live-promotion-row-list">
-        ${(phase.rows || []).map((row) => renderMonsterCandidateLivePromotionRow(row, text)).join("")}
-      </div>
-    </article>
-  `;
-}
-
-function renderMonsterCandidateLivePromotionRow(row, text = {}) {
-  const roles = [
-    monsterCandidateLivePromotionStateLabel(row.planState, text),
-    monsterCandidatePromotionStageLabel(row.promotionStageId, detailTextForPromotion(text)),
-    row.regionName || row.regionId || "",
-  ].filter(Boolean);
-  const actionLabels = (row.nextActionIds || []).map((actionId) => monsterCandidatePromotionActionLabel(actionId, detailTextForPromotion(text)));
-
-  return `
-    <article class="editor-monster-candidate-live-promotion-row" data-state="${escapeAttribute(row.planState || "unknown")}">
-      <div class="editor-monster-candidate-live-promotion-row-head">
-        <div>
-          <h6>${escapeHtml(row.name || row.id || "")}</h6>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.rowMeta", {
-            level: row.level || 0,
-            source: row.sourceMonsterName || row.sourceMonsterId || "-"
-          }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
-        </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
-      </div>
-      <div class="editor-monster-candidate-live-promotion-grid">
-        ${balanceDetailChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
-        ${balanceDetailChipBlock(text.targetFiles || "Target files", row.targetFiles || [])}
-        ${balanceDetailChipBlock(text.nextActions || "Next actions", actionLabels)}
-      </div>
-    </article>
-  `;
-}
-
-function renderMonsterCandidateLivePromotionDeferred(rows = [], text = {}) {
-  if (!rows.length) {
-    return `<p class="muted">${escapeHtml(text.noDeferred || "No deferred candidates.")}</p>`;
-  }
-  return `
-    <div class="editor-monster-candidate-live-promotion-deferred">
-      <div>
-        <strong>${escapeHtml(text.deferredTitle || "Deferred candidates")}</strong>
-        <p>${escapeHtml(text.deferredDescription || "Candidates with partial reward links stay outside live-data promotion.")}</p>
-      </div>
-      <div class="editor-monster-candidate-live-promotion-row-list">
-        ${rows.map((row) => renderMonsterCandidateLivePromotionDeferredRow(row, text)).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function renderMonsterCandidateLivePromotionDeferredRow(row, text = {}) {
-  const promotionText = detailTextForPromotion(text);
-  const roles = [
-    monsterCandidateLivePromotionStateLabel(row.planState, text),
-    monsterCandidatePromotionStageLabel(row.promotionStageId, promotionText),
-  ].filter(Boolean);
-  const missingLabels = (row.missingRewardTypes || []).map((type) => text.rewardTypeLabels?.[type] || type);
-
-  return `
-    <article class="editor-monster-candidate-live-promotion-row" data-state="${escapeAttribute(row.planState || "deferred")}">
-      <div class="editor-monster-candidate-live-promotion-row-head">
-        <div>
-          <h6>${escapeHtml(row.name || row.id || "")}</h6>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.rowMeta", {
-            level: row.level || 0,
-            source: row.sourceMonsterName || row.sourceMonsterId || "-"
-          }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
-        </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
-      </div>
-      <div class="editor-monster-candidate-live-promotion-grid">
-        ${balanceDetailChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
-        ${balanceDetailChipBlock(text.deferredMissing || "Missing reward links", missingLabels.length ? missingLabels : [text.noMissing || "None"])}
-      </div>
-    </article>
-  `;
-}
-
-function monsterCandidateLivePromotionPhaseTitle(phase, text = {}) {
-  return text.phaseLabels?.[phase.id] || tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.phaseLabel", {
-    order: phase.order || 0
-  }, `Phase ${phase.order || 0}`);
-}
-
-function monsterCandidateLivePromotionPriorityLabel(priorityId, text = {}) {
-  return text.priorityLabels?.[priorityId] || priorityId || "";
-}
-
-function monsterCandidateLivePromotionStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function detailTextForPromotion(text = {}) {
-  return {
-    ...(EDITOR_TEXT.balanceTuningDetail?.monsterCandidatePromotion || {}),
-    ...(text.promotionLabels || {}),
-  };
-}
-
-function renderMonsterCandidateLivePatchDraft(draft, detailText = {}) {
-  const text = detailText.monsterCandidateLivePatchDraft || {};
-  const summary = draft.summary || {};
-  const metrics = [
-    [text.drafts || "Drafts", `${summary.draftCount || 0}`],
-    [text.phase || "Phase", summary.targetPhaseId || "-"],
-    [text.regions || "Regions", `${summary.targetRegionCount || 0}`],
-    [text.files || "Files", `${summary.targetFileCount || 0}`],
-    [text.writes || "Writes", draft.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-
-  return `
-    <section class="editor-monster-candidate-live-patch-draft" data-readonly="${draft.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Live Patch Draft")}">
-      <div class="editor-monster-candidate-live-patch-draft-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Monster Candidate Live Patch Draft")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only patch draft before writing live monster data.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePatchDraft.version", {
-          version: draft.version || "-"
-        }, draft.version || "-"))}</strong>
-      </div>
-      <div class="editor-monster-candidate-live-patch-draft-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-monster-candidate-live-patch-draft-list">
-        ${(draft.rows || []).map((row) => renderMonsterCandidateLivePatchDraftRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No patch draft rows.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterCandidateLivePatchDraftRow(row, text = {}) {
-  const entry = row.monsterBalanceEntry || {};
-  const worldPatch = row.worldDataPatch || {};
-  const roles = [
-    monsterCandidatePatchDraftStateLabel(row.planState, text),
-    row.regionName || row.regionId || "",
-  ].filter(Boolean);
-  const statValues = entry.stats
-    ? Object.entries(entry.stats).map(([key, value]) => `${key} ${value}`)
-    : [];
-  const dropValues = (entry.dropTable || []).map((drop) => `${drop.itemId} ${formatPatchDraftChance(drop.chance)}`);
-  const worldValues = [
-    `${text.worldPatchAction || "Action"}: ${monsterCandidatePatchDraftActionLabel(worldPatch.action, text)}`,
-    `${text.representative || "Representative"}: ${worldPatch.keepsRepresentativeMonsterId || "-"}`,
-    `${text.proposedPool || "Pool"}: ${(worldPatch.proposedMonsterPool || []).join(" / ") || "-"}`,
-  ];
-  const blockingSignals = (row.blockingSignalIds || []).map((signalId) => monsterCandidatePatchDraftSignalLabel(signalId, text));
-
-  return `
-    <article class="editor-monster-candidate-live-patch-draft-row" data-state="${escapeAttribute(row.planState || "unknown")}">
-      <div class="editor-monster-candidate-live-patch-draft-row-head">
-        <div>
-          <h5>${escapeHtml(row.name || row.id || "")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePatchDraft.rowMeta", {
-            source: row.sourceMonsterName || row.sourceMonsterId || "-",
-            level: entry.level || 0,
-            exp: entry.exp || 0,
-            gold: entry.gold || 0
-          }, `Level ${entry.level || 0} / exp ${entry.exp || 0} / gold ${entry.gold || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
-      </div>
-      <div class="editor-monster-candidate-live-patch-draft-grid">
-        ${balanceDetailChipBlock(text.stats || "Stats", statValues)}
-        ${balanceDetailChipBlock(text.dropTable || "Drop table", dropValues)}
-        ${balanceDetailChipBlock(text.worldPatch || "World patch", worldValues)}
-        ${balanceDetailChipBlock(text.targetFiles || "Target files", row.targetFiles || [])}
-        ${balanceDetailChipBlock(text.rewardLinks || "Reward links", patchDraftRewardValues(row))}
-        ${balanceDetailChipBlock(text.blockingSignals || "Blocking signals", blockingSignals.length ? blockingSignals : [text.noBlockingSignals || "No blocking signals"])}
-      </div>
-    </article>
-  `;
-}
-
-function patchDraftRewardValues(row) {
-  const link = row.rewardLink || {};
-  return [
-    link.codexFragmentId,
-    ...(link.materialItemIds || []),
-    ...(link.skillItemIds || []),
-  ].filter(Boolean);
-}
-
-function monsterCandidatePatchDraftStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function monsterCandidatePatchDraftActionLabel(actionId, text = {}) {
-  return text.actionLabels?.[actionId] || actionId || "unknown";
-}
-
-function monsterCandidatePatchDraftSignalLabel(signalId, text = {}) {
-  return text.signalLabels?.[signalId] || signalId;
-}
-
-function formatPatchDraftChance(chance) {
-  const value = Number(chance || 0) * 100;
-  return `${Number(value.toFixed(1))}%`;
-}
-
-function renderMonsterCandidateBulkPatchAutomation(preview, detailText = {}) {
-  const text = detailText.monsterCandidateBulkPatchAutomation || {};
-  const summary = preview.summary || {};
-  const metrics = [
-    [text.candidates || "Candidates", `${summary.candidateCount || 0}`],
-    [text.liveCovered || "Live covered", `${summary.liveCoveredCount || 0}`],
-    [text.surfaces || "Surfaces", `${summary.surfaceCount || 0}`],
-    [text.coveredSurfaces || "Covered", `${summary.coveredSurfaceCount || 0}/${summary.generatedSurfaceCount || 0}`],
-    [text.needsDraft || "Needs draft", `${summary.needsDraftCount || 0}`],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-monster-candidate-bulk-automation" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster Candidate Bulk Patch Automation")}">
-      <div class="editor-monster-candidate-bulk-automation-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Monster Candidate Bulk Patch Automation")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only automation surface for bulk monster live promotion.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateBulkPatchAutomation.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-monster-candidate-bulk-automation-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${balanceDetailChipBlock(text.inputFields || "Input fields", preview.templateInputFields || [])}
-      ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", (preview.surfaces || []).map((surface) => `${surface.output}: ${surface.file}`))}
-      <div class="editor-monster-candidate-bulk-automation-list">
-        ${(preview.rows || []).map((row) => renderMonsterCandidateBulkPatchAutomationRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No automation rows.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterCandidateBulkPatchAutomationRow(row, text = {}) {
-  const surfaceLabels = (row.surfaces || []).map((surface) => `${bulkPatchAutomationSurfaceLabel(surface.id, text)}: ${bulkPatchAutomationStateLabel(surface.state, text)}`);
-  const patchValues = [
-    `${text.balance || "Balance"}: ${row.monsterBalanceEntry?.id || row.id}`,
-    `${text.world || "World"}: ${row.worldDataPatch?.action || "-"}`,
-    `${text.spriteSlots || "Sprite slots"}: ${(row.spriteSlotBucketPatch?.poseKeys || []).join(" / ") || "-"}`,
-    `${text.runtimePreset || "Runtime preset"}: ${row.battleSpritePresetDraft?.classId || "-"}`,
-    `${text.cssSelector || "CSS selector"}: ${row.runtimeCssSelector || "-"}`,
-  ];
-  return `
-    <article class="editor-monster-candidate-bulk-automation-row" data-state="${escapeAttribute(row.coverageState || "unknown")}">
-      <div class="editor-monster-candidate-bulk-automation-row-head">
-        <div>
-          <h5>${escapeHtml(row.name || row.id || "")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateBulkPatchAutomation.rowMeta", {
-            region: row.regionId || "-",
-            representative: row.representativeMonsterId || "-"
-          }, `${row.regionId || "-"} / ${row.representativeMonsterId || "-"}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(bulkPatchAutomationStateLabel(row.coverageState, text))}
-          ${row.isLive ? chip(text.live || "Live") : chip(text.pending || "Pending")}
-        </div>
-      </div>
-      <div class="editor-monster-candidate-bulk-automation-grid">
-        ${balanceDetailChipBlock(text.inputSummary || "Input summary", [
-          `${text.level || "Level"} ${row.input?.level || 0}`,
-          ...(row.input?.tags || []),
-          row.input?.rewardLink?.codexFragmentId || "",
-        ].filter(Boolean))}
-        ${balanceDetailChipBlock(text.surfaceStates || "Surface states", surfaceLabels)}
-        ${balanceDetailChipBlock(text.generatedPatches || "Generated patches", patchValues)}
-      </div>
-    </article>
-  `;
-}
-
-function bulkPatchAutomationSurfaceLabel(surfaceId, text = {}) {
-  return text.surfaceLabels?.[surfaceId] || surfaceId || "unknown";
-}
-
-function bulkPatchAutomationStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function renderContentBulkPatchAutomationPlan(plan, detailText = {}) {
-  const text = detailText.contentBulkPatchAutomationPlan || {};
-  const summary = plan.summary || {};
-  const metrics = [
-    [text.domains || "Domains", `${summary.domainCount || 0}`],
-    [text.currentRows || "Current rows", `${summary.currentRowCount || 0}`],
-    [text.surfaceTemplates || "Surface templates", `${summary.surfaceTemplateCount || 0}`],
-    [text.generatedSurfaces || "Generated surfaces", `${summary.generatedSurfaceCount || 0}`],
-    [text.contractReady || "Contract ready", `${summary.contractReadyDomainCount || 0}`],
-    [text.writes || "Writes", plan.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-automation" data-readonly="${plan.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Automation Plan")}">
-      <div class="editor-content-bulk-automation-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Automation Plan")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only content batch expansion contract.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchAutomationPlan.version", {
-          version: plan.version || "-"
-        }, plan.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-automation-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-automation-list">
-        ${(plan.domains || []).map((domain) => renderContentBulkPatchAutomationDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchAutomationDomain(domain, text = {}) {
-  return `
-    <article class="editor-content-bulk-automation-domain" data-state="${escapeAttribute(domain.coverageState || "unknown")}">
-      <div class="editor-content-bulk-automation-domain-head">
-        <div>
-          <h5>${escapeHtml(contentBulkPatchDomainLabel(domain.id, text))}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchAutomationPlan.domainMeta", {
-            rows: domain.currentRowCount || 0,
-            surfaces: domain.surfaceTemplateCount || 0,
-            generated: domain.generatedSurfaceCount || 0
-          }, `${domain.currentRowCount || 0} / ${domain.surfaceTemplateCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchStateLabel(domain.coverageState, text))}
-        </div>
-      </div>
-      <div class="editor-content-bulk-automation-grid">
-        ${balanceDetailChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [])}
-        ${balanceDetailChipBlock(text.batchIdentity || "Batch identity", [domain.batchKey, ...(domain.identityFields || [])].filter(Boolean))}
-        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", domain.surfaces || [])}
-        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
-      </div>
-    </article>
-  `;
-}
-
 function contentBulkPatchDomainLabel(domainId, text = {}) {
   return text.domainLabels?.[domainId] || domainId || "unknown";
-}
-
-function contentBulkPatchStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function renderContentBulkPatchIntakeContract(contract, detailText = {}) {
-  const text = detailText.contentBulkPatchIntakeContract || {};
-  const summary = contract.summary || {};
-  const metrics = [
-    [text.domains || "Domains", `${summary.domainCount || 0}`],
-    [text.batchKeys || "Batch keys", `${summary.batchKeyCount || 0}`],
-    [text.requiredFields || "Required fields", `${summary.requiredFieldCount || 0}`],
-    [text.uniqueChecks || "Checks", `${summary.uniqueCheckCount || 0}`],
-    [text.currentRows || "Current rows", `${summary.currentRowCount || 0}`],
-    [text.writes || "Writes", contract.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-intake" data-readonly="${contract.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Intake Contract")}">
-      <div class="editor-content-bulk-intake-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Intake Contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only batch input contract.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchIntakeContract.version", {
-          version: contract.version || "-"
-        }, contract.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-intake-list">
-        ${(contract.domains || []).map((domain) => renderContentBulkPatchIntakeDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchIntakeDomain(domain, text = {}) {
-  return `
-    <article class="editor-content-bulk-intake-domain">
-      <div class="editor-content-bulk-intake-domain-head">
-        <div>
-          <h5>${escapeHtml(contentBulkPatchDomainLabel(domain.id, text))}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchIntakeContract.domainMeta", {
-            batchKey: domain.batchKey || "-",
-            rows: domain.currentRowCount || 0,
-            fields: (domain.requiredInputFields || []).length
-          }, `${domain.batchKey || "-"} / ${domain.currentRowCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(text.appendOrUpdate || "Append/update")}
-        </div>
-      </div>
-      <div class="editor-content-bulk-intake-grid">
-        ${balanceDetailChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
-        ${balanceDetailChipBlock(text.identityFields || "Identity", domain.identityFields || [])}
-        ${balanceDetailChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [])}
-        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
-      </div>
-    </article>
-  `;
-}
-
-function renderContentBulkPackageOverview(preview, detailText = {}, filterCounts = {}) {
-  const text = detailText.contentBulkPackageOverview || {};
-  const summary = preview.summary || {};
-  const metrics = [
-    [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
-    [text.activeDomains || "Active domains", `${summary.activeDomainCount || 0}`],
-    [text.readyRows || "Ready", `${summary.readyRowCount || 0}`],
-    [text.warningRows || "Review", `${summary.warningRowCount || 0}`],
-    [text.blockedRows || "Blocked", `${summary.blockedRowCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section id="content-bulk-package-overview" class="editor-content-bulk-overview" data-state="${escapeAttribute(preview.status || "ready")}" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Package Overview")}">
-      <div class="editor-content-bulk-overview-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Package Overview")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Summarizes the current bulk package before reviewing each specialized card.")}</p>
-        </div>
-        <strong>${escapeHtml(contentBulkOverviewLabel(preview.status || "ready", text.statusLabels))}</strong>
-      </div>
-      <div class="editor-content-bulk-overview-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkFilterControls(text, filterCounts)}
-      <div class="editor-content-bulk-overview-grid">
-        ${balanceDetailChipBlock(text.recognizedSourceKeys || "Recognized source keys", [`${summary.recognizedSourceKeyCount || 0}`])}
-        ${balanceDetailChipBlock(text.unmappedSourceKeys || "Unmapped source keys", [`${summary.unmappedSourceKeyCount || 0}`])}
-        ${balanceDetailChipBlock(text.reviewSurfaces || "Review surfaces", [`${summary.reviewSurfaceCount || 0}`])}
-      </div>
-      <div class="editor-content-bulk-overview-list">
-        ${(preview.reviewRows || []).map((row) => renderContentBulkOverviewRow(row, text)).join("")}
-      </div>
-      <div class="editor-content-bulk-overview-domains">
-        ${(preview.domainRows || []).map((row) => renderContentBulkOverviewDomain(row, text)).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkOverviewRow(row, text = {}) {
-  return `
-    <article class="editor-content-bulk-overview-row" data-state="${escapeAttribute(row.state || "empty")}">
-      <div>
-        <h5>${escapeHtml(contentBulkOverviewLabel(row.id, text.surfaceLabels))}</h5>
-        <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.rowMeta", {
-          rows: row.rowCount || 0,
-          ready: row.readyCount || 0,
-          blocked: row.blockedCount || 0,
-        }, `${row.rowCount || 0}`))}</p>
-      </div>
-      <div class="editor-content-bulk-overview-actions">
-        <span>${escapeHtml(contentBulkOverviewLabel(row.state, text.statusLabels))}</span>
-        ${contentBulkOverviewJumpLink(row.primaryRowTargetId || row.drilldownTargetId, text)}
-      </div>
-    </article>
-  `;
-}
-
-function renderContentBulkOverviewDomain(row, text = {}) {
-  return `
-    <article class="editor-content-bulk-overview-domain" data-state="${escapeAttribute(row.state || "empty")}">
-      <div>
-        <strong>${escapeHtml(contentBulkPatchDomainLabel(row.id, text))}</strong>
-        <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.domainMeta", {
-          batchKey: row.batchKey || "-",
-          rows: row.rowCount || 0,
-        }, `${row.batchKey || "-"} / ${row.rowCount || 0}`))}</span>
-      </div>
-      ${contentBulkOverviewJumpLink(row.rowTargetId || row.drilldownTargetId, text)}
-    </article>
-  `;
-}
-
-function contentBulkOverviewLabel(id, labels = {}) {
-  return labels?.[id] || id || "-";
-}
-
-function contentBulkOverviewJumpLink(targetId, text = {}) {
-  if (!targetId) return "";
-  return `
-    <a class="editor-content-bulk-overview-jump" href="#${escapeAttribute(targetId)}">${escapeHtml(text.jumpToDetail || "Jump")}</a>
-  `;
-}
-
-function renderContentBulkFilterControls(text = {}, counts = {}) {
-  const filters = ["all", "blocked", "review", "ready", "active", "empty"];
-  const activeState = normalizeContentBulkFilterState(contentBulkDetailFilter.state);
-  const activeDomain = normalizeContentBulkFilterDomain(contentBulkDetailFilter.domain);
-  const query = normalizeContentBulkSearchQuery(contentBulkDetailFilter.query);
-  const stateCounts = counts.states || counts;
-  const domainCounts = counts.domains || {};
-  return `
-    <div class="editor-content-bulk-filter" role="group" aria-label="${escapeAttribute(text.stateFilter || "Bulk row filter")}">
-      <label class="editor-content-bulk-search">
-        <span>${escapeHtml(text.searchLabel || "Search")}</span>
-        <input type="search" data-content-bulk-search value="${escapeAttribute(query)}" placeholder="${escapeAttribute(text.searchPlaceholder || "Monster, item, skill, file")}" />
-      </label>
-      <button class="editor-content-bulk-search-reset" type="button" data-content-bulk-search-reset ${query ? "" : "disabled"}>
-        ${escapeHtml(text.resetSearch || "Reset")}
-      </button>
-      <div class="editor-content-bulk-filter-buttons">
-        ${filters.map((state) => {
-          const active = activeState === state;
-          const label = contentBulkFilterLabel(state, text.filterLabels);
-          const count = state === "all" ? stateCounts.all : stateCounts[state];
-          return `
-            <button class="editor-content-bulk-filter-button${active ? " is-active" : ""}" type="button" data-content-bulk-filter="${escapeAttribute(state)}" aria-pressed="${active ? "true" : "false"}">
-              <span>${escapeHtml(label)}</span>
-              <b>${escapeHtml(String(count || 0))}</b>
-            </button>
-          `;
-        }).join("")}
-      </div>
-      <div class="editor-content-bulk-domain-filter" role="group" aria-label="${escapeAttribute(text.domainFilter || "Bulk domain filter")}">
-        ${CONTENT_BULK_DOMAIN_FILTERS.map((domain) => {
-          const active = activeDomain === domain;
-          const label = contentBulkDomainLabel(domain, text.domainLabels);
-          const count = domain === "all" ? domainCounts.all : domainCounts[domain];
-          return `
-            <button class="editor-content-bulk-filter-button${active ? " is-active" : ""}" type="button" data-content-bulk-domain="${escapeAttribute(domain)}" aria-pressed="${active ? "true" : "false"}">
-              <span>${escapeHtml(label)}</span>
-              <b>${escapeHtml(String(count || 0))}</b>
-            </button>
-          `;
-        }).join("")}
-      </div>
-    </div>
-  `;
 }
 
 function createContentBulkFilterCounts({
@@ -2864,763 +1173,6 @@ function normalizeContentBulkRowDomains(domains = []) {
     .filter((domain) => domain && domain !== "all");
 }
 
-function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}) {
-  const text = detailText.contentBulkPatchPackageAdapter || {};
-  const summary = preview.summary || {};
-  const visibleMappings = (preview.mappings || []).filter((mapping) =>
-    matchesContentBulkFilterRow(Number(mapping.rowCount || 0) > 0 ? "active" : "empty", [
-      mapping,
-      contentBulkPatchDomainLabel(mapping.domainId, text),
-    ], [mapping.domainId])
-  );
-  const draftText = contentBulkPatchPackageInput.draftText || "";
-  const hasAppliedInput = Boolean(String(contentBulkPatchPackageInput.appliedText || "").trim());
-  const message = contentBulkPatchPackageParseError || contentBulkPatchPackageInput.parseError || "";
-  const inputState = message ? "error" : (hasAppliedInput ? "ready" : "template");
-  const sourceName = contentBulkPatchPackageInput.sourceName
-    || (hasAppliedInput ? (text.pasteSource || "Pasted JSON") : (text.templateSource || "Template preview"));
-  const statusLabel = message
-    ? (text.errorStatus || "JSON error")
-    : (hasAppliedInput ? (text.readyStatus || "Preview ready") : (text.templateStatus || "Template preview"));
-  const metrics = [
-    [text.sourceKeys || "Source keys", `${summary.sourceKeyCount || 0}`],
-    [text.recognizedKeys || "Recognized", `${summary.recognizedSourceKeyCount || 0}`],
-    [text.unmappedKeys || "Unmapped", `${summary.unmappedArrayKeyCount || 0}`],
-    [text.normalizedRows || "Normalized rows", `${summary.normalizedRowCount || 0}`],
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
-    [text.withheldRows || "Withheld", `${summary.withheldRowCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section id="content-bulk-package-adapter" class="editor-content-bulk-package" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Package Adapter")}">
-      <div class="editor-content-bulk-package-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Package Adapter")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Normalizes external package aliases into the shared batch contract.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchPackageAdapter.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-package-input" data-state="${escapeAttribute(inputState)}">
-        <div class="editor-content-bulk-package-input-head">
-          <div>
-            <h5>${escapeHtml(text.inputTitle || "Package JSON input")}</h5>
-            <p>${escapeHtml(text.inputDescription || "Paste or load one external package JSON, then preview normalized rows before applying anything.")}</p>
-          </div>
-          <span>${escapeHtml(statusLabel)}</span>
-        </div>
-        <textarea data-content-bulk-package-json spellcheck="false" placeholder="${escapeAttribute(text.inputPlaceholder || "")}">${escapeHtml(draftText)}</textarea>
-        <div class="editor-content-bulk-package-actions">
-          <label class="editor-content-bulk-package-file">
-            <span>${escapeHtml(text.loadFile || "Load file")}</span>
-            <input type="file" accept=".json,application/json" data-content-bulk-package-file />
-          </label>
-          <button type="button" data-content-bulk-package-apply>${escapeHtml(text.applyPreview || "Preview input")}</button>
-          <button type="button" data-content-bulk-package-sample>${escapeHtml(text.useSample || "Use sample")}</button>
-          <button type="button" data-content-bulk-package-template>${escapeHtml(text.downloadTemplate || "Download template")}</button>
-          <button type="button" data-content-bulk-package-reset>${escapeHtml(text.resetInput || "Reset")}</button>
-        </div>
-        <p class="editor-content-bulk-package-message">
-          ${escapeHtml(message || tf("editorPrep.balanceTuningDetail.contentBulkPatchPackageAdapter.inputSource", {
-            source: sourceName
-          }, sourceName))}
-        </p>
-      </div>
-      <div class="editor-content-bulk-package-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-package-list">
-        ${visibleMappings.map((mapping) => renderContentBulkPatchPackageMapping(mapping, text)).join("") || `<p class="muted">${escapeHtml(text.noFilteredRows || text.noMappings || "No package mappings.")}</p>`}
-      </div>
-      <div class="editor-content-bulk-package-grid">
-        ${balanceDetailChipBlock(text.unmappedArrayKeys || "Unmapped array keys", preview.normalized?.unmappedArrayKeys || [])}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchPackageMapping(mapping, text = {}) {
-  return `
-    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.packageDomain, mapping.domainId || mapping.batchKey))}" class="editor-content-bulk-package-domain" data-active="${mapping.rowCount > 0 ? "true" : "false"}">
-      <div class="editor-content-bulk-package-domain-head">
-        <div>
-          <h5>${escapeHtml(contentBulkPatchDomainLabel(mapping.domainId, text))}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchPackageAdapter.domainMeta", {
-            batchKey: mapping.batchKey || "-",
-            rows: mapping.rowCount || 0,
-            aliases: (mapping.aliases || []).length,
-          }, `${mapping.batchKey || "-"} / ${mapping.rowCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(mapping.rowCount > 0 ? (text.active || "Active") : (text.empty || "Empty"))}
-        </div>
-      </div>
-      <div class="editor-content-bulk-package-grid">
-        ${balanceDetailChipBlock(text.sourceKeysForDomain || "Source keys", mapping.sourceKeys || [])}
-        ${balanceDetailChipBlock(text.acceptedAliases || "Accepted aliases", mapping.aliases || [])}
-        ${balanceDetailChipBlock(text.requiredInputs || "Required inputs", mapping.requiredInputFields || [])}
-        ${balanceDetailChipBlock(text.identityFields || "Identity", mapping.identityFields || [])}
-      </div>
-    </article>
-  `;
-}
-
-function renderLootSkillBulkIntakePreview(preview, detailText = {}) {
-  const text = detailText.lootSkillBulkIntakePreview || {};
-  const summary = preview.summary || {};
-  const typeLabels = text.typeLabels || {};
-  const visibleLootRows = (preview.lootRows || []).filter((row) => matchesContentBulkFilterRow(row.intakeState, [
-    row,
-    lootSkillBulkLabel(row.type, typeLabels),
-  ], ["loot_item"]));
-  const visibleSkillRows = (preview.skillRows || []).filter((row) => matchesContentBulkFilterRow(row.bulkState, row, ["skill"]));
-  const metrics = [
-    [text.lootRows || "Loot rows", `${summary.lootRowCount || 0}`],
-    [text.skillRows || "Skill rows", `${summary.skillRowCount || 0}`],
-    [text.codexFragments || "Codex fragments", `${summary.codexFragmentCount || 0}`],
-    [text.manaCrystals || "Mana crystals", `${summary.manaCrystalCount || 0}`],
-    [text.skillFragments || "Skill fragments", `${summary.skillFragmentCount || 0}`],
-    [text.skillRunes || "Skill runes", `${summary.skillRuneCount || 0}`],
-    [text.rewardLinked || "Reward linked", `${summary.rewardLinkedLootCount || 0}`],
-    [text.missingSkillDefinitions || "Missing skill defs", `${summary.missingSkillDefinitionCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section id="loot-skill-bulk-intake" class="editor-loot-skill-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Loot and skill bulk intake")}">
-      <div class="editor-loot-skill-bulk-intake-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Loot and skill bulk intake")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Classifies non-equipment loot and skill rows from the shared bulk package preview.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.lootSkillBulkIntakePreview.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-loot-skill-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkStagedContractSummary(preview.stagedContract, text)}
-      <div class="editor-loot-skill-bulk-intake-list">
-        ${visibleLootRows.map((row) => renderLootSkillBulkLootRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noFilteredRows || text.noLootRows || "No loot rows.")}</p>`}
-      </div>
-      <div class="editor-loot-skill-bulk-intake-list">
-        ${visibleSkillRows.map((row) => renderLootSkillBulkSkillRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noFilteredRows || text.noSkillRows || "No skill rows.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderLootSkillBulkLootRow(row, text = {}) {
-  const stateLabels = text.stateLabels || {};
-  const typeLabels = text.typeLabels || {};
-  const bulkLabels = text.bulkStateLabels || {};
-  return `
-    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.loot, row.id || row.type))}" class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.intakeState || "unknown")}">
-      <div class="editor-loot-skill-bulk-intake-row-head">
-        <div>
-          <h5>${escapeHtml(row.id || "-")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.lootSkillBulkIntakePreview.lootMeta", {
-            type: lootSkillBulkLabel(row.type, typeLabels),
-            rarity: row.rarity || "-",
-            state: lootSkillBulkLabel(row.bulkState, bulkLabels),
-          }, `${row.type || "-"} / ${row.rarity || "-"}`))}</p>
-        </div>
-        <span>${escapeHtml(lootSkillBulkLabel(row.intakeState, stateLabels))}</span>
-      </div>
-      <div class="editor-loot-skill-bulk-intake-grid">
-        ${balanceDetailChipBlock(text.skillLink || "Skill link", [row.skillId || (text.none || "None")])}
-        ${balanceDetailChipBlock(text.dropSource || "Drop source", [row.dropSource || (text.globalSource || "Global")])}
-        ${balanceDetailChipBlock(text.codexRecordTarget || "Codex target", row.recordTarget > 0 ? [`${row.recordTarget}`] : [])}
-        ${balanceDetailChipBlock(text.rewardLink || "Reward link", [row.rewardLinked ? (text.linked || "Linked") : (text.unlinked || "Unlinked")])}
-        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-      </div>
-    </article>
-  `;
-}
-
-function renderLootSkillBulkSkillRow(row, text = {}) {
-  const bulkLabels = text.bulkStateLabels || {};
-  return `
-    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.skill, row.id || row.type))}" class="editor-loot-skill-bulk-intake-row" data-state="${escapeAttribute(row.bulkState || "unknown")}">
-      <div class="editor-loot-skill-bulk-intake-row-head">
-        <div>
-          <h5>${escapeHtml(row.id || "-")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.lootSkillBulkIntakePreview.skillMeta", {
-            type: row.type || "-",
-            mp: row.mpCost || 0,
-            cooldown: row.cooldown || 0,
-            state: lootSkillBulkLabel(row.bulkState, bulkLabels),
-          }, `${row.type || "-"} / ${row.mpCost || 0}`))}</p>
-        </div>
-        <span>${escapeHtml(lootSkillBulkLabel(row.bulkState, bulkLabels))}</span>
-      </div>
-      <div class="editor-loot-skill-bulk-intake-grid">
-        ${balanceDetailChipBlock(text.damageType || "Damage", [row.damageType || "-"])}
-        ${balanceDetailChipBlock(text.effectType || "Effect", [row.effectType || "-"])}
-        ${balanceDetailChipBlock(text.stances || "Stances", row.stanceAllowed || [])}
-        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-      </div>
-    </article>
-  `;
-}
-
-function lootSkillBulkLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderMonsterRuntimeBulkIntakePreview(preview, detailText = {}) {
-  const text = detailText.monsterRuntimeBulkIntakePreview || {};
-  const summary = preview.summary || {};
-  const stateLabels = text.stateLabels || {};
-  const visibleRows = (preview.rows || []).filter((row) => matchesContentBulkFilterRow(row.runtimeState, [
-    row,
-    monsterRuntimeBulkIntakeLabel(row.runtimeState, stateLabels),
-    monsterRuntimeBulkIntakeLabel(row.bulkState, stateLabels),
-  ], ["monster", "monster_runtime"]));
-  const metrics = [
-    [text.runtimePresets || "Runtime presets", `${summary.runtimePresetCount || 0}`],
-    [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
-    [text.recognizedRows || "Recognized rows", `${summary.recognizedRuntimeRows || 0}`],
-    [text.updateCandidates || "Update candidates", `${summary.updateCandidateCount || 0}`],
-    [text.missingSprites || "Missing sprites", `${summary.missingSpriteFileCount || 0}`],
-    [text.blockedRows || "Blocked rows", `${summary.blockedRuntimeRowCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section id="monster-runtime-bulk-intake" class="editor-monster-runtime-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Monster runtime bulk intake")}">
-      <div class="editor-monster-runtime-bulk-intake-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Monster runtime bulk intake")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only bridge from monster runtime package presets into the bulk intake contract.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterRuntimeBulkIntakePreview.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-monster-runtime-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkStagedContractSummary(preview.stagedContract, text)}
-      <div class="editor-monster-runtime-bulk-intake-list">
-        ${visibleRows.map((row) => renderMonsterRuntimeBulkIntakeRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noFilteredRows || text.noRows || "No runtime package rows.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderMonsterRuntimeBulkIntakeRow(row, text = {}) {
-  const stateLabels = text.stateLabels || {};
-  const motionLabels = (row.motions || []).map((motion) => `${motion.phase}: ${motion.runtimeMotionId || motion.externalMotionId}`);
-  const actionLabels = (row.actions || []).map((action) => `${action.id}${action.optional ? ` (${text.optional || "optional"})` : ""}`);
-  return `
-    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.monsterRuntime, row.liveMonsterId || row.externalMonsterId || row.packageIdentity))}" class="editor-monster-runtime-bulk-intake-row" data-state="${escapeAttribute(row.runtimeState || "unknown")}">
-      <div class="editor-monster-runtime-bulk-intake-row-head">
-        <div>
-          <h5>${escapeHtml(row.externalMonsterId || "-")} → ${escapeHtml(row.liveMonsterId || "-")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterRuntimeBulkIntakePreview.rowMeta", {
-            key: row.acceptedAliasKey || "-",
-            domain: row.targetDomainId || "-",
-            state: monsterRuntimeBulkIntakeLabel(row.bulkState, stateLabels),
-          }, `${row.acceptedAliasKey || "-"} / ${row.targetDomainId || "-"}`))}</p>
-        </div>
-        <span>${escapeHtml(monsterRuntimeBulkIntakeLabel(row.runtimeState, stateLabels))}</span>
-      </div>
-      <div class="editor-monster-runtime-bulk-intake-grid">
-        ${balanceDetailChipBlock(text.motions || "Motions", motionLabels)}
-        ${balanceDetailChipBlock(text.actions || "Actions", actionLabels)}
-        ${balanceDetailChipBlock(text.missingSpriteFiles || "Missing sprite files", row.missingSpriteFiles || [])}
-        ${balanceDetailChipBlock(text.sourcePreview || "Source preview", [row.sourcePreviewFile].filter(Boolean))}
-        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-      </div>
-    </article>
-  `;
-}
-
-function monsterRuntimeBulkIntakeLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkIssueList(codes = [], text = {}) {
-  const list = Array.isArray(codes) ? codes.filter(Boolean) : [];
-  return list.length ? list : [text.noIssues || "None"];
-}
-
-function renderContentBulkIssueSummary(issueSummary, text = {}) {
-  if (!issueSummary) return "";
-  const metrics = [
-    [text.affectedDomains || "Affected domains", `${issueSummary.affectedDomainCount || 0}`],
-    [text.affectedRows || "Affected rows", `${issueSummary.affectedRowCount || 0}`],
-  ];
-  if (Number(issueSummary.affectedReviewItemCount || 0) > 0) {
-    metrics.push([text.affectedReviewItems || "Affected review", `${issueSummary.affectedReviewItemCount || 0}`]);
-  }
-  if (Number(issueSummary.affectedFileCount || 0) > 0) {
-    metrics.push([text.affectedFiles || "Affected files", `${issueSummary.affectedFileCount || 0}`]);
-  }
-  return `
-    <div class="editor-content-bulk-contract-summary editor-content-bulk-issue-summary">
-      <div>
-        <strong>${escapeHtml(text.issueSummary || "Issue summary")}</strong>
-        <p class="muted">${escapeHtml(text.issueSummaryHint || "Aggregated blockers and warnings before apply.")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(issueSummary.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(issueSummary.warningIssueCodes, text))}
-      </div>
-    </div>
-  `;
-}
-
-function renderContentBulkMassApplyReadiness({
-  dryRun = {},
-  stagedImport = {},
-  applyGate = {},
-  backupPlan = {},
-  restoreRehearsal = {},
-} = {}, detailText = {}) {
-  const text = detailText.contentBulkMassApplyReadiness || {};
-  const dryRunBlockers = Number(dryRun.summary?.blockingIssueCount || 0);
-  const stagedWithheld = Number(stagedImport.summary?.withheldRowCount || 0);
-  const applyBlocked = Number(applyGate.summary?.blockedReviewItemCount || 0);
-  const backupBlocked = Number(backupPlan.summary?.preApplyBlockedReviewItemCount || 0);
-  const restoreBlocked = Number(restoreRehearsal.preApplyReviewSummary?.blockedReviewItemCount || 0);
-  const blockedReasonCodes = [
-    ...(dryRun.issueSummary?.blockingIssueCodes || []),
-    ...(stagedImport.issueSummary?.blockingIssueCodes || []),
-    ...(applyGate.issueSummary?.blockingIssueCodes || []),
-    ...(backupPlan.issueSummary?.blockingIssueCodes || backupPlan.blockedReasons || []),
-    ...(restoreRehearsal.issueSummary?.blockingIssueCodes || restoreRehearsal.blockedReasons || []),
-  ];
-  const warningCodes = [
-    ...(dryRun.issueSummary?.warningIssueCodes || []),
-    ...(stagedImport.issueSummary?.warningIssueCodes || []),
-    ...(applyGate.issueSummary?.warningIssueCodes || []),
-    ...(backupPlan.issueSummary?.warningIssueCodes || []),
-    ...(restoreRehearsal.issueSummary?.warningIssueCodes || []),
-  ];
-  const blockedCount = dryRunBlockers + stagedWithheld + applyBlocked + backupBlocked + restoreBlocked;
-  const state = blockedCount > 0 || applyGate.applyEnabled === false || backupPlan.backupEnabled === false || restoreRehearsal.restoreEnabled === false
-    ? "blocked"
-    : "ready";
-  const metrics = [
-    [text.dryRunBlockers || "Dry-run blockers", `${dryRunBlockers}`],
-    [text.stagedWithheld || "Staged withheld", `${stagedWithheld}`],
-    [text.applyBlocked || "Apply blocked", `${applyBlocked}`],
-    [text.backupBlocked || "Backup blocked", `${backupBlocked}`],
-    [text.restoreBlocked || "Restore blocked", `${restoreBlocked}`],
-    [text.state || "State", contentBulkMassReadinessLabel(state, text.stateLabels)],
-  ];
-  return `
-    <div class="editor-content-bulk-contract-summary editor-content-bulk-mass-readiness" data-state="${escapeAttribute(state)}">
-      <div>
-        <strong>${escapeHtml(text.title || "Mass apply readiness")}</strong>
-        <p class="muted">${escapeHtml(text.description || "Combined read-only readiness across dry-run, staged import, apply gate, backup, and restore rehearsal.")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.blockedReasons || "Blocked reasons", contentBulkIssueList(Array.from(new Set(blockedReasonCodes)), text))}
-        ${balanceDetailChipBlock(text.warningReasons || "Warning reasons", contentBulkIssueList(Array.from(new Set(warningCodes)), text))}
-      </div>
-    </div>
-  `;
-}
-
-function contentBulkMassReadinessLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderContentBulkStagedApplyRehearsal({
-  stagedImport = {},
-  filePatchDraftExport = {},
-  backupPlan = {},
-  restoreRehearsal = {},
-} = {}, detailText = {}) {
-  const text = detailText.contentBulkStagedApplyRehearsal || {};
-  const stagedSummary = stagedImport.summary || {};
-  const exportSummary = filePatchDraftExport.summary || {};
-  const files = Array.isArray(filePatchDraftExport.payload?.files) ? filePatchDraftExport.payload.files : [];
-  const backupFiles = Array.isArray(backupPlan.fileBackups) ? backupPlan.fileBackups : [];
-  const restoreActions = Array.isArray(restoreRehearsal.restoreActions) ? restoreRehearsal.restoreActions : [];
-  const backupBlockedFileNames = backupFiles
-    .filter((file) => Array.isArray(file.reviewBlockerCodes) && file.reviewBlockerCodes.filter(Boolean).length > 0)
-    .map((file) => file.file)
-    .filter(Boolean);
-  const restoreBlockedFileNames = restoreActions
-    .filter((action) => Array.isArray(action.rehearsalBlockerCodes) && action.rehearsalBlockerCodes.filter(Boolean).length > 0)
-    .map((action) => action.file)
-    .filter(Boolean);
-  const blockedFileNames = new Set([...backupBlockedFileNames, ...restoreBlockedFileNames]);
-  const stagedRows = Number(stagedSummary.stagedRowCount ?? exportSummary.stagedRowCount ?? 0);
-  const withheldRows = Number(stagedSummary.withheldRowCount ?? exportSummary.withheldRowCount ?? 0);
-  const draftFiles = Number(exportSummary.exportedFileCount ?? files.length);
-  const readyFiles = Math.max(0, draftFiles - blockedFileNames.size);
-  const blockingCodes = Array.from(new Set([
-    ...(stagedImport.issueSummary?.blockingIssueCodes || []),
-    ...(filePatchDraftExport.preApplyReview?.checklist || [])
-      .filter((item) => item.state === "blocked")
-      .map((item) => item.id),
-    ...(backupPlan.issueSummary?.blockingIssueCodes || []),
-    ...(restoreRehearsal.issueSummary?.blockingIssueCodes || []),
-  ]));
-  const state = withheldRows > 0 || blockedFileNames.size > 0 || blockingCodes.length > 0 ? "blocked" : "ready";
-  const metrics = [
-    [text.stagedRows || "Staged rows", `${stagedRows}`],
-    [text.withheldRows || "Withheld rows", `${withheldRows}`],
-    [text.draftFiles || "Draft files", `${draftFiles}`],
-    [text.readyFiles || "Ready files", `${readyFiles}`],
-    [text.backupBlockedFiles || "Backup blocked files", `${backupBlockedFileNames.length}`],
-    [text.restoreBlockedFiles || "Restore blocked files", `${restoreBlockedFileNames.length}`],
-    [text.state || "State", contentBulkStagedApplyRehearsalLabel(state, text.stateLabels)],
-  ];
-  return `
-    <section class="editor-content-bulk-contract-summary editor-content-bulk-staged-apply-rehearsal" data-state="${escapeAttribute(state)}" aria-label="${escapeAttribute(text.title || "Staged apply rehearsal")}">
-      <div>
-        <strong>${escapeHtml(text.title || "Staged apply rehearsal")}</strong>
-        <p class="muted">${escapeHtml(text.description || "Compares staged rows, patch draft files, backup blockers, and restore rehearsal blockers before live apply.")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.blockingReasons || "Blocking reasons", contentBulkIssueList(blockingCodes, text))}
-      </div>
-      <div class="editor-content-bulk-patch-draft-list">
-        ${files.slice(0, 6).map((file) => renderContentBulkStagedApplyRehearsalFile(file, {
-          backupFiles,
-          restoreActions,
-        }, text)).join("") || `<p class="muted">${escapeHtml(text.noFiles || "No patch draft files.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkStagedApplyRehearsalFile(file = {}, reviewContext = {}, text = {}) {
-  const backupFile = (reviewContext.backupFiles || []).find((entry) => entry.file === file.file);
-  const restoreAction = (reviewContext.restoreActions || []).find((entry) => entry.file === file.file);
-  const backupBlockers = Array.isArray(backupFile?.reviewBlockerCodes) ? backupFile.reviewBlockerCodes.filter(Boolean) : [];
-  const restoreBlockers = Array.isArray(restoreAction?.rehearsalBlockerCodes) ? restoreAction.rehearsalBlockerCodes.filter(Boolean) : [];
-  const state = backupBlockers.length > 0 || restoreBlockers.length > 0 ? "blocked" : "ready";
-  return `
-    <article class="editor-content-bulk-patch-draft-file" data-state="${escapeAttribute(state)}">
-      <div class="editor-content-bulk-patch-draft-file-head">
-        <div>
-          <h5>${escapeHtml(file.file || "-")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkStagedApplyRehearsal.filePreview", {
-            patchBlocks: Array.isArray(file.patchBlocks) ? file.patchBlocks.length : 0,
-            domains: (file.domainIds || []).join(", ") || "-"
-          }, `${Array.isArray(file.patchBlocks) ? file.patchBlocks.length : 0} blocks`))}</p>
-        </div>
-        <span>${escapeHtml(contentBulkStagedApplyRehearsalLabel(state, text.stateLabels))}</span>
-      </div>
-      <div class="editor-content-bulk-patch-draft-grid">
-        ${balanceDetailChipBlock(text.domains || "Domains", file.domainIds || [])}
-        ${balanceDetailChipBlock(text.patchBlocks || "Patch blocks", [`${Array.isArray(file.patchBlocks) ? file.patchBlocks.length : 0}`])}
-        ${balanceDetailChipBlock(text.backupBlockers || "Backup blockers", contentBulkIssueList(backupBlockers, text))}
-        ${balanceDetailChipBlock(text.restoreBlockers || "Restore blockers", contentBulkIssueList(restoreBlockers, text))}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkStagedApplyRehearsalLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderContentBulkDomainApplyReadiness({
-  dryRun = {},
-  stagedImport = {},
-  filePatchDraftExport = {},
-  backupPlan = {},
-  restoreRehearsal = {},
-  filterCounts = {},
-} = {}, detailText = {}) {
-  const text = detailText.contentBulkDomainApplyReadiness || {};
-  const baseRows = contentBulkDomainApplyReadinessRows({
-    dryRun,
-    stagedImport,
-    filePatchDraftExport,
-    backupPlan,
-    restoreRehearsal,
-  });
-  const activeFilter = contentBulkActiveFilterSummary(text);
-  const rows = baseRows.map((row) => ({
-    ...row,
-    filterMatched: matchesContentBulkFilterRow(
-      row.state,
-      contentBulkDomainApplyFilterValues(row, text),
-      contentBulkDomainApplyFilterDomains(row),
-    ),
-    filterVisibleCandidateCount: contentBulkDomainFilterCandidateCount(row, filterCounts),
-  }));
-  const visibleRows = rows.filter((row) => row.filterMatched);
-  const summary = {
-    domainCount: rows.length,
-    readyDomainCount: rows.filter((row) => row.state === "ready").length,
-    reviewDomainCount: rows.filter((row) => row.state === "review").length,
-    blockedDomainCount: rows.filter((row) => row.state === "blocked").length,
-    emptyDomainCount: rows.filter((row) => row.state === "empty").length,
-    dryRunBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.dryRun || []).length > 0).length,
-    stagedBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.staged || []).length > 0).length,
-    backupBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.backup || []).length > 0).length,
-    restoreBlockedDomainCount: rows.filter((row) => (row.stageBlockerGroups?.restore || []).length > 0).length,
-    filteredCandidateCount: Number(filterCounts.visibleRows || 0),
-    filteredDomainCount: visibleRows.length,
-    draftFileCount: rows.reduce((sum, row) => sum + row.draftFileCount, 0),
-    blockedFileCount: rows.reduce((sum, row) => sum + row.blockedFileCount, 0),
-  };
-  const metrics = [
-    [text.domains || "Domains", `${summary.domainCount}`],
-    [text.readyDomains || "Ready", `${summary.readyDomainCount}`],
-    [text.reviewDomains || "Review", `${summary.reviewDomainCount}`],
-    [text.blockedDomains || "Blocked", `${summary.blockedDomainCount}`],
-    [text.emptyDomains || "Empty", `${summary.emptyDomainCount}`],
-    [text.dryRunBlockedDomains || "Dry-run blocked", `${summary.dryRunBlockedDomainCount}`],
-    [text.stagedBlockedDomains || "Staged blocked", `${summary.stagedBlockedDomainCount}`],
-    [text.backupBlockedDomains || "Backup blocked", `${summary.backupBlockedDomainCount}`],
-    [text.restoreBlockedDomains || "Restore blocked", `${summary.restoreBlockedDomainCount}`],
-    [text.filteredCandidates || "Filtered candidates", `${summary.filteredCandidateCount}`],
-    [text.filteredDomains || "Filtered domains", `${summary.filteredDomainCount}`],
-    [text.draftFiles || "Draft files", `${summary.draftFileCount}`],
-    [text.blockedFiles || "Blocked files", `${summary.blockedFileCount}`],
-  ];
-  return `
-    <section class="editor-content-bulk-contract-summary editor-content-bulk-domain-apply-readiness" aria-label="${escapeAttribute(text.title || "Domain apply readiness")}">
-      <div>
-        <strong>${escapeHtml(text.title || "Domain apply readiness")}</strong>
-        <p class="muted">${escapeHtml(text.description || "Compares dry-run, staged rows, patch draft files, backup blockers, and restore blockers by domain.")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.activeFilter || "Active filter", [
-          tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.activeFilterSummary", activeFilter, `${activeFilter.state} / ${activeFilter.domain}`)
-        ])}
-      </div>
-      ${renderContentBulkDomainFilterDrilldown(visibleRows, text)}
-      ${renderContentBulkCurrentFilterPreApplySummary(visibleRows, filterCounts, text)}
-      <div class="editor-content-bulk-patch-draft-list">
-        ${rows.map((row) => renderContentBulkDomainApplyReadinessRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkDomainFilterDrilldown(rows = [], text = {}) {
-  const stageCounts = contentBulkDomainStageCounts(rows);
-  const state = rows.some((row) => row.state === "blocked") ? "blocked" : rows.length ? "ready" : "empty";
-  const metrics = [
-    [text.filteredDomains || "Filtered domains", `${rows.length}`],
-    [text.dryRunBlockedDomains || "Dry-run blocked", `${stageCounts.dryRun}`],
-    [text.stagedBlockedDomains || "Staged blocked", `${stageCounts.staged}`],
-    [text.backupBlockedDomains || "Backup blocked", `${stageCounts.backup}`],
-    [text.restoreBlockedDomains || "Restore blocked", `${stageCounts.restore}`],
-  ];
-  return `
-    <div class="editor-content-bulk-contract-summary editor-content-bulk-domain-filter-drilldown" data-state="${escapeAttribute(state)}">
-      <div>
-        <strong>${escapeHtml(text.filterDrilldownTitle || "Current filter blocker drilldown")}</strong>
-        <p class="muted">${escapeHtml(text.filterDrilldownHint || "Stage blockers only for domains matching the current filter.")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.filterDrilldownDomains || "Visible domains", rows.map((row) => contentBulkPatchDomainLabel(row.id, text)))}
-      </div>
-    </div>
-  `;
-}
-
-function renderContentBulkCurrentFilterPreApplySummary(rows = [], filterCounts = {}, text = {}) {
-  const summary = contentBulkCurrentFilterPreApplySummary(rows, filterCounts);
-  const activeFilter = contentBulkActiveFilterSummary(text);
-  const state = summary.filteredDomainCount <= 0
-    ? "empty"
-    : (summary.blockedDomainCount > 0 || summary.blockedStageCount > 0 ? "blocked" : (summary.reviewDomainCount > 0 ? "review" : "ready"));
-  const metrics = [
-    [text.currentFilterCandidates || "Current filter candidates", `${summary.filteredCandidateCount}`],
-    [text.filteredDomains || "Filtered domains", `${summary.filteredDomainCount}`],
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount}`],
-    [text.withheldRows || "Withheld rows", `${summary.withheldRowCount}`],
-    [text.patchDraftFiles || "Patch draft files", `${summary.patchDraftFileCount}`],
-    [text.readyPatchFiles || "Ready patch files", `${summary.readyPatchFileCount}`],
-    [text.blockedFiles || "Blocked files", `${summary.blockedPatchFileCount}`],
-    [text.blockedStageCount || "Blocked stages", `${summary.blockedStageCount}`],
-    [text.requiredChecks || "Required checks", `${summary.requiredCheckCount}`],
-  ];
-  return `
-    <div class="editor-content-bulk-contract-summary editor-content-bulk-current-filter-preapply" data-current-filter-preapply data-state="${escapeAttribute(state)}">
-      <div>
-        <strong>${escapeHtml(text.filterPreApplyTitle || "Current filter pre-apply summary")}</strong>
-        <p class="muted">${escapeHtml(text.filterPreApplyHint || "Read-only summary of staged rows, patch draft files, and blockers for the current filter.")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.activeFilter || "Active filter", [
-          tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.activeFilterSummary", activeFilter, `${activeFilter.state} / ${activeFilter.domain}`)
-        ])}
-        ${balanceDetailChipBlock(text.blockerStages || "Blocker stages", contentBulkCurrentFilterStageLabels(summary.stageCounts, text))}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(summary.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(summary.warningIssueCodes, text))}
-      </div>
-      <div class="editor-content-bulk-current-filter-list">
-        ${rows.map((row) => renderContentBulkCurrentFilterPreApplyDomain(row, text)).join("") || `<p class="muted">${escapeHtml(text.noFilteredPreApplyRows || "No current filter pre-apply rows.")}</p>`}
-      </div>
-    </div>
-  `;
-}
-
-function contentBulkCurrentFilterPreApplySummary(rows = [], filterCounts = {}) {
-  const stageCounts = contentBulkDomainStageCounts(rows);
-  const checkScripts = new Set(rows.flatMap((row) => row.checkScripts || []).filter(Boolean));
-  return {
-    filteredCandidateCount: Number(filterCounts.visibleRows || 0),
-    filteredDomainCount: rows.length,
-    readyDomainCount: rows.filter((row) => row.state === "ready").length,
-    reviewDomainCount: rows.filter((row) => row.state === "review").length,
-    blockedDomainCount: rows.filter((row) => row.state === "blocked").length,
-    stagedRowCount: rows.reduce((sum, row) => sum + Number(row.stagedRowCount || 0), 0),
-    withheldRowCount: rows.reduce((sum, row) => sum + Number(row.withheldRowCount || 0), 0),
-    appendStageCount: rows.reduce((sum, row) => sum + Number(row.appendStageCount || 0), 0),
-    updateStageCount: rows.reduce((sum, row) => sum + Number(row.updateStageCount || 0), 0),
-    patchDraftFileCount: rows.reduce((sum, row) => sum + Number(row.draftFileCount || 0), 0),
-    readyPatchFileCount: rows.reduce((sum, row) => sum + Number(row.readyFileCount || 0), 0),
-    blockedPatchFileCount: rows.reduce((sum, row) => sum + Number(row.blockedFileCount || 0), 0),
-    generatedSurfaceCount: rows.reduce((sum, row) => sum + Number(row.generatedSurfaceCount || 0), 0),
-    blockedStageCount: Object.values(stageCounts).reduce((sum, count) => sum + Number(count || 0), 0),
-    requiredCheckCount: checkScripts.size,
-    blockingIssueCodes: Array.from(new Set(rows.flatMap((row) => row.blockingIssueCodes || []).filter(Boolean))),
-    warningIssueCodes: Array.from(new Set(rows.flatMap((row) => row.warningIssueCodes || []).filter(Boolean))),
-    stageCounts,
-  };
-}
-
-function renderContentBulkCurrentFilterPreApplyDomain(row = {}, text = {}) {
-  return `
-    <article class="editor-content-bulk-current-filter-domain" data-state="${escapeAttribute(row.state || "unknown")}" data-blocked-stages="${escapeAttribute(contentBulkDomainBlockedStageIds(row.stageBlockerGroups).join(" "))}">
-      <div class="editor-content-bulk-patch-draft-file-head">
-        <div>
-          <h5>${escapeHtml(contentBulkPatchDomainLabel(row.id, text))}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.domainPreApplyMeta", {
-            candidates: row.filterVisibleCandidateCount || 0,
-            staged: row.stagedRowCount || 0,
-            files: row.draftFileCount || 0,
-            blocked: row.blockedFileCount || 0,
-          }, `${row.stagedRowCount || 0} staged / ${row.draftFileCount || 0} files`))}</p>
-        </div>
-        <span>${escapeHtml(contentBulkDomainApplyReadinessLabel(row.state, text.stateLabels))}</span>
-      </div>
-      <div class="editor-content-bulk-patch-draft-grid">
-        ${balanceDetailChipBlock(text.rows || "Rows", [
-          tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.rowSummary", {
-            rows: row.rowCount || 0,
-            staged: row.stagedRowCount || 0,
-            append: row.appendStageCount || 0,
-            update: row.updateStageCount || 0,
-            withheld: row.withheldRowCount || 0,
-          }, `${row.stagedRowCount || 0}`)
-        ])}
-        ${balanceDetailChipBlock(text.files || "Files", [
-          tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.fileSummary", {
-            files: row.draftFileCount || 0,
-            ready: row.readyFileCount || 0,
-            blocked: row.blockedFileCount || 0,
-          }, `${row.draftFileCount || 0}`)
-        ])}
-        ${balanceDetailChipBlock(text.blockerStages || "Blocker stages", contentBulkDomainStageBlockerLabels(row.stageBlockerGroups, text))}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", row.checkScripts || [])}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkCurrentFilterStageLabels(stageCounts = {}, text = {}) {
-  const labels = text.stageLabels || {};
-  return ["dryRun", "staged", "backup", "restore"].map((stageId) => tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.filterPreApplyStageSummary", {
-    stage: labels[stageId] || stageId,
-    count: Number(stageCounts?.[stageId] || 0),
-  }, `${labels[stageId] || stageId}: ${Number(stageCounts?.[stageId] || 0)}`));
-}
-
-function contentBulkDomainStageCounts(rows = []) {
-  return rows.reduce((counts, row) => {
-    for (const stageId of contentBulkDomainBlockedStageIds(row.stageBlockerGroups)) {
-      counts[stageId] = Number(counts[stageId] || 0) + 1;
-    }
-    return counts;
-  }, {
-    dryRun: 0,
-    staged: 0,
-    backup: 0,
-    restore: 0,
-  });
-}
-
 function contentBulkActiveFilterSummary(text = {}) {
   const state = normalizeContentBulkFilterState(contentBulkDetailFilter.state);
   const domain = normalizeContentBulkFilterDomain(contentBulkDetailFilter.domain);
@@ -3632,1136 +1184,6 @@ function contentBulkActiveFilterSummary(text = {}) {
   };
 }
 
-function contentBulkDomainApplyFilterValues(row = {}, text = {}) {
-  return [
-    row.id,
-    row.batchKey,
-    contentBulkPatchDomainLabel(row.id, text),
-    row.fileNames,
-    row.blockingIssueCodes,
-    row.warningIssueCodes,
-    row.checkScripts,
-  ];
-}
-
-function contentBulkDomainApplyFilterDomains(row = {}) {
-  if (row.id === "monster") return ["monster", "monster_runtime"];
-  return [row.id].filter(Boolean);
-}
-
-function contentBulkDomainFilterCandidateCount(row = {}, filterCounts = {}) {
-  const visibleDomains = filterCounts.visibleDomains || {};
-  return contentBulkDomainApplyFilterDomains(row)
-    .reduce((sum, domain) => sum + Number(visibleDomains[domain] || 0), 0);
-}
-
-function contentBulkDomainApplyReadinessRows({
-  dryRun = {},
-  stagedImport = {},
-  filePatchDraftExport = {},
-  backupPlan = {},
-  restoreRehearsal = {},
-} = {}) {
-  const files = Array.isArray(filePatchDraftExport.payload?.files) ? filePatchDraftExport.payload.files : [];
-  const backupFiles = Array.isArray(backupPlan.fileBackups) ? backupPlan.fileBackups : [];
-  const restoreActions = Array.isArray(restoreRehearsal.restoreActions) ? restoreRehearsal.restoreActions : [];
-  const domainIds = new Set([
-    ...(dryRun.domains || []).map((domain) => domain.id),
-    ...(stagedImport.domains || []).map((domain) => domain.id),
-    ...files.flatMap((file) => file.domainIds || []),
-    ...backupFiles.flatMap((file) => file.domainIds || []),
-    ...restoreActions.flatMap((action) => action.domainIds || []),
-  ].filter(Boolean));
-
-  return [...domainIds].map((domainId) => {
-    const dryDomain = (dryRun.domains || []).find((domain) => domain.id === domainId) || {};
-    const stagedDomain = (stagedImport.domains || []).find((domain) => domain.id === domainId) || {};
-    const domainFiles = files.filter((file) => (file.domainIds || []).includes(domainId));
-    const domainBackupFiles = backupFiles.filter((file) => (file.domainIds || []).includes(domainId));
-    const domainRestoreActions = restoreActions.filter((action) => (action.domainIds || []).includes(domainId));
-    const backupBlockerCodes = domainBackupFiles.flatMap((file) => file.reviewBlockerCodes || []).filter(Boolean);
-    const restoreBlockerCodes = domainRestoreActions.flatMap((action) => action.rehearsalBlockerCodes || []).filter(Boolean);
-    const stageBlockerGroups = {
-      dryRun: Array.from(new Set(dryDomain.blockingIssueCodes || [])),
-      staged: Array.from(new Set(stagedDomain.blockingIssueCodes || [])),
-      backup: Array.from(new Set(backupBlockerCodes)),
-      restore: Array.from(new Set(restoreBlockerCodes)),
-    };
-    const blockedFileNames = new Set([
-      ...domainBackupFiles.filter((file) => (file.reviewBlockerCodes || []).filter(Boolean).length > 0).map((file) => file.file),
-      ...domainRestoreActions.filter((action) => (action.rehearsalBlockerCodes || []).filter(Boolean).length > 0).map((action) => action.file),
-    ].filter(Boolean));
-    const blockingIssueCodes = Array.from(new Set([
-      ...stageBlockerGroups.dryRun,
-      ...stageBlockerGroups.staged,
-      ...stageBlockerGroups.backup,
-      ...stageBlockerGroups.restore,
-    ]));
-    const warningIssueCodes = Array.from(new Set([
-      ...(dryDomain.warningIssueCodes || []),
-      ...(stagedDomain.warningIssueCodes || []),
-    ]));
-    const draftFileCount = domainFiles.length;
-    const blockedFileCount = blockedFileNames.size;
-    const readyFileCount = Math.max(0, draftFileCount - blockedFileCount);
-    const stagedRowCount = Number(stagedDomain.stagedRowCount || 0);
-    const withheldRowCount = Number(stagedDomain.withheldRowCount || 0);
-    const state = contentBulkDomainApplyReadinessState({
-      rowCount: Number(stagedDomain.rowCount || dryDomain.rowCount || 0),
-      stagedRowCount,
-      withheldRowCount,
-      draftFileCount,
-      blockedFileCount,
-      blockingIssueCodes,
-      warningIssueCodes,
-    });
-    return {
-      id: domainId,
-      batchKey: stagedDomain.batchKey || dryDomain.batchKey || "",
-      state,
-      rowCount: Number(stagedDomain.rowCount || dryDomain.rowCount || 0),
-      stagedRowCount,
-      withheldRowCount,
-      appendStageCount: Number(stagedDomain.appendStageCount || 0),
-      updateStageCount: Number(stagedDomain.updateStageCount || 0),
-      draftFileCount,
-      readyFileCount,
-      blockedFileCount,
-      generatedSurfaceCount: Number(stagedDomain.generatedSurfaceCount || dryDomain.generatedSurfaceCount || 0),
-      blockingIssueCodes,
-      warningIssueCodes,
-      stageBlockerGroups,
-      fileNames: domainFiles.map((file) => file.file).filter(Boolean),
-      checkScripts: Array.from(new Set([
-        ...(stagedDomain.checkScripts || []),
-        ...(dryDomain.checkScripts || []),
-      ])),
-    };
-  });
-}
-
-function contentBulkDomainApplyReadinessState({
-  rowCount = 0,
-  stagedRowCount = 0,
-  withheldRowCount = 0,
-  draftFileCount = 0,
-  blockedFileCount = 0,
-  blockingIssueCodes = [],
-  warningIssueCodes = [],
-} = {}) {
-  if (rowCount <= 0 && stagedRowCount <= 0 && draftFileCount <= 0) return "empty";
-  if (withheldRowCount > 0 || blockedFileCount > 0 || blockingIssueCodes.length > 0) return "blocked";
-  if (warningIssueCodes.length > 0) return "review";
-  return "ready";
-}
-
-function renderContentBulkDomainApplyReadinessRow(row = {}, text = {}) {
-  return `
-    <article class="editor-content-bulk-patch-draft-file" data-state="${escapeAttribute(row.state || "unknown")}" data-filter-visible="${row.filterMatched ? "true" : "false"}" data-blocked-stages="${escapeAttribute(contentBulkDomainBlockedStageIds(row.stageBlockerGroups).join(" "))}">
-      <div class="editor-content-bulk-patch-draft-file-head">
-        <div>
-          <h5>${escapeHtml(contentBulkPatchDomainLabel(row.id, text))}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.domainMeta", {
-            rows: row.rowCount || 0,
-            staged: row.stagedRowCount || 0,
-            withheld: row.withheldRowCount || 0,
-            files: row.draftFileCount || 0,
-            blocked: row.blockedFileCount || 0,
-          }, `${row.stagedRowCount || 0} staged / ${row.draftFileCount || 0} files`))}</p>
-        </div>
-        <span>${escapeHtml(contentBulkDomainApplyReadinessLabel(row.state, text.stateLabels))}</span>
-      </div>
-      <div class="editor-content-bulk-patch-draft-grid">
-        ${balanceDetailChipBlock(text.rows || "Rows", [
-          tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.rowSummary", {
-            rows: row.rowCount || 0,
-            staged: row.stagedRowCount || 0,
-            append: row.appendStageCount || 0,
-            update: row.updateStageCount || 0,
-            withheld: row.withheldRowCount || 0,
-          }, `${row.stagedRowCount || 0}`)
-        ])}
-        ${balanceDetailChipBlock(text.files || "Files", [
-          tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.fileSummary", {
-            files: row.draftFileCount || 0,
-            ready: row.readyFileCount || 0,
-            blocked: row.blockedFileCount || 0,
-          }, `${row.draftFileCount || 0}`)
-        ])}
-        ${balanceDetailChipBlock(text.filterScope || "Filter scope", [
-          tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.filterScopeSummary", {
-            candidates: row.filterVisibleCandidateCount || 0,
-            state: row.filterMatched ? (text.filterMatched || "shown") : (text.filterHidden || "hidden"),
-          }, `${row.filterVisibleCandidateCount || 0}`)
-        ])}
-        ${balanceDetailChipBlock(text.blockerStages || "Blocker stages", contentBulkDomainStageBlockerLabels(row.stageBlockerGroups, text))}
-        ${balanceDetailChipBlock(text.patchFiles || "Patch files", contentBulkIssueList(row.fileNames, text))}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", row.checkScripts || [])}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkDomainBlockedStageIds(groups = {}) {
-  return ["dryRun", "staged", "backup", "restore"].filter((stageId) => (groups?.[stageId] || []).filter(Boolean).length > 0);
-}
-
-function contentBulkDomainStageBlockerLabels(groups = {}, text = {}) {
-  const labels = text.stageLabels || {};
-  return ["dryRun", "staged", "backup", "restore"].map((stageId) => tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.stageBlockerSummary", {
-    stage: labels[stageId] || stageId,
-    count: (groups?.[stageId] || []).filter(Boolean).length,
-  }, `${labels[stageId] || stageId}: ${(groups?.[stageId] || []).filter(Boolean).length}`));
-}
-
-function contentBulkDomainApplyReadinessLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderContentBulkStagedContractSummary(contract, text = {}) {
-  if (!contract?.summary) return "";
-  const summary = contract.summary;
-  const metrics = [
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
-    [text.blockedRows || "Blocked rows", `${summary.blockedRowCount || 0}`],
-    [text.warningRows || "Warnings", `${summary.warningRowCount || 0}`],
-    [text.targetSurfaces || "Target surfaces", `${summary.targetSurfaceCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-  ];
-  return `
-    <div class="editor-content-bulk-contract-summary" data-staged-contract-version="${escapeAttribute(contract.version || "")}">
-      <div>
-        <strong>${escapeHtml(text.stagedContract || "Staged contract")}</strong>
-        <p class="muted">${escapeHtml((contract.domainIds || []).join(" / ") || "-")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(contract.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(contract.warningIssueCodes, text))}
-      </div>
-    </div>
-  `;
-}
-
-function renderRuntimeVfxBulkIntakePreview(preview, detailText = {}) {
-  const text = detailText.runtimeVfxBulkIntakePreview || {};
-  const summary = preview.summary || {};
-  const stateLabels = text.stateLabels || {};
-  const kindLabels = text.kindLabels || {};
-  const bulkLabels = text.bulkStateLabels || {};
-  const visibleRows = (preview.rows || []).filter((row) => matchesContentBulkFilterRow(row.intakeState, [
-    row,
-    runtimeVfxBulkLabel(row.intakeState, stateLabels),
-    runtimeVfxBulkLabel(row.kind, kindLabels),
-    runtimeVfxBulkLabel(row.bulkState, bulkLabels),
-  ], ["runtime_vfx"]));
-  const metrics = [
-    [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
-    [text.profileRows || "Profile rows", `${summary.profilePlacementRowCount || 0}`],
-    [text.modifierRows || "Modifier rows", `${summary.effectModifierRowCount || 0}`],
-    [text.updateCandidates || "Updates", `${summary.updateCandidateCount || 0}`],
-    [text.appendCandidates || "Append", `${summary.appendCandidateCount || 0}`],
-    [text.readyRows || "Ready", `${summary.readyRowCount || 0}`],
-    [text.warningRows || "Review", `${summary.warningRowCount || 0}`],
-    [text.blockedRows || "Blocked", `${summary.blockedRowCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section id="runtime-vfx-bulk-intake" class="editor-runtime-vfx-bulk-intake" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Runtime VFX bulk intake")}">
-      <div class="editor-runtime-vfx-bulk-intake-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Runtime VFX bulk intake")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Reviews monster motion-profile VFX placement rows before any live patch.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.runtimeVfxBulkIntakePreview.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-runtime-vfx-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkStagedContractSummary(preview.stagedContract, text)}
-      <div class="editor-runtime-vfx-bulk-intake-list">
-        ${visibleRows.map((row) => renderRuntimeVfxBulkIntakeRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noFilteredRows || text.noRows || "No runtime VFX rows.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderRuntimeVfxBulkIntakeRow(row, text = {}) {
-  const stateLabels = text.stateLabels || {};
-  const kindLabels = text.kindLabels || {};
-  const bulkLabels = text.bulkStateLabels || {};
-  return `
-    <article id="${escapeAttribute(createContentBulkRowTargetId(CONTENT_BULK_ROW_TARGET_SCOPES.runtimeVfx, row.rowIndex, row.motionProfile, row.effectType || row.kind))}" class="editor-runtime-vfx-bulk-intake-row" data-state="${escapeAttribute(row.intakeState || "unknown")}">
-      <div class="editor-runtime-vfx-bulk-intake-row-head">
-        <div>
-          <h5>${escapeHtml(row.motionProfile || "-")}${row.effectType ? ` · ${escapeHtml(row.effectType)}` : ""}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.runtimeVfxBulkIntakePreview.rowMeta", {
-            key: row.sourceKey || "-",
-            kind: runtimeVfxBulkLabel(row.kind, kindLabels),
-            state: runtimeVfxBulkLabel(row.bulkState, bulkLabels),
-          }, `${row.sourceKey || "-"} / ${row.kind || "-"}`))}</p>
-        </div>
-        <span>${escapeHtml(runtimeVfxBulkLabel(row.intakeState, stateLabels))}</span>
-      </div>
-      <div class="editor-runtime-vfx-bulk-intake-grid">
-        ${balanceDetailChipBlock(text.targetSurface || "Target", [row.targetSurface || "-"])}
-        ${balanceDetailChipBlock(text.sourceMonster || "Source monster", [row.sourceMonsterId || (text.none || "None")])}
-        ${balanceDetailChipBlock(text.profileMonsterCount || "Current monsters", [`${row.profileMonsterCount || 0}`])}
-        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.signals || "Signals", row.signals || [])}
-        ${balanceDetailChipBlock(text.issues || "Issues", row.issues || [])}
-        ${balanceDetailChipBlock(text.placement || "Placement", [row.placement ? formatCombatVfxPlacement(row.placement) : runtimeVfxModifierSummary(row.modifier)])}
-      </div>
-    </article>
-  `;
-}
-
-function runtimeVfxModifierSummary(modifier = {}) {
-  if (!modifier) return "-";
-  return `x ${Number(modifier.offsetX || 0)} / y ${Number(modifier.offsetY || 0)} / txt ${Number(modifier.textOffsetY || 0)} / mul ${Number(modifier.slashWidthMultiplier || 1)}/${Number(modifier.expandedSlashWidthMultiplier || 1)}`;
-}
-
-function runtimeVfxBulkLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderContentBulkPatchDryRunPreview(preview, detailText = {}) {
-  const text = detailText.contentBulkPatchDryRunImporter || {};
-  const summary = preview.summary || {};
-  const metrics = [
-    [text.rows || "Rows", `${summary.rowCount || 0}`],
-    [text.activeDomains || "Active domains", `${summary.activeDomainCount || 0}`],
-    [text.appendCandidates || "Append", `${summary.appendCandidateCount || 0}`],
-    [text.updateCandidates || "Update", `${summary.updateCandidateCount || 0}`],
-    [text.generatedSurfaces || "Generated surfaces", `${summary.generatedSurfaceCount || 0}`],
-    [text.blockers || "Blockers", `${summary.blockingIssueCount || 0}`],
-    [text.warnings || "Warnings", `${summary.warningIssueCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-dry-run" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Dry-run Importer")}">
-      <div class="editor-content-bulk-dry-run-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Dry-run Importer")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only dry-run preview for batch imports.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchDryRunImporter.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-dry-run-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkIssueSummary(preview.issueSummary, text)}
-      <div class="editor-content-bulk-dry-run-list">
-        ${(preview.domains || []).map((domain) => renderContentBulkPatchDryRunDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No dry-run domains.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchDryRunDomain(domain, text = {}) {
-  const surfaceLabels = (domain.surfaces || []).map((surface) => `${surface.id} (${surface.candidateCount || 0})`);
-  return `
-    <article class="editor-content-bulk-dry-run-domain" data-state="${escapeAttribute(domain.state || "unknown")}">
-      <div class="editor-content-bulk-dry-run-domain-head">
-        <div>
-          <h5>${escapeHtml(contentBulkPatchDomainLabel(domain.id, text))}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchDryRunImporter.domainMeta", {
-            rows: domain.rowCount || 0,
-            append: domain.appendCandidateCount || 0,
-            update: domain.updateCandidateCount || 0,
-            surfaces: domain.generatedSurfaceCount || 0,
-          }, `${domain.rowCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchDryRunStateLabel(domain.state, text))}
-        </div>
-      </div>
-      <div class="editor-content-bulk-dry-run-grid">
-        ${balanceDetailChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
-        ${balanceDetailChipBlock(text.identityFields || "Identity", domain.identityFields || [])}
-        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", surfaceLabels)}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(domain.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(domain.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkPatchDryRunStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function renderContentBulkPatchStagedImportPreview(preview, detailText = {}) {
-  const text = detailText.contentBulkPatchStagedImportPreview || {};
-  const summary = preview.summary || {};
-  const metrics = [
-    [text.inputRows || "Input rows", `${summary.inputRowCount || 0}`],
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
-    [text.appendStages || "Append", `${summary.appendStageCount || 0}`],
-    [text.updateStages || "Update", `${summary.updateStageCount || 0}`],
-    [text.withheldRows || "Withheld", `${summary.withheldRowCount || 0}`],
-    [text.generatedSurfaces || "Generated surfaces", `${summary.generatedSurfaceCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.applyMode || "Apply mode", preview.applyMode || "-"],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-stage" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Staged Import Preview")}">
-      <div class="editor-content-bulk-stage-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Staged Import Preview")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only staged apply preview for validated batch rows.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchStagedImportPreview.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-stage-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkIssueSummary(preview.issueSummary, text)}
-      <div class="editor-content-bulk-stage-list">
-        ${(preview.domains || []).map((domain) => renderContentBulkPatchStagedImportDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No staged domains.")}</p>`}
-      </div>
-      <div class="editor-content-bulk-stage-steps">
-        <strong>${escapeHtml(text.applySteps || "Apply steps")}</strong>
-        <div class="editor-chip-list">
-          ${(preview.applySteps || []).map((step) => chip(contentBulkPatchStageStepLabel(step, text))).join("")}
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchStagedImportDomain(domain, text = {}) {
-  const surfaceLabels = (domain.surfaces || []).map((surface) => `${surface.id} (${surface.stagedCandidateCount || 0})`);
-  const rowLabels = (domain.rows || []).map((row) => tf("editorPrep.balanceTuningDetail.contentBulkPatchStagedImportPreview.rowMeta", {
-    index: row.rowIndex + 1,
-    identity: row.identity || "-",
-    state: contentBulkPatchStageRowStateLabel(row.state, text),
-    surfaces: row.targetSurfaceCount || 0,
-  }, `#${row.rowIndex + 1} ${row.identity || "-"} ${row.state}`));
-  return `
-    <article class="editor-content-bulk-stage-domain" data-state="${escapeAttribute(domain.state || "unknown")}">
-      <div class="editor-content-bulk-stage-domain-head">
-        <div>
-          <h5>${escapeHtml(contentBulkPatchDomainLabel(domain.id, text))}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchStagedImportPreview.domainMeta", {
-            rows: domain.rowCount || 0,
-            staged: domain.stagedRowCount || 0,
-            append: domain.appendStageCount || 0,
-            update: domain.updateStageCount || 0,
-            withheld: domain.withheldRowCount || 0,
-          }, `${domain.rowCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchStageStateLabel(domain.state, text))}
-        </div>
-      </div>
-      <div class="editor-content-bulk-stage-grid">
-        ${balanceDetailChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
-        ${balanceDetailChipBlock(text.stagedRows || "Staged rows", rowLabels)}
-        ${balanceDetailChipBlock(text.targetSurfaces || "Target surfaces", surfaceLabels)}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(domain.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(domain.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkPatchStageStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function contentBulkPatchStageRowStateLabel(stateId, text = {}) {
-  return text.rowStateLabels?.[stateId] || stateId || "unknown";
-}
-
-function contentBulkPatchStageStepLabel(stepId, text = {}) {
-  return text.stepLabels?.[stepId] || stepId || "unknown";
-}
-
-function renderContentBulkPatchDiffExport(preview, detailText = {}) {
-  const text = detailText.contentBulkPatchDiffExport || {};
-  const summary = preview.summary || {};
-  const metrics = [
-    [text.targetFiles || "Target files", `${summary.targetFileCount || 0}`],
-    [text.targetSurfaces || "Target surfaces", `${summary.targetSurfaceCount || 0}`],
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
-    [text.appendStages || "Append", `${summary.appendStageCount || 0}`],
-    [text.updateStages || "Update", `${summary.updateStageCount || 0}`],
-    [text.withheldRows || "Withheld", `${summary.withheldRowCount || 0}`],
-    [text.requiredChecks || "Checks", `${summary.requiredCheckCount || 0}`],
-    [text.applyMode || "Apply mode", preview.applyMode || "-"],
-    [text.writes || "Writes", preview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-diff" data-readonly="${preview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Diff Export")}">
-      <div class="editor-content-bulk-diff-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Diff Export")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only file and surface map before applying staged batch rows.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchDiffExport.version", {
-          version: preview.version || "-"
-        }, preview.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-diff-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-diff-list">
-        ${(preview.fileTargets || []).map((target) => renderContentBulkPatchDiffTarget(target, text)).join("") || `<p class="muted">${escapeHtml(text.noTargets || "No diff targets.")}</p>`}
-      </div>
-      <div class="editor-content-bulk-diff-steps">
-        <strong>${escapeHtml(text.reviewSteps || "Review steps")}</strong>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchDiffStatusLabel(preview.status, text))}
-          ${(preview.manualReviewSteps || []).map((step) => chip(contentBulkPatchDiffStepLabel(step, text))).join("")}
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchDiffTarget(target, text = {}) {
-  const surfaceLabels = (target.surfaces || []).map((surface) => {
-    const name = surface.surface || surface.id || "-";
-    return `${surface.domainId || "-"} · ${name} (${surface.stagedCandidateCount || 0})`;
-  });
-  return `
-    <article class="editor-content-bulk-diff-target">
-      <div class="editor-content-bulk-diff-target-head">
-        <div>
-          <h5>${escapeHtml(target.file || "-")}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchDiffExport.targetMeta", {
-            surfaces: target.surfaceCount || 0,
-            staged: target.stagedRowCount || 0,
-            append: target.appendStageCount || 0,
-            update: target.updateStageCount || 0,
-            withheld: target.withheldRowCount || 0,
-          }, `${target.surfaceCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${(target.domainIds || []).map((domainId) => chip(contentBulkPatchDomainLabel(domainId, text))).join("")}
-        </div>
-      </div>
-      <div class="editor-content-bulk-diff-grid">
-        ${balanceDetailChipBlock(text.domains || "Domains", target.domainIds || [])}
-        ${balanceDetailChipBlock(text.surfaces || "Surfaces", surfaceLabels)}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkPatchDiffStatusLabel(statusId, text = {}) {
-  return text.statusLabels?.[statusId] || statusId || "unknown";
-}
-
-function contentBulkPatchDiffStepLabel(stepId, text = {}) {
-  return text.stepLabels?.[stepId] || stepId || "unknown";
-}
-
-function renderContentBulkPatchManualApplyChecklist(checklist, detailText = {}) {
-  const text = detailText.contentBulkPatchManualApplyChecklist || {};
-  const summary = checklist.summary || {};
-  const metrics = [
-    [text.targetFiles || "Target files", `${summary.targetFileCount || 0}`],
-    [text.targetSurfaces || "Target surfaces", `${summary.targetSurfaceCount || 0}`],
-    [text.manualItems || "Manual items", `${summary.manualItemCount || 0}`],
-    [text.surfaceReviewItems || "Surface reviews", `${summary.surfaceReviewItemCount || 0}`],
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
-    [text.updateFiles || "Update files", `${summary.updateFileCount || 0}`],
-    [text.verificationSteps || "Verification", `${summary.verificationStepCount || 0}`],
-    [text.applyMode || "Apply mode", checklist.applyMode || "-"],
-    [text.writes || "Writes", checklist.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-checklist" data-readonly="${checklist.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Manual Apply Checklist")}">
-      <div class="editor-content-bulk-checklist-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Manual Apply Checklist")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only manual apply checklist from diff export targets.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchManualApplyChecklist.version", {
-          version: checklist.version || "-"
-        }, checklist.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-checklist-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-checklist-steps">
-        <strong>${escapeHtml(text.preflightSteps || "Preflight steps")}</strong>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchChecklistStatusLabel(checklist.status, text))}
-          ${(checklist.preflightSteps || []).map((step) => chip(contentBulkPatchChecklistStepLabel(step, text))).join("")}
-        </div>
-      </div>
-      <div class="editor-content-bulk-checklist-list">
-        ${(checklist.fileChecklists || []).map((entry) => renderContentBulkPatchManualApplyFile(entry, text)).join("") || `<p class="muted">${escapeHtml(text.noFiles || "No checklist files.")}</p>`}
-      </div>
-      <div class="editor-content-bulk-checklist-steps">
-        <strong>${escapeHtml(text.finalReviewSteps || "Final review steps")}</strong>
-        <div class="editor-chip-list">
-          ${(checklist.finalReviewSteps || []).map((step) => chip(contentBulkPatchChecklistStepLabel(step, text))).join("")}
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchManualApplyFile(entry, text = {}) {
-  const surfaceLabels = (entry.surfaceReviewItems || []).map((item) => `${item.domainId || "-"} · ${item.surface || item.id || "-"} · ${contentBulkPatchChecklistActionLabel(item.reviewAction, text)}`);
-  return `
-    <article class="editor-content-bulk-checklist-file" data-state="${escapeAttribute(entry.status || "unknown")}">
-      <div class="editor-content-bulk-checklist-file-head">
-        <div>
-          <h5>${escapeHtml(`${entry.order || "-"} · ${entry.file || "-"}`)}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchManualApplyChecklist.fileMeta", {
-            surfaces: entry.surfaceCount || 0,
-            staged: entry.stagedRowCount || 0,
-            append: entry.appendStageCount || 0,
-            update: entry.updateStageCount || 0,
-            withheld: entry.withheldRowCount || 0,
-          }, `${entry.surfaceCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchChecklistStatusLabel(entry.status, text))}
-        </div>
-      </div>
-      <div class="editor-content-bulk-checklist-grid">
-        ${balanceDetailChipBlock(text.domains || "Domains", entry.domainIds || [])}
-        ${balanceDetailChipBlock(text.actions || "Actions", (entry.actions || []).map((action) => contentBulkPatchChecklistActionLabel(action, text)))}
-        ${balanceDetailChipBlock(text.surfaceReviews || "Surface reviews", surfaceLabels)}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkPatchChecklistStatusLabel(statusId, text = {}) {
-  return text.statusLabels?.[statusId] || statusId || "unknown";
-}
-
-function contentBulkPatchChecklistStepLabel(stepId, text = {}) {
-  return text.stepLabels?.[stepId] || stepId || "unknown";
-}
-
-function contentBulkPatchChecklistActionLabel(actionId, text = {}) {
-  return text.actionLabels?.[actionId] || actionId || "unknown";
-}
-
-function renderContentBulkPatchFilePatchDraft(draft, detailText = {}, reviewContext = {}) {
-  const text = detailText.contentBulkPatchFilePatchDraft || {};
-  const summary = draft.summary || {};
-  const metrics = [
-    [text.draftFiles || "Draft files", `${summary.draftFileCount || 0}`],
-    [text.patchBlocks || "Patch blocks", `${summary.patchBlockCount || 0}`],
-    [text.targetSurfaces || "Target surfaces", `${summary.targetSurfaceCount || 0}`],
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
-    [text.updateDrafts || "Update drafts", `${summary.updateDraftCount || 0}`],
-    [text.blockedDrafts || "Blocked drafts", `${summary.blockedDraftCount || 0}`],
-    [text.verificationSteps || "Verification", `${summary.verificationStepCount || 0}`],
-    [text.applyMode || "Apply mode", draft.applyMode || "-"],
-    [text.writes || "Writes", draft.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-patch-draft" data-readonly="${draft.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch File Draft")}">
-      <div class="editor-content-bulk-patch-draft-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch File Draft")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only file patch draft from manual apply checklist.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchFilePatchDraft.version", {
-          version: draft.version || "-"
-        }, draft.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-patch-draft-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-patch-draft-steps">
-        <strong>${escapeHtml(text.globalSteps || "Global steps")}</strong>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchFilePatchStatusLabel(draft.status, text))}
-          ${(draft.globalSteps || []).map((step) => chip(contentBulkPatchFilePatchStepLabel(step, text))).join("")}
-        </div>
-      </div>
-      <div class="editor-content-bulk-patch-draft-list">
-        ${(draft.fileDrafts || []).map((entry) => renderContentBulkPatchFilePatchDraftFile(entry, text, reviewContext)).join("") || `<p class="muted">${escapeHtml(text.noFiles || "No patch drafts.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchFilePatchDraftFile(entry, text = {}, reviewContext = {}) {
-  const blockLabels = (entry.patchBlocks || []).map((block) =>
-    `${block.surface || block.id || "-"} - ${contentBulkPatchFilePatchOperationLabel(block.operation, text)} - ${block.anchorHint || "-"}`
-  );
-  const safetyReview = contentBulkPatchFileSafetyReview(entry, reviewContext, text);
-  return `
-    <article class="editor-content-bulk-patch-draft-file" data-state="${escapeAttribute(entry.status || "unknown")}">
-      <div class="editor-content-bulk-patch-draft-file-head">
-        <div>
-          <h5>${escapeHtml(`${entry.order || "-"} - ${entry.file || "-"}`)}</h5>
-          <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchFilePatchDraft.fileMeta", {
-            surfaces: entry.surfaceCount || 0,
-            staged: entry.stagedRowCount || 0,
-            blocks: entry.patchBlocks?.length || 0,
-            operation: contentBulkPatchFilePatchOperationLabel(entry.operation, text),
-          }, `${entry.surfaceCount || 0}`))}</p>
-        </div>
-        <div class="editor-chip-list">
-          ${chip(contentBulkPatchFilePatchStatusLabel(entry.status, text))}
-          ${chip(contentBulkPatchFilePatchOperationLabel(entry.operation, text))}
-        </div>
-      </div>
-      <div class="editor-content-bulk-patch-draft-grid">
-        ${balanceDetailChipBlock(text.domains || "Domains", entry.domainIds || [])}
-        ${balanceDetailChipBlock(text.anchorHints || "Anchor hints", entry.anchorHints || [])}
-        ${balanceDetailChipBlock(text.patchBlocks || "Patch blocks", blockLabels)}
-        ${balanceDetailChipBlock(text.postApplyChecks || "Post apply checks", (entry.postApplyChecks || []).map((step) => contentBulkPatchFilePatchStepLabel(step, text)))}
-        ${balanceDetailChipBlock(text.fileSafetyReview || "File safety review", safetyReview)}
-      </div>
-    </article>
-  `;
-}
-
-function contentBulkPatchFileSafetyReview(entry = {}, reviewContext = {}, text = {}) {
-  const backupFile = (reviewContext.backupPlan?.fileBackups || []).find((file) => file.file === entry.file);
-  const restoreAction = (reviewContext.restoreRehearsal?.restoreActions || []).find((action) => action.file === entry.file);
-  const backupBlockers = Array.isArray(backupFile?.reviewBlockerCodes) ? backupFile.reviewBlockerCodes : [];
-  const restoreBlockers = Array.isArray(restoreAction?.rehearsalBlockerCodes) ? restoreAction.rehearsalBlockerCodes : [];
-  const labels = [];
-  labels.push(tf("editorPrep.balanceTuningDetail.contentBulkPatchFilePatchDraft.backupBlockerSummary", {
-    count: backupBlockers.length
-  }, `${text.backupBlockers || "Backup blockers"} ${backupBlockers.length}`));
-  labels.push(tf("editorPrep.balanceTuningDetail.contentBulkPatchFilePatchDraft.restoreBlockerSummary", {
-    count: restoreBlockers.length
-  }, `${text.restoreBlockers || "Restore blockers"} ${restoreBlockers.length}`));
-  labels.push(...backupBlockers);
-  labels.push(...restoreBlockers);
-  return labels.length ? labels : [text.noSafetyBlockers || "No safety blockers"];
-}
-
-function contentBulkPatchFilePatchStatusLabel(statusId, text = {}) {
-  return text.statusLabels?.[statusId] || statusId || "unknown";
-}
-
-function contentBulkPatchFilePatchStepLabel(stepId, text = {}) {
-  return text.stepLabels?.[stepId] || stepId || "unknown";
-}
-
-function contentBulkPatchFilePatchOperationLabel(operationId, text = {}) {
-  return text.operationLabels?.[operationId] || operationId || "unknown";
-}
-
-function renderContentBulkPatchFilePatchDraftExport(exportPreview, detailText = {}, reviewContext = {}) {
-  const text = detailText.contentBulkPatchFilePatchDraftExport || {};
-  const summary = exportPreview.summary || {};
-  const metrics = [
-    [text.exportedFiles || "Exported files", `${summary.exportedFileCount || 0}`],
-    [text.exportedBlocks || "Exported blocks", `${summary.exportedBlockCount || 0}`],
-    [text.stagedRows || "Staged rows", `${summary.stagedRowCount || 0}`],
-    [text.updateDrafts || "Update drafts", `${summary.updateDraftCount || 0}`],
-    [text.blockedDrafts || "Blocked drafts", `${summary.blockedDraftCount || 0}`],
-    [text.preApplyReviewItems || "Pre-apply review", `${summary.preApplyReviewItemCount || 0}`],
-    [text.preApplyBlockedItems || "Blocked pre-apply", `${summary.preApplyBlockedReviewItemCount || 0}`],
-    [text.writes || "Writes", exportPreview.writesGameData === false ? (text.readOnly || "Read-only") : "Live"],
-  ];
-  return `
-    <section class="editor-content-bulk-patch-draft-export" data-readonly="${exportPreview.writesGameData === false ? "true" : "false"}" aria-label="${escapeAttribute(text.title || "Content Bulk Patch Draft Export")}">
-      <div class="editor-content-bulk-patch-draft-export-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Patch Draft Export")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Download a read-only file patch draft for review.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchFilePatchDraftExport.version", {
-          version: exportPreview.version || "-"
-        }, exportPreview.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-patch-draft-export-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-patch-draft-export-grid">
-        ${renderContentBulkPatchExportReviewStrip(exportPreview, reviewContext, text)}
-        ${balanceDetailChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(exportPreview.preApplyReview?.checklist, text))}
-      </div>
-      <div class="editor-content-bulk-patch-draft-export-actions">
-        <div>
-          <strong>${escapeHtml(text.source || "Source")}</strong>
-          <span>${escapeHtml(summary.sourceName || "-")}</span>
-        </div>
-        <button type="button" data-content-bulk-file-patch-export>
-          ${escapeHtml(text.download || "Download patch draft")}
-        </button>
-      </div>
-    </section>
-  `;
-}
-
-function renderContentBulkPatchExportReviewStrip(exportPreview = {}, reviewContext = {}, text = {}) {
-  const preApplySummary = exportPreview.preApplyReview?.summary || {};
-  const preApplyChecklist = Array.isArray(exportPreview.preApplyReview?.checklist) ? exportPreview.preApplyReview.checklist : [];
-  const backupIssueSummary = reviewContext.backupPlan?.issueSummary || {};
-  const restoreIssueSummary = reviewContext.restoreRehearsal?.issueSummary || {};
-  const preApplyBlockers = preApplyChecklist.filter((item) => item.state === "blocked").map((item) => item.id);
-  const preApplyWarnings = preApplyChecklist.filter((item) => item.state === "review").map((item) => item.id);
-  const blockingIssues = Array.from(new Set([
-    ...preApplyBlockers,
-    ...(backupIssueSummary.blockingIssueCodes || []),
-    ...(restoreIssueSummary.blockingIssueCodes || []),
-  ]));
-  const warningIssues = Array.from(new Set([
-    ...preApplyWarnings,
-    ...(backupIssueSummary.warningIssueCodes || []),
-    ...(restoreIssueSummary.warningIssueCodes || []),
-  ]));
-  const state = blockingIssues.length > 0 ? "blocked" : "ready";
-  const metrics = [
-    [text.reviewStripPreApplyBlocked || "Pre-apply blocked", `${preApplySummary.blockedReviewItemCount || 0}`],
-    [text.reviewStripBackupIssues || "Backup issues", `${backupIssueSummary.blockingIssueCodes?.length || 0}`],
-    [text.reviewStripRestoreIssues || "Restore issues", `${restoreIssueSummary.blockingIssueCodes?.length || 0}`],
-    [text.reviewStripState || "State", state === "blocked" ? (text.reviewStripStateBlocked || "Blocked") : (text.reviewStripStateReady || "Ready")],
-  ];
-
-  return `
-    <div class="editor-content-bulk-contract-summary editor-content-bulk-patch-draft-export-review-strip" data-state="${escapeAttribute(state)}">
-      <div>
-        <strong>${escapeHtml(text.reviewStripTitle || "Export review strip")}</strong>
-        <p class="muted">${escapeHtml(text.reviewStripHint || "Pre-apply, backup, and restore blockers before download.")}</p>
-      </div>
-      <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(blockingIssues, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(warningIssues, text))}
-      </div>
-    </div>
-  `;
-}
-
-function renderContentBulkPatchApplyGatePlan(plan, detailText = {}) {
-  const text = detailText.contentBulkPatchApplyGatePlan || {};
-  const summary = plan.summary || {};
-  const metrics = [
-    [text.targetFiles || "Target files", `${summary.targetFileCount || 0}`],
-    [text.patchBlocks || "Patch blocks", `${summary.patchBlockCount || 0}`],
-    [text.gates || "Gates", `${summary.gateCount || 0}`],
-    [text.rollbackSteps || "Rollback", `${summary.rollbackStepCount || 0}`],
-    [text.validationSteps || "Validation", `${summary.validationStepCount || 0}`],
-    [text.reviewItems || "Review items", `${summary.reviewItemCount || 0}`],
-    [text.blockedReviewItems || "Blocked review", `${summary.blockedReviewItemCount || 0}`],
-    [text.warningReviewItems || "Review warnings", `${summary.warningReviewItemCount || 0}`],
-    [text.applyState || "Apply", plan.applyEnabled ? (text.enabled || "Enabled") : (text.disabled || "Disabled")],
-  ];
-  return `
-    <section class="editor-content-bulk-apply-gate" data-state="${escapeAttribute(plan.status || "unknown")}" aria-label="${escapeAttribute(text.title || "Content Bulk Apply Gate")}">
-      <div class="editor-content-bulk-apply-gate-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Apply Gate")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only apply gate plan. Live writer is disabled.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchApplyGatePlan.version", {
-          version: plan.version || "-"
-        }, plan.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-apply-gate-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkIssueSummary(plan.issueSummary, text)}
-      <div class="editor-content-bulk-apply-gate-grid">
-        ${balanceDetailChipBlock(text.reviewChecklist || "Review checklist", (plan.reviewChecklist || []).map((item) =>
-          `${contentBulkPatchApplyGateLabel(item.id, text.reviewLabels)} - ${contentBulkPatchApplyGateLabel(item.state, text.stateLabels)} - ${item.detail || "-"}`
-        ))}
-        ${balanceDetailChipBlock(text.blockedReasons || "Blocked reasons", (plan.blockedReasons || []).map((reason) => contentBulkPatchApplyGateLabel(reason, text.blockedReasonLabels)))}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(plan.issueSummary?.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(plan.issueSummary?.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.gateList || "Gate list", (plan.gates || []).map((gate) => `${contentBulkPatchApplyGateLabel(gate.id, text.gateLabels)} - ${contentBulkPatchApplyGateLabel(gate.state, text.stateLabels)}`))}
-        ${balanceDetailChipBlock(text.rollbackPlan || "Rollback plan", (plan.rollbackSteps || []).map((step) => contentBulkPatchApplyGateLabel(step, text.rollbackLabels)))}
-        ${balanceDetailChipBlock(text.validationPlan || "Validation plan", (plan.validationSteps || []).map((step) => contentBulkPatchApplyGateLabel(step, text.validationLabels)))}
-      </div>
-    </section>
-  `;
-}
-
-function contentBulkPatchApplyGateLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderContentBulkPatchBackupPlan(plan, detailText = {}) {
-  const text = detailText.contentBulkPatchBackupPlan || {};
-  const summary = plan.summary || {};
-  const artifacts = plan.artifactNames || {};
-  const metrics = [
-    [text.targetFiles || "Target files", `${summary.targetFileCount || 0}`],
-    [text.patchBlocks || "Patch blocks", `${summary.patchBlockCount || 0}`],
-    [text.pendingBackups || "Pending backups", `${summary.pendingBackupCount || 0}`],
-    [text.backupSteps || "Backup steps", `${summary.backupStepCount || 0}`],
-    [text.restoreSteps || "Restore steps", `${summary.restoreStepCount || 0}`],
-    [text.preApplyReviewItems || "Pre-apply review", `${summary.preApplyReviewItemCount || 0}`],
-    [text.preApplyBlockedItems || "Blocked pre-apply", `${summary.preApplyBlockedReviewItemCount || 0}`],
-    [text.backupState || "Backup", plan.backupEnabled ? (text.enabled || "Enabled") : (text.disabled || "Disabled")],
-  ];
-  const fileRows = (plan.fileBackups || []).slice(0, 6).map((file) => `
-    <article class="editor-content-bulk-backup-plan-file">
-      <div>
-        <strong>${escapeHtml(file.file || "-")}</strong>
-        <span>${escapeHtml((file.domainIds || []).join(", ") || "-")}</span>
-      </div>
-      <small>${escapeHtml(contentBulkPatchBackupPlanLabel(file.backupState, text.stateLabels))} / ${escapeHtml(contentBulkPatchBackupPlanLabel(file.restoreState, text.stateLabels))}</small>
-      <div class="editor-chip-list">${(file.reviewBlockerCodes || []).map((code) => chip(contentBulkPatchBackupPlanLabel(code, text.fileReviewBlockerLabels))).join("")}</div>
-    </article>
-  `).join("");
-
-  return `
-    <section class="editor-content-bulk-backup-plan" data-state="${escapeAttribute(plan.status || "unknown")}" aria-label="${escapeAttribute(text.title || "Content Bulk Backup Plan")}">
-      <div class="editor-content-bulk-backup-plan-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Backup Plan")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only backup snapshot plan. Backup writer is disabled.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchBackupPlan.version", {
-          version: plan.version || "-"
-        }, plan.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-backup-plan-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      <div class="editor-content-bulk-backup-plan-artifacts">
-        <span><small>${escapeHtml(text.backupArchive || "Backup archive")}</small><b>${escapeHtml(artifacts.backupArchive || "-")}</b></span>
-        <span><small>${escapeHtml(text.snapshotManifest || "Snapshot manifest")}</small><b>${escapeHtml(artifacts.snapshotManifest || "-")}</b></span>
-        <span><small>${escapeHtml(text.restoreReport || "Restore report")}</small><b>${escapeHtml(artifacts.restoreReport || "-")}</b></span>
-      </div>
-      ${renderContentBulkIssueSummary(plan.issueSummary, text)}
-      <div class="editor-content-bulk-backup-plan-grid">
-        ${balanceDetailChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(plan.preApplyReviewItems, text))}
-        ${balanceDetailChipBlock(text.blockedReasons || "Blocked reasons", (plan.blockedReasons || []).map((reason) => contentBulkPatchBackupPlanLabel(reason, text.blockedReasonLabels)))}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(plan.issueSummary?.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(plan.issueSummary?.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.backupPlan || "Backup plan", (plan.backupSteps || []).map((step) => contentBulkPatchBackupPlanLabel(step, text.backupStepLabels)))}
-        ${balanceDetailChipBlock(text.restorePlan || "Restore plan", (plan.restoreSteps || []).map((step) => contentBulkPatchBackupPlanLabel(step, text.restoreStepLabels)))}
-      </div>
-      <div class="editor-content-bulk-backup-plan-files">
-        <strong>${escapeHtml(text.targetFilePreview || "Target file preview")}</strong>
-        ${fileRows || `<p class="muted">${escapeHtml(text.emptyFiles || "No target files.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function contentBulkPatchBackupPlanLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderContentBulkPatchRestoreRehearsal(rehearsal, detailText = {}) {
-  const text = detailText.contentBulkPatchRestoreRehearsal || {};
-  const summary = rehearsal.summary || {};
-  const metrics = [
-    [text.targetFiles || "Target files", `${summary.targetFileCount || 0}`],
-    [text.mappedRestores || "Mapped restores", `${summary.mappedRestoreCount || 0}`],
-    [text.missingRestores || "Missing restores", `${summary.missingRestoreCount || 0}`],
-    [text.restoreSteps || "Restore steps", `${summary.restoreStepCount || 0}`],
-    [text.validationSteps || "Validation", `${summary.validationStepCount || 0}`],
-    [text.preApplyReviewItems || "Pre-apply review", `${rehearsal.preApplyReviewSummary?.reviewItemCount || 0}`],
-    [text.preApplyBlockedItems || "Blocked pre-apply", `${rehearsal.preApplyReviewSummary?.blockedReviewItemCount || 0}`],
-    [text.restoreState || "Restore", rehearsal.restoreEnabled ? (text.enabled || "Enabled") : (text.disabled || "Disabled")],
-  ];
-  const restoreRows = (rehearsal.restoreActions || []).slice(0, 6).map((action) => `
-    <article class="editor-content-bulk-restore-rehearsal-file">
-      <div>
-        <strong>${escapeHtml(action.file || "-")}</strong>
-        <span>${escapeHtml((action.domainIds || []).join(", ") || "-")}</span>
-      </div>
-      <small>${escapeHtml(contentBulkPatchRestoreRehearsalLabel(action.restoreState, text.stateLabels))} / ${escapeHtml(contentBulkPatchRestoreRehearsalLabel(action.checkState, text.stateLabels))}</small>
-      <div class="editor-chip-list">${(action.rehearsalBlockerCodes || []).map((code) => chip(contentBulkPatchRestoreRehearsalLabel(code, text.fileRehearsalBlockerLabels))).join("")}</div>
-    </article>
-  `).join("");
-
-  return `
-    <section class="editor-content-bulk-restore-rehearsal" data-state="${escapeAttribute(rehearsal.status || "unknown")}" aria-label="${escapeAttribute(text.title || "Content Bulk Restore Rehearsal")}">
-      <div class="editor-content-bulk-restore-rehearsal-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Content Bulk Restore Rehearsal")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only restore rehearsal. Restore writer is disabled.")}</p>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPatchRestoreRehearsal.version", {
-          version: rehearsal.version || "-"
-        }, rehearsal.version || "-"))}</strong>
-      </div>
-      <div class="editor-content-bulk-restore-rehearsal-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
-      </div>
-      ${renderContentBulkIssueSummary(rehearsal.issueSummary, text)}
-      <div class="editor-content-bulk-restore-rehearsal-grid">
-        ${balanceDetailChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(rehearsal.preApplyReviewItems, text))}
-        ${balanceDetailChipBlock(text.blockedReasons || "Blocked reasons", (rehearsal.blockedReasons || []).map((reason) => contentBulkPatchRestoreRehearsalLabel(reason, text.blockedReasonLabels)))}
-        ${balanceDetailChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(rehearsal.issueSummary?.blockingIssueCodes, text))}
-        ${balanceDetailChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(rehearsal.issueSummary?.warningIssueCodes, text))}
-        ${balanceDetailChipBlock(text.validationPlan || "Validation plan", (rehearsal.validationSteps || []).map((step) => contentBulkPatchRestoreRehearsalLabel(step, text.validationLabels)))}
-      </div>
-      <div class="editor-content-bulk-restore-rehearsal-files">
-        <strong>${escapeHtml(text.restoreFilePreview || "Restore file preview")}</strong>
-        ${restoreRows || `<p class="muted">${escapeHtml(text.emptyFiles || "No restore actions.")}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function contentBulkPatchRestoreRehearsalLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkPatchPreApplyReviewChips(items = [], text = {}) {
-  return (items || []).map((item) =>
-    `${contentBulkPatchPreApplyReviewLabel(item.id, text.preApplyReviewLabels)} - ${contentBulkPatchPreApplyReviewLabel(item.state, text.preApplyStateLabels)} - ${item.detail || "-"}`
-  );
-}
-
-function contentBulkPatchPreApplyReviewLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function renderBalanceGroupRow(group, detailText = {}) {
-  const preview = BALANCE_TUNING_PREVIEW_BY_ID.get(group.id);
-  return `
-    <article class="editor-balance-row">
-      <div class="editor-balance-row-head">
-        <div>
-          <h4>${escapeHtml(group.id)}</h4>
-          <span>${escapeHtml(group.scope)}</span>
-        </div>
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.exportCount", { count: group.exports.length }, `${group.exports.length}`))}</strong>
-      </div>
-      ${balanceDetailChipBlock(detailText.files || "Files", group.files)}
-      ${balanceDetailChipBlock(detailText.exports || "Exports", group.exports)}
-      ${balanceDetailChipBlock(detailText.affects || "Affects", group.affects)}
-      ${balanceDetailPreviewBlock(detailText.preview || "Preview", preview?.items || [], detailText)}
-    </article>
-  `;
-}
-
-function renderBalanceFilterControls(detailText = {}, visibleCount = 0, totalCount = 0) {
-  const filterSummary = balanceFilterSummary(detailText);
-  return `
-    <div class="editor-balance-controls">
-      <label class="editor-balance-search">
-        <span>${escapeHtml(detailText.searchLabel || "Search")}</span>
-        <input type="search" data-balance-search value="${escapeAttribute(balanceDetailFilter.query)}" placeholder="${escapeAttribute(detailText.searchPlaceholder || "")}" />
-      </label>
-      <div class="editor-balance-filter-buttons" role="group" aria-label="${escapeAttribute(detailText.scopeFilter || "Scope Filter")}">
-        ${balanceScopeButton("all", detailText.allScopes || "All")}
-        ${balanceScopeButton("engine-balance", "engine-balance")}
-        ${balanceScopeButton("content-balance", "content-balance")}
-      </div>
-      <button class="editor-balance-reset" type="button" data-balance-reset>
-        ${escapeHtml(detailText.reset || "Reset")}
-      </button>
-      <span class="editor-balance-count">
-        <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.visibleCount", {
-          visible: visibleCount,
-          total: totalCount
-        }, `${visibleCount}/${totalCount}`))}</strong>
-        ${filterSummary ? `<small>${escapeHtml(filterSummary)}</small>` : ""}
-      </span>
-    </div>
-  `;
-}
-
-function renderBalanceRelatedChecks(checks = [], detailText = {}) {
-  if (!checks.length) return "";
-  const rows = checks.map((check) => {
-    const guards = Array.isArray(check.guards) ? check.guards : [];
-    return `
-      <article class="editor-balance-check">
-        <div>
-          <h4>${escapeHtml(check.label || check.id || "")}</h4>
-          <span>${escapeHtml(check.script || "")}</span>
-        </div>
-        ${balanceDetailChipBlock(detailText.guards || "Guards", guards)}
-      </article>
-    `;
-  }).join("");
-  return `
-    <div class="editor-balance-check-list" aria-label="${escapeAttribute(detailText.relatedChecks || "Related checks")}">
-      <strong>${escapeHtml(detailText.relatedChecks || "")}</strong>
-      ${rows}
-    </div>
-  `;
-}
-
 function balanceDetailChipBlock(title, values = []) {
   return `
     <div class="editor-balance-chip-block">
@@ -4769,40 +1191,6 @@ function balanceDetailChipBlock(title, values = []) {
       <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
     </div>
   `;
-}
-
-function balanceDetailPreviewBlock(title, items = [], detailText = {}) {
-  if (!items.length) return "";
-  return `
-    <div class="editor-balance-preview-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">
-        ${items.map((item) => chip(`${item.exportName}: ${formatBalancePreviewSummary(item, detailText)}`)).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function formatBalancePreviewSummary(item, detailText = {}) {
-  const sample = Array.isArray(item.sample) ? item.sample.join(", ") : "";
-  if (item.type === "array") {
-    return tf("editorPrep.balanceTuningDetail.previewArray", {
-      count: item.count || 0,
-      sample: sample || "-"
-    }, `${item.count || 0}`);
-  }
-  if (item.type === "object") {
-    return tf("editorPrep.balanceTuningDetail.previewObject", {
-      count: item.count || 0,
-      sample: sample || "-"
-    }, `${item.count || 0}`);
-  }
-  if (item.type === "missing") {
-    return detailText.previewMissing || "Missing";
-  }
-  return tf("editorPrep.balanceTuningDetail.previewValue", {
-    value: item.value || ""
-  }, item.value || "");
 }
 
 function matchesBalanceDetailFilter(group) {
@@ -4824,360 +1212,42 @@ function balanceGroupSearchText(group) {
   ].join(" ").toLowerCase();
 }
 
-function balanceScopeButton(scope, label) {
-  const active = normalizeBalanceScope(balanceDetailFilter.scope) === scope;
-  return `
-    <button class="editor-balance-filter${active ? " is-active" : ""}" type="button" data-balance-scope="${escapeAttribute(scope)}" aria-pressed="${active ? "true" : "false"}">
-      ${escapeHtml(label)}
-    </button>
-  `;
-}
-
-function balanceFilterSummary(detailText = {}) {
-  const scope = normalizeBalanceScope(balanceDetailFilter.scope);
-  const query = String(balanceDetailFilter.query || "").trim();
-  const candidateLabel = String(balanceDetailFilter.candidateLabel || "").trim();
-
-  if (candidateLabel) {
-    return tf("editorPrep.balanceTuningDetail.activeCandidate", {
-      candidate: candidateLabel
-    }, candidateLabel);
-  }
-
-  if (scope !== "all" && query) {
-    return tf("editorPrep.balanceTuningDetail.activeFilterAndSearch", {
-      filter: scope,
-      query
-    }, `${scope} · ${query}`);
-  }
-
-  if (scope !== "all") {
-    return tf("editorPrep.balanceTuningDetail.activeFilter", {
-      filter: scope
-    }, scope);
-  }
-
-  if (query) {
-    return tf("editorPrep.balanceTuningDetail.activeSearch", {
-      query
-    }, query);
-  }
-
-  return "";
-}
-
-function emptyBalanceRows(detailText = {}) {
-  const query = String(balanceDetailFilter.query || "").trim();
-  const scope = normalizeBalanceScope(balanceDetailFilter.scope);
-  const candidateLabel = String(balanceDetailFilter.candidateLabel || "").trim();
-  let message = detailText.empty || "";
-  if (candidateLabel) {
-    message = tf("editorPrep.balanceTuningDetail.emptyByCandidate", {
-      candidate: candidateLabel
-    }, message);
-  } else if (scope !== "all" && query) {
-    message = tf("editorPrep.balanceTuningDetail.emptyByFilterAndSearch", {
-      filter: scope,
-      query
-    }, message);
-  } else if (scope !== "all") {
-    message = tf("editorPrep.balanceTuningDetail.emptyByFilter", {
-      filter: scope
-    }, message);
-  } else if (query) {
-    message = tf("editorPrep.balanceTuningDetail.emptyBySearch", {
-      query
-    }, message);
-  }
-
-  return `
-    <p class="editor-balance-empty">
-      <span>${escapeHtml(message)}</span>
-      <small>${escapeHtml(detailText.emptyResetHint || "")}</small>
-    </p>
-  `;
-}
-
 function renderRetargetPreviewDetail() {
   const preview = createMurimRetargetPreview();
   const detailText = EDITOR_TEXT.retargetDetail || {};
-  const textEntries = preview.textOverrides
-    .map((entry) => createRetargetTextRow(entry, detailText))
-    .filter((entry) => matchesRetargetFilter(entry));
-  const assetEntries = preview.assetOverrides
-    .map((entry) => createRetargetAssetRow(entry, detailText))
-    .filter((entry) => matchesRetargetFilter(entry));
-  const textRows = textEntries.map((entry) => entry.html).join("");
-  const assetRows = assetEntries.map((entry) => entry.html).join("");
-  const visibleTextCount = textEntries.length;
-  const visibleAssetCount = assetEntries.length;
-  const visibleCount = visibleTextCount + visibleAssetCount;
-  const totalCount = preview.counts.textOverrides + preview.counts.assetOverrides;
-  const filterSummary = retargetFilterSummary(detailText);
-
-  return `
-    <section class="editor-retarget-detail" aria-label="${escapeAttribute(detailText.title || "Retarget Preview Detail")}">
-      <div class="editor-retarget-head">
-        <div>
-          <h3>${escapeHtml(detailText.title || "")}</h3>
-          <p class="muted">${escapeHtml(preview.description)}</p>
-        </div>
-        <span>${escapeHtml(preview.isComplete ? (detailText.ready || "") : (detailText.review || ""))}</span>
-      </div>
-      <div class="editor-retarget-summary">
-        <strong>${escapeHtml(preview.title)}</strong>
-        <span>${escapeHtml(tf("editorPrep.retargetDetail.route", {
-          source: preview.sourceProfileId,
-          target: preview.targetProfileId
-        }, `${preview.sourceProfileId} -> ${preview.targetProfileId}`))}</span>
-        <span>${escapeHtml(tf("editorPrep.retargetDetail.counts", {
-          textCount: preview.counts.textOverrides,
-          assetCount: preview.counts.assetOverrides,
-          missingText: preview.counts.missingTextTargets,
-          missingAssets: preview.counts.missingAssetTargets,
-          mismatchedAssets: preview.counts.mismatchedAssetTargets
-        }, ""))}</span>
-      </div>
-      <div class="editor-retarget-controls">
-        <label class="editor-retarget-search">
-          <span>${escapeHtml(detailText.searchLabel || "Search")}</span>
-          <input type="search" data-retarget-search value="${escapeAttribute(retargetDetailFilter.query)}" placeholder="${escapeAttribute(detailText.searchPlaceholder || "")}" />
-        </label>
-        <div class="editor-retarget-filter-buttons" role="group" aria-label="${escapeAttribute(detailText.typeFilter || "Type Filter")}">
-          ${retargetKindButton("all", detailText.all || "All")}
-          ${retargetKindButton("text", detailText.textOnly || "Text")}
-          ${retargetKindButton("asset", detailText.assetOnly || "Assets")}
-        </div>
-        <button class="editor-retarget-reset" type="button" data-retarget-reset>
-          ${escapeHtml(detailText.reset || "Reset")}
-        </button>
-        <span class="editor-retarget-count">
-          <strong>${escapeHtml(tf("editorPrep.retargetDetail.visibleCount", {
-            visible: visibleCount,
-            total: totalCount
-          }, `${visibleCount}/${totalCount}`))}</strong>
-          ${filterSummary ? `<small>${escapeHtml(filterSummary)}</small>` : ""}
-        </span>
-      </div>
-      <div class="editor-retarget-grid">
-        <section>
-          <h4>${escapeHtml(tf("editorPrep.retargetDetail.textTitle", { count: preview.counts.textOverrides }, ""))}</h4>
-          <div class="editor-retarget-list">${textRows || emptyRetargetRows(detailText, "text")}</div>
-        </section>
-        <section>
-          <h4>${escapeHtml(tf("editorPrep.retargetDetail.assetTitle", { count: preview.counts.assetOverrides }, ""))}</h4>
-          <div class="editor-retarget-list">${assetRows || emptyRetargetRows(detailText, "asset")}</div>
-        </section>
-      </div>
-    </section>
-  `;
-}
-
-function createRetargetTextRow(entry, detailText) {
-  const rowId = `text:${entry.sourcePath}`;
-  const expanded = expandedRetargetRows.has(rowId);
-  const searchText = [
-    "text",
-    entry.sourcePath,
-    entry.sourceText,
-    entry.targetTextPath,
-    entry.targetText
-  ].join(" ").toLowerCase();
-  return {
-    kind: "text",
-    searchText,
-    html: `
-      <article class="editor-retarget-row${expanded ? " is-expanded" : ""}" data-retarget-row-kind="text">
-        ${retargetRowHeader(rowId, expanded, detailText)}
-        <div class="editor-retarget-body">
-          <div>
-            <span>${escapeHtml(detailText.sourcePath || "Source")}</span>
-            <code>${escapeHtml(entry.sourcePath)}</code>
-          </div>
-          <div>
-            <span>${escapeHtml(detailText.targetTextPath || "Target")}</span>
-            <code>${escapeHtml(entry.targetTextPath)}</code>
-          </div>
-          <p>${escapeHtml(entry.targetText || "")}</p>
-        </div>
-      </article>
-    `
-  };
-}
-
-function createRetargetAssetRow(entry, detailText) {
-  const rowId = `asset:${entry.sourceAssetId}`;
-  const expanded = expandedRetargetRows.has(rowId);
-  const summary = tf("editorPrep.retargetDetail.assetSummary", {
-    plannedFile: entry.plannedWebpFile || entry.plannedSourceFile || "-",
-    mappedTarget: entry.mappedTargetAssetId || "-",
-    slotCount: entry.slotPaths.length
-  }, "");
-  const searchText = [
-    "asset",
-    entry.sourceAssetId,
-    entry.targetAssetId,
-    entry.plannedSourceFile,
-    entry.plannedWebpFile,
-    entry.mappedTargetAssetId,
-    ...entry.slotPaths
-  ].join(" ").toLowerCase();
-  return {
-    kind: "asset",
-    searchText,
-    html: `
-      <article class="editor-retarget-row${expanded ? " is-expanded" : ""}" data-retarget-row-kind="asset">
-        ${retargetRowHeader(rowId, expanded, detailText)}
-        <div class="editor-retarget-body">
-          <div>
-            <span>${escapeHtml(detailText.sourceAsset || "Source Asset")}</span>
-            <code>${escapeHtml(entry.sourceAssetId)}</code>
-          </div>
-          <div>
-            <span>${escapeHtml(detailText.targetAsset || "Target Asset")}</span>
-            <code>${escapeHtml(entry.targetAssetId)}</code>
-          </div>
-          <p>${escapeHtml(summary)}</p>
-          <div class="editor-chip-list">${entry.slotPaths.map((slotPath) => chip(slotPath)).join("")}</div>
-        </div>
-      </article>
-    `
-  };
-}
-
-function retargetRowHeader(rowId, expanded, detailText) {
-  return `
-    <div class="editor-retarget-row-head">
-      <span>${escapeHtml(rowId.startsWith("asset:") ? (detailText.assetRow || "Asset") : (detailText.textRow || "Text"))}</span>
-      <button class="editor-retarget-toggle" type="button" data-retarget-toggle="${escapeAttribute(rowId)}" aria-expanded="${expanded ? "true" : "false"}">
-        ${escapeHtml(expanded ? (detailText.collapse || "Collapse") : (detailText.expand || "Expand"))}
-      </button>
-    </div>
-  `;
-}
-
-function matchesRetargetFilter(entry) {
-  const kind = retargetDetailFilter.kind || "all";
-  const query = normalizeSearchText(retargetDetailFilter.query);
-  if (kind !== "all" && entry.kind !== kind) return false;
-  return !query || entry.searchText.includes(query);
-}
-
-function retargetKindButton(kind, label) {
-  const active = (retargetDetailFilter.kind || "all") === kind;
-  return `
-    <button class="editor-retarget-filter${active ? " is-active" : ""}" type="button" data-retarget-kind="${escapeAttribute(kind)}" aria-pressed="${active ? "true" : "false"}">
-      ${escapeHtml(label)}
-    </button>
-  `;
-}
-
-function retargetFilterSummary(detailText) {
-  const filterKind = normalizeRetargetKind(retargetDetailFilter.kind);
-  const query = String(retargetDetailFilter.query || "").trim();
-  const filterLabel = filterKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
-
-  if (filterKind !== "all" && query) {
-    return tf("editorPrep.retargetDetail.activeFilterAndSearch", {
-      filter: filterLabel,
-      query
-    }, `${filterLabel} · ${query}`);
-  }
-
-  if (filterKind !== "all") {
-    return tf("editorPrep.retargetDetail.activeFilter", {
-      filter: filterLabel
-    }, filterLabel);
-  }
-
-  if (query) {
-    return tf("editorPrep.retargetDetail.activeSearch", {
-      query
-    }, query);
-  }
-
-  return "";
-}
-
-function emptyRetargetRows(detailText, sectionKind) {
-  const filterKind = normalizeRetargetKind(retargetDetailFilter.kind);
-  const query = String(retargetDetailFilter.query || "").trim();
-  const sectionLabel = sectionKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
-  const filterLabel = filterKind === "asset" ? (detailText.assetOnly || "Assets") : (detailText.textOnly || "Text");
-  let message = detailText.empty || "";
-  let showResetHint = false;
-
-  if (filterKind !== "all" && filterKind !== sectionKind) {
-    message = tf("editorPrep.retargetDetail.emptyByType", {
-      filter: filterLabel,
-      section: sectionLabel
-    }, message);
-    showResetHint = true;
-  } else if (query) {
-    message = tf("editorPrep.retargetDetail.emptyBySearch", {
-      query
-    }, message);
-    showResetHint = true;
-  }
-
-  return `
-    <p class="editor-retarget-empty">
-      <span>${escapeHtml(message)}</span>
-      ${showResetHint ? `<small>${escapeHtml(detailText.emptyResetHint || "")}</small>` : ""}
-    </p>
-  `;
+  return renderRetargetPreviewDetailView({
+    preview,
+    detailText,
+    filter: retargetDetailFilter,
+    expandedRows: expandedRetargetRows,
+  });
 }
 
 function renderAssets() {
   const imageSlots = manifest.assetSlots?.image || [];
   const audioSlots = manifest.assetSlots?.audio || [];
-  elements.assetGrid.innerHTML = [
-    assetSection(EDITOR_TEXT.assetTypes.image, imageSlots),
-    assetSection(EDITOR_TEXT.assetTypes.audio, audioSlots)
-  ].join("");
+  elements.assetGrid.innerHTML = renderEditorAssetSections({
+    assetTypes: EDITOR_TEXT.assetTypes,
+    imageSlots,
+    audioSlots,
+  });
 }
 
 function renderSaveKeys() {
   const summary = createSaveSummary();
-  elements.saveGrid.innerHTML = summary.keys.map((item) => `
-    <article class="editor-save-card">
-      <strong>${escapeHtml(item.key)}</strong>
-      <span>${item.exists ? EDITOR_TEXT.save.saved : EDITOR_TEXT.save.empty}</span>
-      <small>${escapeHtml(item.detail)}</small>
-    </article>
-  `).join("");
+  elements.saveGrid.innerHTML = renderEditorSaveKeyCards(summary.keys, EDITOR_TEXT.save);
 }
 
 function renderBacklog() {
   const items = backlog.items || [];
-  elements.backlogList.innerHTML = items.map((item) => `
-    <article class="editor-backlog-card" data-status="${escapeAttribute(item.status || "planned")}">
-      <div class="editor-backlog-head">
-        <div>
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.summary || "")}</p>
-        </div>
-        <span>${escapeHtml(statusLabel(item.status))}</span>
-      </div>
-      <div class="editor-chip-list">${(item.editorHooks || []).map((hook) => chip(hook)).join("")}</div>
-    </article>
-  `).join("");
+  elements.backlogList.innerHTML = renderEditorBacklogCards(items, {
+    statusLabel,
+  });
 }
 
 function renderPrototypeList() {
   const items = manifest.prototypeListMemory || [];
-  elements.prototypeList.innerHTML = items.map((item) => `
-    <article class="editor-backlog-card">
-      <div class="editor-backlog-head">
-        <div>
-          <h3>${escapeHtml(item.label)}</h3>
-          <p>${escapeHtml(item.id)}</p>
-        </div>
-        <span>${escapeHtml(tf("editorPrep.save.count", { count: (item.keepForEditor || []).length }))}</span>
-      </div>
-      <div class="editor-chip-list">${(item.keepForEditor || []).map((value) => chip(value)).join("")}</div>
-    </article>
-  `).join("");
+  elements.prototypeList.innerHTML = renderEditorPrototypeCards(items);
 }
 
 function detailBlock(title, values = []) {
@@ -5186,24 +1256,6 @@ function detailBlock(title, values = []) {
     <section class="editor-detail-block">
       <h3>${escapeHtml(title)}</h3>
       <div class="editor-chip-list">${list.length ? list.map((value) => chip(value)).join("") : chip(EDITOR_TEXT.save.empty)}</div>
-    </section>
-  `;
-}
-
-function assetSection(title, slots = []) {
-  return `
-    <section class="editor-asset-section">
-      <h3>${escapeHtml(tf("editorPrep.assetTypes.slotTitle", { title }))}</h3>
-      ${slots.map((slot) => `
-        <article class="editor-asset-card">
-          <div>
-            <strong>${escapeHtml(slot.label)}</strong>
-            <span>${escapeHtml(slot.slotId)}</span>
-          </div>
-          <code>${escapeHtml(slot.folder || "")}${escapeHtml(slot.expectedFileName || "")}</code>
-          <small>${escapeHtml(slot.cropPreset || "audio")} · ${escapeHtml(slot.dataTarget || "")}</small>
-        </article>
-      `).join("")}
     </section>
   `;
 }
@@ -5244,133 +1296,86 @@ function renderSaveSlotDiagnostics() {
   const diagnostics = createSaveSlotDiagnostics();
   const text = EDITOR_TEXT.saveDiagnostics || {};
   const activeSlotValue = diagnostics.activeSlot.raw || text.emptyValue || "";
-  return `
-    <section class="editor-save-diagnostics" data-save-slot-diagnostics>
-      <div class="editor-save-diagnostics-head">
-        <div>
-          <h3>${escapeHtml(text.title || "Save slot diagnostics")}</h3>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(diagnostics.writeMode.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(diagnostics.writeMode.status))}
-        </span>
-      </div>
-      <div class="editor-save-diagnostics-metrics">
-        ${metricCard(
-          text.activeSaveMetric || "Active save",
-          saveDiagnosticStatusLabel(diagnostics.activeSave.status),
-          diagnostics.activeSave.hint || "",
-        )}
-        ${metricCard(
-          text.slotStoreMetric || "Save slots",
-          tf("editorPrep.saveDiagnostics.slotCountValue", {
-            filled: diagnostics.slotCounts.filled,
-            total: diagnostics.slotCounts.total,
-            invalid: diagnostics.slotCounts.invalid,
-          }, `${diagnostics.slotCounts.filled}/${diagnostics.slotCounts.total}`),
-          diagnostics.slotStore.hint || "",
-        )}
-        ${metricCard(
-          text.activeSlotMetric || "Active slot",
-          `${saveDiagnosticStatusLabel(diagnostics.activeSlot.status)} · ${activeSlotValue}`,
-          diagnostics.activeSlot.hint || "",
-        )}
-        ${metricCard(
-          text.writeModeMetric || "Write mode",
-          saveDiagnosticStatusLabel(diagnostics.writeMode.status),
-          diagnostics.writeMode.hint || "",
-        )}
-      </div>
-      <div class="editor-save-diagnostics-grid">
-        ${renderSaveDiagnosticCard({
-          id: "active-save",
-          label: text.activeSaveCard || "Active save",
-          status: diagnostics.activeSave.status,
-          summary: diagnostics.activeSave.summary,
-          rawLength: diagnostics.activeSave.rawLength,
-          key: SAVE_SLOT_DIAGNOSTIC_KEYS.activeSave,
-        })}
-        ${diagnostics.slots.map((slot) => renderSaveDiagnosticCard(slot)).join("")}
-      </div>
-      ${renderSaveSlotValidationPlan(diagnostics)}
-      ${renderSaveSlotDraftPayloadPreview(diagnostics)}
-      ${renderSaveSlotDraftDiffSummary(diagnostics)}
-      ${renderSaveSlotApplyGateChecklist(diagnostics)}
-      ${renderSaveSlotRecoveryRehearsalPreview(diagnostics)}
-      ${renderSaveSlotEditInputSchemaPreview(diagnostics)}
-      ${renderSaveSlotEditValidationMatrix(diagnostics)}
-      ${renderSaveSlotEditValidationRuleDrilldown(diagnostics)}
-      ${renderSaveSlotEditSamplePayloadPreview(diagnostics)}
-      ${renderSaveSlotEditValidatorDryRunPlan(diagnostics)}
-      ${renderSaveSlotEditValidatorRegistryContract(diagnostics)}
-      ${renderSaveSlotEditValidatorResultSchemaPreview(diagnostics)}
-      ${renderSaveSlotEditValidatorExecutableDryRunPreview(diagnostics)}
-      ${renderSaveSlotEditProposedValueInjectorPreview(diagnostics)}
-      ${renderSaveSlotEditDryRunSampleComparatorPreview(diagnostics)}
-      ${renderSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics)}
-      ${renderSaveSlotEditProducedResultBridgeContractPreview(diagnostics)}
-      ${renderSaveSlotEditBridgeTransitionChecklistPreview(diagnostics)}
-      ${renderSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics)}
-      ${renderSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics)}
-      ${renderSaveSlotEditAdapterRunnerPreflightPreview(diagnostics)}
-      ${renderSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics)}
-      ${renderSaveSlotEditConfirmationInputShellContractPreview(diagnostics)}
-      ${renderSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics)}
-      ${renderSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics)}
-      ${renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics)}
-      ${renderSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics)}
-      ${renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics)}
-      ${renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics)}
-      ${renderSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics)}
-      ${renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics)}
-      ${renderSaveSlotEditConfirmationInputContractPreview(diagnostics)}
-      ${renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics)}
-      ${renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics)}
-      ${renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics)}
-      ${renderSaveSlotEditWriterEnablementRiskSummary(diagnostics)}
-    </section>
-  `;
+  return renderSaveSlotDiagnosticsShell({
+    diagnostics,
+    text,
+    keys: SAVE_SLOT_DIAGNOSTIC_KEYS,
+    activeSlotValue,
+    slotCountText: tf("editorPrep.saveDiagnostics.slotCountValue", {
+      filled: diagnostics.slotCounts.filled,
+      total: diagnostics.slotCounts.total,
+      invalid: diagnostics.slotCounts.invalid,
+    }, `${diagnostics.slotCounts.filled}/${diagnostics.slotCounts.total}`),
+    renderMetricCard: metricCard,
+    renderDiagnosticCard: renderSaveDiagnosticCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    sections: [
+      renderSaveSlotDiagnosticSection("validation-plan", () => renderSaveSlotValidationPlan(diagnostics)),
+      renderSaveSlotDiagnosticSection("draft-payload", () => renderSaveSlotDraftPayloadPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("draft-diff", () => renderSaveSlotDraftDiffSummary(diagnostics)),
+      renderSaveSlotDiagnosticSection("apply-gate", () => renderSaveSlotApplyGateChecklist(diagnostics)),
+      renderSaveSlotDiagnosticSection("recovery-rehearsal", () => renderSaveSlotRecoveryRehearsalPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("edit-input-schema", () => renderSaveSlotEditInputSchemaPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("validation-matrix", () => renderSaveSlotEditValidationMatrix(diagnostics)),
+      renderSaveSlotDiagnosticSection("rule-drilldown", () => renderSaveSlotEditValidationRuleDrilldown(diagnostics)),
+      renderSaveSlotDiagnosticSection("sample-payload", () => renderSaveSlotEditSamplePayloadPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("validator-dry-run", () => renderSaveSlotEditValidatorDryRunPlan(diagnostics)),
+      renderSaveSlotDiagnosticSection("validator-registry", () => renderSaveSlotEditValidatorRegistryContract(diagnostics)),
+      renderSaveSlotDiagnosticSection("validator-result-schema", () => renderSaveSlotEditValidatorResultSchemaPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("validator-executable-dry-run", () => renderSaveSlotEditValidatorExecutableDryRunPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("proposed-value-injector", () => renderSaveSlotEditProposedValueInjectorPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("dry-run-sample-comparator", () => renderSaveSlotEditDryRunSampleComparatorPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("sample-bridge-blocker", () => renderSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("produced-result-bridge", () => renderSaveSlotEditProducedResultBridgeContractPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("bridge-transition", () => renderSaveSlotEditBridgeTransitionChecklistPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("validator-source-adapter", () => renderSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("selected-source-handoff", () => renderSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("adapter-runner-preflight", () => renderSaveSlotEditAdapterRunnerPreflightPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("confirmation-source-selection", () => renderSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("confirmation-input-shell", () => renderSaveSlotEditConfirmationInputShellContractPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("confirmation-match-review", () => renderSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("submit-runner-blocker", () => renderSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("final-apply-runner-handoff", () => renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("apply-runner-payload", () => renderSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("payload-bridge-compatibility", () => renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("validator-apply-gate-bridge", () => renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("compatibility-confirmation-rollup", () => renderSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("validator-confirmation-preflight", () => renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("confirmation-input-contract", () => renderSaveSlotEditConfirmationInputContractPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("confirmation-runner-handoff", () => renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("writer-payload-checkpoint", () => renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("postwrite-restore", () => renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics)),
+      renderSaveSlotDiagnosticSection("writer-enablement-risk", () => renderSaveSlotEditWriterEnablementRiskSummary(diagnostics)),
+    ],
+  });
+}
+
+function renderSaveSlotDiagnosticSection(id, renderSection) {
+  try {
+    return renderSection();
+  } catch (error) {
+    return `
+      <section class="editor-save-diagnostics-error" data-save-diagnostics-error="${escapeAttribute(id)}" data-status="blocked">
+        <h4>${escapeHtml(saveDiagnosticStatusLabel("blocked"))}</h4>
+        <p>${escapeHtml(error?.message || id)}</p>
+      </section>
+    `;
+  }
 }
 
 function renderSaveSlotValidationPlan(diagnostics) {
   const plan = createSaveSlotValidationPlan(diagnostics);
   const text = EDITOR_TEXT.saveValidation || {};
-  return `
-    <section class="editor-save-validation" data-save-validation-plan>
-      <div class="editor-save-validation-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save validation plan")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(plan.applyStatus)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(plan.applyStatus))}
-        </span>
-      </div>
-      <div class="editor-save-validation-metrics">
-        ${metricCard(
-          text.readyCheckMetric || "Ready checks",
-          tf("editorPrep.saveValidation.readyCheckValue", {
-            ready: plan.readyChecks,
-            total: plan.totalChecks,
-          }, `${plan.readyChecks}/${plan.totalChecks}`),
-          text.readyCheckHint || "",
-        )}
-        ${metricCard(
-          text.rollbackMetric || "Rollback",
-          saveDiagnosticStatusLabel(plan.rollbackStatus),
-          text.rollbackHint || "",
-        )}
-        ${metricCard(
-          text.applyMetric || "Apply",
-          saveDiagnosticStatusLabel(plan.applyStatus),
-          text.applyHint || "",
-        )}
-      </div>
-      <div class="editor-save-validation-grid">
-        ${plan.checks.map((check) => renderSaveValidationCheck(check)).join("")}
-      </div>
-    </section>
-  `;
+  return renderSaveSlotValidationPlanView({
+    plan,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    readyCheckValue: tf("editorPrep.saveValidation.readyCheckValue", {
+      ready: plan.readyChecks,
+      total: plan.totalChecks,
+    }, `${plan.readyChecks}/${plan.totalChecks}`),
+  });
 }
 
 function createSaveSlotValidationPlan(diagnostics) {
@@ -5406,55 +1411,18 @@ function saveValidationCheck(id, isReady, label, detail) {
   };
 }
 
-function renderSaveValidationCheck(check) {
-  return `
-    <article class="editor-save-validation-check" data-save-validation-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-    </article>
-  `;
-}
-
 function renderSaveSlotDraftPayloadPreview(diagnostics) {
   const preview = createSaveSlotDraftPayloadPreview(diagnostics);
   const text = EDITOR_TEXT.saveDraft || {};
-  return `
-    <section class="editor-save-draft" data-save-draft-payload>
-      <div class="editor-save-draft-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit draft payload")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(preview.applyStatus)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(preview.applyStatus))}
-        </span>
-      </div>
-      <div class="editor-save-draft-metrics">
-        ${metricCard(
-          text.targetMetric || "Targets",
-          tf("editorPrep.saveDraft.targetValue", { count: preview.targetCount }, String(preview.targetCount)),
-          text.targetHint || "",
-        )}
-        ${metricCard(
-          text.fieldGroupMetric || "Field groups",
-          tf("editorPrep.saveDraft.fieldGroupValue", { count: preview.fieldGroups.length }, String(preview.fieldGroups.length)),
-          text.fieldGroupHint || "",
-        )}
-        ${metricCard(
-          text.operationMetric || "Operations",
-          tf("editorPrep.saveDraft.operationValue", { count: preview.operationCount }, String(preview.operationCount)),
-          text.operationHint || "",
-        )}
-      </div>
-      <div class="editor-save-draft-grid">
-        ${preview.fieldGroups.map((group) => renderSaveDraftFieldGroup(group)).join("")}
-      </div>
-      <pre class="editor-save-draft-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotDraftPayloadView({
+    preview,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    targetValue: tf("editorPrep.saveDraft.targetValue", { count: preview.targetCount }, String(preview.targetCount)),
+    fieldGroupValue: tf("editorPrep.saveDraft.fieldGroupValue", { count: preview.fieldGroups.length }, String(preview.fieldGroups.length)),
+    operationValue: tf("editorPrep.saveDraft.operationValue", { count: preview.operationCount }, String(preview.operationCount)),
+  });
 }
 
 function createSaveSlotDraftPayloadPreview(diagnostics) {
@@ -5533,1070 +1501,530 @@ function saveDraftField(path, valueType, guard) {
   return { path, valueType, guard };
 }
 
-function renderSaveDraftFieldGroup(group) {
-  return `
-    <article class="editor-save-draft-group" data-save-draft-group="${escapeAttribute(group.id)}">
-      <strong>${escapeHtml(group.label)}</strong>
-      <div class="editor-chip-list">
-        ${group.fields.map((field) => chip(`${field.path} · ${field.valueType} · ${field.guard}`)).join("")}
-      </div>
-    </article>
-  `;
-}
-
 function renderSaveSlotDraftDiffSummary(diagnostics) {
   const diff = createSaveSlotDraftDiffSummary(diagnostics);
   const text = EDITOR_TEXT.saveDraftDiff || {};
-  return `
-    <section class="editor-save-diff" data-save-draft-diff>
-      <div class="editor-save-diff-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save draft diff summary")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(diff.applyStatus)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(diff.applyStatus))}
-        </span>
-      </div>
-      <div class="editor-save-diff-metrics">
-        ${metricCard(text.targetMetric || "Targets", `${diff.targetCount}`, text.targetHint || "")}
-        ${metricCard(text.fieldMetric || "Fields", `${diff.fieldCount}`, text.fieldHint || "")}
-        ${metricCard(text.comparableMetric || "Comparable", `${diff.comparableRows}`, text.comparableHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", `${diff.blockedRows}`, text.blockedHint || "")}
-      </div>
-      <div class="editor-save-diff-grid">
-        ${diff.groups.map((group) => renderSaveDraftDiffGroup(group, text)).join("")}
-      </div>
-      <div class="editor-save-diff-row-list">
-        ${diff.rows.slice(0, 12).map((row) => renderSaveDraftDiffRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No diff rows.")}</p>`}
-      </div>
-    </section>
-  `;
+  const viewDiff = {
+    ...diff,
+    groups: diff.groups.map((group) => ({
+      ...group,
+      rowValue: tf("editorPrep.saveDraftDiff.groupRowValue", { count: group.rowCount }, `${group.rowCount}`),
+      comparableValue: tf("editorPrep.saveDraftDiff.groupComparableValue", { count: group.comparableRows }, `${group.comparableRows}`),
+      missingValue: tf("editorPrep.saveDraftDiff.groupMissingValue", { count: group.missingRows }, `${group.missingRows}`),
+      blockedValue: tf("editorPrep.saveDraftDiff.groupBlockedValue", { count: group.blockedRows }, `${group.blockedRows}`),
+    })),
+  };
+
+  return renderSaveSlotDraftDiffSummaryView({
+    diff: viewDiff,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    targetValue: `${diff.targetCount}`,
+    fieldValue: `${diff.fieldCount}`,
+    comparableValue: `${diff.comparableRows}`,
+    blockedValue: `${diff.blockedRows}`,
+  });
 }
 
 function renderSaveSlotApplyGateChecklist(diagnostics) {
   const gate = createSaveSlotApplyGateChecklist(diagnostics);
   const text = EDITOR_TEXT.saveApplyGate || {};
-  return `
-    <section class="editor-save-apply-gate" data-save-apply-gate data-recovery-status="${escapeAttribute(gate.recoveryStatus)}" data-recovery-blockers="${escapeAttribute(String(gate.recoveryBlockedSteps))}">
-      <div class="editor-save-apply-gate-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit apply gate")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(gate.applyStatus)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(gate.applyStatus))}
-        </span>
-      </div>
-      <div class="editor-save-apply-gate-metrics">
-        ${metricCard(
-          text.readyMetric || "Ready",
-          tf("editorPrep.saveApplyGate.readyValue", { ready: gate.readyChecks, total: gate.totalChecks }, `${gate.readyChecks}/${gate.totalChecks}`),
-          text.readyHint || "",
-        )}
-        ${metricCard(
-          text.blockedMetric || "Blocked",
-          tf("editorPrep.saveApplyGate.blockedValue", { count: gate.blockedChecks }, `${gate.blockedChecks}`),
-          text.blockedHint || "",
-        )}
-        ${metricCard(
-          text.targetMetric || "Targets",
-          tf("editorPrep.saveApplyGate.targetValue", { count: gate.targetCount }, `${gate.targetCount}`),
-          text.targetHint || "",
-        )}
-        ${metricCard(
-          text.diffRowMetric || "Diff rows",
-          tf("editorPrep.saveApplyGate.diffRowValue", { count: gate.diffRowCount }, `${gate.diffRowCount}`),
-          text.diffRowHint || "",
-        )}
-        ${metricCard(
-          text.recoveryMetric || "Recovery",
-          tf("editorPrep.saveApplyGate.recoveryValue", { count: gate.recoveryBlockedSteps }, `${gate.recoveryBlockedSteps}`),
-          text.recoveryHint || "",
-        )}
-      </div>
-      <div class="editor-save-apply-gate-grid">
-        ${gate.checks.map((check) => renderSaveApplyGateCheck(check)).join("")}
-      </div>
-      <div class="editor-save-apply-gate-confirmation" data-save-apply-gate-confirmation>
-        <strong>${escapeHtml(text.confirmationTitle || "Required confirmation")}</strong>
-        <p>${escapeHtml(text.confirmationDescription || "")}</p>
-        <code>${escapeHtml(gate.confirmationPhrase)}</code>
-      </div>
-    </section>
-  `;
+  return renderSaveSlotApplyGateChecklistView({
+    gate,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    readyValue: tf("editorPrep.saveApplyGate.readyValue", { ready: gate.readyChecks, total: gate.totalChecks }, `${gate.readyChecks}/${gate.totalChecks}`),
+    blockedValue: tf("editorPrep.saveApplyGate.blockedValue", { count: gate.blockedChecks }, `${gate.blockedChecks}`),
+    targetValue: tf("editorPrep.saveApplyGate.targetValue", { count: gate.targetCount }, `${gate.targetCount}`),
+    diffRowValue: tf("editorPrep.saveApplyGate.diffRowValue", { count: gate.diffRowCount }, `${gate.diffRowCount}`),
+    recoveryValue: tf("editorPrep.saveApplyGate.recoveryValue", { count: gate.recoveryBlockedSteps }, `${gate.recoveryBlockedSteps}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveApplyGate.blockerValue", { blocker }, `${text.blockerLabel || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotRecoveryRehearsalPreview(diagnostics) {
   const rehearsal = createSaveSlotRecoveryRehearsalPreview(diagnostics);
   const text = EDITOR_TEXT.saveRecovery || {};
-  return `
-    <section class="editor-save-recovery" data-save-recovery-rehearsal>
-      <div class="editor-save-recovery-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save recovery rehearsal")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(rehearsal.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(rehearsal.status))}
-        </span>
-      </div>
-      <div class="editor-save-recovery-metrics">
-        ${metricCard(
-          text.keyMetric || "Snapshot keys",
-          tf("editorPrep.saveRecovery.keyValue", { readable: rehearsal.readableKeys, total: rehearsal.snapshotKeys.length }, `${rehearsal.readableKeys}/${rehearsal.snapshotKeys.length}`),
-          text.keyHint || "",
-        )}
-        ${metricCard(
-          text.stepMetric || "Steps",
-          tf("editorPrep.saveRecovery.stepValue", { count: rehearsal.steps.length }, `${rehearsal.steps.length}`),
-          text.stepHint || "",
-        )}
-        ${metricCard(
-          text.blockedMetric || "Blocked",
-          tf("editorPrep.saveRecovery.blockedValue", { count: rehearsal.blockedSteps }, `${rehearsal.blockedSteps}`),
-          text.blockedHint || "",
-        )}
-        ${metricCard(
-          text.routeMetric || "Failure routes",
-          tf("editorPrep.saveRecovery.routeValue", { count: rehearsal.failureRoutes.length }, `${rehearsal.failureRoutes.length}`),
-          text.routeHint || "",
-        )}
-      </div>
-      <div class="editor-save-recovery-grid">
-        ${rehearsal.snapshotKeys.map((item) => renderSaveRecoveryKey(item)).join("")}
-      </div>
-      <div class="editor-save-recovery-steps">
-        ${rehearsal.steps.map((step) => renderSaveRecoveryStep(step)).join("")}
-      </div>
-      <div class="editor-save-recovery-routes">
-        ${rehearsal.failureRoutes.map((route) => renderSaveRecoveryRoute(route)).join("")}
-      </div>
-    </section>
-  `;
+  return renderSaveSlotRecoveryRehearsalView({
+    rehearsal,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    keyValue: tf("editorPrep.saveRecovery.keyValue", { readable: rehearsal.readableKeys, total: rehearsal.snapshotKeys.length }, `${rehearsal.readableKeys}/${rehearsal.snapshotKeys.length}`),
+    stepValue: tf("editorPrep.saveRecovery.stepValue", { count: rehearsal.steps.length }, `${rehearsal.steps.length}`),
+    blockedValue: tf("editorPrep.saveRecovery.blockedValue", { count: rehearsal.blockedSteps }, `${rehearsal.blockedSteps}`),
+    routeValue: tf("editorPrep.saveRecovery.routeValue", { count: rehearsal.failureRoutes.length }, `${rehearsal.failureRoutes.length}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveRecovery.blockerValue", { blocker }, `${text.blockerLabel || "Blocker"}: ${blocker}`),
+    routeActionFormatter: (action) => tf("editorPrep.saveRecovery.routeActionValue", { action }, `${text.routeActionLabel || "Action"}: ${action}`),
+  });
 }
 
 function renderSaveSlotEditInputSchemaPreview(diagnostics) {
   const schema = createSaveSlotEditInputSchemaPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditInput || {};
-  return `
-    <section class="editor-save-input-schema" data-save-edit-input-schema>
-      <div class="editor-save-input-schema-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit input schema")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(schema.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(schema.status))}
-        </span>
-      </div>
-      <div class="editor-save-input-schema-metrics">
-        ${metricCard(text.groupMetric || "Groups", tf("editorPrep.saveEditInput.groupValue", { count: schema.groups.length }, `${schema.groups.length}`), text.groupHint || "")}
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditInput.fieldValue", { count: schema.fieldCount }, `${schema.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.validationMetric || "Validation", tf("editorPrep.saveEditInput.validationValue", { count: schema.validationRuleCount }, `${schema.validationRuleCount}`), text.validationHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditInput.blockedValue", { count: schema.blockedFieldCount }, `${schema.blockedFieldCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-input-schema-grid">
-        ${schema.groups.map((group) => renderSaveEditInputSchemaGroup(group)).join("")}
-      </div>
-      <div class="editor-save-input-schema-fields">
-        ${schema.fields.map((field) => renderSaveEditInputSchemaField(field)).join("")}
-      </div>
-    </section>
-  `;
+  return renderSaveSlotEditInputSchemaView({
+    schema,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    groupValue: tf("editorPrep.saveEditInput.groupValue", { count: schema.groups.length }, `${schema.groups.length}`),
+    fieldValue: tf("editorPrep.saveEditInput.fieldValue", { count: schema.fieldCount }, `${schema.fieldCount}`),
+    validationValue: tf("editorPrep.saveEditInput.validationValue", { count: schema.validationRuleCount }, `${schema.validationRuleCount}`),
+    blockedValue: tf("editorPrep.saveEditInput.blockedValue", { count: schema.blockedFieldCount }, `${schema.blockedFieldCount}`),
+    groupFieldFormatter: (group) => tf("editorPrep.saveEditInput.groupFieldValue", { count: group.fieldCount }, `${group.fieldCount}`),
+    groupComparableFormatter: (group) => tf("editorPrep.saveEditInput.groupComparableValue", { count: group.comparableRows }, `${group.comparableRows}`),
+  });
 }
 
 function renderSaveSlotEditValidationMatrix(diagnostics) {
   const matrix = createSaveSlotEditValidationMatrix(diagnostics);
   const text = EDITOR_TEXT.saveEditMatrix || {};
-  return `
-    <section class="editor-save-edit-matrix" data-save-edit-validation-matrix>
-      <div class="editor-save-edit-matrix-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validation matrix")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(matrix.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(matrix.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-matrix-metrics">
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditMatrix.fieldValue", { count: matrix.fieldCount }, `${matrix.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.targetMetric || "Targets", tf("editorPrep.saveEditMatrix.targetValue", { count: matrix.targetCount }, `${matrix.targetCount}`), text.targetHint || "")}
-        ${metricCard(text.placeholderMetric || "Placeholders", tf("editorPrep.saveEditMatrix.placeholderValue", { count: matrix.placeholderCount }, `${matrix.placeholderCount}`), text.placeholderHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditMatrix.blockedValue", { count: matrix.blockedRows }, `${matrix.blockedRows}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-matrix-rows">
-        ${matrix.rows.map((row) => renderSaveEditValidationMatrixRow(row)).join("")}
-      </div>
-    </section>
-  `;
+  return renderSaveSlotEditValidationMatrixView({
+    matrix,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    fieldValue: tf("editorPrep.saveEditMatrix.fieldValue", { count: matrix.fieldCount }, `${matrix.fieldCount}`),
+    targetValue: tf("editorPrep.saveEditMatrix.targetValue", { count: matrix.targetCount }, `${matrix.targetCount}`),
+    placeholderValue: tf("editorPrep.saveEditMatrix.placeholderValue", { count: matrix.placeholderCount }, `${matrix.placeholderCount}`),
+    blockedValue: tf("editorPrep.saveEditMatrix.blockedValue", { count: matrix.blockedRows }, `${matrix.blockedRows}`),
+  });
 }
 
 function renderSaveSlotEditValidationRuleDrilldown(diagnostics) {
   const drilldown = createSaveSlotEditValidationRuleDrilldown(diagnostics);
   const text = EDITOR_TEXT.saveEditRuleDrilldown || {};
-  return `
-    <section class="editor-save-edit-rule-drilldown" data-save-edit-rule-drilldown>
-      <div class="editor-save-edit-rule-drilldown-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validation rule drilldown")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(drilldown.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(drilldown.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-rule-drilldown-metrics">
-        ${metricCard(text.ruleMetric || "Rules", tf("editorPrep.saveEditRuleDrilldown.ruleValue", { count: drilldown.ruleCount }, `${drilldown.ruleCount}`), text.ruleHint || "")}
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditRuleDrilldown.fieldValue", { count: drilldown.fieldCount }, `${drilldown.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditRuleDrilldown.checkValue", { count: drilldown.checkCount }, `${drilldown.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditRuleDrilldown.blockedValue", { count: drilldown.blockedCheckCount }, `${drilldown.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-rule-drilldown-grid">
-        ${drilldown.rules.map((rule) => renderSaveEditValidationRuleCard(rule)).join("")}
-      </div>
-    </section>
-  `;
+  return renderSaveSlotEditRuleDrilldownView({
+    drilldown,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    ruleValue: tf("editorPrep.saveEditRuleDrilldown.ruleValue", { count: drilldown.ruleCount }, `${drilldown.ruleCount}`),
+    fieldValue: tf("editorPrep.saveEditRuleDrilldown.fieldValue", { count: drilldown.fieldCount }, `${drilldown.fieldCount}`),
+    checkValue: tf("editorPrep.saveEditRuleDrilldown.checkValue", { count: drilldown.checkCount }, `${drilldown.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditRuleDrilldown.blockedValue", { count: drilldown.blockedCheckCount }, `${drilldown.blockedCheckCount}`),
+  });
 }
 
 function renderSaveSlotEditSamplePayloadPreview(diagnostics) {
   const preview = createSaveSlotEditSamplePayloadPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditSamplePayload || {};
-  return `
-    <section class="editor-save-edit-sample-payload" data-save-edit-sample-payload>
-      <div class="editor-save-edit-sample-payload-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit sample payload")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(preview.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(preview.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-sample-payload-metrics">
-        ${metricCard(text.groupMetric || "Groups", tf("editorPrep.saveEditSamplePayload.groupValue", { count: preview.groupCount }, `${preview.groupCount}`), text.groupHint || "")}
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditSamplePayload.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.ruleMetric || "Rules", tf("editorPrep.saveEditSamplePayload.ruleValue", { count: preview.ruleCount }, `${preview.ruleCount}`), text.ruleHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditSamplePayload.blockedValue", { count: preview.blockedFieldCount }, `${preview.blockedFieldCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-sample-payload-grid">
-        ${preview.groups.map((group) => renderSaveEditSamplePayloadGroup(group)).join("")}
-      </div>
-      <pre class="editor-save-edit-sample-payload-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditSamplePayloadView({
+    preview,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    groupValue: tf("editorPrep.saveEditSamplePayload.groupValue", { count: preview.groupCount }, `${preview.groupCount}`),
+    fieldValue: tf("editorPrep.saveEditSamplePayload.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`),
+    ruleValue: tf("editorPrep.saveEditSamplePayload.ruleValue", { count: preview.ruleCount }, `${preview.ruleCount}`),
+    blockedValue: tf("editorPrep.saveEditSamplePayload.blockedValue", { count: preview.blockedFieldCount }, `${preview.blockedFieldCount}`),
+    groupFieldFormatter: (group) => tf("editorPrep.saveEditSamplePayload.groupFieldValue", { count: group.fieldCount }, `${group.fieldCount}`),
+    fieldChipFormatter: (field) => `${field.path} · ${field.inputKind} · ${text.pendingInput || field.proposedValue}`,
+  });
 }
 
 function renderSaveSlotEditValidatorDryRunPlan(diagnostics) {
   const plan = createSaveSlotEditValidatorDryRunPlan(diagnostics);
   const text = EDITOR_TEXT.saveEditDryRun || {};
-  return `
-    <section class="editor-save-edit-dry-run" data-save-edit-validator-dry-run>
-      <div class="editor-save-edit-dry-run-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validator dry-run plan")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(plan.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(plan.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-dry-run-metrics">
-        ${metricCard(text.stageMetric || "Stages", tf("editorPrep.saveEditDryRun.stageValue", { count: plan.stageCount }, `${plan.stageCount}`), text.stageHint || "")}
-        ${metricCard(text.ruleMetric || "Rules", tf("editorPrep.saveEditDryRun.ruleValue", { count: plan.ruleCount }, `${plan.ruleCount}`), text.ruleHint || "")}
-        ${metricCard(text.blockedStageMetric || "Blocked stages", tf("editorPrep.saveEditDryRun.blockedStageValue", { count: plan.blockedStageCount }, `${plan.blockedStageCount}`), text.blockedStageHint || "")}
-        ${metricCard(text.blockedRuleMetric || "Blocked rules", tf("editorPrep.saveEditDryRun.blockedRuleValue", { count: plan.blockedRuleCount }, `${plan.blockedRuleCount}`), text.blockedRuleHint || "")}
-      </div>
-      <div class="editor-save-edit-dry-run-stages">
-        ${plan.stages.map((stage) => renderSaveEditDryRunStage(stage)).join("")}
-      </div>
-      <div class="editor-save-edit-dry-run-rules">
-        ${plan.rules.map((rule) => renderSaveEditDryRunRule(rule)).join("")}
-      </div>
-    </section>
-  `;
+  return renderSaveSlotEditValidatorDryRunView({
+    plan,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    stageValue: tf("editorPrep.saveEditDryRun.stageValue", { count: plan.stageCount }, `${plan.stageCount}`),
+    ruleValue: tf("editorPrep.saveEditDryRun.ruleValue", { count: plan.ruleCount }, `${plan.ruleCount}`),
+    blockedStageValue: tf("editorPrep.saveEditDryRun.blockedStageValue", { count: plan.blockedStageCount }, `${plan.blockedStageCount}`),
+    blockedRuleValue: tf("editorPrep.saveEditDryRun.blockedRuleValue", { count: plan.blockedRuleCount }, `${plan.blockedRuleCount}`),
+  });
 }
 
 function renderSaveSlotEditValidatorRegistryContract(diagnostics) {
   const contract = createSaveSlotEditValidatorRegistryContract(diagnostics);
   const text = EDITOR_TEXT.saveEditValidatorRegistry || {};
-  return `
-    <section class="editor-save-edit-validator-registry" data-save-edit-validator-registry>
-      <div class="editor-save-edit-validator-registry-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validator registry contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-validator-registry-metrics">
-        ${metricCard(text.ruleMetric || "Rules", tf("editorPrep.saveEditValidatorRegistry.ruleValue", { count: contract.ruleCount }, `${contract.ruleCount}`), text.ruleHint || "")}
-        ${metricCard(text.validatorMetric || "Validators", tf("editorPrep.saveEditValidatorRegistry.validatorValue", { count: contract.validatorCount }, `${contract.validatorCount}`), text.validatorHint || "")}
-        ${metricCard(text.missingMetric || "Missing", tf("editorPrep.saveEditValidatorRegistry.missingValue", { count: contract.missingValidatorCount }, `${contract.missingValidatorCount}`), text.missingHint || "")}
-        ${metricCard(text.contractMetric || "Contract", contract.contractVersion, text.contractHint || "")}
-      </div>
-      <div class="editor-save-edit-validator-registry-grid">
-        ${contract.validators.map((validator) => renderSaveEditValidatorRegistryCard(validator)).join("")}
-      </div>
-    </section>
-  `;
+  return renderSaveSlotEditValidatorRegistryView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    ruleValue: tf("editorPrep.saveEditValidatorRegistry.ruleValue", { count: contract.ruleCount }, `${contract.ruleCount}`),
+    validatorValue: tf("editorPrep.saveEditValidatorRegistry.validatorValue", { count: contract.validatorCount }, `${contract.validatorCount}`),
+    missingValue: tf("editorPrep.saveEditValidatorRegistry.missingValue", { count: contract.missingValidatorCount }, `${contract.missingValidatorCount}`),
+  });
 }
 
 function renderSaveSlotEditValidatorResultSchemaPreview(diagnostics) {
   const schema = createSaveSlotEditValidatorResultSchemaPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditValidatorResult || {};
-  return `
-    <section class="editor-save-edit-validator-result" data-save-edit-validator-result-schema>
-      <div class="editor-save-edit-validator-result-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validator result schema")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(schema.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(schema.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-validator-result-metrics">
-        ${metricCard(text.validatorMetric || "Validators", tf("editorPrep.saveEditValidatorResult.validatorValue", { count: schema.validatorCount }, `${schema.validatorCount}`), text.validatorHint || "")}
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditValidatorResult.fieldValue", { count: schema.fieldCount }, `${schema.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.resultMetric || "Results", tf("editorPrep.saveEditValidatorResult.resultValue", { count: schema.resultCount }, `${schema.resultCount}`), text.resultHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditValidatorResult.blockedValue", { count: schema.blockedResultCount }, `${schema.blockedResultCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-validator-result-grid">
-        ${schema.results.map((result) => renderSaveEditValidatorResultCard(result)).join("")}
-      </div>
-      <pre class="editor-save-edit-validator-result-code"><code>${escapeHtml(JSON.stringify(schema.resultShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditValidatorResultView({
+    schema,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    validatorValue: tf("editorPrep.saveEditValidatorResult.validatorValue", { count: schema.validatorCount }, `${schema.validatorCount}`),
+    fieldValue: tf("editorPrep.saveEditValidatorResult.fieldValue", { count: schema.fieldCount }, `${schema.fieldCount}`),
+    resultValue: tf("editorPrep.saveEditValidatorResult.resultValue", { count: schema.resultCount }, `${schema.resultCount}`),
+    blockedValue: tf("editorPrep.saveEditValidatorResult.blockedValue", { count: schema.blockedResultCount }, `${schema.blockedResultCount}`),
+  });
 }
 
 function renderSaveSlotEditValidatorExecutableDryRunPreview(diagnostics) {
   const preview = createSaveSlotEditValidatorExecutableDryRunPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditValidatorExecutableDryRun || {};
-  return `
-    <section class="editor-save-edit-validator-execution" data-save-edit-validator-executable-dry-run data-status="${escapeAttribute(preview.status)}" data-mode="${escapeAttribute(preview.mode)}" data-apply="${escapeAttribute(preview.apply)}">
-      <div class="editor-save-edit-validator-execution-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validator executable dry-run")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(preview.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(preview.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-validator-execution-metrics">
-        ${metricCard(text.validatorMetric || "Validators", tf("editorPrep.saveEditValidatorExecutableDryRun.validatorValue", { count: preview.validatorCount }, `${preview.validatorCount}`), text.validatorHint || "")}
-        ${metricCard(text.implementedMetric || "Implemented", tf("editorPrep.saveEditValidatorExecutableDryRun.implementedValue", { count: preview.implementedValidatorCount }, `${preview.implementedValidatorCount}`), text.implementedHint || "")}
-        ${metricCard(text.resultMetric || "Results", tf("editorPrep.saveEditValidatorExecutableDryRun.resultValue", { count: preview.resultCount }, `${preview.resultCount}`), text.resultHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditValidatorExecutableDryRun.blockedValue", { count: preview.blockedResultCount }, `${preview.blockedResultCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-validator-execution-grid">
-        ${preview.results.map((result) => renderSaveEditValidatorExecutableDryRunResult(result)).join("")}
-      </div>
-      <pre class="editor-save-edit-validator-execution-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditValidatorExecutableDryRunView({
+    preview,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    validatorValue: tf("editorPrep.saveEditValidatorExecutableDryRun.validatorValue", { count: preview.validatorCount }, `${preview.validatorCount}`),
+    implementedValue: tf("editorPrep.saveEditValidatorExecutableDryRun.implementedValue", { count: preview.implementedValidatorCount }, `${preview.implementedValidatorCount}`),
+    resultValue: tf("editorPrep.saveEditValidatorExecutableDryRun.resultValue", { count: preview.resultCount }, `${preview.resultCount}`),
+    blockedValue: tf("editorPrep.saveEditValidatorExecutableDryRun.blockedValue", { count: preview.blockedResultCount }, `${preview.blockedResultCount}`),
+  });
 }
 
 function renderSaveSlotEditProposedValueInjectorPreview(diagnostics) {
   const preview = createSaveSlotEditProposedValueInjectorPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditProposedValueInjector || {};
-  return `
-    <section class="editor-save-edit-proposed-values" data-save-edit-proposed-value-injector data-status="${escapeAttribute(preview.status)}" data-mode="${escapeAttribute(preview.mode)}" data-injector="${escapeAttribute(preview.injector)}" data-apply="${escapeAttribute(preview.apply)}">
-      <div class="editor-save-edit-proposed-values-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit proposed value injector")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(preview.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(preview.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-proposed-values-metrics">
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditProposedValueInjector.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.validMetric || "Valid samples", tf("editorPrep.saveEditProposedValueInjector.validValue", { count: preview.validSampleCount }, `${preview.validSampleCount}`), text.validHint || "")}
-        ${metricCard(text.invalidMetric || "Invalid samples", tf("editorPrep.saveEditProposedValueInjector.invalidValue", { count: preview.invalidSampleCount }, `${preview.invalidSampleCount}`), text.invalidHint || "")}
-        ${metricCard(text.injectorMetric || "Injector", preview.injector, text.injectorHint || "")}
-      </div>
-      <div class="editor-save-edit-proposed-values-grid">
-        ${preview.fields.map((field) => renderSaveEditProposedValueInjectorField(field)).join("")}
-      </div>
-      <pre class="editor-save-edit-proposed-values-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditProposedValueInjectorView({
+    preview,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    fieldValue: tf("editorPrep.saveEditProposedValueInjector.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`),
+    validValue: tf("editorPrep.saveEditProposedValueInjector.validValue", { count: preview.validSampleCount }, `${preview.validSampleCount}`),
+    invalidValue: tf("editorPrep.saveEditProposedValueInjector.invalidValue", { count: preview.invalidSampleCount }, `${preview.invalidSampleCount}`),
+  });
 }
 
 function renderSaveSlotEditDryRunSampleComparatorPreview(diagnostics) {
   const preview = createSaveSlotEditDryRunSampleComparatorPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditDryRunSampleComparator || {};
-  return `
-    <section class="editor-save-edit-sample-comparator" data-save-edit-dry-run-sample-comparator data-status="${escapeAttribute(preview.status)}" data-mode="${escapeAttribute(preview.mode)}" data-apply="${escapeAttribute(preview.apply)}">
-      <div class="editor-save-edit-sample-comparator-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit dry-run sample comparator")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(preview.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(preview.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-sample-comparator-metrics">
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditDryRunSampleComparator.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.comparableMetric || "Comparable", tf("editorPrep.saveEditDryRunSampleComparator.comparableValue", { count: preview.comparableCount }, `${preview.comparableCount}`), text.comparableHint || "")}
-        ${metricCard(text.readyMetric || "Ready", tf("editorPrep.saveEditDryRunSampleComparator.readyValue", { count: preview.readyComparisonCount }, `${preview.readyComparisonCount}`), text.readyHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditDryRunSampleComparator.blockerValue", { count: preview.blockerCount }, `${preview.blockerCount}`), text.blockerHint || "")}
-      </div>
-      <div class="editor-save-edit-sample-comparator-grid">
-        ${preview.comparisons.map((comparison) => renderSaveEditDryRunSampleComparison(comparison)).join("")}
-      </div>
-      <pre class="editor-save-edit-sample-comparator-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditDryRunSampleComparatorView({
+    preview,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    fieldValue: tf("editorPrep.saveEditDryRunSampleComparator.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`),
+    comparableValue: tf("editorPrep.saveEditDryRunSampleComparator.comparableValue", { count: preview.comparableCount }, `${preview.comparableCount}`),
+    readyValue: tf("editorPrep.saveEditDryRunSampleComparator.readyValue", { count: preview.readyComparisonCount }, `${preview.readyComparisonCount}`),
+    blockerValue: tf("editorPrep.saveEditDryRunSampleComparator.blockerValue", { count: preview.blockerCount }, `${preview.blockerCount}`),
+  });
 }
 
 function renderSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics) {
   const summary = createSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditSampleBridgeBlockerSummary || {};
-  return `
-    <section class="editor-save-edit-sample-bridge" data-save-edit-sample-bridge-blocker-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
-      <div class="editor-save-edit-sample-bridge-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit sample bridge blocker summary")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(summary.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(summary.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-sample-bridge-metrics">
-        ${metricCard(text.readyMetric || "Ready comparisons", tf("editorPrep.saveEditSampleBridgeBlockerSummary.readyValue", { count: summary.readyComparisonCount }, `${summary.readyComparisonCount}`), text.readyHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditSampleBridgeBlockerSummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.bridgeMetric || "Bridge", summary.bridge.status, text.bridgeHint || "")}
-        ${metricCard(text.applyMetric || "Apply", summary.apply, text.applyHint || "")}
-      </div>
-      <div class="editor-save-edit-sample-bridge-grid">
-        ${summary.blockers.map((blocker) => renderSaveEditSampleBridgeBlocker(blocker)).join("")}
-      </div>
-      <pre class="editor-save-edit-sample-bridge-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditSampleBridgeBlockerView({
+    summary,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    readyValue: tf("editorPrep.saveEditSampleBridgeBlockerSummary.readyValue", { count: summary.readyComparisonCount }, `${summary.readyComparisonCount}`),
+    blockerValue: tf("editorPrep.saveEditSampleBridgeBlockerSummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditSampleBridgeBlockerSummary.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditProducedResultBridgeContractPreview(diagnostics) {
   const contract = createSaveSlotEditProducedResultBridgeContractPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditProducedResultBridgeContract || {};
-  return `
-    <section class="editor-save-edit-produced-bridge" data-save-edit-produced-result-bridge-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
-      <div class="editor-save-edit-produced-bridge-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit produced result bridge contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-produced-bridge-metrics">
-        ${metricCard(text.resultMetric || "Results", tf("editorPrep.saveEditProducedResultBridgeContract.resultValue", { count: contract.resultCount }, `${contract.resultCount}`), text.resultHint || "")}
-        ${metricCard(text.routeMetric || "Routes", tf("editorPrep.saveEditProducedResultBridgeContract.routeValue", { count: contract.routeCount }, `${contract.routeCount}`), text.routeHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditProducedResultBridgeContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.adapterMetric || "Adapter", contract.adapter.status, text.adapterHint || "")}
-      </div>
-      <div class="editor-save-edit-produced-bridge-grid">
-        ${contract.routes.map((route) => renderSaveEditProducedResultBridgeRoute(route)).join("")}
-      </div>
-      <pre class="editor-save-edit-produced-bridge-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditProducedResultBridgeView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    resultValue: tf("editorPrep.saveEditProducedResultBridgeContract.resultValue", { count: contract.resultCount }, `${contract.resultCount}`),
+    routeValue: tf("editorPrep.saveEditProducedResultBridgeContract.routeValue", { count: contract.routeCount }, `${contract.routeCount}`),
+    blockerValue: tf("editorPrep.saveEditProducedResultBridgeContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditProducedResultBridgeContract.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditBridgeTransitionChecklistPreview(diagnostics) {
   const checklist = createSaveSlotEditBridgeTransitionChecklistPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditProducedResultBridgeTransitionChecklist || {};
-  return `
-    <section class="editor-save-edit-bridge-transition" data-save-edit-produced-result-bridge-transition-checklist data-status="${escapeAttribute(checklist.status)}" data-mode="${escapeAttribute(checklist.mode)}" data-apply="${escapeAttribute(checklist.apply)}">
-      <div class="editor-save-edit-bridge-transition-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit bridge transition checklist")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(checklist.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(checklist.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-bridge-transition-metrics">
-        ${metricCard(text.producedMetric || "Produced", checklist.producedVersion, text.producedHint || "")}
-        ${metricCard(text.legacyMetric || "Legacy bridge", checklist.legacyBridgeVersion, text.legacyHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.checkValue", { count: checklist.checkCount }, `${checklist.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.blockedValue", { count: checklist.blockedCheckCount }, `${checklist.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-bridge-transition-grid">
-        ${checklist.checks.map((check) => renderSaveEditProducedResultBridgeTransitionCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-bridge-transition-code"><code>${escapeHtml(JSON.stringify(checklist.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditBridgeTransitionView({
+    checklist,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    checkValue: tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.checkValue", { count: checklist.checkCount }, `${checklist.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.blockedValue", { count: checklist.blockedCheckCount }, `${checklist.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics) {
   const plan = createSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditValidatorResultSourceAdapterPlan || {};
-  return `
-    <section class="editor-save-edit-result-source-adapter" data-save-edit-validator-result-source-adapter-plan data-status="${escapeAttribute(plan.status)}" data-mode="${escapeAttribute(plan.mode)}" data-apply="${escapeAttribute(plan.apply)}">
-      <div class="editor-save-edit-result-source-adapter-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validator result source adapter plan")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(plan.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(plan.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-result-source-adapter-metrics">
-        ${metricCard(text.candidateMetric || "Candidates", tf("editorPrep.saveEditValidatorResultSourceAdapterPlan.candidateValue", { count: plan.candidateCount }, `${plan.candidateCount}`), text.candidateHint || "")}
-        ${metricCard(text.readyMetric || "Ready", tf("editorPrep.saveEditValidatorResultSourceAdapterPlan.readyValue", { count: plan.readyCandidateCount }, `${plan.readyCandidateCount}`), text.readyHint || "")}
-        ${metricCard(text.selectedMetric || "Selected", plan.selectedSource, text.selectedHint || "")}
-        ${metricCard(text.adapterMetric || "Adapter", plan.adapter.status, text.adapterHint || "")}
-      </div>
-      <div class="editor-save-edit-result-source-adapter-grid">
-        ${plan.candidates.map((candidate) => renderSaveEditValidatorResultSourceAdapterCandidate(candidate)).join("")}
-      </div>
-      <pre class="editor-save-edit-result-source-adapter-code"><code>${escapeHtml(JSON.stringify(plan.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditValidatorResultSourceAdapterView({
+    plan,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    candidateValue: tf("editorPrep.saveEditValidatorResultSourceAdapterPlan.candidateValue", { count: plan.candidateCount }, `${plan.candidateCount}`),
+    readyValue: tf("editorPrep.saveEditValidatorResultSourceAdapterPlan.readyValue", { count: plan.readyCandidateCount }, `${plan.readyCandidateCount}`),
+  });
 }
 
 function renderSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics) {
   const contract = createSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditSelectedSourceHandoffContract || {};
-  return `
-    <section class="editor-save-edit-source-handoff" data-save-edit-selected-source-handoff-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
-      <div class="editor-save-edit-source-handoff-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit selected source handoff contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-source-handoff-metrics">
-        ${metricCard(text.sourceMetric || "Source", contract.selectedSource, text.sourceHint || "")}
-        ${metricCard(text.fieldMetric || "Payload fields", tf("editorPrep.saveEditSelectedSourceHandoffContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditSelectedSourceHandoffContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditSelectedSourceHandoffContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-source-handoff-grid">
-        ${contract.checks.map((check) => renderSaveEditSelectedSourceHandoffCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-source-handoff-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditSelectedSourceHandoffView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    fieldValue: tf("editorPrep.saveEditSelectedSourceHandoffContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`),
+    checkValue: tf("editorPrep.saveEditSelectedSourceHandoffContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditSelectedSourceHandoffContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditSelectedSourceHandoffContract.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditAdapterRunnerPreflightPreview(diagnostics) {
   const preflight = createSaveSlotEditAdapterRunnerPreflightPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditAdapterRunnerPreflight || {};
-  return `
-    <section class="editor-save-edit-adapter-preflight" data-save-edit-adapter-runner-preflight data-status="${escapeAttribute(preflight.status)}" data-mode="${escapeAttribute(preflight.mode)}" data-apply="${escapeAttribute(preflight.apply)}">
-      <div class="editor-save-edit-adapter-preflight-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit adapter runner preflight")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(preflight.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(preflight.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-adapter-preflight-metrics">
-        ${metricCard(text.payloadMetric || "Payload", tf("editorPrep.saveEditAdapterRunnerPreflight.payloadValue", { count: preflight.payloadFieldCount }, `${preflight.payloadFieldCount}`), text.payloadHint || "")}
-        ${metricCard(text.gateMetric || "Gate blockers", tf("editorPrep.saveEditAdapterRunnerPreflight.gateValue", { count: preflight.gateBlockerCount }, `${preflight.gateBlockerCount}`), text.gateHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditAdapterRunnerPreflight.checkValue", { count: preflight.checkCount }, `${preflight.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditAdapterRunnerPreflight.blockedValue", { count: preflight.blockedCheckCount }, `${preflight.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-adapter-preflight-grid">
-        ${preflight.checks.map((check) => renderSaveEditAdapterRunnerPreflightCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-adapter-preflight-code"><code>${escapeHtml(JSON.stringify(preflight.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditAdapterRunnerPreflightView({
+    preflight,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    payloadValue: tf("editorPrep.saveEditAdapterRunnerPreflight.payloadValue", { count: preflight.payloadFieldCount }, `${preflight.payloadFieldCount}`),
+    gateValue: tf("editorPrep.saveEditAdapterRunnerPreflight.gateValue", { count: preflight.gateBlockerCount }, `${preflight.gateBlockerCount}`),
+    checkValue: tf("editorPrep.saveEditAdapterRunnerPreflight.checkValue", { count: preflight.checkCount }, `${preflight.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditAdapterRunnerPreflight.blockedValue", { count: preflight.blockedCheckCount }, `${preflight.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditAdapterRunnerPreflight.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics) {
   const contract = createSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditConfirmationSourceSelectionContract || {};
-  return `
-    <section class="editor-save-edit-confirm-source" data-save-edit-confirmation-source-selection-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
-      <div class="editor-save-edit-confirm-source-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit confirmation source selection contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-confirm-source-metrics">
-        ${metricCard(text.phraseMetric || "Phrase", contract.requiredPhrase, text.phraseHint || "")}
-        ${metricCard(text.sourceMetric || "Source", contract.sourceSelection.status, text.sourceHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationSourceSelectionContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationSourceSelectionContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-confirm-source-grid">
-        ${contract.checks.map((check) => renderSaveEditConfirmationSourceSelectionCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-confirm-source-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditConfirmationSourceSelectionView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    checkValue: tf("editorPrep.saveEditConfirmationSourceSelectionContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditConfirmationSourceSelectionContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditConfirmationSourceSelectionContract.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditConfirmationInputShellContractPreview(diagnostics) {
   const contract = createSaveSlotEditConfirmationInputShellContractPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditConfirmationInputShellContract || {};
-  return `
-    <section class="editor-save-edit-confirm-input-shell" data-save-edit-confirmation-input-shell-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
-      <div class="editor-save-edit-confirm-input-shell-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit confirmation input shell contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-confirm-input-shell-metrics">
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditConfirmationInputShellContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.phraseMetric || "Phrase", contract.requiredPhrase, text.phraseHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationInputShellContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationInputShellContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-confirm-input-shell-grid">
-        ${contract.fields.map((field) => renderSaveEditConfirmationInputShellField(field)).join("")}
-      </div>
-      <div class="editor-save-edit-confirm-input-shell-grid">
-        ${contract.checks.map((check) => renderSaveEditConfirmationInputShellCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-confirm-input-shell-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditConfirmationInputShellView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    fieldValue: tf("editorPrep.saveEditConfirmationInputShellContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`),
+    checkValue: tf("editorPrep.saveEditConfirmationInputShellContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditConfirmationInputShellContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditConfirmationInputShellContract.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+    fieldStatusLabel: (field) => saveDiagnosticStatusLabel(field.status === "not-created" || field.status === "disabled" || field.status === "not-evaluated" ? "blocked" : "ready"),
+  });
 }
 
 function renderSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics) {
   const summary = createSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {};
-  return `
-    <section class="editor-save-edit-confirm-match-review" data-save-edit-confirmation-match-review-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
-      <div class="editor-save-edit-confirm-match-review-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit confirmation match review summary")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(summary.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(summary.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-confirm-match-review-metrics">
-        ${metricCard(text.reviewMetric || "Review rows", tf("editorPrep.saveEditConfirmationMatchReviewSummary.reviewValue", { count: summary.reviewCount }, `${summary.reviewCount}`), text.reviewHint || "")}
-        ${metricCard(text.sourceMetric || "Result source", summary.resultSource, text.sourceHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationMatchReviewSummary.checkValue", { count: summary.checkCount }, `${summary.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockedValue", { count: summary.blockedCheckCount }, `${summary.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-confirm-match-review-grid">
-        ${summary.reviews.map((review) => renderSaveEditConfirmationMatchReviewRow(review)).join("")}
-      </div>
-      <div class="editor-save-edit-confirm-match-review-grid">
-        ${summary.checks.map((check) => renderSaveEditConfirmationMatchReviewCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-confirm-match-review-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditConfirmationMatchReviewView({
+    summary,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    reviewValue: tf("editorPrep.saveEditConfirmationMatchReviewSummary.reviewValue", { count: summary.reviewCount }, `${summary.reviewCount}`),
+    checkValue: tf("editorPrep.saveEditConfirmationMatchReviewSummary.checkValue", { count: summary.checkCount }, `${summary.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockedValue", { count: summary.blockedCheckCount }, `${summary.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics) {
   const contract = createSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditSubmitRunnerBlockerContract || {};
-  return `
-    <section class="editor-save-edit-submit-runner-blocker" data-save-edit-submit-runner-blocker-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
-      <div class="editor-save-edit-submit-runner-blocker-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit submit runner blocker contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-submit-runner-blocker-metrics">
-        ${metricCard(text.runnerMetric || "Runner", contract.submitRunner, text.runnerHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditSubmitRunnerBlockerContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-submit-runner-blocker-list">
-        <strong>${escapeHtml(text.blockerList || "Submit runner blockers")}</strong>
-        <div class="editor-chip-list">
-          ${contract.blockers.map((blocker) => chip(blocker)).join("")}
-        </div>
-      </div>
-      <div class="editor-save-edit-submit-runner-blocker-grid">
-        ${contract.checks.map((check) => renderSaveEditSubmitRunnerBlockerCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-submit-runner-blocker-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditSubmitRunnerBlockerView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    blockerValue: tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`),
+    checkValue: tf("editorPrep.saveEditSubmitRunnerBlockerContract.checkValue", { count: contract.checkCount }, `${contract.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockedValue", { count: contract.blockedCheckCount }, `${contract.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics) {
   const checklist = createSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditFinalApplyRunnerHandoffChecklist || {};
-  return `
-    <section class="editor-save-edit-apply-runner-handoff" data-save-edit-final-apply-runner-handoff-checklist data-status="${escapeAttribute(checklist.status)}" data-mode="${escapeAttribute(checklist.mode)}" data-apply="${escapeAttribute(checklist.apply)}">
-      <div class="editor-save-edit-apply-runner-handoff-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit final apply runner handoff checklist")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(checklist.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(checklist.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-apply-runner-handoff-metrics">
-        ${metricCard(text.handoffMetric || "Handoff", checklist.handoff, text.handoffHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockerValue", { count: checklist.blockerCount }, `${checklist.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.checkValue", { count: checklist.checkCount }, `${checklist.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockedValue", { count: checklist.blockedCheckCount }, `${checklist.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-apply-runner-handoff-grid">
-        ${checklist.checks.map((check) => renderSaveEditFinalApplyRunnerHandoffCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-apply-runner-handoff-code"><code>${escapeHtml(JSON.stringify(checklist.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditFinalApplyRunnerHandoffView({
+    checklist,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    blockerValue: tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockerValue", { count: checklist.blockerCount }, `${checklist.blockerCount}`),
+    checkValue: tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.checkValue", { count: checklist.checkCount }, `${checklist.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockedValue", { count: checklist.blockedCheckCount }, `${checklist.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics) {
   const preview = createSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics);
   const text = EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {};
-  return `
-    <section class="editor-save-edit-apply-runner-payload" data-save-edit-apply-runner-payload-shape data-status="${escapeAttribute(preview.status)}" data-mode="${escapeAttribute(preview.mode)}" data-runner="${escapeAttribute(preview.applyRunner)}" data-apply="${escapeAttribute(preview.apply)}">
-      <div class="editor-save-edit-apply-runner-payload-head">
-        <div>
-          <span class="eyebrow">${escapeHtml(preview.version)}</span>
-          <h4>${escapeHtml(text.title || "Save edit apply runner payload shape")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only payload shape before any apply runner is created.")}</p>
-        </div>
-        ${chip(preview.status)}
-      </div>
-      <div class="editor-save-edit-apply-runner-payload-metrics">
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditApplyRunnerPayloadShape.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditApplyRunnerPayloadShape.checkValue", { count: preview.checkCount }, `${preview.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditApplyRunnerPayloadShape.blockedValue", { count: preview.blockedCheckCount }, `${preview.blockedCheckCount}`), text.blockedHint || "")}
-        ${metricCard(text.runnerMetric || "Runner", preview.applyRunner, text.runnerHint || "")}
-      </div>
-      <div class="editor-save-edit-apply-runner-payload-grid">
-        ${preview.fields.map((field) => renderSaveEditApplyRunnerPayloadField(field)).join("")}
-        ${preview.checks.map((check) => renderSaveEditApplyRunnerPayloadCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-apply-runner-payload-code"><code>${escapeHtml(JSON.stringify(preview.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditApplyRunnerPayloadShapeView({
+    preview,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    fieldValue: tf("editorPrep.saveEditApplyRunnerPayloadShape.fieldValue", { count: preview.fieldCount }, `${preview.fieldCount}`),
+    checkValue: tf("editorPrep.saveEditApplyRunnerPayloadShape.checkValue", { count: preview.checkCount }, `${preview.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditApplyRunnerPayloadShape.blockedValue", { count: preview.blockedCheckCount }, `${preview.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditApplyRunnerPayloadShape.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics) {
   const summary = createSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditPayloadBridgeCompatibilitySummary || {};
-  return `
-    <section class="editor-save-edit-payload-bridge" data-save-edit-apply-runner-payload-bridge-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
-      <div class="editor-save-edit-payload-bridge-head">
-        <div>
-          <span class="eyebrow">${escapeHtml(summary.version)}</span>
-          <h4>${escapeHtml(text.title || "Payload to bridge compatibility")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only compatibility blockers before the payload can feed the apply bridge.")}</p>
-        </div>
-        ${chip(summary.status)}
-      </div>
-      <div class="editor-save-edit-payload-bridge-metrics">
-        ${metricCard(text.rowMetric || "Rows", tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.rowValue", { count: summary.rowCount }, `${summary.rowCount}`), text.rowHint || "")}
-        ${metricCard(text.readyMetric || "Ready", tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.readyValue", { count: summary.readyRowCount }, `${summary.readyRowCount}`), text.readyHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.bridgeMetric || "Bridge", summary.bridgeVersion, text.bridgeHint || "")}
-      </div>
-      <div class="editor-save-edit-payload-bridge-grid">
-        ${summary.rows.map((row) => renderSaveEditPayloadBridgeCompatibilityRow(row)).join("")}
-      </div>
-      <pre class="editor-save-edit-payload-bridge-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditPayloadBridgeCompatibilityView({
+    summary,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    rowValue: tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.rowValue", { count: summary.rowCount }, `${summary.rowCount}`),
+    readyValue: tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.readyValue", { count: summary.readyRowCount }, `${summary.readyRowCount}`),
+    blockerValue: tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
   const bridge = createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics);
   const text = EDITOR_TEXT.saveEditValidatorApplyGateBridge || {};
-  return `
-    <section class="editor-save-edit-validator-bridge" data-save-edit-validator-apply-bridge data-status="${escapeAttribute(bridge.status)}" data-mode="${escapeAttribute(bridge.mode)}" data-apply="${escapeAttribute(bridge.apply)}">
-      <div class="editor-save-edit-validator-bridge-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validator apply bridge")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(bridge.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(bridge.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-validator-bridge-metrics">
-        ${metricCard(text.resultMetric || "Results", tf("editorPrep.saveEditValidatorApplyGateBridge.resultValue", { count: bridge.resultCount }, `${bridge.resultCount}`), text.resultHint || "")}
-        ${metricCard(text.gateMetric || "Gate blockers", tf("editorPrep.saveEditValidatorApplyGateBridge.gateValue", { count: bridge.gateBlockedChecks }, `${bridge.gateBlockedChecks}`), text.gateHint || "")}
-        ${metricCard(text.stepMetric || "Bridge steps", tf("editorPrep.saveEditValidatorApplyGateBridge.stepValue", { count: bridge.stepCount }, `${bridge.stepCount}`), text.stepHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditValidatorApplyGateBridge.blockedValue", { count: bridge.blockedStepCount }, `${bridge.blockedStepCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-validator-bridge-blockers">
-        <strong>${escapeHtml(text.blockerList || "Bridge blockers")}</strong>
-        <div class="editor-chip-list">
-          ${bridge.gateBlockers.map((item) => chip(`${item.id}: ${item.blocker}`)).join("")}
-        </div>
-      </div>
-      <div class="editor-save-edit-validator-bridge-grid">
-        ${bridge.steps.map((step) => renderSaveEditValidatorApplyGateBridgeStep(step)).join("")}
-      </div>
-      <pre class="editor-save-edit-validator-bridge-code"><code>${escapeHtml(JSON.stringify(bridge.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditValidatorApplyGateBridgeView({
+    bridge,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    resultValue: tf("editorPrep.saveEditValidatorApplyGateBridge.resultValue", { count: bridge.resultCount }, `${bridge.resultCount}`),
+    gateValue: tf("editorPrep.saveEditValidatorApplyGateBridge.gateValue", { count: bridge.gateBlockedChecks }, `${bridge.gateBlockedChecks}`),
+    stepValue: tf("editorPrep.saveEditValidatorApplyGateBridge.stepValue", { count: bridge.stepCount }, `${bridge.stepCount}`),
+    blockedValue: tf("editorPrep.saveEditValidatorApplyGateBridge.blockedValue", { count: bridge.blockedStepCount }, `${bridge.blockedStepCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditValidatorApplyGateBridge.blockerValue", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics) {
   const rollup = createSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {};
-  return `
-    <section class="editor-save-edit-compat-confirm-rollup" data-save-edit-compatibility-confirmation-rollup data-status="${escapeAttribute(rollup.status)}" data-mode="${escapeAttribute(rollup.mode)}" data-apply="${escapeAttribute(rollup.apply)}">
-      <div class="editor-save-edit-compat-confirm-rollup-head">
-        <div>
-          <span class="eyebrow">${escapeHtml(rollup.version)}</span>
-          <h4>${escapeHtml(text.title || "Save edit compatibility to confirmation rollup")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only blocker rollup before confirmation preflight can be converted into real controls.")}</p>
-        </div>
-        ${chip(rollup.status)}
-      </div>
-      <div class="editor-save-edit-compat-confirm-rollup-metrics">
-        ${metricCard(text.laneMetric || "Lanes", tf("editorPrep.saveEditCompatibilityConfirmationRollup.laneValue", { count: rollup.laneCount }, `${rollup.laneCount}`), text.laneHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerValue", { count: rollup.blockerCount }, `${rollup.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditCompatibilityConfirmationRollup.checkValue", { count: rollup.checkCount }, `${rollup.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockedValue", { count: rollup.blockedCheckCount }, `${rollup.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-compat-confirm-rollup-lanes">
-        ${rollup.lanes.map((lane) => renderSaveEditCompatibilityConfirmationRollupLane(lane)).join("")}
-      </div>
-      <div class="editor-save-edit-compat-confirm-rollup-grid">
-        ${rollup.checks.map((check) => renderSaveEditCompatibilityConfirmationRollupCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-compat-confirm-rollup-code"><code>${escapeHtml(JSON.stringify(rollup.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditCompatibilityConfirmationRollupView({
+    rollup,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    laneValue: tf("editorPrep.saveEditCompatibilityConfirmationRollup.laneValue", { count: rollup.laneCount }, `${rollup.laneCount}`),
+    blockerValue: tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerValue", { count: rollup.blockerCount }, `${rollup.blockerCount}`),
+    checkValue: tf("editorPrep.saveEditCompatibilityConfirmationRollup.checkValue", { count: rollup.checkCount }, `${rollup.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockedValue", { count: rollup.blockedCheckCount }, `${rollup.blockedCheckCount}`),
+    laneBlockerValueFormatter: (count) => tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerValue", { count }, `${count}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics) {
   const preflight = createSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {};
-  return `
-    <section class="editor-save-edit-validator-preflight" data-save-edit-validator-confirmation-preflight data-status="${escapeAttribute(preflight.status)}" data-mode="${escapeAttribute(preflight.mode)}" data-apply="${escapeAttribute(preflight.apply)}">
-      <div class="editor-save-edit-validator-preflight-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit validator confirmation preflight")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(preflight.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(preflight.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-validator-preflight-metrics">
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditValidatorConfirmationPreflight.blockerValue", { count: preflight.blockerCount }, `${preflight.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditValidatorConfirmationPreflight.checkValue", { count: preflight.checkCount }, `${preflight.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditValidatorConfirmationPreflight.blockedValue", { count: preflight.blockedCheckCount }, `${preflight.blockedCheckCount}`), text.blockedHint || "")}
-        ${metricCard(text.phraseMetric || "Phrase", preflight.requiredPhrase, text.phraseHint || "")}
-      </div>
-      <div class="editor-save-edit-validator-preflight-groups">
-        ${preflight.groups.map((group) => renderSaveEditValidatorConfirmationPreflightGroup(group)).join("")}
-      </div>
-      <div class="editor-save-edit-validator-preflight-grid">
-        ${preflight.checks.map((check) => renderSaveEditValidatorConfirmationPreflightCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-validator-preflight-code"><code>${escapeHtml(JSON.stringify(preflight.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditValidatorConfirmationPreflightView({
+    preflight,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    blockerValue: tf("editorPrep.saveEditValidatorConfirmationPreflight.blockerValue", { count: preflight.blockerCount }, `${preflight.blockerCount}`),
+    checkValue: tf("editorPrep.saveEditValidatorConfirmationPreflight.checkValue", { count: preflight.checkCount }, `${preflight.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditValidatorConfirmationPreflight.blockedValue", { count: preflight.blockedCheckCount }, `${preflight.blockedCheckCount}`),
+    groupBlockerValueFormatter: (count) => tf("editorPrep.saveEditValidatorConfirmationPreflight.groupBlockerValue", { count }, `${count}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditValidatorConfirmationPreflight.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditConfirmationInputContractPreview(diagnostics) {
   const contract = createSaveSlotEditConfirmationInputContractPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditConfirmationInputContract || {};
-  return `
-    <section class="editor-save-edit-confirmation-contract" data-save-edit-confirmation-input-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
-      <div class="editor-save-edit-confirmation-contract-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit confirmation input contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-confirmation-contract-metrics">
-        ${metricCard(text.fieldMetric || "Fields", tf("editorPrep.saveEditConfirmationInputContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`), text.fieldHint || "")}
-        ${metricCard(text.guardMetric || "Guards", tf("editorPrep.saveEditConfirmationInputContract.guardValue", { count: contract.guardCount }, `${contract.guardCount}`), text.guardHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditConfirmationInputContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.runnerMetric || "Runner", contract.applyRunner.status, text.runnerHint || "")}
-      </div>
-      <div class="editor-save-edit-confirmation-contract-grid">
-        ${contract.fields.map((field) => renderSaveEditConfirmationInputContractField(field)).join("")}
-      </div>
-      <div class="editor-save-edit-confirmation-runner" data-save-edit-apply-runner-contract data-status="${escapeAttribute(contract.applyRunner.status)}">
-        <div>
-          <strong>${escapeHtml(text.runnerTitle || "Apply runner contract")}</strong>
-          <span>${escapeHtml(contract.applyRunner.status)}</span>
-        </div>
-        <div class="editor-chip-list">
-          ${contract.applyRunner.requires.map((item) => chip(item)).join("")}
-          ${contract.applyRunner.blockers.map((item) => chip(item)).join("")}
-        </div>
-      </div>
-      <pre class="editor-save-edit-confirmation-contract-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditConfirmationInputContractView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    fieldValue: tf("editorPrep.saveEditConfirmationInputContract.fieldValue", { count: contract.fieldCount }, `${contract.fieldCount}`),
+    guardValue: tf("editorPrep.saveEditConfirmationInputContract.guardValue", { count: contract.guardCount }, `${contract.guardCount}`),
+    blockerValue: tf("editorPrep.saveEditConfirmationInputContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`),
+  });
 }
 
 function renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics) {
   const summary = createSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {};
-  return `
-    <section class="editor-save-edit-confirm-runner-handoff" data-save-edit-confirmation-runner-handoff-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}">
-      <div class="editor-save-edit-confirm-runner-handoff-head">
-        <div>
-          <span class="eyebrow">${escapeHtml(summary.version)}</span>
-          <h4>${escapeHtml(text.title || "Save edit confirmation to runner handoff")}</h4>
-          <p class="muted">${escapeHtml(text.description || "Read-only blocker summary before confirmation input can hand off to an apply runner.")}</p>
-        </div>
-        ${chip(summary.status)}
-      </div>
-      <div class="editor-save-edit-confirm-runner-handoff-metrics">
-        ${metricCard(text.rowMetric || "Rows", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.rowValue", { count: summary.rowCount }, `${summary.rowCount}`), text.rowHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.checkValue", { count: summary.checkCount }, `${summary.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockedValue", { count: summary.blockedCheckCount }, `${summary.blockedCheckCount}`), text.blockedHint || "")}
-      </div>
-      <div class="editor-save-edit-confirm-runner-handoff-grid">
-        ${summary.rows.map((row) => renderSaveEditConfirmationRunnerHandoffRow(row)).join("")}
-      </div>
-      <div class="editor-save-edit-confirm-runner-handoff-checks">
-        ${summary.checks.map((check) => renderSaveEditConfirmationRunnerHandoffCheck(check)).join("")}
-      </div>
-      <pre class="editor-save-edit-confirm-runner-handoff-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditConfirmationRunnerHandoffView({
+    summary,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    rowValue: tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.rowValue", { count: summary.rowCount }, `${summary.rowCount}`),
+    blockerValue: tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`),
+    checkValue: tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.checkValue", { count: summary.checkCount }, `${summary.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockedValue", { count: summary.blockedCheckCount }, `${summary.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics) {
   const review = createSaveSlotEditWriterPayloadCheckpointPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditWriterPayloadCheckpoint || {};
-  return `
-    <section class="editor-save-edit-writer-checkpoint" data-save-edit-writer-payload-checkpoint data-status="${escapeAttribute(review.status)}" data-mode="${escapeAttribute(review.mode)}" data-apply="${escapeAttribute(review.apply)}">
-      <div class="editor-save-edit-writer-checkpoint-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit writer payload checkpoint")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(review.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(review.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-writer-checkpoint-metrics">
-        ${metricCard(text.targetMetric || "Targets", tf("editorPrep.saveEditWriterPayloadCheckpoint.targetValue", { count: review.targetCount }, `${review.targetCount}`), text.targetHint || "")}
-        ${metricCard(text.checkMetric || "Checks", tf("editorPrep.saveEditWriterPayloadCheckpoint.checkValue", { count: review.checkCount }, `${review.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockedMetric || "Blocked", tf("editorPrep.saveEditWriterPayloadCheckpoint.blockedValue", { count: review.blockedCheckCount }, `${review.blockedCheckCount}`), text.blockedHint || "")}
-        ${metricCard(text.checkpointMetric || "Checkpoint", review.rollbackCheckpoint.status, text.checkpointHint || "")}
-      </div>
-      <div class="editor-save-edit-writer-checkpoint-grid">
-        ${review.checks.map((check) => renderSaveEditWriterPayloadCheckpointCheck(check)).join("")}
-      </div>
-      <div class="editor-save-edit-writer-checkpoint-route" data-save-edit-rollback-checkpoint-contract data-status="${escapeAttribute(review.rollbackCheckpoint.status)}">
-        <div>
-          <strong>${escapeHtml(text.rollbackTitle || "Rollback checkpoint contract")}</strong>
-          <span>${escapeHtml(review.rollbackCheckpoint.status)}</span>
-        </div>
-        <div class="editor-chip-list">
-          ${review.rollbackCheckpoint.keys.map((item) => chip(item)).join("")}
-          ${review.rollbackCheckpoint.blockers.map((item) => chip(item)).join("")}
-        </div>
-      </div>
-      <pre class="editor-save-edit-writer-checkpoint-code"><code>${escapeHtml(JSON.stringify(review.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditWriterPayloadCheckpointView({
+    review,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    targetValue: tf("editorPrep.saveEditWriterPayloadCheckpoint.targetValue", { count: review.targetCount }, `${review.targetCount}`),
+    checkValue: tf("editorPrep.saveEditWriterPayloadCheckpoint.checkValue", { count: review.checkCount }, `${review.checkCount}`),
+    blockedValue: tf("editorPrep.saveEditWriterPayloadCheckpoint.blockedValue", { count: review.blockedCheckCount }, `${review.blockedCheckCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditWriterPayloadCheckpoint.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics) {
   const contract = createSaveSlotEditPostWriteRestoreContractPreview(diagnostics);
   const text = EDITOR_TEXT.saveEditPostWriteRestoreContract || {};
-  return `
-    <section class="editor-save-edit-postwrite-restore" data-save-edit-postwrite-restore-contract data-status="${escapeAttribute(contract.status)}" data-mode="${escapeAttribute(contract.mode)}" data-apply="${escapeAttribute(contract.apply)}">
-      <div class="editor-save-edit-postwrite-restore-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit post-write restore contract")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(contract.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(contract.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-postwrite-restore-metrics">
-        ${metricCard(text.validationMetric || "Validation", contract.postWriteValidation.status, text.validationHint || "")}
-        ${metricCard(text.routeMetric || "Routes", tf("editorPrep.saveEditPostWriteRestoreContract.routeValue", { count: contract.routeCount }, `${contract.routeCount}`), text.routeHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditPostWriteRestoreContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.restoreMetric || "Restore", contract.restoreRunner.status, text.restoreHint || "")}
-      </div>
-      <div class="editor-save-edit-postwrite-restore-grid">
-        ${contract.routes.map((route) => renderSaveEditPostWriteRestoreRoute(route)).join("")}
-      </div>
-      <pre class="editor-save-edit-postwrite-restore-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditPostWriteRestoreContractView({
+    contract,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    routeValue: tf("editorPrep.saveEditPostWriteRestoreContract.routeValue", { count: contract.routeCount }, `${contract.routeCount}`),
+    blockerValue: tf("editorPrep.saveEditPostWriteRestoreContract.blockerValue", { count: contract.blockerCount }, `${contract.blockerCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditPostWriteRestoreContract.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function renderSaveSlotEditWriterEnablementRiskSummary(diagnostics) {
   const summary = createSaveSlotEditWriterEnablementRiskSummary(diagnostics);
   const text = EDITOR_TEXT.saveEditWriterEnablementRisk || {};
-  return `
-    <section class="editor-save-edit-writer-unlock" data-save-edit-writer-enable-risk-summary data-status="${escapeAttribute(summary.status)}" data-mode="${escapeAttribute(summary.mode)}" data-apply="${escapeAttribute(summary.apply)}" data-unlock="${escapeAttribute(summary.manualUnlock.status)}">
-      <div class="editor-save-edit-writer-unlock-head">
-        <div>
-          <h4>${escapeHtml(text.title || "Save edit writer enablement risk")}</h4>
-          <p class="muted">${escapeHtml(text.description || "")}</p>
-        </div>
-        <span data-status="${escapeAttribute(summary.status)}">
-          ${escapeHtml(saveDiagnosticStatusLabel(summary.status))}
-        </span>
-      </div>
-      <div class="editor-save-edit-writer-unlock-metrics">
-        ${metricCard(text.riskMetric || "Risk", summary.riskLevel, text.riskHint || "")}
-        ${metricCard(text.checkMetric || "Checklist", tf("editorPrep.saveEditWriterEnablementRisk.checkValue", { count: summary.checkCount }, `${summary.checkCount}`), text.checkHint || "")}
-        ${metricCard(text.blockerMetric || "Blockers", tf("editorPrep.saveEditWriterEnablementRisk.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`), text.blockerHint || "")}
-        ${metricCard(text.unlockMetric || "Manual unlock", summary.manualUnlock.status, text.unlockHint || "")}
-      </div>
-      <div class="editor-save-edit-writer-unlock-grid">
-        ${summary.checklist.map((check) => renderSaveEditWriterEnablementRiskCheck(check)).join("")}
-      </div>
-      <div class="editor-save-edit-writer-unlock-manual" data-save-edit-manual-unlock-checklist data-status="${escapeAttribute(summary.manualUnlock.status)}">
-        <div>
-          <strong>${escapeHtml(text.manualTitle || "Manual unlock checklist")}</strong>
-          <span>${escapeHtml(summary.manualUnlock.status)}</span>
-        </div>
-        <div class="editor-chip-list">
-          ${summary.manualUnlock.requiredReview.map((item) => chip(item)).join("")}
-          ${summary.manualUnlock.blockers.map((item) => chip(item)).join("")}
-        </div>
-      </div>
-      <pre class="editor-save-edit-writer-unlock-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
-    </section>
-  `;
+  return renderSaveSlotEditWriterEnablementRiskView({
+    summary,
+    text,
+    metricCard,
+    statusLabel: saveDiagnosticStatusLabel,
+    checkValue: tf("editorPrep.saveEditWriterEnablementRisk.checkValue", { count: summary.checkCount }, `${summary.checkCount}`),
+    blockerValue: tf("editorPrep.saveEditWriterEnablementRisk.blockerValue", { count: summary.blockerCount }, `${summary.blockerCount}`),
+    blockerFormatter: (blocker) => tf("editorPrep.saveEditWriterEnablementRisk.blockerText", { blocker }, `${text.blocker || "Blocker"}: ${blocker}`),
+  });
 }
 
 function createSaveSlotDraftDiffSummary(diagnostics) {
@@ -8093,9 +3521,13 @@ function createSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics) 
     saveEditConfirmationRunnerHandoffCheck("apply-runner-bound", false, text.checkLabels?.applyRunnerBound, text.checkDetails?.applyRunnerBound, "apply-runner-missing"),
     saveEditConfirmationRunnerHandoffCheck("writer-enabled", false, text.checkLabels?.writerEnabled, text.checkDetails?.writerEnabled, "writer-disabled"),
   ];
+  const contractBlockers = Array.isArray(contract.blockers) ? contract.blockers : [];
+  const checkpointBlockers = Array.isArray(checkpoint.blockers)
+    ? checkpoint.blockers
+    : (Array.isArray(checkpoint.rollbackCheckpoint?.blockers) ? checkpoint.rollbackCheckpoint.blockers : []);
   const blockers = Array.from(new Set([
-    ...contract.blockers,
-    ...checkpoint.blockers,
+    ...contractBlockers,
+    ...checkpointBlockers,
     ...rows.map((row) => row.blocker).filter(Boolean),
     ...checks.map((check) => check.blocker).filter(Boolean),
   ]));
@@ -8758,746 +4190,6 @@ function saveEditValidationRuleCheck(id, isReady, label, detail) {
   };
 }
 
-function renderSaveEditValidationMatrixRow(row) {
-  const text = EDITOR_TEXT.saveEditMatrix || {};
-  return `
-    <article class="editor-save-edit-matrix-row" data-save-edit-validation-row="${escapeAttribute(row.path)}" data-status="${escapeAttribute(row.status)}">
-      <div>
-        <strong>${escapeHtml(row.path)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(row.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.proposedValue || "Proposed")}</dt>
-          <dd>${escapeHtml(text.pendingInput || row.proposedValue)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.validationResult || "Validation")}</dt>
-          <dd>${escapeHtml(row.validationResult)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.currentStatus || "Current")}</dt>
-          <dd>${escapeHtml(row.currentStatus)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.targetCount || "Targets")}</dt>
-          <dd>${escapeHtml(String(row.targetCount))}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.inputKind || "Input")}</dt>
-          <dd>${escapeHtml(row.inputKind)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(row.blocker)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditValidationRuleCard(rule) {
-  const text = EDITOR_TEXT.saveEditRuleDrilldown || {};
-  return `
-    <article class="editor-save-edit-rule-card" data-save-edit-validation-rule="${escapeAttribute(rule.id)}" data-status="${escapeAttribute(rule.status)}" data-check-count="${escapeAttribute(String(rule.checkCount))}">
-      <div class="editor-save-edit-rule-card-head">
-        <div>
-          <strong>${escapeHtml(rule.label)}</strong>
-          <code>${escapeHtml(rule.id)}</code>
-        </div>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(rule.status))}</span>
-      </div>
-      <dl class="editor-save-edit-rule-card-meta">
-        <div>
-          <dt>${escapeHtml(text.fieldCount || "Fields")}</dt>
-          <dd>${escapeHtml(String(rule.fieldCount))}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.targetCount || "Targets")}</dt>
-          <dd>${escapeHtml(String(rule.targetCount))}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blockedChecks || "Blocked checks")}</dt>
-          <dd>${escapeHtml(String(rule.blockedCheckCount))}</dd>
-        </div>
-      </dl>
-      <div class="editor-save-edit-rule-chip-block">
-        <span>${escapeHtml(text.paths || "Paths")}</span>
-        <div class="editor-chip-list">
-          ${rule.paths.map((path) => chip(path)).join("")}
-        </div>
-      </div>
-      <div class="editor-save-edit-rule-chip-block">
-        <span>${escapeHtml(text.inputKinds || "Input kinds")}</span>
-        <div class="editor-chip-list">
-          ${rule.inputKinds.map((kind) => chip(kind)).join("")}
-          ${rule.blockers.map((blocker) => chip(blocker)).join("")}
-        </div>
-      </div>
-      <div class="editor-save-edit-rule-checks">
-        ${rule.checks.map((check) => renderSaveEditValidationRuleCheck(check)).join("")}
-      </div>
-    </article>
-  `;
-}
-
-function renderSaveEditValidationRuleCheck(check) {
-  return `
-    <div class="editor-save-edit-rule-check" data-save-edit-rule-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-    </div>
-  `;
-}
-
-function renderSaveEditDryRunStage(stage) {
-  return `
-    <article class="editor-save-edit-dry-run-stage" data-save-edit-dry-run-stage="${escapeAttribute(stage.id)}" data-status="${escapeAttribute(stage.status)}">
-      <div>
-        <strong>${escapeHtml(stage.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(stage.status))}</span>
-      </div>
-      ${stage.detail ? `<p>${escapeHtml(stage.detail)}</p>` : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditDryRunRule(rule) {
-  const text = EDITOR_TEXT.saveEditDryRun || {};
-  return `
-    <article class="editor-save-edit-dry-run-rule" data-save-edit-dry-run-rule="${escapeAttribute(rule.id)}" data-status="${escapeAttribute(rule.status)}">
-      <div>
-        <strong>${escapeHtml(rule.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(rule.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.fieldCount || "Fields")}</dt>
-          <dd>${escapeHtml(String(rule.fieldCount))}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.mode || "Mode")}</dt>
-          <dd>${escapeHtml(rule.mode)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(rule.blocker)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditValidatorRegistryCard(validator) {
-  const text = EDITOR_TEXT.saveEditValidatorRegistry || {};
-  return `
-    <article class="editor-save-edit-validator-card" data-save-edit-validator="${escapeAttribute(validator.ruleId)}" data-status="${escapeAttribute(validator.status)}">
-      <div>
-        <strong>${escapeHtml(validator.label)}</strong>
-        <span>${escapeHtml(validator.status)}</span>
-      </div>
-      <code>${escapeHtml(validator.functionName)}</code>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.fieldCount || "Fields")}</dt>
-          <dd>${escapeHtml(String(validator.fieldCount))}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.mode || "Mode")}</dt>
-          <dd>${escapeHtml(validator.mode)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.inputs || "Inputs")}</dt>
-          <dd>${escapeHtml(validator.inputs.join(", "))}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.outputs || "Outputs")}</dt>
-          <dd>${escapeHtml(validator.outputs.join(", "))}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditValidatorResultCard(result) {
-  const text = EDITOR_TEXT.saveEditValidatorResult || {};
-  return `
-    <article class="editor-save-edit-validator-result-card" data-save-edit-validator-result="${escapeAttribute(result.ruleId)}" data-status="${escapeAttribute(result.status)}">
-      <div>
-        <strong>${escapeHtml(result.ruleId)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(result.status))}</span>
-      </div>
-      <code>${escapeHtml(result.functionName)}</code>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.fieldCount || "Fields")}</dt>
-          <dd>${escapeHtml(String(result.fieldCount))}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.resultStatus || "Result")}</dt>
-          <dd>${escapeHtml(result.resultStatus)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.normalizedValue || "Normalized")}</dt>
-          <dd>${escapeHtml(result.normalizedValue)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(result.blocker)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditValidatorExecutableDryRunResult(result) {
-  const text = EDITOR_TEXT.saveEditValidatorExecutableDryRun || {};
-  return `
-    <article class="editor-save-edit-validator-execution-result" data-save-edit-validator-executable-result="${escapeAttribute(result.path)}" data-status="${escapeAttribute(result.status)}">
-      <div>
-        <strong>${escapeHtml(result.path)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(result.status))}</span>
-      </div>
-      <code>${escapeHtml(result.functionName)}</code>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.ruleId || "Rule")}</dt>
-          <dd>${escapeHtml(result.ruleId)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.resultStatus || "Result")}</dt>
-          <dd>${escapeHtml(result.resultStatus)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.normalizedValue || "Normalized")}</dt>
-          <dd>${escapeHtml(result.normalizedValue)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(result.blocker || "")}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditProposedValueInjectorField(field) {
-  const text = EDITOR_TEXT.saveEditProposedValueInjector || {};
-  return `
-    <article class="editor-save-edit-proposed-values-field" data-save-edit-proposed-value-field="${escapeAttribute(field.path)}" data-status="${escapeAttribute(field.inputStatus)}">
-      <div>
-        <strong>${escapeHtml(field.path)}</strong>
-        <span>${escapeHtml(field.inputStatus)}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.ruleId || "Rule")}</dt>
-          <dd>${escapeHtml(field.validationRule)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.validSample || "Valid sample")}</dt>
-          <dd>${escapeHtml(`${field.validSample} -> ${field.validResult}`)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.invalidSample || "Invalid sample")}</dt>
-          <dd>${escapeHtml(`${field.invalidSample} -> ${field.invalidResult}`)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(field.blocker)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditDryRunSampleComparison(comparison) {
-  const text = EDITOR_TEXT.saveEditDryRunSampleComparator || {};
-  return `
-    <article class="editor-save-edit-sample-comparator-card" data-save-edit-dry-run-sample-comparison="${escapeAttribute(comparison.path)}" data-status="${escapeAttribute(comparison.status)}">
-      <div>
-        <strong>${escapeHtml(comparison.path)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(comparison.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.ruleId || "Rule")}</dt>
-          <dd>${escapeHtml(comparison.ruleId)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.missingResult || "Missing")}</dt>
-          <dd>${escapeHtml(`${comparison.missingResult} / ${comparison.missingBlocker}`)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.validResult || "Valid")}</dt>
-          <dd>${escapeHtml(comparison.validResult)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.invalidResult || "Invalid")}</dt>
-          <dd>${escapeHtml(comparison.invalidResult)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditSampleBridgeBlocker(blocker) {
-  const text = EDITOR_TEXT.saveEditSampleBridgeBlockerSummary || {};
-  return `
-    <article class="editor-save-edit-sample-bridge-card" data-save-edit-sample-bridge-blocker="${escapeAttribute(blocker.id)}" data-status="${escapeAttribute(blocker.status)}">
-      <div>
-        <strong>${escapeHtml(text.blockerLabels?.[blocker.id] || blocker.id)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(blocker.status))}</span>
-      </div>
-      ${blocker.blocker ? chip(tf("editorPrep.saveEditSampleBridgeBlockerSummary.blockerText", { blocker: blocker.blocker }, `${text.blocker || "Blocker"}: ${blocker.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditProducedResultBridgeRoute(route) {
-  const text = EDITOR_TEXT.saveEditProducedResultBridgeContract || {};
-  return `
-    <article class="editor-save-edit-produced-bridge-route" data-save-edit-produced-result-bridge-route="${escapeAttribute(route.id)}" data-status="${escapeAttribute(route.status)}">
-      <div>
-        <strong>${escapeHtml(text.routeLabels?.[route.id] || route.id)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(route.status))}</span>
-      </div>
-      ${route.blocker ? chip(tf("editorPrep.saveEditProducedResultBridgeContract.blockerText", { blocker: route.blocker }, `${text.blocker || "Blocker"}: ${route.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditProducedResultBridgeTransitionCheck(check) {
-  const text = EDITOR_TEXT.saveEditProducedResultBridgeTransitionChecklist || {};
-  return `
-    <article class="editor-save-edit-bridge-transition-check" data-save-edit-produced-result-bridge-transition-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditProducedResultBridgeTransitionChecklist.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditValidatorResultSourceAdapterCandidate(candidate) {
-  const text = EDITOR_TEXT.saveEditValidatorResultSourceAdapterPlan || {};
-  return `
-    <article class="editor-save-edit-result-source-adapter-candidate" data-save-edit-validator-result-source-adapter-candidate="${escapeAttribute(candidate.id)}" data-status="${escapeAttribute(candidate.status)}">
-      <div>
-        <strong>${escapeHtml(text.candidateLabels?.[candidate.id] || candidate.id)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(candidate.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.sourceVersion || "Source")}</dt>
-          <dd>${escapeHtml(candidate.sourceVersion)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.sourceBlocker || "Blocker")}</dt>
-          <dd>${escapeHtml(candidate.blocker || text.noBlocker || "none")}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditSelectedSourceHandoffCheck(check) {
-  const text = EDITOR_TEXT.saveEditSelectedSourceHandoffContract || {};
-  return `
-    <article class="editor-save-edit-source-handoff-check" data-save-edit-selected-source-handoff-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditSelectedSourceHandoffContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditAdapterRunnerPreflightCheck(check) {
-  const text = EDITOR_TEXT.saveEditAdapterRunnerPreflight || {};
-  return `
-    <article class="editor-save-edit-adapter-preflight-check" data-save-edit-adapter-runner-preflight-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditAdapterRunnerPreflight.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationSourceSelectionCheck(check) {
-  const text = EDITOR_TEXT.saveEditConfirmationSourceSelectionContract || {};
-  return `
-    <article class="editor-save-edit-confirm-source-check" data-save-edit-confirmation-source-selection-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationSourceSelectionContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationInputShellField(field) {
-  const text = EDITOR_TEXT.saveEditConfirmationInputShellContract || {};
-  return `
-    <article class="editor-save-edit-confirm-input-shell-card" data-save-edit-confirmation-input-shell-field="${escapeAttribute(field.id)}" data-status="${escapeAttribute(field.status)}">
-      <div>
-        <strong>${escapeHtml(field.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(field.status === "not-created" || field.status === "disabled" || field.status === "not-evaluated" ? "blocked" : "ready"))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.fieldKind || "Kind")}</dt>
-          <dd>${escapeHtml(field.kind)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.fieldValueLabel || "Value")}</dt>
-          <dd>${escapeHtml(`${field.value}`)}</dd>
-        </div>
-      </dl>
-      ${field.blocker ? chip(tf("editorPrep.saveEditConfirmationInputShellContract.blockerText", { blocker: field.blocker }, `${text.blocker || "Blocker"}: ${field.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationInputShellCheck(check) {
-  const text = EDITOR_TEXT.saveEditConfirmationInputShellContract || {};
-  return `
-    <article class="editor-save-edit-confirm-input-shell-card" data-save-edit-confirmation-input-shell-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationInputShellContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationMatchReviewRow(review) {
-  const text = EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {};
-  return `
-    <article class="editor-save-edit-confirm-match-review-card" data-save-edit-confirmation-match-review-row="${escapeAttribute(review.id)}" data-status="${escapeAttribute(review.status)}">
-      <div>
-        <strong>${escapeHtml(review.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(review.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.reviewValueLabel || "Value")}</dt>
-          <dd>${escapeHtml(`${review.value}`)}</dd>
-        </div>
-      </dl>
-      ${review.blocker ? chip(tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockerText", { blocker: review.blocker }, `${text.blocker || "Blocker"}: ${review.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationMatchReviewCheck(check) {
-  const text = EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {};
-  return `
-    <article class="editor-save-edit-confirm-match-review-card" data-save-edit-confirmation-match-review-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationMatchReviewSummary.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditSubmitRunnerBlockerCheck(check) {
-  const text = EDITOR_TEXT.saveEditSubmitRunnerBlockerContract || {};
-  return `
-    <article class="editor-save-edit-submit-runner-blocker-check" data-save-edit-submit-runner-blocker-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditSubmitRunnerBlockerContract.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditFinalApplyRunnerHandoffCheck(check) {
-  const text = EDITOR_TEXT.saveEditFinalApplyRunnerHandoffChecklist || {};
-  return `
-    <article class="editor-save-edit-apply-runner-handoff-check" data-save-edit-final-apply-runner-handoff-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditFinalApplyRunnerHandoffChecklist.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditApplyRunnerPayloadField(field) {
-  const text = EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {};
-  return `
-    <article class="editor-save-edit-apply-runner-payload-card" data-save-edit-apply-runner-payload-field="${escapeAttribute(field.id)}" data-status="${escapeAttribute(field.status)}">
-      <div>
-        <strong>${escapeHtml(field.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(field.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.fieldKind || "Kind")}</dt>
-          <dd>${escapeHtml(field.kind)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.fieldValueLabel || "Value")}</dt>
-          <dd>${escapeHtml(`${field.value}`)}</dd>
-        </div>
-      </dl>
-      ${field.blocker ? chip(tf("editorPrep.saveEditApplyRunnerPayloadShape.blockerText", { blocker: field.blocker }, `${text.blocker || "Blocker"}: ${field.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditApplyRunnerPayloadCheck(check) {
-  const text = EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {};
-  return `
-    <article class="editor-save-edit-apply-runner-payload-card" data-save-edit-apply-runner-payload-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.blocker ? chip(tf("editorPrep.saveEditApplyRunnerPayloadShape.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditPayloadBridgeCompatibilityRow(row) {
-  const text = EDITOR_TEXT.saveEditPayloadBridgeCompatibilitySummary || {};
-  return `
-    <article class="editor-save-edit-payload-bridge-row" data-save-edit-apply-runner-payload-bridge-row="${escapeAttribute(row.id)}" data-status="${escapeAttribute(row.status)}">
-      <div>
-        <strong>${escapeHtml(row.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(row.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.payloadValueLabel || "Payload")}</dt>
-          <dd>${escapeHtml(`${row.payloadValue}`)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.bridgeValueLabel || "Bridge")}</dt>
-          <dd>${escapeHtml(`${row.bridgeValue}`)}</dd>
-        </div>
-      </dl>
-      ${row.blocker ? chip(tf("editorPrep.saveEditPayloadBridgeCompatibilitySummary.blockerText", { blocker: row.blocker }, `${text.blocker || "Blocker"}: ${row.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditValidatorApplyGateBridgeStep(step) {
-  const text = EDITOR_TEXT.saveEditValidatorApplyGateBridge || {};
-  return `
-    <article class="editor-save-edit-validator-bridge-step" data-save-edit-validator-apply-bridge-step="${escapeAttribute(step.id)}" data-status="${escapeAttribute(step.status)}">
-      <div>
-        <strong>${escapeHtml(step.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(step.status))}</span>
-      </div>
-      ${step.detail ? `<p>${escapeHtml(step.detail)}</p>` : ""}
-      ${step.blocker ? chip(tf("editorPrep.saveEditValidatorApplyGateBridge.blockerValue", { blocker: step.blocker }, `${text.blocker || "Blocker"}: ${step.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditCompatibilityConfirmationRollupLane(lane) {
-  const text = EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {};
-  return `
-    <article class="editor-save-edit-compat-confirm-rollup-lane" data-save-edit-compat-confirm-rollup-lane="${escapeAttribute(lane.id)}" data-status="${escapeAttribute(lane.status)}">
-      <div>
-        <strong>${escapeHtml(lane.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(lane.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.sourceLabel || "Source")}</dt>
-          <dd>${escapeHtml(lane.source)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.laneBlockerLabel || "Blockers")}</dt>
-          <dd>${escapeHtml(tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerValue", { count: lane.blockerCount }, `${lane.blockerCount}`))}</dd>
-        </div>
-      </dl>
-      <div class="editor-chip-list">
-        ${lane.blockers.map((blocker) => chip(blocker)).join("") || chip(text.noBlocker || "no-blocker")}
-      </div>
-    </article>
-  `;
-}
-
-function renderSaveEditCompatibilityConfirmationRollupCheck(check) {
-  const text = EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {};
-  return `
-    <article class="editor-save-edit-compat-confirm-rollup-check" data-save-edit-compat-confirm-rollup-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(tf("editorPrep.saveEditCompatibilityConfirmationRollup.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditValidatorConfirmationPreflightGroup(group) {
-  const text = EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {};
-  return `
-    <article class="editor-save-edit-validator-preflight-group" data-save-edit-validator-confirmation-preflight-group="${escapeAttribute(group.id)}">
-      <div>
-        <strong>${escapeHtml(group.label)}</strong>
-        <span>${escapeHtml(tf("editorPrep.saveEditValidatorConfirmationPreflight.groupBlockerValue", { count: group.blockerCount }, `${group.blockerCount}`))}</span>
-      </div>
-      <div class="editor-chip-list">
-        ${group.blockers.map((blocker) => chip(blocker)).join("") || chip(text.noBlocker || "no-blocker")}
-      </div>
-    </article>
-  `;
-}
-
-function renderSaveEditValidatorConfirmationPreflightCheck(check) {
-  const text = EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {};
-  return `
-    <article class="editor-save-edit-validator-preflight-check" data-save-edit-validator-confirmation-preflight-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(tf("editorPrep.saveEditValidatorConfirmationPreflight.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationInputContractField(field) {
-  const text = EDITOR_TEXT.saveEditConfirmationInputContract || {};
-  return `
-    <article class="editor-save-edit-confirmation-contract-field" data-save-edit-confirmation-input-field="${escapeAttribute(field.id)}" data-status="${escapeAttribute(field.status)}">
-      <div>
-        <strong>${escapeHtml(field.label)}</strong>
-        <span>${escapeHtml(field.status)}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.inputKind || "Input kind")}</dt>
-          <dd>${escapeHtml(field.inputKind)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.previewValue || "Preview")}</dt>
-          <dd>${escapeHtml(field.previewValue)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(field.blocker)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationRunnerHandoffRow(row) {
-  const text = EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {};
-  return `
-    <article class="editor-save-edit-confirm-runner-handoff-row" data-save-edit-confirmation-runner-handoff-row="${escapeAttribute(row.id)}" data-status="${escapeAttribute(row.status)}">
-      <div>
-        <strong>${escapeHtml(row.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(row.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.sourceValueLabel || "Source")}</dt>
-          <dd>${escapeHtml(`${row.sourceValue}`)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.targetValueLabel || "Target")}</dt>
-          <dd>${escapeHtml(`${row.targetValue}`)}</dd>
-        </div>
-      </dl>
-      ${row.blocker ? chip(tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerText", { blocker: row.blocker }, `${text.blocker || "Blocker"}: ${row.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditConfirmationRunnerHandoffCheck(check) {
-  const text = EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {};
-  return `
-    <article class="editor-save-edit-confirm-runner-handoff-check" data-save-edit-confirmation-runner-handoff-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(tf("editorPrep.saveEditConfirmationRunnerHandoffSummary.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditWriterPayloadCheckpointCheck(check) {
-  const text = EDITOR_TEXT.saveEditWriterPayloadCheckpoint || {};
-  return `
-    <article class="editor-save-edit-writer-checkpoint-check" data-save-edit-writer-payload-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(tf("editorPrep.saveEditWriterPayloadCheckpoint.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditPostWriteRestoreRoute(route) {
-  const text = EDITOR_TEXT.saveEditPostWriteRestoreContract || {};
-  return `
-    <article class="editor-save-edit-postwrite-restore-route" data-save-edit-postwrite-restore-route="${escapeAttribute(route.id)}" data-status="${escapeAttribute(route.status)}">
-      <div>
-        <strong>${escapeHtml(route.label)}</strong>
-        <span>${escapeHtml(route.status)}</span>
-      </div>
-      ${chip(tf("editorPrep.saveEditPostWriteRestoreContract.blockerText", { blocker: route.blocker }, `${text.blocker || "Blocker"}: ${route.blocker}`))}
-    </article>
-  `;
-}
-
-function renderSaveEditWriterEnablementRiskCheck(check) {
-  const text = EDITOR_TEXT.saveEditWriterEnablementRisk || {};
-  return `
-    <article class="editor-save-edit-writer-unlock-check" data-save-edit-writer-unlock-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(tf("editorPrep.saveEditWriterEnablementRisk.blockerText", { blocker: check.blocker }, `${text.blocker || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveEditSamplePayloadGroup(group) {
-  const text = EDITOR_TEXT.saveEditSamplePayload || {};
-  return `
-    <article class="editor-save-edit-sample-payload-group" data-save-edit-sample-payload-group="${escapeAttribute(group.id)}">
-      <div>
-        <strong>${escapeHtml(group.label)}</strong>
-        <span>${escapeHtml(tf("editorPrep.saveEditSamplePayload.groupFieldValue", { count: group.fieldCount }, `${group.fieldCount}`))}</span>
-      </div>
-      <div class="editor-chip-list">
-        ${group.fields.map((field) => chip(`${field.path} · ${field.inputKind} · ${text.pendingInput || field.proposedValue}`)).join("")}
-      </div>
-    </article>
-  `;
-}
-
 function saveEditInputSchemaField(group, field, gate) {
   return {
     groupId: group.id,
@@ -9518,44 +4210,6 @@ function saveEditInputKindForField(field) {
   if (field.valueType === "slot-map") return "readonly-slot-map";
   if (field.valueType === "object") return "readonly-json-object";
   return "readonly-preview";
-}
-
-function renderSaveEditInputSchemaGroup(group) {
-  return `
-    <article class="editor-save-input-schema-group" data-save-edit-input-group="${escapeAttribute(group.id)}">
-      <strong>${escapeHtml(group.label)}</strong>
-      <div class="editor-chip-list">
-        ${chip(tf("editorPrep.saveEditInput.groupFieldValue", { count: group.fieldCount }, `${group.fieldCount}`))}
-        ${chip(tf("editorPrep.saveEditInput.groupComparableValue", { count: group.comparableRows }, `${group.comparableRows}`))}
-      </div>
-    </article>
-  `;
-}
-
-function renderSaveEditInputSchemaField(field) {
-  const text = EDITOR_TEXT.saveEditInput || {};
-  return `
-    <article class="editor-save-input-schema-field" data-save-edit-input-field="${escapeAttribute(field.path)}" data-status="${escapeAttribute(field.status)}">
-      <div>
-        <strong>${escapeHtml(field.path)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(field.status))}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.inputKind || "Input")}</dt>
-          <dd>${escapeHtml(field.inputKind)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.validationRule || "Validation")}</dt>
-          <dd>${escapeHtml(field.validationRule)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(field.blocker)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
 }
 
 function createSaveSlotRecoveryRehearsalPreview(diagnostics, options = {}) {
@@ -9633,44 +4287,6 @@ function saveRecoveryRoute(id, label, detail, action) {
   };
 }
 
-function renderSaveRecoveryKey(item) {
-  return `
-    <article class="editor-save-recovery-key" data-save-recovery-key="${escapeAttribute(item.key)}" data-status="${escapeAttribute(item.status)}">
-      <div>
-        <strong>${escapeHtml(item.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(item.status))}</span>
-      </div>
-      <code>${escapeHtml(item.key)}</code>
-      ${item.detail ? `<p>${escapeHtml(item.detail)}</p>` : ""}
-    </article>
-  `;
-}
-
-function renderSaveRecoveryStep(step) {
-  const text = EDITOR_TEXT.saveRecovery || {};
-  return `
-    <article class="editor-save-recovery-step" data-save-recovery-step="${escapeAttribute(step.id)}" data-status="${escapeAttribute(step.status)}">
-      <div>
-        <strong>${escapeHtml(step.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(step.status))}</span>
-      </div>
-      ${step.detail ? `<p>${escapeHtml(step.detail)}</p>` : ""}
-      ${step.blocker ? chip(tf("editorPrep.saveRecovery.blockerValue", { blocker: step.blocker }, `${text.blockerLabel || "Blocker"}: ${step.blocker}`)) : ""}
-    </article>
-  `;
-}
-
-function renderSaveRecoveryRoute(route) {
-  const text = EDITOR_TEXT.saveRecovery || {};
-  return `
-    <article class="editor-save-recovery-route" data-save-recovery-route="${escapeAttribute(route.id)}">
-      <strong>${escapeHtml(route.label)}</strong>
-      <p>${escapeHtml(route.detail)}</p>
-      ${chip(tf("editorPrep.saveRecovery.routeActionValue", { action: route.action }, `${text.routeActionLabel || "Action"}: ${route.action}`))}
-    </article>
-  `;
-}
-
 function createSaveSlotApplyGateChecklist(diagnostics, options = {}) {
   const validation = createSaveSlotValidationPlan(diagnostics);
   const draft = createSaveSlotDraftPayloadPreview(diagnostics);
@@ -9721,20 +4337,6 @@ function saveApplyGateCheck(id, isReady, label, detail, blocker) {
   };
 }
 
-function renderSaveApplyGateCheck(check) {
-  const text = EDITOR_TEXT.saveApplyGate || {};
-  return `
-    <article class="editor-save-apply-gate-check" data-save-apply-gate-check="${escapeAttribute(check.id)}" data-status="${escapeAttribute(check.status)}">
-      <div>
-        <strong>${escapeHtml(check.label)}</strong>
-        <span>${escapeHtml(saveDiagnosticStatusLabel(check.status))}</span>
-      </div>
-      ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(tf("editorPrep.saveApplyGate.blockerValue", { blocker: check.blocker }, `${text.blockerLabel || "Blocker"}: ${check.blocker}`)) : ""}
-    </article>
-  `;
-}
-
 function createSaveDraftDiffTargets(diagnostics) {
   const text = EDITOR_TEXT.saveDraftDiff || {};
   return [
@@ -9776,47 +4378,6 @@ function createSaveDraftDiffRow(target, field) {
     proposedPreview: "pending-input",
     blocker: current.exists ? "writer-disabled" : "missing-current-path",
   };
-}
-
-function renderSaveDraftDiffGroup(group, text = {}) {
-  return `
-    <article class="editor-save-diff-group" data-save-diff-group="${escapeAttribute(group.id)}">
-      <strong>${escapeHtml(group.label)}</strong>
-      <div class="editor-save-diff-group-metrics">
-        ${chip(tf("editorPrep.saveDraftDiff.groupRowValue", { count: group.rowCount }, `${group.rowCount}`))}
-        ${chip(tf("editorPrep.saveDraftDiff.groupComparableValue", { count: group.comparableRows }, `${group.comparableRows}`))}
-        ${chip(tf("editorPrep.saveDraftDiff.groupMissingValue", { count: group.missingRows }, `${group.missingRows}`))}
-        ${chip(tf("editorPrep.saveDraftDiff.groupBlockedValue", { count: group.blockedRows }, `${group.blockedRows}`))}
-      </div>
-      ${balanceDetailChipBlock(text.paths || "Paths", group.paths)}
-    </article>
-  `;
-}
-
-function renderSaveDraftDiffRow(row, text = {}) {
-  const labels = text.statusLabels || {};
-  return `
-    <article class="editor-save-diff-row" data-save-diff-row data-status="${escapeAttribute(row.status)}">
-      <div>
-        <strong>${escapeHtml(row.targetLabel)} / ${escapeHtml(row.path)}</strong>
-        <span>${escapeHtml(labels[row.status] || row.status)}</span>
-      </div>
-      <dl>
-        <div>
-          <dt>${escapeHtml(text.currentValue || "Current")}</dt>
-          <dd>${escapeHtml(row.currentPreview)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.proposedValue || "Proposed")}</dt>
-          <dd>${escapeHtml(text.pendingInput || row.proposedPreview)}</dd>
-        </div>
-        <div>
-          <dt>${escapeHtml(text.blocker || "Blocker")}</dt>
-          <dd>${escapeHtml(row.blocker)}</dd>
-        </div>
-      </dl>
-    </article>
-  `;
 }
 
 function readSaveDraftPath(source, path) {
@@ -10567,6 +5128,3 @@ function escapeHtml(value) {
 function escapeAttribute(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
 }
-
-
-

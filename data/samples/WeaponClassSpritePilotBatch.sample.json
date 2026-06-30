@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines the first small source-sprite pilot batch before producing all 180 source prompts.",
+  "selection": {
+    "outputType": "source",
+    "skinToneIds": ["T2"],
+    "genders": ["male", "female"],
+    "motionIds": [
+      "sword_shield_slash_v1",
+      "great_weapon_sweep_v1",
+      "bow_release_v1",
+      "staff_cast_v1",
+      "fist_combo_v1"
+    ],
+    "frameIds": ["attack_hit"]
+  },
+  "rules": [
+    "Generate this pilot before the full source batch.",
+    "Pilot uses T2 light because it is close to the current base-body skin tone and reveals both highlight and shadow placement.",
+    "Pilot uses attack_hit because it is the damage-window frame and the hardest attachment/axis frame to approve.",
+    "Do not generate pixel outputs until pilot source frames pass metadata QA and anchor review."
+  ]
+}

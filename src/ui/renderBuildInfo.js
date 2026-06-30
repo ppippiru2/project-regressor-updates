@@ -2,10 +2,10 @@ import {
   applyDeploymentUpdate,
   checkDeploymentUpdate,
   getDeploymentUpdateState,
-} from "../app/deploymentUpdate.js?v=573";
-import { t, tf } from "../localization/index.js?v=573";
-import { renderDeploymentUpdate } from "./renderDeploymentUpdate.js?v=573";
-import { renderRetargetPreviewSummary } from "./renderRetargetPreview.js?v=573";
+} from "../app/deploymentUpdate.js?v=675";
+import { t, tf } from "../localization/index.js?v=675";
+import { renderDeploymentUpdate } from "./renderDeploymentUpdate.js?v=675";
+import { renderRetargetPreviewSummary } from "./renderRetargetPreview.js?v=675";
 
 export function renderBuildInfo() {
   const info = createBuildInfo();
@@ -61,6 +61,3 @@ function setText(id, value) {
   const element = document.getElementById(id);
   if (element) element.textContent = value;
 }
-
-
-

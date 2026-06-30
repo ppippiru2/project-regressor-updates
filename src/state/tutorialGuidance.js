@@ -1,7 +1,9 @@
-import { t, tf } from "../localization/index.js?v=573";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=573";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=573";
-import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=573";
+import { t, tf } from "../localization/index.js?v=675";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=675";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=675";
+import { POST_TUTORIAL_WORLD_UNLOCK_FLAGS } from "./postTutorialUnlocks.js?v=675";
+import { TUTORIAL_ROUTE_STATE_FLAGS } from "./tutorialRouteFlags.js?v=675";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=675";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   prologueCompleted: false,
@@ -9,11 +11,16 @@ export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   firstLootDropGuideShown: false,
   firstCodexRecordGuideShown: false,
   forgottenGodRemnantContacted: false,
+  damagedRecordEnabled: false,
   firstDeathCauseRecorded: false,
   regressorRecordUnlocked: false,
   hasSeenGoldenCardNews: false,
   traitCardResyncAvailable: false,
   goldenCardObtained: false,
+  tutorialBossDamageRate: 0,
+  tutorialBossBestDamageRate: 0,
+  ...Object.fromEntries(POST_TUTORIAL_WORLD_UNLOCK_FLAGS.map((flag) => [flag, false])),
+  ...Object.fromEntries(TUTORIAL_ROUTE_STATE_FLAGS.map((flag) => [flag, false])),
   regressionCount: 1,
   tutorialRun: 1,
   shownRegionCoreEventIds: [],

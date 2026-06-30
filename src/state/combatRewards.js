@@ -1,18 +1,18 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=573";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=573";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=675";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=675";
 import {
   claimFirstCodexRecordGuide,
   claimFirstLootDropGuide,
   claimForgottenGodRemnantGuide,
-} from "./tutorialGuidance.js?v=573";
-import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=573";
-import { t, tf } from "../localization/index.js?v=573";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=573";
+} from "./tutorialGuidance.js?v=675";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=675";
+import { t, tf } from "../localization/index.js?v=675";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=675";
 import {
   claimDialogueEventById,
   claimDialogueEventsForTrigger,
-} from "../story/dialogueEventRuntime.js?v=573";
+} from "../story/dialogueEventRuntime.js?v=675";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;
@@ -110,6 +110,3 @@ function normalizeMultiplier(value) {
   if (!Number.isFinite(number)) return 1;
   return Math.max(0, Math.min(100, number));
 }
-
-
-

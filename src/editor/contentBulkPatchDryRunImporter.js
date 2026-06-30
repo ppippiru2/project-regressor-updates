@@ -2,7 +2,8 @@ import {
   createContentBulkPatchIntakeContract,
   createContentBulkPatchTemplate,
   validateContentBulkPatchBatch,
-} from "./contentBulkPatchIntakeContract.js?v=573";
+} from "./contentBulkPatchIntakeContract.js?v=675";
+import { createContentBulkPatchValidationIssueSummary } from "./contentBulkPatchIssueSummary.js?v=675";
 
 export const CONTENT_BULK_PATCH_DRY_RUN_IMPORTER_VERSION = "content-bulk-patch-dry-run-importer-v1";
 
@@ -15,7 +16,7 @@ export function createContentBulkPatchDryRunPreview(batch = createContentBulkPat
   const domains = contract.domains.map((domain) => dryRunDomain(domain, batch, validation));
   const activeDomains = domains.filter((domain) => domain.rowCount > 0);
   const uniqueChecks = new Set(activeDomains.flatMap((domain) => domain.checkScripts));
-  const issueSummary = createDryRunIssueSummary(validation.issues || []);
+  const issueSummary = createContentBulkPatchValidationIssueSummary(validation.issues || []);
 
   return {
     version: CONTENT_BULK_PATCH_DRY_RUN_IMPORTER_VERSION,
@@ -74,28 +75,6 @@ function dryRunDomain(domain, batch, validation) {
       candidateCount: rows.length,
       state: rows.length ? "candidate" : "empty",
     })),
-  };
-}
-
-function createDryRunIssueSummary(issues = []) {
-  const blockingIssueCodes = new Set();
-  const warningIssueCodes = new Set();
-  const affectedDomains = new Set();
-  const affectedRows = new Set();
-
-  for (const issue of issues) {
-    if (!issue?.code) continue;
-    if (issue.severity === "error") blockingIssueCodes.add(issue.code);
-    if (issue.severity === "warning") warningIssueCodes.add(issue.code);
-    if (issue.domainId) affectedDomains.add(issue.domainId);
-    if (issue.domainId && Number.isFinite(Number(issue.rowIndex))) affectedRows.add(`${issue.domainId}:${issue.rowIndex}`);
-  }
-
-  return {
-    blockingIssueCodes: [...blockingIssueCodes],
-    warningIssueCodes: [...warningIssueCodes],
-    affectedDomainCount: affectedDomains.size,
-    affectedRowCount: affectedRows.size,
   };
 }
 

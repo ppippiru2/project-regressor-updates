@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Stores manual visual review decisions for incoming pilot source PNGs before copy promotion.",
+  "rules": [
+    "Incoming metadata QA must pass before a manual visual review decision can promote a file.",
+    "Each decision must target one of the 10 pilot output IDs.",
+    "A visual_review_passed decision requires all required review fields to be true and no blocking notes.",
+    "This file is an input contract only; it must not copy, move, overwrite, or promote files."
+  ],
+  "decisions": []
+}

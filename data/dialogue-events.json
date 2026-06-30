@@ -1,5 +1,85 @@
 [
   {
+    "id": "prologue_dream_01_falling_consciousness",
+    "title": "떨어지는 의식",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 프롤로그 화면의 정적 대사 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "dream_entry"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "눈을 뜨기 전, 끝을 알 수 없는 어둠 속에서 목소리가 들려왔다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "너는 선택되었다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "아직 이름도, 기록도, 길도 완성되지 않았다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "그러니 먼저 네가 누구인지 동기화한다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI resolver와 같은 localization keyEventDetails 원문에서 생성한 정적 DialogueEvent 데이터입니다.",
+      "프로필/심연/카드 화면의 실제 표시 흐름은 src/ui/characterCreationEvents.js가 담당합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "플레이스홀더가 실제 상태값으로 치환되는가?",
+      "튜토리얼 시작 전 헌터협회/길드/헌터 등급 용어가 노출되지 않는가?"
+    ]
+  },
+  {
     "id": "prologue_dream_02_profile_record",
     "title": "프로필 기록",
     "phase": "prologue",
@@ -110,6 +190,897 @@
       "prologueCompleted=false일 때만 실행되는가?",
       "{playerName}, {age}, {gender}, {country}, {profileImage}가 실제 입력값으로 치환되는가?",
       "주인공 독백이 출력되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_dream_03_initial_stat_sync",
+    "title": "초기 능력치 동기화",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 프롤로그 화면의 정적 대사 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "initial_stat_sync"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[시스템] 초기 능력치가 동기화되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "능력치: {statSummary}. 총합: {statTotal}. 상태창 등급: {statusGrade}.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "이 등급은 외부 조직의 평가가 아니라 현재 상태창의 내부 동기화 값입니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI resolver와 같은 localization keyEventDetails 원문에서 생성한 정적 DialogueEvent 데이터입니다.",
+      "프로필/심연/카드 화면의 실제 표시 흐름은 src/ui/characterCreationEvents.js가 담당합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "플레이스홀더가 실제 상태값으로 치환되는가?",
+      "튜토리얼 시작 전 헌터협회/길드/헌터 등급 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_dream_04_abyss_questions_start",
+    "title": "심연의 질문",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 프롤로그 화면의 정적 대사 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "abyss_questions"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "힘은 질문에 반응한다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "대답은 네 성향을 기록하고, 첫 카드의 흐름에 영향을 준다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "정체불명의 목소리",
+        "lineType": "dialogue",
+        "text": "거짓으로 답해도 좋다. 다만 그 거짓도 기록된다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI resolver와 같은 localization keyEventDetails 원문에서 생성한 정적 DialogueEvent 데이터입니다.",
+      "프로필/심연/카드 화면의 실제 표시 흐름은 src/ui/characterCreationEvents.js가 담당합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "플레이스홀더가 실제 상태값으로 치환되는가?",
+      "튜토리얼 시작 전 헌터협회/길드/헌터 등급 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_card_01_show_cards",
+    "title": "운명 카드 후보",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 프롤로그 화면의 정적 대사 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "starter_card_candidates"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[시스템] 기본 공격은 확정 등록됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "카드 후보 {cardCandidateCount}장이 표시됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "성향 기록: {dispositionName}. 카드 등급 가중치: {cardGradeWeightSummary}.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI resolver와 같은 localization keyEventDetails 원문에서 생성한 정적 DialogueEvent 데이터입니다.",
+      "프로필/심연/카드 화면의 실제 표시 흐름은 src/ui/characterCreationEvents.js가 담당합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "플레이스홀더가 실제 상태값으로 치환되는가?",
+      "튜토리얼 시작 전 헌터협회/길드/헌터 등급 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_result_devotedOrder",
+    "title": "헌신 질서",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 심연 질문 성향 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "disposition_devotedOrder"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[성향 반응] 헌신 질서. 시스템이 보호와 질서를 우선하는 판단 패턴을 기록했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_result_practicalBalance",
+    "title": "실용 균형",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 심연 질문 성향 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "disposition_practicalBalance"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[성향 반응] 실용 균형. 시스템이 위험과 보상을 함께 계산하는 판단 패턴을 기록했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_result_coldCalculation",
+    "title": "냉정 계산",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 심연 질문 성향 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "disposition_coldCalculation"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[성향 반응] 냉정 계산. 시스템이 감정보다 생존 확률을 앞세우는 판단 패턴을 기록했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_result_freeSurvival",
+    "title": "자율 생존",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 심연 질문 성향 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "disposition_freeSurvival"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[성향 반응] 자율 생존. 시스템이 규칙보다 현장 생존을 우선하는 판단 패턴을 기록했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_result_inquiryRecord",
+    "title": "탐구 기록",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 심연 질문 성향 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "disposition_inquiryRecord"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[성향 반응] 탐구 기록. 시스템이 관찰과 기록을 우선하는 판단 패턴을 기록했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_card_starter_weapon_sense",
+    "title": "낡은 무기 감각",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 운명 카드 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "starter_card_starter_weapon_sense"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[운명 카드] 낡은 무기 감각. 손에 익은 무게가 먼저 반응합니다. 슬롯 1에 강타가 연결됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_card_starter_light_step",
+    "title": "가벼운 발걸음",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 운명 카드 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "starter_card_starter_light_step"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[운명 카드] 가벼운 발걸음. 균열 지형을 읽는 감각이 깨어납니다. 슬롯 1에 빠른 발놀림이 연결됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_card_starter_enduring_body",
+    "title": "버티는 몸",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 운명 카드 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "starter_card_starter_enduring_body"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[운명 카드] 버티는 몸. 첫 시험의 충격을 받아낼 준비가 끝났습니다. 슬롯 1에 방어 자세가 연결됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_card_starter_faint_mana",
+    "title": "흐릿한 마력 감각",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 운명 카드 결과 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "starter_card_starter_faint_mana"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[운명 카드] 흐릿한 마력 감각. 희미한 마력 회로가 열린 채 동기화됩니다. 슬롯 1에 마력 점화가 연결됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI의 동적 resolver 결과를 DialogueEvent JSON에서도 조회할 수 있게 만든 미러 데이터입니다.",
+      "실제 카드 선택/성향 결정은 src/ui/characterCreationEvents.js의 현재 구현을 우선합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "선택 결과 ID가 UI의 동적 eventId와 같은가?",
+      "튜토리얼 시작 전 외부 헌터 사회 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "prologue_transfer_to_tutorial",
+    "title": "초심자의 해안 전송",
+    "phase": "prologue",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "auto",
+      "targetId": null,
+      "threshold": null,
+      "description": "새게임 프롤로그 화면의 정적 대사 데이터"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [
+        "prologueCompleted"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_transfer"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[시스템] 선택 카드: {selectedCardName}. 선택 특성: {selectedTraitName}. 선택 스킬: {selectedSkillName}.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "첫 시험 지역으로 전송합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "선택은 끝났어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이제 버티면서 확인해보자.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI resolver와 같은 localization keyEventDetails 원문에서 생성한 정적 DialogueEvent 데이터입니다.",
+      "프로필/심연/카드 화면의 실제 표시 흐름은 src/ui/characterCreationEvents.js가 담당합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "플레이스홀더가 실제 상태값으로 치환되는가?",
+      "튜토리얼 시작 전 헌터협회/길드/헌터 등급 용어가 노출되지 않는가?"
+    ]
+  },
+  {
+    "id": "tutorial_1st_shore_wake_after_dream",
+    "title": "해안의 각성",
+    "phase": "tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "auto",
+      "targetId": "tutorial_shore",
+      "threshold": null,
+      "description": "새게임 프롤로그 종료 후 초심자의 해안 기상"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "prologueCompleted"
+      ],
+      "flagsFalse": [
+        "forgottenGodRemnantContacted",
+        "regressorRecordUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": true
+    },
+    "stateEffects": {
+      "setFlags": [],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "shore_wake"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "차가운 파도 소리가 귀를 때렸다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "눈을 뜨자 낯선 해안과 무너진 잔해가 시야에 들어왔다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "꿈이 아니었나.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "방금 목소리와 시스템 알림이 아직 머리에 남아 있어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "먼저 살아남아야 해.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "현재 새게임 UI resolver와 같은 localization keyEventDetails 원문에서 생성한 정적 DialogueEvent 데이터입니다.",
+      "프로필/심연/카드 화면의 실제 표시 흐름은 src/ui/characterCreationEvents.js가 담당합니다."
+    ],
+    "qaChecks": [
+      "새게임 1회차에서만 표시되는가?",
+      "플레이스홀더가 실제 상태값으로 치환되는가?",
+      "튜토리얼 시작 전 헌터협회/길드/헌터 등급 용어가 노출되지 않는가?"
     ]
   },
   {
@@ -717,7 +1688,7 @@
       "grantItems": [],
       "grantSkills": [],
       "grantTraits": [
-        "▒록□者?"
+        "corrupted_record_trait"
       ],
       "recordEntries": [
         "forgotten_god_remnant_contact"
@@ -783,7 +1754,7 @@
       {
         "speaker": "시스템",
         "lineType": "system",
-        "text": "[특성] ▒록□者?",
+        "text": "[특성] 해독 불가 기록",
         "branchKey": null,
         "requires": {},
         "notesForCodex": "1회차에는 회귀자의 기록 정상명 표시 금지"
@@ -838,7 +1809,9 @@
     },
     "stateEffects": {
       "setFlags": [
-        "tutorialClearedRun1"
+        "tutorialClearedRun1",
+        "tutorialBossDamageRate20Reached",
+        "tutorialEvaluationGradeC"
       ],
       "unsetFlags": [],
       "grantItems": [],
@@ -3179,6 +4152,1522 @@
       "Required tutorial region event id exists in data/dialogue-events.json.",
       "Run-1 pre-reality forbidden terms are absent.",
       "State effect only records a local seen flag and record entry."
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_01_reality_return",
+    "title": "현실 귀환",
+    "preconditions": {
+      "flagsTrue": [
+        "tutorialClearedRun1"
+      ],
+      "flagsFalse": [
+        "realityReturned"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "realityReturned",
+        "postTutorialWorldUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:realityReturn"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "눈을 뜨자 차가운 바닥 대신 병실 천장이 보였다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "돌아왔어. 그 섬은 현실이었고, 기록도 남아 있어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[현실 귀환] 튜토리얼 섬 생존 기록이 현실 상태와 동기화되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_02_hunter_registration",
+    "title": "헌터협회 등록",
+    "preconditions": {
+      "flagsTrue": [
+        "realityReturned"
+      ],
+      "flagsFalse": [
+        "hunterAssociationUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "hunterAssociationUnlocked",
+        "hunterRegistrationUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:hunterRegistration"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "협회 직원",
+        "lineType": "dialogue",
+        "text": "튜토리얼 생존 기록이 확인됐습니다. 임시 헌터 등록 절차를 진행하겠습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[헌터협회] 임시 등록 권한이 열렸습니다. 튜토리얼 평가등급은 협회 헌터 등급과 별도로 보관됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "섬에서 받은 평가는 통과 기록일 뿐이야. 현실 등급은 여기서 다시 시작하는 거고.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_03_four_major_guilds_news",
+    "title": "4대 길드 뉴스",
+    "preconditions": {
+      "flagsTrue": [
+        "hunterAssociationUnlocked"
+      ],
+      "flagsFalse": [
+        "fourMajorGuildsNewsSeen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "fourMajorGuildsNewsSeen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:fourMajorGuildsNews"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "뉴스 앵커",
+        "lineType": "dialogue",
+        "text": "오늘도 4대 길드는 신규 게이트 공략권과 신입 헌터 영입 경쟁을 이어가고 있습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "헌터 뉴스",
+        "lineType": "system",
+        "text": "[헌터 뉴스] 4대 길드 동향이 스크랩북 후보 기록으로 저장되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "지금 당장 끼어들 판은 아니야. 먼저 살아남을 힘부터 만들어야 해.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_04_hunter_board_first_access",
+    "title": "헌터 자유게시판 첫 접근",
+    "preconditions": {
+      "flagsTrue": [
+        "hunterAssociationUnlocked"
+      ],
+      "flagsFalse": [
+        "hunterBoardUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "hunterBoardUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:hunterBoard"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "헌터 자유게시판",
+        "lineType": "system",
+        "text": "[게시판] 튜토리얼 생존자용 공지와 초보 헌터 거래 글을 확인할 수 있습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "정보는 많지만 지금 믿을 수 있는 건 내가 직접 확인한 기록뿐이야.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_05_golden_card_news",
+    "title": "황금 카드 뉴스",
+    "preconditions": {
+      "flagsTrue": [
+        "hunterAssociationUnlocked"
+      ],
+      "flagsFalse": [
+        "hasSeenGoldenCardNews"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "hasSeenGoldenCardNews",
+        "goldenCardNewsUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:goldenCardNews"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "헌터 뉴스",
+        "lineType": "system",
+        "text": "[특보] 일부 튜토리얼 구역에서 황금빛 카드 잔상이 목격되었다는 제보가 접수되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "황금빛 카드. 섬에서 봤던 그 빛이 맞다면, 다음엔 그냥 지나치지 않는다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_06_market_records",
+    "title": "거래소 기록",
+    "preconditions": {
+      "flagsTrue": [
+        "hunterBoardUnlocked"
+      ],
+      "flagsFalse": [
+        "marketRecordsUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "marketRecordsUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:marketRecords"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[거래소 기록] 초보 헌터용 장비 시세와 카드 조각 거래 기록이 읽기 전용으로 열렸습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "돈으로 살 수 있는 건 한계가 있어. 그래도 파밍 목표를 잡는 데는 쓸 수 있겠어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_07_tower_appears",
+    "title": "탑 출현 보도",
+    "preconditions": {
+      "flagsTrue": [
+        "hunterAssociationUnlocked"
+      ],
+      "flagsFalse": [
+        "towerUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "towerUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:towerAppears"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "뉴스 앵커",
+        "lineType": "dialogue",
+        "text": "도심 외곽에 나타난 거대 탑은 현재 헌터협회 통제 아래 조사 중입니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[세계 정보] 탑 관련 기록이 해금되었습니다. 실제 도전은 이후 진행 조건에서 열립니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "저게 다음 무대라면, 지금 실력으로는 입장권도 못 얻어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_08_gate_warning",
+    "title": "게이트 폭주 경보",
+    "preconditions": {
+      "flagsTrue": [
+        "towerUnlocked"
+      ],
+      "flagsFalse": [
+        "gateUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "gateUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:gateWarning"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "헌터 뉴스",
+        "lineType": "system",
+        "text": "[긴급 속보] 미확인 게이트의 마력 수치가 불안정하게 상승하고 있습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "튜토리얼의 관문과 같은 냄새가 난다. 이번엔 현실에서 터지는 건가.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "phase": "post_tutorial_run1",
+    "runRequirement": {
+      "exactRun": 1,
+      "minRun": 1,
+      "maxRun": 1,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": null,
+      "description": "튜토리얼 최종 관문 클리어 후 현실 복귀 후속 알림"
+    },
+    "implementationNotes": [
+      "현실 귀환 이후에만 헌터협회/뉴스/게시판/거래소/탑/게이트 정보를 노출한다.",
+      "1회차 튜토리얼 진행 중 금지어 보호와 분리하기 위해 post_tutorial_run1 phase로 둔다."
+    ],
+    "qaChecks": [
+      "새게임/튜토리얼 전반에는 헌터 사회 용어가 노출되지 않는가?",
+      "최종 관문 클리어 후 비차단 로그로 현실/헌터 사회 정보가 순차 기록되는가?",
+      "상태 플래그가 저장 가능한 tutorialFlags에 남는가?"
+    ],
+    "id": "post_tutorial_09_first_calamity_death",
+    "title": "첫 재앙 사망 예고",
+    "preconditions": {
+      "flagsTrue": [
+        "gateUnlocked"
+      ],
+      "flagsFalse": [
+        "firstCalamityDeathForecastUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "firstCalamityDeathForecastUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "postTutorial:firstCalamityDeathForecast"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "나레이션",
+        "lineType": "dialogue",
+        "text": "화면 속 게이트 경보가 붉게 번지던 순간, 등골을 타고 섬뜩한 예감이 올라왔다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "저게 첫 번째 재앙이라면, 나는 아직 막을 수 없어. 그러니까 다음 기회가 필요하다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[재앙 기록 후보] 첫 게이트 폭주 사망 원인이 회귀 기록 후보로 고정되었습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ]
+  },
+  {
+    "id": "tutorial_2nd_01_wake_record_restored",
+    "title": "2회차 해안 각성 - 회귀자의 기록 복구",
+    "phase": "tutorial_run2",
+    "runRequirement": {
+      "exactRun": 2,
+      "minRun": 2,
+      "maxRun": 2,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onDeath",
+      "targetId": "first_calamity",
+      "threshold": null,
+      "description": "첫 재앙 사망 후 2회차 해안 각성 직전 기록 복구"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "firstDeathCauseRecorded",
+        "traitCardResyncAvailable"
+      ],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "regressorRecordUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_2nd_01_wake_record_restored",
+        "regressorRecord:restored"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[회귀자의 기록] 손상되었던 항목명이 복구됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[안내] 프로필과 성향은 유지됩니다. 기록만 다음 회차 기준으로 재정렬됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이제 이름이 보인다. 회귀자의 기록. 내가 죽은 게 끝이 아니었다는 증거야.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_2nd_02_buried_cache_return",
+    "title": "2회차 묻힌 보급품 재확인",
+    "phase": "tutorial_run2",
+    "runRequirement": {
+      "exactRun": 2,
+      "minRun": 2,
+      "maxRun": 2,
+      "loopFormula": null
+    },
+    "locationId": "tutorial_shore",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "buried_cache_hint",
+      "threshold": null,
+      "description": "2회차 해안에서 이전 회차 보급품 단서를 다시 확인"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "regressorRecordUnlocked"
+      ],
+      "flagsFalse": [
+        "buriedCacheReturnRecorded"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "buriedCacheReturnRecorded"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_2nd_02_buried_cache_return"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[기록 대조] 이전 회차의 묻힌 보급품 위치가 현재 해안 지형과 일치합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "미리 안다는 건 이렇게 쓰는 거야. 찾는 시간을 줄이고 성장에 시간을 쓴다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_2nd_04_sealed_box",
+    "title": "2회차 봉인 상자 개방 조건",
+    "phase": "tutorial_run2",
+    "runRequirement": {
+      "exactRun": 2,
+      "minRun": 2,
+      "maxRun": 2,
+      "loopFormula": null
+    },
+    "locationId": "mana_mine",
+    "trigger": {
+      "type": "onDiscover",
+      "targetId": "sealed_box",
+      "threshold": null,
+      "description": "2회차 광산 봉인 상자를 회귀자의 기록으로 재확인"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "regressorRecordUnlocked"
+      ],
+      "flagsFalse": [
+        "sealedBoxRecordUnlocked"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "sealedBoxRecordUnlocked"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_2nd_04_sealed_box"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[봉인 상자] 이전 회차에는 반응만 남겼던 조건이 기록으로 해석됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[기록 조건] 잊힌 신의 잔재 접촉 기록과 광산 심부 도달 기록이 필요합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "닫힌 상자도 조건을 알면 파밍 목표가 된다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_2nd_05_warden_50",
+    "title": "2회차 관문 파수꾼 50% 평가",
+    "phase": "tutorial_run2",
+    "runRequirement": {
+      "exactRun": 2,
+      "minRun": 2,
+      "maxRun": 2,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": 0.5,
+      "description": "2회차 제한시간 종료 후 50% 이상 피해"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "regressorRecordUnlocked"
+      ],
+      "flagsFalse": [
+        "tutorialSecondWarden50Reached"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialSecondWarden50Reached",
+        "tutorialBossDamageRate50Reached",
+        "tutorialEvaluationGradeB"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorialGrade:B",
+        "tutorial_2nd_05_warden_50"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 관문 파수꾼에게 50% 이상 피해를 누적했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[튜토리얼 평가] B급 평가 기준을 충족했습니다. 협회 헌터 등급과는 별개입니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이번엔 생존선만 넘은 게 아니야. 기록이 실제 성장으로 이어지고 있어.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_3rd_01_wake_pattern_focus",
+    "title": "3회차 해안 각성 - 패턴 집중",
+    "phase": "tutorial_run3",
+    "runRequirement": {
+      "exactRun": 3,
+      "minRun": 3,
+      "maxRun": 3,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "pre_shore_card_resync",
+      "threshold": null,
+      "description": "3회차 해안 각성 직전 패턴 집중 메시지"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "traitCardResyncAvailable"
+      ],
+      "flagsFalse": [
+        "tutorialThirdPatternFocusSeen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialThirdPatternFocusSeen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_3rd_01_wake_pattern_focus"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[패턴 집중] 반복된 동선의 위험 구간이 더 선명하게 정리됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "어디서 시간이 새는지 보인다. 이번엔 파수꾼의 빈틈까지 밀어붙인다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_3rd_warden_80",
+    "title": "3회차 관문 파수꾼 80% 평가",
+    "phase": "tutorial_run3",
+    "runRequirement": {
+      "exactRun": 3,
+      "minRun": 3,
+      "maxRun": 3,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": 0.8,
+      "description": "3회차 제한시간 종료 후 80% 이상 피해"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "regressorRecordUnlocked"
+      ],
+      "flagsFalse": [
+        "tutorialThirdWarden80Reached"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialThirdWarden80Reached",
+        "tutorialBossDamageRate80Reached",
+        "tutorialEvaluationGradeA"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorialGrade:A",
+        "tutorial_3rd_warden_80"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 관문 파수꾼에게 80% 이상 피해를 누적했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[튜토리얼 평가] A급 평가 기준을 충족했습니다. 협회 헌터 등급과는 별개입니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "거의 닿았다. 다음엔 넘긴다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_4th_01_wake_final_tutorial_route",
+    "title": "4회차 해안 각성 - 최종 튜토리얼 루트",
+    "phase": "tutorial_run4",
+    "runRequirement": {
+      "exactRun": 4,
+      "minRun": 4,
+      "maxRun": 4,
+      "loopFormula": null
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "pre_shore_card_resync",
+      "threshold": null,
+      "description": "4회차 해안 각성 직전 최종 루트 메시지"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "traitCardResyncAvailable"
+      ],
+      "flagsFalse": [
+        "tutorialFourthFinalRouteSeen"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialFourthFinalRouteSeen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_4th_01_wake_final_tutorial_route"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[최종 루트] 해안, 숲, 폐허, 광산, 관문의 우선순위가 최종 공략 순서로 정렬됩니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이번엔 튜토리얼을 끝낸다. 알고 있는 길을 전부 성장으로 바꾼다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_4th_warden_100",
+    "title": "4회차 관문 파수꾼 100% 평가",
+    "phase": "tutorial_run4",
+    "runRequirement": {
+      "exactRun": 4,
+      "minRun": 4,
+      "maxRun": 4,
+      "loopFormula": null
+    },
+    "locationId": "rift_gate",
+    "trigger": {
+      "type": "onClear",
+      "targetId": "rift_warden",
+      "threshold": 1,
+      "description": "4회차 제한시간 내 관문 파수꾼 완전 돌파"
+    },
+    "preconditions": {
+      "flagsTrue": [
+        "regressorRecordUnlocked"
+      ],
+      "flagsFalse": [
+        "tutorialFourthWarden100Reached"
+      ],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialFourthWarden100Reached",
+        "tutorialBossDamageRate100Reached",
+        "tutorialEvaluationGradeS"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorialGrade:S",
+        "tutorial_4th_warden_100"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "전투 로그",
+        "lineType": "combatLog",
+        "text": "[전투 기록] 관문 파수꾼을 완전 돌파했습니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "시스템",
+        "lineType": "system",
+        "text": "[튜토리얼 평가] S급 평가 기준을 충족했습니다. 협회 헌터 등급과는 별개입니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "끝났다. 이제 이 기록을 들고 현실로 돌아간다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_loop_A_01_wake",
+    "title": "루프 A - 최적화",
+    "phase": "tutorial_loop",
+    "runRequirement": {
+      "exactRun": null,
+      "minRun": 5,
+      "maxRun": null,
+      "loopFormula": "(regressionCount - 5) % 4",
+      "loopStart": 5,
+      "loopModulo": 4,
+      "loopIndex": 0
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "loop_pre_shore_card_resync",
+      "threshold": null,
+      "description": "5회차 이후 반복 루프 각성 variant"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialLoopVariantASeen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_loop_A_01_wake"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[루프 기록] 루프 A - 최적화 흐름으로 해안 각성 기록을 정렬합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "불필요한 전투를 줄이고 핵심 보상만 가져간다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_loop_B_01_wake",
+    "title": "루프 B - 피로 누적",
+    "phase": "tutorial_loop",
+    "runRequirement": {
+      "exactRun": null,
+      "minRun": 5,
+      "maxRun": null,
+      "loopFormula": "(regressionCount - 5) % 4",
+      "loopStart": 5,
+      "loopModulo": 4,
+      "loopIndex": 1
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "loop_pre_shore_card_resync",
+      "threshold": null,
+      "description": "5회차 이후 반복 루프 각성 variant"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialLoopVariantBSeen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_loop_B_01_wake"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[루프 기록] 루프 B - 피로 누적 흐름으로 해안 각성 기록을 정렬합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "몸은 익숙해졌지만 피로까지 사라지는 건 아니야. 더 짧게 끝낸다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_loop_C_01_wake",
+    "title": "루프 C - 기록 비교",
+    "phase": "tutorial_loop",
+    "runRequirement": {
+      "exactRun": null,
+      "minRun": 5,
+      "maxRun": null,
+      "loopFormula": "(regressionCount - 5) % 4",
+      "loopStart": 5,
+      "loopModulo": 4,
+      "loopIndex": 2
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "loop_pre_shore_card_resync",
+      "threshold": null,
+      "description": "5회차 이후 반복 루프 각성 variant"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialLoopVariantCSeen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_loop_C_01_wake"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[루프 기록] 루프 C - 기록 비교 흐름으로 해안 각성 기록을 정렬합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "이전 기록과 달라진 부분만 확인한다. 변수는 곧 보상이다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
+    ]
+  },
+  {
+    "id": "tutorial_loop_D_01_wake",
+    "title": "루프 D - 변수 대응",
+    "phase": "tutorial_loop",
+    "runRequirement": {
+      "exactRun": null,
+      "minRun": 5,
+      "maxRun": null,
+      "loopFormula": "(regressionCount - 5) % 4",
+      "loopStart": 5,
+      "loopModulo": 4,
+      "loopIndex": 3
+    },
+    "locationId": null,
+    "trigger": {
+      "type": "onRegressionStart",
+      "targetId": "loop_pre_shore_card_resync",
+      "threshold": null,
+      "description": "5회차 이후 반복 루프 각성 variant"
+    },
+    "preconditions": {
+      "flagsTrue": [],
+      "flagsFalse": [],
+      "itemsRequired": [],
+      "skillsRequired": [],
+      "forbiddenTermsBeforeRealityReturn": false
+    },
+    "stateEffects": {
+      "setFlags": [
+        "tutorialLoopVariantDSeen"
+      ],
+      "unsetFlags": [],
+      "grantItems": [],
+      "grantSkills": [],
+      "grantTraits": [],
+      "recordEntries": [
+        "tutorial_loop_D_01_wake"
+      ]
+    },
+    "lines": [
+      {
+        "speaker": "회귀자의 기록",
+        "lineType": "system",
+        "text": "[루프 기록] 루프 D - 변수 대응 흐름으로 해안 각성 기록을 정렬합니다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      },
+      {
+        "speaker": "주인공",
+        "lineType": "dialogue",
+        "text": "같은 길이어도 결과가 완전히 같지는 않다. 변수를 먼저 눌러둔다.",
+        "branchKey": null,
+        "requires": {},
+        "notesForCodex": null
+      }
+    ],
+    "implementationNotes": [
+      "2~4회차 주요 루트와 5회차 이후 루프 대사를 DialogueEvent JSON으로 보강한다.",
+      "프로필/심연의 질문은 반복하지 않고 회귀 전 카드 재동기화 이후 진행 메시지만 출력한다."
+    ],
+    "qaChecks": [
+      "필수 회차별 이벤트 ID가 JSON에 존재하는가?",
+      "runRequirement에 맞는 회차에서만 resolve되는가?",
+      "상태 플래그가 tutorialFlags/save normalization에 보존되는가?"
     ]
   }
 ]

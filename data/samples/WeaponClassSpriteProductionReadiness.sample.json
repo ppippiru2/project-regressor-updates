@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines source/pixel sprite production readiness gates for the first weapon/class attack motion templates.",
+  "coordinateConvention": {
+    "canvas": [1254, 1254],
+    "origin": "top_left",
+    "unit": "source_pixel",
+    "background": "transparent_preferred",
+    "sideRule": "ScreenLeft and ScreenRight are screen-space labels, not anatomical labels."
+  },
+  "globalPromptRules": [
+    "Use the approved source body only as the pose, scale, lighting, and anchor-placement reference.",
+    "Keep canvas size, camera framing, body proportions, clothing style, and equipment attachment anchors locked to the reports.",
+    "Create only the requested attack frame variation for the selected gender and skin tone.",
+    "Use transparent background when possible; otherwise use a flat easy-to-key background.",
+    "No text, no watermark, no extra props, no camera change."
+  ],
+  "skinTones": [
+    { "toneId": "T1", "label": "very_light" },
+    { "toneId": "T2", "label": "light" },
+    { "toneId": "T3", "label": "warm_medium" },
+    { "toneId": "T4", "label": "tan" },
+    { "toneId": "T5", "label": "dark_brown" },
+    { "toneId": "T6", "label": "deep_brown" }
+  ],
+  "outputTypes": [
+    {
+      "outputType": "source",
+      "description": "Clean high-detail source sprite frame used before pixel conversion.",
+      "rules": [
+        "Match source-body lighting and anatomy quality.",
+        "Preserve readable muscles, hands, feet, head scale, and underwear style.",
+        "Do not introduce pixelated edges in the source output."
+      ]
+    },
+    {
+      "outputType": "pixel",
+      "description": "Game-ready pixelized sprite frame derived from the source frame.",
+      "rules": [
+        "Preserve source silhouette and anchor positions by normalized coordinates.",
+        "Use crisp pixel edges and avoid blurry resizing.",
+        "Do not redraw equipment anchors independently from the source frame."
+      ]
+    }
+  ],
+  "approvalGates": [
+    "weapon_class_pose_template_report_zero_missing",
+    "weapon_class_pose_proxy_preview_zero_console_errors",
+    "weapon_class_motion_hitbox_report_zero_missing",
+    "weapon_class_motion_hitbox_preview_zero_console_errors",
+    "weapon_class_motion_frame_report_zero_missing",
+    "weapon_class_motion_frame_preview_zero_console_errors"
+  ],
+  "spriteJobs": [
+    {
+      "jobId": "sprite.weapon_class.sword_shield_slash.v1",
+      "motionId": "sword_shield_slash_v1",
+      "poseTemplateId": "sword_shield_idle",
+      "equipmentProfileIds": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1"],
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "promptFocus": "one-hand sword and shield slash animation with shield remaining attached to the offhand anchor",
+      "frameNotes": {
+        "attack_ready": "Sword-side hand pulls back while feet stay locked.",
+        "attack_hit": "Sword-side hand advances; this is the only damage-window frame.",
+        "attack_recover": "Arms return toward the pose-template baseline."
+      }
+    },
+    {
+      "jobId": "sprite.weapon_class.great_weapon_sweep.v1",
+      "motionId": "great_weapon_sweep_v1",
+      "poseTemplateId": "great_weapon_guard",
+      "equipmentProfileIds": ["weapon.two_hand.heavy.v1"],
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "promptFocus": "heavy two-hand weapon sweep with lower grip, upper grip, weapon tip, and back end aligned",
+      "frameNotes": {
+        "attack_ready": "Heavy weapon winds up behind the body with visible weight shift.",
+        "attack_hit": "Weapon tip sweeps forward; this is the only damage-window frame.",
+        "attack_recover": "Weapon returns toward the two-hand guard baseline."
+      }
+    },
+    {
+      "jobId": "sprite.weapon_class.bow_release.v1",
+      "motionId": "bow_release_v1",
+      "poseTemplateId": "bow_draw",
+      "equipmentProfileIds": ["weapon.bow.v1"],
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "promptFocus": "bow draw and release with bow grip, draw hand, arrow nock, and arrow tip separated",
+      "frameNotes": {
+        "attack_ready": "String is drawn back; arrow line stays nearly horizontal.",
+        "attack_hit": "Arrow releases from the tip spawn anchor; this is the only damage-window frame.",
+        "attack_recover": "Hands return toward the bow draw baseline."
+      }
+    },
+    {
+      "jobId": "sprite.weapon_class.staff_cast.v1",
+      "motionId": "staff_cast_v1",
+      "poseTemplateId": "staff_stand",
+      "equipmentProfileIds": ["weapon.staff.v1"],
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "promptFocus": "staff casting motion with cast hand and staff top kept as separate effect spawn choices",
+      "frameNotes": {
+        "attack_ready": "Cast hand gathers energy while the staff remains vertically readable.",
+        "attack_hit": "Staff top and cast hand form the effect ray; this is the only damage-window frame.",
+        "attack_recover": "Cast hand returns toward the staff stand baseline."
+      }
+    },
+    {
+      "jobId": "sprite.weapon_class.fist_combo.v1",
+      "motionId": "fist_combo_v1",
+      "poseTemplateId": "fist_guard_idle",
+      "equipmentProfileIds": ["handwear.gauntlet.v1"],
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "promptFocus": "close-range fist combo with left and right fist centers preserved for gauntlet attachment",
+      "frameNotes": {
+        "attack_ready": "Guard compresses before the strike while feet stay locked.",
+        "attack_hit": "Screen-left fist advances; this is the only damage-window frame.",
+        "attack_recover": "Fists return to the guard baseline."
+      }
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 import {
   FALLBACK_PAGES_URL,
   FALLBACK_REPOSITORY_URL,
-} from "../app/deploymentUpdate.js?v=573";
-import { t, tf } from "../localization/index.js?v=573";
+} from "../app/deploymentUpdate.js?v=675";
+import { t, tf } from "../localization/index.js?v=675";
 
 export function renderDeploymentUpdate(info, updateState, actions = {}) {
   const grid = document.querySelector(".build-info-grid");
@@ -50,6 +50,3 @@ function deploymentStatusText(status, hasUpdate, manifest, info) {
   if (hasUpdate) return tf("deploymentUpdate.available", { displayVersion: manifest.displayVersion || `v${manifest.versionCode}` });
   return tf("deploymentUpdate.current", { displayVersion: manifest.displayVersion || info.displayVersion });
 }
-
-
-

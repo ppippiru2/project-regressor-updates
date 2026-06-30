@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines equipment attachment, layering, pose template, and motion frame contracts for Project Regressor humanoid sprites.",
+  "coordinateConvention": {
+    "canvas": [1254, 1254],
+    "origin": "top_left",
+    "x": "increases_right",
+    "y": "increases_down",
+    "unit": "source_pixel",
+    "sideRule": "ScreenLeft and ScreenRight are screen-space labels, not anatomical labels.",
+    "pixelOutputRule": "Pixelized outputs should remap source anchors by normalized coordinates."
+  },
+  "basisFiles": {
+    "bodySkeletonManifest": "C:/Users/Administrator/Desktop/141414/base_body_source_v2_unified/base_body_v2_skeleton_lock_manifest.json",
+    "weaponClassPoseReview": "C:/Users/Administrator/Desktop/141414/base_body_source_v2_unified/weapon_class_reanalysis_v2/manual_pose_anchor_v3/weapon_class_manual_pose_anchor_v3_manifest.json",
+    "note": "The pose review is diagnostic. Runtime lock should be derived from explicit pose templates, not from finished test-image bbox projection."
+  },
+  "coreBodyAnchors": [
+    "Head_Top",
+    "Face_Center",
+    "Neck_Base",
+    "Chest_Center",
+    "Hip_Center",
+    "Shoulder_ScreenLeft",
+    "Shoulder_ScreenRight",
+    "Elbow_ScreenLeft",
+    "Elbow_ScreenRight",
+    "Hand_ScreenLeft_Grip",
+    "Hand_ScreenRight_Grip",
+    "Knee_ScreenLeft",
+    "Knee_ScreenRight",
+    "Foot_ScreenLeft_Baseline",
+    "Foot_ScreenRight_Baseline"
+  ],
+  "extendedAnchors": [
+    "Wrist_ScreenLeft",
+    "Wrist_ScreenRight",
+    "Forearm_ScreenLeft_Outer",
+    "Forearm_ScreenRight_Outer",
+    "Chest_ScreenLeft",
+    "Chest_ScreenRight",
+    "Waist_ScreenLeft",
+    "Waist_ScreenRight",
+    "Helmet_Crown",
+    "Helmet_Brow",
+    "Shield_Center",
+    "Shield_Rim_Top",
+    "Shield_Rim_Bottom",
+    "Weapon_Tip",
+    "Weapon_Guard_Center",
+    "Weapon_Back_End",
+    "TwoHand_LowerGrip",
+    "TwoHand_UpperGrip",
+    "Bow_Grip",
+    "Draw_Hand",
+    "Arrow_Nock",
+    "Arrow_Tip",
+    "Staff_Grip",
+    "Staff_Top",
+    "Staff_Base",
+    "Cast_Hand",
+    "Fist_ScreenLeft",
+    "Fist_ScreenRight",
+    "Guard_Center"
+  ],
+  "renderLayers": [
+    "back_weapon",
+    "back_cloak",
+    "body_base",
+    "legwear_back",
+    "boots",
+    "legwear_front",
+    "torso_under",
+    "armor_torso",
+    "shoulder_armor",
+    "arm_back",
+    "arm_front",
+    "handwear",
+    "offhand_back",
+    "mainhand_weapon",
+    "offhand_front",
+    "neck_accessory",
+    "head_back",
+    "head_base",
+    "head_front",
+    "vfx"
+  ],
+  "slots": [
+    {
+      "slotId": "head",
+      "displayName": "Head",
+      "acceptedCategories": ["helmet", "hood", "hat"],
+      "requiredAnchors": ["Head_Top", "Face_Center", "Neck_Base"],
+      "defaultLayers": ["head_back", "head_front"]
+    },
+    {
+      "slotId": "hair",
+      "displayName": "Hair",
+      "acceptedCategories": ["hair"],
+      "requiredAnchors": ["Head_Top", "Face_Center"],
+      "defaultLayers": ["head_back", "head_front"]
+    },
+    {
+      "slotId": "torso",
+      "displayName": "Torso",
+      "acceptedCategories": ["cloth_torso", "leather_armor", "plate_armor", "robe"],
+      "requiredAnchors": ["Neck_Base", "Chest_Center", "Hip_Center", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
+      "defaultLayers": ["torso_under", "armor_torso"]
+    },
+    {
+      "slotId": "mainhand",
+      "displayName": "Main Hand",
+      "acceptedCategories": ["one_hand_weapon", "two_hand_weapon", "wand", "staff", "bow"],
+      "requiredAnchors": ["Hand_ScreenLeft_Grip"],
+      "defaultLayers": ["mainhand_weapon"]
+    },
+    {
+      "slotId": "offhand",
+      "displayName": "Off Hand",
+      "acceptedCategories": ["shield", "book", "offhand_weapon"],
+      "requiredAnchors": ["Hand_ScreenRight_Grip"],
+      "defaultLayers": ["offhand_back", "offhand_front"]
+    },
+    {
+      "slotId": "hand_left",
+      "displayName": "Screen Left Hand",
+      "acceptedCategories": ["glove", "gauntlet", "knuckle"],
+      "requiredAnchors": ["Wrist_ScreenLeft", "Hand_ScreenLeft_Grip", "Forearm_ScreenLeft_Outer"],
+      "defaultLayers": ["handwear"]
+    },
+    {
+      "slotId": "hand_right",
+      "displayName": "Screen Right Hand",
+      "acceptedCategories": ["glove", "gauntlet", "knuckle"],
+      "requiredAnchors": ["Wrist_ScreenRight", "Hand_ScreenRight_Grip", "Forearm_ScreenRight_Outer"],
+      "defaultLayers": ["handwear"]
+    },
+    {
+      "slotId": "boots",
+      "displayName": "Boots",
+      "acceptedCategories": ["boots"],
+      "requiredAnchors": ["Knee_ScreenLeft", "Knee_ScreenRight", "Foot_ScreenLeft_Baseline", "Foot_ScreenRight_Baseline"],
+      "defaultLayers": ["boots"]
+    },
+    {
+      "slotId": "back",
+      "displayName": "Back",
+      "acceptedCategories": ["cloak", "back_weapon", "quiver"],
+      "requiredAnchors": ["Neck_Base", "Chest_Center", "Hip_Center"],
+      "defaultLayers": ["back_weapon", "back_cloak"]
+    }
+  ],
+  "attachmentProfiles": [
+    {
+      "profileId": "weapon.one_hand.mainhand.v1",
+      "slotId": "mainhand",
+      "itemCategory": "one_hand_weapon",
+      "requiredItemAnchors": ["grip", "tip", "guard_center", "bounds"],
+      "attachTo": "Hand_ScreenLeft_Grip",
+      "rotationVector": ["Elbow_ScreenLeft", "Hand_ScreenLeft_Grip"],
+      "scaleBasis": ["Elbow_ScreenLeft", "Hand_ScreenLeft_Grip"],
+      "defaultLayer": "mainhand_weapon",
+      "notes": "Sword, axe, and hammer share the grip rule. Axe and hammer should add mass_center and head_bounds."
+    },
+    {
+      "profileId": "shield.offhand.round.v1",
+      "slotId": "offhand",
+      "itemCategory": "shield",
+      "requiredItemAnchors": ["grip", "shield_center", "rim_top", "rim_bottom", "bounds"],
+      "attachTo": "Hand_ScreenRight_Grip",
+      "rotationVector": ["Elbow_ScreenRight", "Hand_ScreenRight_Grip"],
+      "centerOffsetFromGrip": "asset_defined",
+      "defaultLayers": ["offhand_back", "offhand_front"],
+      "notes": "Shield grip and shield visual center are intentionally separate."
+    },
+    {
+      "profileId": "weapon.two_hand.heavy.v1",
+      "slotId": "mainhand",
+      "itemCategory": "two_hand_weapon",
+      "requiredItemAnchors": ["lower_grip", "upper_grip", "tip", "back_end", "mass_center", "bounds"],
+      "attachTo": ["TwoHand_LowerGrip", "TwoHand_UpperGrip"],
+      "rotationVector": ["TwoHand_LowerGrip", "TwoHand_UpperGrip"],
+      "itemRotationVector": ["lower_grip", "upper_grip"],
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["great_weapon_guard"],
+      "notes": "Requires a pose-specific two-hand template."
+    },
+    {
+      "profileId": "weapon.bow.v1",
+      "slotId": "mainhand",
+      "itemCategory": "bow",
+      "requiredItemAnchors": ["bow_grip", "upper_limb", "lower_limb", "string_top", "string_bottom", "arrow_nock", "arrow_tip"],
+      "attachTo": ["Bow_Grip", "Draw_Hand"],
+      "rotationVector": ["Bow_Grip", "Draw_Hand"],
+      "itemRotationVector": ["arrow_nock", "arrow_tip"],
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["bow_draw"],
+      "notes": "Bow body bounds must not stretch the character body bbox."
+    },
+    {
+      "profileId": "weapon.staff.v1",
+      "slotId": "mainhand",
+      "itemCategory": "staff",
+      "requiredItemAnchors": ["staff_grip", "staff_top", "staff_base", "bounds"],
+      "attachTo": ["Staff_Grip", "Staff_Top", "Staff_Base"],
+      "rotationVector": ["Staff_Base", "Staff_Top"],
+      "itemRotationVector": ["staff_base", "staff_top"],
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["staff_stand"],
+      "notes": "Staff weapons need a vertical axis and a separate cast hand from the pose template."
+    },
+    {
+      "profileId": "armor.helmet.v1",
+      "slotId": "head",
+      "itemCategory": "helmet",
+      "requiredItemAnchors": ["crown", "brow", "neck_back", "bounds"],
+      "attachTo": ["Head_Top", "Face_Center", "Neck_Base"],
+      "defaultLayers": ["head_back", "head_front"],
+      "notes": "Split front and back layers when the helmet wraps behind the head."
+    },
+    {
+      "profileId": "armor.torso.v1",
+      "slotId": "torso",
+      "itemCategory": "armor_torso",
+      "requiredItemAnchors": ["neck_opening", "chest_center", "waist_center", "shoulder_left", "shoulder_right", "bounds"],
+      "attachTo": ["Neck_Base", "Chest_Center", "Hip_Center", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
+      "defaultLayer": "armor_torso",
+      "notes": "Torso armor follows body core anchors and should not include weapon or VFX."
+    },
+    {
+      "profileId": "handwear.gauntlet.v1",
+      "slotId": "hand_left",
+      "itemCategory": "gauntlet",
+      "requiredItemAnchors": ["wrist_lock", "knuckle_center", "forearm_cover_bounds", "bounds"],
+      "attachToBySlot": {
+        "hand_left": ["Wrist_ScreenLeft", "Hand_ScreenLeft_Grip", "Forearm_ScreenLeft_Outer"],
+        "hand_right": ["Wrist_ScreenRight", "Hand_ScreenRight_Grip", "Forearm_ScreenRight_Outer"]
+      },
+      "rotationVectorBySlot": {
+        "hand_left": ["Wrist_ScreenLeft", "Hand_ScreenLeft_Grip"],
+        "hand_right": ["Wrist_ScreenRight", "Hand_ScreenRight_Grip"]
+      },
+      "defaultLayer": "handwear",
+      "notes": "Mirror for screen-right hand. Gauntlets are worn equipment, not hand-held weapons."
+    },
+    {
+      "profileId": "boots.pair.v1",
+      "slotId": "foot_left",
+      "itemCategory": "boots",
+      "requiredItemAnchors": ["ankle_lock", "toe_tip", "heel", "bounds"],
+      "attachToBySlot": {
+        "foot_left": ["Foot_ScreenLeft_Baseline", "Knee_ScreenLeft"],
+        "foot_right": ["Foot_ScreenRight_Baseline", "Knee_ScreenRight"]
+      },
+      "rotationVectorBySlot": {
+        "foot_left": ["Knee_ScreenLeft", "Foot_ScreenLeft_Baseline"],
+        "foot_right": ["Knee_ScreenRight", "Foot_ScreenRight_Baseline"]
+      },
+      "defaultLayer": "boots",
+      "notes": "Boots follow foot baseline anchors and keep feet locked during idle and ordinary hit reactions."
+    },
+    {
+      "profileId": "back.cloak.v1",
+      "slotId": "back",
+      "itemCategory": "cloak",
+      "requiredItemAnchors": ["neck_lock", "chest_fall", "hem_center", "bounds"],
+      "attachTo": ["Neck_Base", "Chest_Center", "Hip_Center"],
+      "rotationVector": ["Neck_Base", "Hip_Center"],
+      "defaultLayer": "back_cloak",
+      "notes": "Cloaks use the back_cloak layer and follow core body anchors behind the base body."
+    }
+  ],
+  "poseTemplates": [
+    {
+      "poseTemplateId": "idle_default",
+      "inherits": "base_body_v2",
+      "anchorPolicy": "Use base body v2 anchors directly.",
+      "compatibleProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
+    },
+    {
+      "poseTemplateId": "great_weapon_guard",
+      "inherits": "base_body_v2",
+      "anchorPolicy": "Override both arm chains and expose TwoHand_LowerGrip and TwoHand_UpperGrip.",
+      "compatibleProfiles": ["weapon.two_hand.heavy.v1"]
+    },
+    {
+      "poseTemplateId": "bow_draw",
+      "inherits": "base_body_v2",
+      "anchorPolicy": "Override both arm chains and expose Bow_Grip, Draw_Hand, Arrow_Nock, and Arrow_Tip.",
+      "compatibleProfiles": ["weapon.bow.v1"]
+    },
+    {
+      "poseTemplateId": "staff_stand",
+      "inherits": "base_body_v2",
+      "anchorPolicy": "Override staff-side hand and expose Staff_Top, Staff_Base, Staff_Grip.",
+      "compatibleProfiles": ["weapon.staff.v1"]
+    }
+  ],
+  "motionContracts": [
+    {
+      "motionId": "idle_loop_v1",
+      "frameCount": 3,
+      "requiredFrameFields": ["frameId", "durationMs", "poseTemplateId", "anchorOverrides", "layerOverrides", "eventTags"],
+      "rules": [
+        "Feet stay locked unless a future walk/run template is explicitly used.",
+        "Chest and shoulders may move by small breathing offsets.",
+        "Equipment follows anchor transforms, not independent CSS-only motion."
+      ]
+    },
+    {
+      "motionId": "basic_attack_v1",
+      "frameCount": 3,
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "rules": [
+        "The attack_hit frame owns the damage_window event tag.",
+        "Weapon tip and hitbox are evaluated from item anchors after frame transforms.",
+        "VFX spawns from motion event tags, not from the body sprite image."
+      ]
+    },
+    {
+      "motionId": "hit_reaction_v1",
+      "frameCount": 2,
+      "requiredFrameIds": ["hit_back", "hit_return"],
+      "rules": [
+        "The actor root may move backward, but equipment remains attached to body anchors.",
+        "Do not swap equipment layers during hit reaction unless the item metadata declares a pose override."
+      ]
+    }
+  ],
+  "firstImplementationOrder": [
+    "Lock base body v2 idle anchors.",
+    "Attach helmet, torso armor, one-hand weapon, and shield on idle_default.",
+    "Add gauntlet handwear using wrist and forearm anchors.",
+    "Add boots using knee and foot baseline anchors.",
+    "Add cloak/back proxies using Neck_Base, Chest_Center, and Hip_Center anchors.",
+    "Add pose templates for great weapon, bow, staff, and fist guard.",
+    "Add idle_loop_v1 frame transforms.",
+    "Add basic_attack_v1 frame transforms and event tags.",
+    "Only then generate new weapon/class test images from the anchor contract."
+  ]
+}

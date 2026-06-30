@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines deterministic source-sprite generation prompts for the first weapon/class sprite batch.",
+  "generationPhase": "source_first",
+  "targetOutputTypes": ["source"],
+  "targetGenders": ["male", "female"],
+  "targetSkinToneIds": ["T1", "T2", "T3", "T4", "T5", "T6"],
+  "targetMotionIds": [
+    "sword_shield_slash_v1",
+    "great_weapon_sweep_v1",
+    "bow_release_v1",
+    "staff_cast_v1",
+    "fist_combo_v1"
+  ],
+  "targetFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+  "globalPromptRules": [
+    "Use the approved source body only as the pose, body scale, head placement, lighting, and anchor-placement reference.",
+    "Keep the exact 1254x1254 canvas, camera framing, body proportions, underwear style, and transparent background.",
+    "Create only the requested motion frame variation for the selected gender and skin tone.",
+    "Do not change the body identity, muscles, hands, feet, stance baseline, or equipment anchor locations beyond the requested frame offsets.",
+    "No text, no watermark, no extra props, no background change."
+  ],
+  "negativePromptRules": [
+    "No cropped body",
+    "No extra limbs",
+    "No changed camera angle",
+    "No face/hair redesign",
+    "No background scenery",
+    "No text",
+    "No watermark"
+  ]
+}

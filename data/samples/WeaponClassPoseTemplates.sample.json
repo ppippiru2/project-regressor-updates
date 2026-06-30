@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines weapon/class pose template anchor requirements before generating new body, weapon, armor, and class test sprites.",
+  "coordinateConvention": {
+    "canvas": [1254, 1254],
+    "origin": "top_left",
+    "unit": "source_pixel",
+    "sideRule": "ScreenLeft and ScreenRight are screen-space labels, not anatomical labels."
+  },
+  "rules": [
+    "Do not derive runtime attachment points from finished weapon/class test image bounding boxes.",
+    "Each weapon/class pose must expose explicit grip, body, and hit/effect anchors before class sprites are generated.",
+    "Pose-specific anchors extend the base body anchor set; they do not replace Head_Top, Neck_Base, Chest_Center, Hip_Center, hands, and foot baselines.",
+    "Feet stay locked for standing idle/guard templates unless the template explicitly declares walk, dash, jump, or knockback foot motion.",
+    "Equipment, armor, cloak, and held items follow anchors and motion frames rather than independent CSS-only movement."
+  ],
+  "poseTemplates": [
+    {
+      "poseTemplateId": "sword_shield_idle",
+      "inherits": "idle_default",
+      "category": "one_hand_guard",
+      "compatibleProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.torso.v1", "armor.helmet.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Elbow_ScreenLeft", "Elbow_ScreenRight", "Wrist_ScreenLeft", "Wrist_ScreenRight"],
+      "footPolicy": "locked",
+      "notes": "Baseline weapon-and-shield stance. It may reuse idle_default until arms are redrawn."
+    },
+    {
+      "poseTemplateId": "great_weapon_guard",
+      "inherits": "idle_default",
+      "category": "two_hand_guard",
+      "compatibleProfiles": ["weapon.two_hand.heavy.v1"],
+      "requiredAnchors": ["TwoHand_LowerGrip", "TwoHand_UpperGrip", "Weapon_Tip", "Weapon_Back_End", "Mass_Center", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
+      "footPolicy": "locked",
+      "notes": "Two-handed weapons need both hand grips before the weapon image can be judged."
+    },
+    {
+      "poseTemplateId": "bow_draw",
+      "inherits": "idle_default",
+      "category": "ranged_draw",
+      "compatibleProfiles": ["weapon.bow.v1"],
+      "requiredAnchors": ["Bow_Grip", "Draw_Hand", "Arrow_Nock", "Arrow_Tip", "Bow_String_Top", "Bow_String_Bottom", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
+      "footPolicy": "locked",
+      "notes": "Bow draw must expose arrow anchors separately from the bow image bounds."
+    },
+    {
+      "poseTemplateId": "staff_stand",
+      "inherits": "idle_default",
+      "category": "caster_guard",
+      "compatibleProfiles": ["weapon.staff.v1"],
+      "requiredAnchors": ["Staff_Grip", "Staff_Top", "Staff_Base", "Cast_Hand", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Chest_Center"],
+      "footPolicy": "locked",
+      "notes": "Staff pose keeps a vertical weapon axis and a separate cast hand for skill VFX."
+    },
+    {
+      "poseTemplateId": "fist_guard_idle",
+      "inherits": "idle_default",
+      "category": "unarmed_guard",
+      "compatibleProfiles": ["handwear.gauntlet.v1"],
+      "requiredAnchors": ["Fist_ScreenLeft", "Fist_ScreenRight", "Wrist_ScreenLeft", "Wrist_ScreenRight", "Elbow_ScreenLeft", "Elbow_ScreenRight", "Guard_Center"],
+      "footPolicy": "locked",
+      "notes": "Gauntlet and knuckle classes need fist centers in addition to the normal hand grips."
+    }
+  ],
+  "implementationOrder": [
+    "Lock this pose-template matrix before producing representative weapon/class test sprites.",
+    "Draw or generate source bodies for each template using the required anchors.",
+    "Create pixelized versions only after source anchors are approved.",
+    "Attach equipment proxies to each template and compare frame reports before approving final class tests."
+  ]
+}

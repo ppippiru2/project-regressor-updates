@@ -1,7 +1,8 @@
-import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=573";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=573";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=573";
-import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=573";
+import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=675";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=675";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=675";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=675";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=675";
 
 export const LOOT_SKILL_BULK_INTAKE_PREVIEW_VERSION = "loot-skill-bulk-intake-preview-v1";
 
@@ -96,6 +97,10 @@ function createLootPreviewRow(row, rowIndex, { packageSkillIds, rewardItemIds, s
   const requiresSkillDefinition = type === "skill_fragment" || type === "skill_rune";
   const hasSkillDefinition = !requiresSkillDefinition || CURRENT_SKILL_IDS.has(skillId) || packageSkillIds.has(skillId);
   const stagedRow = findStagedRow(stagedDomain, rowIndex);
+  const bulkState = stagedRow.state || (CURRENT_LOOT_IDS.has(id) ? "staged-update" : "staged-append");
+  const targetSurfaceCount = Number(stagedRow.targetSurfaceCount || 0);
+  const blockingIssueCodes = Array.from(stagedRow.blockingIssueCodes || []);
+  const warningIssueCodes = Array.from(stagedRow.warningIssueCodes || []);
   return {
     id,
     targetDomainId: "loot_item",
@@ -106,10 +111,17 @@ function createLootPreviewRow(row, rowIndex, { packageSkillIds, rewardItemIds, s
     recordTarget: Math.max(0, Number(row.recordTarget) || 0),
     skillId,
     dropSource: row.dropSource || "",
-    bulkState: stagedRow.state || (CURRENT_LOOT_IDS.has(id) ? "staged-update" : "staged-append"),
-    targetSurfaceCount: Number(stagedRow.targetSurfaceCount || 0),
-    blockingIssueCodes: Array.from(stagedRow.blockingIssueCodes || []),
-    warningIssueCodes: Array.from(stagedRow.warningIssueCodes || []),
+    bulkState,
+    targetSurfaceCount,
+    blockingIssueCodes,
+    warningIssueCodes,
+    contractReview: createContentBulkRowContractReview({
+      domainId: "loot_item",
+      state: bulkState,
+      targetSurfaceCount,
+      blockingIssueCodes,
+      warningIssueCodes,
+    }),
     rewardLinked: rewardItemIds.has(id),
     requiresSkillDefinition,
     hasSkillDefinition,
@@ -125,6 +137,10 @@ function createLootPreviewRow(row, rowIndex, { packageSkillIds, rewardItemIds, s
 function createSkillPreviewRow(row, rowIndex, stagedDomain) {
   const id = row.id || "";
   const stagedRow = findStagedRow(stagedDomain, rowIndex);
+  const bulkState = stagedRow.state || (CURRENT_SKILL_IDS.has(id) ? "staged-update" : "staged-append");
+  const targetSurfaceCount = Number(stagedRow.targetSurfaceCount || 0);
+  const blockingIssueCodes = Array.from(stagedRow.blockingIssueCodes || []);
+  const warningIssueCodes = Array.from(stagedRow.warningIssueCodes || []);
   return {
     id,
     targetDomainId: "skill",
@@ -135,10 +151,17 @@ function createSkillPreviewRow(row, rowIndex, stagedDomain) {
     damageType: row.damageType || "",
     effectType: row.effectType || "",
     stanceAllowed: arrayValue(row.stanceAllowed),
-    bulkState: stagedRow.state || (CURRENT_SKILL_IDS.has(id) ? "staged-update" : "staged-append"),
-    targetSurfaceCount: Number(stagedRow.targetSurfaceCount || 0),
-    blockingIssueCodes: Array.from(stagedRow.blockingIssueCodes || []),
-    warningIssueCodes: Array.from(stagedRow.warningIssueCodes || []),
+    bulkState,
+    targetSurfaceCount,
+    blockingIssueCodes,
+    warningIssueCodes,
+    contractReview: createContentBulkRowContractReview({
+      domainId: "skill",
+      state: bulkState,
+      targetSurfaceCount,
+      blockingIssueCodes,
+      warningIssueCodes,
+    }),
   };
 }
 

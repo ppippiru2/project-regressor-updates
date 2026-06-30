@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=573";
+import { t, tf } from "../localization/index.js?v=675";
 
 export function combatStartMessage(monster) {
   return tf("combatMessages.start", { monsterName: monster.name });
@@ -60,6 +60,3 @@ function instrumentalParticle(value) {
   const hasFinalConsonant = (code - 0xac00) % 28 !== 0;
   return hasFinalConsonant ? t("combatMessages.actionParticleConsonant") : t("combatMessages.actionParticleVowel");
 }
-
-
-

@@ -1,4 +1,4 @@
-import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE, WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=573";
+import { BREAK_GAUGE_BALANCE, HYPER_CHARGE_BALANCE, WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=675";
 
 export function advanceHitCombo(state, now = Date.now()) {
   state.hitCount += 1;
@@ -121,6 +121,3 @@ export function applyWeaknessSkillDamageBonus(result, skill, targetState, now = 
     multiplier,
   };
 }
-
-
-

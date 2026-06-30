@@ -1,7 +1,8 @@
 import {
   createContentBulkPatchFilePatchDraftExport,
-  createContentBulkPatchPreApplyReview,
-} from "./contentBulkPatchFilePatchDraftExport.js?v=573";
+} from "./contentBulkPatchFilePatchDraftExport.js?v=675";
+import { createContentBulkPatchReviewIssueSummary } from "./contentBulkPatchIssueSummary.js?v=675";
+import { createContentBulkPatchPreApplyReview } from "./contentBulkPatchPreApplyReview.js?v=675";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VERSION = "content-bulk-patch-apply-gate-plan-v1";
 
@@ -10,7 +11,7 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
   const gates = createApplyGates(exportPreview);
   const preApplyReview = exportPreview.preApplyReview || exportPreview.payload?.preApplyReview || createContentBulkPatchPreApplyReview(summary);
   const reviewChecklist = preApplyReview.checklist || [];
-  const issueSummary = createApplyGateIssueSummary({ reviewChecklist, blockedReasons: [
+  const issueSummary = createContentBulkPatchReviewIssueSummary({ reviewItems: reviewChecklist, blockedReasons: [
     "writer-not-implemented",
     "rollback-not-executed",
     "explicit-apply-ui-not-confirmed",
@@ -54,6 +55,10 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
       readyReviewItemCount: preApplyReview.summary?.readyReviewItemCount || reviewChecklist.filter((item) => item.state === "ready").length,
       warningReviewItemCount: preApplyReview.summary?.warningReviewItemCount || reviewChecklist.filter((item) => item.state === "review").length,
       blockedReviewItemCount: preApplyReview.summary?.blockedReviewItemCount || reviewChecklist.filter((item) => item.state === "blocked").length,
+      contractReadyRowCount: preApplyReview.summary?.contractReadyRowCount || 0,
+      contractBlockedRowCount: preApplyReview.summary?.contractBlockedRowCount || 0,
+      contractWarningRowCount: preApplyReview.summary?.contractWarningRowCount || 0,
+      contractTargetSurfaceCount: preApplyReview.summary?.contractTargetSurfaceCount || 0,
     },
     blockedReasons: [
       "writer-not-implemented",
@@ -66,22 +71,6 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
     gates,
     rollbackSteps,
     validationSteps,
-  };
-}
-
-function createApplyGateIssueSummary({ reviewChecklist = [], blockedReasons = [] } = {}) {
-  const blockingIssueCodes = new Set(blockedReasons);
-  const warningIssueCodes = new Set();
-
-  for (const item of reviewChecklist) {
-    if (item.state === "blocked") blockingIssueCodes.add(item.id);
-    if (item.state === "review") warningIssueCodes.add(item.id);
-  }
-
-  return {
-    blockingIssueCodes: [...blockingIssueCodes],
-    warningIssueCodes: [...warningIssueCodes],
-    affectedReviewItemCount: reviewChecklist.filter((item) => item.state === "blocked" || item.state === "review").length,
   };
 }
 

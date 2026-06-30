@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines a non-mutating pilot-only import scan contract for the first 10 weapon/class source sprite files.",
+  "importRoots": ["assets/_incoming/weapon-class-sprites"],
+  "matchBy": "pilot_planned_file_name",
+  "allowedExtensions": [".png"],
+  "rules": [
+    "This contract scans incoming files and creates a pilot-only import plan; it must not copy, move, overwrite, or promote files.",
+    "Pilot incoming files match the 10 pilot source prompts by exact file name, including gender, tone, motion, frame, and source suffix.",
+    "Non-pilot planned files are reported separately and should not block the pilot-only scan.",
+    "Unknown, duplicate pilot, or non-PNG incoming files should block pilot import planning until renamed or removed.",
+    "Matched pilot files still need metadata QA, visual anchor review, and promotion readiness before runtime asset manifest registration."
+  ]
+}

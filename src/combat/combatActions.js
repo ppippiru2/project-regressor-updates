@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=573";
+import { t, tf } from "../localization/index.js?v=675";
 
 export function choosePlayerAction(player, state, skills, getSkill, hypMax, actionCooldowns = {}) {
   const hpRate = state.player.hp / player.maxHp;
@@ -133,6 +133,3 @@ function skillCooldownRemaining(skill, actionCooldowns, now = Date.now()) {
   if (!Number.isFinite(cooldownUntil)) return 0;
   return Math.max(0, (cooldownUntil - now) / 1000);
 }
-
-
-

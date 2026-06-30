@@ -1,11 +1,22 @@
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=573";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=573";
+} from "./contentBulkPatchPackageAdapter.js?v=675";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=675";
+import {
+  CONTENT_BULK_PATCH_PRE_APPLY_REVIEW_VERSION,
+  createContentBulkPatchPreApplyReview,
+  createPreApplyContractReviewSummary,
+} from "./contentBulkPatchPreApplyReview.js?v=675";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_EXPORT_VERSION = "content-bulk-patch-file-patch-draft-export-v1";
-export const CONTENT_BULK_PATCH_PRE_APPLY_REVIEW_VERSION = "content-bulk-patch-pre-apply-review-v1";
+export {
+  CONTENT_BULK_PATCH_PRE_APPLY_REVIEW_VERSION,
+  createContentBulkPatchPreApplyReview,
+  createContentBulkPatchPreApplyReviewChecklist,
+  createPreApplyContractReviewSummary,
+  normalizePreApplyContractReviewSummary,
+} from "./contentBulkPatchPreApplyReview.js?v=675";
 
 export function createContentBulkPatchFilePatchDraftExport(
   packageData = createContentBulkPatchPackageAdapterTemplate(),
@@ -51,6 +62,10 @@ export function createContentBulkPatchFilePatchDraftExport(
       preApplyReadyReviewItemCount: preApplyReview.summary.readyReviewItemCount,
       preApplyWarningReviewItemCount: preApplyReview.summary.warningReviewItemCount,
       preApplyBlockedReviewItemCount: preApplyReview.summary.blockedReviewItemCount,
+      preApplyContractReadyRowCount: preApplyReview.summary.contractReadyRowCount,
+      preApplyContractBlockedRowCount: preApplyReview.summary.contractBlockedRowCount,
+      preApplyContractWarningRowCount: preApplyReview.summary.contractWarningRowCount,
+      preApplyContractTargetSurfaceCount: preApplyReview.summary.contractTargetSurfaceCount,
     },
   };
 }
@@ -77,6 +92,7 @@ function createPatchDraftPayload(draft, context) {
     ...draft.summary,
     exportedFileCount: files.length,
     exportedBlockCount: files.reduce((sum, file) => sum + file.patchBlocks.length, 0),
+    contractReviewSummary: createPreApplyContractReviewSummary(context.adapterPreview?.stagedImport?.domains),
   };
   const preApplyReview = createContentBulkPatchPreApplyReview(exportedSummary);
 
@@ -95,80 +111,17 @@ function createPatchDraftPayload(draft, context) {
       stagedRowCount: context.adapterPreview.summary?.stagedRowCount || 0,
       withheldRowCount: context.adapterPreview.summary?.withheldRowCount || 0,
       unmappedArrayKeyCount: context.adapterPreview.summary?.unmappedArrayKeyCount || 0,
+      contractReadyRowCount: preApplyReview.contractReviewSummary.readyForStageCount,
+      contractBlockedRowCount: preApplyReview.contractReviewSummary.blockedCount,
+      contractWarningRowCount: preApplyReview.contractReviewSummary.warningCount,
     },
     summary: draft.summary,
+    contractReviewSummary: preApplyReview.contractReviewSummary,
     preApplyReview,
     globalSteps: draft.globalSteps,
     verificationSteps: draft.verificationSteps,
     files,
   };
-}
-
-export function createContentBulkPatchPreApplyReview(summary = {}) {
-  const checklist = createContentBulkPatchPreApplyReviewChecklist(summary);
-  return {
-    version: CONTENT_BULK_PATCH_PRE_APPLY_REVIEW_VERSION,
-    writesGameData: false,
-    applyEnabled: false,
-    requiresManualReview: true,
-    requiresExplicitApply: true,
-    requiresBackup: true,
-    requiresRollbackPlan: true,
-    checklist,
-    summary: {
-      reviewItemCount: checklist.length,
-      readyReviewItemCount: checklist.filter((item) => item.state === "ready").length,
-      warningReviewItemCount: checklist.filter((item) => item.state === "review").length,
-      blockedReviewItemCount: checklist.filter((item) => item.state === "blocked").length,
-    },
-  };
-}
-
-export function createContentBulkPatchPreApplyReviewChecklist(summary = {}) {
-  return [
-    {
-      id: "review-patch-draft-payload",
-      state: (summary.exportedFileCount || 0) > 0 ? "ready" : "blocked",
-      blocksApply: true,
-      detail: `${summary.exportedFileCount || 0} files / ${summary.exportedBlockCount || 0} blocks`,
-    },
-    {
-      id: "resolve-withheld-rows",
-      state: (summary.withheldRowCount || 0) > 0 ? "blocked" : "ready",
-      blocksApply: true,
-      detail: `${summary.withheldRowCount || 0} withheld`,
-    },
-    {
-      id: "review-update-candidates",
-      state: (summary.updateDraftCount || 0) > 0 ? "review" : "ready",
-      blocksApply: true,
-      detail: `${summary.updateDraftCount || 0} updates`,
-    },
-    {
-      id: "confirm-explicit-apply",
-      state: "blocked",
-      blocksApply: true,
-      detail: "required",
-    },
-    {
-      id: "prepare-backup-snapshot",
-      state: "blocked",
-      blocksApply: true,
-      detail: `${summary.exportedFileCount || 0} target files`,
-    },
-    {
-      id: "prepare-rollback-rehearsal",
-      state: "blocked",
-      blocksApply: true,
-      detail: "required",
-    },
-    {
-      id: "run-validation-suite",
-      state: "waiting",
-      blocksApply: true,
-      detail: "after manual review",
-    },
-  ];
 }
 
 

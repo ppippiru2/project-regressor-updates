@@ -1,5 +1,7 @@
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=573";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=573";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=675";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=675";
+import { createContentBulkPatchRowIssueSummary } from "./contentBulkPatchIssueSummary.js?v=675";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=675";
 
 export const CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW_VERSION = "content-bulk-patch-staged-import-preview-v1";
 
@@ -9,7 +11,7 @@ export function createContentBulkPatchStagedImportPreview(batch = createContentB
   const activeDomains = domains.filter((domain) => domain.rowCount > 0);
   const stagedDomains = activeDomains.filter((domain) => domain.stagedRowCount > 0);
   const uniqueChecks = new Set(stagedDomains.flatMap((domain) => domain.checkScripts || []));
-  const issueSummary = createStagedImportIssueSummary(domains);
+  const issueSummary = createContentBulkPatchRowIssueSummary(domains);
 
   return {
     version: CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW_VERSION,
@@ -56,6 +58,7 @@ function stagedDomain(domain, batch, issues) {
   const warningRows = stagedRows.filter((row) => row.warningIssueCodes.length > 0);
   const appendRows = actionableRows.filter((row) => row.state === "staged-append");
   const updateRows = actionableRows.filter((row) => row.state === "staged-update");
+  const contractReviewSummary = summarizeContractReview(stagedRows);
 
   return {
     id: domain.id,
@@ -69,6 +72,7 @@ function stagedDomain(domain, batch, issues) {
     warningRowCount: warningRows.length,
     blockingIssueCodes: uniqueRowIssueCodes(stagedRows, "blockingIssueCodes"),
     warningIssueCodes: uniqueRowIssueCodes(stagedRows, "warningIssueCodes"),
+    contractReviewSummary,
     generatedSurfaceCount: actionableRows.length * (domain.surfaces || []).length,
     checkScripts: domain.checkScripts || [],
     surfaces: (domain.surfaces || []).map((surface) => ({
@@ -77,33 +81,6 @@ function stagedDomain(domain, batch, issues) {
       state: actionableRows.length ? "staged" : "empty",
     })),
     rows: stagedRows,
-  };
-}
-
-function createStagedImportIssueSummary(domains = []) {
-  const blockingIssueCodes = new Set();
-  const warningIssueCodes = new Set();
-  const affectedDomains = new Set();
-  const affectedRows = new Set();
-
-  for (const domain of domains) {
-    for (const row of domain.rows || []) {
-      const rowBlocking = row.blockingIssueCodes || [];
-      const rowWarnings = row.warningIssueCodes || [];
-      for (const code of rowBlocking) blockingIssueCodes.add(code);
-      for (const code of rowWarnings) warningIssueCodes.add(code);
-      if (rowBlocking.length || rowWarnings.length) {
-        affectedDomains.add(domain.id);
-        affectedRows.add(`${domain.id}:${row.rowIndex}`);
-      }
-    }
-  }
-
-  return {
-    blockingIssueCodes: [...blockingIssueCodes],
-    warningIssueCodes: [...warningIssueCodes],
-    affectedDomainCount: affectedDomains.size,
-    affectedRowCount: affectedRows.size,
   };
 }
 
@@ -125,6 +102,25 @@ function stagedRow(domain, row, rowIndex, issues) {
     blockingIssueCodes,
     warningIssueCodes,
     targetSurfaceCount: state === "withheld-blocked" ? 0 : (domain.surfaces || []).length,
+    contractReview: createContentBulkRowContractReview({
+      domainId: domain.id,
+      state,
+      targetSurface: (domain.surfaces || []).map((surface) => surface.id).join(","),
+      targetSurfaceCount: state === "withheld-blocked" ? 0 : (domain.surfaces || []).length,
+      blockingIssueCodes,
+      warningIssueCodes,
+    }),
+  };
+}
+
+function summarizeContractReview(rows = []) {
+  const reviews = rows.map((row) => row.contractReview).filter(Boolean);
+  return {
+    rowCount: reviews.length,
+    readyForStageCount: reviews.filter((review) => review.readyForStage).length,
+    blockedCount: reviews.filter((review) => review.blocked).length,
+    warningCount: reviews.filter((review) => review.warning).length,
+    targetSurfaceCount: reviews.reduce((sum, review) => sum + Number(review.targetSurfaceCount || 0), 0),
   };
 }
 

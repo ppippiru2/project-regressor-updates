@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=573";
+import { tf } from "../localization/index.js?v=675";
 
 export function selectRegionState(state, uiState, regionId) {
   state.regionId = regionId;
@@ -32,6 +32,3 @@ export function newlyUnlockedRegions(regions, beforeLevel, afterLevel) {
     (region) => region.recommendedLevel > beforeLevel && region.recommendedLevel <= afterLevel
   );
 }
-
-
-

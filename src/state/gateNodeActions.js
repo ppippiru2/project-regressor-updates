@@ -1,5 +1,5 @@
-import { gateNodeTypeLabel } from "../config/gateNodeTypes.js?v=573";
-import { t, tf } from "../localization/index.js?v=573";
+import { gateNodeTypeLabel } from "../config/gateNodeTypes.js?v=675";
+import { t, tf } from "../localization/index.js?v=675";
 
 const COMBAT_NODE_TYPES = new Set(["battle", "elite", "hidden_boss"]);
 const TREASURE_NODE_TYPES = new Set(["treasure", "hidden_treasure"]);
@@ -120,6 +120,3 @@ export function createGateNodeResolution(outcome, options = {}) {
     message: tf("gateNodeActions.inspect", { nodeLabel: options.nodeLabel || t("gateNodeActions.unknownNode") }),
   };
 }
-
-
-

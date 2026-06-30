@@ -1,5 +1,6 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=573";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=573";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=675";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=675";
+import { createContentBulkPatchFileIssueSummary } from "./contentBulkPatchIssueSummary.js?v=675";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VERSION = "content-bulk-patch-backup-plan-v1";
 const FILE_BACKUP_REVIEW_BLOCKERS = Object.freeze([
@@ -32,9 +33,10 @@ export function createContentBulkPatchBackupPlan(
     "snapshot-not-created",
     "restore-not-tested",
   ];
-  const issueSummary = createBackupIssueSummary({
+  const issueSummary = createContentBulkPatchFileIssueSummary({
     blockedReasons,
-    fileBackups,
+    fileItems: fileBackups,
+    blockerCodeKey: "reviewBlockerCodes",
     preApplyReviewItems: applyGatePlan.reviewChecklist || [],
   });
 
@@ -89,42 +91,6 @@ export function createContentBulkPatchBackupPlan(
     backupSteps,
     restoreSteps,
     fileBackups,
-  };
-}
-
-function createBackupIssueSummary({ blockedReasons = [], fileBackups = [], preApplyReviewItems = [] } = {}) {
-  const blockingIssueCodes = new Set(blockedReasons);
-  const warningIssueCodes = new Set();
-  const affectedDomainIds = new Set();
-  let affectedFileCount = 0;
-
-  for (const file of fileBackups) {
-    const blockers = Array.isArray(file.reviewBlockerCodes) ? file.reviewBlockerCodes.filter(Boolean) : [];
-    if (!blockers.length) continue;
-    affectedFileCount += 1;
-    for (const code of blockers) blockingIssueCodes.add(code);
-    for (const domainId of file.domainIds || []) affectedDomainIds.add(domainId);
-  }
-
-  let affectedReviewItemCount = 0;
-  for (const item of preApplyReviewItems) {
-    if (item.state === "blocked") {
-      blockingIssueCodes.add(item.id);
-      affectedReviewItemCount += 1;
-    }
-    if (item.state === "review") {
-      warningIssueCodes.add(item.id);
-      affectedReviewItemCount += 1;
-    }
-  }
-
-  return {
-    blockingIssueCodes: [...blockingIssueCodes],
-    warningIssueCodes: [...warningIssueCodes],
-    affectedDomainCount: affectedDomainIds.size,
-    affectedRowCount: affectedFileCount,
-    affectedFileCount,
-    affectedReviewItemCount,
   };
 }
 

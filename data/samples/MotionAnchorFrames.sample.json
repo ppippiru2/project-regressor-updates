@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Example motion-frame anchor deltas for equipment-aware sprite motion. Values are preview-scale only and must be tuned against approved source bodies.",
+  "coordinateMode": "source_pixel_delta_from_pose_template",
+  "rules": [
+    "Frame anchor offsets are applied after the pose template base anchors.",
+    "Equipment follows transformed anchors.",
+    "Feet remain locked during idle and ordinary hit reaction.",
+    "VFX and damage events are emitted from eventTags."
+  ],
+  "motions": [
+    {
+      "motionId": "idle_loop_v1",
+      "defaultPoseTemplateId": "idle_default",
+      "frames": [
+        {
+          "frameId": "idle_low",
+          "durationMs": 360,
+          "anchorOffsets": {
+            "Chest_Center": [0, 0],
+            "Neck_Base": [0, 0],
+            "Shoulder_ScreenLeft": [0, 0],
+            "Shoulder_ScreenRight": [0, 0],
+            "Wrist_ScreenLeft": [0, 0],
+            "Wrist_ScreenRight": [0, 0],
+            "Hand_ScreenLeft_Grip": [0, 0],
+            "Hand_ScreenRight_Grip": [0, 0]
+          },
+          "layerOverrides": {},
+          "eventTags": []
+        },
+        {
+          "frameId": "idle_breathe_up",
+          "durationMs": 420,
+          "anchorOffsets": {
+            "Chest_Center": [0, -3],
+            "Neck_Base": [0, -2],
+            "Shoulder_ScreenLeft": [0, -2],
+            "Shoulder_ScreenRight": [0, -2],
+            "Wrist_ScreenLeft": [0, -1],
+            "Wrist_ScreenRight": [0, -1],
+            "Forearm_ScreenLeft_Outer": [0, -1],
+            "Forearm_ScreenRight_Outer": [0, -1],
+            "Hand_ScreenLeft_Grip": [0, -1],
+            "Hand_ScreenRight_Grip": [0, -1]
+          },
+          "layerOverrides": {},
+          "eventTags": []
+        },
+        {
+          "frameId": "idle_return",
+          "durationMs": 360,
+          "anchorOffsets": {
+            "Chest_Center": [0, 0],
+            "Neck_Base": [0, 0],
+            "Shoulder_ScreenLeft": [0, 0],
+            "Shoulder_ScreenRight": [0, 0],
+            "Wrist_ScreenLeft": [0, 0],
+            "Wrist_ScreenRight": [0, 0],
+            "Hand_ScreenLeft_Grip": [0, 0],
+            "Hand_ScreenRight_Grip": [0, 0]
+          },
+          "layerOverrides": {},
+          "eventTags": []
+        }
+      ]
+    },
+    {
+      "motionId": "basic_attack_one_hand_v1",
+      "defaultPoseTemplateId": "idle_default",
+      "frames": [
+        {
+          "frameId": "attack_ready",
+          "durationMs": 140,
+          "anchorOffsets": {
+            "Shoulder_ScreenLeft": [-4, -3],
+            "Elbow_ScreenLeft": [-14, -12],
+            "Wrist_ScreenLeft": [-18, -16],
+            "Forearm_ScreenLeft_Outer": [-12, -10],
+            "Hand_ScreenLeft_Grip": [-22, -18],
+            "Chest_Center": [-2, 0],
+            "Hip_Center": [0, 0]
+          },
+          "layerOverrides": {
+            "mainhand_weapon": "front"
+          },
+          "eventTags": ["windup"]
+        },
+        {
+          "frameId": "attack_hit",
+          "durationMs": 120,
+          "anchorOffsets": {
+            "Shoulder_ScreenLeft": [8, 2],
+            "Elbow_ScreenLeft": [34, 4],
+            "Wrist_ScreenLeft": [48, 3],
+            "Forearm_ScreenLeft_Outer": [30, 4],
+            "Hand_ScreenLeft_Grip": [58, 2],
+            "Chest_Center": [8, 0],
+            "Hip_Center": [3, 0]
+          },
+          "layerOverrides": {
+            "mainhand_weapon": "front"
+          },
+          "eventTags": ["damage_window", "vfx_spawn.basic_slash", "sfx.weapon_swing"]
+        },
+        {
+          "frameId": "attack_recover",
+          "durationMs": 220,
+          "anchorOffsets": {
+            "Shoulder_ScreenLeft": [0, 0],
+            "Elbow_ScreenLeft": [0, 0],
+            "Wrist_ScreenLeft": [0, 0],
+            "Forearm_ScreenLeft_Outer": [0, 0],
+            "Hand_ScreenLeft_Grip": [0, 0],
+            "Chest_Center": [0, 0],
+            "Hip_Center": [0, 0]
+          },
+          "layerOverrides": {},
+          "eventTags": ["recover"]
+        }
+      ]
+    },
+    {
+      "motionId": "hit_reaction_v1",
+      "defaultPoseTemplateId": "idle_default",
+      "frames": [
+        {
+          "frameId": "hit_back",
+          "durationMs": 120,
+          "actorRootOffset": [-10, 0],
+          "anchorOffsets": {
+            "Head_Top": [-4, 0],
+            "Neck_Base": [-5, 1],
+            "Chest_Center": [-8, 2],
+            "Hip_Center": [-5, 1],
+            "Wrist_ScreenLeft": [-8, 2],
+            "Wrist_ScreenRight": [-8, 2],
+            "Forearm_ScreenLeft_Outer": [-8, 2],
+            "Forearm_ScreenRight_Outer": [-8, 2],
+            "Hand_ScreenLeft_Grip": [-8, 2],
+            "Hand_ScreenRight_Grip": [-8, 2],
+            "Foot_ScreenLeft_Baseline": [10, 0],
+            "Foot_ScreenRight_Baseline": [10, 0]
+          },
+          "layerOverrides": {},
+          "eventTags": ["hit_flash"]
+        },
+        {
+          "frameId": "hit_return",
+          "durationMs": 180,
+          "actorRootOffset": [0, 0],
+          "anchorOffsets": {
+            "Head_Top": [0, 0],
+            "Neck_Base": [0, 0],
+            "Chest_Center": [0, 0],
+            "Hip_Center": [0, 0],
+            "Wrist_ScreenLeft": [0, 0],
+            "Wrist_ScreenRight": [0, 0],
+            "Forearm_ScreenLeft_Outer": [0, 0],
+            "Forearm_ScreenRight_Outer": [0, 0],
+            "Hand_ScreenLeft_Grip": [0, 0],
+            "Hand_ScreenRight_Grip": [0, 0]
+          },
+          "layerOverrides": {},
+          "eventTags": []
+        }
+      ]
+    }
+  ]
+}

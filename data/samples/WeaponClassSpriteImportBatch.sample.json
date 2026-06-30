@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines a non-mutating import scan contract for externally generated weapon/class source and pixel sprite files.",
+  "importRoots": ["assets/_incoming/weapon-class-sprites"],
+  "matchBy": "planned_file_name",
+  "allowedExtensions": [".png"],
+  "rules": [
+    "This contract scans incoming files and creates an import plan only; it must not copy, move, overwrite, or promote files.",
+    "Incoming files match planned outputs by exact file name, including gender, tone, motion, frame, and source/pixel suffix.",
+    "Unknown, duplicate, or non-PNG incoming files should block import planning until renamed or removed.",
+    "Matched files still need metadata QA, visual anchor review, and promotion readiness before runtime asset manifest registration."
+  ]
+}

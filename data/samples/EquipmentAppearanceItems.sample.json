@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Examples of equipment appearance metadata. These are visual attachment contracts, not stat items.",
+  "rules": [
+    "Equipment stats and equipment appearance stay separate.",
+    "Each appearance asset declares slot, attachment profile, item-space anchors, layers, and compatible pose templates.",
+    "Item anchors are local to the equipment image bounds.",
+    "VFX must not be baked into equipment appearance images."
+  ],
+  "appearances": [
+    {
+      "appearanceId": "appearance.weapon.rusty_sword.v1",
+      "displayName": "Rusty Sword Appearance",
+      "category": "one_hand_weapon",
+      "slotId": "mainhand",
+      "attachmentProfileId": "weapon.one_hand.mainhand.v1",
+      "sourceFile": "assets/weapons/source/rusty_sword_source.png",
+      "cleanFile": "assets/weapons/transparent/rusty_sword_rgba.png",
+      "itemCoordinateSpace": {
+        "origin": "top_left",
+        "unit": "local_pixel"
+      },
+      "itemAnchors": {
+        "grip": [42, 146],
+        "guard_center": [42, 112],
+        "tip": [42, 8],
+        "back_end": [42, 178],
+        "bounds": [0, 0, 84, 186]
+      },
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["idle_default", "sword_shield_idle", "basic_attack_one_hand"],
+      "notes": "Grip must align to Hand_ScreenLeft_Grip."
+    },
+    {
+      "appearanceId": "appearance.shield.round_wood.v1",
+      "displayName": "Round Wood Shield Appearance",
+      "category": "shield",
+      "slotId": "offhand",
+      "attachmentProfileId": "shield.offhand.round.v1",
+      "sourceFile": "assets/shields/source/round_wood_shield_source.png",
+      "cleanFile": "assets/shields/transparent/round_wood_shield_rgba.png",
+      "itemAnchors": {
+        "grip": [58, 88],
+        "shield_center": [84, 88],
+        "rim_top": [84, 8],
+        "rim_bottom": [84, 168],
+        "bounds": [0, 0, 168, 176]
+      },
+      "defaultLayers": ["offhand_back", "offhand_front"],
+      "compatiblePoseTemplates": ["idle_default", "sword_shield_idle", "hit_reaction"],
+      "notes": "The grip is not the visual center. Keep shield_center as a separate offset."
+    },
+    {
+      "appearanceId": "appearance.helmet.novice_iron.v1",
+      "displayName": "Novice Iron Helmet Appearance",
+      "category": "helmet",
+      "slotId": "head",
+      "attachmentProfileId": "armor.helmet.v1",
+      "sourceFile": "assets/appearances/source/novice_iron_helmet_source.png",
+      "cleanFile": "assets/appearances/transparent/novice_iron_helmet_rgba.png",
+      "itemAnchors": {
+        "crown": [64, 8],
+        "brow": [64, 62],
+        "neck_back": [64, 126],
+        "bounds": [0, 0, 128, 140]
+      },
+      "defaultLayers": ["head_back", "head_front"],
+      "compatiblePoseTemplates": ["idle_default", "hit_reaction", "basic_attack_one_hand"],
+      "notes": "Split helmet image into front/back layers if it wraps around the head."
+    },
+    {
+      "appearanceId": "appearance.armor.leather_chest.v1",
+      "displayName": "Leather Chest Armor Appearance",
+      "category": "armor_torso",
+      "slotId": "torso",
+      "attachmentProfileId": "armor.torso.v1",
+      "sourceFile": "assets/appearances/source/leather_chest_armor_source.png",
+      "cleanFile": "assets/appearances/transparent/leather_chest_armor_rgba.png",
+      "itemAnchors": {
+        "neck_opening": [128, 18],
+        "chest_center": [128, 104],
+        "waist_center": [128, 238],
+        "shoulder_left": [32, 52],
+        "shoulder_right": [224, 52],
+        "bounds": [0, 0, 256, 270]
+      },
+      "defaultLayer": "armor_torso",
+      "compatiblePoseTemplates": ["idle_default", "sword_shield_idle", "hit_reaction"],
+      "notes": "Torso armor follows Neck_Base, Chest_Center, Hip_Center, and both shoulders."
+    },
+    {
+      "appearanceId": "appearance.handwear.iron_gauntlets.v1",
+      "displayName": "Iron Gauntlets Appearance",
+      "category": "gauntlet_pair",
+      "slotIds": ["hand_left", "hand_right"],
+      "attachmentProfileId": "handwear.gauntlet.v1",
+      "sourceFile": "assets/appearances/source/iron_gauntlets_source.png",
+      "cleanFile": "assets/appearances/transparent/iron_gauntlets_rgba.png",
+      "itemAnchors": {
+        "left": {
+          "wrist_lock": [48, 24],
+          "knuckle_center": [48, 82],
+          "forearm_cover_bounds": [8, 0, 88, 96],
+          "bounds": [0, 0, 96, 110]
+        },
+        "right": {
+          "wrist_lock": [48, 24],
+          "knuckle_center": [48, 82],
+          "forearm_cover_bounds": [8, 0, 88, 96],
+          "bounds": [0, 0, 96, 110]
+        }
+      },
+      "defaultLayer": "handwear",
+      "compatiblePoseTemplates": ["idle_default", "fist_guard_idle", "hit_reaction"],
+      "notes": "Gauntlets follow wrist, hand, and forearm anchors. They are not hand-held weapons."
+    },
+    {
+      "appearanceId": "appearance.boots.swift.v1",
+      "displayName": "Swift Boots Appearance",
+      "category": "boots_pair",
+      "slotIds": ["foot_left", "foot_right"],
+      "attachmentProfileId": "boots.pair.v1",
+      "sourceFile": "assets/appearances/source/swift_boots_source.png",
+      "cleanFile": "assets/appearances/transparent/swift_boots_rgba.png",
+      "itemAnchors": {
+        "left": {
+          "ankle_lock": [48, 48],
+          "toe_tip": [62, 104],
+          "heel": [24, 92],
+          "bounds": [0, 0, 96, 120]
+        },
+        "right": {
+          "ankle_lock": [48, 48],
+          "toe_tip": [62, 104],
+          "heel": [24, 92],
+          "bounds": [0, 0, 96, 120]
+        }
+      },
+      "defaultLayer": "boots",
+      "compatiblePoseTemplates": ["idle_default", "hit_reaction"],
+      "notes": "Boots follow knee and foot baseline anchors. Feet stay locked during idle and ordinary hit reaction."
+    },
+    {
+      "appearanceId": "appearance.cloak.traveler.v1",
+      "displayName": "Traveler Cloak Appearance",
+      "category": "cloak",
+      "slotId": "back",
+      "attachmentProfileId": "back.cloak.v1",
+      "sourceFile": "assets/appearances/source/traveler_cloak_source.png",
+      "cleanFile": "assets/appearances/transparent/traveler_cloak_rgba.png",
+      "itemAnchors": {
+        "neck_lock": [110, 20],
+        "chest_fall": [110, 132],
+        "hem_center": [110, 334],
+        "bounds": [0, 0, 220, 360]
+      },
+      "defaultLayer": "back_cloak",
+      "compatiblePoseTemplates": ["idle_default", "hit_reaction"],
+      "notes": "Cloaks stay behind the body and follow Neck_Base, Chest_Center, and Hip_Center."
+    },
+    {
+      "appearanceId": "appearance.weapon.training_greatsword.v1",
+      "displayName": "Training Greatsword Appearance",
+      "category": "two_hand_weapon",
+      "slotId": "mainhand",
+      "attachmentProfileId": "weapon.two_hand.heavy.v1",
+      "assetId": "equipment_attachment_training_greatsword_proxy_v1",
+      "sourceFile": "assets/weapons/source/training_greatsword_source.png",
+      "cleanFile": "assets/weapons/transparent/training_greatsword_rgba.png",
+      "itemAnchors": {
+        "lower_grip": [64, 300],
+        "upper_grip": [64, 240],
+        "tip": [64, 8],
+        "back_end": [64, 408],
+        "mass_center": [64, 130],
+        "bounds": [0, 0, 128, 420]
+      },
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["great_weapon_guard"],
+      "notes": "Greatsword requires lower and upper grip anchors from the pose template."
+    },
+    {
+      "appearanceId": "appearance.weapon.training_bow.v1",
+      "displayName": "Training Bow Appearance",
+      "category": "bow",
+      "slotId": "mainhand",
+      "attachmentProfileId": "weapon.bow.v1",
+      "assetId": "equipment_attachment_training_bow_proxy_v1",
+      "sourceFile": "assets/weapons/source/training_bow_source.png",
+      "cleanFile": "assets/weapons/transparent/training_bow_rgba.png",
+      "itemAnchors": {
+        "bow_grip": [96, 160],
+        "upper_limb": [116, 8],
+        "lower_limb": [116, 312],
+        "string_top": [40, 12],
+        "string_bottom": [40, 308],
+        "arrow_nock": [52, 160],
+        "arrow_tip": [232, 160],
+        "bounds": [0, 0, 256, 320]
+      },
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["bow_draw"],
+      "notes": "Bow requires bow_draw or another bow-specific pose template."
+    },
+    {
+      "appearanceId": "appearance.weapon.training_staff.v1",
+      "displayName": "Training Staff Appearance",
+      "category": "staff",
+      "slotId": "mainhand",
+      "attachmentProfileId": "weapon.staff.v1",
+      "assetId": "equipment_attachment_training_staff_proxy_v1",
+      "sourceFile": "assets/weapons/source/training_staff_source.png",
+      "cleanFile": "assets/weapons/transparent/training_staff_rgba.png",
+      "itemAnchors": {
+        "staff_grip": [32, 220],
+        "staff_top": [32, 8],
+        "staff_base": [32, 420],
+        "bounds": [0, 0, 64, 432]
+      },
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["staff_stand"],
+      "notes": "Staff requires Staff_Grip, Staff_Top, and Staff_Base pose anchors."
+    }
+  ]
+}

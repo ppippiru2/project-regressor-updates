@@ -682,6 +682,176 @@
         "approved-icon"
       ],
       "notes": "?? ??? equipment icon supplied by user and applied on 2026-06-29."
+    },
+    {
+      "assetId": "equipment_attachment_rusty_sword_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/weapons/transparent/rusty_sword_rgba.png",
+      "cleanFile": "assets/weapons/transparent/rusty_sword_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "weapon",
+        "mainhand"
+      ],
+      "notes": "Transparent proxy attachment sprite for rusty_sword. Used only by equipmentAttachmentPreview until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_round_wood_shield_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/shields/transparent/round_wood_shield_rgba.png",
+      "cleanFile": "assets/shields/transparent/round_wood_shield_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "shield",
+        "offhand"
+      ],
+      "notes": "Transparent proxy attachment sprite for offhand shield placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_training_greatsword_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/weapons/transparent/training_greatsword_rgba.png",
+      "cleanFile": "assets/weapons/transparent/training_greatsword_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "weapon",
+        "two-hand"
+      ],
+      "notes": "Transparent proxy attachment sprite for great-weapon pose placement tests. Used only by weapon/class pose template validation until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_training_bow_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/weapons/transparent/training_bow_rgba.png",
+      "cleanFile": "assets/weapons/transparent/training_bow_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "weapon",
+        "bow"
+      ],
+      "notes": "Transparent proxy attachment sprite for bow-draw pose placement tests. Used only by weapon/class pose template validation until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_training_staff_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/weapons/transparent/training_staff_rgba.png",
+      "cleanFile": "assets/weapons/transparent/training_staff_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "weapon",
+        "staff"
+      ],
+      "notes": "Transparent proxy attachment sprite for staff-stand pose placement tests. Used only by weapon/class pose template validation until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_novice_iron_helmet_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/appearances/transparent/novice_iron_helmet_rgba.png",
+      "cleanFile": "assets/appearances/transparent/novice_iron_helmet_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "helmet",
+        "head"
+      ],
+      "notes": "Transparent proxy attachment sprite for helmet placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_leather_chest_armor_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/appearances/transparent/leather_chest_armor_rgba.png",
+      "cleanFile": "assets/appearances/transparent/leather_chest_armor_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "armor",
+        "torso"
+      ],
+      "notes": "Transparent proxy attachment sprite for torso armor placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_iron_gauntlets_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/appearances/transparent/iron_gauntlets_rgba.png",
+      "cleanFile": "assets/appearances/transparent/iron_gauntlets_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "gauntlet",
+        "handwear"
+      ],
+      "notes": "Transparent proxy attachment sprite for paired gauntlet placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_swift_boots_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/appearances/transparent/swift_boots_rgba.png",
+      "cleanFile": "assets/appearances/transparent/swift_boots_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "boots",
+        "footwear"
+      ],
+      "notes": "Transparent proxy attachment sprite for paired boots placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_traveler_cloak_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/appearances/transparent/traveler_cloak_rgba.png",
+      "cleanFile": "assets/appearances/transparent/traveler_cloak_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "cloak",
+        "back"
+      ],
+      "notes": "Transparent proxy attachment sprite for cloak/back placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
     }
   ]
 }

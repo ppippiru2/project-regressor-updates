@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines draft attack motion and hitbox anchor contracts for weapon/class pose templates before generated class test sprites are approved.",
+  "rules": [
+    "Hitboxes are derived from explicit pose anchors, not from finished image bounding boxes.",
+    "Each attack motion must have attack_ready, attack_hit, and attack_recover frames.",
+    "The attack_hit frame must own damage_window and at least one hitbox or projectile/effect spawn anchor.",
+    "Standing attack templates keep foot baselines locked unless a later movement template explicitly allows foot motion.",
+    "These hitboxes are visual QA contracts for sprite production, not final combat balance numbers."
+  ],
+  "motions": [
+    {
+      "motionId": "sword_shield_slash_v1",
+      "poseTemplateId": "sword_shield_idle",
+      "category": "one_hand_slash",
+      "compatibleProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1"],
+      "frames": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrame": "attack_hit",
+      "eventTags": ["damage_window", "vfx_spawn.basic_slash", "sfx.weapon_swing"],
+      "hitbox": {
+        "type": "capsule",
+        "fromAnchor": "Hand_ScreenLeft_Grip",
+        "toAnchor": "Elbow_ScreenLeft",
+        "radius": 42,
+        "originAnchor": "Hand_ScreenLeft_Grip",
+        "notes": "Proxy one-hand slash until weapon tip anchors are exposed for the final sword-shield source pose."
+      }
+    },
+    {
+      "motionId": "great_weapon_sweep_v1",
+      "poseTemplateId": "great_weapon_guard",
+      "category": "heavy_sweep",
+      "compatibleProfiles": ["weapon.two_hand.heavy.v1"],
+      "frames": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrame": "attack_hit",
+      "eventTags": ["damage_window", "vfx_spawn.heavy_arc", "sfx.heavy_weapon_swing"],
+      "hitbox": {
+        "type": "capsule",
+        "fromAnchor": "Weapon_Back_End",
+        "toAnchor": "Weapon_Tip",
+        "radius": 56,
+        "originAnchor": "Mass_Center",
+        "notes": "Large sweep follows the whole weapon axis for visual QA."
+      }
+    },
+    {
+      "motionId": "bow_release_v1",
+      "poseTemplateId": "bow_draw",
+      "category": "projectile_release",
+      "compatibleProfiles": ["weapon.bow.v1"],
+      "frames": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrame": "attack_hit",
+      "eventTags": ["damage_window", "projectile_spawn.arrow", "sfx.bow_release"],
+      "hitbox": {
+        "type": "ray",
+        "fromAnchor": "Arrow_Nock",
+        "toAnchor": "Arrow_Tip",
+        "radius": 12,
+        "originAnchor": "Bow_Grip",
+        "projectileSpawnAnchor": "Arrow_Tip",
+        "notes": "Arrow line is a projectile spawn contract, not a melee overlap."
+      }
+    },
+    {
+      "motionId": "staff_cast_v1",
+      "poseTemplateId": "staff_stand",
+      "category": "caster_bolt",
+      "compatibleProfiles": ["weapon.staff.v1"],
+      "frames": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrame": "attack_hit",
+      "eventTags": ["damage_window", "vfx_spawn.staff_bolt", "sfx.staff_cast"],
+      "hitbox": {
+        "type": "ray",
+        "fromAnchor": "Cast_Hand",
+        "toAnchor": "Staff_Top",
+        "radius": 24,
+        "originAnchor": "Cast_Hand",
+        "effectSpawnAnchor": "Staff_Top",
+        "notes": "Cast hand and staff top stay separate so skill VFX can choose either spawn point."
+      }
+    },
+    {
+      "motionId": "fist_combo_v1",
+      "poseTemplateId": "fist_guard_idle",
+      "category": "unarmed_combo",
+      "compatibleProfiles": ["handwear.gauntlet.v1"],
+      "frames": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrame": "attack_hit",
+      "eventTags": ["damage_window", "vfx_spawn.fist_impact", "sfx.fist_hit"],
+      "hitbox": {
+        "type": "dual_sphere",
+        "fromAnchor": "Fist_ScreenLeft",
+        "toAnchor": "Fist_ScreenRight",
+        "radius": 38,
+        "originAnchor": "Guard_Center",
+        "notes": "Both fists are checked as a paired close-range impact zone."
+      }
+    }
+  ]
+}

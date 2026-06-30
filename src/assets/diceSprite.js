@@ -31,7 +31,7 @@ const IMAGE_LOAD_TIMEOUT_MS = 2200;
 
 export async function loadDiceSpriteDefinition() {
   try {
-    const response = await fetch("./data/dice-sprite.json?v=573", { cache: "no-store" });
+    const response = await fetch("./data/dice-sprite.json?v=675", { cache: "no-store" });
     if (!response.ok) return FALLBACK_DICE_SPRITE;
     const definition = await response.json();
     const normalized = normalizeDiceSpriteDefinition(definition);
@@ -194,6 +194,3 @@ function clampNumber(value, min, max, fallback) {
   if (!Number.isFinite(value)) return fallback;
   return Math.max(min, Math.min(max, value));
 }
-
-
-

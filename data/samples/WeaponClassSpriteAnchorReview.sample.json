@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_sample",
+  "purpose": "Defines visual anchor-review checklist fields for generated weapon/class source and pixel sprite files.",
+  "rules": [
+    "Anchor review starts only after file intake and metadata QA pass for a generated file.",
+    "Source review should happen before pixel review for the matching gender, tone, motion, and frame.",
+    "Reviewers should compare the image against pose, hitbox, and motion-frame reports instead of judging by image bounds alone.",
+    "A file can be promoted only after required review fields pass and no blocking visual notes remain."
+  ],
+  "requiredReviewFields": [
+    {
+      "fieldId": "canvas_and_framing_locked",
+      "label": "Canvas and framing match the 1254 source frame."
+    },
+    {
+      "fieldId": "skin_tone_matches_slot",
+      "label": "Skin tone matches the slot tone ID."
+    },
+    {
+      "fieldId": "foot_baseline_locked",
+      "label": "Standing frame keeps both foot baselines locked."
+    },
+    {
+      "fieldId": "hand_or_fist_anchor_aligned",
+      "label": "Hands, fists, or grips align with the frame anchor report."
+    },
+    {
+      "fieldId": "weapon_or_effect_axis_aligned",
+      "label": "Weapon, arrow, staff, or effect line follows the pose and hitbox report."
+    },
+    {
+      "fieldId": "damage_window_frame_correct",
+      "label": "Only attack_hit reads as the damage-window frame."
+    },
+    {
+      "fieldId": "underwear_style_unchanged",
+      "label": "Base underwear style remains consistent with the approved body set."
+    },
+    {
+      "fieldId": "no_text_or_watermark",
+      "label": "No text, watermark, accidental extra props, or background artifacts are present."
+    }
+  ],
+  "promotionStates": [
+    "waiting_file",
+    "waiting_metadata_qa",
+    "pending_visual_review",
+    "visual_review_failed",
+    "visual_review_passed"
+  ]
+}

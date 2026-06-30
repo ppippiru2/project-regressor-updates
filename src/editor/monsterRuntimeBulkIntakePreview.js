@@ -1,7 +1,8 @@
-import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=573";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=573";
-import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=573";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=573";
+import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=675";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=675";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=675";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=675";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=675";
 
 export const MONSTER_RUNTIME_BULK_INTAKE_PREVIEW_VERSION = "monster-runtime-bulk-intake-preview-v1";
 
@@ -60,6 +61,10 @@ export function createMonsterRuntimeBulkIntakePackage(runtimePreview = createMon
 function createRuntimeBulkIntakeRow(row, packageRow, stagedMonsterDomain) {
   const stagedRow = (stagedMonsterDomain.rows || []).find((candidate) => candidate.identity === row.liveMonsterId) || {};
   const missingSpriteFiles = Array.from(row.missingSpriteFiles || []);
+  const bulkState = stagedRow.state || "not-staged";
+  const targetSurfaceCount = Number(stagedRow.targetSurfaceCount || 0);
+  const warningIssueCodes = Array.from(stagedRow.warningIssueCodes || []);
+  const blockingIssueCodes = Array.from(stagedRow.blockingIssueCodes || []);
   return {
     externalMonsterId: row.externalMonsterId,
     liveMonsterId: row.liveMonsterId,
@@ -72,10 +77,17 @@ function createRuntimeBulkIntakeRow(row, packageRow, stagedMonsterDomain) {
     mappingStatus: row.mappingStatus,
     spriteStatus: row.spriteStatus,
     runtimeState: runtimeBulkState(row, missingSpriteFiles),
-    bulkState: stagedRow.state || "not-staged",
-    targetSurfaceCount: Number(stagedRow.targetSurfaceCount || 0),
-    warningIssueCodes: Array.from(stagedRow.warningIssueCodes || []),
-    blockingIssueCodes: Array.from(stagedRow.blockingIssueCodes || []),
+    bulkState,
+    targetSurfaceCount,
+    warningIssueCodes,
+    blockingIssueCodes,
+    contractReview: createContentBulkRowContractReview({
+      domainId: "monster",
+      state: bulkState,
+      targetSurfaceCount,
+      blockingIssueCodes,
+      warningIssueCodes,
+    }),
     motions: Array.from(row.motions || []),
     actions: Array.from(row.actions || []),
     missingSpriteFiles,

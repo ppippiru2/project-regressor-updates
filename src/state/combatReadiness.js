@@ -1,5 +1,5 @@
-import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=573";
-import { t, tf } from "../localization/index.js?v=573";
+import { COMBAT_READINESS_THRESHOLDS } from "./growthObjectiveConfig.js?v=675";
+import { t, tf } from "../localization/index.js?v=675";
 
 export function createCombatReadiness({
   region,
@@ -98,6 +98,3 @@ function expNeededToReachLevel(currentLevel, currentExp, targetLevel, expToNext)
 function clampPercent(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
 }
-
-
-
