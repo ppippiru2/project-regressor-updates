@@ -1,4 +1,4 @@
-import { renderContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapterView.js?v=679";
+import { renderContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapterView.js?v=680";
 
 export function createContentBulkPatchPackageAdapterPreviewRenderer(options = {}) {
   return function renderContentBulkPatchPackageAdapterPreviewSection(preview = {}, detailText = {}) {

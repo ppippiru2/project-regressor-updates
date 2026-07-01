@@ -1,5 +1,5 @@
 import { clamp } from "./combatFormula.js";
-import { advanceTargetWeaknessState } from "./combatHitResults.js?v=679";
+import { advanceTargetWeaknessState } from "./combatHitResults.js?v=680";
 
 export function combatElapsedSeconds(now, lastFrameAt) {
   return Math.max(0.04, Math.min(0.25, (now - (lastFrameAt || now)) / 1000));

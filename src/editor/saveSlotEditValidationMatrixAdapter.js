@@ -1,4 +1,4 @@
-import { renderSaveSlotEditValidationMatrixView } from "./saveSlotEditValidationMatrixView.js?v=679";
+import { renderSaveSlotEditValidationMatrixView } from "./saveSlotEditValidationMatrixView.js?v=680";
 
 export function createSaveSlotEditValidationMatrixRenderer(options = {}) {
   return function renderSaveSlotEditValidationMatrix(diagnostics) {

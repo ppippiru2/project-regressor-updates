@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=679";
+import { tf } from "../localization/index.js?v=680";
 
 export const BALANCE_TUNING_DETAIL_VIEW_VERSION = "balance-tuning-detail-view-v1";
 

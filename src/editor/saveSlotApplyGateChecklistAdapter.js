@@ -1,4 +1,4 @@
-import { renderSaveSlotApplyGateChecklistView } from "./saveSlotApplyGateChecklistView.js?v=679";
+import { renderSaveSlotApplyGateChecklistView } from "./saveSlotApplyGateChecklistView.js?v=680";
 
 export function createSaveSlotApplyGateChecklistRenderer(options = {}) {
   return function renderSaveSlotApplyGateChecklist(diagnostics) {

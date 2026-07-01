@@ -1,4 +1,4 @@
-import { renderSaveSlotEditPayloadBridgeCompatibilityView } from "./saveSlotEditPayloadBridgeCompatibilityView.js?v=679";
+import { renderSaveSlotEditPayloadBridgeCompatibilityView } from "./saveSlotEditPayloadBridgeCompatibilityView.js?v=680";
 
 export function createSaveSlotEditPayloadBridgeCompatibilityRenderer(options = {}) {
   return function renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics) {

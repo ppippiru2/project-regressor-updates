@@ -1,4 +1,4 @@
-import { createContentBulkPatchReadinessPlanBundle } from "./contentBulkPatchReadinessPlanBundle.js?v=679&cachebust=679";
+import { createContentBulkPatchReadinessPlanBundle } from "./contentBulkPatchReadinessPlanBundle.js?v=680&cachebust=680";
 
 const EMPTY_PACKAGE_STATE = Object.freeze({
   input: {},

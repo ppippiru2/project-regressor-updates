@@ -1,7 +1,7 @@
-import { POST_TUTORIAL_EVENT_IDS } from "./postTutorialEvents.js?v=679";
-import { PROLOGUE_DIALOGUE_EVENT_IDS } from "./prologueDialogueEvents.js?v=679";
-import { REGRESSION_ROUTE_EVENT_IDS, TUTORIAL_LOOP_VARIANT_EVENT_IDS } from "./regressionRouteEvents.js?v=679";
-import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=679";
+import { POST_TUTORIAL_EVENT_IDS } from "./postTutorialEvents.js?v=680";
+import { PROLOGUE_DIALOGUE_EVENT_IDS } from "./prologueDialogueEvents.js?v=680";
+import { REGRESSION_ROUTE_EVENT_IDS, TUTORIAL_LOOP_VARIANT_EVENT_IDS } from "./regressionRouteEvents.js?v=680";
+import { renderTutorialDialogueTemplate } from "./tutorialDialogueEvents.js?v=680";
 
 export const DIALOGUE_EVENT_DATA_VERSION = "v1.3";
 

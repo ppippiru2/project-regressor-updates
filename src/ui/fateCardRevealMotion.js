@@ -1,4 +1,4 @@
-import { resolveFateCardVisual } from "../data/fateCardVisualData.js?v=679";
+import { resolveFateCardVisual } from "../data/fateCardVisualData.js?v=680";
 
 const FATE_CARD_REVEAL_SHEET_WIDTH = 1536;
 const FATE_CARD_REVEAL_SHEET_HEIGHT = 1024;

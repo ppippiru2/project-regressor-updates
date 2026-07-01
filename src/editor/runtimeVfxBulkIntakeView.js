@@ -1,14 +1,14 @@
-import { tf } from "../localization/index.js?v=679";
+import { tf } from "../localization/index.js?v=680";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=679";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=679";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=679";
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=679";
-import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=679";
-import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=679";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
+} from "./contentBulkPackageOverview.js?v=680";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=680";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=680";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=680";
+import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=680";
+import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=680";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=680";
 
 export const RUNTIME_VFX_BULK_INTAKE_VIEW_VERSION = "runtime-vfx-bulk-intake-view-v1";
 

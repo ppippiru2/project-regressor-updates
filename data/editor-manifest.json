@@ -61,6 +61,7 @@
     "src/editor/editorJsonLoader.js:fetchEditorJson",
     "src/editor/editorNavGroupState.js:createInitialCollapsedEditorNavGroupIds",
     "src/editor/editorRenderLoopFactory.js:createEditorRenderLoop",
+    "src/editor/editorPanelDetailContentFactory.js:createEditorPanelDetailContentRenderers",
     "src/editor/editorPanelDetailFactory.js:createEditorPanelDetailRenderer",
     "src/editor/editorPanelContentSections.js:createEditorPanelContentSections",
     "src/editor/editorPanelSelection.js:findEditorPanelById",

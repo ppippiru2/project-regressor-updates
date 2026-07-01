@@ -1,4 +1,4 @@
-import { renderSaveSlotEditSampleBridgeBlockerView } from "./saveSlotEditSampleBridgeBlockerView.js?v=679";
+import { renderSaveSlotEditSampleBridgeBlockerView } from "./saveSlotEditSampleBridgeBlockerView.js?v=680";
 
 export function createSaveSlotEditSampleBridgeBlockerRenderer(options = {}) {
   return function renderSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics) {

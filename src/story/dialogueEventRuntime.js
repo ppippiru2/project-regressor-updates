@@ -2,12 +2,12 @@ import {
   normalizeDialogueEvents,
   renderDialogueEventLines,
   resolveDialogueEvent,
-} from "./dialogueEvents.js?v=679";
-import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=679";
-import { karmaValue } from "../state/karma.js?v=679";
-import { POST_TUTORIAL_WORLD_UNLOCK_FLAGS } from "../state/postTutorialUnlocks.js?v=679";
-import { createRegressionCardResyncState } from "../state/regressionCardState.js?v=679";
-import { TUTORIAL_ROUTE_STATE_FLAGS } from "../state/tutorialRouteFlags.js?v=679";
+} from "./dialogueEvents.js?v=680";
+import { createTutorialDialogueTemplateValues } from "./tutorialDialogueEvents.js?v=680";
+import { karmaValue } from "../state/karma.js?v=680";
+import { POST_TUTORIAL_WORLD_UNLOCK_FLAGS } from "../state/postTutorialUnlocks.js?v=680";
+import { createRegressionCardResyncState } from "../state/regressionCardState.js?v=680";
+import { TUTORIAL_ROUTE_STATE_FLAGS } from "../state/tutorialRouteFlags.js?v=680";
 
 export const DIALOGUE_EVENT_RUNTIME_VERSION = "v1.0-live-json-bridge";
 

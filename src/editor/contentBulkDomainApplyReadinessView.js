@@ -1,14 +1,14 @@
-import { tf } from "../localization/index.js?v=679";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=679";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=679";
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=679";
-import { renderContentBulkDomainFilterDrilldown } from "./contentBulkDomainFilterDrilldown.js?v=679";
-import { renderContentBulkCurrentFilterPreApplySummary } from "./contentBulkCurrentFilterPreApplySummary.js?v=679";
+import { tf } from "../localization/index.js?v=680";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=680";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=680";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=680";
+import { renderContentBulkDomainFilterDrilldown } from "./contentBulkDomainFilterDrilldown.js?v=680";
+import { renderContentBulkCurrentFilterPreApplySummary } from "./contentBulkCurrentFilterPreApplySummary.js?v=680";
 import {
   contentBulkDomainBlockedStageIds,
   contentBulkDomainStageBlockerLabels,
-} from "./contentBulkStageGatePreviewLabels.js?v=679";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
+} from "./contentBulkStageGatePreviewLabels.js?v=680";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=680";
 
 export const CONTENT_BULK_DOMAIN_APPLY_READINESS_VIEW_VERSION = "content-bulk-domain-apply-readiness-view-v1";
 

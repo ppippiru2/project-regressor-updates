@@ -1,4 +1,4 @@
-import { saveEditValidatorFunctionName } from "./saveSlotEditValidators.js?v=679";
+import { saveEditValidatorFunctionName } from "./saveSlotEditValidators.js?v=680";
 
 export function createSaveSlotEditValidatorRegistryContractModel(options = {}) {
   const drilldown = options.drilldown || { rules: [], ruleCount: 0 };

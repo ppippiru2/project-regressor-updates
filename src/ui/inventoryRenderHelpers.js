@@ -1,4 +1,4 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=679";
+import { getLocaleText, t, tf } from "../localization/index.js?v=680";
 
 export const INVENTORY_TEXT = getLocaleText().inventoryUi;
 

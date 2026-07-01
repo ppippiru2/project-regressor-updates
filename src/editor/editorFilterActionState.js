@@ -1,10 +1,10 @@
-import { normalizeBalanceScope } from "./balanceFilterModel.js?v=679";
+import { normalizeBalanceScope } from "./balanceFilterModel.js?v=680";
 import {
   normalizeContentBulkFilterDomain,
   normalizeContentBulkFilterState,
-} from "./contentBulkFilterModel.js?v=679";
-import { normalizeCombatVfxKind } from "./combatVfxFilterModel.js?v=679";
-import { normalizeRetargetKind } from "./retargetFilterModel.js?v=679";
+} from "./contentBulkFilterModel.js?v=680";
+import { normalizeCombatVfxKind } from "./combatVfxFilterModel.js?v=680";
+import { normalizeRetargetKind } from "./retargetFilterModel.js?v=680";
 
 export function createContentBulkStateFilter(filter = {}, state = "") {
   return {

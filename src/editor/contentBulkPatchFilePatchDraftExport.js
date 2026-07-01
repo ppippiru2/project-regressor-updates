@@ -1,13 +1,13 @@
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=679";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=679";
+} from "./contentBulkPatchPackageAdapter.js?v=680";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=680";
 import {
   CONTENT_BULK_PATCH_PRE_APPLY_REVIEW_VERSION,
   createContentBulkPatchPreApplyReview,
   createPreApplyContractReviewSummary,
-} from "./contentBulkPatchPreApplyReview.js?v=679";
+} from "./contentBulkPatchPreApplyReview.js?v=680";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_EXPORT_VERSION = "content-bulk-patch-file-patch-draft-export-v1";
 export {
@@ -16,7 +16,7 @@ export {
   createContentBulkPatchPreApplyReviewChecklist,
   createPreApplyContractReviewSummary,
   normalizePreApplyContractReviewSummary,
-} from "./contentBulkPatchPreApplyReview.js?v=679";
+} from "./contentBulkPatchPreApplyReview.js?v=680";
 
 export function createContentBulkPatchFilePatchDraftExport(
   packageData = createContentBulkPatchPackageAdapterTemplate(),

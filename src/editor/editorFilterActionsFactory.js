@@ -1,4 +1,4 @@
-import { createBalanceCandidateFilter, findBalanceTuningCandidate } from "./balanceFilterModel.js?v=679";
+import { createBalanceCandidateFilter, findBalanceTuningCandidate } from "./balanceFilterModel.js?v=680";
 import {
   clearContentBulkQueryFilter,
   createBalanceScopeFilter,
@@ -6,11 +6,11 @@ import {
   createContentBulkDomainFilter,
   createContentBulkStateFilter,
   createRetargetKindFilter,
-} from "./editorFilterActionState.js?v=679&cachebust=679";
+} from "./editorFilterActionState.js?v=680&cachebust=680";
 import {
   scrollEditorBalanceCandidateSummaryIntoView,
   scrollEditorContentBulkPackageIntoView,
-} from "./editorScrollTargets.js?v=679&cachebust=679";
+} from "./editorScrollTargets.js?v=680&cachebust=680";
 
 export function createEditorFilterActions({
   balanceGroups = [],

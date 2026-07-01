@@ -1,4 +1,4 @@
-import { setElementText } from "./editorDomText.js?v=679";
+import { setElementText } from "./editorDomText.js?v=680";
 
 export function renderEditorErrorPanel(elements, options = {}) {
   const text = options.text || {};

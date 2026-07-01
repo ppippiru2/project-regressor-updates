@@ -1,4 +1,4 @@
-import { renderContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunView.js?v=679";
+import { renderContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunView.js?v=680";
 
 export function createContentBulkPatchDryRunRenderer(options = {}) {
   return function renderContentBulkPatchDryRunSection(detailText = {}) {

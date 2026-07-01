@@ -1,22 +1,22 @@
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=679";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=680";
 import {
   createBalancedCreationStats,
   CREATION_STAT_KEYS,
   creationStatTotal,
-} from "../state/characterCreationStats.js?v=679";
+} from "../state/characterCreationStats.js?v=680";
 import {
   PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
   resolveDispositionResult,
-} from "../state/profile.js?v=679";
+} from "../state/profile.js?v=680";
 import {
   createHiddenCardSlots,
   createWeightedStarterCards,
   resolveRecommendedStarterCardDraw,
   STARTER_CARD_DISPOSITION_WEIGHTS,
-} from "../state/starterCardDraw.js?v=679";
-import { CREATION_PROLOGUE_EVENT_STEPS } from "../ui/characterCreationProloguePanel.js?v=679";
-import { TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW } from "../story/tutorialDialogueEvents.js?v=679";
-import { getLocaleText } from "../localization/index.js?v=679";
+} from "../state/starterCardDraw.js?v=680";
+import { CREATION_PROLOGUE_EVENT_STEPS } from "../ui/characterCreationProloguePanel.js?v=680";
+import { TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW } from "../story/tutorialDialogueEvents.js?v=680";
+import { getLocaleText } from "../localization/index.js?v=680";
 
 export function createInitialPlayerSetupPreview({ localeText = getLocaleText() } = {}) {
   const creationText = localeText.characterCreation || {};
