@@ -1,7 +1,7 @@
-import { buildCodexRecordProgress } from "../state/codexProgress.js?v=677";
-import { isCodexProgressLinkedRow, latestCodexDialogueRecord } from "../state/codexDialogueLink.js?v=677";
-import { t, tf } from "../localization/index.js?v=677";
-import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=677";
+import { buildCodexRecordProgress } from "../state/codexProgress.js?v=678";
+import { isCodexProgressLinkedRow, latestCodexDialogueRecord } from "../state/codexDialogueLink.js?v=678";
+import { t, tf } from "../localization/index.js?v=678";
+import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=678";
 
 export function renderCodexProgress(inventory = [], getItem = () => null, tutorialUnlockState = {}, dialogueRecords = []) {
   const summary = byId("codex-progress-summary");

@@ -1,16 +1,16 @@
-import { tf } from "../localization/index.js?v=677";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=677";
-import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=677";
+import { tf } from "../localization/index.js?v=678";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
+import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=678";
 import {
   createContentBulkFilteredCandidateStageGateCountsFromPreview,
   createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
-} from "./contentBulkFilteredCandidateStageGate.js?v=677";
+} from "./contentBulkFilteredCandidateStageGate.js?v=678";
 import {
   contentBulkStageGateReasonLabels,
   contentBulkStageGateStatusLabels,
-} from "./contentBulkStageGatePreviewLabels.js?v=677";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=677";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
+} from "./contentBulkStageGatePreviewLabels.js?v=678";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=678";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VIEW_VERSION = "content-bulk-patch-apply-gate-plan-view-v1";
 

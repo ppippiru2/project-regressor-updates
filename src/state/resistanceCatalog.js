@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=677";
+import { getLocaleText } from "../localization/index.js?v=678";
 
 const RESISTANCE_LABELS = getLocaleText().resistances.labels;
 

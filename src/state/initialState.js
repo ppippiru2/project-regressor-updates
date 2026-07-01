@@ -1,8 +1,8 @@
-import { t } from "../localization/index.js?v=677";
-import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=677";
-import { normalizeKarmaState } from "./karma.js?v=677";
-import { normalizeRegressionCardState } from "./regressionCardState.js?v=677";
-import { createTutorialFlags } from "./tutorialGuidance.js?v=677";
+import { t } from "../localization/index.js?v=678";
+import { PLAYER_INITIAL_STATS } from "../balance/playerGrowthBalance.js?v=678";
+import { normalizeKarmaState } from "./karma.js?v=678";
+import { normalizeRegressionCardState } from "./regressionCardState.js?v=678";
+import { createTutorialFlags } from "./tutorialGuidance.js?v=678";
 
 export function createInitialState({
   slots,

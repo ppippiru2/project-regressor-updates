@@ -1,7 +1,7 @@
-import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=677";
-import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=677";
-import { COMBAT_STYLE_ACTION_IDS, isCombatStyleActive } from "../combat/combatStyleActions.js?v=677";
-import { t, tf } from "../localization/index.js?v=677";
+import { weaknessAutoHuntSkillScore } from "../combat/combatActions.js?v=678";
+import { calculateWeaknessSkillDamageMultiplier } from "../combat/combatHitResults.js?v=678";
+import { COMBAT_STYLE_ACTION_IDS, isCombatStyleActive } from "../combat/combatStyleActions.js?v=678";
+import { t, tf } from "../localization/index.js?v=678";
 
 let lastCombatSkillsRenderKey = "";
 const COMBAT_SKILL_SLOT_COUNT = 4;

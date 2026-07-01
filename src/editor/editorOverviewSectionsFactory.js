@@ -3,9 +3,9 @@ import {
   createEditorBacklogCardsRenderer,
   createEditorPrototypeCardsRenderer,
   createEditorSaveKeyCardsRenderer,
-} from "./editorOverviewListAdapter.js?v=677&cachebust=asset-section-collapse";
-import { createEditorSaveSummary } from "./editorSaveSummaryFactory.js?v=677&cachebust=677";
-import { EDITOR_SAVE_KEYS } from "./saveSlotDiagnosticKeys.js?v=677";
+} from "./editorOverviewListAdapter.js?v=678&cachebust=asset-section-collapse";
+import { createEditorSaveSummary } from "./editorSaveSummaryFactory.js?v=678&cachebust=678";
+import { EDITOR_SAVE_KEYS } from "./saveSlotDiagnosticKeys.js?v=678";
 
 export function createEditorOverviewSections({
   elements = {},

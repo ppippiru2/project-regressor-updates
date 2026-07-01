@@ -1,6 +1,6 @@
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=677";
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=677";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=678";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
 
 export const CONTENT_BULK_STAGED_CONTRACT_SUMMARY_VIEW_VERSION = "content-bulk-staged-contract-summary-view-v1";
 

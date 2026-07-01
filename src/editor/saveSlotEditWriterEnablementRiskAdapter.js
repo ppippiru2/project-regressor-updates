@@ -1,4 +1,4 @@
-import { renderSaveSlotEditWriterEnablementRiskView } from "./saveSlotEditWriterEnablementRiskView.js?v=677";
+import { renderSaveSlotEditWriterEnablementRiskView } from "./saveSlotEditWriterEnablementRiskView.js?v=678";
 
 export function createSaveSlotEditWriterEnablementRiskRenderer(options = {}) {
   return function renderSaveSlotEditWriterEnablementRiskSummary(diagnostics) {

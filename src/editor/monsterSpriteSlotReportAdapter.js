@@ -1,4 +1,4 @@
-import { renderMonsterSpriteSlotReportView } from "./monsterSpriteSlotReportView.js?v=677";
+import { renderMonsterSpriteSlotReportView } from "./monsterSpriteSlotReportView.js?v=678";
 
 export function createMonsterSpriteSlotReportRenderer(options = {}) {
   return function renderMonsterSpriteSlotReportSection(detailText = {}) {

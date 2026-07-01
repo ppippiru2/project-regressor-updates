@@ -1,4 +1,4 @@
-import { createSaveSlotDraftPayloadPreview } from "./saveSlotDraftPayloadModel.js?v=677";
+import { createSaveSlotDraftPayloadPreview } from "./saveSlotDraftPayloadModel.js?v=678";
 
 export function createSaveSlotDraftDiffSummary(diagnostics = {}, text = {}) {
   const draft = createSaveSlotDraftPayloadPreview(diagnostics, text.saveDraft || {});

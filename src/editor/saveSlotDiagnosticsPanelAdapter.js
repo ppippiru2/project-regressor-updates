@@ -1,6 +1,6 @@
-import { renderSaveDiagnosticCardView } from "./saveSlotDiagnosticCardView.js?v=677";
-import { createSaveSlotDiagnosticsModel } from "./saveSlotDiagnosticsModel.js?v=677";
-import { renderSaveSlotDiagnosticsPanel } from "./saveSlotDiagnosticsPanel.js?v=677";
+import { renderSaveDiagnosticCardView } from "./saveSlotDiagnosticCardView.js?v=678";
+import { createSaveSlotDiagnosticsModel } from "./saveSlotDiagnosticsModel.js?v=678";
+import { renderSaveSlotDiagnosticsPanel } from "./saveSlotDiagnosticsPanel.js?v=678";
 
 export function createSaveSlotDiagnosticsPanelRenderer(options = {}) {
   return function renderSaveSlotDiagnostics() {

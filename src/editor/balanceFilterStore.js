@@ -1,7 +1,7 @@
 import {
   normalizeBalanceCandidateGroups,
   normalizeBalanceScope,
-} from "./balanceFilterModel.js?v=677";
+} from "./balanceFilterModel.js?v=678";
 
 const EMPTY_BALANCE_DETAIL_FILTER = Object.freeze({
   scope: "all",

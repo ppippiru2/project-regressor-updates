@@ -1,11 +1,11 @@
-import { tf } from "../localization/index.js?v=677";
+import { tf } from "../localization/index.js?v=678";
 import {
   createRetargetAssetSearchText,
   createRetargetTextSearchText,
   matchesRetargetFilter,
   normalizeRetargetKind,
-} from "./retargetFilterModel.js?v=677";
-import { editorChip } from "./editorChipBlockView.js?v=677";
+} from "./retargetFilterModel.js?v=678";
+import { editorChip } from "./editorChipBlockView.js?v=678";
 
 export const RETARGET_PREVIEW_DETAIL_VIEW_VERSION = "retarget-preview-detail-view-v1";
 const RETARGET_DETAIL_CHIP_OPTIONS = { chipClass: "editor-chip" };

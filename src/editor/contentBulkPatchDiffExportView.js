@@ -1,8 +1,8 @@
-import { tf } from "../localization/index.js?v=677";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=677";
-import { contentBulkFallbackLabel, contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=677";
-import { editorChip } from "./editorChipBlockView.js?v=677";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
+import { tf } from "../localization/index.js?v=678";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
+import { contentBulkFallbackLabel, contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=678";
+import { editorChip } from "./editorChipBlockView.js?v=678";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
 
 export const CONTENT_BULK_PATCH_DIFF_EXPORT_VIEW_VERSION = "content-bulk-patch-diff-export-view-v1";
 

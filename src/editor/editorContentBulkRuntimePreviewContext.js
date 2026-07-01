@@ -1,4 +1,4 @@
-import { createContentBulkRuntimePreviewBundle } from "./contentBulkRuntimePreviewBundle.js?v=677&cachebust=677";
+import { createContentBulkRuntimePreviewBundle } from "./contentBulkRuntimePreviewBundle.js?v=678&cachebust=678";
 
 export function createEditorContentBulkRuntimePreviewContext(options = {}) {
   const packageRuntimeState = options.packageRuntimeState;

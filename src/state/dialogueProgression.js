@@ -1,4 +1,4 @@
-import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=677";
+import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=678";
 
 export function ensureDialogueRunState(state) {
   const run = normalizeRunCount(

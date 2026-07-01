@@ -1,4 +1,4 @@
-import { renderContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlanView.js?v=677";
+import { renderContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlanView.js?v=678";
 
 export function createContentBulkPatchAutomationPlanRenderer(options = {}) {
   return function renderContentBulkPatchAutomationPlanSection(detailText = {}) {

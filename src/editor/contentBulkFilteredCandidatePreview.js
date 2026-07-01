@@ -5,12 +5,12 @@ import {
   normalizeContentBulkFilterState,
   normalizeContentBulkRowDomains,
   normalizeContentBulkSearchQuery,
-} from "./contentBulkFilterModel.js?v=677";
-import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=677";
+} from "./contentBulkFilterModel.js?v=678";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=678";
 import {
   createContentBulkFilteredCandidateStageGateSummary,
   createFilteredCandidateStageGate,
-} from "./contentBulkFilteredCandidateStageGate.js?v=677";
+} from "./contentBulkFilteredCandidateStageGate.js?v=678";
 
 export const CONTENT_BULK_FILTERED_CANDIDATE_PREVIEW_VERSION = "content-bulk-filtered-candidate-preview-v1";
 

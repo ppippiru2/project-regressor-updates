@@ -1,16 +1,16 @@
-import { t, tf } from "../localization/index.js?v=677";
-import { saveSlotLabel } from "../state/saveSlots.js?v=677";
+import { t, tf } from "../localization/index.js?v=678";
+import { saveSlotLabel } from "../state/saveSlots.js?v=678";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=677";
+} from "../state/portraitFrame.js?v=678";
 import {
   applyPortraitFrameToElement,
   readPortraitFrameFromElement,
   renderPortraitImagePreview,
-} from "./portraitFrameView.js?v=677";
+} from "./portraitFrameView.js?v=678";
 
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 const CLEAR_SLOT_HOLD_MS = 5000;

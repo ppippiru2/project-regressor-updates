@@ -1,16 +1,16 @@
-import { tf } from "../localization/index.js?v=677";
+import { tf } from "../localization/index.js?v=678";
 import {
   createContentBulkFilteredCandidateStageGateCountsFromPreview,
   createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
-} from "./contentBulkFilteredCandidateStageGate.js?v=677";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=677";
+} from "./contentBulkFilteredCandidateStageGate.js?v=678";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
 import {
   contentBulkDomainBlockedStageIds,
   contentBulkDomainStageBlockerLabels,
   contentBulkStageGateReasonLabels,
   contentBulkStageGateStatusLabels,
-} from "./contentBulkStageGatePreviewLabels.js?v=677";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
+} from "./contentBulkStageGatePreviewLabels.js?v=678";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
 
 export const CONTENT_BULK_CURRENT_FILTER_PRE_APPLY_SUMMARY_VERSION = "content-bulk-current-filter-pre-apply-summary-v1";
 

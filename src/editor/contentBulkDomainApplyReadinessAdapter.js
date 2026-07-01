@@ -1,4 +1,4 @@
-import { renderContentBulkDomainApplyReadiness } from "./contentBulkDomainApplyReadinessView.js?v=677";
+import { renderContentBulkDomainApplyReadiness } from "./contentBulkDomainApplyReadinessView.js?v=678";
 
 export function createContentBulkDomainApplyReadinessRenderer(options = {}) {
   return function renderContentBulkDomainApplyReadinessSection({

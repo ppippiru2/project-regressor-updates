@@ -1,4 +1,4 @@
-import { renderContentBulkStagedApplyRehearsal } from "./contentBulkStagedApplyRehearsalView.js?v=677";
+import { renderContentBulkStagedApplyRehearsal } from "./contentBulkStagedApplyRehearsalView.js?v=678";
 
 export function createContentBulkStagedApplyRehearsalRenderer(options = {}) {
   return function renderContentBulkStagedApplyRehearsalSection(filteredCandidatePreview = {}, detailText = {}) {

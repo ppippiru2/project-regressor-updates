@@ -1,6 +1,6 @@
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=677";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=677";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=677";
+import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=678";
+import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=678";
+import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=678";
 
 export const CONTENT_BULK_PATCH_READINESS_PLAN_BUNDLE_VERSION =
   "content-bulk-patch-readiness-plan-bundle-v1";

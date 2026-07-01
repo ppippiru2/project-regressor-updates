@@ -1,11 +1,11 @@
-import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=677";
-import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=677";
+import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=678";
+import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=678";
 import {
   matchesBalanceDetailFilter,
   selectedBalanceTuningCandidate,
-} from "./balanceFilterModel.js?v=677";
-import { createEditorContentBulkRuntimePreviewContext } from "./editorContentBulkRuntimePreviewContext.js?v=677";
-import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=677";
+} from "./balanceFilterModel.js?v=678";
+import { createEditorContentBulkRuntimePreviewContext } from "./editorContentBulkRuntimePreviewContext.js?v=678";
+import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=678";
 
 export function createEditorBalanceTuningDetailRenderer(options = {}) {
   const renderers = options.renderers || {};

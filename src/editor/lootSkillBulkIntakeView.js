@@ -1,14 +1,14 @@
-import { tf } from "../localization/index.js?v=677";
+import { tf } from "../localization/index.js?v=678";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=677";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=677";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=677";
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=677";
-import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=677";
-import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=677";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
+} from "./contentBulkPackageOverview.js?v=678";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=678";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=678";
+import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=678";
+import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=678";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
 
 export const LOOT_SKILL_BULK_INTAKE_VIEW_VERSION = "loot-skill-bulk-intake-view-v1";
 

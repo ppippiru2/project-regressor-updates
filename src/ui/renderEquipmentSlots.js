@@ -1,6 +1,6 @@
-import { t, tf } from "../localization/index.js?v=677";
-import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=677";
-import { isOffHandSlotDisabled } from "../state/equipmentActions.js?v=677";
+import { t, tf } from "../localization/index.js?v=678";
+import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=678";
+import { isOffHandSlotDisabled } from "../state/equipmentActions.js?v=678";
 
 export function renderEquipmentSlots(
   equipmentState,

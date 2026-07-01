@@ -1,11 +1,11 @@
-import { t } from "../localization/index.js?v=677";
-import { karmaValue } from "./karma.js?v=677";
+import { t } from "../localization/index.js?v=678";
+import { karmaValue } from "./karma.js?v=678";
 import {
   getCardCandidateCountByKarma,
   getCardGradeWeightSummary,
   getFateCardHintLevel,
   normalizeFateCardCandidateCount,
-} from "./fateCardRoller.js?v=677";
+} from "./fateCardRoller.js?v=678";
 
 export const DEFAULT_REGRESSION_CARD_STATE = Object.freeze({
   karmaValue: 0,

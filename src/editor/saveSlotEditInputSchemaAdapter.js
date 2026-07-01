@@ -1,4 +1,4 @@
-import { renderSaveSlotEditInputSchemaView } from "./saveSlotEditInputSchemaView.js?v=677";
+import { renderSaveSlotEditInputSchemaView } from "./saveSlotEditInputSchemaView.js?v=678";
 
 export function createSaveSlotEditInputSchemaRenderer(options = {}) {
   return function renderSaveSlotEditInputSchemaPreview(diagnostics) {

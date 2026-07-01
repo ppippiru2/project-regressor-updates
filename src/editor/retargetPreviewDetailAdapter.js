@@ -1,4 +1,4 @@
-import { renderRetargetPreviewDetailView } from "./retargetPreviewDetailView.js?v=677";
+import { renderRetargetPreviewDetailView } from "./retargetPreviewDetailView.js?v=678";
 
 export function createRetargetPreviewDetailRenderer(options = {}) {
   const createPreview = typeof options.createPreview === "function" ? options.createPreview : () => ({});

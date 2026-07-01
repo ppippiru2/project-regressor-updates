@@ -1,4 +1,4 @@
-import { renderSaveSlotEditConfirmationMatchReviewView } from "./saveSlotEditConfirmationMatchReviewView.js?v=677";
+import { renderSaveSlotEditConfirmationMatchReviewView } from "./saveSlotEditConfirmationMatchReviewView.js?v=678";
 
 export function createSaveSlotEditConfirmationMatchReviewRenderer(options = {}) {
   return function renderSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics) {

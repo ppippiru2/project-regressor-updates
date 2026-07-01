@@ -1,8 +1,8 @@
-import { t, tf } from "../localization/index.js?v=677";
-import { renderCodexProgress } from "./renderCodexProgress.js?v=677";
-import { renderEquipmentSlots } from "./renderEquipmentSlots.js?v=677";
-import { byId } from "./inventoryRenderHelpers.js?v=677";
-import { createInventoryListRows, inventoryListSummary, renderInventoryList } from "./renderInventoryList.js?v=677";
+import { t, tf } from "../localization/index.js?v=678";
+import { renderCodexProgress } from "./renderCodexProgress.js?v=678";
+import { renderEquipmentSlots } from "./renderEquipmentSlots.js?v=678";
+import { byId } from "./inventoryRenderHelpers.js?v=678";
+import { createInventoryListRows, inventoryListSummary, renderInventoryList } from "./renderInventoryList.js?v=678";
 
 export function renderInventory(
   equipmentState,

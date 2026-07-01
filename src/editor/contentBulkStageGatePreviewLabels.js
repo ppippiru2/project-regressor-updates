@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=677";
+import { tf } from "../localization/index.js?v=678";
 
 export const CONTENT_BULK_STAGE_GATE_PREVIEW_LABELS_VERSION = "content-bulk-stage-gate-preview-labels-v1";
 

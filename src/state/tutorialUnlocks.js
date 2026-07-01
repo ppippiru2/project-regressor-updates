@@ -1,5 +1,5 @@
-import { createPostTutorialWorldUnlockState } from "./postTutorialUnlocks.js?v=677";
-import { createTutorialRouteFlagState } from "./tutorialRouteFlags.js?v=677";
+import { createPostTutorialWorldUnlockState } from "./postTutorialUnlocks.js?v=678";
+import { createTutorialRouteFlagState } from "./tutorialRouteFlags.js?v=678";
 
 export const TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID = "tutorial_1st_mine_06_forgotten_god_remnant";
 

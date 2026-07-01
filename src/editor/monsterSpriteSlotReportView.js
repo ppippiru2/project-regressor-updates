@@ -1,5 +1,5 @@
-import { editorChipBlock } from "./editorChipBlockView.js?v=677";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
+import { editorChipBlock } from "./editorChipBlockView.js?v=678";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
 
 export const MONSTER_SPRITE_SLOT_REPORT_VIEW_VERSION = "monster-sprite-slot-report-view-v1";
 const MONSTER_SPRITE_SLOT_CHIP_OPTIONS = {

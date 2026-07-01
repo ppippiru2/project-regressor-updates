@@ -66,6 +66,7 @@
     "src/editor/editorScrollTargets.js:scrollEditorTargetIntoView",
     "src/editor/editorSearchInputHandlers.js:handleEditorSearchInputEvent",
     "src/editor/editorFilterActionState.js:createContentBulkStateFilter",
+    "src/editor/editorFilterActionsFactory.js:createEditorFilterActions",
     "src/editor/editorOverviewSectionsFactory.js:createEditorOverviewSections",
     "src/editor/editorSaveSummaryFactory.js:createEditorSaveSummary",
     "src/editor/editorSummaryPanel.js:renderEditorSummaryPanel",
