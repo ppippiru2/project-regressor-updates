@@ -134,7 +134,7 @@
     },
     {
       "contractId": "two_hand_heavy_attack_v1",
-      "runtimeStatus": "pose_contract_only",
+      "runtimeStatus": "runtime_covered",
       "poseTemplateId": "great_weapon_guard",
       "motionId": "great_weapon_sweep_v1",
       "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
@@ -143,12 +143,12 @@
       "offHandPolicy": "disabled",
       "requiredProfiles": ["weapon.two_hand.heavy.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
       "requiredAnchors": ["TwoHand_LowerGrip", "TwoHand_UpperGrip", "Weapon_Tip", "Weapon_Back_End", "Mass_Center", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip"],
-      "coverageGateIds": ["weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
-      "approvalBlockers": ["runtime attachment mapping for weapon.two_hand.heavy.v1 is not enabled yet"]
+      "coverageGateIds": ["player_attachment_runtime_coverage", "player_equipment_attachment_runtime", "weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
+      "approvalBlockers": []
     },
     {
       "contractId": "bow_attack_v1",
-      "runtimeStatus": "pose_contract_only",
+      "runtimeStatus": "runtime_covered",
       "poseTemplateId": "bow_draw",
       "motionId": "bow_release_v1",
       "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
@@ -157,8 +157,8 @@
       "offHandPolicy": "disabled",
       "requiredProfiles": ["weapon.bow.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
       "requiredAnchors": ["Bow_Grip", "Draw_Hand", "Arrow_Nock", "Arrow_Tip", "Bow_String_Top", "Bow_String_Bottom"],
-      "coverageGateIds": ["weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
-      "approvalBlockers": ["runtime attachment mapping for weapon.bow.v1 is not enabled yet"]
+      "coverageGateIds": ["player_attachment_runtime_coverage", "player_equipment_attachment_runtime", "weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
+      "approvalBlockers": []
     },
     {
       "contractId": "staff_attack_v1",

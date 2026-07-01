@@ -8,7 +8,7 @@ import {
   createEditorBacklogCardsRenderer,
   createEditorPrototypeCardsRenderer,
   createEditorSaveKeyCardsRenderer,
-} from "./editorOverviewListAdapter.js?v=675";
+} from "./editorOverviewListAdapter.js?v=675&cachebust=asset-section-collapse";
 import {
   createEditorNavigationGroupsRenderer,
   createEditorPanelDetailShellRenderer,
@@ -58,11 +58,8 @@ import {
 import { createBalanceDetailFilterStore } from "./balanceFilterStore.js?v=675";
 import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=675";
 import { createContentBulkPatchAutomationPlanRenderer } from "./contentBulkPatchAutomationPlanAdapter.js?v=675";
-import { createContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlan.js?v=675";
 import { createContentBulkPatchApplyGatePlanRenderer } from "./contentBulkPatchApplyGatePlanAdapter.js?v=675";
-import { createContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlan.js?v=675";
 import { createContentBulkPatchBackupPlanRenderer } from "./contentBulkPatchBackupPlanAdapter.js?v=675";
-import { createContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsal.js?v=675";
 import { createContentBulkPatchRestoreRehearsalRenderer } from "./contentBulkPatchRestoreRehearsalAdapter.js?v=675";
 import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=675";
 import { createContentBulkPatchDryRunRenderer } from "./contentBulkPatchDryRunAdapter.js?v=675";
@@ -71,31 +68,22 @@ import { createContentBulkPatchIntakeContractRenderer } from "./contentBulkPatch
 import { createContentBulkPatchPackageInputStore } from "./contentBulkPatchPackageInputStore.js?v=675";
 import {
   CONTENT_BULK_PACKAGE_TEMPLATE_FILE_NAME,
-  createContentBulkPatchFilePatchDraftExportFromPackageInput,
-  createContentBulkPatchPackageAppliedInput,
-  createContentBulkPatchPackageDraftInput,
-  createContentBulkPatchPackageFileInput,
-  createContentBulkPatchPackagePreviewFromInput,
-  createContentBulkPatchPackageReadErrorInput,
-  createContentBulkPatchPackageSampleInput,
+  createContentBulkPatchPackageInputController,
   createContentBulkPatchPackageTemplatePayload,
-  createRuntimeVfxBulkIntakePreviewFromPackageInput,
-} from "./contentBulkPatchPackageInputActions.js?v=675&cachebust=675";
+} from "./contentBulkPatchPackageInputController.js?v=675&cachebust=675";
+import { createContentBulkPatchReadinessPlanBundle } from "./contentBulkPatchReadinessPlanBundle.js?v=675&cachebust=675";
 import { createContentBulkPatchPackageAdapterPreviewRenderer } from "./contentBulkPatchPackageAdapterPreviewAdapter.js?v=675";
-import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=675";
 import { createContentBulkPackageOverviewRenderer } from "./contentBulkPackageOverviewAdapter.js?v=675";
 import { createContentBulkFilterControlsRenderer } from "./contentBulkFilterControlsAdapter.js?v=675";
 import {
   CONTENT_BULK_DOMAIN_FILTERS,
   contentBulkActiveFilterSummary,
   contentBulkPatchDomainLabel,
-  createContentBulkFilterCounts,
   matchesContentBulkFilterRow,
 } from "./contentBulkFilterModel.js?v=675";
 import { createContentBulkFilterStore } from "./contentBulkFilterStore.js?v=675";
-import { createContentBulkFilteredCandidatePreview } from "./contentBulkFilteredCandidatePreview.js?v=675";
 import { createContentBulkFilteredCandidatePreviewRenderer } from "./contentBulkFilteredCandidatePreviewAdapter.js?v=675";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=675";
+import { createContentBulkRuntimePreviewBundle } from "./contentBulkRuntimePreviewBundle.js?v=675&cachebust=675";
 import { createLootSkillBulkIntakeRenderer } from "./lootSkillBulkIntakeAdapter.js?v=675";
 import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=675";
 import { createContentBulkPatchDiffExportRenderer } from "./contentBulkPatchDiffExportAdapter.js?v=675";
@@ -112,21 +100,10 @@ import { createContentBulkDomainApplyReadinessRenderer } from "./contentBulkDoma
 import { createTutorialIslandPacingSnapshot } from "./tutorialIslandPacingPreview.js?v=675";
 import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=675";
 import {
-  createCombatVfxPlacementDetailRenderer,
   formatCombatVfxPlacement,
 } from "./combatVfxPlacementAdapter.js?v=675";
-import {
-  COMBAT_VFX_CLASS_LABELS,
-  COMBAT_VFX_DETAIL_TEXT,
-  COMBAT_VFX_EFFECT_LABELS,
-  COMBAT_VFX_GENDER_LABELS,
-  COMBAT_VFX_SIGNAL_LABELS,
-} from "./combatVfxPlacementText.js?v=675";
-import {
-  combatVfxMonsterSearchText,
-  combatVfxPlayerSearchText,
-  matchesCombatVfxFilter,
-} from "./combatVfxFilterModel.js?v=675";
+import { COMBAT_VFX_DETAIL_TEXT } from "./combatVfxPlacementText.js?v=675";
+import { createEditorCombatVfxDetailRenderer } from "./editorCombatVfxDetailFactory.js?v=675&cachebust=675";
 import { createCombatVfxFilterStore } from "./combatVfxFilterStore.js?v=675";
 import { createRuntimeVfxBulkIntakeRenderer } from "./runtimeVfxBulkIntakeAdapter.js?v=675";
 import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=675";
@@ -193,6 +170,9 @@ const CONTENT_BULK_PATCH_PACKAGE_INPUT_STORE = createContentBulkPatchPackageInpu
   writeJson: writeEditorLocalStorageJson,
   removeItem: removeEditorLocalStorageItem,
 });
+const CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER = createContentBulkPatchPackageInputController({
+  store: CONTENT_BULK_PATCH_PACKAGE_INPUT_STORE,
+});
 const COMBAT_VFX_FILTER_STORE = createCombatVfxFilterStore({
   storageKey: COMBAT_VFX_FILTER_STORAGE_KEY,
   readJson: readEditorLocalStorageJson,
@@ -224,7 +204,6 @@ const renderEditorBacklogCardsSection = createEditorBacklogCardsRenderer();
 const renderEditorPrototypeCardsSection = createEditorPrototypeCardsRenderer();
 const renderEditorNavigationGroupsSection = createEditorNavigationGroupsRenderer();
 const renderEditorPanelDetailShellSection = createEditorPanelDetailShellRenderer();
-const renderCombatVfxPlacementDetailSection = createCombatVfxPlacementDetailRenderer();
 const renderBalanceTuningDetailSection = createBalanceTuningDetailRenderer();
 const renderBalanceFilterControlsSection = createBalanceFilterControlsRenderer();
 const renderEmptyBalanceRowsSection = createEmptyBalanceRowsRenderer();
@@ -370,6 +349,12 @@ const MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN = createMonsterCandidateLivePromotio
 const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT = createMonsterCandidateLivePatchDraft(MONSTER_CANDIDATE_LIVE_PROMOTION_PLAN);
 const MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION = createMonsterCandidateBulkPatchAutomationPreview();
 const COMBAT_VFX_PLACEMENT_PREVIEW = createCombatVfxPlacementPreview();
+const renderCombatVfxPlacementDetail = createEditorCombatVfxDetailRenderer({
+  baseText: COMBAT_VFX_DETAIL_TEXT,
+  getText: () => EDITOR_TEXT.combatVfxPlacementDetail || {},
+  getPreview: () => COMBAT_VFX_PLACEMENT_PREVIEW,
+  getFilter: () => combatVfxDetailFilter,
+});
 const INITIAL_PLAYER_SETUP_PREVIEW = createInitialPlayerSetupPreview();
 const MONSTER_RUNTIME_INTEGRATION_PREVIEW = createMonsterRuntimeIntegrationPreview();
 const MONSTER_RUNTIME_BULK_INTAKE_PREVIEW = createMonsterRuntimeBulkIntakePreview(MONSTER_RUNTIME_INTEGRATION_PREVIEW);
@@ -391,13 +376,17 @@ const expandedRetargetRows = new Set(storedRetargetDetailFilter.expandedRows);
 let balanceDetailFilter = BALANCE_DETAIL_FILTER_STORE.load();
 let combatVfxDetailFilter = COMBAT_VFX_FILTER_STORE.load();
 let contentBulkDetailFilter = CONTENT_BULK_FILTER_STORE.load();
-let contentBulkPatchPackageInput = CONTENT_BULK_PATCH_PACKAGE_INPUT_STORE.load();
+let contentBulkPatchPackageInput = {};
 let contentBulkPatchPackageParseError = "";
-let contentBulkPatchPackageAdapterPreview = createContentBulkPatchPackageAdapterPreviewFromInput();
-let contentBulkPatchFilePatchDraftExport = createContentBulkPatchFilePatchDraftExportFromInput();
-let contentBulkPatchApplyGatePlan = createContentBulkPatchApplyGatePlan(contentBulkPatchFilePatchDraftExport);
-let contentBulkPatchBackupPlan = createContentBulkPatchBackupPlan(contentBulkPatchFilePatchDraftExport, contentBulkPatchApplyGatePlan);
-let contentBulkPatchRestoreRehearsal = createContentBulkPatchRestoreRehearsal(contentBulkPatchBackupPlan);
+let contentBulkPatchPackageAdapterPreview = {};
+let contentBulkPatchFilePatchDraftExport = {};
+syncContentBulkPatchPackageInputState();
+let contentBulkPatchReadinessPlanBundle = createContentBulkPatchReadinessPlanBundle({
+  filePatchDraftExport: contentBulkPatchFilePatchDraftExport,
+});
+let contentBulkPatchApplyGatePlan = contentBulkPatchReadinessPlanBundle.applyGatePlan;
+let contentBulkPatchBackupPlan = contentBulkPatchReadinessPlanBundle.backupPlan;
+let contentBulkPatchRestoreRehearsal = contentBulkPatchReadinessPlanBundle.restoreRehearsal;
 const MONSTER_SPRITE_SLOT_REPORT = createMonsterSpriteSlotReport();
 const MONSTER_SPRITE_READY_CONNECTION_PLAN = createMonsterSpriteReadyConnectionPatchPlan(MONSTER_SPRITE_SLOT_REPORT);
 const MONSTER_SPRITE_READY_CONNECTION_REVIEW = createMonsterSpriteReadyConnectionReview(
@@ -515,8 +504,7 @@ function bindEvents() {
     }
     const packageTextarea = event.target.closest("[data-content-bulk-package-json]");
     if (packageTextarea) {
-      contentBulkPatchPackageInput = createContentBulkPatchPackageDraftInput(contentBulkPatchPackageInput, packageTextarea.value);
-      persistContentBulkPatchPackageInput();
+      updateContentBulkPatchPackageDraft(packageTextarea.value);
     }
   });
   elements.panelDetail?.addEventListener("change", async (event) => {
@@ -526,14 +514,11 @@ function bindEvents() {
     if (!file) return;
     try {
       const text = await file.text();
-      contentBulkPatchPackageInput = createContentBulkPatchPackageFileInput(text, file.name);
-      persistContentBulkPatchPackageInput();
-      refreshContentBulkPatchPackageAdapterPreview();
+      applyContentBulkPatchPackageFile(text, file.name);
       renderPanelDetail();
       scrollContentBulkPackageIntoView();
     } catch (error) {
-      contentBulkPatchPackageInput = createContentBulkPatchPackageReadErrorInput(contentBulkPatchPackageInput, error);
-      persistContentBulkPatchPackageInput();
+      applyContentBulkPatchPackageReadError(error);
       renderPanelDetail();
       scrollContentBulkPackageIntoView();
     }
@@ -732,44 +717,6 @@ function renderMonsterSpriteSlotReport() {
   return renderMonsterSpriteSlotReportSection(detailText);
 }
 
-function renderCombatVfxPlacementDetail() {
-  const detailText = {
-    ...COMBAT_VFX_DETAIL_TEXT,
-    ...(EDITOR_TEXT.combatVfxPlacementDetail || {})
-  };
-  const preview = COMBAT_VFX_PLACEMENT_PREVIEW;
-  const playerRows = preview.playerRows || [];
-  const monsterRows = preview.monsterRows || [];
-  const searchContext = { formatPlacement: formatCombatVfxPlacement };
-  const visiblePlayerRows = playerRows.filter((row) => matchesCombatVfxFilter(combatVfxDetailFilter, "player", combatVfxPlayerSearchText(row, searchContext)));
-  const visibleMonsterRows = monsterRows.filter((row) => matchesCombatVfxFilter(combatVfxDetailFilter, "monster", combatVfxMonsterSearchText(row, searchContext)));
-  return renderCombatVfxPlacementDetailSection({
-    preview,
-    visiblePlayerRows,
-    visibleMonsterRows,
-    detailText,
-    filter: combatVfxDetailFilter,
-    labels: {
-      classLabels: {
-        ...COMBAT_VFX_CLASS_LABELS,
-        ...(detailText.classLabels || {})
-      },
-      genderLabels: {
-        ...COMBAT_VFX_GENDER_LABELS,
-        ...(detailText.genderLabels || {})
-      },
-      effectLabels: {
-        ...COMBAT_VFX_EFFECT_LABELS,
-        ...(detailText.effectLabels || {})
-      },
-      signalLabels: {
-        ...COMBAT_VFX_SIGNAL_LABELS,
-        ...(detailText.signalLabels || {})
-      },
-    },
-  });
-}
-
 function renderBalanceTuningDetail() {
   const detailText = EDITOR_TEXT.balanceTuningDetail || {};
   const registryMeta = manifest.balanceTuningRegistry || {};
@@ -782,29 +729,21 @@ function renderBalanceTuningDetail() {
   const rows = visibleGroups.map((group) => renderBalanceGroupRowSection(group, detailText, {
     previewById: BALANCE_TUNING_PREVIEW_BY_ID,
   })).join("");
-  const lootSkillBulkIntakePreview = createLootSkillBulkIntakePreview(contentBulkPatchPackageAdapterPreview);
-  const runtimeVfxBulkIntakePreview = createRuntimeVfxBulkIntakePreviewFromInput();
-  const contentBulkPackageOverview = createContentBulkPackageOverview({
+  const contentBulkRuntimePreviewBundle = createContentBulkRuntimePreviewBundle({
     adapterPreview: contentBulkPatchPackageAdapterPreview,
-    lootSkillPreview: lootSkillBulkIntakePreview,
+    packageInput: contentBulkPatchPackageInput,
     monsterRuntimePreview: MONSTER_RUNTIME_BULK_INTAKE_PREVIEW,
-    runtimeVfxPreview: runtimeVfxBulkIntakePreview,
-  });
-  const contentBulkFilterCounts = createContentBulkFilterCounts({
-    adapterPreview: contentBulkPatchPackageAdapterPreview,
-    lootSkillPreview: lootSkillBulkIntakePreview,
-    monsterRuntimePreview: MONSTER_RUNTIME_BULK_INTAKE_PREVIEW,
-    runtimeVfxPreview: runtimeVfxBulkIntakePreview,
-    filter: contentBulkDetailFilter,
-  });
-  const contentBulkFilteredCandidatePreview = createContentBulkFilteredCandidatePreview({
-    adapterPreview: contentBulkPatchPackageAdapterPreview,
-    lootSkillPreview: lootSkillBulkIntakePreview,
-    monsterRuntimePreview: MONSTER_RUNTIME_BULK_INTAKE_PREVIEW,
-    runtimeVfxPreview: runtimeVfxBulkIntakePreview,
+    placementPreview: COMBAT_VFX_PLACEMENT_PREVIEW,
     filter: contentBulkDetailFilter,
     limit: 12,
   });
+  const {
+    lootSkillBulkIntakePreview,
+    runtimeVfxBulkIntakePreview,
+    contentBulkPackageOverview,
+    contentBulkFilterCounts,
+    contentBulkFilteredCandidatePreview,
+  } = contentBulkRuntimePreviewBundle;
   refreshContentBulkPatchReadinessPlans(contentBulkFilteredCandidatePreview);
 
   return renderBalanceTuningDetailSection({
@@ -942,58 +881,63 @@ function persistContentBulkDetailFilter() {
   CONTENT_BULK_FILTER_STORE.persist(contentBulkDetailFilter);
 }
 
-function persistContentBulkPatchPackageInput() {
-  CONTENT_BULK_PATCH_PACKAGE_INPUT_STORE.persist(contentBulkPatchPackageInput);
-}
-
 function applyContentBulkPatchPackageInput() {
   const textarea = elements.panelDetail?.querySelector("[data-content-bulk-package-json]");
   const draftText = textarea ? textarea.value : String(contentBulkPatchPackageInput.draftText || "");
-  contentBulkPatchPackageInput = createContentBulkPatchPackageAppliedInput(contentBulkPatchPackageInput, draftText);
-  persistContentBulkPatchPackageInput();
-  refreshContentBulkPatchPackageAdapterPreview();
-}
-
-function applyContentBulkPatchPackageSample() {
-  contentBulkPatchPackageInput = createContentBulkPatchPackageSampleInput();
-  persistContentBulkPatchPackageInput();
-  refreshContentBulkPatchPackageAdapterPreview();
-}
-
-function resetContentBulkPatchPackageInput() {
-  contentBulkPatchPackageInput = CONTENT_BULK_PATCH_PACKAGE_INPUT_STORE.reset();
-  contentBulkPatchPackageParseError = "";
-}
-
-function refreshContentBulkPatchPackageAdapterPreview() {
-  contentBulkPatchPackageAdapterPreview = createContentBulkPatchPackageAdapterPreviewFromInput();
-  contentBulkPatchFilePatchDraftExport = createContentBulkPatchFilePatchDraftExportFromInput();
+  CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.applyDraft(draftText);
+  syncContentBulkPatchPackageInputState();
   refreshContentBulkPatchReadinessPlans();
 }
 
+function applyContentBulkPatchPackageSample() {
+  CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.applySample();
+  syncContentBulkPatchPackageInputState();
+  refreshContentBulkPatchReadinessPlans();
+}
+
+function resetContentBulkPatchPackageInput() {
+  CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.reset();
+  syncContentBulkPatchPackageInputState();
+}
+
+function refreshContentBulkPatchPackageAdapterPreview() {
+  CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.refresh();
+  syncContentBulkPatchPackageInputState();
+  refreshContentBulkPatchReadinessPlans();
+}
+
+function updateContentBulkPatchPackageDraft(draftText) {
+  CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.updateDraft(draftText);
+  syncContentBulkPatchPackageInputState();
+}
+
+function applyContentBulkPatchPackageFile(text, fileName) {
+  CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.applyFile(text, fileName);
+  syncContentBulkPatchPackageInputState();
+  refreshContentBulkPatchReadinessPlans();
+}
+
+function applyContentBulkPatchPackageReadError(error) {
+  CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.applyReadError(error);
+  syncContentBulkPatchPackageInputState();
+}
+
 function refreshContentBulkPatchReadinessPlans(filteredCandidatePreview = {}) {
-  contentBulkPatchApplyGatePlan = createContentBulkPatchApplyGatePlan(contentBulkPatchFilePatchDraftExport, {
+  contentBulkPatchReadinessPlanBundle = createContentBulkPatchReadinessPlanBundle({
+    filePatchDraftExport: contentBulkPatchFilePatchDraftExport,
     filteredCandidatePreview,
   });
-  contentBulkPatchBackupPlan = createContentBulkPatchBackupPlan(contentBulkPatchFilePatchDraftExport, contentBulkPatchApplyGatePlan);
-  contentBulkPatchRestoreRehearsal = createContentBulkPatchRestoreRehearsal(contentBulkPatchBackupPlan);
+  contentBulkPatchApplyGatePlan = contentBulkPatchReadinessPlanBundle.applyGatePlan;
+  contentBulkPatchBackupPlan = contentBulkPatchReadinessPlanBundle.backupPlan;
+  contentBulkPatchRestoreRehearsal = contentBulkPatchReadinessPlanBundle.restoreRehearsal;
 }
 
-function createContentBulkPatchPackageAdapterPreviewFromInput() {
-  const result = createContentBulkPatchPackagePreviewFromInput(contentBulkPatchPackageInput);
-  contentBulkPatchPackageParseError = result.parseError;
-  return result.preview;
-}
-
-function createContentBulkPatchFilePatchDraftExportFromInput() {
-  return createContentBulkPatchFilePatchDraftExportFromPackageInput(
-    contentBulkPatchPackageInput,
-    contentBulkPatchPackageAdapterPreview,
-  );
-}
-
-function createRuntimeVfxBulkIntakePreviewFromInput() {
-  return createRuntimeVfxBulkIntakePreviewFromPackageInput(contentBulkPatchPackageInput, COMBAT_VFX_PLACEMENT_PREVIEW);
+function syncContentBulkPatchPackageInputState() {
+  const state = CONTENT_BULK_PATCH_PACKAGE_INPUT_CONTROLLER.getState();
+  contentBulkPatchPackageInput = state.input;
+  contentBulkPatchPackageParseError = state.parseError;
+  contentBulkPatchPackageAdapterPreview = state.adapterPreview;
+  contentBulkPatchFilePatchDraftExport = state.filePatchDraftExport;
 }
 
 function persistCombatVfxDetailFilter() {

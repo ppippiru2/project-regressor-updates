@@ -4302,6 +4302,56 @@ select:focus {
   color: var(--text);
 }
 
+.editor-asset-section {
+  position: relative;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(2, 11, 29, 0.42);
+  padding: 0;
+}
+
+.editor-asset-section-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3rem;
+  cursor: pointer;
+  list-style: none;
+  padding: 0.75rem 3.1rem 0.75rem 0.85rem;
+}
+
+.editor-asset-section-summary::-webkit-details-marker {
+  display: none;
+}
+
+.editor-asset-section-summary div {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
+}
+
+.editor-asset-section-summary small {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.editor-asset-section .editor-asset-grid {
+  padding: 0 0.75rem 0.85rem;
+}
+
+.editor-asset-collapse-toggle {
+  top: 0.85rem;
+  right: 0.75rem;
+}
+
+.editor-asset-collapse-toggle::before {
+  content: "+";
+}
+
+.editor-asset-section[open] .editor-asset-collapse-toggle::before {
+  content: "-";
+}
+
 .editor-panel-button {
   display: grid;
   gap: 0.18rem;

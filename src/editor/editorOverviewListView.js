@@ -6,8 +6,8 @@ const EDITOR_OVERVIEW_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderEditorAssetSections({ assetTypes = {}, imageSlots = [], audioSlots = [] } = {}) {
   return [
-    assetSection(assetTypes.image, imageSlots),
-    assetSection(assetTypes.audio, audioSlots),
+    assetSection("image", assetTypes.image, imageSlots),
+    assetSection("audio", assetTypes.audio, audioSlots),
   ].join("");
 }
 
@@ -52,10 +52,18 @@ export function renderEditorPrototypeCards(items = []) {
   `).join("");
 }
 
-function assetSection(title, slots = []) {
+function assetSection(type, title, slots = []) {
+  const sectionTitle = tf("editorPrep.assetTypes.slotTitle", { title });
   return `
-    <section class="editor-asset-section">
-      <h3>${escapeHtml(tf("editorPrep.assetTypes.slotTitle", { title }))}</h3>
+    <details class="editor-asset-section" data-editor-asset-section="${escapeAttribute(type || "")}">
+      <summary class="editor-asset-section-summary" aria-label="${escapeAttribute(sectionTitle)}">
+        <div>
+          <h3>${escapeHtml(sectionTitle)}</h3>
+          <small>${escapeHtml(tf("editorPrep.save.count", { count: slots.length }))}</small>
+        </div>
+        <span class="collapse-toggle editor-asset-collapse-toggle" aria-hidden="true"></span>
+      </summary>
+      <div class="editor-asset-grid">
       ${slots.map((slot) => `
         <article class="editor-asset-card">
           <div>
@@ -66,7 +74,8 @@ function assetSection(title, slots = []) {
           <small>${escapeHtml(slot.cropPreset || "audio")} · ${escapeHtml(slot.dataTarget || "")}</small>
         </article>
       `).join("")}
-    </section>
+      </div>
+    </details>
   `;
 }
 

@@ -62,6 +62,26 @@ const ATTACHMENT_CONTRACT = Object.freeze({
       defaultLayers: ["offhand_back", "offhand_front"],
     },
     {
+      profileId: "weapon.two_hand.heavy.v1",
+      slotId: "mainhand",
+      itemCategory: "two_hand_weapon",
+      requiredItemAnchors: ["lower_grip", "upper_grip", "tip", "back_end", "mass_center", "bounds"],
+      attachTo: ["TwoHand_LowerGrip", "TwoHand_UpperGrip"],
+      rotationVector: ["TwoHand_LowerGrip", "TwoHand_UpperGrip"],
+      itemRotationVector: ["lower_grip", "upper_grip"],
+      defaultLayer: "mainhand_weapon",
+    },
+    {
+      profileId: "weapon.bow.v1",
+      slotId: "mainhand",
+      itemCategory: "bow",
+      requiredItemAnchors: ["bow_grip", "upper_limb", "lower_limb", "string_top", "string_bottom", "arrow_nock", "arrow_tip", "bounds"],
+      attachTo: ["Bow_Grip", "Draw_Hand", "Arrow_Nock", "Arrow_Tip", "Bow_String_Top", "Bow_String_Bottom"],
+      rotationVector: ["Arrow_Nock", "Arrow_Tip"],
+      itemRotationVector: ["arrow_nock", "arrow_tip"],
+      defaultLayer: "mainhand_weapon",
+    },
+    {
       profileId: "armor.helmet.v1",
       slotId: "head",
       itemCategory: "helmet",
@@ -130,6 +150,28 @@ const ATTACHMENT_CONTRACT = Object.freeze({
         "back.cloak.v1",
       ],
     },
+    {
+      poseTemplateId: "great_weapon_guard",
+      compatibleProfiles: [
+        "weapon.two_hand.heavy.v1",
+        "armor.helmet.v1",
+        "armor.torso.v1",
+        "handwear.gauntlet.v1",
+        "boots.pair.v1",
+        "back.cloak.v1",
+      ],
+    },
+    {
+      poseTemplateId: "bow_draw",
+      compatibleProfiles: [
+        "weapon.bow.v1",
+        "armor.helmet.v1",
+        "armor.torso.v1",
+        "handwear.gauntlet.v1",
+        "boots.pair.v1",
+        "back.cloak.v1",
+      ],
+    },
   ],
 });
 
@@ -184,6 +226,44 @@ const APPEARANCE_CATALOG = Object.freeze({
       },
       defaultLayers: ["offhand_back", "offhand_front"],
       compatiblePoseTemplates: ["idle_default"],
+    },
+    {
+      appearanceId: "appearance.weapon.training_greatsword.v1",
+      category: "two_hand_weapon",
+      slotId: "mainhand",
+      attachmentProfileId: "weapon.two_hand.heavy.v1",
+      assetId: "equipment_attachment_training_greatsword_proxy_v1",
+      cleanFile: "assets/weapons/transparent/training_greatsword_rgba.png",
+      itemAnchors: {
+        lower_grip: [64, 300],
+        upper_grip: [64, 240],
+        tip: [64, 8],
+        back_end: [64, 408],
+        mass_center: [64, 130],
+        bounds: [0, 0, 128, 420],
+      },
+      defaultLayer: "mainhand_weapon",
+      compatiblePoseTemplates: ["great_weapon_guard"],
+    },
+    {
+      appearanceId: "appearance.weapon.training_bow.v1",
+      category: "bow",
+      slotId: "mainhand",
+      attachmentProfileId: "weapon.bow.v1",
+      assetId: "equipment_attachment_training_bow_proxy_v1",
+      cleanFile: "assets/weapons/transparent/training_bow_rgba.png",
+      itemAnchors: {
+        bow_grip: [96, 160],
+        upper_limb: [116, 8],
+        lower_limb: [116, 312],
+        string_top: [40, 12],
+        string_bottom: [40, 308],
+        arrow_nock: [52, 160],
+        arrow_tip: [232, 160],
+        bounds: [0, 0, 256, 320],
+      },
+      defaultLayer: "mainhand_weapon",
+      compatiblePoseTemplates: ["bow_draw"],
     },
     {
       appearanceId: "appearance.armor.leather_chest.v1",
@@ -374,6 +454,93 @@ const MOTION_CATALOG = Object.freeze({
       ],
     },
     {
+      motionId: "basic_attack_two_hand_heavy_v1",
+      defaultPoseTemplateId: "great_weapon_guard",
+      frames: [
+        {
+          frameId: "attack_ready",
+          durationMs: 180,
+          anchorOffsets: {
+            TwoHand_LowerGrip: [-24, 20],
+            TwoHand_UpperGrip: [-18, -20],
+            Weapon_Tip: [-30, -28],
+            Weapon_Back_End: [-20, 22],
+            Mass_Center: [-20, 0],
+          },
+          eventTags: ["windup", "weight_shift"],
+        },
+        {
+          frameId: "attack_hit",
+          durationMs: 150,
+          anchorOffsets: {
+            TwoHand_LowerGrip: [18, -8],
+            TwoHand_UpperGrip: [52, -10],
+            Weapon_Tip: [84, 12],
+            Weapon_Back_End: [8, -6],
+            Mass_Center: [28, -7],
+          },
+          eventTags: ["damage_window"],
+        },
+        {
+          frameId: "attack_recover",
+          durationMs: 260,
+          anchorOffsets: {
+            TwoHand_LowerGrip: [0, 0],
+            TwoHand_UpperGrip: [0, 0],
+            Weapon_Tip: [0, 0],
+            Weapon_Back_End: [0, 0],
+            Mass_Center: [0, 0],
+          },
+          eventTags: ["recover"],
+        },
+      ],
+    },
+    {
+      motionId: "bow_release_v1",
+      defaultPoseTemplateId: "bow_draw",
+      frames: [
+        {
+          frameId: "attack_ready",
+          durationMs: 170,
+          anchorOffsets: {
+            Bow_Grip: [-6, 0],
+            Draw_Hand: [-36, 0],
+            Arrow_Nock: [-32, 0],
+            Arrow_Tip: [-4, 0],
+            Bow_String_Top: [-12, 0],
+            Bow_String_Bottom: [-12, 0],
+          },
+          eventTags: ["windup", "string_draw"],
+        },
+        {
+          frameId: "attack_hit",
+          durationMs: 90,
+          anchorOffsets: {
+            Bow_Grip: [4, 0],
+            Draw_Hand: [18, 0],
+            Arrow_Nock: [44, 0],
+            Arrow_Tip: [82, 0],
+            Bow_String_Top: [0, 0],
+            Bow_String_Bottom: [0, 0],
+          },
+          eventTags: ["damage_window", "projectile_spawn.arrow"],
+        },
+        {
+          frameId: "attack_recover",
+          durationMs: 190,
+          anchorOffsets: {
+            Bow_Grip: [0, 0],
+            Draw_Hand: [0, 0],
+            Arrow_Nock: [0, 0],
+            Arrow_Tip: [0, 0],
+            Bow_String_Top: [0, 0],
+            Bow_String_Bottom: [0, 0],
+          },
+          eventTags: ["recover"],
+        },
+      ],
+    },
+    {
       motionId: "hit_reaction_v1",
       defaultPoseTemplateId: "idle_default",
       frames: [
@@ -468,6 +635,8 @@ export const PLAYER_BODY_ANCHORS_BY_GENDER = Object.freeze({
 const ITEM_APPEARANCE_BY_ID = Object.freeze({
   rusty_sword: "appearance.weapon.rusty_sword.v1",
   rift_blade: "appearance.weapon.rusty_sword.v1",
+  training_greatsword: "appearance.weapon.training_greatsword.v1",
+  hunter_bow: "appearance.weapon.training_bow.v1",
   round_wood_shield: "appearance.shield.round_wood.v1",
   novice_helmet: "appearance.helmet.novice_iron.v1",
   sentinel_helmet: "appearance.helmet.novice_iron.v1",
@@ -523,13 +692,15 @@ export function createPlayerEquipmentAttachmentPlan({
     equippedAppearances.push({ appearanceId, itemId, sourceSlot, slotId });
   }
 
-  const motionSelection = resolveRuntimeMotionFrame(combatRuntime, now);
+  const poseTemplateId = resolveRuntimePoseTemplateId(equippedAppearances);
+  const poseAnchors = resolveRuntimePoseTemplateAnchors(poseTemplateId, bodyAnchors);
+  const motionSelection = resolveRuntimeMotionFrame(combatRuntime, now, poseTemplateId);
   const plan = createEquipmentAttachmentPlan({
     attachmentContract: ATTACHMENT_CONTRACT,
     appearanceCatalog: resolveAppearanceCatalog(assetRegistry),
     equippedAppearances,
-    bodyAnchors,
-    poseTemplateId: "idle_default",
+    bodyAnchors: poseAnchors,
+    poseTemplateId,
     motionFrame: motionSelection.frame,
   });
 
@@ -585,7 +756,43 @@ function findRuntimeAppearance(appearanceId) {
   return APPEARANCE_CATALOG.appearances.find((appearance) => appearance.appearanceId === appearanceId) || null;
 }
 
-function resolveRuntimeMotionFrame(combatRuntime, now) {
+function resolveRuntimePoseTemplateId(equippedAppearances) {
+  for (const equipped of equippedAppearances || []) {
+    const appearance = findRuntimeAppearance(equipped.appearanceId);
+    if (appearance?.attachmentProfileId === "weapon.two_hand.heavy.v1") return "great_weapon_guard";
+    if (appearance?.attachmentProfileId === "weapon.bow.v1") return "bow_draw";
+  }
+  return "idle_default";
+}
+
+function resolveRuntimePoseTemplateAnchors(poseTemplateId, baseAnchors) {
+  const anchors = cloneAnchors(baseAnchors);
+
+  if (poseTemplateId === "great_weapon_guard") {
+    anchors.TwoHand_LowerGrip = roundPoint(
+      lerpPoint(baseAnchors.Hand_ScreenLeft_Grip, baseAnchors.Hand_ScreenRight_Grip, 0.42, [0, -8]),
+    );
+    anchors.TwoHand_UpperGrip = roundPoint(
+      lerpPoint(baseAnchors.Chest_Center, baseAnchors.Shoulder_ScreenRight, 0.46, [18, -22]),
+    );
+    anchors.Weapon_Tip = [anchors.TwoHand_UpperGrip[0] + 84, baseAnchors.Head_Top[1] + 18];
+    anchors.Weapon_Back_End = [anchors.TwoHand_LowerGrip[0] - 66, baseAnchors.Hip_Center[1] + 178];
+    anchors.Mass_Center = roundPoint(lerpPoint(anchors.TwoHand_UpperGrip, anchors.TwoHand_LowerGrip, 0.5));
+  }
+
+  if (poseTemplateId === "bow_draw") {
+    anchors.Bow_Grip = [baseAnchors.Shoulder_ScreenRight[0] + 95, baseAnchors.Chest_Center[1] + 6];
+    anchors.Draw_Hand = [baseAnchors.Shoulder_ScreenLeft[0] - 35, baseAnchors.Chest_Center[1] + 2];
+    anchors.Arrow_Nock = [anchors.Draw_Hand[0] + 18, anchors.Draw_Hand[1]];
+    anchors.Arrow_Tip = [anchors.Bow_Grip[0] + 124, anchors.Bow_Grip[1] - 1];
+    anchors.Bow_String_Top = [anchors.Bow_Grip[0] - 38, baseAnchors.Head_Top[1] + 54];
+    anchors.Bow_String_Bottom = [anchors.Bow_Grip[0] - 36, baseAnchors.Hip_Center[1] - 6];
+  }
+
+  return anchors;
+}
+
+function resolveRuntimeMotionFrame(combatRuntime, now, poseTemplateId = "idle_default") {
   const activeMotionId = combatRuntime?.playerSpriteMotionId;
   const activeUntil = Number(combatRuntime?.playerSpriteMotionUntil || 0);
   if (!activeMotionId || now >= activeUntil) {
@@ -598,9 +805,10 @@ function resolveRuntimeMotionFrame(combatRuntime, now) {
   }
 
   if (activeMotionId === "basic_attack_v1") {
-    const frame = resolveActiveMotionFrame(combatRuntime, now, "basic_attack_one_hand_v1");
+    const runtimeMotionId = resolveAttackRuntimeMotionId(poseTemplateId);
+    const frame = resolveActiveMotionFrame(combatRuntime, now, runtimeMotionId);
     return {
-      motionId: "basic_attack_one_hand_v1",
+      motionId: runtimeMotionId,
       frame: frame.frame,
       elapsedMs: frame.elapsedMs,
     };
@@ -623,6 +831,12 @@ function resolveRuntimeMotionFrame(combatRuntime, now) {
   };
 }
 
+function resolveAttackRuntimeMotionId(poseTemplateId) {
+  if (poseTemplateId === "great_weapon_guard") return "basic_attack_two_hand_heavy_v1";
+  if (poseTemplateId === "bow_draw") return "bow_release_v1";
+  return "basic_attack_one_hand_v1";
+}
+
 function resolveActiveMotionFrame(combatRuntime, now, catalogMotionId) {
   const durationMs = resolveMotionDurationMs(MOTION_CATALOG, catalogMotionId);
   const activeUntil = Number(combatRuntime?.playerSpriteMotionUntil || 0);
@@ -637,4 +851,19 @@ function resolveActiveMotionFrame(combatRuntime, now, catalogMotionId) {
 
 function resolvePlayerAttachmentGender(playerProfile) {
   return String(playerProfile?.gender || "").toLowerCase() === "female" ? "female" : "male";
+}
+
+function cloneAnchors(anchors) {
+  return Object.fromEntries(Object.entries(anchors || {}).map(([key, point]) => [key, Array.isArray(point) ? [...point] : point]));
+}
+
+function lerpPoint(a, b, t, offset = [0, 0]) {
+  return [
+    Number(a[0]) + (Number(b[0]) - Number(a[0])) * t + Number(offset[0] || 0),
+    Number(a[1]) + (Number(b[1]) - Number(a[1])) * t + Number(offset[1] || 0),
+  ];
+}
+
+function roundPoint(point) {
+  return [Math.round(Number(point[0])), Math.round(Number(point[1]))];
 }
