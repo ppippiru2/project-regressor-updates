@@ -1,4 +1,4 @@
-import { renderContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportView.js?v=678";
+import { renderContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportView.js?v=679";
 
 export function createContentBulkPatchStagedImportRenderer(options = {}) {
   return function renderContentBulkPatchStagedImportSection(detailText = {}) {

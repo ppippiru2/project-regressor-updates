@@ -1,5 +1,5 @@
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=679";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
 
 export const CONTENT_BULK_ISSUE_SUMMARY_VIEW_VERSION = "content-bulk-issue-summary-view-v1";
 

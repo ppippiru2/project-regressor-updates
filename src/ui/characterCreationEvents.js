@@ -1,41 +1,41 @@
-import { getLocaleText } from "../localization/index.js?v=678";
-import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "../state/profile.js?v=678";
+import { getLocaleText } from "../localization/index.js?v=679";
+import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "../state/profile.js?v=679";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
   nudgePortraitFrame,
   normalizePortraitFrame,
-} from "../state/portraitFrame.js?v=678";
-import { applyPortraitFrameToElement } from "./portraitFrameView.js?v=678";
+} from "../state/portraitFrame.js?v=679";
+import { applyPortraitFrameToElement } from "./portraitFrameView.js?v=679";
 import {
   diceFaceFromStats,
   diceRollDuration,
   initialDiceFace,
   loadSystemDiceSprite,
-} from "./diceSpriteRenderer.js?v=678";
+} from "./diceSpriteRenderer.js?v=679";
 import {
   createBalancedCreationStats,
   CREATION_STAT_KEYS,
   rollInitialCreationStats,
-} from "../state/characterCreationStats.js?v=678";
+} from "../state/characterCreationStats.js?v=679";
 import {
   applyStarterCardRevealDraft,
   clearStarterCardRevealDraft,
   isStarterCardRevealComplete,
   resolveStarterCardRevealDraw,
-} from "../state/starterCardReveal.js?v=678";
-import { renderCreationProloguePanel } from "./characterCreationProloguePanel.js?v=678";
-import { renderCreationProfileStep } from "./characterCreationProfileStep.js?v=678";
-import { renderCreationStatsStep } from "./characterCreationStatsStep.js?v=678";
-import { renderCreationStarterCardStep } from "./characterCreationStarterCardStep.js?v=678";
-import { renderCreationQuestionStep } from "./characterCreationQuestionStep.js?v=678";
-import { renderCreationResultStep } from "./characterCreationResultStep.js?v=678";
+} from "../state/starterCardReveal.js?v=679";
+import { renderCreationProloguePanel } from "./characterCreationProloguePanel.js?v=679";
+import { renderCreationProfileStep } from "./characterCreationProfileStep.js?v=679";
+import { renderCreationStatsStep } from "./characterCreationStatsStep.js?v=679";
+import { renderCreationStarterCardStep } from "./characterCreationStarterCardStep.js?v=679";
+import { renderCreationQuestionStep } from "./characterCreationQuestionStep.js?v=679";
+import { renderCreationResultStep } from "./characterCreationResultStep.js?v=679";
 import {
   renderCreationHiddenFields,
   selectedStarterCard,
   syncCreationHiddenFields,
-} from "./characterCreationFormState.js?v=678";
-import { playFateCardRevealMotion } from "./fateCardRevealMotion.js?v=678";
+} from "./characterCreationFormState.js?v=679";
+import { playFateCardRevealMotion } from "./fateCardRevealMotion.js?v=679";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

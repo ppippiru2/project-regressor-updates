@@ -1,43 +1,43 @@
 {
   "schemaVersion": 1,
   "project": "Project Regressor",
-  "versionCode": 678,
-  "displayVersion": "v678",
-  "cacheVersion": 678,
-  "updatedAt": "2026-07-01T19:50:20Z",
+  "versionCode": 679,
+  "displayVersion": "v679",
+  "cacheVersion": 679,
+  "updatedAt": "2026-07-01T20:12:00Z",
   "repositoryUrl": "https://github.com/ppippiru2/project-regressor-updates",
   "pagesUrl": "https://ppippiru2.github.io/project-regressor-updates/",
-  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=678&cachebust=678",
+  "launchUrl": "https://ppippiru2.github.io/project-regressor-updates/?v=679&cachebust=679",
   "recommendedAndroidShell": "Trusted Web Activity",
-  "notes": "v678 build: include the latest editor filter actions factory split, rebuild the web payload, and refresh the installable Android debug APK without changing save/gameplay schemas.",
-  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v678-debug.apk",
+  "notes": "v679 build: include the latest editor render loop factory split, rebuild the web payload, and refresh the installable Android debug APK without changing save/gameplay schemas.",
+  "androidApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v679-debug.apk",
   "downloads": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v678-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v679-debug.apk"
   },
-  "version": "6.78.0",
+  "version": "6.79.0",
   "artifacts": {
-    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v678-debug.apk"
+    "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v679-debug.apk"
   },
   "android": {
-    "code": 678,
-    "name": "6.78.0",
-    "displayName": "v678",
+    "code": 679,
+    "name": "6.79.0",
+    "displayName": "v679",
     "artifacts": {
-      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v678-debug.apk"
+      "androidDebugApk": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v679-debug.apk"
     },
     "version": {
-      "code": 678,
-      "name": "6.78.0",
-      "displayName": "v678"
+      "code": 679,
+      "name": "6.79.0",
+      "displayName": "v679"
     },
-    "versionCode": 678,
-    "versionName": "6.78.0",
-    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v678-debug.apk",
-    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v678-release.apk"
+    "versionCode": 679,
+    "versionName": "6.79.0",
+    "apkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v679-debug.apk",
+    "releaseApkUrl": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v679-release.apk"
   },
   "apk": {
-    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v678-debug.apk",
-    "fileName": "project-regressor-v678-debug.apk"
+    "url": "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v679-debug.apk",
+    "fileName": "project-regressor-v679-debug.apk"
   },
-  "versionName": "6.78.0"
+  "versionName": "6.79.0"
 }

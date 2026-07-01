@@ -1,6 +1,6 @@
-import { t } from "../localization/index.js?v=678";
-import { editorChipBlock } from "./editorChipBlockView.js?v=678";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
+import { t } from "../localization/index.js?v=679";
+import { editorChipBlock } from "./editorChipBlockView.js?v=679";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
 
 export const MONSTER_RUNTIME_INTEGRATION_VIEW_VERSION = "monster-runtime-integration-view-v1";
 const MONSTER_RUNTIME_CHIP_OPTIONS = {

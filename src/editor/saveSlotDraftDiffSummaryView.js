@@ -1,4 +1,4 @@
-import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=678";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=679";
 
 const SAVE_DIFF_DETAIL_CHIP_OPTIONS = {
   blockClass: "editor-detail-chip-block",

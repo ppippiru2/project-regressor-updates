@@ -1,15 +1,15 @@
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=678";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=678";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=679";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=679";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=679";
 import {
   createContentBulkFilteredCandidateStageGateCountsFromPreview,
   createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
-} from "./contentBulkFilteredCandidateStageGate.js?v=678";
+} from "./contentBulkFilteredCandidateStageGate.js?v=679";
 import {
   contentBulkStageGateReasonLabels,
   contentBulkStageGateStatusLabels,
-} from "./contentBulkStageGatePreviewLabels.js?v=678";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
+} from "./contentBulkStageGatePreviewLabels.js?v=679";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
 
 export const CONTENT_BULK_MASS_APPLY_READINESS_VIEW_VERSION = "content-bulk-mass-apply-readiness-view-v1";
 

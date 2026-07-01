@@ -1,4 +1,4 @@
-import { renderSaveSlotEditApplyRunnerPayloadShapeView } from "./saveSlotEditApplyRunnerPayloadShapeView.js?v=678";
+import { renderSaveSlotEditApplyRunnerPayloadShapeView } from "./saveSlotEditApplyRunnerPayloadShapeView.js?v=679";
 
 export function createSaveSlotEditApplyRunnerPayloadShapeRenderer(options = {}) {
   return function renderSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics) {

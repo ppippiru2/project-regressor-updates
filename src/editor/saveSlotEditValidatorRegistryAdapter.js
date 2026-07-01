@@ -1,4 +1,4 @@
-import { renderSaveSlotEditValidatorRegistryView } from "./saveSlotEditValidatorRegistryView.js?v=678";
+import { renderSaveSlotEditValidatorRegistryView } from "./saveSlotEditValidatorRegistryView.js?v=679";
 
 export function createSaveSlotEditValidatorRegistryRenderer(options = {}) {
   return function renderSaveSlotEditValidatorRegistryContract(diagnostics) {

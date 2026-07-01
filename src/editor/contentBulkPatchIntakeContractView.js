@@ -1,8 +1,8 @@
-import { tf } from "../localization/index.js?v=678";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=678";
-import { contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=678";
-import { editorChip } from "./editorChipBlockView.js?v=678";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
+import { tf } from "../localization/index.js?v=679";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=679";
+import { contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=679";
+import { editorChip } from "./editorChipBlockView.js?v=679";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
 
 export const CONTENT_BULK_PATCH_INTAKE_CONTRACT_VIEW_VERSION = "content-bulk-patch-intake-contract-view-v1";
 const CONTENT_BULK_INTAKE_CHIP_OPTIONS = { chipClass: "editor-chip" };

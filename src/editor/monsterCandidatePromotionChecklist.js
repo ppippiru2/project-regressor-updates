@@ -1,4 +1,4 @@
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=678";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=679";
 
 export const MONSTER_CANDIDATE_PROMOTION_CHECKLIST_VERSION = "monster-candidate-promotion-checklist-v1";
 

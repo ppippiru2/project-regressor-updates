@@ -1,7 +1,7 @@
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=678";
-import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=678";
-import { createContentBulkPatchRowIssueSummary } from "./contentBulkPatchIssueSummary.js?v=678";
-import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=678";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=679";
+import { createContentBulkPatchTemplate } from "./contentBulkPatchIntakeContract.js?v=679";
+import { createContentBulkPatchRowIssueSummary } from "./contentBulkPatchIssueSummary.js?v=679";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=679";
 
 export const CONTENT_BULK_PATCH_STAGED_IMPORT_PREVIEW_VERSION = "content-bulk-patch-staged-import-preview-v1";
 

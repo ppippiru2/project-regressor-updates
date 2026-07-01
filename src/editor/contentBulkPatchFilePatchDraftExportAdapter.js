@@ -1,4 +1,4 @@
-import { renderContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExportView.js?v=678";
+import { renderContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExportView.js?v=679";
 
 export function createContentBulkPatchFilePatchDraftExportRenderer(options = {}) {
   return function renderContentBulkPatchFilePatchDraftExportSection(detailText = {}) {

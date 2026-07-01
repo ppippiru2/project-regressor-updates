@@ -1,4 +1,4 @@
-import { renderSaveSlotEditCompatibilityConfirmationRollupView } from "./saveSlotEditCompatibilityConfirmationRollupView.js?v=678";
+import { renderSaveSlotEditCompatibilityConfirmationRollupView } from "./saveSlotEditCompatibilityConfirmationRollupView.js?v=679";
 
 export function createSaveSlotEditCompatibilityConfirmationRollupRenderer(options = {}) {
   return function renderSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics) {

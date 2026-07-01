@@ -1,7 +1,7 @@
-import { getLocaleText, tf } from "../localization/index.js?v=678";
-import { createHiddenCardSlots } from "../state/starterCardDraw.js?v=678";
-import { FATE_CARD_RENDER_MODES } from "../state/fateCardRoller.js?v=678";
-import { renderFateCardButton } from "./fateCardRenderer.js?v=678";
+import { getLocaleText, tf } from "../localization/index.js?v=679";
+import { createHiddenCardSlots } from "../state/starterCardDraw.js?v=679";
+import { FATE_CARD_RENDER_MODES } from "../state/fateCardRoller.js?v=679";
+import { renderFateCardButton } from "./fateCardRenderer.js?v=679";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

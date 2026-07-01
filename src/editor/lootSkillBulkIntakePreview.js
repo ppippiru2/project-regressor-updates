@@ -1,8 +1,8 @@
-import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=678";
-import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=678";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=678";
-import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=678";
-import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=678";
+import { LOOT_ITEM_BALANCE_DATA } from "../balance/itemBalanceData.js?v=679";
+import { SKILL_BALANCE_DATA } from "../balance/skillBalanceData.js?v=679";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=679";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=679";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=679";
 
 export const LOOT_SKILL_BULK_INTAKE_PREVIEW_VERSION = "loot-skill-bulk-intake-preview-v1";
 

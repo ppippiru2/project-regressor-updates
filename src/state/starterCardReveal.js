@@ -1,5 +1,5 @@
-import { resolveDispositionResult } from "./profile.js?v=678";
-import { resolveRecommendedStarterCardDraw } from "./starterCardDraw.js?v=678";
+import { resolveDispositionResult } from "./profile.js?v=679";
+import { resolveRecommendedStarterCardDraw } from "./starterCardDraw.js?v=679";
 
 export function resolveStarterCardRevealDraw(cards = [], answers = {}, slotIndex = 0) {
   const sourceCards = Array.isArray(cards) ? cards.filter((card) => card?.id) : [];

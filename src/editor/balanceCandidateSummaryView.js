@@ -1,6 +1,6 @@
-import { tf } from "../localization/index.js?v=678";
-import { editorChipBlock } from "./editorChipBlockView.js?v=678";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
+import { tf } from "../localization/index.js?v=679";
+import { editorChipBlock } from "./editorChipBlockView.js?v=679";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
 
 export const BALANCE_CANDIDATE_SUMMARY_VIEW_VERSION = "balance-candidate-summary-view-v1";
 const BALANCE_DETAIL_CHIP_OPTIONS = { chipClass: "editor-chip" };

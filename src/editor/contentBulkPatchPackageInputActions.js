@@ -1,13 +1,13 @@
 import {
   createContentBulkPatchPackageAdapterPreview,
   createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=678";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=678";
-import { normalizeContentBulkPatchPackageInput } from "./contentBulkPatchPackageInputStore.js?v=678";
+} from "./contentBulkPatchPackageAdapter.js?v=679";
+import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=679";
+import { normalizeContentBulkPatchPackageInput } from "./contentBulkPatchPackageInputStore.js?v=679";
 import {
   createRuntimeVfxBulkIntakePreview,
   createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=678";
+} from "./runtimeVfxBulkIntakePreview.js?v=679";
 
 export const CONTENT_BULK_PACKAGE_TEMPLATE_FILE_NAME = "project-regressor-content-bulk-package-template.json";
 export const CONTENT_BULK_PACKAGE_PASTED_SOURCE_NAME = "pasted-package.json";

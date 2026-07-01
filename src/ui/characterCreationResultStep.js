@@ -1,7 +1,7 @@
-import { getLocaleText, tf } from "../localization/index.js?v=678";
-import { resolveDispositionResult } from "../state/profile.js?v=678";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=678";
-import { creationStatTotal, CREATION_STAT_KEYS } from "../state/characterCreationStats.js?v=678";
+import { getLocaleText, tf } from "../localization/index.js?v=679";
+import { resolveDispositionResult } from "../state/profile.js?v=679";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=679";
+import { creationStatTotal, CREATION_STAT_KEYS } from "../state/characterCreationStats.js?v=679";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

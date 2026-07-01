@@ -1,4 +1,4 @@
-import { renderContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlanView.js?v=678";
+import { renderContentBulkPatchApplyGatePlan } from "./contentBulkPatchApplyGatePlanView.js?v=679";
 
 export function createContentBulkPatchApplyGatePlanRenderer(options = {}) {
   return function renderContentBulkPatchApplyGatePlanSection(filteredCandidatePreview = {}, detailText = {}) {

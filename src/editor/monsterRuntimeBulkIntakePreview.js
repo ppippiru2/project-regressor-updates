@@ -1,8 +1,8 @@
-import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=678";
-import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=678";
-import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=678";
-import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=678";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=678";
+import { TUTORIAL_MONSTER_POOL_DATA, TUTORIAL_MONSTER_REWARD_LINKS } from "../balance/monsterCandidatePool.js?v=679";
+import { createContentBulkPatchPackageAdapterPreview } from "./contentBulkPatchPackageAdapter.js?v=679";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=679";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=679";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=679";
 
 export const MONSTER_RUNTIME_BULK_INTAKE_PREVIEW_VERSION = "monster-runtime-bulk-intake-preview-v1";
 

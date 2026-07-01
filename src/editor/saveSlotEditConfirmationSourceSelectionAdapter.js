@@ -1,4 +1,4 @@
-import { renderSaveSlotEditConfirmationSourceSelectionView } from "./saveSlotEditConfirmationSourceSelectionView.js?v=678";
+import { renderSaveSlotEditConfirmationSourceSelectionView } from "./saveSlotEditConfirmationSourceSelectionView.js?v=679";
 
 export function createSaveSlotEditConfirmationSourceSelectionRenderer(options = {}) {
   return function renderSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics) {

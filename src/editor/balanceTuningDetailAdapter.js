@@ -1,4 +1,4 @@
-import { renderBalanceTuningDetailView } from "./balanceTuningDetailView.js?v=678";
+import { renderBalanceTuningDetailView } from "./balanceTuningDetailView.js?v=679";
 
 export function createBalanceTuningDetailRenderer() {
   return function renderBalanceTuningDetailSection(options = {}) {

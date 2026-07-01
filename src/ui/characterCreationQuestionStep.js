@@ -1,4 +1,4 @@
-import { getLocaleText } from "../localization/index.js?v=678";
+import { getLocaleText } from "../localization/index.js?v=679";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

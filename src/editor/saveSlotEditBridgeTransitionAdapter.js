@@ -1,4 +1,4 @@
-import { renderSaveSlotEditBridgeTransitionView } from "./saveSlotEditBridgeTransitionView.js?v=678";
+import { renderSaveSlotEditBridgeTransitionView } from "./saveSlotEditBridgeTransitionView.js?v=679";
 
 export function createSaveSlotEditBridgeTransitionRenderer(options = {}) {
   return function renderSaveSlotEditBridgeTransitionChecklistPreview(diagnostics) {

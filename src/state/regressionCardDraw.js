@@ -3,7 +3,7 @@ import {
   getCardCandidateCountByKarma,
   getCardGradeWeightSummary,
   normalizeFateCardCandidateCount,
-} from "./fateCardRoller.js?v=678";
+} from "./fateCardRoller.js?v=679";
 
 export const REGRESSION_CARD_DRAW_TEST_PRESETS = Object.freeze([
   Object.freeze({ id: "run2_karma0", regressionCount: 2, karmaValue: 0 }),

@@ -1,4 +1,4 @@
-import { renderContentBulkFilterControls } from "./contentBulkFilterControlsView.js?v=678";
+import { renderContentBulkFilterControls } from "./contentBulkFilterControlsView.js?v=679";
 
 export function createContentBulkFilterControlsRenderer(options = {}) {
   return function renderContentBulkFilterControlsSection(text = {}, counts = {}) {

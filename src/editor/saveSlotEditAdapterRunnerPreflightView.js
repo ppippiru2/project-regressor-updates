@@ -1,4 +1,4 @@
-import { editorChip } from "./editorChipBlockView.js?v=678";
+import { editorChip } from "./editorChipBlockView.js?v=679";
 
 const SAVE_EDIT_ADAPTER_PREFLIGHT_CHIP_OPTIONS = { chipClass: "editor-chip" };
 

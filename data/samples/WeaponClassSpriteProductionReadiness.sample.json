@@ -51,7 +51,8 @@
     "weapon_class_motion_hitbox_report_zero_missing",
     "weapon_class_motion_hitbox_preview_zero_console_errors",
     "weapon_class_motion_frame_report_zero_missing",
-    "weapon_class_motion_frame_preview_zero_console_errors"
+    "weapon_class_motion_frame_preview_zero_console_errors",
+    "player_equipment_motion_attachment_continuity_zero_failed_v1_1"
   ],
   "spriteJobs": [
     {

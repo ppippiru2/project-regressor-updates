@@ -1,4 +1,4 @@
-import { renderSaveSlotDraftDiffSummaryView } from "./saveSlotDraftDiffSummaryView.js?v=678";
+import { renderSaveSlotDraftDiffSummaryView } from "./saveSlotDraftDiffSummaryView.js?v=679";
 
 export function createSaveSlotDraftDiffSummaryRenderer(options = {}) {
   return function renderSaveSlotDraftDiffSummary(diagnostics) {

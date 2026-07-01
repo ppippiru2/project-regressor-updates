@@ -1,7 +1,7 @@
-import { tf } from "../localization/index.js?v=678";
-import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=678";
-import { editorFallbackLabel } from "./editorLabelFormatters.js?v=678";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=678";
+import { tf } from "../localization/index.js?v=679";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=679";
+import { editorFallbackLabel } from "./editorLabelFormatters.js?v=679";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=679";
 
 export const MONSTER_CANDIDATE_PROMOTION_VIEW_VERSION = "monster-candidate-promotion-view-v1";
 const MONSTER_CANDIDATE_CHIP_OPTIONS = { chipClass: "editor-chip" };

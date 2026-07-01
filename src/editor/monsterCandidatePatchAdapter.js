@@ -1,5 +1,5 @@
-import { renderMonsterCandidateBulkPatchAutomation } from "./monsterCandidateBulkPatchAutomationView.js?v=678";
-import { renderMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraftView.js?v=678";
+import { renderMonsterCandidateBulkPatchAutomation } from "./monsterCandidateBulkPatchAutomationView.js?v=679";
+import { renderMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraftView.js?v=679";
 
 export function createMonsterCandidateLivePatchDraftRenderer(options = {}) {
   return function renderMonsterCandidateLivePatchDraftSection(detailText = {}) {
