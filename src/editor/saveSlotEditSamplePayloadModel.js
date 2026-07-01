@@ -1,4 +1,4 @@
-import { saveEditInputKindForField } from "./saveSlotEditInputSchemaModel.js?v=675";
+import { saveEditInputKindForField } from "./saveSlotEditInputSchemaModel.js?v=676";
 
 export function createSaveSlotEditSamplePayloadPreviewModel(options = {}) {
   const draft = options.draft || { fieldGroups: [], payloadShape: { target: {} } };

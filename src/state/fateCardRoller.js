@@ -1,4 +1,4 @@
-import { t } from "../localization/index.js?v=675";
+import { t } from "../localization/index.js?v=676";
 
 export const FATE_CARD_RENDER_MODES = Object.freeze({
   devPreview: "devPreview",

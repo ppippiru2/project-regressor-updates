@@ -1,16 +1,16 @@
 import {
   DEFAULT_DEVELOPER_OPTIONS,
   normalizeDeveloperOptions,
-} from "./developerOptions.js?v=675";
-import { normalizeKarmaState } from "./karma.js?v=675";
-import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=675";
-import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "./profile.js?v=675";
-import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=675";
-import { normalizeRegressionCardState } from "./regressionCardState.js?v=675";
-import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=675";
-import { t, tf } from "../localization/index.js?v=675";
+} from "./developerOptions.js?v=676";
+import { normalizeKarmaState } from "./karma.js?v=676";
+import { DEFAULT_PORTRAIT_FRAME, normalizePortraitFrame } from "./portraitFrame.js?v=676";
+import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "./profile.js?v=676";
+import { normalizeRegionEncounterCounts } from "./regionMonsterPool.js?v=676";
+import { normalizeRegressionCardState } from "./regressionCardState.js?v=676";
+import { normalizeTutorialFlags } from "./tutorialGuidance.js?v=676";
+import { t, tf } from "../localization/index.js?v=676";
 
-export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=675";
+export { DEFAULT_DEVELOPER_OPTIONS } from "./developerOptions.js?v=676";
 
 const STORAGE_KEY = "project_regressor_mvp_save";
 const UI_STORAGE_KEY = "project_regressor_ui_state";

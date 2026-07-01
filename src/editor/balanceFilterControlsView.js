@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=675";
+import { tf } from "../localization/index.js?v=676";
 
 export const BALANCE_FILTER_CONTROLS_VIEW_VERSION = "balance-filter-controls-view-v1";
 

@@ -1,9 +1,9 @@
-import { t, tf } from "../localization/index.js?v=675";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=675";
-import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=675";
-import { POST_TUTORIAL_WORLD_UNLOCK_FLAGS } from "./postTutorialUnlocks.js?v=675";
-import { TUTORIAL_ROUTE_STATE_FLAGS } from "./tutorialRouteFlags.js?v=675";
-import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=675";
+import { t, tf } from "../localization/index.js?v=676";
+import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=676";
+import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=676";
+import { POST_TUTORIAL_WORLD_UNLOCK_FLAGS } from "./postTutorialUnlocks.js?v=676";
+import { TUTORIAL_ROUTE_STATE_FLAGS } from "./tutorialRouteFlags.js?v=676";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=676";
 
 export const DEFAULT_TUTORIAL_FLAGS = Object.freeze({
   prologueCompleted: false,

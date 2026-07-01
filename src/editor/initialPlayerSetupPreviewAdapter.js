@@ -1,4 +1,4 @@
-import { renderInitialPlayerSetupPreviewView } from "./initialPlayerSetupPreviewView.js?v=675";
+import { renderInitialPlayerSetupPreviewView } from "./initialPlayerSetupPreviewView.js?v=676";
 
 export function createInitialPlayerSetupPreviewRenderer(options = {}) {
   return function renderInitialPlayerSetupPreviewSection(text = {}) {

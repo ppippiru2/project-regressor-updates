@@ -1,4 +1,4 @@
-import { renderSaveSlotEditValidatorConfirmationPreflightView } from "./saveSlotEditValidatorConfirmationPreflightView.js?v=675";
+import { renderSaveSlotEditValidatorConfirmationPreflightView } from "./saveSlotEditValidatorConfirmationPreflightView.js?v=676";
 
 export function createSaveSlotEditValidatorConfirmationPreflightRenderer(options = {}) {
   return function renderSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics) {

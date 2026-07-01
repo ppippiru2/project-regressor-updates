@@ -1,4 +1,4 @@
-import { renderSaveSlotEditWriterPayloadCheckpointView } from "./saveSlotEditWriterPayloadCheckpointView.js?v=675";
+import { renderSaveSlotEditWriterPayloadCheckpointView } from "./saveSlotEditWriterPayloadCheckpointView.js?v=676";
 
 export function createSaveSlotEditWriterPayloadCheckpointRenderer(options = {}) {
   return function renderSaveSlotEditWriterPayloadCheckpointPreview(diagnostics) {

@@ -1,4 +1,4 @@
-import { renderSaveSlotRecoveryRehearsalView } from "./saveSlotRecoveryRehearsalView.js?v=675";
+import { renderSaveSlotRecoveryRehearsalView } from "./saveSlotRecoveryRehearsalView.js?v=676";
 
 export function createSaveSlotRecoveryRehearsalRenderer(options = {}) {
   return function renderSaveSlotRecoveryRehearsalPreview(diagnostics) {

@@ -1,12 +1,12 @@
 import {
   createContentBulkPatchFilePatchDraftExport,
-} from "./contentBulkPatchFilePatchDraftExport.js?v=675";
+} from "./contentBulkPatchFilePatchDraftExport.js?v=676";
 import {
   createContentBulkFilteredCandidateStageGateCountsFromPreview,
   createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
-} from "./contentBulkFilteredCandidateStageGate.js?v=675";
-import { createContentBulkPatchReviewIssueSummary } from "./contentBulkPatchIssueSummary.js?v=675";
-import { createContentBulkPatchPreApplyReview } from "./contentBulkPatchPreApplyReview.js?v=675";
+} from "./contentBulkFilteredCandidateStageGate.js?v=676";
+import { createContentBulkPatchReviewIssueSummary } from "./contentBulkPatchIssueSummary.js?v=676";
+import { createContentBulkPatchPreApplyReview } from "./contentBulkPatchPreApplyReview.js?v=676";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VERSION = "content-bulk-patch-apply-gate-plan-v1";
 

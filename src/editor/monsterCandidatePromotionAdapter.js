@@ -1,5 +1,5 @@
-import { renderMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionView.js?v=675";
-import { renderMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionView.js?v=675";
+import { renderMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionView.js?v=676";
+import { renderMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionView.js?v=676";
 
 export function createMonsterCandidatePromotionChecklistRenderer(options = {}) {
   return function renderMonsterCandidatePromotionChecklistSection(detailText = {}) {

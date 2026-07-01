@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "updatedAt": "2026-06-30",
   "status": "draft_sample",
-  "purpose": "Defines source/pixel sprite production readiness gates for the first weapon/class attack motion templates.",
+  "purpose": "Defines source/pixel sprite production readiness gates for weapon/class attack motions and player support motion templates.",
   "coordinateConvention": {
     "canvas": [1254, 1254],
     "origin": "top_left",
@@ -56,6 +56,7 @@
   "spriteJobs": [
     {
       "jobId": "sprite.weapon_class.sword_shield_slash.v1",
+      "jobKind": "attack",
       "motionId": "sword_shield_slash_v1",
       "poseTemplateId": "sword_shield_idle",
       "equipmentProfileIds": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1"],
@@ -69,6 +70,7 @@
     },
     {
       "jobId": "sprite.weapon_class.great_weapon_sweep.v1",
+      "jobKind": "attack",
       "motionId": "great_weapon_sweep_v1",
       "poseTemplateId": "great_weapon_guard",
       "equipmentProfileIds": ["weapon.two_hand.heavy.v1"],
@@ -82,6 +84,7 @@
     },
     {
       "jobId": "sprite.weapon_class.bow_release.v1",
+      "jobKind": "attack",
       "motionId": "bow_release_v1",
       "poseTemplateId": "bow_draw",
       "equipmentProfileIds": ["weapon.bow.v1"],
@@ -95,6 +98,7 @@
     },
     {
       "jobId": "sprite.weapon_class.staff_cast.v1",
+      "jobKind": "attack",
       "motionId": "staff_cast_v1",
       "poseTemplateId": "staff_stand",
       "equipmentProfileIds": ["weapon.staff.v1"],
@@ -107,7 +111,22 @@
       }
     },
     {
+      "jobId": "sprite.weapon_class.wand_book_cast.v1",
+      "jobKind": "attack",
+      "motionId": "wand_book_cast_v1",
+      "poseTemplateId": "wand_book_cast",
+      "equipmentProfileIds": ["weapon.wand.v1", "offhand.book.v1"],
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "promptFocus": "wand and book casting motion with wand tip, cast hand, book grip, and book center kept distinct",
+      "frameNotes": {
+        "attack_ready": "Cast hand gathers energy while the offhand book stays supported.",
+        "attack_hit": "Wand tip becomes the effect spawn; this is the only damage-window frame.",
+        "attack_recover": "Cast hand and book return toward the wand-book baseline."
+      }
+    },
+    {
       "jobId": "sprite.weapon_class.fist_combo.v1",
+      "jobKind": "attack",
       "motionId": "fist_combo_v1",
       "poseTemplateId": "fist_guard_idle",
       "equipmentProfileIds": ["handwear.gauntlet.v1"],
@@ -117,6 +136,35 @@
         "attack_ready": "Guard compresses before the strike while feet stay locked.",
         "attack_hit": "Screen-left fist advances; this is the only damage-window frame.",
         "attack_recover": "Fists return to the guard baseline."
+      }
+    },
+    {
+      "jobId": "sprite.player_support.idle_loop.v1",
+      "jobKind": "support",
+      "motionId": "idle_loop_v1",
+      "poseTemplateId": "idle_default",
+      "equipmentProfileIds": ["visual.all_equipment_slots.v1"],
+      "requiredFrameIds": ["idle_low", "idle_breathe_up", "idle_return"],
+      "requiresHitboxContract": false,
+      "promptFocus": "idle breathing loop with all visual equipment slots staying attached to stable body anchors",
+      "frameNotes": {
+        "idle_low": "Baseline idle frame with feet and hand grips locked.",
+        "idle_breathe_up": "Chest and shoulders lift slightly while equipment follows transformed anchors.",
+        "idle_return": "Body returns to the baseline idle frame without equipment drift."
+      }
+    },
+    {
+      "jobId": "sprite.player_support.hit_reaction.v1",
+      "jobKind": "support",
+      "motionId": "hit_reaction_v1",
+      "poseTemplateId": "idle_default",
+      "equipmentProfileIds": ["visual.all_equipment_slots.v1"],
+      "requiredFrameIds": ["hit_back", "hit_return"],
+      "requiresHitboxContract": false,
+      "promptFocus": "short hit reaction with body recoil while armor, weapon, offhand, gloves, boots, and helmet remain attached",
+      "frameNotes": {
+        "hit_back": "Body recoils backward with a hit flash posture while feet remain visually grounded.",
+        "hit_return": "Body returns to the idle baseline with all equipment anchors restored."
       }
     }
   ]

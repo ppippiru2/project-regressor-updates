@@ -1,4 +1,4 @@
-import { renderSaveSlotEditConfirmationInputContractView } from "./saveSlotEditConfirmationInputContractView.js?v=675";
+import { renderSaveSlotEditConfirmationInputContractView } from "./saveSlotEditConfirmationInputContractView.js?v=676";
 
 export function createSaveSlotEditConfirmationInputContractRenderer(options = {}) {
   return function renderSaveSlotEditConfirmationInputContractPreview(diagnostics) {

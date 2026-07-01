@@ -1,4 +1,4 @@
-import { renderMonsterCandidateRewardPreview } from "./monsterCandidateRewardView.js?v=675";
+import { renderMonsterCandidateRewardPreview } from "./monsterCandidateRewardView.js?v=676";
 
 export function createMonsterCandidateRewardRenderer(options = {}) {
   return function renderMonsterCandidateRewardSection(detailText = {}) {

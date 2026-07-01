@@ -1,5 +1,5 @@
 import { addInventoryItem, consumeInventoryItem } from "./inventory.js";
-import { t, tf } from "../localization/index.js?v=675";
+import { t, tf } from "../localization/index.js?v=676";
 
 const OFFHAND_SLOT = "OffHand";
 const MAINHAND_SLOT = "Weapon";

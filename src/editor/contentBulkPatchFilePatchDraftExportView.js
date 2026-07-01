@@ -1,8 +1,8 @@
-import { tf } from "../localization/index.js?v=675";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
-import { contentBulkPatchPreApplyReviewLabel } from "./contentBulkPatchPreApplyReview.js?v=675";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+import { tf } from "../localization/index.js?v=676";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=676";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=676";
+import { contentBulkPatchPreApplyReviewLabel } from "./contentBulkPatchPreApplyReview.js?v=676";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_EXPORT_VIEW_VERSION = "content-bulk-patch-file-patch-draft-export-view-v1";
 

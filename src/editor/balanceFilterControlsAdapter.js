@@ -1,7 +1,7 @@
 import {
   renderBalanceFilterControls,
   renderEmptyBalanceRows,
-} from "./balanceFilterControlsView.js?v=675";
+} from "./balanceFilterControlsView.js?v=676";
 
 export function createBalanceFilterControlsRenderer() {
   return function renderBalanceFilterControlsSection(detailText = {}, visibleCount = 0, totalCount = 0, options = {}) {

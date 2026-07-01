@@ -1,7 +1,7 @@
-import { tf } from "../localization/index.js?v=675";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
-import { contentBulkDomainLabel, contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+import { tf } from "../localization/index.js?v=676";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=676";
+import { contentBulkDomainLabel, contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=676";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
 
 export const CONTENT_BULK_PACKAGE_OVERVIEW_VIEW_VERSION = "content-bulk-package-overview-view-v1";
 

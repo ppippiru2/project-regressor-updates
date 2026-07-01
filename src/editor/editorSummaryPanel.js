@@ -1,6 +1,6 @@
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=675";
-import { renderEditorSummaryMetrics } from "./editorSummaryMetrics.js?v=675";
-import { setElementText } from "./editorDomText.js?v=675";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=676";
+import { renderEditorSummaryMetrics } from "./editorSummaryMetrics.js?v=676";
+import { setElementText } from "./editorDomText.js?v=676";
 
 export function renderEditorSummaryPanel(elements, options = {}) {
   const text = options.text || {};

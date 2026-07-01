@@ -2,7 +2,7 @@ import {
   renderBalanceGroupRow,
   renderBalancePacingSnapshot,
   renderBalanceRelatedChecks,
-} from "./balanceRegistryDetailView.js?v=675";
+} from "./balanceRegistryDetailView.js?v=676";
 
 export function createBalanceGroupRowRenderer() {
   return function renderBalanceGroupRowSection(group, detailText = {}, options = {}) {

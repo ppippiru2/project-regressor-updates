@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "updatedAt": "2026-06-30",
   "status": "draft_sample",
-  "purpose": "Defines the first small source-sprite pilot batch before producing all 180 source prompts.",
+  "purpose": "Defines the first five-motion source-sprite pilot batch before producing all 276 source prompts.",
   "selection": {
     "outputType": "source",
     "skinToneIds": ["T2"],

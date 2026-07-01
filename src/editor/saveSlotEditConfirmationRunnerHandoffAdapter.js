@@ -1,4 +1,4 @@
-import { renderSaveSlotEditConfirmationRunnerHandoffView } from "./saveSlotEditConfirmationRunnerHandoffView.js?v=675";
+import { renderSaveSlotEditConfirmationRunnerHandoffView } from "./saveSlotEditConfirmationRunnerHandoffView.js?v=676";
 
 export function createSaveSlotEditConfirmationRunnerHandoffRenderer(options = {}) {
   return function renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics) {

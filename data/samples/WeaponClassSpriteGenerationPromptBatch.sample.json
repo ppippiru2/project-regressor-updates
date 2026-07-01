@@ -12,14 +12,20 @@
     "great_weapon_sweep_v1",
     "bow_release_v1",
     "staff_cast_v1",
-    "fist_combo_v1"
+    "wand_book_cast_v1",
+    "fist_combo_v1",
+    "idle_loop_v1",
+    "hit_reaction_v1"
   ],
-  "targetFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+  "targetFrameIds": ["attack_ready", "attack_hit", "attack_recover", "idle_low", "idle_breathe_up", "idle_return", "hit_back", "hit_return"],
   "globalPromptRules": [
     "Use the approved source body only as the pose, body scale, head placement, lighting, and anchor-placement reference.",
     "Keep the exact 1254x1254 canvas, camera framing, body proportions, underwear style, and transparent background.",
     "Create only the requested motion frame variation for the selected gender and skin tone.",
     "Do not change the body identity, muscles, hands, feet, stance baseline, or equipment anchor locations beyond the requested frame offsets.",
+    "Preserve the seven visual equipment attachment slots: Helmet, Armor, LegArmor, Gloves, Boots, Weapon, and OffHand.",
+    "Keep Armor and LegArmor separate: Armor follows torso anchors, while LegArmor follows hip, knee, and foot-baseline anchors.",
+    "Do not add OffHand shield, book, or secondary-weapon props in two-handed weapon, bow, staff, or gauntlet-only fist frames; only wand_book_cast_v1 may include the OffHand book.",
     "No text, no watermark, no extra props, no background change."
   ],
   "negativePromptRules": [

@@ -1,6 +1,6 @@
-import { tf } from "../localization/index.js?v=675";
-import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+import { tf } from "../localization/index.js?v=676";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=676";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
 
 export const COMBAT_VFX_PLACEMENT_VIEW_VERSION = "combat-vfx-placement-view-v1";
 const COMBAT_VFX_CHIP_OPTIONS = {

@@ -1,4 +1,4 @@
-import { renderEditorMetricCard } from "./editorMetricView.js?v=675";
+import { renderEditorMetricCard } from "./editorMetricView.js?v=676";
 
 export function renderEditorSummaryMetrics(options = {}) {
   const manifest = options.manifest || {};

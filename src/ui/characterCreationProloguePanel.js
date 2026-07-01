@@ -1,13 +1,13 @@
-import { getLocaleText, tf } from "../localization/index.js?v=675";
-import { resolveAlignment, resolveDispositionResult } from "../state/profile.js?v=675";
-import { statusGradeFromStats } from "../state/statusGrade.js?v=675";
+import { getLocaleText, tf } from "../localization/index.js?v=676";
+import { resolveAlignment, resolveDispositionResult } from "../state/profile.js?v=676";
+import { statusGradeFromStats } from "../state/statusGrade.js?v=676";
 import {
   renderTutorialDialogueTemplate,
   resolveTutorialDispositionDialogue,
   resolveTutorialKeyEventDialogue,
   resolveTutorialStarterCardDialogue,
   TUTORIAL_SELF_DESCRIBING_NEW_GAME_EVENT_FLOW,
-} from "../story/tutorialDialogueEvents.js?v=675";
+} from "../story/tutorialDialogueEvents.js?v=676";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

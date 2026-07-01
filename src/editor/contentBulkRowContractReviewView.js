@@ -1,5 +1,5 @@
-import { tf } from "../localization/index.js?v=675";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { tf } from "../localization/index.js?v=676";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=676";
 
 export const CONTENT_BULK_ROW_CONTRACT_REVIEW_VIEW_VERSION = "content-bulk-row-contract-review-view-v1";
 

@@ -16,7 +16,7 @@
       "kind": "class_representative",
       "label": "Warrior representative armor and sword-shield silhouette",
       "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/1.Warrior Representative.png",
-      "appliesToMotionIds": ["sword_shield_slash_v1"],
+      "appliesToMotionIds": ["sword_shield_slash_v1", "idle_loop_v1", "hit_reaction_v1"],
       "appliesToPoseTemplateIds": ["sword_shield_idle"],
       "targetRoles": ["class_silhouette", "shield_readability", "one_hand_weapon_readability"],
       "attachmentFocus": [
@@ -56,7 +56,7 @@
       "kind": "class_representative",
       "label": "Fighter representative gauntlet guard silhouette",
       "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/3.Fighter Representative.png",
-      "appliesToMotionIds": ["fist_combo_v1"],
+      "appliesToMotionIds": ["fist_combo_v1", "idle_loop_v1", "hit_reaction_v1"],
       "appliesToPoseTemplateIds": ["fist_guard_idle"],
       "targetRoles": ["fist_guard_silhouette", "gauntlet_readability"],
       "attachmentFocus": [
@@ -82,8 +82,8 @@
       "kind": "class_representative",
       "label": "Mage representative wand and book silhouette",
       "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/5.Mage Representative — Wand + Book.png",
-      "appliesToMotionIds": ["staff_cast_v1"],
-      "appliesToPoseTemplateIds": ["staff_stand"],
+      "appliesToMotionIds": ["wand_book_cast_v1"],
+      "appliesToPoseTemplateIds": ["wand_book_cast"],
       "targetRoles": ["caster_silhouette", "book_hand_contact", "casting_hand_readability"],
       "attachmentFocus": [
         "Book should sit in the offhand with palm/fingers supporting it.",
@@ -160,8 +160,8 @@
       "kind": "weapon_grip_test",
       "label": "T02B wand plus magic book test",
       "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T02B — 완드 + 마법책 Test.png",
-      "appliesToMotionIds": ["staff_cast_v1"],
-      "appliesToPoseTemplateIds": ["staff_stand"],
+      "appliesToMotionIds": ["wand_book_cast_v1"],
+      "appliesToPoseTemplateIds": ["wand_book_cast"],
       "targetRoles": ["future_wand_grip", "book_offhand_attachment", "caster_hand_contact"],
       "attachmentFocus": [
         "Book should be visibly supported by fingers/palm at the offhand.",
@@ -311,11 +311,22 @@
       "motionId": "staff_cast_v1",
       "poseTemplateId": "staff_stand",
       "primaryReferenceIds": ["weapon_test_two_hand_staff", "class_mage_staff_representative"],
-      "secondaryReferenceIds": ["weapon_test_wand_book", "class_mage_wand_book_representative"],
+      "secondaryReferenceIds": [],
       "requiredVisualOutcomes": [
         "staff base, grip, and top align on a single staff axis",
         "grip hand visibly holds the staff shaft",
         "casting hand remains separate enough for spell VFX anchoring"
+      ]
+    },
+    {
+      "motionId": "wand_book_cast_v1",
+      "poseTemplateId": "wand_book_cast",
+      "primaryReferenceIds": ["weapon_test_wand_book", "class_mage_wand_book_representative"],
+      "secondaryReferenceIds": [],
+      "requiredVisualOutcomes": [
+        "wand tip, cast hand, and spell effect direction remain clearly connected",
+        "offhand book stays visibly supported by the hand instead of floating",
+        "caster silhouette keeps the book readable without hiding torso, face, or hand anchors"
       ]
     },
     {
@@ -327,6 +338,28 @@
         "gauntlets wrap both fists and wrists",
         "fist centers remain readable for hitbox and impact VFX",
         "guard stance keeps both hands attached to the body rather than prop-floating"
+      ]
+    },
+    {
+      "motionId": "idle_loop_v1",
+      "poseTemplateId": "idle_default",
+      "primaryReferenceIds": ["class_warrior_representative", "class_fighter_representative"],
+      "secondaryReferenceIds": [],
+      "requiredVisualOutcomes": [
+        "feet, torso, helmet, armor, gloves, boots, weapon, and offhand slots remain visually attached",
+        "breathing motion is subtle enough that equipment does not drift from body anchors",
+        "idle silhouette remains readable for both armored and light-gear class fantasies"
+      ]
+    },
+    {
+      "motionId": "hit_reaction_v1",
+      "poseTemplateId": "idle_default",
+      "primaryReferenceIds": ["class_warrior_representative", "class_fighter_representative"],
+      "secondaryReferenceIds": [],
+      "requiredVisualOutcomes": [
+        "short recoil keeps body and equipment moving as one silhouette",
+        "weapon and offhand props do not detach during the hit-back frame",
+        "return frame restores the same idle anchor relationships without changing class identity"
       ]
     }
   ],

@@ -1,7 +1,7 @@
-import { getLocaleText, t } from "../localization/index.js?v=675";
-import { REGRESSION_FATE_CARD_POOL_DATA } from "../data/fateCardPoolData.js?v=675";
-import { resolveFateCardVisual, resolveFateCardVisualSlug } from "../data/fateCardVisualData.js?v=675";
-import { resolveFateCardAuraTier } from "./fateCardRoller.js?v=675";
+import { getLocaleText, t } from "../localization/index.js?v=676";
+import { REGRESSION_FATE_CARD_POOL_DATA } from "../data/fateCardPoolData.js?v=676";
+import { resolveFateCardVisual, resolveFateCardVisualSlug } from "../data/fateCardVisualData.js?v=676";
+import { resolveFateCardAuraTier } from "./fateCardRoller.js?v=676";
 
 export function createRegressionFateCardCatalog(starterCards = [], localeText = getLocaleText()) {
   const starter = Array.isArray(starterCards) ? starterCards.filter((card) => card?.id) : [];

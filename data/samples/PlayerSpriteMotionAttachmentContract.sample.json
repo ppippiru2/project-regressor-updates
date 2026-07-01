@@ -17,6 +17,52 @@
     "OffHand shield, book, or secondary weapon contracts must expose the screen-right hand or forearm support anchor before runtime enablement.",
     "Runtime-covered contracts must be protected by player equipment motion attachment continuity checks before generated sprites are promoted."
   ],
+  "equipmentSlotCoverageRules": [
+    {
+      "slotId": "Helmet",
+      "profileIds": ["armor.helmet.v1"],
+      "requiredInContracts": ["idle_default_equipment_v1", "sword_shield_attack_v1", "hit_reaction_equipment_v1", "two_hand_heavy_attack_v1", "bow_attack_v1", "staff_attack_v1", "fist_gauntlet_attack_v1", "wand_book_cast_v1"],
+      "notes": "Helmet must follow head anchors in every current player motion contract."
+    },
+    {
+      "slotId": "Armor",
+      "profileIds": ["armor.torso.v1"],
+      "requiredInContracts": ["idle_default_equipment_v1", "sword_shield_attack_v1", "hit_reaction_equipment_v1", "two_hand_heavy_attack_v1", "bow_attack_v1", "staff_attack_v1", "fist_gauntlet_attack_v1", "wand_book_cast_v1"],
+      "notes": "Armor is the upper-body armor slot only."
+    },
+    {
+      "slotId": "LegArmor",
+      "profileIds": ["armor.legs.v1"],
+      "requiredInContracts": ["idle_default_equipment_v1", "sword_shield_attack_v1", "hit_reaction_equipment_v1", "two_hand_heavy_attack_v1", "bow_attack_v1", "staff_attack_v1", "fist_gauntlet_attack_v1", "wand_book_cast_v1"],
+      "notes": "LegArmor is separated from Armor and reserved for pants, greaves, and future lower-body armor."
+    },
+    {
+      "slotId": "Gloves",
+      "profileIds": ["handwear.gauntlet.v1"],
+      "requiredInContracts": ["idle_default_equipment_v1", "sword_shield_attack_v1", "hit_reaction_equipment_v1", "two_hand_heavy_attack_v1", "bow_attack_v1", "staff_attack_v1", "fist_gauntlet_attack_v1", "wand_book_cast_v1"],
+      "notes": "Gloves must follow wrist and hand anchors, including the gauntlet-only fist path."
+    },
+    {
+      "slotId": "Boots",
+      "profileIds": ["boots.pair.v1"],
+      "requiredInContracts": ["idle_default_equipment_v1", "sword_shield_attack_v1", "hit_reaction_equipment_v1", "two_hand_heavy_attack_v1", "bow_attack_v1", "staff_attack_v1", "fist_gauntlet_attack_v1", "wand_book_cast_v1"],
+      "notes": "Boots must follow locked foot baseline anchors."
+    },
+    {
+      "slotId": "Weapon",
+      "profileIds": ["weapon.one_hand.mainhand.v1", "weapon.two_hand.heavy.v1", "weapon.bow.v1", "weapon.staff.v1", "weapon.wand.v1"],
+      "requiredInContracts": ["idle_default_equipment_v1", "sword_shield_attack_v1", "hit_reaction_equipment_v1", "two_hand_heavy_attack_v1", "bow_attack_v1", "staff_attack_v1", "wand_book_cast_v1"],
+      "optionalInContracts": ["fist_gauntlet_attack_v1"],
+      "notes": "Weapon is required for weapon motions and intentionally absent from the gauntlet-only fist path."
+    },
+    {
+      "slotId": "OffHand",
+      "profileIds": ["shield.offhand.round.v1", "offhand.book.v1"],
+      "requiredInContracts": ["idle_default_equipment_v1", "sword_shield_attack_v1", "hit_reaction_equipment_v1", "wand_book_cast_v1"],
+      "prohibitedInContracts": ["two_hand_heavy_attack_v1", "bow_attack_v1", "staff_attack_v1", "fist_gauntlet_attack_v1"],
+      "notes": "OffHand is allowed for shield/book/dual-wield style contracts and disabled for heavy two-hand, bow, staff, and no-weapon fist paths."
+    }
+  ],
   "attachmentTrackRules": [
     {
       "trackId": "mainhand.one_hand",

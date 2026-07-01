@@ -182,6 +182,51 @@
       ]
     },
     {
+      "motionId": "wand_book_cast_v1",
+      "poseTemplateId": "wand_book_cast",
+      "frames": [
+        {
+          "frameId": "attack_ready",
+          "durationMs": 170,
+          "anchorOffsets": {
+            "Cast_Hand": [-16, -20],
+            "Wand_Tip": [-10, -28],
+            "Book_Grip": [-4, -4],
+            "Book_Center": [-4, -8],
+            "Book_Top": [-4, -10],
+            "Book_Bottom": [-4, -4]
+          },
+          "eventTags": ["windup", "mana_gather", "book_guard"]
+        },
+        {
+          "frameId": "attack_hit",
+          "durationMs": 130,
+          "anchorOffsets": {
+            "Cast_Hand": [36, -30],
+            "Wand_Tip": [62, -60],
+            "Book_Grip": [0, -10],
+            "Book_Center": [0, -16],
+            "Book_Top": [0, -18],
+            "Book_Bottom": [0, -8]
+          },
+          "eventTags": ["damage_window", "vfx_spawn.wand_book_bolt", "sfx.wand_cast"]
+        },
+        {
+          "frameId": "attack_recover",
+          "durationMs": 210,
+          "anchorOffsets": {
+            "Cast_Hand": [0, 0],
+            "Wand_Tip": [0, 0],
+            "Book_Grip": [0, 0],
+            "Book_Center": [0, 0],
+            "Book_Top": [0, 0],
+            "Book_Bottom": [0, 0]
+          },
+          "eventTags": ["recover"]
+        }
+      ]
+    },
+    {
       "motionId": "fist_combo_v1",
       "poseTemplateId": "fist_guard_idle",
       "frames": [

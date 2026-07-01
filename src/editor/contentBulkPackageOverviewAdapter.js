@@ -1,4 +1,4 @@
-import { renderContentBulkPackageOverview } from "./contentBulkPackageOverviewView.js?v=675";
+import { renderContentBulkPackageOverview } from "./contentBulkPackageOverviewView.js?v=676";
 
 export function createContentBulkPackageOverviewRenderer(options = {}) {
   return function renderContentBulkPackageOverviewSection(preview = {}, detailText = {}, filterCounts = {}) {

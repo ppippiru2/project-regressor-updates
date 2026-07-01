@@ -1,4 +1,4 @@
-import { renderSaveSlotValidationPlanView } from "./saveSlotValidationPlanView.js?v=675";
+import { renderSaveSlotValidationPlanView } from "./saveSlotValidationPlanView.js?v=676";
 
 export function createSaveSlotValidationPlanRenderer(options = {}) {
   return function renderSaveSlotValidationPlan(diagnostics) {

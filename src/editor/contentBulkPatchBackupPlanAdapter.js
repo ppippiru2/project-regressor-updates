@@ -1,4 +1,4 @@
-import { renderContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlanView.js?v=675";
+import { renderContentBulkPatchBackupPlan } from "./contentBulkPatchBackupPlanView.js?v=676";
 
 export function createContentBulkPatchBackupPlanRenderer(options = {}) {
   return function renderContentBulkPatchBackupPlanSection(detailText = {}) {

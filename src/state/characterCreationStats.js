@@ -1,4 +1,4 @@
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=675";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=676";
 
 export const CREATION_STAT_KEYS = Object.freeze(["STR", "AGI", "VIT", "INT", "WIS", "LUK"]);
 

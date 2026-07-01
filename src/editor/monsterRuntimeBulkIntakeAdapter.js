@@ -1,4 +1,4 @@
-import { renderMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakeView.js?v=675";
+import { renderMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakeView.js?v=676";
 
 export function createMonsterRuntimeBulkIntakeRenderer(options = {}) {
   return function renderMonsterRuntimeBulkIntake(preview, detailText = {}) {

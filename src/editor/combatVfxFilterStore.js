@@ -1,4 +1,4 @@
-import { normalizeCombatVfxKind } from "./combatVfxFilterModel.js?v=675";
+import { normalizeCombatVfxKind } from "./combatVfxFilterModel.js?v=676";
 
 const EMPTY_COMBAT_VFX_FILTER = Object.freeze({
   kind: "all",

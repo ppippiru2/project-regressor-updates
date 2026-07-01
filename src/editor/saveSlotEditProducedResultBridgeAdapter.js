@@ -1,4 +1,4 @@
-import { renderSaveSlotEditProducedResultBridgeView } from "./saveSlotEditProducedResultBridgeView.js?v=675";
+import { renderSaveSlotEditProducedResultBridgeView } from "./saveSlotEditProducedResultBridgeView.js?v=676";
 
 export function createSaveSlotEditProducedResultBridgeRenderer(options = {}) {
   return function renderSaveSlotEditProducedResultBridgeContractPreview(diagnostics) {

@@ -1,8 +1,8 @@
-import { editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { editorChipBlock } from "./editorChipBlockView.js?v=676";
 import {
   editorNavGroupId,
   isEditorNavGroupCollapsed,
-} from "./editorNavGroupState.js?v=675&cachebust=675";
+} from "./editorNavGroupState.js?v=676&cachebust=676";
 
 const EDITOR_SHELL_DETAIL_BLOCK_OPTIONS = {
   blockClass: "editor-detail-block",

@@ -1,12 +1,12 @@
-import { getLocaleText, t, tf } from "../localization/index.js?v=675";
+import { getLocaleText, t, tf } from "../localization/index.js?v=676";
 import {
   createRegressionCardResyncState,
   shouldShowRegressionCardResync,
-} from "../state/regressionCardState.js?v=675";
-import { createRegressionCardCandidateSlots } from "../state/regressionCardDraw.js?v=675";
-import { createRegressionFateCardCatalog } from "../state/fateCardPool.js?v=675";
-import { FATE_CARD_RENDER_MODES } from "../state/fateCardRoller.js?v=675";
-import { renderFateCardButton } from "./fateCardRenderer.js?v=675";
+} from "../state/regressionCardState.js?v=676";
+import { createRegressionCardCandidateSlots } from "../state/regressionCardDraw.js?v=676";
+import { createRegressionFateCardCatalog } from "../state/fateCardPool.js?v=676";
+import { FATE_CARD_RENDER_MODES } from "../state/fateCardRoller.js?v=676";
+import { renderFateCardButton } from "./fateCardRenderer.js?v=676";
 
 export function regressionStarterCards(localeText = getLocaleText()) {
   return Array.isArray(localeText.characterCreation?.starterCards?.items)

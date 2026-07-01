@@ -1,4 +1,4 @@
-import { renderSaveSlotEditSelectedSourceHandoffView } from "./saveSlotEditSelectedSourceHandoffView.js?v=675";
+import { renderSaveSlotEditSelectedSourceHandoffView } from "./saveSlotEditSelectedSourceHandoffView.js?v=676";
 
 export function createSaveSlotEditSelectedSourceHandoffRenderer(options = {}) {
   return function renderSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics) {

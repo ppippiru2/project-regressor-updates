@@ -1,4 +1,4 @@
-import { renderSaveSlotEditAdapterRunnerPreflightView } from "./saveSlotEditAdapterRunnerPreflightView.js?v=675";
+import { renderSaveSlotEditAdapterRunnerPreflightView } from "./saveSlotEditAdapterRunnerPreflightView.js?v=676";
 
 export function createSaveSlotEditAdapterRunnerPreflightRenderer(options = {}) {
   return function renderSaveSlotEditAdapterRunnerPreflightPreview(diagnostics) {

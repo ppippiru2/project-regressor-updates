@@ -1,4 +1,4 @@
-import { SAVE_SLOT_DIAGNOSTIC_KEYS } from "./saveSlotDiagnosticKeys.js?v=675";
+import { SAVE_SLOT_DIAGNOSTIC_KEYS } from "./saveSlotDiagnosticKeys.js?v=676";
 
 export function createSaveSlotDraftPayloadPreview(diagnostics = {}, text = {}) {
   const slots = Array.isArray(diagnostics.slots) ? diagnostics.slots : [];

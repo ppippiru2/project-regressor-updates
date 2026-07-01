@@ -82,6 +82,24 @@
       }
     },
     {
+      "motionId": "wand_book_cast_v1",
+      "poseTemplateId": "wand_book_cast",
+      "category": "wand_book_bolt",
+      "compatibleProfiles": ["weapon.wand.v1", "offhand.book.v1"],
+      "frames": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrame": "attack_hit",
+      "eventTags": ["damage_window", "vfx_spawn.wand_book_bolt", "sfx.wand_cast"],
+      "hitbox": {
+        "type": "ray",
+        "fromAnchor": "Cast_Hand",
+        "toAnchor": "Wand_Tip",
+        "radius": 22,
+        "originAnchor": "Cast_Hand",
+        "effectSpawnAnchor": "Wand_Tip",
+        "notes": "Wand tip owns the bolt spawn while the offhand book remains readable as a support prop."
+      }
+    },
+    {
       "motionId": "fist_combo_v1",
       "poseTemplateId": "fist_guard_idle",
       "category": "unarmed_combo",

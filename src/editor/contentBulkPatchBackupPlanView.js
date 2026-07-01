@@ -1,10 +1,10 @@
-import { tf } from "../localization/index.js?v=675";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
-import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=675";
-import { contentBulkPatchPreApplyReviewLabel } from "./contentBulkPatchPreApplyReview.js?v=675";
-import { editorChip } from "./editorChipBlockView.js?v=675";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+import { tf } from "../localization/index.js?v=676";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=676";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=676";
+import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=676";
+import { contentBulkPatchPreApplyReviewLabel } from "./contentBulkPatchPreApplyReview.js?v=676";
+import { editorChip } from "./editorChipBlockView.js?v=676";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VIEW_VERSION = "content-bulk-patch-backup-plan-view-v1";
 const CONTENT_BULK_BACKUP_CHIP_OPTIONS = { chipClass: "editor-chip" };

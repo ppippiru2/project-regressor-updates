@@ -1,4 +1,4 @@
-import { renderSaveSlotEditValidatorApplyGateBridgeView } from "./saveSlotEditValidatorApplyGateBridgeView.js?v=675";
+import { renderSaveSlotEditValidatorApplyGateBridgeView } from "./saveSlotEditValidatorApplyGateBridgeView.js?v=676";
 
 export function createSaveSlotEditValidatorApplyGateBridgeRenderer(options = {}) {
   return function renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {

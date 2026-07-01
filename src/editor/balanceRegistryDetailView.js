@@ -1,6 +1,6 @@
-import { tf } from "../localization/index.js?v=675";
-import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+import { tf } from "../localization/index.js?v=676";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=676";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
 
 export const BALANCE_REGISTRY_DETAIL_VIEW_VERSION = "balance-registry-detail-view-v1";
 const BALANCE_DETAIL_CHIP_OPTIONS = { chipClass: "editor-chip" };
