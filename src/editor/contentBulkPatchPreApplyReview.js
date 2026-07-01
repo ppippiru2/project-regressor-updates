@@ -107,6 +107,10 @@ export function normalizePreApplyContractReviewSummary(summary = {}) {
   };
 }
 
+export function contentBulkPatchPreApplyReviewLabel(id, labels = {}) {
+  return labels?.[id] || id || "unknown";
+}
+
 function rowContractReviewState(summary = {}) {
   if ((summary.blockedCount || 0) > 0) return "blocked";
   if ((summary.warningCount || 0) > 0) return "review";

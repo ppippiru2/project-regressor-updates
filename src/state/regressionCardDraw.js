@@ -2,9 +2,8 @@ import {
   createFateCardCandidateSlots,
   getCardCandidateCountByKarma,
   getCardGradeWeightSummary,
+  normalizeFateCardCandidateCount,
 } from "./fateCardRoller.js?v=675";
-
-export const MAX_REGRESSION_CARD_CANDIDATES = 8;
 
 export const REGRESSION_CARD_DRAW_TEST_PRESETS = Object.freeze([
   Object.freeze({ id: "run2_karma0", regressionCount: 2, karmaValue: 0 }),
@@ -15,7 +14,7 @@ export const REGRESSION_CARD_DRAW_TEST_PRESETS = Object.freeze([
 ]);
 
 export function createRegressionCardCandidateSlots(cards = [], snapshot = {}, options = {}) {
-  const count = normalizeCandidateCount(snapshot.cardCandidateCount ?? getCardCandidateCountByKarma(snapshot.karmaValue));
+  const count = normalizeFateCardCandidateCount(snapshot.cardCandidateCount ?? getCardCandidateCountByKarma(snapshot.karmaValue));
   return createFateCardCandidateSlots(cards, {
     ...snapshot,
     cardCandidateCount: count,
@@ -92,12 +91,6 @@ export function selectRegressionCardDrawTestSlot(testState = {}, slotIndex = -1)
 
 export function findRegressionCardDrawTestPreset(presetId = "") {
   return REGRESSION_CARD_DRAW_TEST_PRESETS.find((preset) => preset.id === presetId) || null;
-}
-
-function normalizeCandidateCount(value) {
-  const count = normalizeInteger(value);
-  if (count <= 0) return 4;
-  return Math.max(4, Math.min(MAX_REGRESSION_CARD_CANDIDATES, count));
 }
 
 function normalizeRunCount(value) {

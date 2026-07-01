@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_CONFIRMATION_RUNNER_HANDOFF_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditConfirmationRunnerHandoffView(options = {}) {
   const summary = options.summary || {};
   const text = options.text || {};
@@ -19,7 +23,7 @@ export function renderSaveSlotEditConfirmationRunnerHandoffView(options = {}) {
           <h4>${escapeHtml(text.title || "Save edit confirmation to runner handoff")}</h4>
           <p class="muted">${escapeHtml(text.description || "Read-only blocker summary before confirmation input can hand off to an apply runner.")}</p>
         </div>
-        ${chip(statusLabel(summary.status))}
+        ${editorChip(statusLabel(summary.status), SAVE_EDIT_CONFIRMATION_RUNNER_HANDOFF_CHIP_OPTIONS)}
       </div>
       <div class="editor-save-edit-confirm-runner-handoff-metrics">
         ${metricCard(text.rowMetric || "Rows", rowValue, text.rowHint || "")}
@@ -55,7 +59,7 @@ function renderSaveEditConfirmationRunnerHandoffRowView(row = {}, text = {}, sta
           <dd>${escapeHtml(`${row.targetValue}`)}</dd>
         </div>
       </dl>
-      ${row.blocker ? chip(blockerFormatter(row.blocker)) : ""}
+      ${row.blocker ? editorChip(blockerFormatter(row.blocker), SAVE_EDIT_CONFIRMATION_RUNNER_HANDOFF_CHIP_OPTIONS) : ""}
     </article>
   `;
 }
@@ -68,13 +72,9 @@ function renderSaveEditConfirmationRunnerHandoffCheckView(check = {}, statusLabe
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_CONFIRMATION_RUNNER_HANDOFF_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

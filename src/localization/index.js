@@ -33,6 +33,3 @@ export function formatText(template, values = {}) {
 export function tf(path, values = {}, fallback = "", locale = DEFAULT_LOCALE) {
   return formatText(t(path, fallback, locale), values);
 }
-
-
-

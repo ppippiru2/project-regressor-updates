@@ -215,5 +215,3 @@ function templateValueFor(domainId, field) {
   if (field === "skillItemIds") return ["sample_skill_fragment"];
   return "sample";
 }
-
-

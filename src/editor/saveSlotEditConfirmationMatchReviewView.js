@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_CONFIRMATION_MATCH_REVIEW_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditConfirmationMatchReviewView(options = {}) {
   const summary = options.summary || {};
   const text = options.text || {};
@@ -51,7 +55,7 @@ function renderSaveEditConfirmationMatchReviewRowView(review = {}, text = {}, st
           <dd>${escapeHtml(`${review.value}`)}</dd>
         </div>
       </dl>
-      ${review.blocker ? chip(blockerFormatter(review.blocker)) : ""}
+      ${review.blocker ? editorChip(blockerFormatter(review.blocker), SAVE_EDIT_CONFIRMATION_MATCH_REVIEW_CHIP_OPTIONS) : ""}
     </article>
   `;
 }
@@ -63,13 +67,9 @@ function renderSaveEditConfirmationMatchReviewCheckView(check = {}, statusLabel 
         <strong>${escapeHtml(check.label)}</strong>
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_CONFIRMATION_MATCH_REVIEW_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

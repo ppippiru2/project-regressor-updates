@@ -1,4 +1,7 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkDomainLabel, contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PACKAGE_OVERVIEW_VIEW_VERSION = "content-bulk-package-overview-view-v1";
 
@@ -24,21 +27,16 @@ export function renderContentBulkPackageOverview(preview, detailText = {}, filte
           <h4>${escapeHtml(text.title || "Content Bulk Package Overview")}</h4>
           <p class="muted">${escapeHtml(text.description || "Summarizes the current bulk package before reviewing each specialized card.")}</p>
         </div>
-        <strong>${escapeHtml(contentBulkOverviewLabel(preview.status || "ready", text.statusLabels))}</strong>
+        <strong>${escapeHtml(contentBulkFallbackLabel(preview.status || "ready", text.statusLabels, "-"))}</strong>
       </div>
       <div class="editor-content-bulk-overview-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${filterControls}
       <div class="editor-content-bulk-overview-grid">
-        ${contentBulkOverviewChipBlock(text.recognizedSourceKeys || "Recognized source keys", [`${summary.recognizedSourceKeyCount || 0}`])}
-        ${contentBulkOverviewChipBlock(text.unmappedSourceKeys || "Unmapped source keys", [`${summary.unmappedSourceKeyCount || 0}`])}
-        ${contentBulkOverviewChipBlock(text.reviewSurfaces || "Review surfaces", [`${summary.reviewSurfaceCount || 0}`])}
+        ${contentBulkChipBlock(text.recognizedSourceKeys || "Recognized source keys", [`${summary.recognizedSourceKeyCount || 0}`], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.unmappedSourceKeys || "Unmapped source keys", [`${summary.unmappedSourceKeyCount || 0}`], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.reviewSurfaces || "Review surfaces", [`${summary.reviewSurfaceCount || 0}`], { chipClass: "editor-chip" })}
       </div>
       <div class="editor-content-bulk-overview-list">
         ${(preview.reviewRows || []).map((row) => renderContentBulkOverviewRow(row, text)).join("")}
@@ -54,7 +52,7 @@ function renderContentBulkOverviewRow(row, text = {}) {
   return `
     <article class="editor-content-bulk-overview-row" data-state="${escapeAttribute(row.state || "empty")}">
       <div>
-        <h5>${escapeHtml(contentBulkOverviewLabel(row.id, text.surfaceLabels))}</h5>
+        <h5>${escapeHtml(contentBulkFallbackLabel(row.id, text.surfaceLabels, "-"))}</h5>
         <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.rowMeta", {
           rows: row.rowCount || 0,
           ready: row.readyCount || 0,
@@ -62,7 +60,7 @@ function renderContentBulkOverviewRow(row, text = {}) {
         }, `${row.rowCount || 0}`))}</p>
       </div>
       <div class="editor-content-bulk-overview-actions">
-        <span>${escapeHtml(contentBulkOverviewLabel(row.state, text.statusLabels))}</span>
+        <span>${escapeHtml(contentBulkFallbackLabel(row.state, text.statusLabels, "-"))}</span>
         ${contentBulkOverviewJumpLink(row.primaryRowTargetId || row.drilldownTargetId, text)}
       </div>
     </article>
@@ -73,7 +71,7 @@ function renderContentBulkOverviewDomain(row, text = {}) {
   return `
     <article class="editor-content-bulk-overview-domain" data-state="${escapeAttribute(row.state || "empty")}">
       <div>
-        <strong>${escapeHtml(contentBulkPackageDomainLabel(row.id, text))}</strong>
+        <strong>${escapeHtml(contentBulkDomainLabel(row.id, text.domainLabels))}</strong>
         <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.contentBulkPackageOverview.domainMeta", {
           batchKey: row.batchKey || "-",
           rows: row.rowCount || 0,
@@ -84,32 +82,11 @@ function renderContentBulkOverviewDomain(row, text = {}) {
   `;
 }
 
-function contentBulkOverviewLabel(id, labels = {}) {
-  return labels?.[id] || id || "-";
-}
-
-function contentBulkPackageDomainLabel(domainId, text = {}) {
-  return text.domainLabels?.[domainId] || domainId || "unknown";
-}
-
 function contentBulkOverviewJumpLink(targetId, text = {}) {
   if (!targetId) return "";
   return `
     <a class="editor-content-bulk-overview-jump" href="#${escapeAttribute(targetId)}">${escapeHtml(text.jumpToDetail || "Jump")}</a>
   `;
-}
-
-function contentBulkOverviewChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

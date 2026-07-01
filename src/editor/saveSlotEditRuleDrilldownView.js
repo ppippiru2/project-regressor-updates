@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_RULE_DRILLDOWN_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditRuleDrilldownView(options = {}) {
   const drilldown = options.drilldown || {};
   const text = options.text || {};
@@ -65,14 +69,14 @@ function renderSaveEditValidationRuleCardView(rule = {}, text = {}, statusLabel 
       <div class="editor-save-edit-rule-chip-block">
         <span>${escapeHtml(text.paths || "Paths")}</span>
         <div class="editor-chip-list">
-          ${paths.map((path) => chip(path)).join("")}
+          ${paths.map((path) => editorChip(path, SAVE_EDIT_RULE_DRILLDOWN_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <div class="editor-save-edit-rule-chip-block">
         <span>${escapeHtml(text.inputKinds || "Input kinds")}</span>
         <div class="editor-chip-list">
-          ${inputKinds.map((kind) => chip(kind)).join("")}
-          ${blockers.map((blocker) => chip(blocker)).join("")}
+          ${inputKinds.map((kind) => editorChip(kind, SAVE_EDIT_RULE_DRILLDOWN_CHIP_OPTIONS)).join("")}
+          ${blockers.map((blocker) => editorChip(blocker, SAVE_EDIT_RULE_DRILLDOWN_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <div class="editor-save-edit-rule-checks">
@@ -92,10 +96,6 @@ function renderSaveEditValidationRuleCheckView(check = {}, statusLabel = (status
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
     </div>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

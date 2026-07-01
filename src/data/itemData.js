@@ -28,6 +28,3 @@ export const items = [...equipment, ...lootItems];
 export function isEquipmentItem(item) {
   return Boolean(item?.slot);
 }
-
-
-

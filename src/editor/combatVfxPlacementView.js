@@ -1,6 +1,13 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const COMBAT_VFX_PLACEMENT_VIEW_VERSION = "combat-vfx-placement-view-v1";
+const COMBAT_VFX_CHIP_OPTIONS = {
+  blockClass: "editor-combat-vfx-chip-block",
+  chipClass: "editor-chip",
+  filterEmpty: true,
+};
 
 export function renderCombatVfxPlacementDetailView({
   preview = {},
@@ -34,12 +41,12 @@ export function renderCombatVfxPlacementDetailView({
         }, detailText.summary))}</span>
       </div>
       <div class="editor-combat-vfx-summary">
-        ${combatVfxSummaryCard(detailText.playerMetric, String(totals.playerRows || playerRows.length))}
-        ${combatVfxSummaryCard(detailText.monsterMetric, String(totals.monsterRows || monsterRows.length))}
-        ${combatVfxSummaryCard(detailText.profileMetric || "Motion Profiles", String(totals.monsterMotionProfiles || monsterMotionProfileRows.length))}
-        ${combatVfxSummaryCard(detailText.profileTuningMetric || "Profile Signals", String(totals.monsterProfileTuningRows || 0))}
-        ${combatVfxSummaryCard(detailText.effectMetric, String(totals.effectTypes || 0))}
-        ${combatVfxSummaryCard(detailText.tuningMetric, String(totals.tuningCandidates || tuningCandidates.length))}
+        ${renderEditorSummaryCard(detailText.playerMetric, String(totals.playerRows || playerRows.length))}
+        ${renderEditorSummaryCard(detailText.monsterMetric, String(totals.monsterRows || monsterRows.length))}
+        ${renderEditorSummaryCard(detailText.profileMetric || "Motion Profiles", String(totals.monsterMotionProfiles || monsterMotionProfileRows.length))}
+        ${renderEditorSummaryCard(detailText.profileTuningMetric || "Profile Signals", String(totals.monsterProfileTuningRows || 0))}
+        ${renderEditorSummaryCard(detailText.effectMetric, String(totals.effectTypes || 0))}
+        ${renderEditorSummaryCard(detailText.tuningMetric, String(totals.tuningCandidates || tuningCandidates.length))}
       </div>
       ${renderCombatVfxTuningSignals(tuningCandidates, detailText, labels.signalLabels)}
       ${renderMonsterMotionProfileSummary(monsterMotionProfileRows, detailText, labels)}
@@ -83,7 +90,7 @@ function renderCombatVfxTuningSignals(candidates = [], detailText = {}, signalLa
 
 function renderCombatVfxTuningCandidate(candidate = {}, detailText = {}, signalLabels = {}) {
   const kindLabel = candidate.kind === "monster" ? (detailText.monsterOnly || "Monster") : (detailText.playerOnly || "Player");
-  const signalChips = (candidate.signals || []).map((signal) => chip(signalLabels[signal] || signal)).join("");
+  const signalChips = (candidate.signals || []).map((signal) => editorChip(signalLabels[signal] || signal, COMBAT_VFX_CHIP_OPTIONS)).join("");
   return `
     <article class="editor-combat-vfx-tuning-card" data-priority="${escapeAttribute(String(candidate.priority || 3))}">
       <div>
@@ -96,7 +103,7 @@ function renderCombatVfxTuningCandidate(candidate = {}, detailText = {}, signalL
         <span>${escapeHtml(detailText.candidateSignals || "Signals")}</span>
         <div class="editor-chip-list">${signalChips}</div>
       </div>
-      ${combatVfxFieldBlock(detailText.candidatePlacement || "Placement", [formatCombatVfxPlacement(candidate.placement)])}
+      ${editorChipBlock(detailText.candidatePlacement || "Placement", [formatCombatVfxPlacement(candidate.placement)], COMBAT_VFX_CHIP_OPTIONS)}
     </article>
   `;
 }
@@ -123,16 +130,16 @@ function renderMonsterMotionProfileSummary(rows = [], detailText = {}, labels = 
 function renderMonsterMotionProfileCard(row = {}, detailText = {}, labels = {}) {
   const effectLabels = labels.effectLabels || {};
   const signalLabels = labels.signalLabels || {};
-  const monsterChips = (row.monsterNames || []).map((name) => chip(name)).join("");
-  const classChips = (row.classIds || []).map((classId) => chip(classId)).join("");
-  const sfxChips = (row.sfxProfiles || []).map((sfxProfile) => chip(sfxProfile)).join("");
-  const defaultEffectChips = (row.defaultEffectTypes || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
-  const modifierChips = (row.effectModifiers || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
+  const monsterChips = (row.monsterNames || []).map((name) => editorChip(name, COMBAT_VFX_CHIP_OPTIONS)).join("");
+  const classChips = (row.classIds || []).map((classId) => editorChip(classId, COMBAT_VFX_CHIP_OPTIONS)).join("");
+  const sfxChips = (row.sfxProfiles || []).map((sfxProfile) => editorChip(sfxProfile, COMBAT_VFX_CHIP_OPTIONS)).join("");
+  const defaultEffectChips = (row.defaultEffectTypes || []).map((effectType) => editorChip(effectLabels[effectType] || effectType, COMBAT_VFX_CHIP_OPTIONS)).join("");
+  const modifierChips = (row.effectModifiers || []).map((effectType) => editorChip(effectLabels[effectType] || effectType, COMBAT_VFX_CHIP_OPTIONS)).join("");
   const signalChips = (row.signals || []).length
-    ? row.signals.map((signal) => chip(signalLabels[signal] || signal)).join("")
-    : chip(detailText.noProfileSignals || "Stable range");
+    ? row.signals.map((signal) => editorChip(signalLabels[signal] || signal, COMBAT_VFX_CHIP_OPTIONS)).join("")
+    : editorChip(detailText.noProfileSignals || "Stable range", COMBAT_VFX_CHIP_OPTIONS);
   const effectRangeChips = Object.entries(row.effectRanges || {})
-    .map(([effectType, range]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacementRange(range)}`))
+    .map(([effectType, range]) => editorChip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacementRange(range)}`, COMBAT_VFX_CHIP_OPTIONS))
     .join("");
   return `
     <article class="editor-combat-vfx-profile-card" data-priority="${escapeAttribute(String(row.priority || 0))}">
@@ -145,8 +152,8 @@ function renderMonsterMotionProfileCard(row = {}, detailText = {}, labels = {}) 
         </div>
         <strong>${escapeHtml(row.id || "")}</strong>
       </div>
-      ${combatVfxFieldBlock(detailText.profileBaseRange || "Base range", [formatCombatVfxPlacementRange(row.baseRange)])}
-      ${combatVfxFieldBlock(detailText.profileHyperRange || "Hyper range", [formatCombatVfxPlacementRange(row.hyperRange)])}
+      ${editorChipBlock(detailText.profileBaseRange || "Base range", [formatCombatVfxPlacementRange(row.baseRange)], COMBAT_VFX_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.profileHyperRange || "Hyper range", [formatCombatVfxPlacementRange(row.hyperRange)], COMBAT_VFX_CHIP_OPTIONS)}
       <div class="editor-combat-vfx-chip-block">
         <span>${escapeHtml(detailText.monsterOnly || "Monster")}</span>
         <div class="editor-chip-list">${monsterChips}</div>
@@ -277,7 +284,7 @@ function renderPlayerVfxPreviewRow(row, detailText = {}, labels = {}) {
   const classLabel = classLabels[row.classId] || row.classId;
   const genderLabel = genderLabels[row.gender] || row.gender;
   const effectChips = Object.entries(row.effects || {})
-    .map(([effectType, placement]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`))
+    .map(([effectType, placement]) => editorChip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`, COMBAT_VFX_CHIP_OPTIONS))
     .join("");
   return `
     <article class="editor-combat-vfx-row">
@@ -288,8 +295,8 @@ function renderPlayerVfxPreviewRow(row, detailText = {}, labels = {}) {
         </div>
         <strong>${escapeHtml(row.id)}</strong>
       </div>
-      ${combatVfxFieldBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)])}
-      ${combatVfxFieldBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)])}
+      ${editorChipBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)], COMBAT_VFX_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)], COMBAT_VFX_CHIP_OPTIONS)}
       <div class="editor-combat-vfx-chip-block">
         <span>${escapeHtml(detailText.effects)}</span>
         <div class="editor-chip-list">${effectChips}</div>
@@ -302,9 +309,9 @@ function renderMonsterVfxPreviewRow(row, detailText = {}, labels = {}) {
   const effectLabels = labels.effectLabels || {};
   const effectLabel = effectLabels[row.effectType] || row.effectType || "";
   const effectChips = Object.entries(row.effects || {})
-    .map(([effectType, placement]) => chip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`))
+    .map(([effectType, placement]) => editorChip(`${effectLabels[effectType] || effectType}: ${formatCombatVfxPlacement(placement)}`, COMBAT_VFX_CHIP_OPTIONS))
     .join("");
-  const modifierChips = (row.effectModifiers || []).map((effectType) => chip(effectLabels[effectType] || effectType)).join("");
+  const modifierChips = (row.effectModifiers || []).map((effectType) => editorChip(effectLabels[effectType] || effectType, COMBAT_VFX_CHIP_OPTIONS)).join("");
   return `
     <article class="editor-combat-vfx-row">
       <div class="editor-combat-vfx-row-head">
@@ -314,11 +321,11 @@ function renderMonsterVfxPreviewRow(row, detailText = {}, labels = {}) {
         </div>
         <strong>${escapeHtml(row.id)}</strong>
       </div>
-      ${combatVfxFieldBlock(detailText.motion, [row.motionProfile])}
-      ${combatVfxFieldBlock(detailText.sfx, [row.sfxProfile])}
-      ${combatVfxFieldBlock(detailText.motionBase || "Motion base", [formatCombatVfxPlacement(row.profilePlacement)])}
-      ${combatVfxFieldBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)])}
-      ${combatVfxFieldBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)])}
+      ${editorChipBlock(detailText.motion, [row.motionProfile], COMBAT_VFX_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.sfx, [row.sfxProfile], COMBAT_VFX_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.motionBase || "Motion base", [formatCombatVfxPlacement(row.profilePlacement)], COMBAT_VFX_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.base, [formatCombatVfxPlacement(row.basePlacement)], COMBAT_VFX_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.hyper, [formatCombatVfxPlacement(row.hyperPlacement)], COMBAT_VFX_CHIP_OPTIONS)}
       <div class="editor-combat-vfx-chip-block">
         <span>${escapeHtml(detailText.motionModifiers || "Motion modifiers")}</span>
         <div class="editor-chip-list">${modifierChips}</div>
@@ -328,24 +335,6 @@ function renderMonsterVfxPreviewRow(row, detailText = {}, labels = {}) {
         <div class="editor-chip-list">${effectChips}</div>
       </div>
     </article>
-  `;
-}
-
-function combatVfxSummaryCard(label, value) {
-  return `
-    <span>
-      <small>${escapeHtml(label || "")}</small>
-      <b>${escapeHtml(value)}</b>
-    </span>
-  `;
-}
-
-function combatVfxFieldBlock(title, values = []) {
-  return `
-    <div class="editor-combat-vfx-chip-block">
-      <span>${escapeHtml(title || "")}</span>
-      <div class="editor-chip-list">${values.filter(Boolean).map((value) => chip(value)).join("")}</div>
-    </div>
   `;
 }
 
@@ -360,10 +349,6 @@ function formatCombatVfxPlacementRange(range = {}) {
     return min === max ? String(min) : `${min}..${max}`;
   };
   return `x ${rangeValue(range.offsetX)} / y ${rangeValue(range.offsetY)} / txt ${rangeValue(range.textOffsetY)} / slash ${rangeValue(range.slashWidth)}/${rangeValue(range.expandedSlashWidth)}`;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(value)}</span>`;
 }
 
 function normalizeCombatVfxKind(kind) {

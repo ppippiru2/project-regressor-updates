@@ -3,9 +3,12 @@ import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
 } from "./contentBulkPackageOverview.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
 import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=675";
 import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const MONSTER_RUNTIME_BULK_INTAKE_VIEW_VERSION = "monster-runtime-bulk-intake-view-v1";
 
@@ -18,8 +21,8 @@ export function renderMonsterRuntimeBulkIntakePreview(preview, detailText = {}, 
     : () => true;
   const visibleRows = (preview.rows || []).filter((row) => matchesFilterRow(row.runtimeState, [
     row,
-    monsterRuntimeBulkIntakeLabel(row.runtimeState, stateLabels),
-    monsterRuntimeBulkIntakeLabel(row.bulkState, stateLabels),
+    contentBulkFallbackLabel(row.runtimeState, stateLabels),
+    contentBulkFallbackLabel(row.bulkState, stateLabels),
   ], ["monster", "monster_runtime"]));
   const metrics = [
     [text.runtimePresets || "Runtime presets", `${summary.runtimePresetCount || 0}`],
@@ -43,12 +46,7 @@ export function renderMonsterRuntimeBulkIntakePreview(preview, detailText = {}, 
         }, preview.version || "-"))}</strong>
       </div>
       <div class="editor-monster-runtime-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${renderContentBulkStagedContractSummary(preview.stagedContract, text)}
       <div class="editor-monster-runtime-bulk-intake-list">
@@ -70,35 +68,22 @@ function renderMonsterRuntimeBulkIntakeRow(row, text = {}) {
           <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterRuntimeBulkIntakePreview.rowMeta", {
             key: row.acceptedAliasKey || "-",
             domain: row.targetDomainId || "-",
-            state: monsterRuntimeBulkIntakeLabel(row.bulkState, stateLabels),
+            state: contentBulkFallbackLabel(row.bulkState, stateLabels),
           }, `${row.acceptedAliasKey || "-"} / ${row.targetDomainId || "-"}`))}</p>
         </div>
-        <span>${escapeHtml(monsterRuntimeBulkIntakeLabel(row.runtimeState, stateLabels))}</span>
+        <span>${escapeHtml(contentBulkFallbackLabel(row.runtimeState, stateLabels))}</span>
       </div>
       <div class="editor-monster-runtime-bulk-intake-grid">
-        ${monsterRuntimeBulkIntakeChipBlock(text.motions || "Motions", motionLabels)}
-        ${monsterRuntimeBulkIntakeChipBlock(text.actions || "Actions", actionLabels)}
-        ${monsterRuntimeBulkIntakeChipBlock(text.missingSpriteFiles || "Missing sprite files", row.missingSpriteFiles || [])}
-        ${monsterRuntimeBulkIntakeChipBlock(text.sourcePreview || "Source preview", [row.sourcePreviewFile].filter(Boolean))}
+        ${contentBulkChipBlock(text.motions || "Motions", motionLabels)}
+        ${contentBulkChipBlock(text.actions || "Actions", actionLabels)}
+        ${contentBulkChipBlock(text.missingSpriteFiles || "Missing sprite files", row.missingSpriteFiles || [])}
+        ${contentBulkChipBlock(text.sourcePreview || "Source preview", [row.sourcePreviewFile].filter(Boolean))}
         ${renderContentBulkRowContractReviewChip(row.contractReview, text)}
-        ${monsterRuntimeBulkIntakeChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${monsterRuntimeBulkIntakeChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${monsterRuntimeBulkIntakeChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
       </div>
     </article>
-  `;
-}
-
-function monsterRuntimeBulkIntakeLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function monsterRuntimeBulkIntakeChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
-    </div>
   `;
 }
 

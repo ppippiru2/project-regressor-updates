@@ -1,3 +1,8 @@
+import {
+  contentBulkDomainLabel,
+  contentBulkFilterLabel,
+} from "./contentBulkFilterModel.js?v=675";
+
 export const CONTENT_BULK_FILTER_CONTROLS_VIEW_VERSION = "content-bulk-filter-controls-view-v1";
 
 export function renderContentBulkFilterControls(text = {}, counts = {}, options = {}) {
@@ -48,15 +53,6 @@ export function renderContentBulkFilterControls(text = {}, counts = {}, options 
       </div>
     </div>
   `;
-}
-
-function contentBulkFilterLabel(state, labels = {}) {
-  return labels?.[state] || state || "all";
-}
-
-function contentBulkDomainLabel(domain, labels = {}) {
-  if (domain === "all") return labels?.all || "All";
-  return labels?.[domain] || domain || "all";
 }
 
 function normalizeContentBulkFilterState(state) {

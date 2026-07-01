@@ -3,9 +3,12 @@ import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
 } from "./contentBulkPackageOverview.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
 import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=675";
 import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const LOOT_SKILL_BULK_INTAKE_VIEW_VERSION = "loot-skill-bulk-intake-view-v1";
 
@@ -18,7 +21,7 @@ export function renderLootSkillBulkIntakePreview(preview, detailText = {}, optio
     : () => true;
   const visibleLootRows = (preview.lootRows || []).filter((row) => matchesFilterRow(row.intakeState, [
     row,
-    lootSkillBulkLabel(row.type, typeLabels),
+    contentBulkFallbackLabel(row.type, typeLabels),
   ], ["loot_item"]));
   const visibleSkillRows = (preview.skillRows || []).filter((row) => matchesFilterRow(row.bulkState, row, ["skill"]));
   const metrics = [
@@ -45,12 +48,7 @@ export function renderLootSkillBulkIntakePreview(preview, detailText = {}, optio
         }, preview.version || "-"))}</strong>
       </div>
       <div class="editor-loot-skill-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${renderContentBulkStagedContractSummary(preview.stagedContract, text)}
       <div class="editor-loot-skill-bulk-intake-list">
@@ -73,22 +71,22 @@ function renderLootSkillBulkLootRow(row, text = {}) {
         <div>
           <h5>${escapeHtml(row.id || "-")}</h5>
           <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.lootSkillBulkIntakePreview.lootMeta", {
-            type: lootSkillBulkLabel(row.type, typeLabels),
+            type: contentBulkFallbackLabel(row.type, typeLabels),
             rarity: row.rarity || "-",
-            state: lootSkillBulkLabel(row.bulkState, bulkLabels),
+            state: contentBulkFallbackLabel(row.bulkState, bulkLabels),
           }, `${row.type || "-"} / ${row.rarity || "-"}`))}</p>
         </div>
-        <span>${escapeHtml(lootSkillBulkLabel(row.intakeState, stateLabels))}</span>
+        <span>${escapeHtml(contentBulkFallbackLabel(row.intakeState, stateLabels))}</span>
       </div>
       <div class="editor-loot-skill-bulk-intake-grid">
-        ${lootSkillBulkChipBlock(text.skillLink || "Skill link", [row.skillId || (text.none || "None")])}
-        ${lootSkillBulkChipBlock(text.dropSource || "Drop source", [row.dropSource || (text.globalSource || "Global")])}
-        ${lootSkillBulkChipBlock(text.codexRecordTarget || "Codex target", row.recordTarget > 0 ? [`${row.recordTarget}`] : [])}
-        ${lootSkillBulkChipBlock(text.rewardLink || "Reward link", [row.rewardLinked ? (text.linked || "Linked") : (text.unlinked || "Unlinked")])}
+        ${contentBulkChipBlock(text.skillLink || "Skill link", [row.skillId || (text.none || "None")])}
+        ${contentBulkChipBlock(text.dropSource || "Drop source", [row.dropSource || (text.globalSource || "Global")])}
+        ${contentBulkChipBlock(text.codexRecordTarget || "Codex target", row.recordTarget > 0 ? [`${row.recordTarget}`] : [])}
+        ${contentBulkChipBlock(text.rewardLink || "Reward link", [row.rewardLinked ? (text.linked || "Linked") : (text.unlinked || "Unlinked")])}
         ${renderContentBulkRowContractReviewChip(row.contractReview, text)}
-        ${lootSkillBulkChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${lootSkillBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${lootSkillBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
       </div>
     </article>
   `;
@@ -105,34 +103,21 @@ function renderLootSkillBulkSkillRow(row, text = {}) {
             type: row.type || "-",
             mp: row.mpCost || 0,
             cooldown: row.cooldown || 0,
-            state: lootSkillBulkLabel(row.bulkState, bulkLabels),
+            state: contentBulkFallbackLabel(row.bulkState, bulkLabels),
           }, `${row.type || "-"} / ${row.mpCost || 0}`))}</p>
         </div>
-        <span>${escapeHtml(lootSkillBulkLabel(row.bulkState, bulkLabels))}</span>
+        <span>${escapeHtml(contentBulkFallbackLabel(row.bulkState, bulkLabels))}</span>
       </div>
       <div class="editor-loot-skill-bulk-intake-grid">
-        ${lootSkillBulkChipBlock(text.damageType || "Damage", [row.damageType || "-"])}
-        ${lootSkillBulkChipBlock(text.effectType || "Effect", [row.effectType || "-"])}
-        ${lootSkillBulkChipBlock(text.stances || "Stances", row.stanceAllowed || [])}
+        ${contentBulkChipBlock(text.damageType || "Damage", [row.damageType || "-"])}
+        ${contentBulkChipBlock(text.effectType || "Effect", [row.effectType || "-"])}
+        ${contentBulkChipBlock(text.stances || "Stances", row.stanceAllowed || [])}
         ${renderContentBulkRowContractReviewChip(row.contractReview, text)}
-        ${lootSkillBulkChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${lootSkillBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${lootSkillBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
       </div>
     </article>
-  `;
-}
-
-function lootSkillBulkLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function lootSkillBulkChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
-    </div>
   `;
 }
 

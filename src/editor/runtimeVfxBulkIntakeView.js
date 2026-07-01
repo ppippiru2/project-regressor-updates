@@ -3,9 +3,12 @@ import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
 } from "./contentBulkPackageOverview.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
 import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=675";
 import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const RUNTIME_VFX_BULK_INTAKE_VIEW_VERSION = "runtime-vfx-bulk-intake-view-v1";
 
@@ -23,9 +26,9 @@ export function renderRuntimeVfxBulkIntakePreview(preview, detailText = {}, opti
     : runtimeVfxFallbackPlacementSummary;
   const visibleRows = (preview.rows || []).filter((row) => matchesFilterRow(row.intakeState, [
     row,
-    runtimeVfxBulkLabel(row.intakeState, stateLabels),
-    runtimeVfxBulkLabel(row.kind, kindLabels),
-    runtimeVfxBulkLabel(row.bulkState, bulkLabels),
+    contentBulkFallbackLabel(row.intakeState, stateLabels),
+    contentBulkFallbackLabel(row.kind, kindLabels),
+    contentBulkFallbackLabel(row.bulkState, bulkLabels),
   ], ["runtime_vfx"]));
   const metrics = [
     [text.packageRows || "Package rows", `${summary.packageRowCount || 0}`],
@@ -51,12 +54,7 @@ export function renderRuntimeVfxBulkIntakePreview(preview, detailText = {}, opti
         }, preview.version || "-"))}</strong>
       </div>
       <div class="editor-runtime-vfx-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${renderContentBulkStagedContractSummary(preview.stagedContract, text)}
       <div class="editor-runtime-vfx-bulk-intake-list">
@@ -80,23 +78,23 @@ function renderRuntimeVfxBulkIntakeRow(row, text = {}, options = {}) {
           <h5>${escapeHtml(row.motionProfile || "-")}${row.effectType ? ` - ${escapeHtml(row.effectType)}` : ""}</h5>
           <p>${escapeHtml(tf("editorPrep.balanceTuningDetail.runtimeVfxBulkIntakePreview.rowMeta", {
             key: row.sourceKey || "-",
-            kind: runtimeVfxBulkLabel(row.kind, kindLabels),
-            state: runtimeVfxBulkLabel(row.bulkState, bulkLabels),
+            kind: contentBulkFallbackLabel(row.kind, kindLabels),
+            state: contentBulkFallbackLabel(row.bulkState, bulkLabels),
           }, `${row.sourceKey || "-"} / ${row.kind || "-"}`))}</p>
         </div>
-        <span>${escapeHtml(runtimeVfxBulkLabel(row.intakeState, stateLabels))}</span>
+        <span>${escapeHtml(contentBulkFallbackLabel(row.intakeState, stateLabels))}</span>
       </div>
       <div class="editor-runtime-vfx-bulk-intake-grid">
-        ${runtimeVfxBulkChipBlock(text.targetSurface || "Target", [row.targetSurface || "-"])}
-        ${runtimeVfxBulkChipBlock(text.sourceMonster || "Source monster", [row.sourceMonsterId || (text.none || "None")])}
-        ${runtimeVfxBulkChipBlock(text.profileMonsterCount || "Current monsters", [`${row.profileMonsterCount || 0}`])}
+        ${contentBulkChipBlock(text.targetSurface || "Target", [row.targetSurface || "-"])}
+        ${contentBulkChipBlock(text.sourceMonster || "Source monster", [row.sourceMonsterId || (text.none || "None")])}
+        ${contentBulkChipBlock(text.profileMonsterCount || "Current monsters", [`${row.profileMonsterCount || 0}`])}
         ${renderContentBulkRowContractReviewChip(row.contractReview, text)}
-        ${runtimeVfxBulkChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
-        ${runtimeVfxBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${runtimeVfxBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-        ${runtimeVfxBulkChipBlock(text.signals || "Signals", row.signals || [])}
-        ${runtimeVfxBulkChipBlock(text.issues || "Issues", row.issues || [])}
-        ${runtimeVfxBulkChipBlock(text.placement || "Placement", [row.placement ? formatPlacement(row.placement) : runtimeVfxModifierSummary(row.modifier)])}
+        ${contentBulkChipBlock(text.targetSurfaces || "Target surfaces", [`${row.targetSurfaceCount || 0}`])}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.signals || "Signals", row.signals || [])}
+        ${contentBulkChipBlock(text.issues || "Issues", row.issues || [])}
+        ${contentBulkChipBlock(text.placement || "Placement", [row.placement ? formatPlacement(row.placement) : runtimeVfxModifierSummary(row.modifier)])}
       </div>
     </article>
   `;
@@ -109,19 +107,6 @@ function runtimeVfxModifierSummary(modifier = {}) {
 
 function runtimeVfxFallbackPlacementSummary(placement = {}) {
   return `x ${Number(placement.x || 0)} / y ${Number(placement.y || 0)} / w ${Number(placement.width || 0)} / h ${Number(placement.height || 0)}`;
-}
-
-function runtimeVfxBulkLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function runtimeVfxBulkChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
-    </div>
-  `;
 }
 
 function escapeHtml(value) {

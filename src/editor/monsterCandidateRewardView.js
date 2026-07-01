@@ -1,6 +1,9 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const MONSTER_CANDIDATE_REWARD_VIEW_VERSION = "monster-candidate-reward-view-v1";
+const MONSTER_CANDIDATE_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderMonsterCandidateRewardPreview(preview, detailText = {}) {
   const text = detailText.monsterCandidateRewards || {};
@@ -26,12 +29,7 @@ export function renderMonsterCandidateRewardPreview(preview, detailText = {}) {
         }, preview.version || "-"))}</strong>
       </div>
       <div class="editor-monster-candidate-reward-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${unresolved.length ? `<p class="editor-monster-candidate-reward-warning">${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateRewards.unresolved", {
         items: unresolved.join(", ")
@@ -84,7 +82,7 @@ function renderMonsterCandidateRewardRow(row, text = {}) {
             source: row.sourceMonsterName || row.sourceMonsterId || "-"
           }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
         </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+        <div class="editor-chip-list">${roles.map((role) => editorChip(role, MONSTER_CANDIDATE_CHIP_OPTIONS)).join("")}</div>
       </div>
       <div class="editor-monster-candidate-reward-item-grid">
         ${renderMonsterCandidateRewardItemBlock(text.codex || "Codex", [row.codexFragment].filter(Boolean), text)}
@@ -103,7 +101,7 @@ function renderMonsterCandidateRewardItemBlock(label, items = [], text = {}) {
   const values = items.length
     ? items.map((item) => `${item.typeLabel || item.type || "-"} · ${item.name || item.id || "-"}`)
     : [text.emptyReward || "None"];
-  return monsterCandidateRewardChipBlock(label, values);
+  return editorChipBlock(label, values, MONSTER_CANDIDATE_CHIP_OPTIONS);
 }
 
 function monsterCandidateDropCoverageLabel(row, text = {}) {
@@ -115,19 +113,6 @@ function monsterCandidateDropCoverageLabel(row, text = {}) {
     material: `${row.liveDropCoverage?.materialCount || 0}/${materialTotal}`,
     skill: `${row.liveDropCoverage?.skillCount || 0}/${skillTotal}`,
   }, `${row.liveDropCoverage?.codex ? "Connected" : "Candidate"} / ${row.liveDropCoverage?.materialCount || 0}/${materialTotal} / ${row.liveDropCoverage?.skillCount || 0}/${skillTotal}`);
-}
-
-function monsterCandidateRewardChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

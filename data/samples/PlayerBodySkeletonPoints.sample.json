@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-01",
+  "status": "draft_skeleton_point_lock",
+  "purpose": "Locks the shared player body skeleton, body points, and attachment point roles used before source body, pixel body, weapon/class, face, hair, armor, and held-item sprites are generated.",
+  "coordinateConvention": {
+    "canvas": [1254, 1254],
+    "origin": "top_left",
+    "x": "increases_right",
+    "y": "increases_down",
+    "unit": "source_pixel",
+    "sideRule": "ScreenLeft and ScreenRight are screen-space labels, not anatomical labels.",
+    "pixelOutputRule": "Pixelized outputs must project anchors by normalized source coordinates unless a pixel-specific anchor review explicitly overrides them."
+  },
+  "runtimeAnchorSource": {
+    "module": "src/assets/playerEquipmentAttachments.js",
+    "exportName": "PLAYER_BODY_ANCHORS_BY_GENDER",
+    "status": "authoritative_runtime_source"
+  },
+  "visualReferenceFiles": [
+    {
+      "gender": "female",
+      "outputType": "source",
+      "path": "C:/Users/Administrator/Desktop/141414/female_base_body_common_v1_source.png",
+      "expectedCanvas": [1254, 1254],
+      "usage": "visual_reference_only"
+    },
+    {
+      "gender": "female",
+      "outputType": "pixel",
+      "path": "C:/Users/Administrator/Desktop/141414/female_base_body_common_v1_pixel.png",
+      "expectedCanvas": [1254, 1254],
+      "usage": "visual_reference_only"
+    },
+    {
+      "gender": "male",
+      "outputType": "source",
+      "path": "C:/Users/Administrator/Desktop/141414/male_base_body_common_v1_source.png",
+      "expectedCanvas": [1254, 1254],
+      "usage": "visual_reference_only"
+    },
+    {
+      "gender": "male",
+      "outputType": "pixel",
+      "path": "C:/Users/Administrator/Desktop/141414/male_base_body_common_v1_pixel.png",
+      "expectedCanvas": [1254, 1254],
+      "usage": "visual_reference_only"
+    },
+    {
+      "gender": "female",
+      "outputType": "skin_tone_qc",
+      "path": "C:/Users/Administrator/Desktop/141414/female_body_skin_tone_qc_sheet_v2.png",
+      "expectedToneIds": ["T1", "T2", "T3", "T4", "T5", "T6"],
+      "usage": "visual_reference_only"
+    },
+    {
+      "gender": "male",
+      "outputType": "skin_tone_qc",
+      "path": "C:/Users/Administrator/Desktop/141414/male_body_skin_tone_qc_sheet_v2.png",
+      "expectedToneIds": ["T1", "T2", "T3", "T4", "T5", "T6"],
+      "usage": "visual_reference_only"
+    }
+  ],
+  "skinTones": [
+    { "toneId": "T1", "label": "very_light" },
+    { "toneId": "T2", "label": "light" },
+    { "toneId": "T3", "label": "warm_medium" },
+    { "toneId": "T4", "label": "tan" },
+    { "toneId": "T5", "label": "dark_brown" },
+    { "toneId": "T6", "label": "deep_brown" }
+  ],
+  "outputTypes": [
+    {
+      "outputType": "source",
+      "role": "high_detail_generation_source",
+      "anchorRule": "Use source_pixel coordinates directly."
+    },
+    {
+      "outputType": "pixel",
+      "role": "game_ready_pixelized_sprite",
+      "anchorRule": "Remap from source_pixel by normalized coordinates, then review hand, foot, face, and equipment contact."
+    }
+  ],
+  "requiredBaseAnchors": [
+    "Head_Top",
+    "Face_Center",
+    "Neck_Base",
+    "Shoulder_ScreenLeft",
+    "Shoulder_ScreenRight",
+    "Chest_Center",
+    "Hip_Center",
+    "Elbow_ScreenLeft",
+    "Elbow_ScreenRight",
+    "Wrist_ScreenLeft",
+    "Wrist_ScreenRight",
+    "Forearm_ScreenLeft_Outer",
+    "Forearm_ScreenRight_Outer",
+    "Hand_ScreenLeft_Grip",
+    "Hand_ScreenRight_Grip",
+    "Knee_ScreenLeft",
+    "Knee_ScreenRight",
+    "Foot_ScreenLeft_Baseline",
+    "Foot_ScreenRight_Baseline"
+  ],
+  "anchorRoles": [
+    { "anchorName": "Head_Top", "group": "head", "usage": ["hair_top", "helmet_crown", "head_scale"] },
+    { "anchorName": "Face_Center", "group": "head", "usage": ["face_direction", "portrait_alignment", "helmet_brow"] },
+    { "anchorName": "Neck_Base", "group": "core", "usage": ["neck_lock", "cloak_lock", "torso_neck_opening"] },
+    { "anchorName": "Chest_Center", "group": "core", "usage": ["torso_center", "robe_fall", "cast_vfx_origin"] },
+    { "anchorName": "Hip_Center", "group": "core", "usage": ["waist_center", "root_balance", "leg_origin"] },
+    { "anchorName": "Shoulder_ScreenLeft", "group": "upper_limb", "usage": ["torso_shoulder", "upper_arm_origin"] },
+    { "anchorName": "Shoulder_ScreenRight", "group": "upper_limb", "usage": ["torso_shoulder", "upper_arm_origin"] },
+    { "anchorName": "Elbow_ScreenLeft", "group": "upper_limb", "usage": ["arm_bend", "weapon_rotation_basis"] },
+    { "anchorName": "Elbow_ScreenRight", "group": "upper_limb", "usage": ["arm_bend", "offhand_rotation_basis"] },
+    { "anchorName": "Wrist_ScreenLeft", "group": "upper_limb", "usage": ["gauntlet_wrist", "hand_rotation_basis"] },
+    { "anchorName": "Wrist_ScreenRight", "group": "upper_limb", "usage": ["gauntlet_wrist", "hand_rotation_basis"] },
+    { "anchorName": "Forearm_ScreenLeft_Outer", "group": "upper_limb", "usage": ["gauntlet_cover", "bracer_outer_edge"] },
+    { "anchorName": "Forearm_ScreenRight_Outer", "group": "upper_limb", "usage": ["gauntlet_cover", "bracer_outer_edge"] },
+    { "anchorName": "Hand_ScreenLeft_Grip", "group": "hand", "usage": ["mainhand_grip", "one_hand_weapon", "staff_lower_hand"] },
+    { "anchorName": "Hand_ScreenRight_Grip", "group": "hand", "usage": ["offhand_grip", "shield_grip", "book_support"] },
+    { "anchorName": "Knee_ScreenLeft", "group": "lower_limb", "usage": ["leg_bend", "boot_rotation_basis"] },
+    { "anchorName": "Knee_ScreenRight", "group": "lower_limb", "usage": ["leg_bend", "boot_rotation_basis"] },
+    { "anchorName": "Foot_ScreenLeft_Baseline", "group": "lower_limb", "usage": ["foot_lock", "boot_toe_baseline", "standing_ground"] },
+    { "anchorName": "Foot_ScreenRight_Baseline", "group": "lower_limb", "usage": ["foot_lock", "boot_toe_baseline", "standing_ground"] }
+  ],
+  "skeletonBones": [
+    { "boneId": "core.hip_to_chest", "from": "Hip_Center", "to": "Chest_Center", "group": "core" },
+    { "boneId": "core.chest_to_neck", "from": "Chest_Center", "to": "Neck_Base", "group": "core" },
+    { "boneId": "head.neck_to_face", "from": "Neck_Base", "to": "Face_Center", "group": "head" },
+    { "boneId": "head.face_to_top", "from": "Face_Center", "to": "Head_Top", "group": "head" },
+    { "boneId": "shoulder.span", "from": "Shoulder_ScreenLeft", "to": "Shoulder_ScreenRight", "group": "upper_limb" },
+    { "boneId": "screen_left.clavicle", "from": "Neck_Base", "to": "Shoulder_ScreenLeft", "group": "upper_limb" },
+    { "boneId": "screen_left.upper_arm", "from": "Shoulder_ScreenLeft", "to": "Elbow_ScreenLeft", "group": "upper_limb" },
+    { "boneId": "screen_left.forearm", "from": "Elbow_ScreenLeft", "to": "Wrist_ScreenLeft", "group": "upper_limb" },
+    { "boneId": "screen_left.hand", "from": "Wrist_ScreenLeft", "to": "Hand_ScreenLeft_Grip", "group": "hand" },
+    { "boneId": "screen_right.clavicle", "from": "Neck_Base", "to": "Shoulder_ScreenRight", "group": "upper_limb" },
+    { "boneId": "screen_right.upper_arm", "from": "Shoulder_ScreenRight", "to": "Elbow_ScreenRight", "group": "upper_limb" },
+    { "boneId": "screen_right.forearm", "from": "Elbow_ScreenRight", "to": "Wrist_ScreenRight", "group": "upper_limb" },
+    { "boneId": "screen_right.hand", "from": "Wrist_ScreenRight", "to": "Hand_ScreenRight_Grip", "group": "hand" },
+    { "boneId": "screen_left.thigh", "from": "Hip_Center", "to": "Knee_ScreenLeft", "group": "lower_limb" },
+    { "boneId": "screen_left.shin", "from": "Knee_ScreenLeft", "to": "Foot_ScreenLeft_Baseline", "group": "lower_limb" },
+    { "boneId": "screen_right.thigh", "from": "Hip_Center", "to": "Knee_ScreenRight", "group": "lower_limb" },
+    { "boneId": "screen_right.shin", "from": "Knee_ScreenRight", "to": "Foot_ScreenRight_Baseline", "group": "lower_limb" },
+    { "boneId": "feet.baseline_span", "from": "Foot_ScreenLeft_Baseline", "to": "Foot_ScreenRight_Baseline", "group": "lower_limb" }
+  ],
+  "baselineMeasurements": [
+    { "measurementId": "foot_baseline_span", "from": "Foot_ScreenLeft_Baseline", "to": "Foot_ScreenRight_Baseline", "expectedRange": [260, 460] },
+    { "measurementId": "shoulder_span", "from": "Shoulder_ScreenLeft", "to": "Shoulder_ScreenRight", "expectedRange": [150, 240] },
+    { "measurementId": "head_stack", "from": "Head_Top", "to": "Neck_Base", "expectedRange": [120, 180] },
+    { "measurementId": "hand_span", "from": "Hand_ScreenLeft_Grip", "to": "Hand_ScreenRight_Grip", "expectedRange": [260, 420] }
+  ],
+  "attachmentPointLocks": [
+    {
+      "slotId": "hair",
+      "profileIds": ["hair.future.v1"],
+      "anchors": ["Head_Top", "Face_Center", "Neck_Base"],
+      "reviewFocus": ["head_scale", "face_direction", "no_body_pose_change"]
+    },
+    {
+      "slotId": "head",
+      "profileIds": ["armor.helmet.v1"],
+      "anchors": ["Head_Top", "Face_Center", "Neck_Base"],
+      "reviewFocus": ["helmet_crown", "helmet_brow", "neck_back"]
+    },
+    {
+      "slotId": "face",
+      "profileIds": ["face.future.v1"],
+      "anchors": ["Face_Center", "Head_Top", "Neck_Base"],
+      "reviewFocus": ["face_direction", "expression_variation", "no_camera_change"]
+    },
+    {
+      "slotId": "torso",
+      "profileIds": ["armor.torso.v1", "back.cloak.v1"],
+      "anchors": ["Neck_Base", "Chest_Center", "Hip_Center", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
+      "reviewFocus": ["neck_opening", "chest_center", "waist_center", "cloak_fall"]
+    },
+    {
+      "slotId": "mainhand",
+      "profileIds": ["weapon.one_hand.mainhand.v1"],
+      "anchors": ["Elbow_ScreenLeft", "Wrist_ScreenLeft", "Hand_ScreenLeft_Grip"],
+      "reviewFocus": ["weapon_grip", "guard_contact", "forearm_axis"]
+    },
+    {
+      "slotId": "offhand",
+      "profileIds": ["shield.offhand.round.v1"],
+      "anchors": ["Elbow_ScreenRight", "Wrist_ScreenRight", "Hand_ScreenRight_Grip"],
+      "reviewFocus": ["shield_grip", "shield_center", "forearm_overlap"]
+    },
+    {
+      "slotId": "handwear",
+      "profileIds": ["handwear.gauntlet.v1"],
+      "anchors": ["Wrist_ScreenLeft", "Wrist_ScreenRight", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Forearm_ScreenLeft_Outer", "Forearm_ScreenRight_Outer"],
+      "reviewFocus": ["wrist_lock", "knuckle_center", "forearm_cover"]
+    },
+    {
+      "slotId": "boots",
+      "profileIds": ["boots.pair.v1"],
+      "anchors": ["Knee_ScreenLeft", "Knee_ScreenRight", "Foot_ScreenLeft_Baseline", "Foot_ScreenRight_Baseline"],
+      "reviewFocus": ["ankle_lock", "toe_tip", "foot_baseline"]
+    }
+  ],
+  "posePointGroups": [
+    {
+      "poseTemplateId": "sword_shield_idle",
+      "pointGroup": "one_hand_guard",
+      "anchors": ["Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Elbow_ScreenLeft", "Elbow_ScreenRight", "Wrist_ScreenLeft", "Wrist_ScreenRight"],
+      "mustKeepFootBaselinesLocked": true
+    },
+    {
+      "poseTemplateId": "great_weapon_guard",
+      "pointGroup": "two_hand_guard",
+      "anchors": ["TwoHand_LowerGrip", "TwoHand_UpperGrip", "Weapon_Tip", "Weapon_Back_End", "Mass_Center", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip"],
+      "mustKeepFootBaselinesLocked": true
+    },
+    {
+      "poseTemplateId": "bow_draw",
+      "pointGroup": "ranged_draw",
+      "anchors": ["Bow_Grip", "Draw_Hand", "Arrow_Nock", "Arrow_Tip", "Bow_String_Top", "Bow_String_Bottom"],
+      "mustKeepFootBaselinesLocked": true
+    },
+    {
+      "poseTemplateId": "staff_stand",
+      "pointGroup": "caster_guard",
+      "anchors": ["Staff_Grip", "Staff_Top", "Staff_Base", "Cast_Hand", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip"],
+      "mustKeepFootBaselinesLocked": true
+    },
+    {
+      "poseTemplateId": "fist_guard_idle",
+      "pointGroup": "unarmed_guard",
+      "anchors": ["Fist_ScreenLeft", "Fist_ScreenRight", "Wrist_ScreenLeft", "Wrist_ScreenRight", "Elbow_ScreenLeft", "Elbow_ScreenRight", "Guard_Center"],
+      "mustKeepFootBaselinesLocked": true
+    }
+  ],
+  "motionPointRules": [
+    "Standing idle, guard, attack_ready, attack_hit, attack_recover, and ordinary hit-reaction frames keep both foot baseline anchors locked.",
+    "attack_hit is the only first-pass damage-window frame for each weapon/class motion.",
+    "Held-item, shield, book, bow, staff, and gauntlet art must follow hand/fist anchors from the resolved motion frame.",
+    "Face and hair variations may use Head_Top, Face_Center, and Neck_Base only; they must not shift body, camera, hands, feet, or canvas."
+  ],
+  "productionRules": [
+    "Generate source sprites first, then pixelize from the approved source frame.",
+    "Do not regenerate runtime anchors from the image bounding box after generation.",
+    "If source and pixel outputs disagree, source anchors remain authoritative until a manual pixel anchor review is approved.",
+    "Use the six locked skin tone slots for every body production batch.",
+    "Keep underwear style consistent with the approved base body family unless a separate costume item covers it."
+  ],
+  "reviewGates": [
+    "player_body_anchor_geometry_zero_failures",
+    "player_body_skeleton_points_zero_missing",
+    "weapon_class_pose_template_report_zero_missing",
+    "weapon_class_motion_frame_report_zero_missing",
+    "weapon_class_motion_hitbox_report_zero_missing",
+    "weapon_class_sprite_anchor_review_manual_pass"
+  ]
+}

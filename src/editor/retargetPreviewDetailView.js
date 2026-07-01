@@ -1,6 +1,14 @@
 import { tf } from "../localization/index.js?v=675";
+import {
+  createRetargetAssetSearchText,
+  createRetargetTextSearchText,
+  matchesRetargetFilter,
+  normalizeRetargetKind,
+} from "./retargetFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
 
 export const RETARGET_PREVIEW_DETAIL_VIEW_VERSION = "retarget-preview-detail-view-v1";
+const RETARGET_DETAIL_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderRetargetPreviewDetailView({
   preview = {},
@@ -82,13 +90,7 @@ export function renderRetargetPreviewDetailView({
 function createRetargetTextRow(entry, detailText, expandedRows) {
   const rowId = `text:${entry.sourcePath}`;
   const expanded = expandedRows.has(rowId);
-  const searchText = [
-    "text",
-    entry.sourcePath,
-    entry.sourceText,
-    entry.targetTextPath,
-    entry.targetText
-  ].join(" ").toLowerCase();
+  const searchText = createRetargetTextSearchText(entry);
   return {
     kind: "text",
     searchText,
@@ -119,15 +121,7 @@ function createRetargetAssetRow(entry, detailText, expandedRows) {
     mappedTarget: entry.mappedTargetAssetId || "-",
     slotCount: entry.slotPaths.length
   }, "");
-  const searchText = [
-    "asset",
-    entry.sourceAssetId,
-    entry.targetAssetId,
-    entry.plannedSourceFile,
-    entry.plannedWebpFile,
-    entry.mappedTargetAssetId,
-    ...entry.slotPaths
-  ].join(" ").toLowerCase();
+  const searchText = createRetargetAssetSearchText(entry);
   return {
     kind: "asset",
     searchText,
@@ -144,7 +138,7 @@ function createRetargetAssetRow(entry, detailText, expandedRows) {
             <code>${escapeHtml(entry.targetAssetId)}</code>
           </div>
           <p>${escapeHtml(summary)}</p>
-          <div class="editor-chip-list">${entry.slotPaths.map((slotPath) => chip(slotPath)).join("")}</div>
+          <div class="editor-chip-list">${entry.slotPaths.map((slotPath) => editorChip(slotPath, RETARGET_DETAIL_CHIP_OPTIONS)).join("")}</div>
         </div>
       </article>
     `
@@ -160,13 +154,6 @@ function retargetRowHeader(rowId, expanded, detailText) {
       </button>
     </div>
   `;
-}
-
-function matchesRetargetFilter(entry, filter = {}) {
-  const kind = normalizeRetargetKind(filter.kind);
-  const query = normalizeSearchText(filter.query);
-  if (kind !== "all" && entry.kind !== kind) return false;
-  return !query || entry.searchText.includes(query);
 }
 
 function retargetKindButton(kind, label, filter = {}) {
@@ -232,18 +219,6 @@ function emptyRetargetRows(detailText, sectionKind, filter = {}) {
       ${showResetHint ? `<small>${escapeHtml(detailText.emptyResetHint || "")}</small>` : ""}
     </p>
   `;
-}
-
-function normalizeRetargetKind(value) {
-  return value === "text" || value === "asset" ? value : "all";
-}
-
-function normalizeSearchText(value) {
-  return String(value || "").trim().toLowerCase();
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {

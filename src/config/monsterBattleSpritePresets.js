@@ -590,5 +590,3 @@ function boundedNumber(value, min, max, fallback) {
   if (!Number.isFinite(numeric)) return fallback;
   return Math.min(max, Math.max(min, numeric));
 }
-
-

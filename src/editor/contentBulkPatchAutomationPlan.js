@@ -155,5 +155,3 @@ export function createContentBulkPatchAutomationPlan() {
     domains,
   };
 }
-
-

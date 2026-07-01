@@ -1,10 +1,15 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
 } from "./contentBulkPackageOverview.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_PACKAGE_ADAPTER_VIEW_VERSION = "content-bulk-patch-package-adapter-view-v1";
+const CONTENT_BULK_PACKAGE_ADAPTER_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderContentBulkPatchPackageAdapterPreview(preview, detailText = {}, options = {}) {
   const text = detailText.contentBulkPatchPackageAdapter || {};
@@ -71,18 +76,13 @@ export function renderContentBulkPatchPackageAdapterPreview(preview, detailText 
         </p>
       </div>
       <div class="editor-content-bulk-package-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-package-list">
         ${visibleMappings.map((mapping) => renderContentBulkPatchPackageMapping(mapping, text)).join("") || `<p class="muted">${escapeHtml(text.noFilteredRows || text.noMappings || "No package mappings.")}</p>`}
       </div>
       <div class="editor-content-bulk-package-grid">
-        ${contentBulkPatchPackageChipBlock(text.unmappedArrayKeys || "Unmapped array keys", preview.normalized?.unmappedArrayKeys || [])}
+        ${contentBulkChipBlock(text.unmappedArrayKeys || "Unmapped array keys", preview.normalized?.unmappedArrayKeys || [], { chipClass: "editor-chip" })}
       </div>
     </section>
   `;
@@ -101,34 +101,17 @@ export function renderContentBulkPatchPackageMapping(mapping, text = {}) {
           }, `${mapping.batchKey || "-"} / ${mapping.rowCount || 0}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${chip(mapping.rowCount > 0 ? (text.active || "Active") : (text.empty || "Empty"))}
+          ${editorChip(mapping.rowCount > 0 ? (text.active || "Active") : (text.empty || "Empty"), CONTENT_BULK_PACKAGE_ADAPTER_CHIP_OPTIONS)}
         </div>
       </div>
       <div class="editor-content-bulk-package-grid">
-        ${contentBulkPatchPackageChipBlock(text.sourceKeysForDomain || "Source keys", mapping.sourceKeys || [])}
-        ${contentBulkPatchPackageChipBlock(text.acceptedAliases || "Accepted aliases", mapping.aliases || [])}
-        ${contentBulkPatchPackageChipBlock(text.requiredInputs || "Required inputs", mapping.requiredInputFields || [])}
-        ${contentBulkPatchPackageChipBlock(text.identityFields || "Identity", mapping.identityFields || [])}
+        ${contentBulkChipBlock(text.sourceKeysForDomain || "Source keys", mapping.sourceKeys || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.acceptedAliases || "Accepted aliases", mapping.aliases || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.requiredInputs || "Required inputs", mapping.requiredInputFields || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.identityFields || "Identity", mapping.identityFields || [], { chipClass: "editor-chip" })}
       </div>
     </article>
   `;
-}
-
-function contentBulkPatchDomainLabel(domainId, text = {}) {
-  return text.domainLabels?.[domainId] || domainId || "unknown";
-}
-
-function contentBulkPatchPackageChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

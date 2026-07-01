@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_WRITER_RISK_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditWriterEnablementRiskView(options = {}) {
   const summary = options.summary || {};
   const text = options.text || {};
@@ -37,8 +41,8 @@ export function renderSaveSlotEditWriterEnablementRiskView(options = {}) {
           <span>${escapeHtml(manualUnlock.status)}</span>
         </div>
         <div class="editor-chip-list">
-          ${requiredReview.map((item) => chip(item)).join("")}
-          ${manualBlockers.map((item) => chip(item)).join("")}
+          ${requiredReview.map((item) => editorChip(item, SAVE_EDIT_WRITER_RISK_CHIP_OPTIONS)).join("")}
+          ${manualBlockers.map((item) => editorChip(item, SAVE_EDIT_WRITER_RISK_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <pre class="editor-save-edit-writer-unlock-code"><code>${escapeHtml(JSON.stringify(summary.payloadShape, null, 2))}</code></pre>
@@ -54,13 +58,9 @@ function renderSaveEditWriterEnablementRiskCheckView(check = {}, statusLabel = (
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_WRITER_RISK_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

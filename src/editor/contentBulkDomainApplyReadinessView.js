@@ -1,7 +1,14 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
 import { renderContentBulkDomainFilterDrilldown } from "./contentBulkDomainFilterDrilldown.js?v=675";
 import { renderContentBulkCurrentFilterPreApplySummary } from "./contentBulkCurrentFilterPreApplySummary.js?v=675";
+import {
+  contentBulkDomainBlockedStageIds,
+  contentBulkDomainStageBlockerLabels,
+} from "./contentBulkStageGatePreviewLabels.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_DOMAIN_APPLY_READINESS_VIEW_VERSION = "content-bulk-domain-apply-readiness-view-v1";
 
@@ -12,6 +19,7 @@ export function renderContentBulkDomainApplyReadiness({
   backupPlan = {},
   restoreRehearsal = {},
   filterCounts = {},
+  filteredCandidatePreview = {},
 } = {}, detailText = {}, helpers = {}) {
   const text = detailText.contentBulkDomainApplyReadiness || {};
   const domainLabel = helpers.domainLabel || ((id) => id || "unknown");
@@ -77,25 +85,23 @@ export function renderContentBulkDomainApplyReadiness({
         <p class="muted">${escapeHtml(text.description || "Compares dry-run, staged rows, patch draft files, backup blockers, and restore blockers by domain.")}</p>
       </div>
       <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-contract-issues">
-        ${contentBulkDomainChipBlock(text.activeFilter || "Active filter", [
+        ${contentBulkChipBlock(text.activeFilter || "Active filter", [
           tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.activeFilterSummary", activeFilter, `${activeFilter.state} / ${activeFilter.domain}`)
         ])}
       </div>
       ${renderContentBulkDomainFilterDrilldown(visibleRows, text, {
         domainLabel: (id) => domainLabel(id, text),
+        filteredCandidatePreview,
       })}
       ${renderContentBulkCurrentFilterPreApplySummary(visibleRows, filterCounts, text, {
         activeFilter,
         domainLabel: (id) => domainLabel(id, text),
-        readinessLabel: (state) => contentBulkDomainApplyReadinessLabel(state, text.stateLabels),
+        readinessLabel: (state) => contentBulkFallbackLabel(state, text.stateLabels),
+        filteredCandidatePreview,
+        stageGateReasonLabels: helpers.stageGateReasonLabels || detailText.contentBulkFilteredCandidatePreview?.stageGateReasonLabels || {},
       })}
       <div class="editor-content-bulk-patch-draft-list">
         ${rows.map((row) => renderContentBulkDomainApplyReadinessRow(row, text, domainLabel)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
@@ -241,10 +247,10 @@ function renderContentBulkDomainApplyReadinessRow(row = {}, text = {}, domainLab
             blocked: row.blockedFileCount || 0,
           }, `${row.stagedRowCount || 0} staged / ${row.draftFileCount || 0} files`))}</p>
         </div>
-        <span>${escapeHtml(contentBulkDomainApplyReadinessLabel(row.state, text.stateLabels))}</span>
+        <span>${escapeHtml(contentBulkFallbackLabel(row.state, text.stateLabels))}</span>
       </div>
       <div class="editor-content-bulk-patch-draft-grid">
-        ${contentBulkDomainChipBlock(text.rows || "Rows", [
+        ${contentBulkChipBlock(text.rows || "Rows", [
           tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.rowSummary", {
             rows: row.rowCount || 0,
             staged: row.stagedRowCount || 0,
@@ -253,51 +259,26 @@ function renderContentBulkDomainApplyReadinessRow(row = {}, text = {}, domainLab
             withheld: row.withheldRowCount || 0,
           }, `${row.stagedRowCount || 0}`)
         ])}
-        ${contentBulkDomainChipBlock(text.files || "Files", [
+        ${contentBulkChipBlock(text.files || "Files", [
           tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.fileSummary", {
             files: row.draftFileCount || 0,
             ready: row.readyFileCount || 0,
             blocked: row.blockedFileCount || 0,
           }, `${row.draftFileCount || 0}`)
         ])}
-        ${contentBulkDomainChipBlock(text.filterScope || "Filter scope", [
+        ${contentBulkChipBlock(text.filterScope || "Filter scope", [
           tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.filterScopeSummary", {
             candidates: row.filterVisibleCandidateCount || 0,
             state: row.filterMatched ? (text.filterMatched || "shown") : (text.filterHidden || "hidden"),
           }, `${row.filterVisibleCandidateCount || 0}`)
         ])}
-        ${contentBulkDomainChipBlock(text.blockerStages || "Blocker stages", contentBulkDomainStageBlockerLabels(row.stageBlockerGroups, text))}
-        ${contentBulkDomainChipBlock(text.patchFiles || "Patch files", contentBulkIssueList(row.fileNames, text))}
-        ${contentBulkDomainChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
-        ${contentBulkDomainChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
-        ${contentBulkDomainChipBlock(text.guardChecks || "Guard checks", row.checkScripts || [])}
+        ${contentBulkChipBlock(text.blockerStages || "Blocker stages", contentBulkDomainStageBlockerLabels(row.stageBlockerGroups, text))}
+        ${contentBulkChipBlock(text.patchFiles || "Patch files", contentBulkIssueList(row.fileNames, text))}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(row.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(row.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.guardChecks || "Guard checks", row.checkScripts || [])}
       </div>
     </article>
-  `;
-}
-
-function contentBulkDomainBlockedStageIds(groups = {}) {
-  return ["dryRun", "staged", "backup", "restore"].filter((stageId) => (groups?.[stageId] || []).filter(Boolean).length > 0);
-}
-
-function contentBulkDomainStageBlockerLabels(groups = {}, text = {}) {
-  const labels = text.stageLabels || {};
-  return ["dryRun", "staged", "backup", "restore"].map((stageId) => tf("editorPrep.balanceTuningDetail.contentBulkDomainApplyReadiness.stageBlockerSummary", {
-    stage: labels[stageId] || stageId,
-    count: (groups?.[stageId] || []).filter(Boolean).length,
-  }, `${labels[stageId] || stageId}: ${(groups?.[stageId] || []).filter(Boolean).length}`));
-}
-
-function contentBulkDomainApplyReadinessLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkDomainChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
-    </div>
   `;
 }
 

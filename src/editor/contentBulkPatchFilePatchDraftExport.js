@@ -123,5 +123,3 @@ function createPatchDraftPayload(draft, context) {
     files,
   };
 }
-
-

@@ -148,5 +148,3 @@ function findCurrentMonsterRow(monsterId) {
 function findCurrentRewardLink(monsterId) {
   return TUTORIAL_MONSTER_REWARD_LINKS.find((link) => link.monsterId === monsterId) || null;
 }
-
-

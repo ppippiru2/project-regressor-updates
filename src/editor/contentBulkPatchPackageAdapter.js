@@ -346,5 +346,3 @@ function firstValue(...values) {
 function isObjectRecord(value) {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
-
-

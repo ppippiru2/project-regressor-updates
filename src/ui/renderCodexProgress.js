@@ -1,4 +1,5 @@
 import { buildCodexRecordProgress } from "../state/codexProgress.js?v=675";
+import { isCodexProgressLinkedRow, latestCodexDialogueRecord } from "../state/codexDialogueLink.js?v=675";
 import { t, tf } from "../localization/index.js?v=675";
 import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=675";
 
@@ -13,8 +14,10 @@ export function renderCodexProgress(inventory = [], getItem = () => null, tutori
   summary.dataset.codexAccess = codexAccess;
   list.dataset.codexAccess = codexAccess;
   setOptionalDataset(summary, "dialogueEventId", linkedRecord?.eventId);
+  setOptionalDataset(summary, "dialogueTitle", linkedRecord?.title);
   setOptionalDataset(summary, "dialogueOutputChannel", linkedRecord?.outputChannel);
   setOptionalDataset(list, "dialogueEventId", linkedRecord?.eventId);
+  setOptionalDataset(list, "dialogueTitle", linkedRecord?.title);
   setOptionalDataset(list, "dialogueRecordEntries", linkedRecord?.recordEntries?.join("|"));
   if (tutorialUnlockState?.codexProgressReadable === false || codexAccess === "locked") {
     summary.textContent = t("inventoryUi.codexProgressLockedSummary");
@@ -47,7 +50,12 @@ export function renderCodexProgress(inventory = [], getItem = () => null, tutori
       const statusText = isReady ? t("inventoryUi.codexProgressReady") : t("inventoryUi.codexProgressRecording");
       const hintText = codexProgressHint({ remaining, hintState });
       const isRecentRecord = isCodexProgressLinkedRow(item, linkedRecord);
-      return `<div class="item codex-progress-item ${isReady ? "is-upgrade" : "is-sidegrade"}${isRecentRecord ? " is-recent-record" : ""}" data-recent-record="${isRecentRecord ? "true" : "false"}">
+      const recentRecordTitle = isRecentRecord ? linkedRecord?.title || "" : "";
+      const recentRecordLabel = recentRecordTitle
+        ? tf("inventoryUi.codexProgressRecentWithTitle", { title: recentRecordTitle })
+        : t("inventoryUi.codexProgressRecent");
+      const recentRecordTitleAttr = recentRecordTitle ? ` data-dialogue-title="${escapeHtml(recentRecordTitle)}"` : "";
+      return `<div class="item codex-progress-item ${isReady ? "is-upgrade" : "is-sidegrade"}${isRecentRecord ? " is-recent-record" : ""}" data-recent-record="${isRecentRecord ? "true" : "false"}"${recentRecordTitleAttr}>
         ${itemIconSlot({ item, iconPath: "", label: tf("inventoryUi.itemIcon", { name: item.name }) })}
         <div class="item-main">
           <div class="item-title-row">
@@ -57,7 +65,7 @@ export function renderCodexProgress(inventory = [], getItem = () => null, tutori
           <div class="codex-progress-meter" aria-hidden="true"><span style="width: ${percent}%"></span></div>
           <div class="muted">${escapeHtml(tf("inventoryUi.codexProgressDetail", { count, target }))}</div>
           <div class="codex-progress-hint">${escapeHtml(hintText)}</div>
-          ${isRecentRecord ? `<div class="codex-progress-recent">${escapeHtml(t("inventoryUi.codexProgressRecent"))}</div>` : ""}
+          ${isRecentRecord ? `<div class="codex-progress-recent">${escapeHtml(recentRecordLabel)}</div>` : ""}
         </div>
         <div class="item-actions">
           <span class="item-score">${escapeHtml(t("inventoryUi.readOnly"))}</span>
@@ -71,31 +79,6 @@ function codexProgressHint({ remaining = 0, hintState = "next" } = {}) {
   if (hintState === "ready") return t("inventoryUi.codexProgressReadyHint");
   if (hintState === "first") return tf("inventoryUi.codexProgressFirstHint", { remaining });
   return tf("inventoryUi.codexProgressNextHint", { remaining });
-}
-
-function latestCodexDialogueRecord(records = []) {
-  return [...records].reverse().find((record) => {
-    if (!record?.eventId) return false;
-    const searchable = [record.eventId, ...(record.recordEntries || [])].join(" ");
-    return /codex|scrap|nameless/iu.test(searchable);
-  }) || null;
-}
-
-function isCodexProgressLinkedRow(item, record) {
-  if (!item || !record) return false;
-  const searchable = [
-    record.text,
-    record.eventId,
-    record.triggerTargetId,
-    ...(record.recordEntries || []),
-  ].filter(Boolean).join(" ").toLocaleLowerCase("ko-KR");
-  const itemId = String(item.id || "").toLocaleLowerCase("ko-KR");
-  const itemName = String(item.name || "").toLocaleLowerCase("ko-KR");
-  return Boolean(
-    (itemName && searchable.includes(itemName)) ||
-    (itemId && searchable.includes(itemId)) ||
-    (record.triggerTargetId && itemId.includes(String(record.triggerTargetId).toLocaleLowerCase("ko-KR")))
-  );
 }
 
 function setOptionalDataset(element, key, value) {

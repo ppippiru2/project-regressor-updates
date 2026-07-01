@@ -202,6 +202,7 @@ import {
 } from "./state/regressionCardState.js?v=675";
 import {
   createRegressionCardCandidateSlots,
+  createRegressionCardDrawTestSnapshot,
   createDefaultRegressionCardDrawTestState,
   selectRegressionCardDrawTestSlot,
   updateRegressionCardDrawTestAction,
@@ -284,6 +285,7 @@ import { nodeName } from "./ui/renderRegion.js?v=675";
 import { renderLog } from "./ui/renderCommon.js?v=675";
 import { renderCombatSkillInfo } from "./ui/renderCombatActions.js?v=675";
 import { renderHitCounter } from "./ui/renderCombatPulse.js?v=675";
+import { playFateCardRevealMotion } from "./ui/fateCardRevealMotion.js?v=675";
 import { setupCollapsiblePanels } from "./ui/panels.js?v=675";
 import { setSaveStatus } from "./ui/saveSlotStatus.js?v=675";
 import {
@@ -343,6 +345,7 @@ let pendingNewSlotCreation = null;
 let manualBattleLoopSequence = 0;
 let regressionCardDrawTestState = createDefaultRegressionCardDrawTestState();
 let latestDialogueEventRecords = [];
+let fateCardRevealMotionPending = false;
 
 ensureDialogueRunState(state);
 
@@ -1524,9 +1527,13 @@ function setRegressionCardDrawTestPreset(presetId) {
   render();
 }
 
-function revealRegressionCardDrawTestSlot(slotIndex) {
-  regressionCardDrawTestState = selectRegressionCardDrawTestSlot(regressionCardDrawTestState, slotIndex);
-  render();
+function revealRegressionCardDrawTestSlot(slotIndex, sourceElement) {
+  const selectedSlot = resolveRegressionCardDrawTestSlot(slotIndex);
+  if (!selectedSlot?.card) return;
+  runFateCardRevealMotion(sourceElement, selectedSlot.card, () => {
+    regressionCardDrawTestState = selectRegressionCardDrawTestSlot(regressionCardDrawTestState, slotIndex);
+    render();
+  });
 }
 
 function skipCurrentRegionForDevelopment() {
@@ -1693,9 +1700,15 @@ function selectStance(stance) {
   render();
 }
 
-function selectRegressionCard(cardToken) {
+function selectRegressionCard(cardToken, sourceElement) {
   const selectedCard = resolveRegressionCardSelection(cardToken);
   if (!selectedCard) return;
+  runFateCardRevealMotion(sourceElement, selectedCard, () => {
+    applySelectedRegressionCard(selectedCard);
+  });
+}
+
+function applySelectedRegressionCard(selectedCard) {
   const result = applyRegressionCardSelection(state, selectedCard);
   if (!result.selected) return;
   syncStarterSkillActionToActiveLoadout(state.playerProfile);
@@ -1706,6 +1719,22 @@ function selectRegressionCard(cardToken) {
   }));
   saveState();
   render();
+}
+
+function runFateCardRevealMotion(sourceElement, card, onComplete) {
+  if (fateCardRevealMotionPending) return;
+  if (!sourceElement) {
+    onComplete?.();
+    return;
+  }
+  fateCardRevealMotionPending = true;
+  Promise.resolve()
+    .then(() => playFateCardRevealMotion(sourceElement, card))
+    .catch(() => false)
+    .then(() => {
+      fateCardRevealMotionPending = false;
+      onComplete?.();
+    });
 }
 
 function resolveRegressionCardSelection(cardToken) {
@@ -1719,6 +1748,17 @@ function resolveRegressionCardSelection(cardToken) {
     return slots.find((slot) => slot.index === slotIndex)?.card || null;
   }
   return getRegressionCard(cardToken);
+}
+
+function resolveRegressionCardDrawTestSlot(slotIndex) {
+  const index = Number(slotIndex);
+  if (!Number.isInteger(index) || index < 0) return null;
+  const snapshot = createRegressionCardDrawTestSnapshot(regressionCardDrawTestState);
+  const slots = createRegressionCardCandidateSlots(regressionCardCatalog(), snapshot, {
+    seed: regressionCardDrawTestState.seed + snapshot.regressionCount,
+    projectFallbackGrades: true,
+  });
+  return slots.find((slot) => slot.index === index) || null;
 }
 
 function toggleRest() {

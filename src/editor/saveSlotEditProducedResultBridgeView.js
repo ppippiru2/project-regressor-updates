@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_PRODUCED_BRIDGE_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditProducedResultBridgeView(options = {}) {
   const contract = options.contract || {};
   const text = options.text || {};
@@ -41,13 +45,9 @@ function renderSaveEditProducedResultBridgeRouteView(route = {}, text = {}, stat
         <strong>${escapeHtml(text.routeLabels?.[route.id] || route.id)}</strong>
         <span>${escapeHtml(statusLabel(route.status))}</span>
       </div>
-      ${route.blocker ? chip(blockerFormatter(route.blocker)) : ""}
+      ${route.blocker ? editorChip(blockerFormatter(route.blocker), SAVE_EDIT_PRODUCED_BRIDGE_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

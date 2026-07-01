@@ -1,6 +1,10 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { editorFallbackLabel } from "./editorLabelFormatters.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const MONSTER_CANDIDATE_BULK_PATCH_AUTOMATION_VIEW_VERSION = "monster-candidate-bulk-patch-automation-view-v1";
+const MONSTER_CANDIDATE_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderMonsterCandidateBulkPatchAutomation(preview, detailText = {}) {
   const text = detailText.monsterCandidateBulkPatchAutomation || {};
@@ -25,15 +29,10 @@ export function renderMonsterCandidateBulkPatchAutomation(preview, detailText = 
         }, preview.version || "-"))}</strong>
       </div>
       <div class="editor-monster-candidate-bulk-automation-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
-      ${monsterCandidateBulkPatchAutomationChipBlock(text.inputFields || "Input fields", preview.templateInputFields || [])}
-      ${monsterCandidateBulkPatchAutomationChipBlock(text.targetSurfaces || "Target surfaces", (preview.surfaces || []).map((surface) => `${surface.output}: ${surface.file}`))}
+      ${editorChipBlock(text.inputFields || "Input fields", preview.templateInputFields || [], MONSTER_CANDIDATE_CHIP_OPTIONS)}
+      ${editorChipBlock(text.targetSurfaces || "Target surfaces", (preview.surfaces || []).map((surface) => `${surface.output}: ${surface.file}`), MONSTER_CANDIDATE_CHIP_OPTIONS)}
       <div class="editor-monster-candidate-bulk-automation-list">
         ${(preview.rows || []).map((row) => renderMonsterCandidateBulkPatchAutomationRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No automation rows.")}</p>`}
       </div>
@@ -42,7 +41,7 @@ export function renderMonsterCandidateBulkPatchAutomation(preview, detailText = 
 }
 
 function renderMonsterCandidateBulkPatchAutomationRow(row, text = {}) {
-  const surfaceLabels = (row.surfaces || []).map((surface) => `${bulkPatchAutomationSurfaceLabel(surface.id, text)}: ${bulkPatchAutomationStateLabel(surface.state, text)}`);
+  const surfaceLabels = (row.surfaces || []).map((surface) => `${editorFallbackLabel(surface.id, text.surfaceLabels)}: ${editorFallbackLabel(surface.state, text.stateLabels)}`);
   const patchValues = [
     `${text.balance || "Balance"}: ${row.monsterBalanceEntry?.id || row.id}`,
     `${text.world || "World"}: ${row.worldDataPatch?.action || "-"}`,
@@ -61,42 +60,21 @@ function renderMonsterCandidateBulkPatchAutomationRow(row, text = {}) {
           }, `${row.regionId || "-"} / ${row.representativeMonsterId || "-"}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${chip(bulkPatchAutomationStateLabel(row.coverageState, text))}
-          ${row.isLive ? chip(text.live || "Live") : chip(text.pending || "Pending")}
+          ${editorChip(editorFallbackLabel(row.coverageState, text.stateLabels), MONSTER_CANDIDATE_CHIP_OPTIONS)}
+          ${editorChip(row.isLive ? (text.live || "Live") : (text.pending || "Pending"), MONSTER_CANDIDATE_CHIP_OPTIONS)}
         </div>
       </div>
       <div class="editor-monster-candidate-bulk-automation-grid">
-        ${monsterCandidateBulkPatchAutomationChipBlock(text.inputSummary || "Input summary", [
+        ${editorChipBlock(text.inputSummary || "Input summary", [
           `${text.level || "Level"} ${row.input?.level || 0}`,
           ...(row.input?.tags || []),
           row.input?.rewardLink?.codexFragmentId || "",
-        ].filter(Boolean))}
-        ${monsterCandidateBulkPatchAutomationChipBlock(text.surfaceStates || "Surface states", surfaceLabels)}
-        ${monsterCandidateBulkPatchAutomationChipBlock(text.generatedPatches || "Generated patches", patchValues)}
+        ].filter(Boolean), MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.surfaceStates || "Surface states", surfaceLabels, MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.generatedPatches || "Generated patches", patchValues, MONSTER_CANDIDATE_CHIP_OPTIONS)}
       </div>
     </article>
   `;
-}
-
-function bulkPatchAutomationSurfaceLabel(surfaceId, text = {}) {
-  return text.surfaceLabels?.[surfaceId] || surfaceId || "unknown";
-}
-
-function bulkPatchAutomationStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function monsterCandidateBulkPatchAutomationChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

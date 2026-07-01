@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-01",
+  "status": "draft_attachment_point_review_matrix",
+  "purpose": "Locks the manual review matrix that connects player body skeleton points, base body variants, equipment attachment profiles, and the user's weapon/class reference targets before generated source or pixel sprites are accepted.",
+  "inputs": {
+    "skeletonPointContract": "data/samples/PlayerBodySkeletonPoints.sample.json",
+    "baseBodyVariantManifest": "data/samples/PlayerBaseBodyVariantManifest.sample.json",
+    "equipmentAttachmentMotionContract": "data/samples/EquipmentAttachmentMotion.sample.json",
+    "weaponClassReferenceTargets": "data/samples/WeaponClassReferenceTargets.sample.json",
+    "runtimeAttachmentModule": "src/assets/playerEquipmentAttachments.js"
+  },
+  "reviewStates": [
+    "waiting_generated_asset",
+    "manual_review_needed",
+    "approved_for_pixelization",
+    "approved_for_runtime_import",
+    "blocked_anchor_or_contact_failure"
+  ],
+  "reviewSuites": [
+    {
+      "reviewId": "base_body_core_alignment",
+      "displayName": "Base body core alignment",
+      "scope": "base_body",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": [],
+      "poseTemplateIds": ["idle_default"],
+      "requiredAnchors": [
+        "Head_Top",
+        "Face_Center",
+        "Neck_Base",
+        "Chest_Center",
+        "Hip_Center",
+        "Hand_ScreenLeft_Grip",
+        "Hand_ScreenRight_Grip",
+        "Foot_ScreenLeft_Baseline",
+        "Foot_ScreenRight_Baseline"
+      ],
+      "referenceIds": [],
+      "gates": [
+        "canvas_1254_locked",
+        "source_review_before_pixel",
+        "same_pose_across_six_skin_tones",
+        "foot_baselines_locked",
+        "transparent_or_easy_key_background"
+      ],
+      "failureModes": [
+        "source_pixel_anchor_mismatch",
+        "foot_baseline_drift",
+        "head_scale_drift",
+        "body_pose_or_camera_changed"
+      ]
+    },
+    {
+      "reviewId": "face_hair_head_overlay",
+      "displayName": "Face hair and head overlay alignment",
+      "scope": "head_overlay",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["face.future.v1", "hair.future.v1", "armor.helmet.v1"],
+      "poseTemplateIds": ["idle_default"],
+      "requiredAnchors": ["Head_Top", "Face_Center", "Neck_Base"],
+      "referenceIds": ["class_assassin_dual_dagger_hair"],
+      "gates": [
+        "head_scale_unchanged",
+        "face_direction_unchanged",
+        "neck_back_alignment_visible",
+        "no_body_pose_change"
+      ],
+      "failureModes": [
+        "head_scale_drift",
+        "face_direction_drift",
+        "helmet_or_hair_floats",
+        "body_pose_or_camera_changed"
+      ]
+    },
+    {
+      "reviewId": "torso_cloak_alignment",
+      "displayName": "Torso armor and cloak alignment",
+      "scope": "torso_back",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["armor.torso.v1", "back.cloak.v1"],
+      "poseTemplateIds": ["idle_default", "sword_shield_idle", "staff_stand"],
+      "requiredAnchors": [
+        "Neck_Base",
+        "Chest_Center",
+        "Hip_Center",
+        "Shoulder_ScreenLeft",
+        "Shoulder_ScreenRight"
+      ],
+      "referenceIds": [
+        "class_warrior_representative",
+        "class_assassin_dual_dagger_plain",
+        "class_mage_staff_representative"
+      ],
+      "gates": [
+        "neck_opening_matches_body",
+        "chest_center_matches_body",
+        "waist_center_matches_body",
+        "cloak_follows_back_without_weapon_overlap"
+      ],
+      "failureModes": [
+        "torso_armor_chest_offset",
+        "cloak_detached_from_neck",
+        "shoulder_armor_not_following_shoulders",
+        "robe_or_belt_hides_grip_anchor"
+      ]
+    },
+    {
+      "reviewId": "one_hand_mainhand_grip",
+      "displayName": "One-hand mainhand grip",
+      "scope": "held_weapon",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["weapon.one_hand.mainhand.v1"],
+      "poseTemplateIds": ["sword_shield_idle"],
+      "requiredAnchors": [
+        "Elbow_ScreenLeft",
+        "Wrist_ScreenLeft",
+        "Hand_ScreenLeft_Grip"
+      ],
+      "referenceIds": [
+        "weapon_test_one_hand_sword_grip",
+        "weapon_test_one_hand_axe_grip",
+        "weapon_test_one_hand_hammer_grip",
+        "weapon_test_sword_shield",
+        "class_warrior_representative"
+      ],
+      "gates": [
+        "grip_center_inside_fist",
+        "guard_or_handle_contacts_knuckles",
+        "weapon_axis_follows_forearm",
+        "weapon_swap_keeps_same_grip_anchor"
+      ],
+      "failureModes": [
+        "hand_weapon_separation",
+        "weapon_handle_not_inside_fist",
+        "weapon_axis_misses_wrist",
+        "heavy_head_pulls_weapon_off_anchor"
+      ]
+    },
+    {
+      "reviewId": "shield_offhand_alignment",
+      "displayName": "Shield and offhand alignment",
+      "scope": "offhand",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["shield.offhand.round.v1"],
+      "poseTemplateIds": ["sword_shield_idle"],
+      "requiredAnchors": [
+        "Elbow_ScreenRight",
+        "Wrist_ScreenRight",
+        "Hand_ScreenRight_Grip"
+      ],
+      "referenceIds": [
+        "weapon_test_sword_shield",
+        "class_warrior_representative"
+      ],
+      "gates": [
+        "shield_grip_matches_offhand",
+        "shield_center_overlaps_forearm",
+        "front_and_back_layers_keep_arm_contact",
+        "rim_does_not_hide_head_or_mainhand"
+      ],
+      "failureModes": [
+        "floating_shield_or_book",
+        "shield_center_not_following_forearm",
+        "offhand_layer_order_wrong",
+        "shield_crops_or_hides_grip"
+      ]
+    },
+    {
+      "reviewId": "two_hand_heavy_guard",
+      "displayName": "Two-hand heavy weapon guard",
+      "scope": "held_weapon",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["weapon.two_hand.heavy.v1"],
+      "poseTemplateIds": ["great_weapon_guard"],
+      "requiredAnchors": [
+        "TwoHand_LowerGrip",
+        "TwoHand_UpperGrip",
+        "Weapon_Tip",
+        "Weapon_Back_End",
+        "Mass_Center",
+        "Hand_ScreenLeft_Grip",
+        "Hand_ScreenRight_Grip"
+      ],
+      "referenceIds": [
+        "weapon_test_greatsword_two_hand",
+        "weapon_test_two_hand_axe_hammer"
+      ],
+      "gates": [
+        "both_hands_share_same_handle_axis",
+        "large_weapon_axis_crosses_both_grips",
+        "mass_center_stays_on_weapon_shaft",
+        "feet_stay_locked_during_guard"
+      ],
+      "failureModes": [
+        "two_hand_grips_disagree",
+        "large_weapon_floats_above_hands",
+        "mass_center_not_on_weapon_axis",
+        "foot_baseline_drift"
+      ]
+    },
+    {
+      "reviewId": "bow_draw_alignment",
+      "displayName": "Bow draw and arrow alignment",
+      "scope": "ranged_weapon",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["weapon.bow.v1"],
+      "poseTemplateIds": ["bow_draw"],
+      "requiredAnchors": [
+        "Bow_Grip",
+        "Draw_Hand",
+        "Arrow_Nock",
+        "Arrow_Tip",
+        "Bow_String_Top",
+        "Bow_String_Bottom"
+      ],
+      "referenceIds": [
+        "weapon_test_bow_draw",
+        "class_archer_representative"
+      ],
+      "gates": [
+        "forward_hand_locks_to_bow_grip",
+        "draw_hand_locks_to_arrow_nock",
+        "arrow_axis_is_readable",
+        "string_line_connects_top_bottom_and_nock"
+      ],
+      "failureModes": [
+        "bow_grip_not_in_hand",
+        "draw_hand_misses_arrow_nock",
+        "arrow_axis_misses_target_line",
+        "bow_string_detached"
+      ]
+    },
+    {
+      "reviewId": "staff_caster_alignment",
+      "displayName": "Staff caster and wand-book alignment",
+      "scope": "caster_weapon",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["weapon.staff.v1"],
+      "poseTemplateIds": ["staff_stand"],
+      "requiredAnchors": [
+        "Staff_Grip",
+        "Staff_Top",
+        "Staff_Base",
+        "Cast_Hand",
+        "Hand_ScreenLeft_Grip",
+        "Hand_ScreenRight_Grip"
+      ],
+      "referenceIds": [
+        "weapon_test_two_hand_staff",
+        "weapon_test_wand_book",
+        "class_mage_staff_representative",
+        "class_mage_wand_book_representative"
+      ],
+      "gates": [
+        "staff_axis_is_clear",
+        "staff_grip_is_inside_hand",
+        "cast_hand_remains_free_for_vfx",
+        "book_or_wand_does_not_float_from_offhand"
+      ],
+      "failureModes": [
+        "staff_axis_misses_grip",
+        "staff_base_or_top_crops",
+        "floating_shield_or_book",
+        "cast_hand_hidden_by_robe_or_staff"
+      ]
+    },
+    {
+      "reviewId": "gauntlet_fist_alignment",
+      "displayName": "Gauntlet and fist alignment",
+      "scope": "handwear",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["handwear.gauntlet.v1"],
+      "poseTemplateIds": ["fist_guard_idle"],
+      "requiredAnchors": [
+        "Fist_ScreenLeft",
+        "Fist_ScreenRight",
+        "Wrist_ScreenLeft",
+        "Wrist_ScreenRight",
+        "Guard_Center"
+      ],
+      "referenceIds": [
+        "weapon_test_gauntlets",
+        "class_fighter_representative"
+      ],
+      "gates": [
+        "gauntlet_wraps_wrist_and_fist",
+        "fist_centers_remain_visible",
+        "impact_vfx_anchor_stays_between_fists",
+        "handwear_does_not_read_as_held_prop"
+      ],
+      "failureModes": [
+        "gauntlet_floats_from_fist",
+        "fist_center_hidden",
+        "guard_center_not_between_hands",
+        "wrist_lock_mismatch"
+      ]
+    },
+    {
+      "reviewId": "boots_foot_baseline",
+      "displayName": "Boots and foot baseline",
+      "scope": "footwear",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["boots.pair.v1"],
+      "poseTemplateIds": [
+        "idle_default",
+        "sword_shield_idle",
+        "great_weapon_guard",
+        "bow_draw",
+        "staff_stand",
+        "fist_guard_idle"
+      ],
+      "requiredAnchors": [
+        "Knee_ScreenLeft",
+        "Knee_ScreenRight",
+        "Foot_ScreenLeft_Baseline",
+        "Foot_ScreenRight_Baseline"
+      ],
+      "referenceIds": [
+        "class_warrior_representative",
+        "class_fighter_representative",
+        "class_mage_staff_representative"
+      ],
+      "gates": [
+        "toe_and_heel_keep_ground_contact",
+        "boot_rotation_follows_knee_to_foot",
+        "feet_do_not_slide_between_motion_frames",
+        "standing_ground_line_remains_consistent"
+      ],
+      "failureModes": [
+        "foot_baseline_drift",
+        "boot_detached_from_ankle",
+        "toe_tip_above_ground",
+        "left_right_boot_swap"
+      ]
+    }
+  ],
+  "globalFailureModes": [
+    {
+      "failureId": "hand_weapon_separation",
+      "meaning": "A held weapon or prop no longer touches the intended hand grip anchor."
+    },
+    {
+      "failureId": "floating_shield_or_book",
+      "meaning": "An offhand prop appears beside the hand instead of being held or supported by it."
+    },
+    {
+      "failureId": "foot_baseline_drift",
+      "meaning": "A generated frame moves one or both feet away from the locked standing baseline."
+    },
+    {
+      "failureId": "head_scale_drift",
+      "meaning": "Face, hair, helmet, or body generation changes the locked head scale or placement."
+    },
+    {
+      "failureId": "source_pixel_anchor_mismatch",
+      "meaning": "The pixelized sprite no longer projects the approved source anchors by normalized coordinates."
+    }
+  ],
+  "rules": [
+    "Review generated source sprites before pixel outputs.",
+    "If a review suite fails, regenerate or adjust the pose/anchor contract before importing the sprite.",
+    "Do not loosen runtime anchors to match a bad generated image.",
+    "Use reference images for visual target intent only; do not copy their background, labels, or side-by-side layout."
+  ]
+}

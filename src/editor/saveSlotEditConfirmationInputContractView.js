@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_CONFIRMATION_CONTRACT_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditConfirmationInputContractView(options = {}) {
   const contract = options.contract || {};
   const text = options.text || {};
@@ -37,8 +41,8 @@ export function renderSaveSlotEditConfirmationInputContractView(options = {}) {
           <span>${escapeHtml(applyRunner.status)}</span>
         </div>
         <div class="editor-chip-list">
-          ${runnerRequires.map((item) => chip(item)).join("")}
-          ${runnerBlockers.map((item) => chip(item)).join("")}
+          ${runnerRequires.map((item) => editorChip(item, SAVE_EDIT_CONFIRMATION_CONTRACT_CHIP_OPTIONS)).join("")}
+          ${runnerBlockers.map((item) => editorChip(item, SAVE_EDIT_CONFIRMATION_CONTRACT_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <pre class="editor-save-edit-confirmation-contract-code"><code>${escapeHtml(JSON.stringify(contract.payloadShape, null, 2))}</code></pre>
@@ -69,10 +73,6 @@ function renderSaveEditConfirmationInputContractFieldView(field = {}, text = {})
       </dl>
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

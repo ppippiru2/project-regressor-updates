@@ -1,6 +1,10 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { editorFallbackLabel } from "./editorLabelFormatters.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const MONSTER_CANDIDATE_PROMOTION_VIEW_VERSION = "monster-candidate-promotion-view-v1";
+const MONSTER_CANDIDATE_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderMonsterCandidatePromotionChecklist(checklist, detailText = {}) {
   const text = detailText.monsterCandidatePromotion || {};
@@ -28,12 +32,7 @@ export function renderMonsterCandidatePromotionChecklist(checklist, detailText =
         }, checklist.version || "-"))}</strong>
       </div>
       <div class="editor-monster-candidate-promotion-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${renderMonsterCandidatePromotionActions(checklist.requiredActions || [], text)}
       <div class="editor-monster-candidate-promotion-groups">
@@ -51,7 +50,7 @@ function renderMonsterCandidatePromotionActions(actions = [], text = {}) {
       <div>
         ${actions.map((action) => `
           <span>
-            <b>${escapeHtml(monsterCandidatePromotionActionLabel(action.id, text))}</b>
+            <b>${escapeHtml(editorFallbackLabel(action.id, text.actionLabels, ""))}</b>
             <small>${escapeHtml(action.file || "")}</small>
           </span>
         `).join("")}
@@ -85,11 +84,11 @@ function renderMonsterCandidatePromotionGroup(group, text = {}) {
 function renderMonsterCandidatePromotionRow(row, text = {}) {
   const roles = [
     row.readyForReview ? (text.readyForReview || "Ready for review") : (text.blocked || "Blocked"),
-    monsterCandidatePromotionStageLabel(row.promotionStageId, text),
+    editorFallbackLabel(row.promotionStageId, text.stageLabels),
     row.isBoss ? (text.boss || "Boss") : "",
   ].filter(Boolean);
-  const actionLabels = (row.requiredActionIds || []).map((actionId) => monsterCandidatePromotionActionLabel(actionId, text));
-  const riskLabels = (row.riskSignalIds || []).map((signalId) => monsterCandidatePromotionRiskLabel(signalId, text));
+  const actionLabels = (row.requiredActionIds || []).map((actionId) => editorFallbackLabel(actionId, text.actionLabels, ""));
+  const riskLabels = (row.riskSignalIds || []).map((signalId) => editorFallbackLabel(signalId, text.riskLabels, ""));
 
   return `
     <article class="editor-monster-candidate-promotion-row" data-state="${row.readyForReview ? "ready" : "blocked"}" data-stage="${escapeAttribute(row.promotionStageId || "unknown")}">
@@ -101,26 +100,18 @@ function renderMonsterCandidatePromotionRow(row, text = {}) {
             source: row.sourceMonsterName || row.sourceMonsterId || "-"
           }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
         </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+        <div class="editor-chip-list">${roles.map((role) => editorChip(role, MONSTER_CANDIDATE_CHIP_OPTIONS)).join("")}</div>
       </div>
       <div class="editor-monster-candidate-promotion-grid">
-        ${monsterCandidatePromotionChipBlock(text.promotionStage || "Promotion stage", [monsterCandidatePromotionStageLabel(row.promotionStageId, text)])}
-        ${monsterCandidatePromotionChipBlock(text.actionPlan || "Actions", actionLabels)}
-        ${monsterCandidatePromotionChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
-        ${monsterCandidatePromotionChipBlock(text.rewardCoverage || "Reward coverage", monsterCandidatePromotionRewardCoverageValues(row, text))}
-        ${monsterCandidatePromotionChipBlock(text.codexRecord || "Codex record", monsterCandidatePromotionCodexRecordValues(row, text))}
-        ${monsterCandidatePromotionChipBlock(text.risks || "Signals", riskLabels.length ? riskLabels : [text.noRisks || "No blocking signals"])}
+        ${editorChipBlock(text.promotionStage || "Promotion stage", [editorFallbackLabel(row.promotionStageId, text.stageLabels)], MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.actionPlan || "Actions", actionLabels, MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"], MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.rewardCoverage || "Reward coverage", monsterCandidatePromotionRewardCoverageValues(row, text), MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.codexRecord || "Codex record", monsterCandidatePromotionCodexRecordValues(row, text), MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.risks || "Signals", riskLabels.length ? riskLabels : [text.noRisks || "No blocking signals"], MONSTER_CANDIDATE_CHIP_OPTIONS)}
       </div>
     </article>
   `;
-}
-
-function monsterCandidatePromotionActionLabel(actionId, text = {}) {
-  return text.actionLabels?.[actionId] || actionId;
-}
-
-function monsterCandidatePromotionRiskLabel(signalId, text = {}) {
-  return text.riskLabels?.[signalId] || signalId;
 }
 
 function monsterCandidatePromotionCodexRecordValues(row, text = {}) {
@@ -141,23 +132,6 @@ function monsterCandidatePromotionRewardCoverageValues(row, text = {}) {
     `${labels.material || "Material"}: ${coverage.material ? (labels.connected || "Connected") : (labels.missing || "Missing")}`,
     `${labels.skill || "Skill"}: ${coverage.skill ? (labels.connected || "Connected") : (labels.missing || "Missing")}`,
   ];
-}
-
-function monsterCandidatePromotionStageLabel(stageId, text = {}) {
-  return text.stageLabels?.[stageId] || stageId || "unknown";
-}
-
-function monsterCandidatePromotionChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

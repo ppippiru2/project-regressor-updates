@@ -109,5 +109,3 @@ function reviewActionForSurface(surface) {
   if (surface.domainId === "monster") return "verify-monster-runtime";
   return "verify-data-row";
 }
-
-

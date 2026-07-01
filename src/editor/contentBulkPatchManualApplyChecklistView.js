@@ -1,4 +1,8 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST_VIEW_VERSION = "content-bulk-patch-manual-apply-checklist-view-v1";
 
@@ -28,18 +32,13 @@ export function renderContentBulkPatchManualApplyChecklist(checklist, detailText
         }, checklist.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-checklist-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-checklist-steps">
         <strong>${escapeHtml(text.preflightSteps || "Preflight steps")}</strong>
         <div class="editor-chip-list">
-          ${chip(contentBulkPatchChecklistStatusLabel(checklist.status, text))}
-          ${(checklist.preflightSteps || []).map((step) => chip(contentBulkPatchChecklistStepLabel(step, text))).join("")}
+          ${editorChip(contentBulkFallbackLabel(checklist.status, text.statusLabels))}
+          ${(checklist.preflightSteps || []).map((step) => editorChip(contentBulkFallbackLabel(step, text.stepLabels))).join("")}
         </div>
       </div>
       <div class="editor-content-bulk-checklist-list">
@@ -48,7 +47,7 @@ export function renderContentBulkPatchManualApplyChecklist(checklist, detailText
       <div class="editor-content-bulk-checklist-steps">
         <strong>${escapeHtml(text.finalReviewSteps || "Final review steps")}</strong>
         <div class="editor-chip-list">
-          ${(checklist.finalReviewSteps || []).map((step) => chip(contentBulkPatchChecklistStepLabel(step, text))).join("")}
+          ${(checklist.finalReviewSteps || []).map((step) => editorChip(contentBulkFallbackLabel(step, text.stepLabels))).join("")}
         </div>
       </div>
     </section>
@@ -56,7 +55,7 @@ export function renderContentBulkPatchManualApplyChecklist(checklist, detailText
 }
 
 function renderContentBulkPatchManualApplyFile(entry, text = {}) {
-  const surfaceLabels = (entry.surfaceReviewItems || []).map((item) => `${item.domainId || "-"} · ${item.surface || item.id || "-"} · ${contentBulkPatchChecklistActionLabel(item.reviewAction, text)}`);
+  const surfaceLabels = (entry.surfaceReviewItems || []).map((item) => `${item.domainId || "-"} · ${item.surface || item.id || "-"} · ${contentBulkFallbackLabel(item.reviewAction, text.actionLabels)}`);
   return `
     <article class="editor-content-bulk-checklist-file" data-state="${escapeAttribute(entry.status || "unknown")}">
       <div class="editor-content-bulk-checklist-file-head">
@@ -71,41 +70,16 @@ function renderContentBulkPatchManualApplyFile(entry, text = {}) {
           }, `${entry.surfaceCount || 0}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${chip(contentBulkPatchChecklistStatusLabel(entry.status, text))}
+          ${editorChip(contentBulkFallbackLabel(entry.status, text.statusLabels))}
         </div>
       </div>
       <div class="editor-content-bulk-checklist-grid">
-        ${contentBulkPatchChecklistChipBlock(text.domains || "Domains", entry.domainIds || [])}
-        ${contentBulkPatchChecklistChipBlock(text.actions || "Actions", (entry.actions || []).map((action) => contentBulkPatchChecklistActionLabel(action, text)))}
-        ${contentBulkPatchChecklistChipBlock(text.surfaceReviews || "Surface reviews", surfaceLabels)}
+        ${contentBulkChipBlock(text.domains || "Domains", entry.domainIds || [])}
+        ${contentBulkChipBlock(text.actions || "Actions", (entry.actions || []).map((action) => contentBulkFallbackLabel(action, text.actionLabels)))}
+        ${contentBulkChipBlock(text.surfaceReviews || "Surface reviews", surfaceLabels)}
       </div>
     </article>
   `;
-}
-
-function contentBulkPatchChecklistStatusLabel(statusId, text = {}) {
-  return text.statusLabels?.[statusId] || statusId || "unknown";
-}
-
-function contentBulkPatchChecklistStepLabel(stepId, text = {}) {
-  return text.stepLabels?.[stepId] || stepId || "unknown";
-}
-
-function contentBulkPatchChecklistActionLabel(actionId, text = {}) {
-  return text.actionLabels?.[actionId] || actionId || "unknown";
-}
-
-function contentBulkPatchChecklistChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span>${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {

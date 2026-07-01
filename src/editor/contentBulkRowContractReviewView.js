@@ -1,11 +1,13 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
 
 export const CONTENT_BULK_ROW_CONTRACT_REVIEW_VIEW_VERSION = "content-bulk-row-contract-review-view-v1";
 
 export function renderContentBulkRowContractReviewChip(review = {}, text = {}) {
-  return contentBulkRowContractReviewChipBlock(
+  return contentBulkChipBlock(
     text.contractReview || "Contract review",
     contentBulkRowContractReviewLabels(review, text),
+    { blockClass: "editor-balance-chip-block editor-content-bulk-row-contract-review" },
   );
 }
 
@@ -27,15 +29,6 @@ export function contentBulkRowContractReviewLabels(review = {}, text = {}) {
       surfaces: review.targetSurfaceCount || 0,
     }, `${status} - ${state} - ${review.targetSurfaceCount || 0}`),
   ];
-}
-
-function contentBulkRowContractReviewChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block editor-content-bulk-row-contract-review">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
-    </div>
-  `;
 }
 
 function escapeHtml(value) {

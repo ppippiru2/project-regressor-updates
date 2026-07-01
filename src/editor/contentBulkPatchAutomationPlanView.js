@@ -1,6 +1,11 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel, contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_AUTOMATION_PLAN_VIEW_VERSION = "content-bulk-patch-automation-plan-view-v1";
+const CONTENT_BULK_AUTOMATION_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderContentBulkPatchAutomationPlan(plan, detailText = {}) {
   const text = detailText.contentBulkPatchAutomationPlan || {};
@@ -25,12 +30,7 @@ export function renderContentBulkPatchAutomationPlan(plan, detailText = {}) {
         }, plan.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-automation-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-automation-list">
         ${(plan.domains || []).map((domain) => renderContentBulkPatchAutomationDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
@@ -52,38 +52,17 @@ function renderContentBulkPatchAutomationDomain(domain, text = {}) {
           }, `${domain.currentRowCount || 0} / ${domain.surfaceTemplateCount || 0}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${chip(contentBulkPatchStateLabel(domain.coverageState, text))}
+          ${editorChip(contentBulkFallbackLabel(domain.coverageState, text.stateLabels), CONTENT_BULK_AUTOMATION_CHIP_OPTIONS)}
         </div>
       </div>
       <div class="editor-content-bulk-automation-grid">
-        ${contentBulkPatchAutomationChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [])}
-        ${contentBulkPatchAutomationChipBlock(text.batchIdentity || "Batch identity", [domain.batchKey, ...(domain.identityFields || [])].filter(Boolean))}
-        ${contentBulkPatchAutomationChipBlock(text.targetSurfaces || "Target surfaces", domain.surfaces || [])}
-        ${contentBulkPatchAutomationChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
+        ${contentBulkChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.batchIdentity || "Batch identity", [domain.batchKey, ...(domain.identityFields || [])].filter(Boolean), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.targetSurfaces || "Target surfaces", domain.surfaces || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [], { chipClass: "editor-chip" })}
       </div>
     </article>
   `;
-}
-
-function contentBulkPatchDomainLabel(domainId, text = {}) {
-  return text.domainLabels?.[domainId] || domainId || "unknown";
-}
-
-function contentBulkPatchStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function contentBulkPatchAutomationChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

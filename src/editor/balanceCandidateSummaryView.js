@@ -1,6 +1,9 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const BALANCE_CANDIDATE_SUMMARY_VIEW_VERSION = "balance-candidate-summary-view-v1";
+const BALANCE_DETAIL_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderActiveBalanceCandidateSummary(detailText = {}, relatedChecks = [], candidates = [], visibleGroups = [], options = {}) {
   const candidate = options.activeCandidate || null;
@@ -32,7 +35,7 @@ export function renderActiveBalanceCandidateSummary(detailText = {}, relatedChec
             count: overview.checkCount
           }, `${overview.checkCount}`))}
         </div>
-        ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", overview.signals)}
+        ${editorChipBlock(detailText.candidateSignals || "Signals", overview.signals, BALANCE_DETAIL_CHIP_OPTIONS)}
       </section>
     `;
   }
@@ -67,8 +70,8 @@ export function renderActiveBalanceCandidateSummary(detailText = {}, relatedChec
         ${balanceActiveCandidateMetric(detailText.candidateValueRanges || "Value Ranges", valueRanges.join(" / "))}
         ${balanceActiveCandidateMetric(detailText.candidateChecks || "Checks", checkLabels.join(" / ") || "-")}
       </div>
-      ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [])}
-      ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
+      ${editorChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [], BALANCE_DETAIL_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [], BALANCE_DETAIL_CHIP_OPTIONS)}
     </section>
   `;
 }
@@ -106,13 +109,13 @@ export function renderBalanceDomainSummaries(domains = [], detailText = {}, rela
                 priority: domain.priority || "-"
               }, `#${domain.priority || "-"}`))}</strong>
             </div>
-            ${balanceDetailChipBlock(detailText.domainGroups || "Groups", domain.groups || [])}
-            ${balanceDetailChipBlock(detailText.domainExports || "Exports", balanceDomainExportNames(domain, context))}
-            ${balanceDetailChipBlock(detailText.domainValueShapes || "Value Shapes", balanceDomainValueShapeLabels(domain, detailText, context))}
-            ${balanceDetailChipBlock(detailText.domainValueRanges || "Value Ranges", balanceDomainValueRangeLabels(domain, detailText, context))}
-            ${balanceDetailChipBlock(detailText.domainChecks || "Checks", balanceDomainCheckLabels(domain, relatedChecks))}
-            ${balanceDetailChipBlock(detailText.domainSignals || "Signals", balanceDomainSignalLabels(domain, detailText))}
-            ${balanceDetailChipBlock(detailText.domainWatch || "Watch", domain.watch || [])}
+            ${editorChipBlock(detailText.domainGroups || "Groups", domain.groups || [], BALANCE_DETAIL_CHIP_OPTIONS)}
+            ${editorChipBlock(detailText.domainExports || "Exports", balanceDomainExportNames(domain, context), BALANCE_DETAIL_CHIP_OPTIONS)}
+            ${editorChipBlock(detailText.domainValueShapes || "Value Shapes", balanceDomainValueShapeLabels(domain, detailText, context), BALANCE_DETAIL_CHIP_OPTIONS)}
+            ${editorChipBlock(detailText.domainValueRanges || "Value Ranges", balanceDomainValueRangeLabels(domain, detailText, context), BALANCE_DETAIL_CHIP_OPTIONS)}
+            ${editorChipBlock(detailText.domainChecks || "Checks", balanceDomainCheckLabels(domain, relatedChecks), BALANCE_DETAIL_CHIP_OPTIONS)}
+            ${editorChipBlock(detailText.domainSignals || "Signals", balanceDomainSignalLabels(domain, detailText), BALANCE_DETAIL_CHIP_OPTIONS)}
+            ${editorChipBlock(detailText.domainWatch || "Watch", domain.watch || [], BALANCE_DETAIL_CHIP_OPTIONS)}
           </article>
         `;
       }).join("")}
@@ -135,10 +138,10 @@ export function renderBalanceTuningCandidates(candidates = [], detailText = {}, 
           </div>
           ${balanceCandidatePriorityBlock(candidate, detailText)}
           ${balanceCandidateImpactBlock(balanceCandidateImpactSummary(candidate, context), detailText)}
-          ${balanceDetailChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [])}
-          ${balanceDetailChipBlock(detailText.candidateValueRanges || "Value Ranges", balanceCandidateValueRangeLabels(candidate, detailText, context))}
-          ${balanceDetailChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [])}
-          ${balanceDetailChipBlock(detailText.candidateChecks || "Checks", balanceCandidateCheckLabels(candidate, relatedChecks))}
+          ${editorChipBlock(detailText.candidateSignals || "Signals", candidate.signals || [], BALANCE_DETAIL_CHIP_OPTIONS)}
+          ${editorChipBlock(detailText.candidateValueRanges || "Value Ranges", balanceCandidateValueRangeLabels(candidate, detailText, context), BALANCE_DETAIL_CHIP_OPTIONS)}
+          ${editorChipBlock(detailText.candidateGroups || "Groups", candidate.groups || [], BALANCE_DETAIL_CHIP_OPTIONS)}
+          ${editorChipBlock(detailText.candidateChecks || "Checks", balanceCandidateCheckLabels(candidate, relatedChecks), BALANCE_DETAIL_CHIP_OPTIONS)}
         </button>
       `).join("")}
     </section>
@@ -178,12 +181,7 @@ function balanceCandidateOverviewSummary(candidates = [], relatedChecks = [], co
 }
 
 function balanceActiveCandidateMetric(label, value) {
-  return `
-    <span>
-      <small>${escapeHtml(label)}</small>
-      <b>${escapeHtml(value || "-")}</b>
-    </span>
-  `;
+  return renderEditorSummaryCard(label, value || "-");
 }
 
 function balanceDomainImpactSummary(domain = {}, context = createBalanceCandidateRenderContext()) {
@@ -326,15 +324,6 @@ function normalizeBalanceCandidateGroups(value, context = createBalanceCandidate
   if (!Array.isArray(value)) return [];
   const groupIds = new Set(context.groups.map((group) => group.id));
   return value.filter((groupId) => typeof groupId === "string" && groupIds.has(groupId));
-}
-
-function balanceDetailChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span class="editor-chip">${escapeHtml(String(value))}</span>`).join("")}</div>
-    </div>
-  `;
 }
 
 function escapeHtml(value) {

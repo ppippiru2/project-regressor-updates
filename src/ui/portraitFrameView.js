@@ -59,6 +59,3 @@ function escapeAttr(value) {
     "'": "&#39;",
   })[char]);
 }
-
-
-

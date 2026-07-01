@@ -21,6 +21,7 @@ export function renderSystemWindow({ log, dialogueRecords, player, playerProfile
   windowElement.dataset.systemType = notice.type;
   windowElement.dataset.systemLabel = notice.label;
   setOptionalDataset(windowElement, "dialogueEventId", notice.dialogueEventId);
+  setOptionalDataset(windowElement, "dialogueTitle", notice.dialogueTitle);
   setOptionalDataset(windowElement, "dialogueOutputChannel", notice.dialogueOutputChannel);
   setOptionalDataset(windowElement, "dialogueLineType", notice.dialogueLineType);
   if (targetView) {

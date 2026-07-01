@@ -75,7 +75,7 @@ function renderCardSlot(slot, selected, snapshot) {
     karmaValue: snapshot.karmaValue,
   });
   return renderFateCardButton(slot, {
-    mode: FATE_CARD_RENDER_MODES.devPreview,
+    mode: FATE_CARD_RENDER_MODES.productionProgressiveHint,
     hintLevel,
     selected,
     revealed: selected,

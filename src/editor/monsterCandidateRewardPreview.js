@@ -113,6 +113,3 @@ function resolveRewardItem(itemId, itemById, unresolvedItemIds) {
 function monsterName(monsterId) {
   return MONSTER_NAMES[monsterId] || monsterId;
 }
-
-
-

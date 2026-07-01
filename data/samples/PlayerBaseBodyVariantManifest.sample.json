@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-01",
+  "status": "draft_base_body_variant_manifest",
+  "purpose": "Plans the common player base body source/pixel variants for both genders and six skin tones before face, hair, armor, weapon, and class sprite production.",
+  "coordinateConvention": {
+    "canvas": [1254, 1254],
+    "origin": "top_left",
+    "unit": "source_pixel",
+    "background": "transparent_preferred",
+    "pixelOutputRule": "Pixel variants must project body anchors from the approved source variant by normalized coordinates."
+  },
+  "runtimeAnchorSource": {
+    "module": "src/assets/playerEquipmentAttachments.js",
+    "exportName": "PLAYER_BODY_ANCHORS_BY_GENDER"
+  },
+  "skeletonPointContract": "data/samples/PlayerBodySkeletonPoints.sample.json",
+  "visualReferences": [
+    {
+      "gender": "female",
+      "outputType": "source",
+      "path": "C:/Users/Administrator/Desktop/141414/female_base_body_common_v1_source.png"
+    },
+    {
+      "gender": "female",
+      "outputType": "pixel",
+      "path": "C:/Users/Administrator/Desktop/141414/female_base_body_common_v1_pixel.png"
+    },
+    {
+      "gender": "male",
+      "outputType": "source",
+      "path": "C:/Users/Administrator/Desktop/141414/male_base_body_common_v1_source.png"
+    },
+    {
+      "gender": "male",
+      "outputType": "pixel",
+      "path": "C:/Users/Administrator/Desktop/141414/male_base_body_common_v1_pixel.png"
+    }
+  ],
+  "genders": ["male", "female"],
+  "skinTones": [
+    { "toneId": "T1", "label": "very_light" },
+    { "toneId": "T2", "label": "light" },
+    { "toneId": "T3", "label": "warm_medium" },
+    { "toneId": "T4", "label": "tan" },
+    { "toneId": "T5", "label": "dark_brown" },
+    { "toneId": "T6", "label": "deep_brown" }
+  ],
+  "outputTypes": [
+    {
+      "outputType": "source",
+      "fileNameTemplate": "player_base_body_{gender}_{toneId}_source.png",
+      "targetDirectory": "assets/_incoming/player-base-bodies/source",
+      "rules": [
+        "Match the approved body pose, camera framing, head scale, lighting, and underwear style.",
+        "Keep clean high-detail edges; do not add pixelated outlines to source variants."
+      ]
+    },
+    {
+      "outputType": "pixel",
+      "fileNameTemplate": "player_base_body_{gender}_{toneId}_pixel.png",
+      "targetDirectory": "assets/_incoming/player-base-bodies/pixel",
+      "rules": [
+        "Derive from the matching approved source body variant.",
+        "Keep crisp pixel edges while preserving anchor positions and silhouette."
+      ]
+    }
+  ],
+  "approvalGates": [
+    "player_body_anchor_geometry_zero_failures",
+    "player_body_skeleton_points_zero_missing",
+    "source_variant_review_passed_before_pixel",
+    "skin_tone_matches_qc_sheet",
+    "transparent_or_easy_to_key_background",
+    "underwear_style_unchanged",
+    "no_text_or_watermark"
+  ],
+  "generationRules": [
+    "Generate source variants before pixel variants.",
+    "Do not change body pose, stance, hand position, foot baseline, head scale, camera framing, or underwear style between skin tones.",
+    "Use transparent background when possible; otherwise use a flat easy-to-key background.",
+    "Face and hair are separate overlays unless the specific task is a face or hair source variant.",
+    "Runtime anchors remain shared per gender and are not recalculated from generated image bounds."
+  ]
+}

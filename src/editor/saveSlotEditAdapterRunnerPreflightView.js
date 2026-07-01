@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_ADAPTER_PREFLIGHT_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditAdapterRunnerPreflightView(options = {}) {
   const preflight = options.preflight || {};
   const text = options.text || {};
@@ -42,13 +46,9 @@ function renderSaveEditAdapterRunnerPreflightCheckView(check = {}, statusLabel =
         <strong>${escapeHtml(check.label)}</strong>
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_ADAPTER_PREFLIGHT_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

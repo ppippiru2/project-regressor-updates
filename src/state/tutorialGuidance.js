@@ -115,6 +115,11 @@ export function claimRegionCoreEventGuide(state, region) {
   return [resolved.log];
 }
 
+export function claimRegionCoreEventCompletionGuide(region) {
+  const resolved = resolveRegionCoreEvent(region);
+  return resolved?.completionLog ? [resolved.completionLog] : [];
+}
+
 function validTutorialFlagOverrides(source) {
   return Object.fromEntries(
     Object.entries(DEFAULT_TUTORIAL_FLAGS).map(([key, fallback]) => {
@@ -130,6 +135,3 @@ function validTutorialFlagOverrides(source) {
     })
   );
 }
-
-
-

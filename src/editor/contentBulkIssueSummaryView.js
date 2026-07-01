@@ -1,8 +1,29 @@
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+
 export const CONTENT_BULK_ISSUE_SUMMARY_VIEW_VERSION = "content-bulk-issue-summary-view-v1";
 
 export function contentBulkIssueList(codes = [], text = {}) {
   const list = Array.isArray(codes) ? codes.filter(Boolean) : [];
-  return list.length ? list : [text.noIssues || "None"];
+  const labels = contentBulkIssueLabels(text);
+  return list.length ? list.map((code) => labels[code] || code) : [text.noIssues || "None"];
+}
+
+function contentBulkIssueLabels(text = {}) {
+  return {
+    ...(text.issueLabels || {}),
+    ...(text.stageGateReasonLabels || {}),
+    ...(text.blockedReasonLabels || {}),
+    ...(text.warningReasonLabels || {}),
+    ...(text.reviewLabels || {}),
+    ...(text.gateLabels || {}),
+    ...(text.fileReviewBlockerLabels || {}),
+    ...(text.fileRehearsalBlockerLabels || {}),
+    ...(text.preApplyReviewLabels || {}),
+    ...(text.backupStepLabels || {}),
+    ...(text.restoreStepLabels || {}),
+    ...(text.validationLabels || {}),
+  };
 }
 
 export function renderContentBulkIssueSummary(issueSummary, text = {}) {
@@ -24,32 +45,14 @@ export function renderContentBulkIssueSummary(issueSummary, text = {}) {
         <p class="muted">${escapeHtml(text.issueSummaryHint || "Aggregated blockers and warnings before apply.")}</p>
       </div>
       <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-contract-issues">
-        ${contentBulkIssueChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(issueSummary.blockingIssueCodes, text))}
-        ${contentBulkIssueChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(issueSummary.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(issueSummary.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(issueSummary.warningIssueCodes, text))}
       </div>
     </div>
   `;
-}
-
-function contentBulkIssueChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span>${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {

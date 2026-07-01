@@ -1,5 +1,8 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
+import { contentBulkPatchPreApplyReviewLabel } from "./contentBulkPatchPreApplyReview.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_EXPORT_VIEW_VERSION = "content-bulk-patch-file-patch-draft-export-view-v1";
 
@@ -31,16 +34,11 @@ export function renderContentBulkPatchFilePatchDraftExport(exportPreview, detail
         }, exportPreview.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-patch-draft-export-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-patch-draft-export-grid">
         ${renderContentBulkPatchExportReviewStrip(exportPreview, reviewContext, text)}
-        ${contentBulkPatchFilePatchDraftExportChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(exportPreview.preApplyReview?.checklist, text))}
+        ${contentBulkChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(exportPreview.preApplyReview?.checklist, text), { chipClass: "editor-chip" })}
       </div>
       <div class="editor-content-bulk-patch-draft-export-actions">
         <div>
@@ -89,16 +87,11 @@ function renderContentBulkPatchExportReviewStrip(exportPreview = {}, reviewConte
         <p class="muted">${escapeHtml(text.reviewStripHint || "Pre-apply, backup, and restore blockers before download.")}</p>
       </div>
       <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-contract-issues">
-        ${contentBulkPatchFilePatchDraftExportChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(blockingIssues, text))}
-        ${contentBulkPatchFilePatchDraftExportChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(warningIssues, text))}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(blockingIssues, text), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(warningIssues, text), { chipClass: "editor-chip" })}
       </div>
     </div>
   `;
@@ -108,23 +101,6 @@ function contentBulkPatchPreApplyReviewChips(items = [], text = {}) {
   return (items || []).map((item) =>
     `${contentBulkPatchPreApplyReviewLabel(item.id, text.preApplyReviewLabels)} - ${contentBulkPatchPreApplyReviewLabel(item.state, text.preApplyStateLabels)} - ${item.detail || "-"}`
   );
-}
-
-function contentBulkPatchPreApplyReviewLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkPatchFilePatchDraftExportChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

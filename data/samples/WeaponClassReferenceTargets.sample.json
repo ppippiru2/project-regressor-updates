@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-30",
+  "status": "draft_reference_targets",
+  "purpose": "Registers the user's prior weapon/class test images as visual targets for grip, attachment, class silhouette, and generated sprite review.",
+  "rules": [
+    "Reference images guide pose intent, hand grip, weapon axis, shield/book/staff placement, armor silhouette, and class fantasy only.",
+    "Do not derive runtime anchors from reference-image bounding boxes; runtime anchors still come from pose templates, motion frames, and attachment contracts.",
+    "Do not copy reference backgrounds, side-by-side layouts, text, or canvas framing into generated source sprites.",
+    "Generated source sprites must still follow the planned 1254x1254 transparent PNG, gender, tone, underwear, motion-frame, and no-text/no-watermark rules.",
+    "If generated art disagrees with anchors, anchors win; if repeated art fails the same grip, revisit the pose template before bulk generation."
+  ],
+  "referenceTargets": [
+    {
+      "referenceId": "class_warrior_representative",
+      "kind": "class_representative",
+      "label": "Warrior representative armor and sword-shield silhouette",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/1.Warrior Representative.png",
+      "appliesToMotionIds": ["sword_shield_slash_v1"],
+      "appliesToPoseTemplateIds": ["sword_shield_idle"],
+      "targetRoles": ["class_silhouette", "shield_readability", "one_hand_weapon_readability"],
+      "attachmentFocus": [
+        "Leather-and-metal warrior silhouette should preserve shoulder, chest, belt, knee, and boot attachment readability.",
+        "Round shield should feel held by the offhand/forearm, not floating beside the body.",
+        "Sword grip should sit inside the main hand with the crossguard near the knuckles."
+      ]
+    },
+    {
+      "referenceId": "class_assassin_dual_dagger_plain",
+      "kind": "class_representative",
+      "label": "Assassin representative dual-dagger silhouette",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/2.Assassin Representative.png",
+      "appliesToMotionIds": [],
+      "appliesToPoseTemplateIds": [],
+      "targetRoles": ["future_dual_weapon_silhouette", "light_armor_silhouette"],
+      "attachmentFocus": [
+        "Dual weapons should mirror hand grip contact without drifting outside the fists.",
+        "Light armor silhouette should keep scarf, shoulder, bracer, belt, and boot reads separate from the body."
+      ]
+    },
+    {
+      "referenceId": "class_assassin_dual_dagger_hair",
+      "kind": "class_representative",
+      "label": "Assassin representative hair variant and dual-dagger silhouette",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/2.Assassin Representative1.png",
+      "appliesToMotionIds": [],
+      "appliesToPoseTemplateIds": [],
+      "targetRoles": ["future_hair_variation", "future_dual_weapon_silhouette"],
+      "attachmentFocus": [
+        "Hair and hood/scarf should not hide weapon hand contact points.",
+        "Dual dagger direction should remain readable from both wrists."
+      ]
+    },
+    {
+      "referenceId": "class_fighter_representative",
+      "kind": "class_representative",
+      "label": "Fighter representative gauntlet guard silhouette",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/3.Fighter Representative.png",
+      "appliesToMotionIds": ["fist_combo_v1"],
+      "appliesToPoseTemplateIds": ["fist_guard_idle"],
+      "targetRoles": ["fist_guard_silhouette", "gauntlet_readability"],
+      "attachmentFocus": [
+        "Gauntlets should wrap the fists and wrists, not sit as separate props.",
+        "Raised guard should keep both fist centers readable for hitbox and impact VFX anchors."
+      ]
+    },
+    {
+      "referenceId": "class_archer_representative",
+      "kind": "class_representative",
+      "label": "Archer representative bow and quiver silhouette",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/4.Archer Representative.png",
+      "appliesToMotionIds": ["bow_release_v1"],
+      "appliesToPoseTemplateIds": ["bow_draw"],
+      "targetRoles": ["bow_silhouette", "quiver_readability", "ranged_hand_contact"],
+      "attachmentFocus": [
+        "Bow grip must be held by the forward hand while the arrow line passes through draw hand, nock, and tip.",
+        "Quiver and leather gear should read as attached to the torso/back, not as loose background elements."
+      ]
+    },
+    {
+      "referenceId": "class_mage_wand_book_representative",
+      "kind": "class_representative",
+      "label": "Mage representative wand and book silhouette",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/5.Mage Representative — Wand + Book.png",
+      "appliesToMotionIds": ["staff_cast_v1"],
+      "appliesToPoseTemplateIds": ["staff_stand"],
+      "targetRoles": ["caster_silhouette", "book_hand_contact", "casting_hand_readability"],
+      "attachmentFocus": [
+        "Book should sit in the offhand with palm/fingers supporting it.",
+        "Wand/casting prop should align with the caster hand without losing wrist direction."
+      ]
+    },
+    {
+      "referenceId": "class_mage_staff_representative",
+      "kind": "class_representative",
+      "label": "Mage representative two-hand staff silhouette",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/2.직업/6.Mage Representative — Staff.png",
+      "appliesToMotionIds": ["staff_cast_v1"],
+      "appliesToPoseTemplateIds": ["staff_stand"],
+      "targetRoles": ["staff_silhouette", "caster_hand_contact", "robe_attachment"],
+      "attachmentFocus": [
+        "Staff must stay on a clear base-to-top axis with the grip hand wrapped around the shaft.",
+        "Free casting hand should remain separate from the staff for VFX anchor readability."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_one_hand_sword_grip",
+      "kind": "weapon_grip_test",
+      "label": "T01 one-hand sword grip test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T01 — 한손검 Grip Test.png",
+      "appliesToMotionIds": ["sword_shield_slash_v1"],
+      "appliesToPoseTemplateIds": ["sword_shield_idle"],
+      "targetRoles": ["one_hand_grip", "blade_axis"],
+      "attachmentFocus": [
+        "Sword handle should be centered inside the fist.",
+        "Crossguard should touch the hand area and blade axis should extend from the wrist/forearm direction."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_one_hand_axe_grip",
+      "kind": "weapon_grip_test",
+      "label": "T01B one-hand axe grip test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T01B — 한손 도끼 Grip Test.png",
+      "appliesToMotionIds": [],
+      "appliesToPoseTemplateIds": [],
+      "targetRoles": ["future_one_hand_axe_grip"],
+      "attachmentFocus": [
+        "Axe shaft should sit through the fist with the head weight beyond the hand.",
+        "Grip contact should remain the same when swapping one-hand sword, axe, or hammer categories."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_one_hand_hammer_grip",
+      "kind": "weapon_grip_test",
+      "label": "T01C one-hand hammer grip test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T01C — 한손 망치  워해머 Grip Test.png",
+      "appliesToMotionIds": [],
+      "appliesToPoseTemplateIds": [],
+      "targetRoles": ["future_one_hand_hammer_grip"],
+      "attachmentFocus": [
+        "Hammer shaft should remain locked through the fist even with a heavy head.",
+        "Weapon head should not force the hand to drift away from the planned wrist anchor."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_sword_shield",
+      "kind": "weapon_grip_test",
+      "label": "T02 one-hand sword plus shield test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T02 — 한손검 + 방패 Test.png",
+      "appliesToMotionIds": ["sword_shield_slash_v1"],
+      "appliesToPoseTemplateIds": ["sword_shield_idle"],
+      "targetRoles": ["sword_grip", "shield_offhand_attachment"],
+      "attachmentFocus": [
+        "Sword and shield should remain attached to separate hands with no floating gap.",
+        "Shield center should align to offhand/forearm, with rim overlapping the arm naturally."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_wand_book",
+      "kind": "weapon_grip_test",
+      "label": "T02B wand plus magic book test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T02B — 완드 + 마법책 Test.png",
+      "appliesToMotionIds": ["staff_cast_v1"],
+      "appliesToPoseTemplateIds": ["staff_stand"],
+      "targetRoles": ["future_wand_grip", "book_offhand_attachment", "caster_hand_contact"],
+      "attachmentFocus": [
+        "Book should be visibly supported by fingers/palm at the offhand.",
+        "Caster prop should point from the hand/wrist without floating."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_dual_swords",
+      "kind": "weapon_grip_test",
+      "label": "T03 dual sword test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T03 — 쌍수  쌍검 Test.png",
+      "appliesToMotionIds": [],
+      "appliesToPoseTemplateIds": [],
+      "targetRoles": ["future_dual_sword_grip"],
+      "attachmentFocus": [
+        "Both swords should use mirrored but independent hand grip locks.",
+        "Blade direction should follow each wrist without intersecting the body incorrectly."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_dual_daggers",
+      "kind": "weapon_grip_test",
+      "label": "T04 dual dagger assassin test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T04 — 쌍단검 암살자 Test.png",
+      "appliesToMotionIds": [],
+      "appliesToPoseTemplateIds": [],
+      "targetRoles": ["future_dual_dagger_grip"],
+      "attachmentFocus": [
+        "Daggers should stay close to the fists with short blade axes.",
+        "Both weapon handles should remain visible at the hand contact points."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_gauntlets",
+      "kind": "weapon_grip_test",
+      "label": "T05 knuckle and gauntlet fighter test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T05 — 너클  건틀릿 격투가 Test.png",
+      "appliesToMotionIds": ["fist_combo_v1"],
+      "appliesToPoseTemplateIds": ["fist_guard_idle"],
+      "targetRoles": ["gauntlet_attachment", "fist_center_readability"],
+      "attachmentFocus": [
+        "Gauntlets should enclose both fists and wrists.",
+        "Fist centers must remain obvious for impact point and hitbox review."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_greatsword_two_hand",
+      "kind": "weapon_grip_test",
+      "label": "T06 greatsword and large two-hand weapon test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T06 — 대검  대형 양손무기 Test.png",
+      "appliesToMotionIds": ["great_weapon_sweep_v1"],
+      "appliesToPoseTemplateIds": ["great_weapon_guard"],
+      "targetRoles": ["two_hand_grip", "heavy_blade_axis"],
+      "attachmentFocus": [
+        "Both hands should share the same handle with clear upper and lower grip positions.",
+        "Large blade axis should pass through both grip anchors, not float above the hands."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_two_hand_axe_hammer",
+      "kind": "weapon_grip_test",
+      "label": "T06B two-hand axe and hammer swap test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T06B — 양손 도끼  양손 망치 교체 Test.png",
+      "appliesToMotionIds": ["great_weapon_sweep_v1"],
+      "appliesToPoseTemplateIds": ["great_weapon_guard"],
+      "targetRoles": ["two_hand_heavy_swap", "mass_center_readability"],
+      "attachmentFocus": [
+        "Two-hand heavy weapon swaps should keep both grip anchors stable.",
+        "Heavy head/mass center should remain on the weapon shaft axis and not detach from the hands."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_polearm_spear",
+      "kind": "weapon_grip_test",
+      "label": "T07 spear and polearm test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T07 — 창  장병기.png",
+      "appliesToMotionIds": [],
+      "appliesToPoseTemplateIds": [],
+      "targetRoles": ["future_polearm_axis", "long_weapon_body_clearance"],
+      "attachmentFocus": [
+        "Polearm shaft should pass behind or through the grip hand consistently.",
+        "Long weapon ends must remain readable without cropping or body collision confusion."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_bow_draw",
+      "kind": "weapon_grip_test",
+      "label": "T08 bow draw test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T08 — 활 Test.png",
+      "appliesToMotionIds": ["bow_release_v1"],
+      "appliesToPoseTemplateIds": ["bow_draw"],
+      "targetRoles": ["bow_grip", "draw_hand", "arrow_axis"],
+      "attachmentFocus": [
+        "Forward hand should lock to the bow grip.",
+        "Draw hand, arrow nock, arrow tip, and bow grip should stay on a readable release line."
+      ]
+    },
+    {
+      "referenceId": "weapon_test_two_hand_staff",
+      "kind": "weapon_grip_test",
+      "label": "T09A two-hand staff test",
+      "sourcePath": "C:/Users/Administrator/Desktop/새 폴더 (2)/1.무기/무기 TEST/T09A — 양손 지팡이 Test.png",
+      "appliesToMotionIds": ["staff_cast_v1"],
+      "appliesToPoseTemplateIds": ["staff_stand"],
+      "targetRoles": ["staff_axis", "staff_grip", "cast_hand_clearance"],
+      "attachmentFocus": [
+        "Staff base, grip, and top should stay on one vertical/near-vertical axis.",
+        "Grip hand should clasp the shaft while the other hand remains available for casting."
+      ]
+    }
+  ],
+  "motionReferenceMap": [
+    {
+      "motionId": "sword_shield_slash_v1",
+      "poseTemplateId": "sword_shield_idle",
+      "primaryReferenceIds": ["weapon_test_sword_shield", "class_warrior_representative"],
+      "secondaryReferenceIds": ["weapon_test_one_hand_sword_grip"],
+      "requiredVisualOutcomes": [
+        "main hand sword grip and crossguard contact are visibly locked",
+        "offhand round shield stays attached to hand/forearm",
+        "warrior armor silhouette remains compatible with shoulders, torso, waist, knees, and boots"
+      ]
+    },
+    {
+      "motionId": "great_weapon_sweep_v1",
+      "poseTemplateId": "great_weapon_guard",
+      "primaryReferenceIds": ["weapon_test_greatsword_two_hand", "weapon_test_two_hand_axe_hammer"],
+      "secondaryReferenceIds": [],
+      "requiredVisualOutcomes": [
+        "upper and lower grip hands share the same heavy-weapon handle",
+        "weapon tip, back end, and mass center follow one coherent heavy weapon axis",
+        "large weapon does not float away from either hand"
+      ]
+    },
+    {
+      "motionId": "bow_release_v1",
+      "poseTemplateId": "bow_draw",
+      "primaryReferenceIds": ["weapon_test_bow_draw", "class_archer_representative"],
+      "secondaryReferenceIds": [],
+      "requiredVisualOutcomes": [
+        "bow grip is locked to the forward hand",
+        "draw hand, nock, arrow tip, and bow string read as one release setup",
+        "archer silhouette remains readable without hiding the arrow axis"
+      ]
+    },
+    {
+      "motionId": "staff_cast_v1",
+      "poseTemplateId": "staff_stand",
+      "primaryReferenceIds": ["weapon_test_two_hand_staff", "class_mage_staff_representative"],
+      "secondaryReferenceIds": ["weapon_test_wand_book", "class_mage_wand_book_representative"],
+      "requiredVisualOutcomes": [
+        "staff base, grip, and top align on a single staff axis",
+        "grip hand visibly holds the staff shaft",
+        "casting hand remains separate enough for spell VFX anchoring"
+      ]
+    },
+    {
+      "motionId": "fist_combo_v1",
+      "poseTemplateId": "fist_guard_idle",
+      "primaryReferenceIds": ["weapon_test_gauntlets", "class_fighter_representative"],
+      "secondaryReferenceIds": [],
+      "requiredVisualOutcomes": [
+        "gauntlets wrap both fists and wrists",
+        "fist centers remain readable for hitbox and impact VFX",
+        "guard stance keeps both hands attached to the body rather than prop-floating"
+      ]
+    }
+  ],
+  "pilotCoverageRules": {
+    "currentPilotMotionIds": [
+      "sword_shield_slash_v1",
+      "great_weapon_sweep_v1",
+      "bow_release_v1",
+      "staff_cast_v1",
+      "fist_combo_v1"
+    ],
+    "minimumPrimaryReferencesPerMotion": 2,
+    "minimumTotalReferencesPerMotion": 2
+  }
+}

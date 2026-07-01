@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_FINAL_APPLY_HANDOFF_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditFinalApplyRunnerHandoffView(options = {}) {
   const checklist = options.checklist || {};
   const text = options.text || {};
@@ -41,13 +45,9 @@ function renderSaveEditFinalApplyRunnerHandoffCheckView(check = {}, statusLabel 
         <strong>${escapeHtml(check.label)}</strong>
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_FINAL_APPLY_HANDOFF_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

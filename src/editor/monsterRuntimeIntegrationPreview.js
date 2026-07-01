@@ -124,5 +124,3 @@ function normalizePathList(paths = []) {
 function normalizePath(path = "") {
   return String(path || "").replaceAll("\\", "/").replace(/^\.\//, "");
 }
-
-

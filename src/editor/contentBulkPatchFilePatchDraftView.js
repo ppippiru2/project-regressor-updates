@@ -1,6 +1,11 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_FILE_PATCH_DRAFT_VIEW_VERSION = "content-bulk-patch-file-patch-draft-view-v1";
+const CONTENT_BULK_FILE_PATCH_DRAFT_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderContentBulkPatchFilePatchDraft(draft, detailText = {}, reviewContext = {}) {
   const text = detailText.contentBulkPatchFilePatchDraft || {};
@@ -28,18 +33,13 @@ export function renderContentBulkPatchFilePatchDraft(draft, detailText = {}, rev
         }, draft.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-patch-draft-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-patch-draft-steps">
         <strong>${escapeHtml(text.globalSteps || "Global steps")}</strong>
         <div class="editor-chip-list">
-          ${chip(contentBulkPatchFilePatchStatusLabel(draft.status, text))}
-          ${(draft.globalSteps || []).map((step) => chip(contentBulkPatchFilePatchStepLabel(step, text))).join("")}
+          ${editorChip(contentBulkFallbackLabel(draft.status, text.statusLabels), CONTENT_BULK_FILE_PATCH_DRAFT_CHIP_OPTIONS)}
+          ${(draft.globalSteps || []).map((step) => editorChip(contentBulkFallbackLabel(step, text.stepLabels), CONTENT_BULK_FILE_PATCH_DRAFT_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <div class="editor-content-bulk-patch-draft-list">
@@ -51,7 +51,7 @@ export function renderContentBulkPatchFilePatchDraft(draft, detailText = {}, rev
 
 function renderContentBulkPatchFilePatchDraftFile(entry, text = {}, reviewContext = {}) {
   const blockLabels = (entry.patchBlocks || []).map((block) =>
-    `${block.surface || block.id || "-"} - ${contentBulkPatchFilePatchOperationLabel(block.operation, text)} - ${block.anchorHint || "-"}`
+    `${block.surface || block.id || "-"} - ${contentBulkFallbackLabel(block.operation, text.operationLabels)} - ${block.anchorHint || "-"}`
   );
   const safetyReview = contentBulkPatchFileSafetyReview(entry, reviewContext, text);
   return `
@@ -63,20 +63,20 @@ function renderContentBulkPatchFilePatchDraftFile(entry, text = {}, reviewContex
             surfaces: entry.surfaceCount || 0,
             staged: entry.stagedRowCount || 0,
             blocks: entry.patchBlocks?.length || 0,
-            operation: contentBulkPatchFilePatchOperationLabel(entry.operation, text),
+            operation: contentBulkFallbackLabel(entry.operation, text.operationLabels),
           }, `${entry.surfaceCount || 0}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${chip(contentBulkPatchFilePatchStatusLabel(entry.status, text))}
-          ${chip(contentBulkPatchFilePatchOperationLabel(entry.operation, text))}
+          ${editorChip(contentBulkFallbackLabel(entry.status, text.statusLabels), CONTENT_BULK_FILE_PATCH_DRAFT_CHIP_OPTIONS)}
+          ${editorChip(contentBulkFallbackLabel(entry.operation, text.operationLabels), CONTENT_BULK_FILE_PATCH_DRAFT_CHIP_OPTIONS)}
         </div>
       </div>
       <div class="editor-content-bulk-patch-draft-grid">
-        ${contentBulkPatchFilePatchChipBlock(text.domains || "Domains", entry.domainIds || [])}
-        ${contentBulkPatchFilePatchChipBlock(text.anchorHints || "Anchor hints", entry.anchorHints || [])}
-        ${contentBulkPatchFilePatchChipBlock(text.patchBlocks || "Patch blocks", blockLabels)}
-        ${contentBulkPatchFilePatchChipBlock(text.postApplyChecks || "Post apply checks", (entry.postApplyChecks || []).map((step) => contentBulkPatchFilePatchStepLabel(step, text)))}
-        ${contentBulkPatchFilePatchChipBlock(text.fileSafetyReview || "File safety review", safetyReview)}
+        ${contentBulkChipBlock(text.domains || "Domains", entry.domainIds || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.anchorHints || "Anchor hints", entry.anchorHints || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.patchBlocks || "Patch blocks", blockLabels, { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.postApplyChecks || "Post apply checks", (entry.postApplyChecks || []).map((step) => contentBulkFallbackLabel(step, text.stepLabels)), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.fileSafetyReview || "File safety review", safetyReview, { chipClass: "editor-chip" })}
       </div>
     </article>
   `;
@@ -97,31 +97,6 @@ function contentBulkPatchFileSafetyReview(entry = {}, reviewContext = {}, text =
   labels.push(...backupBlockers);
   labels.push(...restoreBlockers);
   return labels.length ? labels : [text.noSafetyBlockers || "No safety blockers"];
-}
-
-function contentBulkPatchFilePatchStatusLabel(statusId, text = {}) {
-  return text.statusLabels?.[statusId] || statusId || "unknown";
-}
-
-function contentBulkPatchFilePatchStepLabel(stepId, text = {}) {
-  return text.stepLabels?.[stepId] || stepId || "unknown";
-}
-
-function contentBulkPatchFilePatchOperationLabel(operationId, text = {}) {
-  return text.operationLabels?.[operationId] || operationId || "unknown";
-}
-
-function contentBulkPatchFilePatchChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_SAMPLE_PAYLOAD_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditSamplePayloadView(options = {}) {
   const preview = options.preview || {};
   const text = options.text || {};
@@ -45,7 +49,7 @@ function renderSaveEditSamplePayloadGroupView(group = {}, text = {}, groupFieldF
         <span>${escapeHtml(groupFieldFormatter(group))}</span>
       </div>
       <div class="editor-chip-list">
-        ${fields.map((field) => chip(fieldChipFormatter(field, text))).join("")}
+        ${fields.map((field) => editorChip(fieldChipFormatter(field, text), SAVE_EDIT_SAMPLE_PAYLOAD_CHIP_OPTIONS)).join("")}
       </div>
     </article>
   `;
@@ -53,10 +57,6 @@ function renderSaveEditSamplePayloadGroupView(group = {}, text = {}, groupFieldF
 
 function defaultFieldChip(field = {}, text = {}) {
   return `${field.path || ""} · ${field.inputKind || ""} · ${text.pendingInput || field.proposedValue || ""}`;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

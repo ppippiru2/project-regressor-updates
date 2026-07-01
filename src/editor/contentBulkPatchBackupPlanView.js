@@ -1,7 +1,13 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
 import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=675";
+import { contentBulkPatchPreApplyReviewLabel } from "./contentBulkPatchPreApplyReview.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_BACKUP_PLAN_VIEW_VERSION = "content-bulk-patch-backup-plan-view-v1";
+const CONTENT_BULK_BACKUP_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderContentBulkPatchBackupPlan(plan, detailText = {}) {
   const text = detailText.contentBulkPatchBackupPlan || {};
@@ -23,8 +29,8 @@ export function renderContentBulkPatchBackupPlan(plan, detailText = {}) {
         <strong>${escapeHtml(file.file || "-")}</strong>
         <span>${escapeHtml((file.domainIds || []).join(", ") || "-")}</span>
       </div>
-      <small>${escapeHtml(contentBulkPatchBackupPlanLabel(file.backupState, text.stateLabels))} / ${escapeHtml(contentBulkPatchBackupPlanLabel(file.restoreState, text.stateLabels))}</small>
-      <div class="editor-chip-list">${(file.reviewBlockerCodes || []).map((code) => chip(contentBulkPatchBackupPlanLabel(code, text.fileReviewBlockerLabels))).join("")}</div>
+      <small>${escapeHtml(contentBulkFallbackLabel(file.backupState, text.stateLabels))} / ${escapeHtml(contentBulkFallbackLabel(file.restoreState, text.stateLabels))}</small>
+      <div class="editor-chip-list">${(file.reviewBlockerCodes || []).map((code) => editorChip(contentBulkFallbackLabel(code, text.fileReviewBlockerLabels), CONTENT_BULK_BACKUP_CHIP_OPTIONS)).join("")}</div>
     </article>
   `).join("");
 
@@ -40,26 +46,21 @@ export function renderContentBulkPatchBackupPlan(plan, detailText = {}) {
         }, plan.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-backup-plan-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-backup-plan-artifacts">
-        <span><small>${escapeHtml(text.backupArchive || "Backup archive")}</small><b>${escapeHtml(artifacts.backupArchive || "-")}</b></span>
-        <span><small>${escapeHtml(text.snapshotManifest || "Snapshot manifest")}</small><b>${escapeHtml(artifacts.snapshotManifest || "-")}</b></span>
-        <span><small>${escapeHtml(text.restoreReport || "Restore report")}</small><b>${escapeHtml(artifacts.restoreReport || "-")}</b></span>
+        ${renderEditorSummaryCard(text.backupArchive || "Backup archive", artifacts.backupArchive || "-")}
+        ${renderEditorSummaryCard(text.snapshotManifest || "Snapshot manifest", artifacts.snapshotManifest || "-")}
+        ${renderEditorSummaryCard(text.restoreReport || "Restore report", artifacts.restoreReport || "-")}
       </div>
       ${renderContentBulkIssueSummary(plan.issueSummary, text)}
       <div class="editor-content-bulk-backup-plan-grid">
-        ${contentBulkPatchBackupPlanChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(plan.preApplyReviewItems, text))}
-        ${contentBulkPatchBackupPlanChipBlock(text.blockedReasons || "Blocked reasons", (plan.blockedReasons || []).map((reason) => contentBulkPatchBackupPlanLabel(reason, text.blockedReasonLabels)))}
-        ${contentBulkPatchBackupPlanChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(plan.issueSummary?.blockingIssueCodes, text))}
-        ${contentBulkPatchBackupPlanChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(plan.issueSummary?.warningIssueCodes, text))}
-        ${contentBulkPatchBackupPlanChipBlock(text.backupPlan || "Backup plan", (plan.backupSteps || []).map((step) => contentBulkPatchBackupPlanLabel(step, text.backupStepLabels)))}
-        ${contentBulkPatchBackupPlanChipBlock(text.restorePlan || "Restore plan", (plan.restoreSteps || []).map((step) => contentBulkPatchBackupPlanLabel(step, text.restoreStepLabels)))}
+        ${contentBulkChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(plan.preApplyReviewItems, text), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.blockedReasons || "Blocked reasons", (plan.blockedReasons || []).map((reason) => contentBulkFallbackLabel(reason, text.blockedReasonLabels)), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(plan.issueSummary?.blockingIssueCodes, text), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(plan.issueSummary?.warningIssueCodes, text), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.backupPlan || "Backup plan", (plan.backupSteps || []).map((step) => contentBulkFallbackLabel(step, text.backupStepLabels)), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.restorePlan || "Restore plan", (plan.restoreSteps || []).map((step) => contentBulkFallbackLabel(step, text.restoreStepLabels)), { chipClass: "editor-chip" })}
       </div>
       <div class="editor-content-bulk-backup-plan-files">
         <strong>${escapeHtml(text.targetFilePreview || "Target file preview")}</strong>
@@ -69,31 +70,10 @@ export function renderContentBulkPatchBackupPlan(plan, detailText = {}) {
   `;
 }
 
-function contentBulkPatchBackupPlanLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
 function contentBulkPatchPreApplyReviewChips(items = [], text = {}) {
   return (items || []).map((item) =>
     `${contentBulkPatchPreApplyReviewLabel(item.id, text.preApplyReviewLabels)} - ${contentBulkPatchPreApplyReviewLabel(item.state, text.preApplyStateLabels)} - ${item.detail || "-"}`
   );
-}
-
-function contentBulkPatchPreApplyReviewLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkPatchBackupPlanChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

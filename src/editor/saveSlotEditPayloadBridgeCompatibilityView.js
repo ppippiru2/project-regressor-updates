@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_PAYLOAD_BRIDGE_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditPayloadBridgeCompatibilityView(options = {}) {
   const summary = options.summary || {};
   const text = options.text || {};
@@ -17,7 +21,7 @@ export function renderSaveSlotEditPayloadBridgeCompatibilityView(options = {}) {
           <h4>${escapeHtml(text.title || "Payload to bridge compatibility")}</h4>
           <p class="muted">${escapeHtml(text.description || "Read-only compatibility blockers before the payload can feed the apply bridge.")}</p>
         </div>
-        ${chip(statusLabel(summary.status))}
+        ${editorChip(statusLabel(summary.status), SAVE_EDIT_PAYLOAD_BRIDGE_CHIP_OPTIONS)}
       </div>
       <div class="editor-save-edit-payload-bridge-metrics">
         ${metricCard(text.rowMetric || "Rows", rowValue, text.rowHint || "")}
@@ -50,13 +54,9 @@ function renderSaveEditPayloadBridgeCompatibilityRowView(row = {}, text = {}, st
           <dd>${escapeHtml(`${row.bridgeValue}`)}</dd>
         </div>
       </dl>
-      ${row.blocker ? chip(blockerFormatter(row.blocker)) : ""}
+      ${row.blocker ? editorChip(blockerFormatter(row.blocker), SAVE_EDIT_PAYLOAD_BRIDGE_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

@@ -121,5 +121,3 @@ function surfaceName(surfaceId = "") {
   const parts = String(surfaceId || "").split(":");
   return parts.length > 1 ? parts.slice(1).join(":") : "";
 }
-
-

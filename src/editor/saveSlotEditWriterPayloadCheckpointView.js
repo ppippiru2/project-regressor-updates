@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_WRITER_CHECKPOINT_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditWriterPayloadCheckpointView(options = {}) {
   const review = options.review || {};
   const text = options.text || {};
@@ -38,8 +42,8 @@ export function renderSaveSlotEditWriterPayloadCheckpointView(options = {}) {
           <span>${escapeHtml(rollbackCheckpoint.status)}</span>
         </div>
         <div class="editor-chip-list">
-          ${rollbackKeys.map((item) => chip(item)).join("")}
-          ${rollbackBlockers.map((item) => chip(item)).join("")}
+          ${rollbackKeys.map((item) => editorChip(item, SAVE_EDIT_WRITER_CHECKPOINT_CHIP_OPTIONS)).join("")}
+          ${rollbackBlockers.map((item) => editorChip(item, SAVE_EDIT_WRITER_CHECKPOINT_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <pre class="editor-save-edit-writer-checkpoint-code"><code>${escapeHtml(JSON.stringify(review.payloadShape, null, 2))}</code></pre>
@@ -55,13 +59,9 @@ function renderSaveEditWriterPayloadCheckpointCheckView(check = {}, statusLabel 
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_WRITER_CHECKPOINT_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

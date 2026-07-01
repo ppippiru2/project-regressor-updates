@@ -18,6 +18,11 @@ export const PLAYER_EFFECT_TYPE_PLACEMENT_TUNING = Object.freeze({
   explosion: { slashWidth: 1.18, expandedSlashWidth: 1.16, slashHeight: 1.16, expandedSlashHeight: 1.16, offsetY: 2 },
 });
 
+const PLAYER_ATTACK_EFFECT_WIDTH_LIMITS = Object.freeze({
+  slashWidth: { min: 90, max: 230 },
+  expandedSlashWidth: { min: 160, max: 320 },
+});
+
 export function resolvePlayerBattleSpritePreset(playerProfile = {}) {
   const params = getSearchParams();
   const classId = normalizeSpriteClass(
@@ -34,8 +39,14 @@ export function resolvePlayerAttackEffectPlacement(playerProfile = {}, { effectT
   const tunedPlacement = {
     ...basePlacement,
     offsetY: Number(basePlacement.offsetY || 0) + Number(tuning.offsetY || 0),
-    slashWidth: Math.round(Number(basePlacement.slashWidth || 150) * Number(tuning.slashWidth || 1)),
-    expandedSlashWidth: Math.round(Number(basePlacement.expandedSlashWidth || 190) * Number(tuning.expandedSlashWidth || 1)),
+    slashWidth: clampEffectWidth(
+      Math.round(Number(basePlacement.slashWidth || 150) * Number(tuning.slashWidth || 1)),
+      PLAYER_ATTACK_EFFECT_WIDTH_LIMITS.slashWidth,
+    ),
+    expandedSlashWidth: clampEffectWidth(
+      Math.round(Number(basePlacement.expandedSlashWidth || 190) * Number(tuning.expandedSlashWidth || 1)),
+      PLAYER_ATTACK_EFFECT_WIDTH_LIMITS.expandedSlashWidth,
+    ),
     slashHeight: scaleCardPercentLength(basePlacement.slashHeight, Number(tuning.slashHeight || 1)),
     expandedSlashHeight: scaleCardPercentLength(basePlacement.expandedSlashHeight, Number(tuning.expandedSlashHeight || 1)),
   };
@@ -43,8 +54,14 @@ export function resolvePlayerAttackEffectPlacement(playerProfile = {}, { effectT
   return {
     ...tunedPlacement,
     textOffsetY: Number(tunedPlacement.textOffsetY || 0) - 2,
-    slashWidth: Math.round(Number(tunedPlacement.slashWidth || 150) * 1.14),
-    expandedSlashWidth: Math.round(Number(tunedPlacement.expandedSlashWidth || 190) * 1.1),
+    slashWidth: clampEffectWidth(
+      Math.round(Number(tunedPlacement.slashWidth || 150) * 1.14),
+      PLAYER_ATTACK_EFFECT_WIDTH_LIMITS.slashWidth,
+    ),
+    expandedSlashWidth: clampEffectWidth(
+      Math.round(Number(tunedPlacement.expandedSlashWidth || 190) * 1.1),
+      PLAYER_ATTACK_EFFECT_WIDTH_LIMITS.expandedSlashWidth,
+    ),
   };
 }
 
@@ -78,5 +95,8 @@ function scaleCardPercentLength(value, multiplier) {
   return `${rounded}%`;
 }
 
-
-
+function clampEffectWidth(value, limit) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return limit.min;
+  return Math.min(Math.max(numeric, limit.min), limit.max);
+}

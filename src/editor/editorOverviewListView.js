@@ -1,6 +1,8 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
 
 export const EDITOR_OVERVIEW_LIST_VIEW_VERSION = "editor-overview-list-view-v1";
+const EDITOR_OVERVIEW_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderEditorAssetSections({ assetTypes = {}, imageSlots = [], audioSlots = [] } = {}) {
   return [
@@ -30,7 +32,7 @@ export function renderEditorBacklogCards(items = [], options = {}) {
         </div>
         <span>${escapeHtml(getStatusLabel(item.status || "planned"))}</span>
       </div>
-      <div class="editor-chip-list">${(item.editorHooks || []).map((hook) => chip(hook)).join("")}</div>
+      <div class="editor-chip-list">${(item.editorHooks || []).map((hook) => editorChip(hook, EDITOR_OVERVIEW_CHIP_OPTIONS)).join("")}</div>
     </article>
   `).join("");
 }
@@ -45,7 +47,7 @@ export function renderEditorPrototypeCards(items = []) {
         </div>
         <span>${escapeHtml(tf("editorPrep.save.count", { count: (item.keepForEditor || []).length }))}</span>
       </div>
-      <div class="editor-chip-list">${(item.keepForEditor || []).map((value) => chip(value)).join("")}</div>
+      <div class="editor-chip-list">${(item.keepForEditor || []).map((value) => editorChip(value, EDITOR_OVERVIEW_CHIP_OPTIONS)).join("")}</div>
     </article>
   `).join("");
 }
@@ -66,10 +68,6 @@ function assetSection(title, slots = []) {
       `).join("")}
     </section>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {

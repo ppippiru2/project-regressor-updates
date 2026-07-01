@@ -1,6 +1,10 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { editorFallbackLabel } from "./editorLabelFormatters.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const MONSTER_CANDIDATE_LIVE_PATCH_DRAFT_VIEW_VERSION = "monster-candidate-live-patch-draft-view-v1";
+const MONSTER_CANDIDATE_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderMonsterCandidateLivePatchDraft(draft, detailText = {}) {
   const text = detailText.monsterCandidateLivePatchDraft || {};
@@ -25,12 +29,7 @@ export function renderMonsterCandidateLivePatchDraft(draft, detailText = {}) {
         }, draft.version || "-"))}</strong>
       </div>
       <div class="editor-monster-candidate-live-patch-draft-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-monster-candidate-live-patch-draft-list">
         ${(draft.rows || []).map((row) => renderMonsterCandidateLivePatchDraftRow(row, text)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No patch draft rows.")}</p>`}
@@ -43,7 +42,7 @@ function renderMonsterCandidateLivePatchDraftRow(row, text = {}) {
   const entry = row.monsterBalanceEntry || {};
   const worldPatch = row.worldDataPatch || {};
   const roles = [
-    monsterCandidatePatchDraftStateLabel(row.planState, text),
+    editorFallbackLabel(row.planState, text.stateLabels),
     row.regionName || row.regionId || "",
   ].filter(Boolean);
   const statValues = entry.stats
@@ -51,11 +50,11 @@ function renderMonsterCandidateLivePatchDraftRow(row, text = {}) {
     : [];
   const dropValues = (entry.dropTable || []).map((drop) => `${drop.itemId} ${formatPatchDraftChance(drop.chance)}`);
   const worldValues = [
-    `${text.worldPatchAction || "Action"}: ${monsterCandidatePatchDraftActionLabel(worldPatch.action, text)}`,
+    `${text.worldPatchAction || "Action"}: ${editorFallbackLabel(worldPatch.action, text.actionLabels)}`,
     `${text.representative || "Representative"}: ${worldPatch.keepsRepresentativeMonsterId || "-"}`,
     `${text.proposedPool || "Pool"}: ${(worldPatch.proposedMonsterPool || []).join(" / ") || "-"}`,
   ];
-  const blockingSignals = (row.blockingSignalIds || []).map((signalId) => monsterCandidatePatchDraftSignalLabel(signalId, text));
+  const blockingSignals = (row.blockingSignalIds || []).map((signalId) => editorFallbackLabel(signalId, text.signalLabels, ""));
 
   return `
     <article class="editor-monster-candidate-live-patch-draft-row" data-state="${escapeAttribute(row.planState || "unknown")}">
@@ -69,15 +68,15 @@ function renderMonsterCandidateLivePatchDraftRow(row, text = {}) {
             gold: entry.gold || 0
           }, `Level ${entry.level || 0} / exp ${entry.exp || 0} / gold ${entry.gold || 0}`))}</p>
         </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+        <div class="editor-chip-list">${roles.map((role) => editorChip(role, MONSTER_CANDIDATE_CHIP_OPTIONS)).join("")}</div>
       </div>
       <div class="editor-monster-candidate-live-patch-draft-grid">
-        ${monsterCandidateLivePatchDraftChipBlock(text.stats || "Stats", statValues)}
-        ${monsterCandidateLivePatchDraftChipBlock(text.dropTable || "Drop table", dropValues)}
-        ${monsterCandidateLivePatchDraftChipBlock(text.worldPatch || "World patch", worldValues)}
-        ${monsterCandidateLivePatchDraftChipBlock(text.targetFiles || "Target files", row.targetFiles || [])}
-        ${monsterCandidateLivePatchDraftChipBlock(text.rewardLinks || "Reward links", patchDraftRewardValues(row))}
-        ${monsterCandidateLivePatchDraftChipBlock(text.blockingSignals || "Blocking signals", blockingSignals.length ? blockingSignals : [text.noBlockingSignals || "No blocking signals"])}
+        ${editorChipBlock(text.stats || "Stats", statValues, MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.dropTable || "Drop table", dropValues, MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.worldPatch || "World patch", worldValues, MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.targetFiles || "Target files", row.targetFiles || [], MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.rewardLinks || "Reward links", patchDraftRewardValues(row), MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.blockingSignals || "Blocking signals", blockingSignals.length ? blockingSignals : [text.noBlockingSignals || "No blocking signals"], MONSTER_CANDIDATE_CHIP_OPTIONS)}
       </div>
     </article>
   `;
@@ -92,34 +91,9 @@ function patchDraftRewardValues(row) {
   ].filter(Boolean);
 }
 
-function monsterCandidatePatchDraftStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function monsterCandidatePatchDraftActionLabel(actionId, text = {}) {
-  return text.actionLabels?.[actionId] || actionId || "unknown";
-}
-
-function monsterCandidatePatchDraftSignalLabel(signalId, text = {}) {
-  return text.signalLabels?.[signalId] || signalId;
-}
-
 function formatPatchDraftChance(chance) {
   const value = Number(chance || 0) * 100;
   return `${Number(value.toFixed(1))}%`;
-}
-
-function monsterCandidateLivePatchDraftChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

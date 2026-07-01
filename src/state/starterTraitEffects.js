@@ -14,6 +14,3 @@ export function starterTraitStatBonuses(playerProfile = {}) {
     Object.entries(bonus).filter(([, value]) => Number.isFinite(value) && value !== 0)
   );
 }
-
-
-

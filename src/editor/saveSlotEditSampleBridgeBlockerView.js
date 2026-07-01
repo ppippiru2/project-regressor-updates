@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_SAMPLE_BRIDGE_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditSampleBridgeBlockerView(options = {}) {
   const summary = options.summary || {};
   const text = options.text || {};
@@ -40,13 +44,9 @@ function renderSaveEditSampleBridgeBlockerView(blocker = {}, text = {}, statusLa
         <strong>${escapeHtml(text.blockerLabels?.[blocker.id] || blocker.id)}</strong>
         <span>${escapeHtml(statusLabel(blocker.status))}</span>
       </div>
-      ${blocker.blocker ? chip(blockerFormatter(blocker.blocker)) : ""}
+      ${blocker.blocker ? editorChip(blockerFormatter(blocker.blocker), SAVE_EDIT_SAMPLE_BRIDGE_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

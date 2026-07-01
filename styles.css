@@ -778,6 +778,152 @@ select:focus {
   text-align: left;
 }
 
+.fate-card-visual {
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: min(100%, 5.8rem);
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(111, 217, 255, 0.16), transparent 42%),
+    rgba(4, 14, 34, 0.74);
+  box-shadow:
+    inset 0 0 0 1px rgba(174, 231, 255, 0.18),
+    0 0 18px rgba(57, 228, 255, 0.08);
+}
+
+.fate-card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.fate-card-visual-front {
+  width: min(100%, 6.7rem);
+  background: rgba(2, 9, 24, 0.72);
+}
+
+.fate-card-visual-back img {
+  opacity: 0.92;
+  filter: saturate(1.04) brightness(0.92);
+}
+
+.fate-card-reveal-motion {
+  position: fixed;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 14px rgba(79, 225, 255, 0.48))
+    drop-shadow(0 0 28px rgba(72, 129, 255, 0.28));
+  transform-origin: center;
+  animation: fate-card-reveal-motion-host 796ms cubic-bezier(0.2, 0.72, 0.18, 1) both;
+}
+
+.fate-card-reveal-motion::after {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(113, 235, 255, 0.3), transparent 58%),
+    conic-gradient(from 90deg, transparent, rgba(113, 235, 255, 0.22), transparent 44%);
+  opacity: 0;
+  animation: fate-card-reveal-motion-flash 796ms ease-out both;
+}
+
+.fate-card-reveal-motion-frame {
+  position: relative;
+  z-index: 1;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: perspective(520px) rotateY(-8deg) scale(0.96);
+  animation-name: fate-card-reveal-motion-frame;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.fate-card-reveal-motion-frame.is-final {
+  animation-name: fate-card-reveal-motion-final-frame;
+  animation-timing-function: ease-out;
+}
+
+@keyframes fate-card-reveal-motion-host {
+  0% {
+    opacity: 0.96;
+    transform: translateY(0) scale(0.94);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateY(-0.42rem) scale(1.08);
+  }
+
+  82% {
+    opacity: 1;
+    transform: translateY(-0.24rem) scale(1.04);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-0.72rem) scale(1.12);
+  }
+}
+
+@keyframes fate-card-reveal-motion-frame {
+  0% {
+    opacity: 0;
+  }
+
+  1%,
+  99% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fate-card-reveal-motion-final-frame {
+  0% {
+    opacity: 0;
+    transform: perspective(520px) rotateY(6deg) scale(0.96);
+  }
+
+  1%,
+  100% {
+    opacity: 1;
+    transform: perspective(520px) rotateY(0deg) scale(1.03);
+  }
+}
+
+@keyframes fate-card-reveal-motion-flash {
+  0%,
+  42% {
+    opacity: 0;
+    transform: scale(0.6) rotate(0deg);
+  }
+
+  62% {
+    opacity: 1;
+    transform: scale(1) rotate(16deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.3) rotate(42deg);
+  }
+}
+
 .creation-starter-card.is-hidden-card,
 .regression-card-option.is-hidden-card {
   position: relative;
@@ -812,7 +958,6 @@ select:focus {
 
 .creation-starter-card.is-hidden-card strong,
 .regression-card-option.is-hidden-card strong {
-  margin-top: 0.7rem;
   letter-spacing: 0;
 }
 
@@ -4116,6 +4261,47 @@ select:focus {
   text-transform: uppercase;
 }
 
+.editor-nav-group {
+  position: relative;
+  border: 1px solid rgba(108, 210, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(2, 11, 29, 0.44);
+  padding: 0.6rem 0.55rem 0.65rem;
+}
+
+.editor-nav-group-header {
+  min-height: 1.7rem;
+  display: flex;
+  align-items: center;
+  padding-right: 2.45rem;
+}
+
+.editor-nav-group-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.editor-nav-collapse-toggle {
+  top: 0.45rem;
+  right: 0.5rem;
+  width: 1.8rem;
+  height: 1.22rem;
+  font-size: 0.82rem;
+}
+
+.editor-nav-group.is-collapsed {
+  min-height: 2.75rem;
+  gap: 0;
+}
+
+.editor-nav-group.is-collapsed .editor-nav-group-list {
+  display: none;
+}
+
+.editor-nav-group.is-collapsed h3 {
+  color: var(--text);
+}
+
 .editor-panel-button {
   display: grid;
   gap: 0.18rem;
@@ -4187,6 +4373,145 @@ select:focus {
 .editor-save-card small {
   color: var(--muted);
   line-height: 1.45;
+}
+
+.editor-initial-player-preview {
+  display: grid;
+  gap: 1rem;
+}
+
+.editor-initial-player-head,
+.editor-initial-player-grid > article,
+.editor-initial-player-recommendations,
+.editor-initial-player-row-list > article {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(4, 16, 40, 0.58);
+  min-width: 0;
+}
+
+.editor-initial-player-head {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.85rem;
+}
+
+.editor-initial-player-head div {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editor-initial-player-head h4,
+.editor-initial-player-grid h4,
+.editor-initial-player-recommendations h4 {
+  margin: 0;
+}
+
+.editor-initial-player-head span {
+  border-radius: 999px;
+  background: rgba(62, 199, 255, 0.14);
+  color: var(--accent);
+  padding: 0.18rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.editor-initial-player-head p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.editor-initial-player-metrics,
+.editor-initial-player-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.editor-initial-player-metrics > article {
+  border: 1px solid rgba(108, 210, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(8, 24, 52, 0.68);
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.editor-initial-player-metrics span,
+.editor-initial-player-row-list span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.editor-initial-player-metrics strong {
+  color: var(--text);
+  font-size: 1.15rem;
+}
+
+.editor-initial-player-metrics small,
+.editor-initial-player-row-list small {
+  color: var(--muted);
+}
+
+.editor-initial-player-grid > article {
+  padding: 0.85rem;
+}
+
+.editor-initial-player-grid dl {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.7rem 0 0;
+}
+
+.editor-initial-player-grid dl div {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.editor-initial-player-grid dt {
+  color: var(--muted);
+}
+
+.editor-initial-player-grid dd {
+  color: var(--text);
+  font-weight: 800;
+  margin: 0;
+  min-width: 0;
+  text-align: right;
+  word-break: break-word;
+}
+
+.editor-initial-player-recommendations {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.85rem;
+}
+
+.editor-initial-player-row-list {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.editor-initial-player-row-list > article {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem;
+}
+
+.editor-initial-player-row-list strong {
+  color: var(--text);
+}
+
+.editor-initial-player-row-list code {
+  color: var(--accent);
+  white-space: normal;
+  word-break: break-word;
 }
 
 .editor-save-diagnostics {

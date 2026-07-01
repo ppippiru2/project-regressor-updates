@@ -61,6 +61,3 @@ function safeNumber(value, fallback) {
   const number = Number(value);
   return Number.isFinite(number) ? number : fallback;
 }
-
-
-

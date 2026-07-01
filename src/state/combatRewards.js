@@ -5,10 +5,10 @@ import {
   claimFirstCodexRecordGuide,
   claimFirstLootDropGuide,
   claimForgottenGodRemnantGuide,
+  claimRegionCoreEventCompletionGuide,
 } from "./tutorialGuidance.js?v=675";
 import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=675";
 import { t, tf } from "../localization/index.js?v=675";
-import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=675";
 import {
   claimDialogueEventById,
   claimDialogueEventsForTrigger,
@@ -98,8 +98,7 @@ export function applyMonsterDefeatRewards(state, monster, context) {
       monster,
       flags: ["forgottenGodRemnantContacted"],
     }));
-    const resolved = resolveRegionCoreEvent(region);
-    if (resolved?.completionLog) messages.push(resolved.completionLog);
+    messages.push(...claimRegionCoreEventCompletionGuide(region));
   }
 
   return messages;

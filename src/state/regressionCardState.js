@@ -4,6 +4,7 @@ import {
   getCardCandidateCountByKarma,
   getCardGradeWeightSummary,
   getFateCardHintLevel,
+  normalizeFateCardCandidateCount,
 } from "./fateCardRoller.js?v=675";
 
 export const DEFAULT_REGRESSION_CARD_STATE = Object.freeze({
@@ -113,7 +114,7 @@ export function applyRegressionCardSelection(state, selectedCard) {
 
 function normalizeCandidateCount(value, karma) {
   const count = normalizeCount(value);
-  return count > 0 ? count : getCardCandidateCountByKarma(karma);
+  return normalizeFateCardCandidateCount(count > 0 ? count : getCardCandidateCountByKarma(karma));
 }
 
 function normalizeRunCount(value) {

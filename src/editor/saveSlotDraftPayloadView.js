@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_DRAFT_PAYLOAD_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotDraftPayloadView(options = {}) {
   const preview = options.preview || {};
   const text = options.text || {};
@@ -50,14 +54,10 @@ function renderSaveDraftFieldGroupView(group = {}) {
     <article class="editor-save-draft-group" data-save-draft-group="${escapeAttribute(group.id)}">
       <strong>${escapeHtml(group.label)}</strong>
       <div class="editor-chip-list">
-        ${fields.map((field) => chip(`${field.path} · ${field.valueType} · ${field.guard}`)).join("")}
+        ${fields.map((field) => editorChip(`${field.path} · ${field.valueType} · ${field.guard}`, SAVE_DRAFT_PAYLOAD_CHIP_OPTIONS)).join("")}
       </div>
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

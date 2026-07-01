@@ -231,5 +231,3 @@ function arrayValue(value) {
   }
   return [];
 }
-
-

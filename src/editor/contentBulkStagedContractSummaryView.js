@@ -1,4 +1,6 @@
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_STAGED_CONTRACT_SUMMARY_VIEW_VERSION = "content-bulk-staged-contract-summary-view-v1";
 
@@ -19,26 +21,12 @@ export function renderContentBulkStagedContractSummary(contract, text = {}) {
         <p class="muted">${escapeHtml((contract.domainIds || []).join(" / ") || "-")}</p>
       </div>
       <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-contract-issues">
-        ${contentBulkStagedContractChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(contract.blockingIssueCodes, text))}
-        ${contentBulkStagedContractChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(contract.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(contract.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(contract.warningIssueCodes, text))}
       </div>
-    </div>
-  `;
-}
-
-function contentBulkStagedContractChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
     </div>
   `;
 }

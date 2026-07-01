@@ -234,5 +234,3 @@ function scaleReward(value, sourceLevel, candidateLevel, weight) {
   const levelDelta = Math.max(0, Number(candidateLevel || 0) - Number(sourceLevel || 0));
   return Math.max(1, Math.round(baseValue * (1 + levelDelta * weight)));
 }
-
-

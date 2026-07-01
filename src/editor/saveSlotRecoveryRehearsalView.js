@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_RECOVERY_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotRecoveryRehearsalView(options = {}) {
   const rehearsal = options.rehearsal || {};
   const text = options.text || {};
@@ -64,7 +68,7 @@ function renderSaveRecoveryStepView(step = {}, statusLabel = (status) => status 
         <span>${escapeHtml(statusLabel(step.status))}</span>
       </div>
       ${step.detail ? `<p>${escapeHtml(step.detail)}</p>` : ""}
-      ${step.blocker ? chip(blockerFormatter ? blockerFormatter(step.blocker) : step.blocker) : ""}
+      ${step.blocker ? editorChip(blockerFormatter ? blockerFormatter(step.blocker) : step.blocker, SAVE_RECOVERY_CHIP_OPTIONS) : ""}
     </article>
   `;
 }
@@ -74,7 +78,7 @@ function renderSaveRecoveryRouteView(route = {}, routeActionFormatter = (action)
     <article class="editor-save-recovery-route" data-save-recovery-route="${escapeAttribute(route.id)}">
       <strong>${escapeHtml(route.label)}</strong>
       <p>${escapeHtml(route.detail)}</p>
-      ${chip(routeActionFormatter(route.action))}
+      ${editorChip(routeActionFormatter(route.action), SAVE_RECOVERY_CHIP_OPTIONS)}
     </article>
   `;
 }
@@ -87,10 +91,6 @@ function formatBlocker(blocker, text = {}) {
 function formatRouteAction(action, text = {}) {
   const label = text.routeActionLabel || "Action";
   return `${label}: ${action}`;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

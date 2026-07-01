@@ -1,6 +1,11 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_INTAKE_CONTRACT_VIEW_VERSION = "content-bulk-patch-intake-contract-view-v1";
+const CONTENT_BULK_INTAKE_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderContentBulkPatchIntakeContract(contract, detailText = {}) {
   const text = detailText.contentBulkPatchIntakeContract || {};
@@ -25,12 +30,7 @@ export function renderContentBulkPatchIntakeContract(contract, detailText = {}) 
         }, contract.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-intake-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-intake-list">
         ${(contract.domains || []).map((domain) => renderContentBulkPatchIntakeDomain(domain, text)).join("") || `<p class="muted">${escapeHtml(text.noDomains || "No domains.")}</p>`}
@@ -52,34 +52,17 @@ function renderContentBulkPatchIntakeDomain(domain, text = {}) {
           }, `${domain.batchKey || "-"} / ${domain.currentRowCount || 0}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${chip(text.appendOrUpdate || "Append/update")}
+          ${editorChip(text.appendOrUpdate || "Append/update", CONTENT_BULK_INTAKE_CHIP_OPTIONS)}
         </div>
       </div>
       <div class="editor-content-bulk-intake-grid">
-        ${contentBulkPatchIntakeChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
-        ${contentBulkPatchIntakeChipBlock(text.identityFields || "Identity", domain.identityFields || [])}
-        ${contentBulkPatchIntakeChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [])}
-        ${contentBulkPatchIntakeChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
+        ${contentBulkChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.identityFields || "Identity", domain.identityFields || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.requiredInputs || "Required inputs", domain.requiredInputFields || [], { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [], { chipClass: "editor-chip" })}
       </div>
     </article>
   `;
-}
-
-function contentBulkPatchDomainLabel(domainId, text = {}) {
-  return text.domainLabels?.[domainId] || domainId || "unknown";
-}
-
-function contentBulkPatchIntakeChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

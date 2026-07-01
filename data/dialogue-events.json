@@ -1972,7 +1972,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2054,7 +2054,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2136,7 +2136,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2210,7 +2210,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2284,7 +2284,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2366,7 +2366,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2448,7 +2448,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2530,7 +2530,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2612,7 +2612,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2686,7 +2686,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2768,7 +2768,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2842,7 +2842,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -2924,7 +2924,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3006,7 +3006,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3088,7 +3088,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3170,7 +3170,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3252,7 +3252,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3326,7 +3326,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3408,7 +3408,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3490,7 +3490,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3572,7 +3572,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3654,7 +3654,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3736,7 +3736,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3818,7 +3818,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3900,7 +3900,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -3982,7 +3982,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -4064,7 +4064,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",
@@ -4146,7 +4146,7 @@
     ],
     "implementationNotes": [
       "TEST-010 DialogueEvent JSON coverage seed.",
-      "Runtime hookup remains non-blocking until a later live resolver integration pass."
+      "Runtime hookup is active through dialogueEventRuntime; delivery remains non-blocking."
     ],
     "qaChecks": [
       "Required tutorial region event id exists in data/dialogue-events.json.",

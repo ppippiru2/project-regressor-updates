@@ -93,5 +93,3 @@ function dryRunState(rowCount, blockingIssueCount, warningIssueCount) {
   if (warningIssueCount > 0) return "ready-with-warnings";
   return "ready";
 }
-
-

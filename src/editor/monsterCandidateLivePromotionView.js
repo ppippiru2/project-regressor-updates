@@ -1,6 +1,10 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { editorFallbackLabel } from "./editorLabelFormatters.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const MONSTER_CANDIDATE_LIVE_PROMOTION_VIEW_VERSION = "monster-candidate-live-promotion-view-v1";
+const MONSTER_CANDIDATE_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderMonsterCandidateLivePromotionPlan(plan, detailText = {}) {
   const text = detailText.monsterCandidateLivePromotion || {};
@@ -25,12 +29,7 @@ export function renderMonsterCandidateLivePromotionPlan(plan, detailText = {}) {
         }, plan.version || "-"))}</strong>
       </div>
       <div class="editor-monster-candidate-live-promotion-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-monster-candidate-live-promotion-phases">
         ${(plan.phases || []).map((phase) => renderMonsterCandidateLivePromotionPhase(phase, text, detailText)).join("") || `<p class="muted">${escapeHtml(text.noRows || "No promotion-ready candidates.")}</p>`}
@@ -46,7 +45,7 @@ function renderMonsterCandidateLivePromotionPhase(phase, text = {}, detailText =
       <div class="editor-monster-candidate-live-promotion-phase-head">
         <div>
           <h5>${escapeHtml(monsterCandidateLivePromotionPhaseTitle(phase, text))}</h5>
-          <p>${escapeHtml(monsterCandidateLivePromotionPriorityLabel(phase.priority, text))}</p>
+          <p>${escapeHtml(editorFallbackLabel(phase.priority, text.priorityLabels, ""))}</p>
         </div>
         <span>${escapeHtml(tf("editorPrep.balanceTuningDetail.monsterCandidateLivePromotion.phaseCandidateCount", {
           count: phase.candidateCount || 0
@@ -62,11 +61,11 @@ function renderMonsterCandidateLivePromotionPhase(phase, text = {}, detailText =
 function renderMonsterCandidateLivePromotionRow(row, text = {}, detailText = {}) {
   const promotionText = detailTextForPromotion(detailText, text);
   const roles = [
-    monsterCandidateLivePromotionStateLabel(row.planState, text),
-    monsterCandidatePromotionStageLabel(row.promotionStageId, promotionText),
+    editorFallbackLabel(row.planState, text.stateLabels),
+    editorFallbackLabel(row.promotionStageId, promotionText.stageLabels),
     row.regionName || row.regionId || "",
   ].filter(Boolean);
-  const actionLabels = (row.nextActionIds || []).map((actionId) => monsterCandidatePromotionActionLabel(actionId, promotionText));
+  const actionLabels = (row.nextActionIds || []).map((actionId) => editorFallbackLabel(actionId, promotionText.actionLabels, ""));
 
   return `
     <article class="editor-monster-candidate-live-promotion-row" data-state="${escapeAttribute(row.planState || "unknown")}">
@@ -78,12 +77,12 @@ function renderMonsterCandidateLivePromotionRow(row, text = {}, detailText = {})
             source: row.sourceMonsterName || row.sourceMonsterId || "-"
           }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
         </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+        <div class="editor-chip-list">${roles.map((role) => editorChip(role, MONSTER_CANDIDATE_CHIP_OPTIONS)).join("")}</div>
       </div>
       <div class="editor-monster-candidate-live-promotion-grid">
-        ${monsterCandidateLivePromotionChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
-        ${monsterCandidateLivePromotionChipBlock(text.targetFiles || "Target files", row.targetFiles || [])}
-        ${monsterCandidateLivePromotionChipBlock(text.nextActions || "Next actions", actionLabels)}
+        ${editorChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"], MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.targetFiles || "Target files", row.targetFiles || [], MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.nextActions || "Next actions", actionLabels, MONSTER_CANDIDATE_CHIP_OPTIONS)}
       </div>
     </article>
   `;
@@ -109,8 +108,8 @@ function renderMonsterCandidateLivePromotionDeferred(rows = [], text = {}, detai
 function renderMonsterCandidateLivePromotionDeferredRow(row, text = {}, detailText = {}) {
   const promotionText = detailTextForPromotion(detailText, text);
   const roles = [
-    monsterCandidateLivePromotionStateLabel(row.planState, text),
-    monsterCandidatePromotionStageLabel(row.promotionStageId, promotionText),
+    editorFallbackLabel(row.planState, text.stateLabels),
+    editorFallbackLabel(row.promotionStageId, promotionText.stageLabels),
   ].filter(Boolean);
   const missingLabels = (row.missingRewardTypes || []).map((type) => text.rewardTypeLabels?.[type] || type);
 
@@ -124,11 +123,11 @@ function renderMonsterCandidateLivePromotionDeferredRow(row, text = {}, detailTe
             source: row.sourceMonsterName || row.sourceMonsterId || "-"
           }, `Level ${row.level || 0} / source ${row.sourceMonsterName || row.sourceMonsterId || "-"}`))}</p>
         </div>
-        <div class="editor-chip-list">${roles.map((role) => chip(role)).join("")}</div>
+        <div class="editor-chip-list">${roles.map((role) => editorChip(role, MONSTER_CANDIDATE_CHIP_OPTIONS)).join("")}</div>
       </div>
       <div class="editor-monster-candidate-live-promotion-grid">
-        ${monsterCandidateLivePromotionChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"])}
-        ${monsterCandidateLivePromotionChipBlock(text.deferredMissing || "Missing reward links", missingLabels.length ? missingLabels : [text.noMissing || "None"])}
+        ${editorChipBlock(text.rewardLinks || "Reward links", row.rewardItemIds?.length ? row.rewardItemIds : [text.emptyReward || "None"], MONSTER_CANDIDATE_CHIP_OPTIONS)}
+        ${editorChipBlock(text.deferredMissing || "Missing reward links", missingLabels.length ? missingLabels : [text.noMissing || "None"], MONSTER_CANDIDATE_CHIP_OPTIONS)}
       </div>
     </article>
   `;
@@ -140,40 +139,11 @@ function monsterCandidateLivePromotionPhaseTitle(phase, text = {}) {
   }, `Phase ${phase.order || 0}`);
 }
 
-function monsterCandidateLivePromotionPriorityLabel(priorityId, text = {}) {
-  return text.priorityLabels?.[priorityId] || priorityId || "";
-}
-
-function monsterCandidateLivePromotionStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
 function detailTextForPromotion(detailText = {}, text = {}) {
   return {
     ...(detailText.monsterCandidatePromotion || {}),
     ...(text.promotionLabels || {}),
   };
-}
-
-function monsterCandidatePromotionActionLabel(actionId, text = {}) {
-  return text.actionLabels?.[actionId] || actionId;
-}
-
-function monsterCandidatePromotionStageLabel(stageId, text = {}) {
-  return text.stageLabels?.[stageId] || stageId || "unknown";
-}
-
-function monsterCandidateLivePromotionChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_COMPAT_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditCompatibilityConfirmationRollupView(options = {}) {
   const rollup = options.rollup || {};
   const text = options.text || {};
@@ -20,7 +24,7 @@ export function renderSaveSlotEditCompatibilityConfirmationRollupView(options = 
           <h4>${escapeHtml(text.title || "Save edit compatibility to confirmation rollup")}</h4>
           <p class="muted">${escapeHtml(text.description || "Read-only blocker rollup before confirmation preflight can be converted into real controls.")}</p>
         </div>
-        ${chip(statusLabel(rollup.status))}
+        ${editorChip(statusLabel(rollup.status), SAVE_EDIT_COMPAT_CHIP_OPTIONS)}
       </div>
       <div class="editor-save-edit-compat-confirm-rollup-metrics">
         ${metricCard(text.laneMetric || "Lanes", laneValue, text.laneHint || "")}
@@ -58,7 +62,7 @@ function renderSaveEditCompatibilityConfirmationRollupLaneView(lane = {}, text =
         </div>
       </dl>
       <div class="editor-chip-list">
-        ${blockers.map((blocker) => chip(blocker)).join("") || chip(text.noBlocker || "no-blocker")}
+        ${blockers.map((blocker) => editorChip(blocker, SAVE_EDIT_COMPAT_CHIP_OPTIONS)).join("") || editorChip(text.noBlocker || "no-blocker", SAVE_EDIT_COMPAT_CHIP_OPTIONS)}
       </div>
     </article>
   `;
@@ -72,13 +76,9 @@ function renderSaveEditCompatibilityConfirmationRollupCheckView(check = {}, stat
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_COMPAT_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

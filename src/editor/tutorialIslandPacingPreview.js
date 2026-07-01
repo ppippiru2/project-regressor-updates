@@ -220,6 +220,3 @@ function collect(errors, condition, message) {
   if (condition) return;
   errors.push(message);
 }
-
-
-

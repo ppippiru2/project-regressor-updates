@@ -1,13 +1,20 @@
 import {
   createContentBulkPatchFilePatchDraftExport,
 } from "./contentBulkPatchFilePatchDraftExport.js?v=675";
+import {
+  createContentBulkFilteredCandidateStageGateCountsFromPreview,
+  createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
+} from "./contentBulkFilteredCandidateStageGate.js?v=675";
 import { createContentBulkPatchReviewIssueSummary } from "./contentBulkPatchIssueSummary.js?v=675";
 import { createContentBulkPatchPreApplyReview } from "./contentBulkPatchPreApplyReview.js?v=675";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VERSION = "content-bulk-patch-apply-gate-plan-v1";
 
-export function createContentBulkPatchApplyGatePlan(exportPreview = createContentBulkPatchFilePatchDraftExport()) {
+export function createContentBulkPatchApplyGatePlan(exportPreview = createContentBulkPatchFilePatchDraftExport(), options = {}) {
   const summary = exportPreview.summary || {};
+  const filteredCandidatePreview = options.filteredCandidatePreview || {};
+  const filteredCandidateStageGateCounts = createContentBulkFilteredCandidateStageGateCountsFromPreview(filteredCandidatePreview);
+  const filteredCandidateStageGateReasonCodes = createContentBulkFilteredCandidateStageGateReasonCodesFromPreview(filteredCandidatePreview);
   const gates = createApplyGates(exportPreview);
   const preApplyReview = exportPreview.preApplyReview || exportPreview.payload?.preApplyReview || createContentBulkPatchPreApplyReview(summary);
   const reviewChecklist = preApplyReview.checklist || [];
@@ -59,6 +66,24 @@ export function createContentBulkPatchApplyGatePlan(exportPreview = createConten
       contractBlockedRowCount: preApplyReview.summary?.contractBlockedRowCount || 0,
       contractWarningRowCount: preApplyReview.summary?.contractWarningRowCount || 0,
       contractTargetSurfaceCount: preApplyReview.summary?.contractTargetSurfaceCount || 0,
+      filteredCandidateVisibleRowCount: filteredCandidatePreview.summary?.visibleRowCount || 0,
+      filteredCandidateBlockingRowCount: filteredCandidatePreview.summary?.blockingRowCount || 0,
+      filteredCandidateWarningRowCount: filteredCandidatePreview.summary?.warningRowCount || 0,
+      filteredCandidateStageGateReadyRowCount: filteredCandidateStageGateCounts.ready,
+      filteredCandidateStageGateReviewRowCount: filteredCandidateStageGateCounts.review,
+      filteredCandidateStageGateBlockedRowCount: filteredCandidateStageGateCounts.blocked,
+      filteredCandidateStageGateNotStagedRowCount: filteredCandidateStageGateCounts.notStaged,
+      filteredCandidateStageGateReasonCount: filteredCandidateStageGateReasonCodes.length,
+    },
+    filteredCandidateGate: {
+      activeFilter: filteredCandidatePreview.activeFilter || null,
+      visibleRowCount: filteredCandidatePreview.summary?.visibleRowCount || 0,
+      blockingRowCount: filteredCandidatePreview.summary?.blockingRowCount || 0,
+      warningRowCount: filteredCandidatePreview.summary?.warningRowCount || 0,
+      stageGateCounts: filteredCandidateStageGateCounts,
+      reasonCodes: filteredCandidateStageGateReasonCodes,
+      requiresExplicitApply: true,
+      writesGameData: false,
     },
     blockedReasons: [
       "writer-not-implemented",
@@ -108,5 +133,3 @@ function createApplyGates(exportPreview) {
     },
   ];
 }
-
-

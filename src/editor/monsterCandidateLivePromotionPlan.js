@@ -132,6 +132,3 @@ function sortLivePromotionRows(left, right) {
   if (levelDiff) return levelDiff;
   return String(left.id || "").localeCompare(String(right.id || ""));
 }
-
-
-

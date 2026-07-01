@@ -10,6 +10,7 @@ export const displayNames = DATA_TEXT.displayNames;
 
 export const slots = [
   "Weapon",
+  "OffHand",
   "Helmet",
   "Armor",
   "Gloves",

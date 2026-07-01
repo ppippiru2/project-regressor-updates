@@ -82,6 +82,3 @@ function sampleArrayItem(item) {
   }
   return String(item ?? "");
 }
-
-
-

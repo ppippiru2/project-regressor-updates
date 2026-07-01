@@ -75,7 +75,7 @@ export function bindDelegatedClickEvents({
 
     if (cardDrawTestSlot) {
       event.preventDefault();
-      onCardDrawTestSlot?.(cardDrawTestSlot.dataset.cardDrawTestSlot);
+      onCardDrawTestSlot?.(cardDrawTestSlot.dataset.cardDrawTestSlot, cardDrawTestSlot);
       return;
     }
 
@@ -93,13 +93,13 @@ export function bindDelegatedClickEvents({
 
     if (regressionCardSlot) {
       event.preventDefault();
-      onRegressionCardSelect?.(regressionCardSlot.dataset.regressionCardSlot);
+      onRegressionCardSelect?.(regressionCardSlot.dataset.regressionCardSlot, regressionCardSlot);
       return;
     }
 
     if (regressionCard) {
       event.preventDefault();
-      onRegressionCardSelect?.(regressionCard.dataset.regressionCard);
+      onRegressionCardSelect?.(regressionCard.dataset.regressionCard, regressionCard);
       return;
     }
 

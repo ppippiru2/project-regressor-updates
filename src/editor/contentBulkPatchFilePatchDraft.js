@@ -144,5 +144,3 @@ function createPostApplyChecks(entry) {
   if ((entry.domainIds || []).some((id) => id.includes("item"))) checks.push("verify-inventory-and-rewards");
   return Array.from(new Set(checks));
 }
-
-

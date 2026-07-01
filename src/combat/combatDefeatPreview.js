@@ -17,6 +17,3 @@ export function createDefeatedTargetPreview({
     visibleUntil: now + Math.max(restartDelayMs, minVisibleMs),
   };
 }
-
-
-

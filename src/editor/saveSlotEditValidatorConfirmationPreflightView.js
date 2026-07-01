@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_VALIDATOR_PREFLIGHT_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditValidatorConfirmationPreflightView(options = {}) {
   const preflight = options.preflight || {};
   const text = options.text || {};
@@ -48,7 +52,7 @@ function renderSaveEditValidatorConfirmationPreflightGroupView(group = {}, text 
         <span>${escapeHtml(groupBlockerValueFormatter(group.blockerCount || 0))}</span>
       </div>
       <div class="editor-chip-list">
-        ${blockers.map((blocker) => chip(blocker)).join("") || chip(text.noBlocker || "no-blocker")}
+        ${blockers.map((blocker) => editorChip(blocker, SAVE_EDIT_VALIDATOR_PREFLIGHT_CHIP_OPTIONS)).join("") || editorChip(text.noBlocker || "no-blocker", SAVE_EDIT_VALIDATOR_PREFLIGHT_CHIP_OPTIONS)}
       </div>
     </article>
   `;
@@ -62,13 +66,9 @@ function renderSaveEditValidatorConfirmationPreflightCheckView(check = {}, statu
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_VALIDATOR_PREFLIGHT_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_INPUT_SCHEMA_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditInputSchemaView(options = {}) {
   const schema = options.schema || {};
   const text = options.text || {};
@@ -44,8 +48,8 @@ function renderSaveEditInputSchemaGroupView(group = {}, groupFieldFormatter, gro
     <article class="editor-save-input-schema-group" data-save-edit-input-group="${escapeAttribute(group.id)}">
       <strong>${escapeHtml(group.label)}</strong>
       <div class="editor-chip-list">
-        ${chip(groupFieldFormatter(group))}
-        ${chip(groupComparableFormatter(group))}
+        ${editorChip(groupFieldFormatter(group), SAVE_EDIT_INPUT_SCHEMA_CHIP_OPTIONS)}
+        ${editorChip(groupComparableFormatter(group), SAVE_EDIT_INPUT_SCHEMA_CHIP_OPTIONS)}
       </div>
     </article>
   `;
@@ -74,10 +78,6 @@ function renderSaveEditInputSchemaFieldView(field = {}, text = {}, statusLabel =
       </dl>
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

@@ -331,6 +331,3 @@ function normalizeExistingFilePaths(paths) {
 function normalizeAssetPath(path) {
   return String(path || "").replaceAll("\\", "/").replace(/^\.\//, "");
 }
-
-
-

@@ -1,9 +1,5 @@
 import { getLocaleText } from "../localization/index.js?v=675";
-import {
-  PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
-  resolveAlignment,
-  resolveDispositionResult,
-} from "../state/profile.js?v=675";
+import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "../state/profile.js?v=675";
 import {
   DEFAULT_PORTRAIT_FRAME,
   dragPortraitFrame,
@@ -23,15 +19,23 @@ import {
   rollInitialCreationStats,
 } from "../state/characterCreationStats.js?v=675";
 import {
-  createWeightedStarterCards,
-  resolveRecommendedStarterCardDraw,
-} from "../state/starterCardDraw.js?v=675";
+  applyStarterCardRevealDraft,
+  clearStarterCardRevealDraft,
+  isStarterCardRevealComplete,
+  resolveStarterCardRevealDraw,
+} from "../state/starterCardReveal.js?v=675";
 import { renderCreationProloguePanel } from "./characterCreationProloguePanel.js?v=675";
 import { renderCreationProfileStep } from "./characterCreationProfileStep.js?v=675";
 import { renderCreationStatsStep } from "./characterCreationStatsStep.js?v=675";
 import { renderCreationStarterCardStep } from "./characterCreationStarterCardStep.js?v=675";
 import { renderCreationQuestionStep } from "./characterCreationQuestionStep.js?v=675";
 import { renderCreationResultStep } from "./characterCreationResultStep.js?v=675";
+import {
+  renderCreationHiddenFields,
+  selectedStarterCard,
+  syncCreationHiddenFields,
+} from "./characterCreationFormState.js?v=675";
+import { playFateCardRevealMotion } from "./fateCardRevealMotion.js?v=675";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
@@ -48,6 +52,13 @@ const EMPTY_STARTER_CARD = Object.freeze({
   skill: "",
   glow: "",
   unlock: "",
+});
+const FORM_STATE_OPTIONS = Object.freeze({
+  profileImageBridgeId: PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
+  questions: QUESTIONS,
+  statKeys: STAT_KEYS,
+  starterCards: STARTER_CARDS,
+  emptyStarterCard: EMPTY_STARTER_CARD,
 });
 const MAX_PROFILE_IMAGE_BYTES = 1200000;
 export function bindCharacterCreationEvents(onCreateCharacter, onCancelCreation) {
@@ -150,14 +161,13 @@ export function bindCharacterCreationEvents(onCreateCharacter, onCancelCreation)
 
     if (button.dataset.starterCardSlot) {
       event.preventDefault();
-      revealStarterCard(draft, Number(button.dataset.starterCardSlot));
-      renderCreationWizard(form, draft);
+      startStarterCardReveal(form, draft, button, Number(button.dataset.starterCardSlot));
       return;
     }
 
     if (button.dataset.confirmStarterCard !== undefined) {
       event.preventDefault();
-      if (!isStarterCardRevealed(draft)) return;
+      if (!isStarterCardRevealComplete(draft)) return;
       draft.step = "result";
       renderCreationWizard(form, draft);
       return;
@@ -246,6 +256,7 @@ function createInitialDraft() {
     answers: {},
     starterCardId: "",
     starterCardRevealed: false,
+    starterCardRevealPending: false,
     starterCardSlotIndex: -1,
   };
 }
@@ -269,7 +280,7 @@ function readCreationQueryDefaults() {
 
 function renderCreationWizard(form, draft) {
   form.innerHTML = `
-    ${renderHiddenFields(draft)}
+    ${renderCreationHiddenFields(draft, FORM_STATE_OPTIONS)}
     ${renderStepHeader(draft)}
     ${renderStepBody(draft)}
   `;
@@ -296,13 +307,13 @@ function renderStepBody(draft) {
   if (draft.step === "stats") return renderCreationStatsStep(draft);
   if (draft.step === "questions") return renderCreationQuestionStep(draft);
   if (draft.step === "starterCards") {
-    const revealed = isStarterCardRevealed(draft);
+    const revealed = isStarterCardRevealComplete(draft);
     return renderCreationStarterCardStep(draft, {
       revealed,
-      selectedCard: revealed ? selectedStarterCard(draft) : EMPTY_STARTER_CARD,
+      selectedCard: revealed ? selectedStarterCard(draft, FORM_STATE_OPTIONS) : EMPTY_STARTER_CARD,
     });
   }
-  if (draft.step === "result") return renderCreationResultStep(draft, { selectedCard: selectedStarterCard(draft) });
+  if (draft.step === "result") return renderCreationResultStep(draft, { selectedCard: selectedStarterCard(draft, FORM_STATE_OPTIONS) });
   return renderCreationProfileStep(draft);
 }
 
@@ -321,7 +332,7 @@ function answerQuestion(draft, value) {
   draft.answers[question.id] = value;
   if (draft.questionIndex >= QUESTIONS.length - 1) {
     draft.step = "starterCards";
-    clearStarterCardReveal(draft);
+    clearStarterCardRevealDraft(draft);
     return;
   }
   draft.questionIndex += 1;
@@ -341,7 +352,7 @@ function moveBack(draft) {
     return;
   }
   if (draft.step === "starterCards") {
-    clearStarterCardReveal(draft);
+    clearStarterCardRevealDraft(draft);
     draft.step = "questions";
     draft.questionIndex = QUESTIONS.length - 1;
     return;
@@ -351,104 +362,26 @@ function moveBack(draft) {
   }
 }
 
-function renderHiddenFields(draft) {
-  return `
-    <input type="hidden" name="name" value="${escapeAttr(draft.name)}" />
-    <input type="hidden" name="age" value="${escapeAttr(draft.age)}" />
-    <input type="hidden" name="gender" value="${escapeAttr(draft.gender)}" />
-    <input type="hidden" name="country" value="${escapeAttr(draft.country)}" />
-    <input type="hidden" name="portraitDataUrl" value="${escapeAttr(draft.portraitDataUrl)}" />
-    <input type="hidden" name="profileImageBridgeId" value="${escapeAttr(PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID)}" />
-    <input type="hidden" name="portraitFrameX" value="${escapeAttr(draft.portraitFrame.x)}" />
-    <input type="hidden" name="portraitFrameY" value="${escapeAttr(draft.portraitFrame.y)}" />
-    <input type="hidden" name="portraitFrameScale" value="${escapeAttr(draft.portraitFrame.scale)}" />
-    ${renderStarterCardHiddenFields(draft)}
-    ${QUESTIONS.map((question) => `<input type="hidden" name="${question.id}" value="${escapeAttr(draft.answers[question.id] || "")}" />`).join("")}
-    ${STAT_KEYS.map((stat) => `<input type="hidden" name="stat_${stat}" value="${draft.stats[stat]}" />`).join("")}
-  `;
-}
-
 function syncHiddenFields(form, draft) {
   readProfileFields(form, draft);
-  for (const [name, value] of Object.entries({
-    name: draft.name,
-    age: draft.age,
-    gender: draft.gender,
-    country: draft.country,
-    portraitDataUrl: draft.portraitDataUrl,
-    profileImageBridgeId: PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID,
-    portraitFrameX: draft.portraitFrame.x,
-    portraitFrameY: draft.portraitFrame.y,
-    portraitFrameScale: draft.portraitFrame.scale,
-    ...starterCardFormValues(draft),
-  })) {
-    setHiddenValue(form, name, value);
-  }
-  for (const question of QUESTIONS) {
-    setHiddenValue(form, question.id, draft.answers[question.id] || "");
-  }
-  for (const stat of STAT_KEYS) {
-    setHiddenValue(form, `stat_${stat}`, draft.stats[stat]);
-  }
+  syncCreationHiddenFields(form, draft, FORM_STATE_OPTIONS);
 }
 
-function selectedStarterCard(draft) {
-  if (!draft?.starterCardId) return EMPTY_STARTER_CARD;
-  return STARTER_CARDS.find((card) => card.id === draft.starterCardId) || EMPTY_STARTER_CARD;
-}
-
-function weightedStarterCards(draft) {
-  const disposition = resolveDispositionResult(Object.values(draft.answers || {}));
-  return createWeightedStarterCards(STARTER_CARDS, disposition.id);
-}
-
-function revealStarterCard(draft, slotIndex) {
-  if (isStarterCardRevealed(draft)) return;
-  const normalizedSlot = Math.max(0, Math.min(STARTER_CARDS.length - 1, Math.floor(Number(slotIndex)) || 0));
-  const disposition = resolveDispositionResult(Object.values(draft.answers || {}));
-  const draw = resolveRecommendedStarterCardDraw(STARTER_CARDS, disposition.id);
-  draft.starterCardId = draw.card?.id || STARTER_CARDS[0]?.id || "";
-  draft.starterCardRevealed = Boolean(draft.starterCardId);
-  draft.starterCardSlotIndex = normalizedSlot;
-}
-
-function clearStarterCardReveal(draft) {
-  draft.starterCardId = "";
-  draft.starterCardRevealed = false;
-  draft.starterCardSlotIndex = -1;
-}
-
-function isStarterCardRevealed(draft) {
-  return Boolean(draft?.starterCardRevealed && draft.starterCardId);
-}
-
-function starterCardFormValues(draft) {
-  const card = selectedStarterCard(draft);
-  return {
-    starterCardId: card.id,
-    starterCardName: card.card,
-    starterTraitId: card.traitId || "",
-    starterTrait: card.trait,
-    starterSkill: card.skill,
-    starterSkillActionId: card.actionId || "",
-  };
-}
-
-function renderStarterCardHiddenFields(draft) {
-  return Object.entries(starterCardFormValues(draft))
-    .map(([name, value]) => `<input type="hidden" name="${name}" value="${escapeAttr(value)}" />`)
-    .join("");
-}
-
-function setHiddenValue(form, name, value) {
-  let input = form.querySelector(`input[type="hidden"][name="${name}"]`);
-  if (!input) {
-    input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    form.appendChild(input);
-  }
-  input.value = value;
+function startStarterCardReveal(form, draft, button, slotIndex) {
+  if (isStarterCardRevealComplete(draft) || draft.starterCardRevealPending) return;
+  const draw = resolveStarterCardRevealDraw(STARTER_CARDS, draft.answers, slotIndex);
+  draft.starterCardRevealPending = true;
+  button.disabled = true;
+  button.classList.add("is-revealing");
+  Promise.resolve()
+    .then(() => playFateCardRevealMotion(button, draw.card))
+    .catch(() => false)
+    .then(() => {
+      draft.starterCardRevealPending = false;
+      if (draft.step !== "starterCards" || isStarterCardRevealComplete(draft)) return;
+      applyStarterCardRevealDraft(draft, draw, STARTER_CARDS);
+      renderCreationWizard(form, draft);
+    });
 }
 
 function readFileAsDataUrl(file) {
@@ -478,8 +411,4 @@ function escapeHtml(value) {
     '"': "&quot;",
     "'": "&#39;",
   })[char]);
-}
-
-function escapeAttr(value) {
-  return escapeHtml(value);
 }

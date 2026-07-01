@@ -1,11 +1,37 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
 import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=675";
+import {
+  createContentBulkFilteredCandidateStageGateCountsFromPreview,
+  createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
+} from "./contentBulkFilteredCandidateStageGate.js?v=675";
+import {
+  contentBulkStageGateReasonLabels,
+  contentBulkStageGateStatusLabels,
+} from "./contentBulkStageGatePreviewLabels.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_APPLY_GATE_PLAN_VIEW_VERSION = "content-bulk-patch-apply-gate-plan-view-v1";
 
-export function renderContentBulkPatchApplyGatePlan(plan, detailText = {}) {
+const APPLY_GATE_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
+export function renderContentBulkPatchApplyGatePlan(plan, detailText = {}, helpers = {}) {
   const text = detailText.contentBulkPatchApplyGatePlan || {};
+  const candidateText = detailText.contentBulkFilteredCandidatePreview || {};
   const summary = plan.summary || {};
+  const filteredCandidatePreview = helpers.filteredCandidatePreview || {};
+  const hasFilteredCandidatePreview = Boolean(filteredCandidatePreview.summary || filteredCandidatePreview.visibleRows);
+  const stageGateCounts = hasFilteredCandidatePreview
+    ? createContentBulkFilteredCandidateStageGateCountsFromPreview(filteredCandidatePreview)
+    : normalizeStageGateCounts(plan.filteredCandidateGate?.stageGateCounts);
+  const stageGateReasonCodes = hasFilteredCandidatePreview
+    ? createContentBulkFilteredCandidateStageGateReasonCodesFromPreview(filteredCandidatePreview)
+    : normalizedList(plan.filteredCandidateGate?.reasonCodes);
+  const stageGateReasonLabels = {
+    ...(candidateText.stageGateReasonLabels || {}),
+    ...(text.stageGateReasonLabels || {}),
+  };
   const metrics = [
     [text.targetFiles || "Target files", `${summary.targetFileCount || 0}`],
     [text.patchBlocks || "Patch blocks", `${summary.patchBlockCount || 0}`],
@@ -18,6 +44,10 @@ export function renderContentBulkPatchApplyGatePlan(plan, detailText = {}) {
     [text.contractReadyRows || "Contract ready", `${summary.contractReadyRowCount || 0}`],
     [text.contractBlockedRows || "Contract blocked", `${summary.contractBlockedRowCount || 0}`],
     [text.contractWarningRows || "Contract review", `${summary.contractWarningRowCount || 0}`],
+    [text.stageGateReadyRows || "Stage gate ready", `${stageGateCounts.ready}`],
+    [text.stageGateReviewRows || "Stage gate review", `${stageGateCounts.review}`],
+    [text.stageGateBlockedRows || "Stage gate blocked", `${stageGateCounts.blocked}`],
+    [text.stageGateNotStagedRows || "Stage gate not staged", `${stageGateCounts.notStaged}`],
     [text.applyState || "Apply", plan.applyEnabled ? (text.enabled || "Enabled") : (text.disabled || "Disabled")],
   ];
   return `
@@ -32,44 +62,24 @@ export function renderContentBulkPatchApplyGatePlan(plan, detailText = {}) {
         }, plan.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-apply-gate-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${renderContentBulkIssueSummary(plan.issueSummary, text)}
       <div class="editor-content-bulk-apply-gate-grid">
-        ${contentBulkPatchApplyGateChipBlock(text.reviewChecklist || "Review checklist", (plan.reviewChecklist || []).map((item) =>
-          `${contentBulkPatchApplyGateLabel(item.id, text.reviewLabels)} - ${contentBulkPatchApplyGateLabel(item.state, text.stateLabels)} - ${item.detail || "-"}`
-        ))}
-        ${contentBulkPatchApplyGateChipBlock(text.blockedReasons || "Blocked reasons", (plan.blockedReasons || []).map((reason) => contentBulkPatchApplyGateLabel(reason, text.blockedReasonLabels)))}
-        ${contentBulkPatchApplyGateChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(plan.issueSummary?.blockingIssueCodes, text))}
-        ${contentBulkPatchApplyGateChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(plan.issueSummary?.warningIssueCodes, text))}
-        ${contentBulkPatchApplyGateChipBlock(text.gateList || "Gate list", (plan.gates || []).map((gate) => `${contentBulkPatchApplyGateLabel(gate.id, text.gateLabels)} - ${contentBulkPatchApplyGateLabel(gate.state, text.stateLabels)}`))}
-        ${contentBulkPatchApplyGateChipBlock(text.rollbackPlan || "Rollback plan", (plan.rollbackSteps || []).map((step) => contentBulkPatchApplyGateLabel(step, text.rollbackLabels)))}
-        ${contentBulkPatchApplyGateChipBlock(text.validationPlan || "Validation plan", (plan.validationSteps || []).map((step) => contentBulkPatchApplyGateLabel(step, text.validationLabels)))}
+        ${contentBulkChipBlock(text.stageGateStatus || "Stage gate status", contentBulkStageGateStatusLabels(stageGateCounts, text), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.stageGateReasons || "Stage gate reasons", contentBulkStageGateReasonLabels(stageGateReasonCodes, stageGateReasonLabels, text), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.reviewChecklist || "Review checklist", (plan.reviewChecklist || []).map((item) =>
+          `${contentBulkFallbackLabel(item.id, text.reviewLabels)} - ${contentBulkFallbackLabel(item.state, text.stateLabels)} - ${item.detail || "-"}`
+        ), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.blockedReasons || "Blocked reasons", (plan.blockedReasons || []).map((reason) => contentBulkFallbackLabel(reason, text.blockedReasonLabels)), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(plan.issueSummary?.blockingIssueCodes, text), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(plan.issueSummary?.warningIssueCodes, text), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.gateList || "Gate list", (plan.gates || []).map((gate) => `${contentBulkFallbackLabel(gate.id, text.gateLabels)} - ${contentBulkFallbackLabel(gate.state, text.stateLabels)}`), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.rollbackPlan || "Rollback plan", (plan.rollbackSteps || []).map((step) => contentBulkFallbackLabel(step, text.rollbackLabels)), APPLY_GATE_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.validationPlan || "Validation plan", (plan.validationSteps || []).map((step) => contentBulkFallbackLabel(step, text.validationLabels)), APPLY_GATE_CHIP_OPTIONS)}
       </div>
     </section>
   `;
-}
-
-function contentBulkPatchApplyGateLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkPatchApplyGateChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {
@@ -83,4 +93,20 @@ function escapeHtml(value) {
 
 function escapeAttribute(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
+}
+
+function normalizeStageGateCounts(counts = {}) {
+  return {
+    ready: Number(counts.ready || 0),
+    review: Number(counts.review || 0),
+    blocked: Number(counts.blocked || 0),
+    notStaged: Number(counts.notStaged || 0),
+  };
+}
+
+function normalizedList(value) {
+  return []
+    .concat(value || [])
+    .map((entry) => String(entry || "").trim())
+    .filter(Boolean);
 }

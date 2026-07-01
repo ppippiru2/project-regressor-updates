@@ -758,5 +758,3 @@ function resolveTutorialDialogueFallbackValue({ localeText = getLocaleText(), fa
   if (typeof localizedFallback === "string" && localizedFallback.trim()) return localizedFallback;
   return TUTORIAL_DIALOGUE_FALLBACK_VALUE;
 }
-
-

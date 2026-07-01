@@ -1,5 +1,6 @@
 import { getLocaleText, t } from "../localization/index.js?v=675";
 import { REGRESSION_FATE_CARD_POOL_DATA } from "../data/fateCardPoolData.js?v=675";
+import { resolveFateCardVisual, resolveFateCardVisualSlug } from "../data/fateCardVisualData.js?v=675";
 import { resolveFateCardAuraTier } from "./fateCardRoller.js?v=675";
 
 export function createRegressionFateCardCatalog(starterCards = [], localeText = getLocaleText()) {
@@ -18,6 +19,8 @@ function normalizeCatalogCard(card, localeText, source) {
   const text = localeText?.fateCardPool?.items?.[card.id] || {};
   const grade = card.grade || card.rarity || "D";
   const auraTier = resolveFateCardAuraTier(grade);
+  const visualSlug = resolveFateCardVisualSlug(card);
+  const visual = resolveFateCardVisual({ ...card, visualSlug });
   return {
     ...card,
     card: text.card || card.card || card.name || card.id,
@@ -31,6 +34,10 @@ function normalizeCatalogCard(card, localeText, source) {
     grade,
     rarity: card.rarity || grade,
     glow: text.glow || t(`fateCardHints.aura.${auraTier}`),
+    visualSlug,
+    frontImage: visual?.frontImage || "",
+    revealSprite: visual?.revealSprite || "",
+    defaultBfx: visual?.defaultBfx || "",
     poolSource: source,
   };
 }

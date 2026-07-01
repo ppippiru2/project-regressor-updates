@@ -1,4 +1,5 @@
 import { t, tf } from "../localization/index.js?v=675";
+import { FATE_CARD_BACK_IMAGE, resolveFateCardVisual } from "../data/fateCardVisualData.js?v=675";
 import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=675";
 import {
   FATE_CARD_RENDER_MODES,
@@ -14,6 +15,7 @@ export function resolveFateCardRenderState(slot = {}, options = {}) {
   const auraVisible = shouldShowAura(slot, { mode, hintLevel, revealed });
   const auraClass = auraVisible ? resolveCardGradeAuraClass(slot.auraCard || slot.card || { grade: slot.grade }) : "card-aura-hidden";
   const auraTier = resolveFateCardAuraTier(slot.grade || slot.auraCard?.grade || slot.card?.grade || slot.card?.glow);
+  const visual = resolveSlotVisual(slot);
 
   return {
     mode,
@@ -24,17 +26,27 @@ export function resolveFateCardRenderState(slot = {}, options = {}) {
     auraVisible,
     auraTier,
     auraClass,
+    bfxId: auraVisible ? visual?.defaultBfx || "" : "",
     hintClass: `fate-card-hint-level-${hintLevel}`,
     title: showIdentity ? cardName(slot) : options.hiddenTitle,
     glow: showIdentity ? cardGlow(slot) : hiddenGlowLabel(auraTier, hintLevel, mode),
     primaryHint: showIdentity ? options.revealedHint : options.hiddenHint,
     archetypeHint: !showIdentity && hintLevel >= 4 ? archetypeHint(slot.archetype) : "",
+    visual,
+    showFrontImage: showIdentity && Boolean(visual?.frontImage),
+    revealSprite: showIdentity ? visual?.revealSprite || "" : "",
+    backImage: FATE_CARD_BACK_IMAGE,
   };
 }
 
 export function renderFateCardButton(slot = {}, options = {}) {
   const renderState = resolveFateCardRenderState(slot, options);
-  const attrs = renderAttributes(options.attributes || {});
+  const attrs = renderAttributes({
+    ...(options.attributes || {}),
+    "data-card-bfx": renderState.bfxId,
+    "data-card-visual": renderState.showFrontImage ? renderState.visual?.visualSlug : "",
+    "data-card-reveal-sprite": renderState.revealSprite,
+  });
   const buttonClass = [
     options.className || "fate-card-button",
     renderState.auraClass,
@@ -51,6 +63,7 @@ export function renderFateCardButton(slot = {}, options = {}) {
   const progressiveLines = renderState.archetypeHint ? [`<small class="fate-card-archetype-hint">${escapeHtml(renderState.archetypeHint)}</small>`] : [];
 
   return `<button class="${escapeAttr(buttonClass)}" type="button" ${attrs} aria-pressed="${renderState.selected ? "true" : "false"}"${disabled}>
+    ${renderFateCardVisual(renderState, title)}
     <span class="creation-starter-card-glow">${escapeHtml(renderState.glow || t("fateCardHints.hiddenGlow"))}</span>
     <strong>${escapeHtml(title)}</strong>
     <small>${escapeHtml(primaryHint)}</small>
@@ -58,6 +71,17 @@ export function renderFateCardButton(slot = {}, options = {}) {
     ${extraLines.map((line) => `<small>${escapeHtml(line)}</small>`).join("")}
     ${progressiveLines.join("")}
   </button>`;
+}
+
+function renderFateCardVisual(renderState, title) {
+  if (renderState.showFrontImage) {
+    return `<span class="fate-card-visual fate-card-visual-front" aria-hidden="true">
+      <img src="${escapeAttr(renderState.visual.frontImage)}" alt="" loading="lazy" decoding="async" />
+    </span>`;
+  }
+  return `<span class="fate-card-visual fate-card-visual-back" aria-hidden="true">
+    <img src="${escapeAttr(renderState.backImage)}" alt="${escapeAttr(title)}" loading="lazy" decoding="async" />
+  </span>`;
 }
 
 function shouldShowAura(slot, { mode, hintLevel, revealed }) {
@@ -99,6 +123,14 @@ function cardName(slot) {
 function cardGlow(slot) {
   const auraTier = resolveFateCardAuraTier(slot.grade || slot.auraCard?.grade || slot.card?.grade || slot.card?.glow);
   return t(`fateCardHints.aura.${auraTier}`) || slot.card?.glow;
+}
+
+function resolveSlotVisual(slot = {}) {
+  return resolveFateCardVisual({
+    ...(slot.card || {}),
+    id: slot.card?.id || slot.cardId,
+    visualSlug: slot.card?.visualSlug || slot.visualSlug,
+  });
 }
 
 function renderAttributes(attributes) {

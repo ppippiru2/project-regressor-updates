@@ -1,7 +1,13 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
 import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=675";
+import { contentBulkPatchPreApplyReviewLabel } from "./contentBulkPatchPreApplyReview.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_RESTORE_REHEARSAL_VIEW_VERSION = "content-bulk-patch-restore-rehearsal-view-v1";
+const CONTENT_BULK_RESTORE_REHEARSAL_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderContentBulkPatchRestoreRehearsal(rehearsal, detailText = {}) {
   const text = detailText.contentBulkPatchRestoreRehearsal || {};
@@ -22,8 +28,8 @@ export function renderContentBulkPatchRestoreRehearsal(rehearsal, detailText = {
         <strong>${escapeHtml(action.file || "-")}</strong>
         <span>${escapeHtml((action.domainIds || []).join(", ") || "-")}</span>
       </div>
-      <small>${escapeHtml(contentBulkPatchRestoreRehearsalLabel(action.restoreState, text.stateLabels))} / ${escapeHtml(contentBulkPatchRestoreRehearsalLabel(action.checkState, text.stateLabels))}</small>
-      <div class="editor-chip-list">${(action.rehearsalBlockerCodes || []).map((code) => chip(contentBulkPatchRestoreRehearsalLabel(code, text.fileRehearsalBlockerLabels))).join("")}</div>
+      <small>${escapeHtml(contentBulkFallbackLabel(action.restoreState, text.stateLabels))} / ${escapeHtml(contentBulkFallbackLabel(action.checkState, text.stateLabels))}</small>
+      <div class="editor-chip-list">${(action.rehearsalBlockerCodes || []).map((code) => editorChip(contentBulkFallbackLabel(code, text.fileRehearsalBlockerLabels), CONTENT_BULK_RESTORE_REHEARSAL_CHIP_OPTIONS)).join("")}</div>
     </article>
   `).join("");
 
@@ -39,20 +45,15 @@ export function renderContentBulkPatchRestoreRehearsal(rehearsal, detailText = {
         }, rehearsal.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-restore-rehearsal-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${renderContentBulkIssueSummary(rehearsal.issueSummary, text)}
       <div class="editor-content-bulk-restore-rehearsal-grid">
-        ${contentBulkPatchRestoreRehearsalChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(rehearsal.preApplyReviewItems, text))}
-        ${contentBulkPatchRestoreRehearsalChipBlock(text.blockedReasons || "Blocked reasons", (rehearsal.blockedReasons || []).map((reason) => contentBulkPatchRestoreRehearsalLabel(reason, text.blockedReasonLabels)))}
-        ${contentBulkPatchRestoreRehearsalChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(rehearsal.issueSummary?.blockingIssueCodes, text))}
-        ${contentBulkPatchRestoreRehearsalChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(rehearsal.issueSummary?.warningIssueCodes, text))}
-        ${contentBulkPatchRestoreRehearsalChipBlock(text.validationPlan || "Validation plan", (rehearsal.validationSteps || []).map((step) => contentBulkPatchRestoreRehearsalLabel(step, text.validationLabels)))}
+        ${contentBulkChipBlock(text.preApplyReview || "Pre-apply review", contentBulkPatchPreApplyReviewChips(rehearsal.preApplyReviewItems, text), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.blockedReasons || "Blocked reasons", (rehearsal.blockedReasons || []).map((reason) => contentBulkFallbackLabel(reason, text.blockedReasonLabels)), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(rehearsal.issueSummary?.blockingIssueCodes, text), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(rehearsal.issueSummary?.warningIssueCodes, text), { chipClass: "editor-chip" })}
+        ${contentBulkChipBlock(text.validationPlan || "Validation plan", (rehearsal.validationSteps || []).map((step) => contentBulkFallbackLabel(step, text.validationLabels)), { chipClass: "editor-chip" })}
       </div>
       <div class="editor-content-bulk-restore-rehearsal-files">
         <strong>${escapeHtml(text.restoreFilePreview || "Restore file preview")}</strong>
@@ -62,31 +63,10 @@ export function renderContentBulkPatchRestoreRehearsal(rehearsal, detailText = {
   `;
 }
 
-function contentBulkPatchRestoreRehearsalLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
 function contentBulkPatchPreApplyReviewChips(items = [], text = {}) {
   return (items || []).map((item) =>
     `${contentBulkPatchPreApplyReviewLabel(item.id, text.preApplyReviewLabels)} - ${contentBulkPatchPreApplyReviewLabel(item.state, text.preApplyStateLabels)} - ${item.detail || "-"}`
   );
-}
-
-function contentBulkPatchPreApplyReviewLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkPatchRestoreRehearsalChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

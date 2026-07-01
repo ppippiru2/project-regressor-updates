@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_APPLY_RUNNER_PAYLOAD_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditApplyRunnerPayloadShapeView(options = {}) {
   const preview = options.preview || {};
   const text = options.text || {};
@@ -18,7 +22,7 @@ export function renderSaveSlotEditApplyRunnerPayloadShapeView(options = {}) {
           <h4>${escapeHtml(text.title || "Save edit apply runner payload shape")}</h4>
           <p class="muted">${escapeHtml(text.description || "Read-only payload shape before any apply runner is created.")}</p>
         </div>
-        ${chip(statusLabel(preview.status))}
+        ${editorChip(statusLabel(preview.status), SAVE_EDIT_APPLY_RUNNER_PAYLOAD_CHIP_OPTIONS)}
       </div>
       <div class="editor-save-edit-apply-runner-payload-metrics">
         ${metricCard(text.fieldMetric || "Fields", fieldValue, text.fieldHint || "")}
@@ -52,7 +56,7 @@ function renderSaveEditApplyRunnerPayloadFieldView(field = {}, text = {}, status
           <dd>${escapeHtml(`${field.value}`)}</dd>
         </div>
       </dl>
-      ${field.blocker ? chip(blockerFormatter(field.blocker)) : ""}
+      ${field.blocker ? editorChip(blockerFormatter(field.blocker), SAVE_EDIT_APPLY_RUNNER_PAYLOAD_CHIP_OPTIONS) : ""}
     </article>
   `;
 }
@@ -64,13 +68,9 @@ function renderSaveEditApplyRunnerPayloadCheckView(check = {}, statusLabel = (st
         <strong>${escapeHtml(check.label)}</strong>
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_APPLY_RUNNER_PAYLOAD_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

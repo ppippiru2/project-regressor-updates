@@ -220,6 +220,3 @@ function tuningPriority(signals = []) {
   if (signals.length >= 2) return 2;
   return 3;
 }
-
-
-

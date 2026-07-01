@@ -1,8 +1,31 @@
+import {
+  createContentBulkFilteredCandidateStageGateCountsFromPreview,
+  createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
+} from "./contentBulkFilteredCandidateStageGate.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import {
+  contentBulkDomainBlockedStageIds,
+  contentBulkStageGateReasonLabels,
+  contentBulkStageGateStatusLabels,
+} from "./contentBulkStageGatePreviewLabels.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+
 export const CONTENT_BULK_DOMAIN_FILTER_DRILLDOWN_VERSION = "content-bulk-domain-filter-drilldown-v1";
 
+const DETAIL_CHIP_OPTIONS = {
+  blockClass: "",
+  titleTag: "small",
+  filterEmpty: true,
+  emptyValue: "-",
+};
+
 export function renderContentBulkDomainFilterDrilldown(rows = [], text = {}, helpers = {}) {
-  const summary = createContentBulkDomainFilterDrilldownSummary(rows);
+  const summary = createContentBulkDomainFilterDrilldownSummary(rows, helpers.filteredCandidatePreview);
   const domainLabel = helpers.domainLabel || ((id) => id || "unknown");
+  const stageGateReasonLabels = {
+    ...(text.stageGateReasonLabels || {}),
+    ...(helpers.stageGateReasonLabels || {}),
+  };
   const state = summary.blockedDomainCount > 0 ? "blocked" : rows.length ? "ready" : "empty";
   const metrics = [
     [text.filteredDomains || "Filtered domains", `${rows.length}`],
@@ -10,6 +33,11 @@ export function renderContentBulkDomainFilterDrilldown(rows = [], text = {}, hel
     [text.stagedBlockedDomains || "Staged blocked", `${summary.stageCounts.staged}`],
     [text.backupBlockedDomains || "Backup blocked", `${summary.stageCounts.backup}`],
     [text.restoreBlockedDomains || "Restore blocked", `${summary.stageCounts.restore}`],
+    [text.stageGateReadyRows || "Stage gate ready", `${summary.stageGateCounts.ready}`],
+    [text.stageGateReviewRows || "Stage gate review", `${summary.stageGateCounts.review}`],
+    [text.stageGateBlockedRows || "Stage gate blocked", `${summary.stageGateCounts.blocked}`],
+    [text.stageGateNotStagedRows || "Stage gate not staged", `${summary.stageGateCounts.notStaged}`],
+    [text.stageGateReasons || "Stage gate reasons", `${summary.stageGateReasonCount}`],
   ];
   return `
     <div class="editor-content-bulk-contract-summary editor-content-bulk-domain-filter-drilldown" data-state="${escapeAttribute(state)}">
@@ -18,27 +46,30 @@ export function renderContentBulkDomainFilterDrilldown(rows = [], text = {}, hel
         <p class="muted">${escapeHtml(text.filterDrilldownHint || "Stage blockers only for domains matching the current filter.")}</p>
       </div>
       <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-contract-issues">
-        ${balanceDetailChipBlock(text.filterDrilldownDomains || "Visible domains", rows.map((row) => domainLabel(row.id)))}
+        ${contentBulkChipBlock(text.filterDrilldownDomains || "Visible domains", rows.map((row) => domainLabel(row.id)), DETAIL_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.stageGateStatus || "Stage gate status", contentBulkStageGateStatusLabels(summary.stageGateCounts, text), DETAIL_CHIP_OPTIONS)}
+        ${contentBulkChipBlock(text.stageGateReasons || "Stage gate reasons", contentBulkStageGateReasonLabels(summary.stageGateReasonCodes, stageGateReasonLabels, text), DETAIL_CHIP_OPTIONS)}
       </div>
     </div>
   `;
 }
 
-export function createContentBulkDomainFilterDrilldownSummary(rows = []) {
+export function createContentBulkDomainFilterDrilldownSummary(rows = [], filteredCandidatePreview = {}) {
   const stageCounts = contentBulkDomainStageCounts(rows);
+  const stageGateCounts = createContentBulkFilteredCandidateStageGateCountsFromPreview(filteredCandidatePreview);
+  const stageGateReasonCodes = createContentBulkFilteredCandidateStageGateReasonCodesFromPreview(filteredCandidatePreview);
   return {
     filteredDomainCount: rows.length,
     blockedDomainCount: rows.filter((row) => row.state === "blocked").length,
     stageCounts,
+    stageGateCounts,
+    stageGateReasonCodes,
+    stageGateReasonCount: stageGateReasonCodes.length,
     blockedStageCount: Object.values(stageCounts).reduce((sum, count) => sum + Number(count || 0), 0),
+    stageGateReviewOrBlockedCount: Number(stageGateCounts.review || 0) + Number(stageGateCounts.blocked || 0),
   };
 }
 
@@ -54,22 +85,6 @@ function contentBulkDomainStageCounts(rows = []) {
     backup: 0,
     restore: 0,
   });
-}
-
-function contentBulkDomainBlockedStageIds(groups = {}) {
-  return ["dryRun", "staged", "backup", "restore"].filter((stageId) => (groups?.[stageId] || []).filter(Boolean).length > 0);
-}
-
-function balanceDetailChipBlock(title, values = []) {
-  const normalizedValues = Array.isArray(values) ? values.filter(Boolean) : [];
-  return `
-    <div>
-      <small>${escapeHtml(title)}</small>
-      <div class="editor-chip-list">
-        ${normalizedValues.length ? normalizedValues.map((value) => `<span>${escapeHtml(value)}</span>`).join("") : `<span>${escapeHtml("-")}</span>`}
-      </div>
-    </div>
-  `;
 }
 
 function escapeHtml(value) {

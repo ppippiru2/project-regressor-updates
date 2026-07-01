@@ -143,6 +143,3 @@ function promotionStageForRewardCoverage(coverage) {
   if (!coverage.skill) return "needs-skill-link";
   return "complete-reward-link";
 }
-
-
-

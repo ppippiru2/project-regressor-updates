@@ -1,4 +1,8 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel, contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_DIFF_EXPORT_VIEW_VERSION = "content-bulk-patch-diff-export-view-v1";
 
@@ -28,12 +32,7 @@ export function renderContentBulkPatchDiffExport(preview, detailText = {}) {
         }, preview.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-diff-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-diff-list">
         ${(preview.fileTargets || []).map((target) => renderContentBulkPatchDiffTarget(target, text)).join("") || `<p class="muted">${escapeHtml(text.noTargets || "No diff targets.")}</p>`}
@@ -41,8 +40,8 @@ export function renderContentBulkPatchDiffExport(preview, detailText = {}) {
       <div class="editor-content-bulk-diff-steps">
         <strong>${escapeHtml(text.reviewSteps || "Review steps")}</strong>
         <div class="editor-chip-list">
-          ${chip(contentBulkPatchDiffStatusLabel(preview.status, text))}
-          ${(preview.manualReviewSteps || []).map((step) => chip(contentBulkPatchDiffStepLabel(step, text))).join("")}
+          ${editorChip(contentBulkFallbackLabel(preview.status, text.statusLabels))}
+          ${(preview.manualReviewSteps || []).map((step) => editorChip(contentBulkFallbackLabel(step, text.stepLabels))).join("")}
         </div>
       </div>
     </section>
@@ -68,40 +67,15 @@ function renderContentBulkPatchDiffTarget(target, text = {}) {
           }, `${target.surfaceCount || 0}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${(target.domainIds || []).map((domainId) => chip(contentBulkPatchDomainLabel(domainId, text))).join("")}
+          ${(target.domainIds || []).map((domainId) => editorChip(contentBulkPatchDomainLabel(domainId, text))).join("")}
         </div>
       </div>
       <div class="editor-content-bulk-diff-grid">
-        ${contentBulkPatchDiffChipBlock(text.domains || "Domains", target.domainIds || [])}
-        ${contentBulkPatchDiffChipBlock(text.surfaces || "Surfaces", surfaceLabels)}
+        ${contentBulkChipBlock(text.domains || "Domains", target.domainIds || [])}
+        ${contentBulkChipBlock(text.surfaces || "Surfaces", surfaceLabels)}
       </div>
     </article>
   `;
-}
-
-function contentBulkPatchDomainLabel(domainId, text = {}) {
-  return text.domainLabels?.[domainId] || domainId || "unknown";
-}
-
-function contentBulkPatchDiffStatusLabel(statusId, text = {}) {
-  return text.statusLabels?.[statusId] || statusId || "unknown";
-}
-
-function contentBulkPatchDiffStepLabel(stepId, text = {}) {
-  return text.stepLabels?.[stepId] || stepId || "unknown";
-}
-
-function contentBulkPatchDiffChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span>${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {

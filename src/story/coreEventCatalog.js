@@ -81,6 +81,3 @@ export function getCoreEventCatalog() {
     regionEvents: TUTORIAL_REGION_CORE_EVENTS,
   };
 }
-
-
-

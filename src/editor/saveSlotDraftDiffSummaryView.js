@@ -1,3 +1,13 @@
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+
+const SAVE_DIFF_DETAIL_CHIP_OPTIONS = {
+  blockClass: "editor-detail-chip-block",
+  chipClass: "editor-chip",
+  filterEmpty: true,
+  hideWhenEmpty: true,
+};
+const SAVE_DIFF_METRIC_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotDraftDiffSummaryView(options = {}) {
   const diff = options.diff || {};
   const text = options.text || {};
@@ -50,9 +60,9 @@ function renderSaveDraftDiffGroupView(group = {}, text = {}) {
     <article class="editor-save-diff-group" data-save-diff-group="${escapeAttribute(group.id)}">
       <strong>${escapeHtml(group.label)}</strong>
       <div class="editor-save-diff-group-metrics">
-        ${chips.map((value) => chip(value)).join("")}
+        ${chips.map((value) => editorChip(value, SAVE_DIFF_METRIC_CHIP_OPTIONS)).join("")}
       </div>
-      ${detailChipBlock(text.paths || "Paths", paths)}
+      ${renderDetailChips(text.paths || "Paths", paths)}
     </article>
   `;
 }
@@ -83,23 +93,8 @@ function renderSaveDraftDiffRowView(row = {}, text = {}) {
   `;
 }
 
-function detailChipBlock(label, values) {
-  const list = Array.isArray(values) ? values.filter(Boolean) : [];
-  if (!list.length) {
-    return "";
-  }
-  return `
-    <div class="editor-detail-chip-block">
-      <span>${escapeHtml(label)}</span>
-      <div class="editor-chip-list">
-        ${list.map((value) => chip(value)).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
+function renderDetailChips(label, values) {
+  return editorChipBlock(label, Array.isArray(values) ? values : [], SAVE_DIFF_DETAIL_CHIP_OPTIONS);
 }
 
 function escapeHtml(value) {

@@ -50,6 +50,3 @@ function parseAttributeMap(value) {
     })
     .filter((entry) => entry.attribute && entry.key);
 }
-
-
-

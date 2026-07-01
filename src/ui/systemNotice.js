@@ -1,4 +1,5 @@
 import { getLocaleText, t, tf } from "../localization/index.js?v=675";
+import { latestCodexDialogueRecord } from "../state/codexDialogueLink.js?v=675";
 import { resolveRegionCoreEvent } from "../story/coreEventCatalog.js?v=675";
 import { resolveTutorialKeyEventDialogue } from "../story/tutorialDialogueEvents.js?v=675";
 
@@ -143,6 +144,7 @@ export function createSystemNotice({ log, dialogueRecords, player, playerProfile
   const codexRecord = message.match(regex(SYSTEM_MATCHERS.codexRecord));
   if (codexRecord) {
     const progress = parseProgress(codexRecord[2]);
+    const codexDialogueRecord = dialogueRecord || latestCodexDialogueRecord(dialogueRecords);
     const resolved = resolveTutorialKeyEventDialogue("tutorial_1st_shore_06_nameless_scrap", {
       templateValues: {
         itemName: codexRecord[1],
@@ -158,7 +160,7 @@ export function createSystemNotice({ log, dialogueRecords, player, playerProfile
         : t("systemWindow.notices.codexRecordMessage"),
       meta: [codexRecord[1], codexRecord[2], t("systemWindow.notices.checkCodexProgress")],
       targetView: "inventory",
-    }, dialogueRecord);
+    }, codexDialogueRecord);
   }
 
   const regionRecord = message.match(regex(SYSTEM_MATCHERS.regionRecord));
@@ -263,6 +265,7 @@ function withDialogueRecord(notice, record) {
   return {
     ...notice,
     dialogueEventId: record.eventId,
+    dialogueTitle: record.title || "",
     dialogueOutputChannel: record.outputChannel || "",
     dialogueLineType: record.lineType || "",
     dialogueRecordEntries: Array.isArray(record.recordEntries) ? [...record.recordEntries] : [],

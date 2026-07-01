@@ -1,5 +1,16 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
+import {
+  createContentBulkFilteredCandidateStageGateCountsFromPreview,
+  createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
+} from "./contentBulkFilteredCandidateStageGate.js?v=675";
+import {
+  contentBulkStageGateReasonLabels,
+  contentBulkStageGateStatusLabels,
+} from "./contentBulkStageGatePreviewLabels.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_STAGED_APPLY_REHEARSAL_VIEW_VERSION = "content-bulk-staged-apply-rehearsal-view-v1";
 
@@ -8,8 +19,16 @@ export function renderContentBulkStagedApplyRehearsal({
   filePatchDraftExport = {},
   backupPlan = {},
   restoreRehearsal = {},
+  filteredCandidatePreview = {},
 } = {}, detailText = {}) {
   const text = detailText.contentBulkStagedApplyRehearsal || {};
+  const candidateText = detailText.contentBulkFilteredCandidatePreview || {};
+  const stageGateCounts = createContentBulkFilteredCandidateStageGateCountsFromPreview(filteredCandidatePreview);
+  const stageGateReasonCodes = createContentBulkFilteredCandidateStageGateReasonCodesFromPreview(filteredCandidatePreview);
+  const stageGateReasonLabels = {
+    ...(candidateText.stageGateReasonLabels || {}),
+    ...(text.stageGateReasonLabels || {}),
+  };
   const stagedSummary = stagedImport.summary || {};
   const exportSummary = filePatchDraftExport.summary || {};
   const files = Array.isArray(filePatchDraftExport.payload?.files) ? filePatchDraftExport.payload.files : [];
@@ -44,7 +63,11 @@ export function renderContentBulkStagedApplyRehearsal({
     [text.readyFiles || "Ready files", `${readyFiles}`],
     [text.backupBlockedFiles || "Backup blocked files", `${backupBlockedFileNames.length}`],
     [text.restoreBlockedFiles || "Restore blocked files", `${restoreBlockedFileNames.length}`],
-    [text.state || "State", contentBulkStagedApplyRehearsalLabel(state, text.stateLabels)],
+    [text.stageGateReadyRows || "Stage gate ready", `${stageGateCounts.ready}`],
+    [text.stageGateReviewRows || "Stage gate review", `${stageGateCounts.review}`],
+    [text.stageGateBlockedRows || "Stage gate blocked", `${stageGateCounts.blocked}`],
+    [text.stageGateNotStagedRows || "Stage gate not staged", `${stageGateCounts.notStaged}`],
+    [text.state || "State", contentBulkFallbackLabel(state, text.stateLabels)],
   ];
   return `
     <section class="editor-content-bulk-contract-summary editor-content-bulk-staged-apply-rehearsal" data-state="${escapeAttribute(state)}" aria-label="${escapeAttribute(text.title || "Staged apply rehearsal")}">
@@ -53,15 +76,12 @@ export function renderContentBulkStagedApplyRehearsal({
         <p class="muted">${escapeHtml(text.description || "Compares staged rows, patch draft files, backup blockers, and restore rehearsal blockers before live apply.")}</p>
       </div>
       <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-contract-issues">
-        ${contentBulkStagedChipBlock(text.blockingReasons || "Blocking reasons", contentBulkIssueList(blockingCodes, text))}
+        ${contentBulkChipBlock(text.stageGateStatus || "Stage gate status", contentBulkStageGateStatusLabels(stageGateCounts, text))}
+        ${contentBulkChipBlock(text.stageGateReasons || "Stage gate reasons", contentBulkStageGateReasonLabels(stageGateReasonCodes, stageGateReasonLabels, text))}
+        ${contentBulkChipBlock(text.blockingReasons || "Blocking reasons", contentBulkIssueList(blockingCodes, text))}
       </div>
       <div class="editor-content-bulk-patch-draft-list">
         ${files.slice(0, 6).map((file) => renderContentBulkStagedApplyRehearsalFile(file, {
@@ -89,28 +109,15 @@ function renderContentBulkStagedApplyRehearsalFile(file = {}, reviewContext = {}
             domains: (file.domainIds || []).join(", ") || "-"
           }, `${Array.isArray(file.patchBlocks) ? file.patchBlocks.length : 0} blocks`))}</p>
         </div>
-        <span>${escapeHtml(contentBulkStagedApplyRehearsalLabel(state, text.stateLabels))}</span>
+        <span>${escapeHtml(contentBulkFallbackLabel(state, text.stateLabels))}</span>
       </div>
       <div class="editor-content-bulk-patch-draft-grid">
-        ${contentBulkStagedChipBlock(text.domains || "Domains", file.domainIds || [])}
-        ${contentBulkStagedChipBlock(text.patchBlocks || "Patch blocks", [`${Array.isArray(file.patchBlocks) ? file.patchBlocks.length : 0}`])}
-        ${contentBulkStagedChipBlock(text.backupBlockers || "Backup blockers", contentBulkIssueList(backupBlockers, text))}
-        ${contentBulkStagedChipBlock(text.restoreBlockers || "Restore blockers", contentBulkIssueList(restoreBlockers, text))}
+        ${contentBulkChipBlock(text.domains || "Domains", file.domainIds || [])}
+        ${contentBulkChipBlock(text.patchBlocks || "Patch blocks", [`${Array.isArray(file.patchBlocks) ? file.patchBlocks.length : 0}`])}
+        ${contentBulkChipBlock(text.backupBlockers || "Backup blockers", contentBulkIssueList(backupBlockers, text))}
+        ${contentBulkChipBlock(text.restoreBlockers || "Restore blockers", contentBulkIssueList(restoreBlockers, text))}
       </div>
     </article>
-  `;
-}
-
-function contentBulkStagedApplyRehearsalLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkStagedChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
-    </div>
   `;
 }
 

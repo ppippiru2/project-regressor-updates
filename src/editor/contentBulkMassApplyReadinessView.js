@@ -1,4 +1,15 @@
 import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=675";
+import {
+  createContentBulkFilteredCandidateStageGateCountsFromPreview,
+  createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
+} from "./contentBulkFilteredCandidateStageGate.js?v=675";
+import {
+  contentBulkStageGateReasonLabels,
+  contentBulkStageGateStatusLabels,
+} from "./contentBulkStageGatePreviewLabels.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_MASS_APPLY_READINESS_VIEW_VERSION = "content-bulk-mass-apply-readiness-view-v1";
 
@@ -8,8 +19,16 @@ export function renderContentBulkMassApplyReadiness({
   applyGate = {},
   backupPlan = {},
   restoreRehearsal = {},
+  filteredCandidatePreview = {},
 } = {}, detailText = {}) {
   const text = detailText.contentBulkMassApplyReadiness || {};
+  const candidateText = detailText.contentBulkFilteredCandidatePreview || {};
+  const stageGateCounts = createContentBulkFilteredCandidateStageGateCountsFromPreview(filteredCandidatePreview);
+  const stageGateReasonCodes = createContentBulkFilteredCandidateStageGateReasonCodesFromPreview(filteredCandidatePreview);
+  const stageGateReasonLabels = {
+    ...(candidateText.stageGateReasonLabels || {}),
+    ...(text.stageGateReasonLabels || {}),
+  };
   const dryRunBlockers = Number(dryRun.summary?.blockingIssueCount || 0);
   const stagedWithheld = Number(stagedImport.summary?.withheldRowCount || 0);
   const applyBlocked = Number(applyGate.summary?.blockedReviewItemCount || 0);
@@ -39,7 +58,11 @@ export function renderContentBulkMassApplyReadiness({
     [text.applyBlocked || "Apply blocked", `${applyBlocked}`],
     [text.backupBlocked || "Backup blocked", `${backupBlocked}`],
     [text.restoreBlocked || "Restore blocked", `${restoreBlocked}`],
-    [text.state || "State", contentBulkMassReadinessLabel(state, text.stateLabels)],
+    [text.stageGateReadyRows || "Stage gate ready", `${stageGateCounts.ready}`],
+    [text.stageGateReviewRows || "Stage gate review", `${stageGateCounts.review}`],
+    [text.stageGateBlockedRows || "Stage gate blocked", `${stageGateCounts.blocked}`],
+    [text.stageGateNotStagedRows || "Stage gate not staged", `${stageGateCounts.notStaged}`],
+    [text.state || "State", contentBulkFallbackLabel(state, text.stateLabels)],
   ];
   return `
     <div class="editor-content-bulk-contract-summary editor-content-bulk-mass-readiness" data-state="${escapeAttribute(state)}">
@@ -48,30 +71,14 @@ export function renderContentBulkMassApplyReadiness({
         <p class="muted">${escapeHtml(text.description || "Combined read-only readiness across dry-run, staged import, apply gate, backup, and restore rehearsal.")}</p>
       </div>
       <div class="editor-content-bulk-contract-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       <div class="editor-content-bulk-contract-issues">
-        ${contentBulkMassChipBlock(text.blockedReasons || "Blocked reasons", contentBulkIssueList(Array.from(new Set(blockedReasonCodes)), text))}
-        ${contentBulkMassChipBlock(text.warningReasons || "Warning reasons", contentBulkIssueList(Array.from(new Set(warningCodes)), text))}
+        ${contentBulkChipBlock(text.stageGateStatus || "Stage gate status", contentBulkStageGateStatusLabels(stageGateCounts, text))}
+        ${contentBulkChipBlock(text.stageGateReasons || "Stage gate reasons", contentBulkStageGateReasonLabels(stageGateReasonCodes, stageGateReasonLabels, text))}
+        ${contentBulkChipBlock(text.blockedReasons || "Blocked reasons", contentBulkIssueList(Array.from(new Set(blockedReasonCodes)), text))}
+        ${contentBulkChipBlock(text.warningReasons || "Warning reasons", contentBulkIssueList(Array.from(new Set(warningCodes)), text))}
       </div>
-    </div>
-  `;
-}
-
-function contentBulkMassReadinessLabel(id, labels = {}) {
-  return labels?.[id] || id || "unknown";
-}
-
-function contentBulkMassChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
     </div>
   `;
 }

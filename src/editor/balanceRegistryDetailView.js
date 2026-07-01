@@ -1,6 +1,9 @@
 import { tf } from "../localization/index.js?v=675";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const BALANCE_REGISTRY_DETAIL_VIEW_VERSION = "balance-registry-detail-view-v1";
+const BALANCE_DETAIL_CHIP_OPTIONS = { chipClass: "editor-chip" };
 
 export function renderBalancePacingSnapshot(snapshot, detailText = {}) {
   const metrics = [
@@ -19,12 +22,7 @@ export function renderBalancePacingSnapshot(snapshot, detailText = {}) {
         <strong>${escapeHtml(snapshot.isValid ? (detailText.pacingStatusOk || "") : (detailText.pacingStatusReview || ""))}</strong>
       </div>
       <div class="editor-balance-pacing-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${snapshot.isValid ? "" : `<p class="editor-balance-pacing-error">${escapeHtml((snapshot.errors || []).slice(0, 2).join(" / "))}</p>`}
     </section>
@@ -42,9 +40,9 @@ export function renderBalanceGroupRow(group, detailText = {}, options = {}) {
         </div>
         <strong>${escapeHtml(tf("editorPrep.balanceTuningDetail.exportCount", { count: group.exports.length }, `${group.exports.length}`))}</strong>
       </div>
-      ${balanceDetailChipBlock(detailText.files || "Files", group.files)}
-      ${balanceDetailChipBlock(detailText.exports || "Exports", group.exports)}
-      ${balanceDetailChipBlock(detailText.affects || "Affects", group.affects)}
+      ${editorChipBlock(detailText.files || "Files", group.files, BALANCE_DETAIL_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.exports || "Exports", group.exports, BALANCE_DETAIL_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.affects || "Affects", group.affects, BALANCE_DETAIL_CHIP_OPTIONS)}
       ${balanceDetailPreviewBlock(detailText.preview || "Preview", preview?.items || [], detailText)}
     </article>
   `;
@@ -60,7 +58,7 @@ export function renderBalanceRelatedChecks(checks = [], detailText = {}) {
           <h4>${escapeHtml(check.label || check.id || "")}</h4>
           <span>${escapeHtml(check.script || "")}</span>
         </div>
-        ${balanceDetailChipBlock(detailText.guards || "Guards", guards)}
+        ${editorChipBlock(detailText.guards || "Guards", guards, BALANCE_DETAIL_CHIP_OPTIONS)}
       </article>
     `;
   }).join("");
@@ -72,22 +70,13 @@ export function renderBalanceRelatedChecks(checks = [], detailText = {}) {
   `;
 }
 
-function balanceDetailChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${(values || []).map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
 function balanceDetailPreviewBlock(title, items = [], detailText = {}) {
   if (!items.length) return "";
   return `
     <div class="editor-balance-preview-block">
       <span>${escapeHtml(title)}</span>
       <div class="editor-chip-list">
-        ${items.map((item) => chip(`${item.exportName}: ${formatBalancePreviewSummary(item, detailText)}`)).join("")}
+        ${items.map((item) => editorChip(`${item.exportName}: ${formatBalancePreviewSummary(item, detailText)}`, BALANCE_DETAIL_CHIP_OPTIONS)).join("")}
       </div>
     </div>
   `;
@@ -113,10 +102,6 @@ function formatBalancePreviewSummary(item, detailText = {}) {
   return tf("editorPrep.balanceTuningDetail.previewValue", {
     value: item.value || ""
   }, item.value || "");
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {

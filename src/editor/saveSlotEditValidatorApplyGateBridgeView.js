@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_VALIDATOR_APPLY_BRIDGE_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditValidatorApplyGateBridgeView(options = {}) {
   const bridge = options.bridge || {};
   const text = options.text || {};
@@ -32,7 +36,7 @@ export function renderSaveSlotEditValidatorApplyGateBridgeView(options = {}) {
       <div class="editor-save-edit-validator-bridge-blockers">
         <strong>${escapeHtml(text.blockerList || "Bridge blockers")}</strong>
         <div class="editor-chip-list">
-          ${gateBlockers.map((item) => chip(gateBlockerFormatter(item))).join("")}
+          ${gateBlockers.map((item) => editorChip(gateBlockerFormatter(item), SAVE_EDIT_VALIDATOR_APPLY_BRIDGE_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <div class="editor-save-edit-validator-bridge-grid">
@@ -51,13 +55,9 @@ function renderSaveEditValidatorApplyGateBridgeStepView(step = {}, statusLabel =
         <span>${escapeHtml(statusLabel(step.status))}</span>
       </div>
       ${step.detail ? `<p>${escapeHtml(step.detail)}</p>` : ""}
-      ${step.blocker ? chip(blockerFormatter(step.blocker)) : ""}
+      ${step.blocker ? editorChip(blockerFormatter(step.blocker), SAVE_EDIT_VALIDATOR_APPLY_BRIDGE_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

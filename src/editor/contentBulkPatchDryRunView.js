@@ -1,5 +1,9 @@
 import { tf } from "../localization/index.js?v=675";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=675";
+import { contentBulkFallbackLabel, contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=675";
 import { contentBulkIssueList, renderContentBulkIssueSummary } from "./contentBulkIssueSummaryView.js?v=675";
+import { editorChip } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
 
 export const CONTENT_BULK_PATCH_DRY_RUN_VIEW_VERSION = "content-bulk-patch-dry-run-view-v1";
 
@@ -29,12 +33,7 @@ export function renderContentBulkPatchDryRunPreview(preview, detailText = {}) {
         }, preview.version || "-"))}</strong>
       </div>
       <div class="editor-content-bulk-dry-run-metrics">
-        ${metrics.map(([label, value]) => `
-          <span>
-            <small>${escapeHtml(label)}</small>
-            <b>${escapeHtml(value)}</b>
-          </span>
-        `).join("")}
+        ${metrics.map(([label, value]) => renderEditorSummaryCard(label, value)).join("")}
       </div>
       ${renderContentBulkIssueSummary(preview.issueSummary, text)}
       <div class="editor-content-bulk-dry-run-list">
@@ -59,40 +58,19 @@ function renderContentBulkPatchDryRunDomain(domain, text = {}) {
           }, `${domain.rowCount || 0}`))}</p>
         </div>
         <div class="editor-chip-list">
-          ${chip(contentBulkPatchDryRunStateLabel(domain.state, text))}
+          ${editorChip(contentBulkFallbackLabel(domain.state, text.stateLabels))}
         </div>
       </div>
       <div class="editor-content-bulk-dry-run-grid">
-        ${contentBulkPatchDryRunChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
-        ${contentBulkPatchDryRunChipBlock(text.identityFields || "Identity", domain.identityFields || [])}
-        ${contentBulkPatchDryRunChipBlock(text.targetSurfaces || "Target surfaces", surfaceLabels)}
-        ${contentBulkPatchDryRunChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(domain.blockingIssueCodes, text))}
-        ${contentBulkPatchDryRunChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(domain.warningIssueCodes, text))}
-        ${contentBulkPatchDryRunChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
+        ${contentBulkChipBlock(text.batchKey || "Batch key", [domain.batchKey].filter(Boolean))}
+        ${contentBulkChipBlock(text.identityFields || "Identity", domain.identityFields || [])}
+        ${contentBulkChipBlock(text.targetSurfaces || "Target surfaces", surfaceLabels)}
+        ${contentBulkChipBlock(text.blockingIssues || "Blocking issues", contentBulkIssueList(domain.blockingIssueCodes, text))}
+        ${contentBulkChipBlock(text.warningIssues || "Warning issues", contentBulkIssueList(domain.warningIssueCodes, text))}
+        ${contentBulkChipBlock(text.guardChecks || "Guard checks", domain.checkScripts || [])}
       </div>
     </article>
   `;
-}
-
-function contentBulkPatchDomainLabel(domainId, text = {}) {
-  return text.domainLabels?.[domainId] || domainId || "unknown";
-}
-
-function contentBulkPatchDryRunStateLabel(stateId, text = {}) {
-  return text.stateLabels?.[stateId] || stateId || "unknown";
-}
-
-function contentBulkPatchDryRunChipBlock(title, values = []) {
-  return `
-    <div class="editor-balance-chip-block">
-      <span>${escapeHtml(title)}</span>
-      <div class="editor-chip-list">${values.map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span>${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {

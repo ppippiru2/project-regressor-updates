@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_APPLY_GATE_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotApplyGateChecklistView(options = {}) {
   const gate = options.gate || {};
   const text = options.text || {};
@@ -49,7 +53,7 @@ function renderSaveApplyGateCheckView(check = {}, text = {}, statusLabel = (stat
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
       ${check.detail ? `<p>${escapeHtml(check.detail)}</p>` : ""}
-      ${check.blocker ? chip(blockerFormatter ? blockerFormatter(check.blocker) : formatBlocker(check.blocker, text)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter ? blockerFormatter(check.blocker) : formatBlocker(check.blocker, text), SAVE_APPLY_GATE_CHIP_OPTIONS) : ""}
     </article>
   `;
 }
@@ -57,10 +61,6 @@ function renderSaveApplyGateCheckView(check = {}, text = {}, statusLabel = (stat
 function formatBlocker(blocker, text = {}) {
   const label = text.blockerLabel || "Blocker";
   return `${label}: ${blocker}`;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

@@ -122,5 +122,3 @@ function scaleReward(value, sourceLevel, candidateLevel, weight) {
 function clampChance(value, min, max) {
   return Number(Math.min(max, Math.max(min, value)).toFixed(3));
 }
-
-

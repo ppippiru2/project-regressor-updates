@@ -60,7 +60,7 @@ export function getCardGradeWeightSummary(value) {
 
 export function createFateCardCandidateSlots(cards = [], context = {}, options = {}) {
   const sourceCards = Array.isArray(cards) ? cards.filter((card) => card?.id) : [];
-  const count = normalizeCandidateCount(context.cardCandidateCount ?? getCardCandidateCountByKarma(context.karmaValue));
+  const count = normalizeFateCardCandidateCount(context.cardCandidateCount ?? getCardCandidateCountByKarma(context.karmaValue));
   const seed = normalizeCount(options.seed ?? context.seed ?? context.karmaValue ?? 0);
   const orderedCards = orderCardsByFateWeight(sourceCards, context, seed);
 
@@ -200,7 +200,7 @@ function resolveProjectedFateCardGrade(karmaValue, index, count) {
   return "D";
 }
 
-function normalizeCandidateCount(value) {
+export function normalizeFateCardCandidateCount(value) {
   const count = normalizeCount(value);
   if (count <= 0) return MIN_FATE_CARD_CANDIDATES;
   return Math.max(MIN_FATE_CARD_CANDIDATES, Math.min(MAX_FATE_CARD_CANDIDATES, count));

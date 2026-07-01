@@ -1,3 +1,7 @@
+import { editorChip } from "./editorChipBlockView.js?v=675";
+
+const SAVE_EDIT_SUBMIT_RUNNER_BLOCKER_CHIP_OPTIONS = { chipClass: "editor-chip" };
+
 export function renderSaveSlotEditSubmitRunnerBlockerView(options = {}) {
   const contract = options.contract || {};
   const text = options.text || {};
@@ -31,7 +35,7 @@ export function renderSaveSlotEditSubmitRunnerBlockerView(options = {}) {
       <div class="editor-save-edit-submit-runner-blocker-list">
         <strong>${escapeHtml(text.blockerList || "Submit runner blockers")}</strong>
         <div class="editor-chip-list">
-          ${blockers.map((blocker) => chip(blockerChipFormatter(blocker))).join("")}
+          ${blockers.map((blocker) => editorChip(blockerChipFormatter(blocker), SAVE_EDIT_SUBMIT_RUNNER_BLOCKER_CHIP_OPTIONS)).join("")}
         </div>
       </div>
       <div class="editor-save-edit-submit-runner-blocker-grid">
@@ -49,13 +53,9 @@ function renderSaveEditSubmitRunnerBlockerCheckView(check = {}, statusLabel = (s
         <strong>${escapeHtml(check.label)}</strong>
         <span>${escapeHtml(statusLabel(check.status))}</span>
       </div>
-      ${check.blocker ? chip(blockerFormatter(check.blocker)) : ""}
+      ${check.blocker ? editorChip(blockerFormatter(check.blocker), SAVE_EDIT_SUBMIT_RUNNER_BLOCKER_CHIP_OPTIONS) : ""}
     </article>
   `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(String(value))}</span>`;
 }
 
 function escapeHtml(value) {

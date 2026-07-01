@@ -1,4 +1,12 @@
+import { editorChipBlock } from "./editorChipBlockView.js?v=675";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=675";
+
 export const MONSTER_SPRITE_SLOT_REPORT_VIEW_VERSION = "monster-sprite-slot-report-view-v1";
+const MONSTER_SPRITE_SLOT_CHIP_OPTIONS = {
+  blockClass: "editor-combat-vfx-chip-block",
+  chipClass: "editor-chip",
+  filterEmpty: true,
+};
 
 export function renderMonsterSpriteSlotReportView({
   report = {},
@@ -23,13 +31,13 @@ export function renderMonsterSpriteSlotReportView({
         <span>${escapeHtml(`${totals.monsters || 0} monsters / ${totals.poses || 0} poses`)}</span>
       </div>
       <div class="editor-monster-sprite-summary">
-        ${monsterSpriteSummaryCard(detailText.slotMetric, String(totals.slots || 0))}
-        ${monsterSpriteSummaryCard(detailText.assignedMetric, String(totals.assignedSlots || 0))}
-        ${monsterSpriteSummaryCard(detailText.connectableMetric, String(totals.connectableSlots || 0))}
-        ${monsterSpriteSummaryCard(detailText.missingMetric, String(totals.missingSlots || 0))}
-        ${monsterSpriteSummaryCard(detailText.fileScanMetric, String(totals.fileReadySlots || 0))}
-        ${monsterSpriteSummaryCard(detailText.fallbackMetric, String(totals.cssPlaceholderSlots || 0))}
-        ${monsterSpriteSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
+        ${renderEditorSummaryCard(detailText.slotMetric, String(totals.slots || 0))}
+        ${renderEditorSummaryCard(detailText.assignedMetric, String(totals.assignedSlots || 0))}
+        ${renderEditorSummaryCard(detailText.connectableMetric, String(totals.connectableSlots || 0))}
+        ${renderEditorSummaryCard(detailText.missingMetric, String(totals.missingSlots || 0))}
+        ${renderEditorSummaryCard(detailText.fileScanMetric, String(totals.fileReadySlots || 0))}
+        ${renderEditorSummaryCard(detailText.fallbackMetric, String(totals.cssPlaceholderSlots || 0))}
+        ${renderEditorSummaryCard(detailText.brokenMetric, String(totals.brokenSlots || 0))}
       </div>
       ${renderMonsterSpriteConnectionPlan(readiness, detailText, { plan, review })}
       ${renderMonsterSpriteFallbackSummary(report, detailText)}
@@ -65,11 +73,11 @@ export function renderMonsterSpriteConnectionPlan(readiness = {}, detailText = {
       </div>
       <p class="editor-monster-sprite-plan-next">${escapeHtml(nextStepLabel)}</p>
       <div class="editor-monster-sprite-plan-grid">
-        ${monsterSpriteSummaryCard(detailText.readyPatchMetric || "Ready patches", String(readySlotPatches))}
-        ${monsterSpriteSummaryCard(detailText.readyManifestMetric || "Manifest entries", String(readyManifestEntries))}
-        ${monsterSpriteSummaryCard(detailText.readyFileMetric || "Ready files", String(readyFiles))}
-        ${monsterSpriteSummaryCard(detailText.missingFileMetric || "Missing files", String(missingFiles))}
-        ${monsterSpriteSummaryCard(detailText.applyModeMetric || "Apply mode", applyMode)}
+        ${renderEditorSummaryCard(detailText.readyPatchMetric || "Ready patches", String(readySlotPatches))}
+        ${renderEditorSummaryCard(detailText.readyManifestMetric || "Manifest entries", String(readyManifestEntries))}
+        ${renderEditorSummaryCard(detailText.readyFileMetric || "Ready files", String(readyFiles))}
+        ${renderEditorSummaryCard(detailText.missingFileMetric || "Missing files", String(missingFiles))}
+        ${renderEditorSummaryCard(detailText.applyModeMetric || "Apply mode", applyMode)}
       </div>
       ${renderMonsterSpriteReviewChecks(review, detailText)}
       ${renderMonsterSpriteApplyPreview(readiness, detailText)}
@@ -116,10 +124,10 @@ export function renderMonsterSpriteMissingFileHandoff(readiness = {}, detailText
         <span>${escapeHtml(detailText.handoffDescription || "")}</span>
       </div>
       <div class="editor-monster-sprite-handoff-grid">
-        ${monsterSpriteFieldBlock(detailText.handoffArtifactMetric || "Artifact", [readiness.missingFileHandoffArtifact])}
-        ${monsterSpriteFieldBlock(detailText.handoffScriptMetric || "Script", [readiness.missingFileHandoffExportScript || "-"])}
-        ${monsterSpriteFieldBlock(detailText.handoffMissingMetric || "Missing files", [String(readiness.missingFileHandoffMissingFiles ?? "-")])}
-        ${monsterSpriteFieldBlock(detailText.handoffGroupsMetric || "Monster groups", [String(readiness.missingFileHandoffMonsterGroups ?? "-")])}
+        ${editorChipBlock(detailText.handoffArtifactMetric || "Artifact", [readiness.missingFileHandoffArtifact], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+        ${editorChipBlock(detailText.handoffScriptMetric || "Script", [readiness.missingFileHandoffExportScript || "-"], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+        ${editorChipBlock(detailText.handoffMissingMetric || "Missing files", [String(readiness.missingFileHandoffMissingFiles ?? "-")], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+        ${editorChipBlock(detailText.handoffGroupsMetric || "Monster groups", [String(readiness.missingFileHandoffMonsterGroups ?? "-")], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
       </div>
     </div>
   `;
@@ -143,11 +151,11 @@ export function renderMonsterSpriteApplyPreview(readiness = {}, detailText = {})
         <span>${escapeHtml(detailText.applyPreviewDescription || "")}</span>
       </div>
       <div class="editor-monster-sprite-apply-preview-grid">
-        ${monsterSpriteFieldBlock(detailText.applyPreviewArtifactMetric || "Artifact", [readiness.applyPreviewArtifact])}
-        ${monsterSpriteFieldBlock(detailText.applyPreviewScriptMetric || "Script", [readiness.applyPreviewExportScript || "-"])}
-        ${monsterSpriteFieldBlock(detailText.applyPreviewStatusMetric || "Status", [statusLabel])}
-        ${monsterSpriteFieldBlock(detailText.applyPreviewReadyPatchMetric || "Ready patches", [String(readiness.applyPreviewReadyPatchCount ?? "-")])}
-        ${monsterSpriteFieldBlock(detailText.applyPreviewPolicyMetric || "Policy", [manualReviewLabel, compareLabel])}
+        ${editorChipBlock(detailText.applyPreviewArtifactMetric || "Artifact", [readiness.applyPreviewArtifact], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+        ${editorChipBlock(detailText.applyPreviewScriptMetric || "Script", [readiness.applyPreviewExportScript || "-"], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+        ${editorChipBlock(detailText.applyPreviewStatusMetric || "Status", [statusLabel], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+        ${editorChipBlock(detailText.applyPreviewReadyPatchMetric || "Ready patches", [String(readiness.applyPreviewReadyPatchCount ?? "-")], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+        ${editorChipBlock(detailText.applyPreviewPolicyMetric || "Policy", [manualReviewLabel, compareLabel], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
       </div>
     </div>
   `;
@@ -212,39 +220,17 @@ function renderMonsterSpriteSlotPose(row, detailText, statusLabels, fileStatusLa
         <strong>${escapeHtml(row.pose)}</strong>
         <span>${escapeHtml(status)}</span>
       </div>
-      ${monsterSpriteFieldBlock(detailText.expectedPath, [row.expectedPath])}
-      ${monsterSpriteFieldBlock(detailText.fileStatus, [fileStatus])}
-      ${monsterSpriteFieldBlock(detailText.fallbackMode || "Fallback", [fallbackMode])}
-      ${monsterSpriteFieldBlock(detailText.assignedAsset, [assetValue])}
-      ${!row.assetId ? monsterSpriteFieldBlock(detailText.suggestedAsset, [row.draftAssetId]) : ""}
-      ${!row.assetId ? monsterSpriteFieldBlock(detailText.defaultSlot || "Default slot", [row.defaultSlotKey || "-"]) : ""}
-      ${!row.assetId ? monsterSpriteFieldBlock(detailText.slotPatch, [row.slotPatchPath]) : ""}
-      ${row.runtimePreviewPath ? monsterSpriteFieldBlock(detailText.runtimePreview || "Runtime preview", [runtimePreviewPath]) : ""}
-      ${row.resolvedPath ? monsterSpriteFieldBlock(detailText.runtimePath, [runtimePath]) : ""}
+      ${editorChipBlock(detailText.expectedPath, [row.expectedPath], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.fileStatus, [fileStatus], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.fallbackMode || "Fallback", [fallbackMode], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+      ${editorChipBlock(detailText.assignedAsset, [assetValue], MONSTER_SPRITE_SLOT_CHIP_OPTIONS)}
+      ${!row.assetId ? editorChipBlock(detailText.suggestedAsset, [row.draftAssetId], MONSTER_SPRITE_SLOT_CHIP_OPTIONS) : ""}
+      ${!row.assetId ? editorChipBlock(detailText.defaultSlot || "Default slot", [row.defaultSlotKey || "-"], MONSTER_SPRITE_SLOT_CHIP_OPTIONS) : ""}
+      ${!row.assetId ? editorChipBlock(detailText.slotPatch, [row.slotPatchPath], MONSTER_SPRITE_SLOT_CHIP_OPTIONS) : ""}
+      ${row.runtimePreviewPath ? editorChipBlock(detailText.runtimePreview || "Runtime preview", [runtimePreviewPath], MONSTER_SPRITE_SLOT_CHIP_OPTIONS) : ""}
+      ${row.resolvedPath ? editorChipBlock(detailText.runtimePath, [runtimePath], MONSTER_SPRITE_SLOT_CHIP_OPTIONS) : ""}
     </div>
   `;
-}
-
-function monsterSpriteSummaryCard(label, value) {
-  return `
-    <span>
-      <small>${escapeHtml(label || "")}</small>
-      <b>${escapeHtml(value)}</b>
-    </span>
-  `;
-}
-
-function monsterSpriteFieldBlock(title, values = []) {
-  return `
-    <div class="editor-combat-vfx-chip-block">
-      <span>${escapeHtml(title || "")}</span>
-      <div class="editor-chip-list">${values.filter(Boolean).map((value) => chip(value)).join("")}</div>
-    </div>
-  `;
-}
-
-function chip(value) {
-  return `<span class="editor-chip">${escapeHtml(value)}</span>`;
 }
 
 function escapeHtml(value) {
