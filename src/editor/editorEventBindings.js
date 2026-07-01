@@ -1,4 +1,4 @@
-import { handleEditorSearchInputEvent } from "./editorSearchInputHandlers.js?v=680&cachebust=680";
+import { handleEditorSearchInputEvent } from "./editorSearchInputHandlers.js?v=681&cachebust=681";
 
 export function bindEditorEvents(options = {}) {
   const elements = options.elements || {};

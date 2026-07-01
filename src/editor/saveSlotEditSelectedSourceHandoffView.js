@@ -1,4 +1,4 @@
-import { editorChip } from "./editorChipBlockView.js?v=680";
+import { editorChip } from "./editorChipBlockView.js?v=681";
 
 const SAVE_EDIT_SELECTED_SOURCE_HANDOFF_CHIP_OPTIONS = { chipClass: "editor-chip" };
 

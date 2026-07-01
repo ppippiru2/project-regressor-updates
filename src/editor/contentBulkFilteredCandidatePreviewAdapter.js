@@ -1,4 +1,4 @@
-import { renderContentBulkFilteredCandidatePreview } from "./contentBulkFilteredCandidatePreviewView.js?v=680";
+import { renderContentBulkFilteredCandidatePreview } from "./contentBulkFilteredCandidatePreviewView.js?v=681";
 
 export function createContentBulkFilteredCandidatePreviewRenderer() {
   return function renderContentBulkFilteredCandidatePreviewSection(preview = {}, detailText = {}) {

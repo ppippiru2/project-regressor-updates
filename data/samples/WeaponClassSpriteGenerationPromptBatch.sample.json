@@ -25,6 +25,7 @@
     "Do not change the body identity, muscles, hands, feet, stance baseline, or equipment anchor locations beyond the requested frame offsets.",
     "Preserve the seven visual equipment attachment slots: Helmet, Armor, LegArmor, Gloves, Boots, Weapon, and OffHand.",
     "Keep Armor and LegArmor separate: Armor follows torso anchors, while LegArmor follows hip, knee, and foot-baseline anchors.",
+    "Follow player_equipment_motion_attachment_continuity_zero_failed_v1_1: keep every visible item locked to the approved frame anchors; if a held item, OffHand item, armor part, glove, boot, or helmet would float or detach, fix the item contact instead of changing the body, camera, or stance.",
     "Do not add OffHand shield, book, or secondary-weapon props in two-handed weapon, bow, staff, or gauntlet-only fist frames; only wand_book_cast_v1 may include the OffHand book.",
     "No text, no watermark, no extra props, no background change."
   ],

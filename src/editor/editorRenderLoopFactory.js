@@ -1,6 +1,6 @@
-import { renderEditorSummaryPanel } from "./editorSummaryPanel.js?v=680";
-import { toggleEditorNavGroupCollapsed } from "./editorNavGroupState.js?v=680";
-import { getEditorPanels } from "./editorPanelSelection.js?v=680";
+import { renderEditorSummaryPanel } from "./editorSummaryPanel.js?v=681";
+import { toggleEditorNavGroupCollapsed } from "./editorNavGroupState.js?v=681";
+import { getEditorPanels } from "./editorPanelSelection.js?v=681";
 
 export function createEditorRenderLoop({
   elements,

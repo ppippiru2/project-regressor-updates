@@ -1,4 +1,4 @@
-import { renderContentBulkMassApplyReadiness } from "./contentBulkMassApplyReadinessView.js?v=680";
+import { renderContentBulkMassApplyReadiness } from "./contentBulkMassApplyReadinessView.js?v=681";
 
 export function createContentBulkMassApplyReadinessRenderer(options = {}) {
   return function renderContentBulkMassApplyReadinessSection(filteredCandidatePreview = {}, detailText = {}) {

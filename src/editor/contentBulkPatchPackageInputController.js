@@ -8,8 +8,8 @@ import {
   createContentBulkPatchPackageReadErrorInput,
   createContentBulkPatchPackageSampleInput,
   createContentBulkPatchPackageTemplatePayload,
-} from "./contentBulkPatchPackageInputActions.js?v=680";
-import { normalizeContentBulkPatchPackageInput } from "./contentBulkPatchPackageInputStore.js?v=680";
+} from "./contentBulkPatchPackageInputActions.js?v=681";
+import { normalizeContentBulkPatchPackageInput } from "./contentBulkPatchPackageInputStore.js?v=681";
 
 export {
   CONTENT_BULK_PACKAGE_TEMPLATE_FILE_NAME,

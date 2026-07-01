@@ -1,14 +1,14 @@
 import {
   createContentBulkFilteredCandidateStageGateCountsFromPreview,
   createContentBulkFilteredCandidateStageGateReasonCodesFromPreview,
-} from "./contentBulkFilteredCandidateStageGate.js?v=680";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=680";
+} from "./contentBulkFilteredCandidateStageGate.js?v=681";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=681";
 import {
   contentBulkDomainBlockedStageIds,
   contentBulkStageGateReasonLabels,
   contentBulkStageGateStatusLabels,
-} from "./contentBulkStageGatePreviewLabels.js?v=680";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=680";
+} from "./contentBulkStageGatePreviewLabels.js?v=681";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=681";
 
 export const CONTENT_BULK_DOMAIN_FILTER_DRILLDOWN_VERSION = "content-bulk-domain-filter-drilldown-v1";
 

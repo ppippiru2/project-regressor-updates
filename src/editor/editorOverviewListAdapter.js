@@ -3,7 +3,7 @@ import {
   renderEditorBacklogCards,
   renderEditorPrototypeCards,
   renderEditorSaveKeyCards,
-} from "./editorOverviewListView.js?v=680&cachebust=asset-section-collapse";
+} from "./editorOverviewListView.js?v=681&cachebust=asset-section-collapse";
 
 export function createEditorAssetSectionsRenderer() {
   return function renderEditorAssetSectionsSection(options = {}) {

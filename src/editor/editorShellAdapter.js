@@ -1,7 +1,7 @@
 import {
   renderEditorNavigationGroups,
   renderEditorPanelDetailShell,
-} from "./editorShellView.js?v=680&cachebust=680";
+} from "./editorShellView.js?v=681&cachebust=681";
 
 export function createEditorNavigationGroupsRenderer() {
   return function renderEditorNavigationGroupsSection(options = {}) {

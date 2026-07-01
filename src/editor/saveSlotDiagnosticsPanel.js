@@ -1,5 +1,5 @@
-import { renderSaveSlotDiagnosticSections } from "./saveSlotDiagnosticSectionView.js?v=680";
-import { renderSaveSlotDiagnosticsShell } from "./saveSlotDiagnosticsView.js?v=680";
+import { renderSaveSlotDiagnosticSections } from "./saveSlotDiagnosticSectionView.js?v=681";
+import { renderSaveSlotDiagnosticsShell } from "./saveSlotDiagnosticsView.js?v=681";
 
 export const SAVE_SLOT_DIAGNOSTIC_SECTION_ORDER = Object.freeze([
   "validation-plan",

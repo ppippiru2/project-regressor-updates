@@ -1,12 +1,12 @@
-import { tf } from "../localization/index.js?v=680";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=680";
-import { contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=680";
-import { editorChip } from "./editorChipBlockView.js?v=680";
+import { tf } from "../localization/index.js?v=681";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=681";
+import { contentBulkPatchDomainLabel } from "./contentBulkFilterModel.js?v=681";
+import { editorChip } from "./editorChipBlockView.js?v=681";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=680";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=680";
+} from "./contentBulkPackageOverview.js?v=681";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=681";
 
 export const CONTENT_BULK_PATCH_PACKAGE_ADAPTER_VIEW_VERSION = "content-bulk-patch-package-adapter-view-v1";
 const CONTENT_BULK_PACKAGE_ADAPTER_CHIP_OPTIONS = { chipClass: "editor-chip" };

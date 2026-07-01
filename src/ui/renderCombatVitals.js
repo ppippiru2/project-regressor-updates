@@ -1,43 +1,11 @@
-import { t, tf } from "../localization/index.js?v=680";
-import { WEAKNESS_BALANCE } from "../balance/combatBalance.js?v=680";
+import { t, tf } from "../localization/index.js?v=681";
+import { renderPlayerBuffStrip } from "./renderCombatBuffStatus.js?v=681";
+import { renderEnemyWeaknessMeter } from "./renderCombatWeaknessMeter.js?v=681";
 
 const byId = (id) => document.getElementById(id);
 const battleBackgroundImageSizeCache = new Map();
 let lastClearSpriteFrameBackgroundPath = "";
 let clearSpriteFrameResizeBound = false;
-
-const PLAYER_BUFF_STATUS_META = Object.freeze({
-  preserve_guard: {
-    labelKey: "combatBuffStatus.preserve.label",
-    summaryKey: "combatBuffStatus.preserve.summary",
-    detailKey: "combatBuffStatus.preserve.detail",
-    fallbackLabel: "Guard",
-    fallbackSummary: "Damage down",
-    fallbackDetail: "Next damage x0.5",
-    tone: "guard",
-    type: "defense",
-  },
-  full_power: {
-    labelKey: "combatBuffStatus.fullPower.label",
-    summaryKey: "combatBuffStatus.fullPower.summary",
-    detailKey: "combatBuffStatus.fullPower.detail",
-    fallbackLabel: "Full Power",
-    fallbackSummary: "Attack up",
-    fallbackDetail: "Attack x1.25",
-    tone: "power",
-    type: "attack",
-  },
-  rampage: {
-    labelKey: "combatBuffStatus.rampage.label",
-    summaryKey: "combatBuffStatus.rampage.summary",
-    detailKey: "combatBuffStatus.rampage.detail",
-    fallbackLabel: "Rampage",
-    fallbackSummary: "Attack up / risk",
-    fallbackDetail: "Attack x1.45 / damage x1.2",
-    tone: "risk",
-    type: "risk",
-  },
-});
 
 function clampValue(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -115,99 +83,6 @@ export function renderCombatVitals({
     : t("combatVitals.waiting");
 
   return { enemyHp, enemyMp };
-}
-
-function renderPlayerBuffStrip(combatRuntime) {
-  const strip = byId("player-buff-strip");
-  if (!strip) return;
-
-  const buffs = activePlayerBuffsForUi(combatRuntime);
-  if (!buffs.length) {
-    strip.hidden = true;
-    strip.innerHTML = "";
-    delete strip.dataset.activeBuffCount;
-    return;
-  }
-
-  strip.hidden = false;
-  strip.dataset.activeBuffCount = String(buffs.length);
-  strip.innerHTML = buffs.map(playerBuffChipMarkup).join("");
-}
-
-function activePlayerBuffsForUi(combatRuntime) {
-  const buffs = Array.isArray(combatRuntime?.playerBuffs) ? combatRuntime.playerBuffs : [];
-  return buffs
-    .map((buff) => ({
-      ...buff,
-      remainingTurns: Math.max(0, Math.floor(Number(buff?.remainingTurns || 0))),
-    }))
-    .filter((buff) => buff.remainingTurns > 0);
-}
-
-function playerBuffChipMarkup(buff) {
-  const meta = playerBuffStatusMeta(buff);
-  const remaining = Math.max(0, Number(buff.remainingTurns || 0));
-  const remainingText = tf("combatBuffStatus.remainingTurns", { count: remaining }, `${remaining}x`);
-  const label = t(meta.labelKey, meta.fallbackLabel);
-  const summary = t(meta.summaryKey, meta.fallbackSummary);
-  const detail = t(meta.detailKey, meta.fallbackDetail);
-  const title = `${label} · ${detail} · ${remainingText}`;
-  const className = `combat-buff-chip combat-buff-chip--${meta.tone}`;
-
-  return `<span class="${className}" data-combat-buff-id="${escapeHtml(buff.id)}" data-combat-buff-remaining="${remaining}" data-combat-buff-type="${escapeHtml(meta.type)}" title="${escapeHtml(title)}" aria-label="${escapeHtml(title)}">
-    <span class="combat-buff-chip-label">${escapeHtml(label)}</span>
-    <small>${escapeHtml(summary)}</small>
-    <b>${escapeHtml(remainingText)}</b>
-  </span>`;
-}
-
-function playerBuffStatusMeta(buff) {
-  return PLAYER_BUFF_STATUS_META[buff?.id] || {
-    labelKey: "",
-    summaryKey: "",
-    detailKey: "",
-    fallbackLabel: buff?.label || buff?.id || t("combatBuffStatus.fallbackLabel", "Buff"),
-    fallbackSummary: t("combatBuffStatus.fallbackSummary", "Status up"),
-    fallbackDetail: t("combatBuffStatus.fallbackDetail", "Combat status enhanced"),
-    tone: "default",
-    type: "support",
-  };
-}
-
-function renderEnemyWeaknessMeter(state, now = Date.now()) {
-  const meter = byId("enemy-weakness-meter");
-  const fill = byId("enemy-weakness-bar");
-  const text = byId("enemy-weakness-text");
-  if (!meter || !fill || !text) return;
-
-  const target = state.inCombat ? state.target : null;
-  if (!target || target.hp <= 0) {
-    meter.dataset.weaknessState = "idle";
-    fill.style.width = "0%";
-    text.textContent = t("combatVitals.weaknessWaiting");
-    return;
-  }
-
-  const weaknessUntil = Number(target.weaknessUntil || 0);
-  if (weaknessUntil > now) {
-    const remainingSeconds = Math.max(0, (weaknessUntil - now) / 1000);
-    const duration = Math.max(0.1, Number(WEAKNESS_BALANCE.durationSeconds) || 0.1);
-    const percent = clampValue((remainingSeconds / duration) * 100, 0, 100);
-    meter.dataset.weaknessState = "active";
-    fill.style.width = `${percent}%`;
-    text.textContent = tf("combatVitals.weaknessActive", {
-      seconds: Math.ceil(remainingSeconds),
-      count: Number(target.weaknessStrikeCount || 0),
-    });
-    return;
-  }
-
-  const maxGauge = Math.max(0, Number(target.breakGaugeMax || 0));
-  const currentGauge = clampValue(Number(target.breakGauge ?? maxGauge), 0, maxGauge);
-  const progress = maxGauge > 0 ? clampValue(((maxGauge - currentGauge) / maxGauge) * 100, 0, 100) : 0;
-  meter.dataset.weaknessState = progress > 0 ? "charging" : "idle";
-  fill.style.width = `${progress}%`;
-  text.textContent = tf("combatVitals.weaknessGauge", { percent: Math.floor(progress) });
 }
 
 function getVisibleDefeatedTarget(state, targetMonster, combatRuntime) {

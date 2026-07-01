@@ -1,4 +1,4 @@
-import { renderSaveSlotEditSamplePayloadView } from "./saveSlotEditSamplePayloadView.js?v=680";
+import { renderSaveSlotEditSamplePayloadView } from "./saveSlotEditSamplePayloadView.js?v=681";
 
 export function createSaveSlotEditSamplePayloadRenderer(options = {}) {
   return function renderSaveSlotEditSamplePayloadPreview(diagnostics) {

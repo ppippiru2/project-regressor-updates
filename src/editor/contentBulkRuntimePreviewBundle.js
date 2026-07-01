@@ -1,8 +1,8 @@
-import { createContentBulkFilterCounts } from "./contentBulkFilterModel.js?v=680";
-import { createContentBulkFilteredCandidatePreview } from "./contentBulkFilteredCandidatePreview.js?v=680";
-import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=680";
-import { createRuntimeVfxBulkIntakePreviewFromPackageInput } from "./contentBulkPatchPackageInputActions.js?v=680";
-import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=680";
+import { createContentBulkFilterCounts } from "./contentBulkFilterModel.js?v=681";
+import { createContentBulkFilteredCandidatePreview } from "./contentBulkFilteredCandidatePreview.js?v=681";
+import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=681";
+import { createRuntimeVfxBulkIntakePreviewFromPackageInput } from "./contentBulkPatchPackageInputActions.js?v=681";
+import { createLootSkillBulkIntakePreview } from "./lootSkillBulkIntakePreview.js?v=681";
 
 export const CONTENT_BULK_RUNTIME_PREVIEW_BUNDLE_VERSION = "content-bulk-runtime-preview-bundle-v1";
 

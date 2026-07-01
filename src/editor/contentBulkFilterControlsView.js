@@ -1,7 +1,7 @@
 import {
   contentBulkDomainLabel,
   contentBulkFilterLabel,
-} from "./contentBulkFilterModel.js?v=680";
+} from "./contentBulkFilterModel.js?v=681";
 
 export const CONTENT_BULK_FILTER_CONTROLS_VIEW_VERSION = "content-bulk-filter-controls-view-v1";
 

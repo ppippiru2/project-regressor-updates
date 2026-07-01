@@ -1,4 +1,4 @@
-import { editorFallbackLabel } from "./editorLabelFormatters.js?v=680";
+import { editorFallbackLabel } from "./editorLabelFormatters.js?v=681";
 
 export const CONTENT_BULK_DOMAIN_FILTERS = Object.freeze([
   "all",

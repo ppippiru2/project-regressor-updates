@@ -1,4 +1,4 @@
-import { tf } from "../localization/index.js?v=680";
+import { tf } from "../localization/index.js?v=681";
 
 export async function fetchEditorJson(url, options = {}) {
   const fetchRef = options.fetchRef || fetch;

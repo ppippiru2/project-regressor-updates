@@ -1,4 +1,4 @@
-import { renderContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContractView.js?v=680";
+import { renderContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContractView.js?v=681";
 
 export function createContentBulkPatchIntakeContractRenderer(options = {}) {
   return function renderContentBulkPatchIntakeContractSection(detailText = {}) {

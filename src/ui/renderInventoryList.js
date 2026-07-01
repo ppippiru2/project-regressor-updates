@@ -1,7 +1,7 @@
-import { equipmentScoreDelta } from "../state/equipmentScore.js?v=680";
-import { canEquipOffHand } from "../state/equipmentActions.js?v=680";
-import { t, tf } from "../localization/index.js?v=680";
-import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=680";
+import { equipmentScoreDelta } from "../state/equipmentScore.js?v=681";
+import { canEquipOffHand } from "../state/equipmentActions.js?v=681";
+import { t, tf } from "../localization/index.js?v=681";
+import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=681";
 
 const RARITY_ORDER = {
   legendary: 5,

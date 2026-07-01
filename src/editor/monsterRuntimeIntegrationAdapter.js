@@ -1,4 +1,4 @@
-import { renderMonsterRuntimeIntegrationView } from "./monsterRuntimeIntegrationView.js?v=680";
+import { renderMonsterRuntimeIntegrationView } from "./monsterRuntimeIntegrationView.js?v=681";
 
 export function createMonsterRuntimeIntegrationRenderer(options = {}) {
   return function renderMonsterRuntimeIntegrationSection(detailText = {}) {

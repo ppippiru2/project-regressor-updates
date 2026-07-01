@@ -1,4 +1,4 @@
-import { createSaveSummaryModel } from "./saveSummaryModel.js?v=680";
+import { createSaveSummaryModel } from "./saveSummaryModel.js?v=681";
 
 export function createEditorSaveSummary(options = {}) {
   return createSaveSummaryModel({

@@ -1,4 +1,4 @@
-import { renderContentBulkPatchDiffExport } from "./contentBulkPatchDiffExportView.js?v=680";
+import { renderContentBulkPatchDiffExport } from "./contentBulkPatchDiffExportView.js?v=681";
 
 export function createContentBulkPatchDiffExportRenderer(options = {}) {
   return function renderContentBulkPatchDiffExportSection(detailText = {}) {

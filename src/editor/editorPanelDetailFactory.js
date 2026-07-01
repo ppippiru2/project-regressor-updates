@@ -1,5 +1,5 @@
-import { createEditorPanelContentSections } from "./editorPanelContentSections.js?v=680";
-import { findEditorPanelById } from "./editorPanelSelection.js?v=680";
+import { createEditorPanelContentSections } from "./editorPanelContentSections.js?v=681";
+import { findEditorPanelById } from "./editorPanelSelection.js?v=681";
 
 export function createEditorPanelDetailRenderer({
   getManifest = () => ({}),

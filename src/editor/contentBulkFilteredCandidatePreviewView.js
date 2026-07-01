@@ -1,9 +1,9 @@
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=680";
-import { createContentBulkFilteredCandidateStageGateReasonCodesFromPreview } from "./contentBulkFilteredCandidateStageGate.js?v=680";
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=680";
-import { contentBulkStageGateReasonLabels } from "./contentBulkStageGatePreviewLabels.js?v=680";
-import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=680";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=680";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=681";
+import { createContentBulkFilteredCandidateStageGateReasonCodesFromPreview } from "./contentBulkFilteredCandidateStageGate.js?v=681";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=681";
+import { contentBulkStageGateReasonLabels } from "./contentBulkStageGatePreviewLabels.js?v=681";
+import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=681";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=681";
 
 const DETAIL_CHIP_OPTIONS = {
   blockClass: "",

@@ -3,8 +3,8 @@ import {
   resolveMotionDurationMs,
   resolveMotionFrame,
   resolveMotionFrameAtElapsed,
-} from "./equipmentAttachmentRenderer.js?v=680";
-import { resolveAssetPath } from "./assetRegistry.js?v=680";
+} from "./equipmentAttachmentRenderer.js?v=681";
+import { resolveAssetPath } from "./assetRegistry.js?v=681";
 
 export const PLAYER_EQUIPMENT_ATTACHMENT_RUNTIME_VERSION = "1.0.0";
 

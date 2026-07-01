@@ -1,5 +1,5 @@
-import { tf } from "../localization/index.js?v=680";
-import { editorChip } from "./editorChipBlockView.js?v=680";
+import { tf } from "../localization/index.js?v=681";
+import { editorChip } from "./editorChipBlockView.js?v=681";
 
 export const EDITOR_OVERVIEW_LIST_VIEW_VERSION = "editor-overview-list-view-v1";
 const EDITOR_OVERVIEW_CHIP_OPTIONS = { chipClass: "editor-chip" };

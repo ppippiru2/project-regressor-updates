@@ -1,5 +1,5 @@
-import { gateNodeTypeLabel } from "../config/gateNodeTypes.js?v=680";
-import { t, tf } from "../localization/index.js?v=680";
+import { gateNodeTypeLabel } from "../config/gateNodeTypes.js?v=681";
+import { t, tf } from "../localization/index.js?v=681";
 
 const COMBAT_NODE_TYPES = new Set(["battle", "elite", "hidden_boss"]);
 const TREASURE_NODE_TYPES = new Set(["treasure", "hidden_treasure"]);
