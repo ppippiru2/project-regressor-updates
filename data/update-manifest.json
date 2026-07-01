@@ -4,12 +4,12 @@
     "versionCode":  675,
     "displayVersion":  "v675",
     "cacheVersion":  675,
-    "updatedAt":  "2026-07-01T16:12:00Z",
+    "updatedAt":  "2026-07-01T17:12:00Z",
     "repositoryUrl":  "https://github.com/ppippiru2/project-regressor-updates",
     "pagesUrl":  "https://ppippiru2.github.io/project-regressor-updates/",
     "launchUrl":  "https://ppippiru2.github.io/project-regressor-updates/?v=675\u0026cachebust=675",
     "recommendedAndroidShell":  "Trusted Web Activity",
-    "notes":  "v675 build: refresh editor asset collapse, content-bulk module-split guards, player sprite motion attachment checks, and bow runtime attachment coverage while keeping save/gameplay schemas unchanged.",
+    "notes":  "v675 build: refresh editor asset collapse, content-bulk module-split guards, player sprite motion attachment checks, and bow/staff/fist/wand-book runtime attachment coverage while keeping save/gameplay schemas unchanged.",
     "androidApkUrl":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk",
     "downloads":  {
                       "androidDebugApk":  "https://ppippiru2.github.io/project-regressor-updates/releases/project-regressor-v675-debug.apk"

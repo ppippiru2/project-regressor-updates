@@ -921,7 +921,11 @@ export const KO_KR_TEXT = {
     ],
     "slot:Armor": [
       "갑옷",
-      "몸통 방어구 슬롯입니다. 방어력과 생존 옵션이 붙기 좋은 자리입니다."
+      "상체 방어구 슬롯입니다. 방어력과 생존 옵션이 붙기 좋은 자리입니다."
+    ],
+    "slot:LegArmor": [
+      "하체 갑옷",
+      "허리와 다리 방어구 슬롯입니다. 무릎과 발 기준점을 따라 움직이는 장비 자리입니다."
     ],
     "slot:Gloves": [
       "장갑",
@@ -1085,6 +1089,7 @@ export const KO_KR_TEXT = {
       OffHand: "보",
       Helmet: "투",
       Armor: "갑",
+      LegArmor: "하",
       Gloves: "장",
       Boots: "신",
       Necklace: "목",
@@ -2108,7 +2113,8 @@ export const KO_KR_TEXT = {
       Weapon: "무기",
       OffHand: "보조무기",
       Helmet: "투구",
-      Armor: "갑옷",
+      Armor: "상체 갑옷",
+      LegArmor: "하체 갑옷",
       Gloves: "장갑",
       Boots: "신발",
       Necklace: "목걸이",
@@ -2167,6 +2173,7 @@ export const KO_KR_TEXT = {
       backup_dagger: "예비 단검",
       worn_gloves: "낡은 전투 장갑",
       wolf_leather_armor: "그림자 늑대 가죽갑옷",
+      wolf_leather_greaves: "그림자 늑대 가죽 각반",
       swift_boots: "숲길 추적자의 신발",
       sentinel_helmet: "파수병의 금 간 투구",
       tower_shield_armor: "탑 방벽 흉갑",

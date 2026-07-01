@@ -61,6 +61,11 @@
     "Staff_Top",
     "Staff_Base",
     "Cast_Hand",
+    "Wand_Tip",
+    "Book_Grip",
+    "Book_Center",
+    "Book_Top",
+    "Book_Bottom",
     "Fist_ScreenLeft",
     "Fist_ScreenRight",
     "Guard_Center"
@@ -110,6 +115,13 @@
       "defaultLayers": ["torso_under", "armor_torso"]
     },
     {
+      "slotId": "legs",
+      "displayName": "Leg Armor",
+      "acceptedCategories": ["cloth_legs", "leather_greaves", "plate_greaves", "pants"],
+      "requiredAnchors": ["Hip_Center", "Knee_ScreenLeft", "Knee_ScreenRight", "Foot_ScreenLeft_Baseline", "Foot_ScreenRight_Baseline"],
+      "defaultLayers": ["legwear_back", "legwear_front"]
+    },
+    {
       "slotId": "mainhand",
       "displayName": "Main Hand",
       "acceptedCategories": ["one_hand_weapon", "two_hand_weapon", "wand", "staff", "bow"],
@@ -119,7 +131,7 @@
     {
       "slotId": "offhand",
       "displayName": "Off Hand",
-      "acceptedCategories": ["shield", "book", "offhand_weapon"],
+      "acceptedCategories": ["shield", "book", "grimoire", "offhand_weapon"],
       "requiredAnchors": ["Hand_ScreenRight_Grip"],
       "defaultLayers": ["offhand_back", "offhand_front"]
     },
@@ -212,6 +224,30 @@
       "notes": "Staff weapons need a vertical axis and a separate cast hand from the pose template."
     },
     {
+      "profileId": "weapon.wand.v1",
+      "slotId": "mainhand",
+      "itemCategory": "wand",
+      "requiredItemAnchors": ["grip", "tip", "focus", "bounds"],
+      "attachTo": ["Cast_Hand", "Wand_Tip"],
+      "rotationVector": ["Cast_Hand", "Wand_Tip"],
+      "itemRotationVector": ["grip", "tip"],
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["wand_book_cast"],
+      "notes": "Wands use the cast hand and a separate wand-tip anchor instead of the ordinary sword grip."
+    },
+    {
+      "profileId": "offhand.book.v1",
+      "slotId": "offhand",
+      "itemCategory": "grimoire",
+      "requiredItemAnchors": ["grip", "book_center", "spine_top", "spine_bottom", "bounds"],
+      "attachTo": ["Book_Grip", "Book_Center", "Book_Top", "Book_Bottom"],
+      "rotationVector": ["Book_Grip", "Book_Center"],
+      "itemRotationVector": ["grip", "book_center"],
+      "defaultLayer": "offhand_front",
+      "compatiblePoseTemplates": ["wand_book_cast"],
+      "notes": "Book and grimoire offhand props use a dedicated support anchor so shield grip rules are not reused."
+    },
+    {
       "profileId": "armor.helmet.v1",
       "slotId": "head",
       "itemCategory": "helmet",
@@ -228,6 +264,23 @@
       "attachTo": ["Neck_Base", "Chest_Center", "Hip_Center", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
       "defaultLayer": "armor_torso",
       "notes": "Torso armor follows body core anchors and should not include weapon or VFX."
+    },
+    {
+      "profileId": "armor.legs.v1",
+      "slotId": "leg_left",
+      "itemCategory": "armor_legs",
+      "requiredItemAnchors": ["knee_lock", "hip_lock", "ankle_lock", "side_outer", "bounds"],
+      "attachToBySlot": {
+        "leg_left": ["Knee_ScreenLeft", "Hip_Center", "Foot_ScreenLeft_Baseline"],
+        "leg_right": ["Knee_ScreenRight", "Hip_Center", "Foot_ScreenRight_Baseline"]
+      },
+      "rotationVectorBySlot": {
+        "leg_left": ["Knee_ScreenLeft", "Foot_ScreenLeft_Baseline"],
+        "leg_right": ["Knee_ScreenRight", "Foot_ScreenRight_Baseline"]
+      },
+      "itemRotationVector": ["knee_lock", "ankle_lock"],
+      "defaultLayer": "legwear_front",
+      "notes": "Lower armor is one equipment slot but resolves into left and right leg attachment parts."
     },
     {
       "profileId": "handwear.gauntlet.v1",
@@ -277,25 +330,37 @@
       "poseTemplateId": "idle_default",
       "inherits": "base_body_v2",
       "anchorPolicy": "Use base body v2 anchors directly.",
-      "compatibleProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
+      "compatibleProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.helmet.v1", "armor.torso.v1", "armor.legs.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
     },
     {
       "poseTemplateId": "great_weapon_guard",
       "inherits": "base_body_v2",
       "anchorPolicy": "Override both arm chains and expose TwoHand_LowerGrip and TwoHand_UpperGrip.",
-      "compatibleProfiles": ["weapon.two_hand.heavy.v1"]
+      "compatibleProfiles": ["weapon.two_hand.heavy.v1", "armor.helmet.v1", "armor.torso.v1", "armor.legs.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
     },
     {
       "poseTemplateId": "bow_draw",
       "inherits": "base_body_v2",
       "anchorPolicy": "Override both arm chains and expose Bow_Grip, Draw_Hand, Arrow_Nock, and Arrow_Tip.",
-      "compatibleProfiles": ["weapon.bow.v1"]
+      "compatibleProfiles": ["weapon.bow.v1", "armor.helmet.v1", "armor.torso.v1", "armor.legs.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
     },
     {
       "poseTemplateId": "staff_stand",
       "inherits": "base_body_v2",
       "anchorPolicy": "Override staff-side hand and expose Staff_Top, Staff_Base, Staff_Grip.",
-      "compatibleProfiles": ["weapon.staff.v1"]
+      "compatibleProfiles": ["weapon.staff.v1", "armor.helmet.v1", "armor.torso.v1", "armor.legs.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
+    },
+    {
+      "poseTemplateId": "fist_guard_idle",
+      "inherits": "base_body_v2",
+      "anchorPolicy": "Override both hand guards and expose Fist_ScreenLeft, Fist_ScreenRight, and Guard_Center.",
+      "compatibleProfiles": ["armor.helmet.v1", "armor.torso.v1", "armor.legs.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
+    },
+    {
+      "poseTemplateId": "wand_book_cast",
+      "inherits": "base_body_v2",
+      "anchorPolicy": "Override caster hand and offhand support anchors for wand/book casting.",
+      "compatibleProfiles": ["weapon.wand.v1", "offhand.book.v1", "armor.helmet.v1", "armor.torso.v1", "armor.legs.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"]
     }
   ],
   "motionContracts": [
@@ -320,6 +385,16 @@
       ]
     },
     {
+      "motionId": "wand_book_cast_v1",
+      "frameCount": 3,
+      "requiredFrameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "rules": [
+        "The attack_hit frame owns the damage_window event tag.",
+        "Wand and grimoire attachments follow Cast_Hand, Wand_Tip, Book_Grip, and Book_Center anchors.",
+        "This runtime contract is covered by the equipment attachment plan before final wand/book class sprites are generated."
+      ]
+    },
+    {
       "motionId": "hit_reaction_v1",
       "frameCount": 2,
       "requiredFrameIds": ["hit_back", "hit_return"],
@@ -336,6 +411,7 @@
     "Add boots using knee and foot baseline anchors.",
     "Add cloak/back proxies using Neck_Base, Chest_Center, and Hip_Center anchors.",
     "Add pose templates for great weapon, bow, staff, and fist guard.",
+    "Add wand/book caster runtime anchors before final wand/book source sprites are generated.",
     "Add idle_loop_v1 frame transforms.",
     "Add basic_attack_v1 frame transforms and event tags.",
     "Only then generate new weapon/class test images from the anchor contract."

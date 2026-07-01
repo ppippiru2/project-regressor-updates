@@ -11,6 +11,7 @@ export const ITEM_BALANCE_DATA = [
   { id: "backup_dagger", slot: "OffHand", rarity: "common", attack: 1, offHandType: "secondary_weapon", options: [{ type: "AGI", value: 1 }] },
   { id: "worn_gloves", slot: "Gloves", rarity: "common", defense: 1, options: [{ type: "AGI", value: 1 }] },
   { id: "wolf_leather_armor", slot: "Armor", rarity: "uncommon", defense: 2, options: [{ type: "VIT", value: 2 }] },
+  { id: "wolf_leather_greaves", slot: "LegArmor", rarity: "uncommon", defense: 1, options: [{ type: "VIT", value: 1 }, { type: "AGI", value: 1 }] },
   { id: "swift_boots", slot: "Boots", rarity: "uncommon", defense: 1, options: [{ type: "AGI", value: 2 }] },
   { id: "sentinel_helmet", slot: "Helmet", rarity: "rare", defense: 1, options: [{ type: "WIS", value: 2 }] },
   { id: "tower_shield_armor", slot: "Armor", rarity: "rare", defense: 4, options: [{ type: "VIT", value: 3 }] },

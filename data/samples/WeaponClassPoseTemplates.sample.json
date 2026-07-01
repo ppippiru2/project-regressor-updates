@@ -54,6 +54,15 @@
       "notes": "Staff pose keeps a vertical weapon axis and a separate cast hand for skill VFX."
     },
     {
+      "poseTemplateId": "wand_book_cast",
+      "inherits": "idle_default",
+      "category": "caster_guard",
+      "compatibleProfiles": ["weapon.wand.v1", "offhand.book.v1"],
+      "requiredAnchors": ["Cast_Hand", "Wand_Tip", "Book_Grip", "Book_Center", "Book_Top", "Book_Bottom", "Chest_Center", "Face_Center", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip"],
+      "footPolicy": "locked",
+      "notes": "Wand-book pose keeps the cast hand, wand tip, and supported grimoire anchors separate for runtime VFX and offhand attachment checks."
+    },
+    {
       "poseTemplateId": "fist_guard_idle",
       "inherits": "idle_default",
       "category": "unarmed_guard",

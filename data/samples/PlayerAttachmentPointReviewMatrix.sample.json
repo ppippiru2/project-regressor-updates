@@ -244,13 +244,18 @@
       "scope": "caster_weapon",
       "appliesToGenders": ["male", "female"],
       "appliesToOutputs": ["source", "pixel"],
-      "profileIds": ["weapon.staff.v1"],
-      "poseTemplateIds": ["staff_stand"],
+      "profileIds": ["weapon.staff.v1", "weapon.wand.v1", "offhand.book.v1"],
+      "poseTemplateIds": ["staff_stand", "wand_book_cast"],
       "requiredAnchors": [
         "Staff_Grip",
         "Staff_Top",
         "Staff_Base",
         "Cast_Hand",
+        "Wand_Tip",
+        "Book_Grip",
+        "Book_Center",
+        "Book_Top",
+        "Book_Bottom",
         "Hand_ScreenLeft_Grip",
         "Hand_ScreenRight_Grip"
       ],
@@ -303,6 +308,46 @@
         "fist_center_hidden",
         "guard_center_not_between_hands",
         "wrist_lock_mismatch"
+      ]
+    },
+    {
+      "reviewId": "leg_armor_alignment",
+      "displayName": "Lower armor and leg alignment",
+      "scope": "legwear",
+      "appliesToGenders": ["male", "female"],
+      "appliesToOutputs": ["source", "pixel"],
+      "profileIds": ["armor.legs.v1"],
+      "poseTemplateIds": [
+        "idle_default",
+        "sword_shield_idle",
+        "great_weapon_guard",
+        "bow_draw",
+        "staff_stand",
+        "fist_guard_idle"
+      ],
+      "requiredAnchors": [
+        "Hip_Center",
+        "Knee_ScreenLeft",
+        "Knee_ScreenRight",
+        "Foot_ScreenLeft_Baseline",
+        "Foot_ScreenRight_Baseline"
+      ],
+      "referenceIds": [
+        "class_warrior_representative",
+        "class_assassin_dual_dagger_plain",
+        "class_fighter_representative"
+      ],
+      "gates": [
+        "waistline_matches_hip_center",
+        "left_right_knee_locks_do_not_swap",
+        "legwear_follows_knee_to_foot_angle",
+        "lower_armor_does_not_merge_with_boots"
+      ],
+      "failureModes": [
+        "leg_armor_detached_from_knee",
+        "left_right_legwear_swap",
+        "pants_slide_against_foot_baseline",
+        "lower_armor_hides_boot_lock"
       ]
     },
     {

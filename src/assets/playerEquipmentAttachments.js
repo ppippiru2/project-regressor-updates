@@ -82,6 +82,36 @@ const ATTACHMENT_CONTRACT = Object.freeze({
       defaultLayer: "mainhand_weapon",
     },
     {
+      profileId: "weapon.staff.v1",
+      slotId: "mainhand",
+      itemCategory: "staff",
+      requiredItemAnchors: ["staff_grip", "staff_top", "staff_base", "bounds"],
+      attachTo: ["Staff_Grip", "Staff_Top", "Staff_Base", "Cast_Hand"],
+      rotationVector: ["Staff_Base", "Staff_Top"],
+      itemRotationVector: ["staff_base", "staff_top"],
+      defaultLayer: "mainhand_weapon",
+    },
+    {
+      profileId: "weapon.wand.v1",
+      slotId: "mainhand",
+      itemCategory: "wand",
+      requiredItemAnchors: ["grip", "tip", "focus", "bounds"],
+      attachTo: ["Cast_Hand", "Wand_Tip"],
+      rotationVector: ["Cast_Hand", "Wand_Tip"],
+      itemRotationVector: ["grip", "tip"],
+      defaultLayer: "mainhand_weapon",
+    },
+    {
+      profileId: "offhand.book.v1",
+      slotId: "offhand",
+      itemCategory: "grimoire",
+      requiredItemAnchors: ["grip", "book_center", "spine_top", "spine_bottom", "bounds"],
+      attachTo: ["Book_Grip", "Book_Center", "Book_Top", "Book_Bottom"],
+      rotationVector: ["Book_Grip", "Book_Center"],
+      itemRotationVector: ["grip", "book_center"],
+      defaultLayer: "offhand_front",
+    },
+    {
       profileId: "armor.helmet.v1",
       slotId: "head",
       itemCategory: "helmet",
@@ -96,6 +126,22 @@ const ATTACHMENT_CONTRACT = Object.freeze({
       requiredItemAnchors: ["neck_opening", "chest_center", "waist_center", "shoulder_left", "shoulder_right", "bounds"],
       attachTo: ["Neck_Base", "Chest_Center", "Hip_Center", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
       defaultLayer: "armor_torso",
+    },
+    {
+      profileId: "armor.legs.v1",
+      slotId: "leg_left",
+      itemCategory: "armor_legs",
+      requiredItemAnchors: ["knee_lock", "hip_lock", "ankle_lock", "side_outer", "bounds"],
+      attachToBySlot: {
+        leg_left: ["Knee_ScreenLeft", "Hip_Center", "Foot_ScreenLeft_Baseline"],
+        leg_right: ["Knee_ScreenRight", "Hip_Center", "Foot_ScreenRight_Baseline"],
+      },
+      rotationVectorBySlot: {
+        leg_left: ["Knee_ScreenLeft", "Foot_ScreenLeft_Baseline"],
+        leg_right: ["Knee_ScreenRight", "Foot_ScreenRight_Baseline"],
+      },
+      itemRotationVector: ["knee_lock", "ankle_lock"],
+      defaultLayer: "legwear_front",
     },
     {
       profileId: "handwear.gauntlet.v1",
@@ -145,6 +191,7 @@ const ATTACHMENT_CONTRACT = Object.freeze({
         "shield.offhand.round.v1",
         "armor.helmet.v1",
         "armor.torso.v1",
+        "armor.legs.v1",
         "handwear.gauntlet.v1",
         "boots.pair.v1",
         "back.cloak.v1",
@@ -156,6 +203,7 @@ const ATTACHMENT_CONTRACT = Object.freeze({
         "weapon.two_hand.heavy.v1",
         "armor.helmet.v1",
         "armor.torso.v1",
+        "armor.legs.v1",
         "handwear.gauntlet.v1",
         "boots.pair.v1",
         "back.cloak.v1",
@@ -167,6 +215,43 @@ const ATTACHMENT_CONTRACT = Object.freeze({
         "weapon.bow.v1",
         "armor.helmet.v1",
         "armor.torso.v1",
+        "armor.legs.v1",
+        "handwear.gauntlet.v1",
+        "boots.pair.v1",
+        "back.cloak.v1",
+      ],
+    },
+    {
+      poseTemplateId: "staff_stand",
+      compatibleProfiles: [
+        "weapon.staff.v1",
+        "armor.helmet.v1",
+        "armor.torso.v1",
+        "armor.legs.v1",
+        "handwear.gauntlet.v1",
+        "boots.pair.v1",
+        "back.cloak.v1",
+      ],
+    },
+    {
+      poseTemplateId: "fist_guard_idle",
+      compatibleProfiles: [
+        "armor.helmet.v1",
+        "armor.torso.v1",
+        "armor.legs.v1",
+        "handwear.gauntlet.v1",
+        "boots.pair.v1",
+        "back.cloak.v1",
+      ],
+    },
+    {
+      poseTemplateId: "wand_book_cast",
+      compatibleProfiles: [
+        "weapon.wand.v1",
+        "offhand.book.v1",
+        "armor.helmet.v1",
+        "armor.torso.v1",
+        "armor.legs.v1",
         "handwear.gauntlet.v1",
         "boots.pair.v1",
         "back.cloak.v1",
@@ -208,7 +293,7 @@ const APPEARANCE_CATALOG = Object.freeze({
         bounds: [0, 0, 128, 140],
       },
       defaultLayers: ["head_back", "head_front"],
-      compatiblePoseTemplates: ["idle_default"],
+      compatiblePoseTemplates: ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "wand_book_cast"],
     },
     {
       appearanceId: "appearance.shield.round_wood.v1",
@@ -266,6 +351,55 @@ const APPEARANCE_CATALOG = Object.freeze({
       compatiblePoseTemplates: ["bow_draw"],
     },
     {
+      appearanceId: "appearance.weapon.training_staff.v1",
+      category: "staff",
+      slotId: "mainhand",
+      attachmentProfileId: "weapon.staff.v1",
+      assetId: "equipment_attachment_training_staff_proxy_v1",
+      cleanFile: "assets/weapons/transparent/training_staff_rgba.png",
+      itemAnchors: {
+        staff_grip: [32, 220],
+        staff_top: [32, 8],
+        staff_base: [32, 420],
+        bounds: [0, 0, 64, 432],
+      },
+      defaultLayer: "mainhand_weapon",
+      compatiblePoseTemplates: ["staff_stand"],
+    },
+    {
+      appearanceId: "appearance.weapon.apprentice_wand.v1",
+      category: "wand",
+      slotId: "mainhand",
+      attachmentProfileId: "weapon.wand.v1",
+      assetId: "equipment_attachment_apprentice_wand_proxy_v1",
+      cleanFile: "assets/weapons/transparent/apprentice_wand_rgba.png",
+      itemAnchors: {
+        grip: [24, 122],
+        tip: [24, 10],
+        focus: [24, 28],
+        bounds: [0, 0, 48, 166],
+      },
+      defaultLayer: "mainhand_weapon",
+      compatiblePoseTemplates: ["wand_book_cast"],
+    },
+    {
+      appearanceId: "appearance.offhand.apprentice_grimoire.v1",
+      category: "grimoire",
+      slotId: "offhand",
+      attachmentProfileId: "offhand.book.v1",
+      assetId: "equipment_attachment_apprentice_grimoire_proxy_v1",
+      cleanFile: "assets/offhands/transparent/apprentice_grimoire_rgba.png",
+      itemAnchors: {
+        grip: [24, 86],
+        book_center: [72, 74],
+        spine_top: [24, 16],
+        spine_bottom: [24, 132],
+        bounds: [0, 0, 132, 148],
+      },
+      defaultLayer: "offhand_front",
+      compatiblePoseTemplates: ["wand_book_cast"],
+    },
+    {
       appearanceId: "appearance.armor.leather_chest.v1",
       category: "armor_torso",
       slotId: "torso",
@@ -281,7 +415,33 @@ const APPEARANCE_CATALOG = Object.freeze({
         bounds: [0, 0, 256, 270],
       },
       defaultLayer: "armor_torso",
-      compatiblePoseTemplates: ["idle_default"],
+      compatiblePoseTemplates: ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "wand_book_cast"],
+    },
+    {
+      appearanceId: "appearance.legwear.leather_greaves.v1",
+      category: "armor_legs_pair",
+      slotIds: ["leg_left", "leg_right"],
+      attachmentProfileId: "armor.legs.v1",
+      assetId: "equipment_attachment_leather_leg_armor_proxy_v1",
+      cleanFile: "assets/appearances/transparent/leather_leg_armor_rgba.png",
+      itemAnchors: {
+        left: {
+          knee_lock: [48, 126],
+          hip_lock: [48, 20],
+          ankle_lock: [48, 248],
+          side_outer: [24, 136],
+          bounds: [0, 0, 96, 270],
+        },
+        right: {
+          knee_lock: [48, 126],
+          hip_lock: [48, 20],
+          ankle_lock: [48, 248],
+          side_outer: [72, 136],
+          bounds: [0, 0, 96, 270],
+        },
+      },
+      defaultLayer: "legwear_front",
+      compatiblePoseTemplates: ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "wand_book_cast"],
     },
     {
       appearanceId: "appearance.handwear.iron_gauntlets.v1",
@@ -305,7 +465,7 @@ const APPEARANCE_CATALOG = Object.freeze({
         },
       },
       defaultLayer: "handwear",
-      compatiblePoseTemplates: ["idle_default"],
+      compatiblePoseTemplates: ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "wand_book_cast"],
     },
     {
       appearanceId: "appearance.boots.swift.v1",
@@ -329,7 +489,7 @@ const APPEARANCE_CATALOG = Object.freeze({
         },
       },
       defaultLayer: "boots",
-      compatiblePoseTemplates: ["idle_default"],
+      compatiblePoseTemplates: ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "wand_book_cast"],
     },
     {
       appearanceId: "appearance.cloak.traveler.v1",
@@ -345,7 +505,7 @@ const APPEARANCE_CATALOG = Object.freeze({
         bounds: [0, 0, 220, 360],
       },
       defaultLayer: "back_cloak",
-      compatiblePoseTemplates: ["idle_default"],
+      compatiblePoseTemplates: ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "wand_book_cast"],
     },
   ],
 });
@@ -541,6 +701,132 @@ const MOTION_CATALOG = Object.freeze({
       ],
     },
     {
+      motionId: "staff_cast_v1",
+      defaultPoseTemplateId: "staff_stand",
+      frames: [
+        {
+          frameId: "attack_ready",
+          durationMs: 170,
+          anchorOffsets: {
+            Cast_Hand: [-18, -18],
+            Staff_Top: [0, -8],
+            Staff_Grip: [0, 0],
+            Staff_Base: [0, 0],
+          },
+          eventTags: ["windup", "mana_gather"],
+        },
+        {
+          frameId: "attack_hit",
+          durationMs: 130,
+          anchorOffsets: {
+            Cast_Hand: [20, -34],
+            Staff_Top: [10, -34],
+            Staff_Grip: [4, -6],
+            Staff_Base: [0, 0],
+          },
+          eventTags: ["damage_window", "vfx_spawn.staff_bolt"],
+        },
+        {
+          frameId: "attack_recover",
+          durationMs: 210,
+          anchorOffsets: {
+            Cast_Hand: [0, 0],
+            Staff_Top: [0, 0],
+            Staff_Grip: [0, 0],
+            Staff_Base: [0, 0],
+          },
+          eventTags: ["recover"],
+        },
+      ],
+    },
+    {
+      motionId: "fist_combo_v1",
+      defaultPoseTemplateId: "fist_guard_idle",
+      frames: [
+        {
+          frameId: "attack_ready",
+          durationMs: 110,
+          anchorOffsets: {
+            Fist_ScreenLeft: [-38, -12],
+            Fist_ScreenRight: [-10, -8],
+            Guard_Center: [-12, -10],
+            Wrist_ScreenLeft: [-18, -8],
+            Wrist_ScreenRight: [-6, -4],
+          },
+          eventTags: ["windup"],
+        },
+        {
+          frameId: "attack_hit",
+          durationMs: 90,
+          anchorOffsets: {
+            Fist_ScreenLeft: [72, 0],
+            Fist_ScreenRight: [22, -4],
+            Guard_Center: [30, -2],
+            Wrist_ScreenLeft: [48, 0],
+            Wrist_ScreenRight: [12, -4],
+          },
+          eventTags: ["damage_window", "vfx_spawn.fist_impact", "sfx.fist_hit"],
+        },
+        {
+          frameId: "attack_recover",
+          durationMs: 150,
+          anchorOffsets: {
+            Fist_ScreenLeft: [0, 0],
+            Fist_ScreenRight: [0, 0],
+            Guard_Center: [0, 0],
+            Wrist_ScreenLeft: [0, 0],
+            Wrist_ScreenRight: [0, 0],
+          },
+          eventTags: ["recover"],
+        },
+      ],
+    },
+    {
+      motionId: "wand_book_cast_v1",
+      defaultPoseTemplateId: "wand_book_cast",
+      frames: [
+        {
+          frameId: "attack_ready",
+          durationMs: 150,
+          anchorOffsets: {
+            Cast_Hand: [-16, -20],
+            Wand_Tip: [-10, -28],
+            Book_Grip: [-4, -4],
+            Book_Center: [-4, -8],
+            Book_Top: [-4, -10],
+            Book_Bottom: [-4, -4],
+          },
+          eventTags: ["windup", "mana_gather"],
+        },
+        {
+          frameId: "attack_hit",
+          durationMs: 140,
+          anchorOffsets: {
+            Cast_Hand: [36, -30],
+            Wand_Tip: [62, -60],
+            Book_Grip: [0, -10],
+            Book_Center: [0, -16],
+            Book_Top: [0, -18],
+            Book_Bottom: [0, -8],
+          },
+          eventTags: ["damage_window", "vfx_spawn.mana_bolt", "sfx.magic_cast"],
+        },
+        {
+          frameId: "attack_recover",
+          durationMs: 210,
+          anchorOffsets: {
+            Cast_Hand: [0, 0],
+            Wand_Tip: [0, 0],
+            Book_Grip: [0, 0],
+            Book_Center: [0, 0],
+            Book_Top: [0, 0],
+            Book_Bottom: [0, 0],
+          },
+          eventTags: ["recover"],
+        },
+      ],
+    },
+    {
       motionId: "hit_reaction_v1",
       defaultPoseTemplateId: "idle_default",
       frames: [
@@ -637,13 +923,17 @@ const ITEM_APPEARANCE_BY_ID = Object.freeze({
   rift_blade: "appearance.weapon.rusty_sword.v1",
   training_greatsword: "appearance.weapon.training_greatsword.v1",
   hunter_bow: "appearance.weapon.training_bow.v1",
+  apprentice_staff: "appearance.weapon.training_staff.v1",
+  apprentice_wand: "appearance.weapon.apprentice_wand.v1",
   round_wood_shield: "appearance.shield.round_wood.v1",
+  apprentice_grimoire: "appearance.offhand.apprentice_grimoire.v1",
   novice_helmet: "appearance.helmet.novice_iron.v1",
   sentinel_helmet: "appearance.helmet.novice_iron.v1",
   warden_crown: "appearance.helmet.novice_iron.v1",
   wolf_leather_armor: "appearance.armor.leather_chest.v1",
   tower_shield_armor: "appearance.armor.leather_chest.v1",
   ore_plate: "appearance.armor.leather_chest.v1",
+  wolf_leather_greaves: "appearance.legwear.leather_greaves.v1",
   worn_gloves: "appearance.handwear.iron_gauntlets.v1",
   rift_gauntlets: "appearance.handwear.iron_gauntlets.v1",
   swift_boots: "appearance.boots.swift.v1",
@@ -736,7 +1026,13 @@ function resolveAppearanceCatalog(assetRegistry) {
 function hasMappedAttachmentEquipment(equipmentState) {
   return Object.entries(equipmentState || {}).some(([sourceSlot, entry]) => {
     const itemId = entry?.itemId || "";
-    return Boolean(itemId && VISUAL_SLOT_BY_EQUIPMENT_SLOT[sourceSlot] && ITEM_APPEARANCE_BY_ID[itemId]);
+    const appearanceId = ITEM_APPEARANCE_BY_ID[itemId] || "";
+    const appearance = findRuntimeAppearance(appearanceId);
+    return Boolean(
+      itemId
+        && appearanceId
+        && (VISUAL_SLOT_BY_EQUIPMENT_SLOT[sourceSlot] || appearance?.slotIds?.length),
+    );
   });
 }
 
@@ -746,6 +1042,7 @@ function sampleEquipmentAttachmentState() {
     Offhand: { itemId: "round_wood_shield" },
     Helmet: { itemId: "novice_helmet" },
     Armor: { itemId: "wolf_leather_armor" },
+    LegArmor: { itemId: "wolf_leather_greaves" },
     Gloves: { itemId: "worn_gloves" },
     Boots: { itemId: "swift_boots" },
     Back: { itemId: "traveler_cloak" },
@@ -757,11 +1054,30 @@ function findRuntimeAppearance(appearanceId) {
 }
 
 function resolveRuntimePoseTemplateId(equippedAppearances) {
+  let hasMainhandWeapon = false;
+  let hasGauntlet = false;
+  let hasWand = false;
+  let hasBook = false;
   for (const equipped of equippedAppearances || []) {
     const appearance = findRuntimeAppearance(equipped.appearanceId);
     if (appearance?.attachmentProfileId === "weapon.two_hand.heavy.v1") return "great_weapon_guard";
     if (appearance?.attachmentProfileId === "weapon.bow.v1") return "bow_draw";
+    if (appearance?.attachmentProfileId === "weapon.staff.v1") return "staff_stand";
+    if (appearance?.attachmentProfileId === "weapon.wand.v1") {
+      hasWand = true;
+    }
+    if (appearance?.attachmentProfileId === "offhand.book.v1") {
+      hasBook = true;
+    }
+    if (appearance?.attachmentProfileId?.startsWith("weapon.") || appearance?.slotId === "mainhand") {
+      hasMainhandWeapon = true;
+    }
+    if (appearance?.attachmentProfileId === "handwear.gauntlet.v1") {
+      hasGauntlet = true;
+    }
   }
+  if (hasWand || (!hasMainhandWeapon && hasBook)) return "wand_book_cast";
+  if (!hasMainhandWeapon && hasGauntlet) return "fist_guard_idle";
   return "idle_default";
 }
 
@@ -787,6 +1103,29 @@ function resolveRuntimePoseTemplateAnchors(poseTemplateId, baseAnchors) {
     anchors.Arrow_Tip = [anchors.Bow_Grip[0] + 124, anchors.Bow_Grip[1] - 1];
     anchors.Bow_String_Top = [anchors.Bow_Grip[0] - 38, baseAnchors.Head_Top[1] + 54];
     anchors.Bow_String_Bottom = [anchors.Bow_Grip[0] - 36, baseAnchors.Hip_Center[1] - 6];
+  }
+
+  if (poseTemplateId === "staff_stand") {
+    anchors.Staff_Grip = [baseAnchors.Hand_ScreenLeft_Grip[0] - 20, baseAnchors.Chest_Center[1] + 168];
+    anchors.Staff_Top = [anchors.Staff_Grip[0] + 18, Math.max(38, baseAnchors.Head_Top[1] - 82)];
+    anchors.Staff_Base = [anchors.Staff_Grip[0] - 14, baseAnchors.Foot_ScreenLeft_Baseline[1] + 18];
+    anchors.Cast_Hand = [baseAnchors.Hand_ScreenRight_Grip[0] - 10, baseAnchors.Chest_Center[1] - 12];
+  }
+
+  if (poseTemplateId === "fist_guard_idle") {
+    const centerX = Math.round((baseAnchors.Shoulder_ScreenLeft[0] + baseAnchors.Shoulder_ScreenRight[0]) / 2);
+    anchors.Fist_ScreenLeft = [baseAnchors.Wrist_ScreenLeft[0] + 24, baseAnchors.Chest_Center[1] + 92];
+    anchors.Fist_ScreenRight = [baseAnchors.Wrist_ScreenRight[0] - 24, baseAnchors.Chest_Center[1] + 86];
+    anchors.Guard_Center = [centerX, baseAnchors.Chest_Center[1] + 88];
+  }
+
+  if (poseTemplateId === "wand_book_cast") {
+    anchors.Cast_Hand = [baseAnchors.Hand_ScreenLeft_Grip[0] - 18, baseAnchors.Chest_Center[1] + 18];
+    anchors.Wand_Tip = [anchors.Cast_Hand[0] + 58, anchors.Cast_Hand[1] - 96];
+    anchors.Book_Grip = [baseAnchors.Hand_ScreenRight_Grip[0] - 18, baseAnchors.Chest_Center[1] + 52];
+    anchors.Book_Center = [anchors.Book_Grip[0] + 46, anchors.Book_Grip[1] - 18];
+    anchors.Book_Top = [anchors.Book_Center[0], anchors.Book_Center[1] - 58];
+    anchors.Book_Bottom = [anchors.Book_Center[0], anchors.Book_Center[1] + 58];
   }
 
   return anchors;
@@ -834,6 +1173,9 @@ function resolveRuntimeMotionFrame(combatRuntime, now, poseTemplateId = "idle_de
 function resolveAttackRuntimeMotionId(poseTemplateId) {
   if (poseTemplateId === "great_weapon_guard") return "basic_attack_two_hand_heavy_v1";
   if (poseTemplateId === "bow_draw") return "bow_release_v1";
+  if (poseTemplateId === "staff_stand") return "staff_cast_v1";
+  if (poseTemplateId === "fist_guard_idle") return "fist_combo_v1";
+  if (poseTemplateId === "wand_book_cast") return "wand_book_cast_v1";
   return "basic_attack_one_hand_v1";
 }
 

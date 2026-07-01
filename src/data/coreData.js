@@ -13,6 +13,7 @@ export const slots = [
   "OffHand",
   "Helmet",
   "Armor",
+  "LegArmor",
   "Gloves",
   "Boots",
   "Necklace",

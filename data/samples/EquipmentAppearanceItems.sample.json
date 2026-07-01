@@ -67,7 +67,7 @@
         "bounds": [0, 0, 128, 140]
       },
       "defaultLayers": ["head_back", "head_front"],
-      "compatiblePoseTemplates": ["idle_default", "hit_reaction", "basic_attack_one_hand"],
+      "compatiblePoseTemplates": ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "hit_reaction", "basic_attack_one_hand"],
       "notes": "Split helmet image into front/back layers if it wraps around the head."
     },
     {
@@ -87,8 +87,37 @@
         "bounds": [0, 0, 256, 270]
       },
       "defaultLayer": "armor_torso",
-      "compatiblePoseTemplates": ["idle_default", "sword_shield_idle", "hit_reaction"],
+      "compatiblePoseTemplates": ["idle_default", "sword_shield_idle", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "hit_reaction"],
       "notes": "Torso armor follows Neck_Base, Chest_Center, Hip_Center, and both shoulders."
+    },
+    {
+      "appearanceId": "appearance.legwear.leather_greaves.v1",
+      "displayName": "Leather Leg Armor Appearance",
+      "category": "armor_legs_pair",
+      "slotIds": ["leg_left", "leg_right"],
+      "attachmentProfileId": "armor.legs.v1",
+      "assetId": "equipment_attachment_leather_leg_armor_proxy_v1",
+      "sourceFile": "assets/appearances/source/leather_leg_armor_source.png",
+      "cleanFile": "assets/appearances/transparent/leather_leg_armor_rgba.png",
+      "itemAnchors": {
+        "left": {
+          "knee_lock": [48, 126],
+          "hip_lock": [48, 20],
+          "ankle_lock": [48, 248],
+          "side_outer": [24, 136],
+          "bounds": [0, 0, 96, 270]
+        },
+        "right": {
+          "knee_lock": [48, 126],
+          "hip_lock": [48, 20],
+          "ankle_lock": [48, 248],
+          "side_outer": [72, 136],
+          "bounds": [0, 0, 96, 270]
+        }
+      },
+      "defaultLayer": "legwear_front",
+      "compatiblePoseTemplates": ["idle_default", "sword_shield_idle", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "hit_reaction"],
+      "notes": "One lower-armor equipment slot resolves into left and right leg attachment layers."
     },
     {
       "appearanceId": "appearance.handwear.iron_gauntlets.v1",
@@ -113,7 +142,7 @@
         }
       },
       "defaultLayer": "handwear",
-      "compatiblePoseTemplates": ["idle_default", "fist_guard_idle", "hit_reaction"],
+      "compatiblePoseTemplates": ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "hit_reaction"],
       "notes": "Gauntlets follow wrist, hand, and forearm anchors. They are not hand-held weapons."
     },
     {
@@ -139,7 +168,7 @@
         }
       },
       "defaultLayer": "boots",
-      "compatiblePoseTemplates": ["idle_default", "hit_reaction"],
+      "compatiblePoseTemplates": ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "hit_reaction"],
       "notes": "Boots follow knee and foot baseline anchors. Feet stay locked during idle and ordinary hit reaction."
     },
     {
@@ -157,7 +186,7 @@
         "bounds": [0, 0, 220, 360]
       },
       "defaultLayer": "back_cloak",
-      "compatiblePoseTemplates": ["idle_default", "hit_reaction"],
+      "compatiblePoseTemplates": ["idle_default", "great_weapon_guard", "bow_draw", "staff_stand", "fist_guard_idle", "hit_reaction"],
       "notes": "Cloaks stay behind the body and follow Neck_Base, Chest_Center, and Hip_Center."
     },
     {
@@ -222,6 +251,45 @@
       "defaultLayer": "mainhand_weapon",
       "compatiblePoseTemplates": ["staff_stand"],
       "notes": "Staff requires Staff_Grip, Staff_Top, and Staff_Base pose anchors."
+    },
+    {
+      "appearanceId": "appearance.weapon.apprentice_wand.v1",
+      "displayName": "Apprentice Wand Appearance",
+      "category": "wand",
+      "slotId": "mainhand",
+      "attachmentProfileId": "weapon.wand.v1",
+      "assetId": "equipment_attachment_apprentice_wand_proxy_v1",
+      "sourceFile": "assets/weapons/source/apprentice_wand_source.png",
+      "cleanFile": "assets/weapons/transparent/apprentice_wand_rgba.png",
+      "itemAnchors": {
+        "grip": [24, 122],
+        "tip": [24, 10],
+        "focus": [24, 28],
+        "bounds": [0, 0, 48, 166]
+      },
+      "defaultLayer": "mainhand_weapon",
+      "compatiblePoseTemplates": ["wand_book_cast"],
+      "notes": "Wand-book casting uses Cast_Hand and Wand_Tip instead of the ordinary sword grip line."
+    },
+    {
+      "appearanceId": "appearance.offhand.apprentice_grimoire.v1",
+      "displayName": "Apprentice Grimoire Appearance",
+      "category": "grimoire",
+      "slotId": "offhand",
+      "attachmentProfileId": "offhand.book.v1",
+      "assetId": "equipment_attachment_apprentice_grimoire_proxy_v1",
+      "sourceFile": "assets/offhands/source/apprentice_grimoire_source.png",
+      "cleanFile": "assets/offhands/transparent/apprentice_grimoire_rgba.png",
+      "itemAnchors": {
+        "grip": [24, 86],
+        "book_center": [72, 74],
+        "spine_top": [24, 16],
+        "spine_bottom": [24, 132],
+        "bounds": [0, 0, 132, 148]
+      },
+      "defaultLayer": "offhand_front",
+      "compatiblePoseTemplates": ["wand_book_cast"],
+      "notes": "Grimoires use a book support profile and should not reuse shield center offsets."
     }
   ]
 }

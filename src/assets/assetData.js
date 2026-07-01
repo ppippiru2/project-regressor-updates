@@ -771,6 +771,40 @@ export const ASSET_MANIFEST = {
       "notes": "Transparent proxy attachment sprite for staff-stand pose placement tests. Used only by weapon/class pose template validation until final equipment art is approved."
     },
     {
+      "assetId": "equipment_attachment_apprentice_wand_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/weapons/transparent/apprentice_wand_rgba.png",
+      "cleanFile": "assets/weapons/transparent/apprentice_wand_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "weapon",
+        "wand"
+      ],
+      "notes": "Transparent proxy attachment sprite for wand-book cast pose placement tests. Used only by weapon/class pose template validation until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_apprentice_grimoire_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/offhands/transparent/apprentice_grimoire_rgba.png",
+      "cleanFile": "assets/offhands/transparent/apprentice_grimoire_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "offhand",
+        "grimoire"
+      ],
+      "notes": "Transparent proxy attachment sprite for wand-book cast offhand placement tests. Used only by weapon/class pose template validation until final equipment art is approved."
+    },
+    {
       "assetId": "equipment_attachment_novice_iron_helmet_proxy_v1",
       "category": "equipment-attachment-proxy",
       "sourceFile": "assets/appearances/transparent/novice_iron_helmet_rgba.png",
@@ -803,6 +837,24 @@ export const ASSET_MANIFEST = {
         "torso"
       ],
       "notes": "Transparent proxy attachment sprite for torso armor placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
+    },
+    {
+      "assetId": "equipment_attachment_leather_leg_armor_proxy_v1",
+      "category": "equipment-attachment-proxy",
+      "sourceFile": "assets/appearances/transparent/leather_leg_armor_rgba.png",
+      "cleanFile": "assets/appearances/transparent/leather_leg_armor_rgba.png",
+      "webpFile": null,
+      "approved": false,
+      "useInGame": false,
+      "tags": [
+        "equipment",
+        "attachment",
+        "proxy",
+        "armor",
+        "legs",
+        "legwear"
+      ],
+      "notes": "Transparent proxy attachment sprite for lower armor placement. Used only by equipmentAttachmentPreview until final equipment art is approved."
     },
     {
       "assetId": "equipment_attachment_iron_gauntlets_proxy_v1",
@@ -925,6 +977,7 @@ export const ASSET_SLOTS = {
         "rusty_sword": "item_rusty_sword_icon_v1",
         "lucky_ring": "item_lucky_ring_icon_v1",
         "wolf_leather_armor": "item_wolf_leather_armor_icon_v1",
+        "wolf_leather_greaves": "item_wolf_leather_armor_icon_v1",
         "worn_gloves": "item_worn_gloves_icon_v1",
         "swift_boots": "item_swift_boots_icon_v1",
         "mana_necklace": "item_mana_necklace_icon_v1",
