@@ -1,4 +1,4 @@
-import { renderSaveSlotEditFinalApplyRunnerHandoffView } from "./saveSlotEditFinalApplyRunnerHandoffView.js?v=676";
+import { renderSaveSlotEditFinalApplyRunnerHandoffView } from "./saveSlotEditFinalApplyRunnerHandoffView.js?v=677";
 
 export function createSaveSlotEditFinalApplyRunnerHandoffRenderer(options = {}) {
   return function renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics) {

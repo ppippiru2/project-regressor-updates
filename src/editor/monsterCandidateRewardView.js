@@ -1,6 +1,6 @@
-import { tf } from "../localization/index.js?v=676";
-import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=676";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
+import { tf } from "../localization/index.js?v=677";
+import { editorChip, editorChipBlock } from "./editorChipBlockView.js?v=677";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
 
 export const MONSTER_CANDIDATE_REWARD_VIEW_VERSION = "monster-candidate-reward-view-v1";
 const MONSTER_CANDIDATE_CHIP_OPTIONS = { chipClass: "editor-chip" };

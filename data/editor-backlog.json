@@ -22,6 +22,8 @@
         "src/editor/editorBalanceTuningDetailFactory.js:createEditorBalanceTuningDetailRenderer",
         "src/editor/editorJsonLoader.js:fetchEditorJson",
         "src/editor/editorNavGroupState.js:createInitialCollapsedEditorNavGroupIds",
+        "src/editor/editorOverviewSectionsFactory.js:createEditorOverviewSections",
+        "src/editor/editorPanelDetailFactory.js:createEditorPanelDetailRenderer",
         "src/editor/editorPanelContentSections.js:createEditorPanelContentSections",
         "src/editor/editorPanelSelection.js:findEditorPanelById",
         "src/editor/editorScrollTargets.js:scrollEditorTargetIntoView",

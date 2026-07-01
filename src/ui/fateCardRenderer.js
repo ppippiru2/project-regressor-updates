@@ -1,10 +1,10 @@
-import { t, tf } from "../localization/index.js?v=676";
-import { FATE_CARD_BACK_IMAGE, resolveFateCardVisual } from "../data/fateCardVisualData.js?v=676";
-import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=676";
+import { t, tf } from "../localization/index.js?v=677";
+import { FATE_CARD_BACK_IMAGE, resolveFateCardVisual } from "../data/fateCardVisualData.js?v=677";
+import { resolveCardGradeAuraClass } from "../state/cardGradeDisplay.js?v=677";
 import {
   FATE_CARD_RENDER_MODES,
   resolveFateCardAuraTier,
-} from "../state/fateCardRoller.js?v=676";
+} from "../state/fateCardRoller.js?v=677";
 
 export function resolveFateCardRenderState(slot = {}, options = {}) {
   const mode = options.mode || FATE_CARD_RENDER_MODES.productionProgressiveHint;

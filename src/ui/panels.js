@@ -1,4 +1,4 @@
-import { t, tf } from "../localization/index.js?v=676";
+import { t, tf } from "../localization/index.js?v=677";
 
 export function setupCollapsiblePanels(uiState, saveUiState) {
   ensurePanelUiState(uiState);

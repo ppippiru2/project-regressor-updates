@@ -1,15 +1,15 @@
-import { createCombatVfxPlacementDetailRenderer, formatCombatVfxPlacement } from "./combatVfxPlacementAdapter.js?v=676";
+import { createCombatVfxPlacementDetailRenderer, formatCombatVfxPlacement } from "./combatVfxPlacementAdapter.js?v=677";
 import {
   COMBAT_VFX_CLASS_LABELS,
   COMBAT_VFX_EFFECT_LABELS,
   COMBAT_VFX_GENDER_LABELS,
   COMBAT_VFX_SIGNAL_LABELS,
-} from "./combatVfxPlacementText.js?v=676";
+} from "./combatVfxPlacementText.js?v=677";
 import {
   combatVfxMonsterSearchText,
   combatVfxPlayerSearchText,
   matchesCombatVfxFilter,
-} from "./combatVfxFilterModel.js?v=676";
+} from "./combatVfxFilterModel.js?v=677";
 
 export function createEditorCombatVfxDetailRenderer(options = {}) {
   const renderDetailSection = options.renderDetailSection || createCombatVfxPlacementDetailRenderer();

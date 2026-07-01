@@ -1,4 +1,4 @@
-import { renderRuntimeVfxBulkIntakePreview } from "./runtimeVfxBulkIntakeView.js?v=676";
+import { renderRuntimeVfxBulkIntakePreview } from "./runtimeVfxBulkIntakeView.js?v=677";
 
 export function createRuntimeVfxBulkIntakeRenderer(options = {}) {
   return function renderRuntimeVfxBulkIntake(preview, detailText = {}) {

@@ -1,4 +1,4 @@
-import { renderSaveSlotDraftPayloadView } from "./saveSlotDraftPayloadView.js?v=676";
+import { renderSaveSlotDraftPayloadView } from "./saveSlotDraftPayloadView.js?v=677";
 
 export function createSaveSlotDraftPayloadRenderer(options = {}) {
   return function renderSaveSlotDraftPayloadPreview(diagnostics) {

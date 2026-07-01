@@ -1,4 +1,4 @@
-import { editorChipBlock } from "./editorChipBlockView.js?v=676";
+import { editorChipBlock } from "./editorChipBlockView.js?v=677";
 
 export const CONTENT_BULK_CHIP_BLOCK_VIEW_VERSION = "content-bulk-chip-block-view-v1";
 

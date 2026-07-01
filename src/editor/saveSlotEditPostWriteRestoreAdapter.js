@@ -1,4 +1,4 @@
-import { renderSaveSlotEditPostWriteRestoreContractView } from "./saveSlotEditPostWriteRestoreContractView.js?v=676";
+import { renderSaveSlotEditPostWriteRestoreContractView } from "./saveSlotEditPostWriteRestoreContractView.js?v=677";
 
 export function createSaveSlotEditPostWriteRestoreContractRenderer(options = {}) {
   return function renderSaveSlotEditPostWriteRestoreContractPreview(diagnostics) {

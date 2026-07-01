@@ -1,4 +1,4 @@
-import { renderContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsalView.js?v=676";
+import { renderContentBulkPatchRestoreRehearsal } from "./contentBulkPatchRestoreRehearsalView.js?v=677";
 
 export function createContentBulkPatchRestoreRehearsalRenderer(options = {}) {
   return function renderContentBulkPatchRestoreRehearsalSection(detailText = {}) {

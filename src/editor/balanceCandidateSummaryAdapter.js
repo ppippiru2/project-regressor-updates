@@ -2,7 +2,7 @@ import {
   renderActiveBalanceCandidateSummary,
   renderBalanceDomainSummaries,
   renderBalanceTuningCandidates,
-} from "./balanceCandidateSummaryView.js?v=676";
+} from "./balanceCandidateSummaryView.js?v=677";
 
 export function createActiveBalanceCandidateSummaryRenderer() {
   return function renderActiveBalanceCandidateSummarySection(

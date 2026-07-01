@@ -1,8 +1,8 @@
-import { tf } from "../localization/index.js?v=676";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=676";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=676";
-import { editorChip } from "./editorChipBlockView.js?v=676";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
+import { tf } from "../localization/index.js?v=677";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=677";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=677";
+import { editorChip } from "./editorChipBlockView.js?v=677";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
 
 export const CONTENT_BULK_PATCH_MANUAL_APPLY_CHECKLIST_VIEW_VERSION = "content-bulk-patch-manual-apply-checklist-view-v1";
 

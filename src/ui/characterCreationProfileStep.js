@@ -1,9 +1,9 @@
-import { getLocaleText } from "../localization/index.js?v=676";
-import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "../state/profile.js?v=676";
+import { getLocaleText } from "../localization/index.js?v=677";
+import { PROFILE_IMAGE_CUSTOMIZATION_BRIDGE_ID } from "../state/profile.js?v=677";
 import {
   portraitCropImageHtml,
   portraitFrameInlineStyle,
-} from "./portraitFrameView.js?v=676";
+} from "./portraitFrameView.js?v=677";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;

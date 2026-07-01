@@ -1,137 +1,131 @@
-import { applyDomLocalization } from "../localization/domText.js?v=676";
-import { getLocaleText, tf } from "../localization/index.js?v=676";
-import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=676";
-import { createRetargetPreviewDetailRenderer } from "./retargetPreviewDetailAdapter.js?v=676";
-import { createRetargetFilterStore } from "./retargetFilterStore.js?v=676";
-import {
-  createEditorAssetSectionsRenderer,
-  createEditorBacklogCardsRenderer,
-  createEditorPrototypeCardsRenderer,
-  createEditorSaveKeyCardsRenderer,
-} from "./editorOverviewListAdapter.js?v=676&cachebust=asset-section-collapse";
+import { applyDomLocalization } from "../localization/domText.js?v=677";
+import { getLocaleText, tf } from "../localization/index.js?v=677";
+import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=677";
+import { createRetargetPreviewDetailRenderer } from "./retargetPreviewDetailAdapter.js?v=677";
+import { createRetargetFilterStore } from "./retargetFilterStore.js?v=677";
+import { createEditorOverviewSections } from "./editorOverviewSectionsFactory.js?v=677";
 import {
   createEditorNavigationGroupsRenderer,
   createEditorPanelDetailShellRenderer,
-} from "./editorShellAdapter.js?v=676&cachebust=676";
-import { createEditorStatusLabelFormatter } from "./editorStatusLabels.js?v=676";
-import { downloadJson } from "./editorDownload.js?v=676";
-import { getEditorElements } from "./editorDomElements.js?v=676";
-import { setElementText } from "./editorDomText.js?v=676";
-import { renderEditorErrorPanel } from "./editorErrorPanel.js?v=676";
-import { fetchEditorJson } from "./editorJsonLoader.js?v=676";
-import { renderEditorMetricCard } from "./editorMetricView.js?v=676";
+} from "./editorShellAdapter.js?v=677&cachebust=677";
+import { createEditorStatusLabelFormatter } from "./editorStatusLabels.js?v=677";
+import { downloadJson } from "./editorDownload.js?v=677";
+import { getEditorElements } from "./editorDomElements.js?v=677";
+import { setElementText } from "./editorDomText.js?v=677";
+import { renderEditorErrorPanel } from "./editorErrorPanel.js?v=677";
+import { fetchEditorJson } from "./editorJsonLoader.js?v=677";
+import { renderEditorMetricCard } from "./editorMetricView.js?v=677";
 import {
   createInitialCollapsedEditorNavGroupIds,
   toggleEditorNavGroupCollapsed,
-} from "./editorNavGroupState.js?v=676&cachebust=676";
-import { createEditorPanelContentSections } from "./editorPanelContentSections.js?v=676";
-import { findEditorPanelById, getEditorPanels, getInitialEditorPanelId } from "./editorPanelSelection.js?v=676";
+} from "./editorNavGroupState.js?v=677&cachebust=677";
+import { createEditorPanelDetailRenderer } from "./editorPanelDetailFactory.js?v=677";
+import { getEditorPanels, getInitialEditorPanelId } from "./editorPanelSelection.js?v=677";
 import {
   scrollEditorBalanceCandidateSummaryIntoView,
   scrollEditorContentBulkPackageIntoView,
-} from "./editorScrollTargets.js?v=676&cachebust=676";
-import { bindEditorEvents } from "./editorEventBindings.js?v=676";
-import { renderEditorSummaryPanel } from "./editorSummaryPanel.js?v=676";
-import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=676";
-import { createBalanceTuningDetailRenderer } from "./balanceTuningDetailAdapter.js?v=676";
+} from "./editorScrollTargets.js?v=677&cachebust=677";
+import { bindEditorEvents } from "./editorEventBindings.js?v=677";
+import { renderEditorSummaryPanel } from "./editorSummaryPanel.js?v=677";
+import { BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=677";
+import { createBalanceTuningDetailRenderer } from "./balanceTuningDetailAdapter.js?v=677";
 import {
   createActiveBalanceCandidateSummaryRenderer,
   createBalanceDomainSummariesRenderer,
   createBalanceTuningCandidatesRenderer,
-} from "./balanceCandidateSummaryAdapter.js?v=676";
+} from "./balanceCandidateSummaryAdapter.js?v=677";
 import {
   createBalanceGroupRowRenderer,
   createBalancePacingSnapshotRenderer,
   createBalanceRelatedChecksRenderer,
-} from "./balanceRegistryDetailAdapter.js?v=676";
+} from "./balanceRegistryDetailAdapter.js?v=677";
 import {
   createBalanceFilterControlsRenderer,
   createEmptyBalanceRowsRenderer,
-} from "./balanceFilterControlsAdapter.js?v=676";
+} from "./balanceFilterControlsAdapter.js?v=677";
 import {
   createBalanceCandidateFilter,
   findBalanceTuningCandidate,
-} from "./balanceFilterModel.js?v=676";
-import { createBalanceDetailFilterStore } from "./balanceFilterStore.js?v=676";
-import { createEditorBalanceTuningDetailRenderer } from "./editorBalanceTuningDetailFactory.js?v=676";
-import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=676";
-import { createContentBulkPatchAutomationPlanRenderer } from "./contentBulkPatchAutomationPlanAdapter.js?v=676";
-import { createContentBulkPatchApplyGatePlanRenderer } from "./contentBulkPatchApplyGatePlanAdapter.js?v=676";
-import { createContentBulkPatchBackupPlanRenderer } from "./contentBulkPatchBackupPlanAdapter.js?v=676";
-import { createContentBulkPatchRestoreRehearsalRenderer } from "./contentBulkPatchRestoreRehearsalAdapter.js?v=676";
-import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=676";
-import { createContentBulkPatchDryRunRenderer } from "./contentBulkPatchDryRunAdapter.js?v=676";
-import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=676";
-import { createContentBulkPatchIntakeContractRenderer } from "./contentBulkPatchIntakeContractAdapter.js?v=676";
-import { createContentBulkPatchPackageInputStore } from "./contentBulkPatchPackageInputStore.js?v=676";
+} from "./balanceFilterModel.js?v=677";
+import { createBalanceDetailFilterStore } from "./balanceFilterStore.js?v=677";
+import { createEditorBalanceTuningDetailRenderer } from "./editorBalanceTuningDetailFactory.js?v=677";
+import { createContentBulkPatchAutomationPlan } from "./contentBulkPatchAutomationPlan.js?v=677";
+import { createContentBulkPatchAutomationPlanRenderer } from "./contentBulkPatchAutomationPlanAdapter.js?v=677";
+import { createContentBulkPatchApplyGatePlanRenderer } from "./contentBulkPatchApplyGatePlanAdapter.js?v=677";
+import { createContentBulkPatchBackupPlanRenderer } from "./contentBulkPatchBackupPlanAdapter.js?v=677";
+import { createContentBulkPatchRestoreRehearsalRenderer } from "./contentBulkPatchRestoreRehearsalAdapter.js?v=677";
+import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImporter.js?v=677";
+import { createContentBulkPatchDryRunRenderer } from "./contentBulkPatchDryRunAdapter.js?v=677";
+import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=677";
+import { createContentBulkPatchIntakeContractRenderer } from "./contentBulkPatchIntakeContractAdapter.js?v=677";
+import { createContentBulkPatchPackageInputStore } from "./contentBulkPatchPackageInputStore.js?v=677";
 import {
   CONTENT_BULK_PACKAGE_TEMPLATE_FILE_NAME,
   createContentBulkPatchPackageInputController,
   createContentBulkPatchPackageTemplatePayload,
-} from "./contentBulkPatchPackageInputController.js?v=676&cachebust=676";
-import { createContentBulkPatchPackageRuntimeState } from "./contentBulkPatchPackageRuntimeState.js?v=676";
-import { createEditorContentBulkPackageActions } from "./editorContentBulkPackageActions.js?v=676";
-import { createContentBulkPatchPackageAdapterPreviewRenderer } from "./contentBulkPatchPackageAdapterPreviewAdapter.js?v=676";
-import { createContentBulkPackageOverviewRenderer } from "./contentBulkPackageOverviewAdapter.js?v=676";
-import { createContentBulkFilterControlsRenderer } from "./contentBulkFilterControlsAdapter.js?v=676";
+} from "./contentBulkPatchPackageInputController.js?v=677&cachebust=677";
+import { createContentBulkPatchPackageRuntimeState } from "./contentBulkPatchPackageRuntimeState.js?v=677";
+import { createEditorContentBulkPackageActions } from "./editorContentBulkPackageActions.js?v=677";
+import { createContentBulkPatchPackageAdapterPreviewRenderer } from "./contentBulkPatchPackageAdapterPreviewAdapter.js?v=677";
+import { createContentBulkPackageOverviewRenderer } from "./contentBulkPackageOverviewAdapter.js?v=677";
+import { createContentBulkFilterControlsRenderer } from "./contentBulkFilterControlsAdapter.js?v=677";
 import {
   CONTENT_BULK_DOMAIN_FILTERS,
   contentBulkActiveFilterSummary,
   contentBulkPatchDomainLabel,
   matchesContentBulkFilterRow,
-} from "./contentBulkFilterModel.js?v=676";
-import { createContentBulkFilterStore } from "./contentBulkFilterStore.js?v=676";
-import { createContentBulkFilteredCandidatePreviewRenderer } from "./contentBulkFilteredCandidatePreviewAdapter.js?v=676";
-import { createLootSkillBulkIntakeRenderer } from "./lootSkillBulkIntakeAdapter.js?v=676";
-import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=676";
-import { createContentBulkPatchDiffExportRenderer } from "./contentBulkPatchDiffExportAdapter.js?v=676";
-import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=676";
-import { createContentBulkPatchFilePatchDraftRenderer } from "./contentBulkPatchFilePatchDraftAdapter.js?v=676";
-import { createContentBulkPatchFilePatchDraftExportRenderer } from "./contentBulkPatchFilePatchDraftExportAdapter.js?v=676";
-import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=676";
-import { createContentBulkPatchManualApplyChecklistRenderer } from "./contentBulkPatchManualApplyChecklistAdapter.js?v=676";
-import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=676";
-import { createContentBulkPatchStagedImportRenderer } from "./contentBulkPatchStagedImportAdapter.js?v=676";
-import { createContentBulkMassApplyReadinessRenderer } from "./contentBulkMassApplyReadinessAdapter.js?v=676";
-import { createContentBulkStagedApplyRehearsalRenderer } from "./contentBulkStagedApplyRehearsalAdapter.js?v=676";
-import { createContentBulkDomainApplyReadinessRenderer } from "./contentBulkDomainApplyReadinessAdapter.js?v=676";
-import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=676";
+} from "./contentBulkFilterModel.js?v=677";
+import { createContentBulkFilterStore } from "./contentBulkFilterStore.js?v=677";
+import { createContentBulkFilteredCandidatePreviewRenderer } from "./contentBulkFilteredCandidatePreviewAdapter.js?v=677";
+import { createLootSkillBulkIntakeRenderer } from "./lootSkillBulkIntakeAdapter.js?v=677";
+import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.js?v=677";
+import { createContentBulkPatchDiffExportRenderer } from "./contentBulkPatchDiffExportAdapter.js?v=677";
+import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=677";
+import { createContentBulkPatchFilePatchDraftRenderer } from "./contentBulkPatchFilePatchDraftAdapter.js?v=677";
+import { createContentBulkPatchFilePatchDraftExportRenderer } from "./contentBulkPatchFilePatchDraftExportAdapter.js?v=677";
+import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=677";
+import { createContentBulkPatchManualApplyChecklistRenderer } from "./contentBulkPatchManualApplyChecklistAdapter.js?v=677";
+import { createContentBulkPatchStagedImportPreview } from "./contentBulkPatchStagedImportPreview.js?v=677";
+import { createContentBulkPatchStagedImportRenderer } from "./contentBulkPatchStagedImportAdapter.js?v=677";
+import { createContentBulkMassApplyReadinessRenderer } from "./contentBulkMassApplyReadinessAdapter.js?v=677";
+import { createContentBulkStagedApplyRehearsalRenderer } from "./contentBulkStagedApplyRehearsalAdapter.js?v=677";
+import { createContentBulkDomainApplyReadinessRenderer } from "./contentBulkDomainApplyReadinessAdapter.js?v=677";
+import { createCombatVfxPlacementPreview } from "./combatVfxPlacementPreview.js?v=677";
 import {
   formatCombatVfxPlacement,
-} from "./combatVfxPlacementAdapter.js?v=676";
-import { COMBAT_VFX_DETAIL_TEXT } from "./combatVfxPlacementText.js?v=676";
-import { createEditorCombatVfxDetailRenderer } from "./editorCombatVfxDetailFactory.js?v=676&cachebust=676";
-import { createCombatVfxFilterStore } from "./combatVfxFilterStore.js?v=676";
-import { createRuntimeVfxBulkIntakeRenderer } from "./runtimeVfxBulkIntakeAdapter.js?v=676";
-import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=676";
-import { createMonsterCandidateRewardRenderer } from "./monsterCandidateRewardAdapter.js?v=676";
-import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=676";
-import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=676";
+} from "./combatVfxPlacementAdapter.js?v=677";
+import { COMBAT_VFX_DETAIL_TEXT } from "./combatVfxPlacementText.js?v=677";
+import { createEditorCombatVfxDetailRenderer } from "./editorCombatVfxDetailFactory.js?v=677&cachebust=677";
+import { createCombatVfxFilterStore } from "./combatVfxFilterStore.js?v=677";
+import { createRuntimeVfxBulkIntakeRenderer } from "./runtimeVfxBulkIntakeAdapter.js?v=677";
+import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=677";
+import { createMonsterCandidateRewardRenderer } from "./monsterCandidateRewardAdapter.js?v=677";
+import { createMonsterCandidatePromotionChecklist } from "./monsterCandidatePromotionChecklist.js?v=677";
+import { createMonsterCandidateLivePromotionPlan } from "./monsterCandidateLivePromotionPlan.js?v=677";
 import {
   createMonsterCandidateLivePromotionPlanRenderer,
   createMonsterCandidatePromotionChecklistRenderer,
-} from "./monsterCandidatePromotionAdapter.js?v=676";
-import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=676";
-import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=676";
+} from "./monsterCandidatePromotionAdapter.js?v=677";
+import { createMonsterCandidateLivePatchDraft } from "./monsterCandidateLivePatchDraft.js?v=677";
+import { createMonsterCandidateBulkPatchAutomationPreview } from "./monsterCandidateBulkPatchAutomation.js?v=677";
 import {
   createMonsterCandidateBulkPatchAutomationRenderer,
   createMonsterCandidateLivePatchDraftRenderer,
-} from "./monsterCandidatePatchAdapter.js?v=676";
+} from "./monsterCandidatePatchAdapter.js?v=677";
 import {
   createMonsterSpriteReadyConnectionPatchPlan,
   createMonsterSpriteReadyConnectionReview,
   createMonsterSpriteSlotReport,
-} from "./monsterSpriteSlotReport.js?v=676";
-import { MONSTER_SPRITE_REPORT_TEXT } from "./monsterSpriteSlotReportText.js?v=676";
-import { createMonsterSpriteSlotReportRenderer } from "./monsterSpriteSlotReportAdapter.js?v=676";
-import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=676";
-import { createMonsterRuntimeIntegrationRenderer } from "./monsterRuntimeIntegrationAdapter.js?v=676";
-import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=676";
-import { createMonsterRuntimeBulkIntakeRenderer } from "./monsterRuntimeBulkIntakeAdapter.js?v=676";
-import { createInitialPlayerSetupPreview } from "./initialPlayerSetupPreview.js?v=676";
-import { createInitialPlayerSetupPreviewRenderer } from "./initialPlayerSetupPreviewAdapter.js?v=676";
-import { createEditorSaveSlotDiagnosticsRenderer } from "./editorSaveSlotDiagnosticsFactory.js?v=676&cachebust=676";
-import { createEditorSaveSummary } from "./editorSaveSummaryFactory.js?v=676&cachebust=676";
+} from "./monsterSpriteSlotReport.js?v=677";
+import { MONSTER_SPRITE_REPORT_TEXT } from "./monsterSpriteSlotReportText.js?v=677";
+import { createMonsterSpriteSlotReportRenderer } from "./monsterSpriteSlotReportAdapter.js?v=677";
+import { createMonsterRuntimeIntegrationPreview } from "./monsterRuntimeIntegrationPreview.js?v=677";
+import { createMonsterRuntimeIntegrationRenderer } from "./monsterRuntimeIntegrationAdapter.js?v=677";
+import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntakePreview.js?v=677";
+import { createMonsterRuntimeBulkIntakeRenderer } from "./monsterRuntimeBulkIntakeAdapter.js?v=677";
+import { createInitialPlayerSetupPreview } from "./initialPlayerSetupPreview.js?v=677";
+import { createInitialPlayerSetupPreviewRenderer } from "./initialPlayerSetupPreviewAdapter.js?v=677";
+import { createEditorSaveSlotDiagnosticsRenderer } from "./editorSaveSlotDiagnosticsFactory.js?v=677&cachebust=677";
 import {
   clearContentBulkQueryFilter,
   createBalanceScopeFilter,
@@ -139,22 +133,21 @@ import {
   createContentBulkDomainFilter,
   createContentBulkStateFilter,
   createRetargetKindFilter,
-} from "./editorFilterActionState.js?v=676&cachebust=676";
+} from "./editorFilterActionState.js?v=677&cachebust=677";
 import {
   BALANCE_FILTER_STORAGE_KEY,
   COMBAT_VFX_FILTER_STORAGE_KEY,
   CONTENT_BULK_FILTER_STORAGE_KEY,
   CONTENT_BULK_PACKAGE_INPUT_STORAGE_KEY,
-  EDITOR_SAVE_KEYS,
   RETARGET_FILTER_STORAGE_KEY,
-} from "./saveSlotDiagnosticKeys.js?v=676";
+} from "./saveSlotDiagnosticKeys.js?v=677";
 import {
   readEditorLocalStorageJson,
   removeEditorLocalStorageItem,
   writeEditorLocalStorageJson,
-} from "./editorLocalStorage.js?v=676";
+} from "./editorLocalStorage.js?v=677";
 
-const EDITOR_VERSION = "676";
+const EDITOR_VERSION = "677";
 const MANIFEST_URL = `data/editor-manifest.json?v=${EDITOR_VERSION}`;
 const BACKLOG_URL = `data/editor-backlog.json?v=${EDITOR_VERSION}`;
 const LOCALE_TEXT = getLocaleText();
@@ -198,10 +191,6 @@ const renderRuntimeVfxBulkIntakeSection = createRuntimeVfxBulkIntakeRenderer({
   matchesFilterRow: matchesContentBulkFilterRow,
   formatPlacement: (placement) => formatCombatVfxPlacement(placement),
 });
-const renderEditorAssetSectionsSection = createEditorAssetSectionsRenderer();
-const renderEditorSaveKeyCardsSection = createEditorSaveKeyCardsRenderer();
-const renderEditorBacklogCardsSection = createEditorBacklogCardsRenderer();
-const renderEditorPrototypeCardsSection = createEditorPrototypeCardsRenderer();
 const renderEditorNavigationGroupsSection = createEditorNavigationGroupsRenderer();
 const renderEditorPanelDetailShellSection = createEditorPanelDetailShellRenderer();
 const renderBalanceTuningDetailSection = createBalanceTuningDetailRenderer();
@@ -426,9 +415,35 @@ const MONSTER_SPRITE_READY_CONNECTION_REVIEW = createMonsterSpriteReadyConnectio
 );
 
 const elements = getEditorElements(document);
+const EDITOR_OVERVIEW_SECTIONS = createEditorOverviewSections({
+  elements,
+  getManifest: () => manifest,
+  getBacklog: () => backlog,
+  getText: () => EDITOR_TEXT,
+  statusLabel: EDITOR_STATUS_LABEL,
+  translate: tf,
+  editorVersion: EDITOR_VERSION,
+});
 const CONTENT_BULK_PATCH_PACKAGE_ACTIONS = createEditorContentBulkPackageActions({
   runtimeState: CONTENT_BULK_PATCH_PACKAGE_RUNTIME_STATE,
   getPanelDetail: () => elements.panelDetail,
+});
+const renderPanelDetail = createEditorPanelDetailRenderer({
+  getManifest: () => manifest,
+  getActivePanelId: () => activePanelId,
+  getPanelDetailElement: () => elements.panelDetail,
+  getText: () => EDITOR_TEXT,
+  renderPanelDetailShell: renderEditorPanelDetailShellSection,
+  statusLabel: EDITOR_STATUS_LABEL,
+  contentRenderers: {
+    retargetDetail: renderRetargetPreviewDetail,
+    balanceTuningDetail: renderBalanceTuningDetail,
+    combatVfxDetail: renderCombatVfxPlacementDetail,
+    initialPlayerSetup: renderInitialPlayerSetupPreview,
+    monsterSpriteReport: renderMonsterSpriteSlotReport,
+    monsterRuntimePreview: renderMonsterRuntimeIntegrationPreview,
+    saveSlotDiagnostics: renderSaveSlotDiagnostics,
+  },
 });
 
 applyDomLocalization(document);
@@ -452,7 +467,7 @@ async function initEditor() {
         },
         renderNav,
         renderPanelDetail,
-        renderSaveKeys,
+        renderSaveKeys: EDITOR_OVERVIEW_SECTIONS.renderSaveKeys,
         updateRetargetQuery: (value) => {
           retargetDetailFilter = {
             ...retargetDetailFilter,
@@ -532,7 +547,7 @@ async function initEditor() {
       },
       downloads: {
         downloadJson,
-        createSaveSummary,
+        createSaveSummary: EDITOR_OVERVIEW_SECTIONS.createSaveSummary,
         getManifest: () => manifest,
         getBacklog: () => backlog,
         contentBulkPackageTemplateFileName: CONTENT_BULK_PACKAGE_TEMPLATE_FILE_NAME,
@@ -560,10 +575,10 @@ function renderEditor() {
   });
   renderNav();
   renderPanelDetail();
-  renderAssets();
-  renderSaveKeys();
-  renderPrototypeList();
-  renderBacklog();
+  EDITOR_OVERVIEW_SECTIONS.renderAssets();
+  EDITOR_OVERVIEW_SECTIONS.renderSaveKeys();
+  EDITOR_OVERVIEW_SECTIONS.renderPrototypeList();
+  EDITOR_OVERVIEW_SECTIONS.renderBacklog();
 }
 
 function renderNav() {
@@ -579,33 +594,6 @@ function renderNav() {
 
 function toggleCollapsedNavGroup(groupId) {
   collapsedNavGroupIds = toggleEditorNavGroupCollapsed(collapsedNavGroupIds, groupId);
-}
-
-function renderPanelDetail() {
-  const panel = findEditorPanelById(manifest, activePanelId);
-  if (!panel) {
-    elements.panelDetail.innerHTML = renderEditorPanelDetailShellSection({
-      panel,
-      noPanelText: EDITOR_TEXT.noPanel,
-    });
-    return;
-  }
-  elements.panelDetail.innerHTML = renderEditorPanelDetailShellSection({
-    panel,
-    noPanelText: EDITOR_TEXT.noPanel,
-    detailTitles: EDITOR_TEXT.detailTitles || {},
-    emptyValue: EDITOR_TEXT.save.empty,
-    statusLabel: EDITOR_STATUS_LABEL,
-    contentSections: createEditorPanelContentSections(panel, {
-      retargetDetail: renderRetargetPreviewDetail,
-      balanceTuningDetail: renderBalanceTuningDetail,
-      combatVfxDetail: renderCombatVfxPlacementDetail,
-      initialPlayerSetup: renderInitialPlayerSetupPreview,
-      monsterSpriteReport: renderMonsterSpriteSlotReport,
-      monsterRuntimePreview: renderMonsterRuntimeIntegrationPreview,
-      saveSlotDiagnostics: renderSaveSlotDiagnostics,
-    }),
-  });
 }
 
 function renderInitialPlayerSetupPreview() {
@@ -643,43 +631,6 @@ function renderRetargetPreviewDetail() {
     detailText,
     filter: retargetDetailFilter,
     expandedRows: expandedRetargetRows,
-  });
-}
-
-function renderAssets() {
-  const imageSlots = manifest.assetSlots?.image || [];
-  const audioSlots = manifest.assetSlots?.audio || [];
-  elements.assetGrid.innerHTML = renderEditorAssetSectionsSection({
-    assetTypes: EDITOR_TEXT.assetTypes,
-    imageSlots,
-    audioSlots,
-  });
-}
-
-function renderSaveKeys() {
-  const summary = createSaveSummary();
-  elements.saveGrid.innerHTML = renderEditorSaveKeyCardsSection(summary.keys, EDITOR_TEXT.save);
-}
-
-function renderBacklog() {
-  const items = backlog.items || [];
-  elements.backlogList.innerHTML = renderEditorBacklogCardsSection(items, {
-    statusLabel: EDITOR_STATUS_LABEL,
-  });
-}
-
-function renderPrototypeList() {
-  const items = manifest.prototypeListMemory || [];
-  elements.prototypeList.innerHTML = renderEditorPrototypeCardsSection(items);
-}
-
-function createSaveSummary() {
-  return createEditorSaveSummary({
-    keys: EDITOR_SAVE_KEYS,
-    saveText: EDITOR_TEXT.save,
-    locale: EDITOR_TEXT.locale,
-    translate: tf,
-    editorVersion: EDITOR_VERSION,
   });
 }
 

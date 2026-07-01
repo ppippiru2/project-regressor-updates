@@ -1,9 +1,9 @@
-import { t } from "../localization/index.js?v=676";
-import { createSystemNotice, playerMeta, systemStatusText } from "./systemNotice.js?v=676";
+import { t } from "../localization/index.js?v=677";
+import { createSystemNotice, playerMeta, systemStatusText } from "./systemNotice.js?v=677";
 
 let lastSignature = "";
 
-export { createSystemNotice } from "./systemNotice.js?v=676";
+export { createSystemNotice } from "./systemNotice.js?v=677";
 
 export function renderSystemWindow({ log, dialogueRecords, player, playerProfile, region, inCombat }) {
   const windowElement = document.getElementById("system-window");

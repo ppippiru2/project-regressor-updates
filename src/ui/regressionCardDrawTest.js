@@ -1,15 +1,15 @@
-import { t, tf } from "../localization/index.js?v=676";
+import { t, tf } from "../localization/index.js?v=677";
 import {
   REGRESSION_CARD_DRAW_TEST_PRESETS,
   createRegressionCardCandidateSlots,
   createRegressionCardDrawTestSnapshot,
   normalizeRegressionCardDrawTestState,
-} from "../state/regressionCardDraw.js?v=676";
+} from "../state/regressionCardDraw.js?v=677";
 import {
   FATE_CARD_RENDER_MODES,
   getFateCardHintLevel,
-} from "../state/fateCardRoller.js?v=676";
-import { renderFateCardButton } from "./fateCardRenderer.js?v=676";
+} from "../state/fateCardRoller.js?v=677";
+import { renderFateCardButton } from "./fateCardRenderer.js?v=677";
 
 export function renderRegressionCardDrawTest(testState = {}, cards = []) {
   const container = document.getElementById("regression-card-draw-test");

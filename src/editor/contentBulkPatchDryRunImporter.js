@@ -2,8 +2,8 @@ import {
   createContentBulkPatchIntakeContract,
   createContentBulkPatchTemplate,
   validateContentBulkPatchBatch,
-} from "./contentBulkPatchIntakeContract.js?v=676";
-import { createContentBulkPatchValidationIssueSummary } from "./contentBulkPatchIssueSummary.js?v=676";
+} from "./contentBulkPatchIntakeContract.js?v=677";
+import { createContentBulkPatchValidationIssueSummary } from "./contentBulkPatchIssueSummary.js?v=677";
 
 export const CONTENT_BULK_PATCH_DRY_RUN_IMPORTER_VERSION = "content-bulk-patch-dry-run-importer-v1";
 

@@ -1,13 +1,13 @@
 import {
   COMBAT_VFX_PREVIEW_EFFECT_TYPES,
   createCombatVfxPlacementPreview,
-} from "./combatVfxPlacementPreview.js?v=676";
+} from "./combatVfxPlacementPreview.js?v=677";
 import {
   MONSTER_EFFECT_PLACEMENTS_BY_MOTION_PROFILE,
   MONSTER_EFFECT_TYPE_PLACEMENT_MODIFIERS_BY_MOTION_PROFILE,
-} from "../config/monsterBattleSpritePresets.js?v=676";
-import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=676";
-import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=676";
+} from "../config/monsterBattleSpritePresets.js?v=677";
+import { createContentBulkRowContractReview } from "./contentBulkRowContractReview.js?v=677";
+import { createStagedContractSummary } from "./contentBulkStagedContractSummary.js?v=677";
 
 export const RUNTIME_VFX_BULK_INTAKE_PREVIEW_VERSION = "runtime-vfx-bulk-intake-preview-v1";
 

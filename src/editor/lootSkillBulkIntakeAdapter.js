@@ -1,4 +1,4 @@
-import { renderLootSkillBulkIntakePreview } from "./lootSkillBulkIntakeView.js?v=676";
+import { renderLootSkillBulkIntakePreview } from "./lootSkillBulkIntakeView.js?v=677";
 
 export function createLootSkillBulkIntakeRenderer(options = {}) {
   return function renderLootSkillBulkIntake(preview, detailText = {}) {

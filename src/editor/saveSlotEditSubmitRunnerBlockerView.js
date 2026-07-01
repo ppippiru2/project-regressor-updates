@@ -1,4 +1,4 @@
-import { editorChip } from "./editorChipBlockView.js?v=676";
+import { editorChip } from "./editorChipBlockView.js?v=677";
 
 const SAVE_EDIT_SUBMIT_RUNNER_BLOCKER_CHIP_OPTIONS = { chipClass: "editor-chip" };
 

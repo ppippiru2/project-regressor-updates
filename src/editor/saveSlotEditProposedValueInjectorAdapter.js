@@ -1,4 +1,4 @@
-import { renderSaveSlotEditProposedValueInjectorView } from "./saveSlotEditProposedValueInjectorView.js?v=676";
+import { renderSaveSlotEditProposedValueInjectorView } from "./saveSlotEditProposedValueInjectorView.js?v=677";
 
 export function createSaveSlotEditProposedValueInjectorRenderer(options = {}) {
   return function renderSaveSlotEditProposedValueInjectorPreview(diagnostics) {

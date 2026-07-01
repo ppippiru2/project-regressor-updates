@@ -1,4 +1,4 @@
-import { renderContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklistView.js?v=676";
+import { renderContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklistView.js?v=677";
 
 export function createContentBulkPatchManualApplyChecklistRenderer(options = {}) {
   return function renderContentBulkPatchManualApplyChecklistSection(detailText = {}) {

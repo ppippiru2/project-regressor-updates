@@ -1,18 +1,18 @@
 import { addInventoryItem } from "./inventory.js";
-import { droppedEquipmentInsight } from "./lootInsight.js?v=676";
-import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=676";
+import { droppedEquipmentInsight } from "./lootInsight.js?v=677";
+import { applyMonsterRewards, markRegionCompleted, regionExpMultiplier, rollMonsterDrops } from "./rewards.js?v=677";
 import {
   claimFirstCodexRecordGuide,
   claimFirstLootDropGuide,
   claimForgottenGodRemnantGuide,
   claimRegionCoreEventCompletionGuide,
-} from "./tutorialGuidance.js?v=676";
-import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=676";
-import { t, tf } from "../localization/index.js?v=676";
+} from "./tutorialGuidance.js?v=677";
+import { TUTORIAL_FORGOTTEN_REMNANT_EVENT_ID } from "./tutorialUnlocks.js?v=677";
+import { t, tf } from "../localization/index.js?v=677";
 import {
   claimDialogueEventById,
   claimDialogueEventsForTrigger,
-} from "../story/dialogueEventRuntime.js?v=676";
+} from "../story/dialogueEventRuntime.js?v=677";
 
 export function applyMonsterDefeatRewards(state, monster, context) {
   const { player, region, getItemName, getItem, equipmentState, developerOptions = {} } = context;

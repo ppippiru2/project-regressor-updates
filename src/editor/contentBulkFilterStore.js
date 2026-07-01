@@ -2,7 +2,7 @@ import {
   normalizeContentBulkFilterDomain,
   normalizeContentBulkFilterState,
   normalizeContentBulkSearchQuery,
-} from "./contentBulkFilterModel.js?v=676";
+} from "./contentBulkFilterModel.js?v=677";
 
 const EMPTY_CONTENT_BULK_FILTER = Object.freeze({
   state: "all",

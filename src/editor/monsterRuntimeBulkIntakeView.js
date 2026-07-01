@@ -1,14 +1,14 @@
-import { tf } from "../localization/index.js?v=676";
+import { tf } from "../localization/index.js?v=677";
 import {
   CONTENT_BULK_ROW_TARGET_SCOPES,
   createContentBulkRowTargetId,
-} from "./contentBulkPackageOverview.js?v=676";
-import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=676";
-import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=676";
-import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=676";
-import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=676";
-import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=676";
-import { renderEditorSummaryCard } from "./editorMetricView.js?v=676";
+} from "./contentBulkPackageOverview.js?v=677";
+import { contentBulkChipBlock } from "./contentBulkChipBlockView.js?v=677";
+import { contentBulkFallbackLabel } from "./contentBulkFilterModel.js?v=677";
+import { contentBulkIssueList } from "./contentBulkIssueSummaryView.js?v=677";
+import { renderContentBulkRowContractReviewChip } from "./contentBulkRowContractReviewView.js?v=677";
+import { renderContentBulkStagedContractSummary } from "./contentBulkStagedContractSummaryView.js?v=677";
+import { renderEditorSummaryCard } from "./editorMetricView.js?v=677";
 
 export const MONSTER_RUNTIME_BULK_INTAKE_VIEW_VERSION = "monster-runtime-bulk-intake-view-v1";
 

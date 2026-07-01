@@ -1,4 +1,4 @@
-import { STARTER_TRAIT_BONUSES } from "../balance/playerGrowthBalance.js?v=676";
+import { STARTER_TRAIT_BONUSES } from "../balance/playerGrowthBalance.js?v=677";
 
 const STARTER_CARD_TRAIT_IDS = {
   starter_weapon_sense: "lower_weapon_mastery",

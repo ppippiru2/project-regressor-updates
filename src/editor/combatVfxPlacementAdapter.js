@@ -1,7 +1,7 @@
 import {
   formatCombatVfxPlacement,
   renderCombatVfxPlacementDetailView,
-} from "./combatVfxPlacementView.js?v=676";
+} from "./combatVfxPlacementView.js?v=677";
 
 export { formatCombatVfxPlacement };
 

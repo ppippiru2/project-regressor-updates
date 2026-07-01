@@ -1,6 +1,6 @@
-import { getLocaleText, tf } from "../localization/index.js?v=676";
-import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=676";
-import { renderDiceSprite } from "./diceSpriteRenderer.js?v=676";
+import { getLocaleText, tf } from "../localization/index.js?v=677";
+import { INITIAL_CREATION_STAT_BALANCE } from "../balance/playerGrowthBalance.js?v=677";
+import { renderDiceSprite } from "./diceSpriteRenderer.js?v=677";
 
 const TEXT = getLocaleText();
 const CREATION_TEXT = TEXT.characterCreation;
