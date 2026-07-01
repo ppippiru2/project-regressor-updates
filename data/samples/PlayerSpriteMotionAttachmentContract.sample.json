@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-01",
+  "status": "draft_motion_attachment_contract",
+  "purpose": "Locks which player body anchors, equipment attachment profiles, and frame groups must stay connected before idle, attack, hit, and future class sprites are approved.",
+  "basisFiles": {
+    "bodySkeletonPoints": "data/samples/PlayerBodySkeletonPoints.sample.json",
+    "equipmentAttachmentMotion": "data/samples/EquipmentAttachmentMotion.sample.json",
+    "weaponClassPoseTemplates": "data/samples/WeaponClassPoseTemplates.sample.json",
+    "weaponClassMotionFrames": "data/samples/WeaponClassMotionFrames.sample.json",
+    "runtimeContinuityGate": "build-scripts/check-player-equipment-motion-attachment-continuity.mjs"
+  },
+  "globalRules": [
+    "Generated source sprites and pixel sprites must keep equipment attached to explicit anchors, not to visual bounding boxes.",
+    "Standing idle, guard, attack, and ordinary hit frames keep both foot baselines locked unless a future movement template explicitly unlocks them.",
+    "Two-handed weapons, bows, and two-handed staves disable the live OffHand slot and must not include offhand attachment profiles.",
+    "OffHand shield, book, or secondary weapon contracts must expose the screen-right hand or forearm support anchor before runtime enablement.",
+    "Runtime-covered contracts must be protected by player equipment motion attachment continuity checks before generated sprites are promoted."
+  ],
+  "attachmentTrackRules": [
+    {
+      "trackId": "mainhand.one_hand",
+      "profileId": "weapon.one_hand.mainhand.v1",
+      "layers": ["mainhand_weapon"],
+      "requiredAnchors": ["Elbow_ScreenLeft", "Wrist_ScreenLeft", "Hand_ScreenLeft_Grip"],
+      "followPolicy": "frame_transform"
+    },
+    {
+      "trackId": "offhand.shield_or_book",
+      "profileId": "shield.offhand.round.v1",
+      "layers": ["offhand_back", "offhand_front"],
+      "requiredAnchors": ["Elbow_ScreenRight", "Wrist_ScreenRight", "Hand_ScreenRight_Grip"],
+      "followPolicy": "frame_transform"
+    },
+    {
+      "trackId": "mainhand.two_hand_heavy",
+      "profileId": "weapon.two_hand.heavy.v1",
+      "layers": ["mainhand_weapon"],
+      "requiredAnchors": ["TwoHand_LowerGrip", "TwoHand_UpperGrip", "Weapon_Tip", "Weapon_Back_End", "Mass_Center"],
+      "followPolicy": "pose_specific_frame_transform"
+    },
+    {
+      "trackId": "mainhand.bow",
+      "profileId": "weapon.bow.v1",
+      "layers": ["mainhand_weapon"],
+      "requiredAnchors": ["Bow_Grip", "Draw_Hand", "Arrow_Nock", "Arrow_Tip", "Bow_String_Top", "Bow_String_Bottom"],
+      "followPolicy": "pose_specific_frame_transform"
+    },
+    {
+      "trackId": "mainhand.staff",
+      "profileId": "weapon.staff.v1",
+      "layers": ["mainhand_weapon"],
+      "requiredAnchors": ["Staff_Grip", "Staff_Top", "Staff_Base", "Cast_Hand"],
+      "followPolicy": "pose_specific_frame_transform"
+    },
+    {
+      "trackId": "armor.core",
+      "profileId": "armor.torso.v1",
+      "layers": ["armor_torso"],
+      "requiredAnchors": ["Neck_Base", "Chest_Center", "Hip_Center", "Shoulder_ScreenLeft", "Shoulder_ScreenRight"],
+      "followPolicy": "core_body_transform"
+    },
+    {
+      "trackId": "armor.head",
+      "profileId": "armor.helmet.v1",
+      "layers": ["head_back", "head_front"],
+      "requiredAnchors": ["Head_Top", "Face_Center", "Neck_Base"],
+      "followPolicy": "head_transform"
+    },
+    {
+      "trackId": "handwear.gauntlets",
+      "profileId": "handwear.gauntlet.v1",
+      "layers": ["handwear"],
+      "requiredAnchors": ["Wrist_ScreenLeft", "Wrist_ScreenRight", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Forearm_ScreenLeft_Outer", "Forearm_ScreenRight_Outer"],
+      "followPolicy": "hand_transform"
+    },
+    {
+      "trackId": "boots.pair",
+      "profileId": "boots.pair.v1",
+      "layers": ["boots"],
+      "requiredAnchors": ["Knee_ScreenLeft", "Knee_ScreenRight", "Foot_ScreenLeft_Baseline", "Foot_ScreenRight_Baseline"],
+      "followPolicy": "foot_baseline_lock"
+    },
+    {
+      "trackId": "back.cloak",
+      "profileId": "back.cloak.v1",
+      "layers": ["back_cloak"],
+      "requiredAnchors": ["Neck_Base", "Chest_Center", "Hip_Center"],
+      "followPolicy": "core_body_transform"
+    }
+  ],
+  "motionContracts": [
+    {
+      "contractId": "idle_default_equipment_v1",
+      "runtimeStatus": "runtime_covered",
+      "poseTemplateId": "idle_default",
+      "motionId": "idle_loop_v1",
+      "frameIds": ["idle_low", "idle_breathe_up", "idle_return"],
+      "damageWindowFrameId": "",
+      "footPolicy": "locked",
+      "offHandPolicy": "allowed",
+      "requiredProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Head_Top", "Face_Center", "Neck_Base", "Chest_Center", "Hip_Center", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Foot_ScreenLeft_Baseline", "Foot_ScreenRight_Baseline"],
+      "coverageGateIds": ["player_attachment_runtime_coverage", "player_equipment_motion_attachment_continuity"],
+      "approvalBlockers": []
+    },
+    {
+      "contractId": "sword_shield_attack_v1",
+      "runtimeStatus": "runtime_covered",
+      "poseTemplateId": "sword_shield_idle",
+      "motionId": "sword_shield_slash_v1",
+      "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrameId": "attack_hit",
+      "footPolicy": "locked",
+      "offHandPolicy": "allowed",
+      "requiredProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Elbow_ScreenLeft", "Elbow_ScreenRight", "Wrist_ScreenLeft", "Wrist_ScreenRight"],
+      "coverageGateIds": ["player_equipment_motion_attachment_continuity", "weapon_class_motion_frame_report"],
+      "approvalBlockers": []
+    },
+    {
+      "contractId": "hit_reaction_equipment_v1",
+      "runtimeStatus": "runtime_covered",
+      "poseTemplateId": "idle_default",
+      "motionId": "hit_reaction_v1",
+      "frameIds": ["hit_back", "hit_return"],
+      "damageWindowFrameId": "",
+      "footPolicy": "locked",
+      "offHandPolicy": "allowed",
+      "requiredProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Head_Top", "Neck_Base", "Chest_Center", "Hip_Center", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Foot_ScreenLeft_Baseline", "Foot_ScreenRight_Baseline"],
+      "coverageGateIds": ["player_equipment_motion_attachment_continuity"],
+      "approvalBlockers": []
+    },
+    {
+      "contractId": "two_hand_heavy_attack_v1",
+      "runtimeStatus": "pose_contract_only",
+      "poseTemplateId": "great_weapon_guard",
+      "motionId": "great_weapon_sweep_v1",
+      "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrameId": "attack_hit",
+      "footPolicy": "locked",
+      "offHandPolicy": "disabled",
+      "requiredProfiles": ["weapon.two_hand.heavy.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["TwoHand_LowerGrip", "TwoHand_UpperGrip", "Weapon_Tip", "Weapon_Back_End", "Mass_Center", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip"],
+      "coverageGateIds": ["weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
+      "approvalBlockers": ["runtime attachment mapping for weapon.two_hand.heavy.v1 is not enabled yet"]
+    },
+    {
+      "contractId": "bow_attack_v1",
+      "runtimeStatus": "pose_contract_only",
+      "poseTemplateId": "bow_draw",
+      "motionId": "bow_release_v1",
+      "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrameId": "attack_hit",
+      "footPolicy": "locked",
+      "offHandPolicy": "disabled",
+      "requiredProfiles": ["weapon.bow.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Bow_Grip", "Draw_Hand", "Arrow_Nock", "Arrow_Tip", "Bow_String_Top", "Bow_String_Bottom"],
+      "coverageGateIds": ["weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
+      "approvalBlockers": ["runtime attachment mapping for weapon.bow.v1 is not enabled yet"]
+    },
+    {
+      "contractId": "staff_attack_v1",
+      "runtimeStatus": "pose_contract_only",
+      "poseTemplateId": "staff_stand",
+      "motionId": "staff_cast_v1",
+      "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrameId": "attack_hit",
+      "footPolicy": "locked",
+      "offHandPolicy": "disabled",
+      "requiredProfiles": ["weapon.staff.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Staff_Grip", "Staff_Top", "Staff_Base", "Cast_Hand", "Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip"],
+      "coverageGateIds": ["weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
+      "approvalBlockers": ["runtime attachment mapping for weapon.staff.v1 is not enabled yet"]
+    },
+    {
+      "contractId": "fist_gauntlet_attack_v1",
+      "runtimeStatus": "pose_contract_only",
+      "poseTemplateId": "fist_guard_idle",
+      "motionId": "fist_combo_v1",
+      "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrameId": "attack_hit",
+      "footPolicy": "locked",
+      "offHandPolicy": "none",
+      "requiredProfiles": ["handwear.gauntlet.v1", "armor.helmet.v1", "armor.torso.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Fist_ScreenLeft", "Fist_ScreenRight", "Wrist_ScreenLeft", "Wrist_ScreenRight", "Elbow_ScreenLeft", "Elbow_ScreenRight", "Guard_Center"],
+      "coverageGateIds": ["weapon_class_pose_template_report", "weapon_class_motion_frame_report"],
+      "approvalBlockers": ["runtime attachment mapping for fist pose handwear offsets is not enabled yet"]
+    },
+    {
+      "contractId": "wand_book_cast_v1",
+      "runtimeStatus": "waiting_pose_template",
+      "poseTemplateId": "wand_book_cast",
+      "motionId": "wand_book_cast_v1",
+      "frameIds": ["attack_ready", "attack_hit", "attack_recover"],
+      "damageWindowFrameId": "attack_hit",
+      "footPolicy": "locked",
+      "offHandPolicy": "allowed",
+      "requiredProfiles": ["weapon.one_hand.mainhand.v1", "shield.offhand.round.v1", "armor.helmet.v1", "armor.torso.v1", "handwear.gauntlet.v1", "boots.pair.v1", "back.cloak.v1"],
+      "requiredAnchors": ["Hand_ScreenLeft_Grip", "Hand_ScreenRight_Grip", "Cast_Hand", "Chest_Center", "Face_Center"],
+      "coverageGateIds": ["player_sprite_motion_attachment_contract"],
+      "approvalBlockers": ["wand_book_cast pose template is not authored yet", "book/grimoire-specific offhand attachment profile is not authored yet", "wand_book_cast_v1 frame offsets are not authored yet"]
+    }
+  ]
+}

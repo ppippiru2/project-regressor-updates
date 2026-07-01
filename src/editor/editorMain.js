@@ -2,7 +2,6 @@ import { applyDomLocalization } from "../localization/domText.js?v=675";
 import { getLocaleText, tf } from "../localization/index.js?v=675";
 import { createMurimRetargetPreview } from "../ui/renderRetargetPreview.js?v=675";
 import { createRetargetPreviewDetailRenderer } from "./retargetPreviewDetailAdapter.js?v=675";
-import { normalizeRetargetKind } from "./retargetFilterModel.js?v=675";
 import { createRetargetFilterStore } from "./retargetFilterStore.js?v=675";
 import {
   createEditorAssetSectionsRenderer,
@@ -31,6 +30,7 @@ import {
   scrollEditorBalanceCandidateSummaryIntoView,
   scrollEditorContentBulkPackageIntoView,
 } from "./editorScrollTargets.js?v=675&cachebust=675";
+import { handleEditorSearchInputEvent } from "./editorSearchInputHandlers.js?v=675&cachebust=675";
 import { renderEditorSummaryPanel } from "./editorSummaryPanel.js?v=675";
 import { BALANCE_TUNING_DOMAIN_SUMMARIES, BALANCE_TUNING_GROUPS } from "../balance/balanceTuningRegistry.js?v=675";
 import { createBalanceTuningPreviewRows } from "./balanceTuningPreview.js?v=675";
@@ -53,7 +53,6 @@ import {
   createBalanceCandidateFilter,
   findBalanceTuningCandidate,
   matchesBalanceDetailFilter,
-  normalizeBalanceScope,
   selectedBalanceTuningCandidate,
 } from "./balanceFilterModel.js?v=675";
 import { createBalanceDetailFilterStore } from "./balanceFilterStore.js?v=675";
@@ -69,11 +68,19 @@ import { createContentBulkPatchDryRunPreview } from "./contentBulkPatchDryRunImp
 import { createContentBulkPatchDryRunRenderer } from "./contentBulkPatchDryRunAdapter.js?v=675";
 import { createContentBulkPatchIntakeContract } from "./contentBulkPatchIntakeContract.js?v=675";
 import { createContentBulkPatchIntakeContractRenderer } from "./contentBulkPatchIntakeContractAdapter.js?v=675";
-import {
-  createContentBulkPatchPackageAdapterPreview,
-  createContentBulkPatchPackageAdapterTemplate,
-} from "./contentBulkPatchPackageAdapter.js?v=675";
 import { createContentBulkPatchPackageInputStore } from "./contentBulkPatchPackageInputStore.js?v=675";
+import {
+  CONTENT_BULK_PACKAGE_TEMPLATE_FILE_NAME,
+  createContentBulkPatchFilePatchDraftExportFromPackageInput,
+  createContentBulkPatchPackageAppliedInput,
+  createContentBulkPatchPackageDraftInput,
+  createContentBulkPatchPackageFileInput,
+  createContentBulkPatchPackagePreviewFromInput,
+  createContentBulkPatchPackageReadErrorInput,
+  createContentBulkPatchPackageSampleInput,
+  createContentBulkPatchPackageTemplatePayload,
+  createRuntimeVfxBulkIntakePreviewFromPackageInput,
+} from "./contentBulkPatchPackageInputActions.js?v=675&cachebust=675";
 import { createContentBulkPatchPackageAdapterPreviewRenderer } from "./contentBulkPatchPackageAdapterPreviewAdapter.js?v=675";
 import { createContentBulkPackageOverview } from "./contentBulkPackageOverview.js?v=675";
 import { createContentBulkPackageOverviewRenderer } from "./contentBulkPackageOverviewAdapter.js?v=675";
@@ -84,8 +91,6 @@ import {
   contentBulkPatchDomainLabel,
   createContentBulkFilterCounts,
   matchesContentBulkFilterRow,
-  normalizeContentBulkFilterDomain,
-  normalizeContentBulkFilterState,
 } from "./contentBulkFilterModel.js?v=675";
 import { createContentBulkFilterStore } from "./contentBulkFilterStore.js?v=675";
 import { createContentBulkFilteredCandidatePreview } from "./contentBulkFilteredCandidatePreview.js?v=675";
@@ -96,7 +101,6 @@ import { createContentBulkPatchDiffExport } from "./contentBulkPatchDiffExport.j
 import { createContentBulkPatchDiffExportRenderer } from "./contentBulkPatchDiffExportAdapter.js?v=675";
 import { createContentBulkPatchFilePatchDraft } from "./contentBulkPatchFilePatchDraft.js?v=675";
 import { createContentBulkPatchFilePatchDraftRenderer } from "./contentBulkPatchFilePatchDraftAdapter.js?v=675";
-import { createContentBulkPatchFilePatchDraftExport } from "./contentBulkPatchFilePatchDraftExport.js?v=675";
 import { createContentBulkPatchFilePatchDraftExportRenderer } from "./contentBulkPatchFilePatchDraftExportAdapter.js?v=675";
 import { createContentBulkPatchManualApplyChecklist } from "./contentBulkPatchManualApplyChecklist.js?v=675";
 import { createContentBulkPatchManualApplyChecklistRenderer } from "./contentBulkPatchManualApplyChecklistAdapter.js?v=675";
@@ -122,13 +126,8 @@ import {
   combatVfxMonsterSearchText,
   combatVfxPlayerSearchText,
   matchesCombatVfxFilter,
-  normalizeCombatVfxKind,
 } from "./combatVfxFilterModel.js?v=675";
 import { createCombatVfxFilterStore } from "./combatVfxFilterStore.js?v=675";
-import {
-  createRuntimeVfxBulkIntakePreview,
-  createRuntimeVfxBulkIntakeTemplate,
-} from "./runtimeVfxBulkIntakePreview.js?v=675";
 import { createRuntimeVfxBulkIntakeRenderer } from "./runtimeVfxBulkIntakeAdapter.js?v=675";
 import { createMonsterCandidateRewardPreview } from "./monsterCandidateRewardPreview.js?v=675";
 import { createMonsterCandidateRewardRenderer } from "./monsterCandidateRewardAdapter.js?v=675";
@@ -157,8 +156,16 @@ import { createMonsterRuntimeBulkIntakePreview } from "./monsterRuntimeBulkIntak
 import { createMonsterRuntimeBulkIntakeRenderer } from "./monsterRuntimeBulkIntakeAdapter.js?v=675";
 import { createInitialPlayerSetupPreview } from "./initialPlayerSetupPreview.js?v=675";
 import { createInitialPlayerSetupPreviewRenderer } from "./initialPlayerSetupPreviewAdapter.js?v=675";
-import { createSaveSlotDiagnosticsPanelRenderer } from "./saveSlotDiagnosticsPanelAdapter.js?v=675";
+import { createEditorSaveSlotDiagnosticsRenderer } from "./editorSaveSlotDiagnosticsFactory.js?v=675&cachebust=675";
 import { createEditorSaveSummary } from "./editorSaveSummaryFactory.js?v=675&cachebust=675";
+import {
+  clearContentBulkQueryFilter,
+  createBalanceScopeFilter,
+  createCombatVfxKindFilter,
+  createContentBulkDomainFilter,
+  createContentBulkStateFilter,
+  createRetargetKindFilter,
+} from "./editorFilterActionState.js?v=675&cachebust=675";
 import {
   BALANCE_FILTER_STORAGE_KEY,
   COMBAT_VFX_FILTER_STORAGE_KEY,
@@ -166,51 +173,7 @@ import {
   CONTENT_BULK_PACKAGE_INPUT_STORAGE_KEY,
   EDITOR_SAVE_KEYS,
   RETARGET_FILTER_STORAGE_KEY,
-  SAVE_SLOT_DIAGNOSTIC_KEYS,
-  SAVE_SLOT_DIAGNOSTIC_NO_ACTIVE,
-  SAVE_SLOT_DIAGNOSTIC_SLOT_IDS,
 } from "./saveSlotDiagnosticKeys.js?v=675";
-import { createSaveSlotDiagnosticFormatters } from "./saveSlotDiagnosticFormatters.js?v=675";
-import { createSaveSlotDiagnosticsSectionRenderers } from "./saveSlotDiagnosticsSectionRendererRegistry.js?v=675";
-import { createSaveSlotValidationPlan } from "./saveSlotValidationPlanModel.js?v=675";
-import { createSaveSlotValidationPlanRenderer } from "./saveSlotValidationPlanAdapter.js?v=675";
-import { createSaveSlotDraftPayloadPreview as createSaveSlotDraftPayloadPreviewModel } from "./saveSlotDraftPayloadModel.js?v=675";
-import { createSaveSlotDraftPayloadRenderer } from "./saveSlotDraftPayloadAdapter.js?v=675";
-import { createSaveSlotEditPreviewComposition } from "./saveSlotEditPreviewCompositionModel.js?v=675";
-import { createSaveSlotDraftDiffSummaryRenderer } from "./saveSlotDraftDiffSummaryAdapter.js?v=675";
-import { createSaveSlotApplyGateChecklistRenderer } from "./saveSlotApplyGateChecklistAdapter.js?v=675";
-import { createSaveSlotRecoveryRehearsalRenderer } from "./saveSlotRecoveryRehearsalAdapter.js?v=675";
-import { createSaveSlotEditInputSchemaRenderer } from "./saveSlotEditInputSchemaAdapter.js?v=675";
-import { createSaveSlotEditValidationMatrixRenderer } from "./saveSlotEditValidationMatrixAdapter.js?v=675";
-import { createSaveSlotEditRuleDrilldownRenderer } from "./saveSlotEditRuleDrilldownAdapter.js?v=675";
-import { createSaveSlotEditSamplePayloadRenderer } from "./saveSlotEditSamplePayloadAdapter.js?v=675";
-import { createSaveSlotEditValidatorDryRunRenderer } from "./saveSlotEditValidatorDryRunAdapter.js?v=675";
-import { createSaveSlotEditValidatorRegistryRenderer } from "./saveSlotEditValidatorRegistryAdapter.js?v=675";
-import { createSaveSlotEditValidatorResultRenderer } from "./saveSlotEditValidatorResultAdapter.js?v=675";
-import { createSaveSlotEditValidatorExecutableDryRunRenderer } from "./saveSlotEditValidatorExecutableDryRunAdapter.js?v=675";
-import { createSaveSlotEditProposedValueInjectorRenderer } from "./saveSlotEditProposedValueInjectorAdapter.js?v=675";
-import { createSaveSlotEditDryRunSampleComparatorRenderer } from "./saveSlotEditDryRunSampleComparatorAdapter.js?v=675";
-import { createSaveSlotEditSampleBridgeBlockerRenderer } from "./saveSlotEditSampleBridgeBlockerAdapter.js?v=675";
-import { createSaveSlotEditProducedResultBridgeRenderer } from "./saveSlotEditProducedResultBridgeAdapter.js?v=675";
-import { createSaveSlotEditBridgeTransitionRenderer } from "./saveSlotEditBridgeTransitionAdapter.js?v=675";
-import { createSaveSlotEditValidatorResultSourceAdapterPlanRenderer } from "./saveSlotEditValidatorResultSourceAdapterPlanAdapter.js?v=675";
-import { createSaveSlotEditSelectedSourceHandoffRenderer } from "./saveSlotEditSelectedSourceHandoffAdapter.js?v=675";
-import { createSaveSlotEditAdapterRunnerPreflightRenderer } from "./saveSlotEditAdapterRunnerPreflightAdapter.js?v=675";
-import { createSaveSlotEditConfirmationSourceSelectionRenderer } from "./saveSlotEditConfirmationSourceSelectionAdapter.js?v=675";
-import { createSaveSlotEditConfirmationInputShellRenderer } from "./saveSlotEditConfirmationInputShellAdapter.js?v=675";
-import { createSaveSlotEditConfirmationMatchReviewRenderer } from "./saveSlotEditConfirmationMatchReviewAdapter.js?v=675";
-import { createSaveSlotEditSubmitRunnerBlockerRenderer } from "./saveSlotEditSubmitRunnerBlockerAdapter.js?v=675";
-import { createSaveSlotEditFinalApplyRunnerHandoffRenderer } from "./saveSlotEditFinalApplyRunnerHandoffAdapter.js?v=675";
-import { createSaveSlotEditApplyRunnerPayloadShapeRenderer } from "./saveSlotEditApplyRunnerPayloadShapeAdapter.js?v=675";
-import { createSaveSlotEditPayloadBridgeCompatibilityRenderer } from "./saveSlotEditPayloadBridgeCompatibilityAdapter.js?v=675";
-import { createSaveSlotEditValidatorApplyGateBridgeRenderer } from "./saveSlotEditValidatorApplyGateBridgeAdapter.js?v=675";
-import { createSaveSlotEditCompatibilityConfirmationRollupRenderer } from "./saveSlotEditCompatibilityConfirmationRollupAdapter.js?v=675";
-import { createSaveSlotEditValidatorConfirmationPreflightRenderer } from "./saveSlotEditValidatorConfirmationPreflightAdapter.js?v=675";
-import { createSaveSlotEditConfirmationInputContractRenderer } from "./saveSlotEditConfirmationInputContractAdapter.js?v=675";
-import { createSaveSlotEditConfirmationRunnerHandoffRenderer } from "./saveSlotEditConfirmationRunnerHandoffAdapter.js?v=675";
-import { createSaveSlotEditWriterPayloadCheckpointRenderer } from "./saveSlotEditWriterPayloadCheckpointAdapter.js?v=675";
-import { createSaveSlotEditPostWriteRestoreContractRenderer } from "./saveSlotEditPostWriteRestoreAdapter.js?v=675";
-import { createSaveSlotEditWriterEnablementRiskRenderer } from "./saveSlotEditWriterEnablementRiskAdapter.js?v=675";
 import {
   readEditorLocalStorageJson,
   removeEditorLocalStorageItem,
@@ -385,317 +348,11 @@ const BALANCE_DETAIL_FILTER_STORE = createBalanceDetailFilterStore({
   writeJson: writeEditorLocalStorageJson,
   removeItem: removeEditorLocalStorageItem,
 });
-const SAVE_SLOT_DIAGNOSTIC_FORMATTERS = createSaveSlotDiagnosticFormatters({
-  text: EDITOR_TEXT.saveDiagnostics || {},
-  locale: EDITOR_TEXT.locale,
-});
-const SAVE_SLOT_EDIT_PREVIEW_COMPOSITION = createSaveSlotEditPreviewComposition({
+const renderSaveSlotDiagnostics = createEditorSaveSlotDiagnosticsRenderer({
   text: EDITOR_TEXT,
-  translate: tf,
-  diagnosticKeys: SAVE_SLOT_DIAGNOSTIC_KEYS,
-  createDraftPayloadPreview: createSaveSlotDraftPayloadPreview,
-  createValidationPlan: createSaveSlotValidationPlan,
-});
-const renderSaveSlotValidationPlanSection = createSaveSlotValidationPlanRenderer({
-  text: EDITOR_TEXT.saveValidation || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPlan: createSaveSlotValidationPlan,
-});
-const renderSaveSlotDraftPayloadSection = createSaveSlotDraftPayloadRenderer({
-  text: EDITOR_TEXT.saveDraft || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreview: createSaveSlotDraftPayloadPreview,
-});
-const renderSaveSlotDraftDiffSummarySection = createSaveSlotDraftDiffSummaryRenderer({
-  text: EDITOR_TEXT.saveDraftDiff || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createDiff: createSaveSlotDraftDiffSummary,
-});
-const renderSaveSlotApplyGateChecklistSection = createSaveSlotApplyGateChecklistRenderer({
-  text: EDITOR_TEXT.saveApplyGate || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createGate: createSaveSlotApplyGateChecklist,
-});
-const renderSaveSlotRecoveryRehearsalSection = createSaveSlotRecoveryRehearsalRenderer({
-  text: EDITOR_TEXT.saveRecovery || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createRehearsal: createSaveSlotRecoveryRehearsalPreview,
-});
-const renderSaveSlotEditSampleBridgeBlockerSection = createSaveSlotEditSampleBridgeBlockerRenderer({
-  text: EDITOR_TEXT.saveEditSampleBridgeBlockerSummary || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createSummary: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics),
-});
-const renderSaveSlotEditProducedResultBridgeSection = createSaveSlotEditProducedResultBridgeRenderer({
-  text: EDITOR_TEXT.saveEditProducedResultBridgeContract || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditProducedResultBridgeContractPreview(diagnostics),
-});
-const renderSaveSlotEditBridgeTransitionSection = createSaveSlotEditBridgeTransitionRenderer({
-  text: EDITOR_TEXT.saveEditProducedResultBridgeTransitionChecklist || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createChecklist: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditBridgeTransitionChecklistPreview(diagnostics),
-});
-const renderSaveSlotEditValidatorResultSourceAdapterSection = createSaveSlotEditValidatorResultSourceAdapterPlanRenderer({
-  text: EDITOR_TEXT.saveEditValidatorResultSourceAdapterPlan || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPlan: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics),
-});
-const renderSaveSlotEditSelectedSourceHandoffSection = createSaveSlotEditSelectedSourceHandoffRenderer({
-  text: EDITOR_TEXT.saveEditSelectedSourceHandoffContract || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics),
-});
-const renderSaveSlotEditAdapterRunnerPreflightSection = createSaveSlotEditAdapterRunnerPreflightRenderer({
-  text: EDITOR_TEXT.saveEditAdapterRunnerPreflight || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreflight: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditAdapterRunnerPreflightPreview(diagnostics),
-});
-const renderSaveSlotEditConfirmationSourceSelectionSection = createSaveSlotEditConfirmationSourceSelectionRenderer({
-  text: EDITOR_TEXT.saveEditConfirmationSourceSelectionContract || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics),
-});
-const renderSaveSlotEditConfirmationInputShellSection = createSaveSlotEditConfirmationInputShellRenderer({
-  text: EDITOR_TEXT.saveEditConfirmationInputShellContract || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationInputShellContractPreview(diagnostics),
-});
-const renderSaveSlotEditConfirmationMatchReviewSection = createSaveSlotEditConfirmationMatchReviewRenderer({
-  text: EDITOR_TEXT.saveEditConfirmationMatchReviewSummary || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createSummary: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics),
-});
-const renderSaveSlotEditSubmitRunnerBlockerSection = createSaveSlotEditSubmitRunnerBlockerRenderer({
-  text: EDITOR_TEXT.saveEditSubmitRunnerBlockerContract || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics),
-});
-const renderSaveSlotEditFinalApplyRunnerHandoffSection = createSaveSlotEditFinalApplyRunnerHandoffRenderer({
-  text: EDITOR_TEXT.saveEditFinalApplyRunnerHandoffChecklist || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createChecklist: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics),
-});
-const renderSaveSlotEditApplyRunnerPayloadShapeSection = createSaveSlotEditApplyRunnerPayloadShapeRenderer({
-  text: EDITOR_TEXT.saveEditApplyRunnerPayloadShape || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreview: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics),
-});
-const renderSaveSlotEditPayloadBridgeCompatibilitySection = createSaveSlotEditPayloadBridgeCompatibilityRenderer({
-  text: EDITOR_TEXT.saveEditPayloadBridgeCompatibilitySummary || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createSummary: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics),
-});
-const renderSaveSlotEditValidatorApplyGateBridgeSection = createSaveSlotEditValidatorApplyGateBridgeRenderer({
-  text: EDITOR_TEXT.saveEditValidatorApplyGateBridge || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createBridge: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics),
-});
-const renderSaveSlotEditInputSchemaSection = createSaveSlotEditInputSchemaRenderer({
-  text: EDITOR_TEXT.saveEditInput || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createSchema: (diagnostics) => createSaveSlotEditInputSchemaPreview(diagnostics),
-});
-const renderSaveSlotEditValidationMatrixSection = createSaveSlotEditValidationMatrixRenderer({
-  text: EDITOR_TEXT.saveEditMatrix || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createMatrix: (diagnostics) => createSaveSlotEditValidationMatrix(diagnostics),
-});
-const renderSaveSlotEditRuleDrilldownSection = createSaveSlotEditRuleDrilldownRenderer({
-  text: EDITOR_TEXT.saveEditRuleDrilldown || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createDrilldown: (diagnostics) => createSaveSlotEditValidationRuleDrilldown(diagnostics),
-});
-const renderSaveSlotEditSamplePayloadSection = createSaveSlotEditSamplePayloadRenderer({
-  text: EDITOR_TEXT.saveEditSamplePayload || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreview: (diagnostics) => createSaveSlotEditSamplePayloadPreview(diagnostics),
-});
-const renderSaveSlotEditValidatorDryRunSection = createSaveSlotEditValidatorDryRunRenderer({
-  text: EDITOR_TEXT.saveEditDryRun || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPlan: (diagnostics) => createSaveSlotEditValidatorDryRunPlan(diagnostics),
-});
-const renderSaveSlotEditValidatorRegistrySection = createSaveSlotEditValidatorRegistryRenderer({
-  text: EDITOR_TEXT.saveEditValidatorRegistry || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => createSaveSlotEditValidatorRegistryContract(diagnostics),
-});
-const renderSaveSlotEditValidatorResultSchemaSection = createSaveSlotEditValidatorResultRenderer({
-  text: EDITOR_TEXT.saveEditValidatorResult || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createSchema: (diagnostics) => createSaveSlotEditValidatorResultSchemaPreview(diagnostics),
-});
-const renderSaveSlotEditValidatorExecutableDryRunSection = createSaveSlotEditValidatorExecutableDryRunRenderer({
-  text: EDITOR_TEXT.saveEditValidatorExecutableDryRun || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreview: (diagnostics) => createSaveSlotEditValidatorExecutableDryRunPreview(diagnostics),
-});
-const renderSaveSlotEditProposedValueInjectorSection = createSaveSlotEditProposedValueInjectorRenderer({
-  text: EDITOR_TEXT.saveEditProposedValueInjector || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreview: (diagnostics) => createSaveSlotEditProposedValueInjectorPreview(diagnostics),
-});
-const renderSaveSlotEditDryRunSampleComparatorSection = createSaveSlotEditDryRunSampleComparatorRenderer({
-  text: EDITOR_TEXT.saveEditDryRunSampleComparator || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreview: (diagnostics) => createSaveSlotEditDryRunSampleComparatorPreview(diagnostics),
-});
-const renderSaveSlotEditCompatibilityConfirmationRollupPreview = createSaveSlotEditCompatibilityConfirmationRollupRenderer({
-  text: EDITOR_TEXT.saveEditCompatibilityConfirmationRollup || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createRollup: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditCompatibilityConfirmationRollupPreview(diagnostics),
-});
-const renderSaveSlotEditValidatorConfirmationPreflightPreview = createSaveSlotEditValidatorConfirmationPreflightRenderer({
-  text: EDITOR_TEXT.saveEditValidatorConfirmationPreflight || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createPreflight: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorConfirmationPreflightPreview(diagnostics),
-});
-const renderSaveSlotEditConfirmationInputContractPreview = createSaveSlotEditConfirmationInputContractRenderer({
-  text: EDITOR_TEXT.saveEditConfirmationInputContract || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationInputContractPreview(diagnostics),
-});
-const renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview = createSaveSlotEditConfirmationRunnerHandoffRenderer({
-  text: EDITOR_TEXT.saveEditConfirmationRunnerHandoffSummary || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createSummary: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationRunnerHandoffSummaryPreview(diagnostics),
-});
-const renderSaveSlotEditWriterPayloadCheckpointPreview = createSaveSlotEditWriterPayloadCheckpointRenderer({
-  text: EDITOR_TEXT.saveEditWriterPayloadCheckpoint || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createReview: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditWriterPayloadCheckpointPreview(diagnostics),
-});
-const renderSaveSlotEditPostWriteRestoreContractPreview = createSaveSlotEditPostWriteRestoreContractRenderer({
-  text: EDITOR_TEXT.saveEditPostWriteRestoreContract || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createContract: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditPostWriteRestoreContractPreview(diagnostics),
-});
-const renderSaveSlotEditWriterEnablementRiskSummary = createSaveSlotEditWriterEnablementRiskRenderer({
-  text: EDITOR_TEXT.saveEditWriterEnablementRisk || {},
-  translate: tf,
-  metricCard: renderEditorMetricCard,
-  statusLabel: SAVE_SLOT_DIAGNOSTIC_FORMATTERS.statusLabel,
-  createSummary: (diagnostics) => SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditWriterEnablementRiskSummary(diagnostics),
-});
-const SAVE_SLOT_DIAGNOSTIC_SECTION_RENDERERS = createSaveSlotDiagnosticsSectionRenderers({
-  validationPlan: renderSaveSlotValidationPlan,
-  draftPayload: renderSaveSlotDraftPayloadPreview,
-  draftDiff: renderSaveSlotDraftDiffSummary,
-  applyGate: renderSaveSlotApplyGateChecklist,
-  recoveryRehearsal: renderSaveSlotRecoveryRehearsalPreview,
-  editInputSchema: renderSaveSlotEditInputSchemaPreview,
-  validationMatrix: renderSaveSlotEditValidationMatrix,
-  ruleDrilldown: renderSaveSlotEditValidationRuleDrilldown,
-  samplePayload: renderSaveSlotEditSamplePayloadPreview,
-  validatorDryRun: renderSaveSlotEditValidatorDryRunPlan,
-  validatorRegistry: renderSaveSlotEditValidatorRegistryContract,
-  validatorResultSchema: renderSaveSlotEditValidatorResultSchemaPreview,
-  validatorExecutableDryRun: renderSaveSlotEditValidatorExecutableDryRunPreview,
-  proposedValueInjector: renderSaveSlotEditProposedValueInjectorPreview,
-  dryRunSampleComparator: renderSaveSlotEditDryRunSampleComparatorPreview,
-  sampleBridgeBlocker: renderSaveSlotEditSampleBridgeBlockerSummaryPreview,
-  producedResultBridge: renderSaveSlotEditProducedResultBridgeContractPreview,
-  bridgeTransition: renderSaveSlotEditBridgeTransitionChecklistPreview,
-  validatorSourceAdapter: renderSaveSlotEditValidatorResultSourceAdapterPlanPreview,
-  selectedSourceHandoff: renderSaveSlotEditSelectedSourceHandoffContractPreview,
-  adapterRunnerPreflight: renderSaveSlotEditAdapterRunnerPreflightPreview,
-  confirmationSourceSelection: renderSaveSlotEditConfirmationSourceSelectionContractPreview,
-  confirmationInputShell: renderSaveSlotEditConfirmationInputShellContractPreview,
-  confirmationMatchReview: renderSaveSlotEditConfirmationMatchReviewSummaryPreview,
-  submitRunnerBlocker: renderSaveSlotEditSubmitRunnerBlockerContractPreview,
-  finalApplyRunnerHandoff: renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview,
-  applyRunnerPayload: renderSaveSlotEditApplyRunnerPayloadShapePreview,
-  payloadBridgeCompatibility: renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview,
-  validatorApplyGateBridge: renderSaveSlotEditValidatorApplyGateBridgePreview,
-  compatibilityConfirmationRollup: renderSaveSlotEditCompatibilityConfirmationRollupPreview,
-  validatorConfirmationPreflight: renderSaveSlotEditValidatorConfirmationPreflightPreview,
-  confirmationInputContract: renderSaveSlotEditConfirmationInputContractPreview,
-  confirmationRunnerHandoff: renderSaveSlotEditConfirmationRunnerHandoffSummaryPreview,
-  writerPayloadCheckpoint: renderSaveSlotEditWriterPayloadCheckpointPreview,
-  postwriteRestore: renderSaveSlotEditPostWriteRestoreContractPreview,
-  writerEnablementRisk: renderSaveSlotEditWriterEnablementRiskSummary,
-});
-const renderSaveSlotDiagnostics = createSaveSlotDiagnosticsPanelRenderer({
-  keys: SAVE_SLOT_DIAGNOSTIC_KEYS,
-  slotIds: SAVE_SLOT_DIAGNOSTIC_SLOT_IDS,
-  noActiveSlot: SAVE_SLOT_DIAGNOSTIC_NO_ACTIVE,
-  text: EDITOR_TEXT.saveDiagnostics || {},
   locale: EDITOR_TEXT.locale,
   translate: tf,
-  renderMetricCard: renderEditorMetricCard,
-  formatters: SAVE_SLOT_DIAGNOSTIC_FORMATTERS,
-  sectionRenderers: SAVE_SLOT_DIAGNOSTIC_SECTION_RENDERERS,
+  metricCard: renderEditorMetricCard,
 });
 const BALANCE_TUNING_PREVIEW_BY_ID = new Map(
   createBalanceTuningPreviewRows(BALANCE_TUNING_GROUPS).map((row) => [row.id, row])
@@ -797,80 +454,68 @@ function bindEvents() {
     downloadJson("project-regressor-editor-backlog.json", backlog);
   });
   elements.panelDetail?.addEventListener("input", (event) => {
-    const input = event.target.closest("[data-retarget-search]");
-    if (input) {
-      const cursor = input.selectionStart ?? input.value.length;
-      retargetDetailFilter = {
-        ...retargetDetailFilter,
-        query: input.value
-      };
-      persistRetargetDetailFilter();
-      renderPanelDetail();
-      const nextInput = elements.panelDetail.querySelector("[data-retarget-search]");
-      if (nextInput) {
-        nextInput.focus();
-        nextInput.setSelectionRange(cursor, cursor);
+    if (handleEditorSearchInputEvent(event, {
+      selector: "[data-retarget-search]",
+      container: elements.panelDetail,
+      render: renderPanelDetail,
+      update: (value) => {
+        retargetDetailFilter = {
+          ...retargetDetailFilter,
+          query: value
+        };
+        persistRetargetDetailFilter();
       }
+    })) {
       return;
     }
-    const balanceInput = event.target.closest("[data-balance-search]");
-    if (balanceInput) {
-      const cursor = balanceInput.selectionStart ?? balanceInput.value.length;
-      balanceDetailFilter = {
-        ...balanceDetailFilter,
-        query: balanceInput.value,
-        candidateId: "",
-        candidateLabel: "",
-        candidateGroups: []
-      };
-      persistBalanceDetailFilter();
-      renderPanelDetail();
-      const nextInput = elements.panelDetail.querySelector("[data-balance-search]");
-      if (nextInput) {
-        nextInput.focus();
-        nextInput.setSelectionRange(cursor, cursor);
+    if (handleEditorSearchInputEvent(event, {
+      selector: "[data-balance-search]",
+      container: elements.panelDetail,
+      render: renderPanelDetail,
+      update: (value) => {
+        balanceDetailFilter = {
+          ...balanceDetailFilter,
+          query: value,
+          candidateId: "",
+          candidateLabel: "",
+          candidateGroups: []
+        };
+        persistBalanceDetailFilter();
       }
+    })) {
       return;
     }
-    const combatVfxInput = event.target.closest("[data-combat-vfx-search]");
-    if (combatVfxInput) {
-      const cursor = combatVfxInput.selectionStart ?? combatVfxInput.value.length;
-      combatVfxDetailFilter = {
-        ...combatVfxDetailFilter,
-        query: combatVfxInput.value
-      };
-      persistCombatVfxDetailFilter();
-      renderPanelDetail();
-      const nextInput = elements.panelDetail.querySelector("[data-combat-vfx-search]");
-      if (nextInput) {
-        nextInput.focus();
-        nextInput.setSelectionRange(cursor, cursor);
+    if (handleEditorSearchInputEvent(event, {
+      selector: "[data-combat-vfx-search]",
+      container: elements.panelDetail,
+      render: renderPanelDetail,
+      update: (value) => {
+        combatVfxDetailFilter = {
+          ...combatVfxDetailFilter,
+          query: value
+        };
+        persistCombatVfxDetailFilter();
       }
+    })) {
       return;
     }
-    const contentBulkSearchInput = event.target.closest("[data-content-bulk-search]");
-    if (contentBulkSearchInput) {
-      const cursor = contentBulkSearchInput.selectionStart ?? contentBulkSearchInput.value.length;
-      contentBulkDetailFilter = {
-        ...contentBulkDetailFilter,
-        query: contentBulkSearchInput.value
-      };
-      persistContentBulkDetailFilter();
-      renderPanelDetail();
-      const nextInput = elements.panelDetail.querySelector("[data-content-bulk-search]");
-      if (nextInput) {
-        nextInput.focus();
-        nextInput.setSelectionRange(cursor, cursor);
+    if (handleEditorSearchInputEvent(event, {
+      selector: "[data-content-bulk-search]",
+      container: elements.panelDetail,
+      render: renderPanelDetail,
+      update: (value) => {
+        contentBulkDetailFilter = {
+          ...contentBulkDetailFilter,
+          query: value
+        };
+        persistContentBulkDetailFilter();
       }
+    })) {
       return;
     }
     const packageTextarea = event.target.closest("[data-content-bulk-package-json]");
     if (packageTextarea) {
-      contentBulkPatchPackageInput = {
-        ...contentBulkPatchPackageInput,
-        draftText: packageTextarea.value,
-        parseError: ""
-      };
+      contentBulkPatchPackageInput = createContentBulkPatchPackageDraftInput(contentBulkPatchPackageInput, packageTextarea.value);
       persistContentBulkPatchPackageInput();
     }
   });
@@ -881,21 +526,13 @@ function bindEvents() {
     if (!file) return;
     try {
       const text = await file.text();
-      contentBulkPatchPackageInput = {
-        draftText: text,
-        appliedText: text,
-        sourceName: file.name,
-        parseError: ""
-      };
+      contentBulkPatchPackageInput = createContentBulkPatchPackageFileInput(text, file.name);
       persistContentBulkPatchPackageInput();
       refreshContentBulkPatchPackageAdapterPreview();
       renderPanelDetail();
       scrollContentBulkPackageIntoView();
     } catch (error) {
-      contentBulkPatchPackageInput = {
-        ...contentBulkPatchPackageInput,
-        parseError: error?.message || "File read failed"
-      };
+      contentBulkPatchPackageInput = createContentBulkPatchPackageReadErrorInput(contentBulkPatchPackageInput, error);
       persistContentBulkPatchPackageInput();
       renderPanelDetail();
       scrollContentBulkPackageIntoView();
@@ -926,7 +563,7 @@ function bindEvents() {
     }
     const packageTemplateButton = event.target.closest("[data-content-bulk-package-template]");
     if (packageTemplateButton) {
-      downloadJson("project-regressor-content-bulk-package-template.json", createContentBulkPatchPackageAdapterTemplate());
+      downloadJson(CONTENT_BULK_PACKAGE_TEMPLATE_FILE_NAME, createContentBulkPatchPackageTemplatePayload());
       return;
     }
     const filePatchDraftExportButton = event.target.closest("[data-content-bulk-file-patch-export]");
@@ -939,30 +576,21 @@ function bindEvents() {
     }
     const contentBulkFilterButton = event.target.closest("[data-content-bulk-filter]");
     if (contentBulkFilterButton) {
-      contentBulkDetailFilter = {
-        ...contentBulkDetailFilter,
-        state: normalizeContentBulkFilterState(contentBulkFilterButton.dataset.contentBulkFilter)
-      };
+      contentBulkDetailFilter = createContentBulkStateFilter(contentBulkDetailFilter, contentBulkFilterButton.dataset.contentBulkFilter);
       persistContentBulkDetailFilter();
       renderPanelDetail();
       return;
     }
     const contentBulkDomainButton = event.target.closest("[data-content-bulk-domain]");
     if (contentBulkDomainButton) {
-      contentBulkDetailFilter = {
-        ...contentBulkDetailFilter,
-        domain: normalizeContentBulkFilterDomain(contentBulkDomainButton.dataset.contentBulkDomain)
-      };
+      contentBulkDetailFilter = createContentBulkDomainFilter(contentBulkDetailFilter, contentBulkDomainButton.dataset.contentBulkDomain);
       persistContentBulkDetailFilter();
       renderPanelDetail();
       return;
     }
     const contentBulkSearchResetButton = event.target.closest("[data-content-bulk-search-reset]");
     if (contentBulkSearchResetButton) {
-      contentBulkDetailFilter = {
-        ...contentBulkDetailFilter,
-        query: ""
-      };
+      contentBulkDetailFilter = clearContentBulkQueryFilter(contentBulkDetailFilter);
       persistContentBulkDetailFilter();
       renderPanelDetail();
       return;
@@ -975,10 +603,7 @@ function bindEvents() {
     }
     const combatVfxKindButton = event.target.closest("[data-combat-vfx-kind]");
     if (combatVfxKindButton) {
-      combatVfxDetailFilter = {
-        ...combatVfxDetailFilter,
-        kind: normalizeCombatVfxKind(combatVfxKindButton.dataset.combatVfxKind)
-      };
+      combatVfxDetailFilter = createCombatVfxKindFilter(combatVfxDetailFilter, combatVfxKindButton.dataset.combatVfxKind);
       persistCombatVfxDetailFilter();
       renderPanelDetail();
       return;
@@ -998,13 +623,7 @@ function bindEvents() {
     }
     const balanceScopeButton = event.target.closest("[data-balance-scope]");
     if (balanceScopeButton) {
-      balanceDetailFilter = {
-        ...balanceDetailFilter,
-        scope: normalizeBalanceScope(balanceScopeButton.dataset.balanceScope),
-        candidateId: "",
-        candidateLabel: "",
-        candidateGroups: []
-      };
+      balanceDetailFilter = createBalanceScopeFilter(balanceDetailFilter, balanceScopeButton.dataset.balanceScope);
       persistBalanceDetailFilter();
       renderPanelDetail();
       return;
@@ -1017,10 +636,7 @@ function bindEvents() {
     }
     const filterButton = event.target.closest("[data-retarget-kind]");
     if (filterButton) {
-      retargetDetailFilter = {
-        ...retargetDetailFilter,
-        kind: normalizeRetargetKind(filterButton.dataset.retargetKind)
-      };
+      retargetDetailFilter = createRetargetKindFilter(retargetDetailFilter, filterButton.dataset.retargetKind);
       persistRetargetDetailFilter();
       renderPanelDetail();
       return;
@@ -1305,238 +921,6 @@ function createSaveSummary() {
   });
 }
 
-function renderSaveSlotValidationPlan(diagnostics) {
-  return renderSaveSlotValidationPlanSection(diagnostics);
-}
-
-function renderSaveSlotDraftPayloadPreview(diagnostics) {
-  return renderSaveSlotDraftPayloadSection(diagnostics);
-}
-
-function createSaveSlotDraftPayloadPreview(diagnostics) {
-  return createSaveSlotDraftPayloadPreviewModel(diagnostics, EDITOR_TEXT.saveDraft || {});
-}
-
-function renderSaveSlotDraftDiffSummary(diagnostics) {
-  return renderSaveSlotDraftDiffSummarySection(diagnostics);
-}
-
-function renderSaveSlotApplyGateChecklist(diagnostics) {
-  return renderSaveSlotApplyGateChecklistSection(diagnostics);
-}
-
-function renderSaveSlotRecoveryRehearsalPreview(diagnostics) {
-  return renderSaveSlotRecoveryRehearsalSection(diagnostics);
-}
-
-function renderSaveSlotEditInputSchemaPreview(diagnostics) {
-  return renderSaveSlotEditInputSchemaSection(diagnostics);
-}
-
-function renderSaveSlotEditValidationMatrix(diagnostics) {
-  return renderSaveSlotEditValidationMatrixSection(diagnostics);
-}
-
-function renderSaveSlotEditValidationRuleDrilldown(diagnostics) {
-  return renderSaveSlotEditRuleDrilldownSection(diagnostics);
-}
-
-function renderSaveSlotEditSamplePayloadPreview(diagnostics) {
-  return renderSaveSlotEditSamplePayloadSection(diagnostics);
-}
-
-function renderSaveSlotEditValidatorDryRunPlan(diagnostics) {
-  return renderSaveSlotEditValidatorDryRunSection(diagnostics);
-}
-
-function renderSaveSlotEditValidatorRegistryContract(diagnostics) {
-  return renderSaveSlotEditValidatorRegistrySection(diagnostics);
-}
-
-function renderSaveSlotEditValidatorResultSchemaPreview(diagnostics) {
-  return renderSaveSlotEditValidatorResultSchemaSection(diagnostics);
-}
-
-function renderSaveSlotEditValidatorExecutableDryRunPreview(diagnostics) {
-  return renderSaveSlotEditValidatorExecutableDryRunSection(diagnostics);
-}
-
-function renderSaveSlotEditProposedValueInjectorPreview(diagnostics) {
-  return renderSaveSlotEditProposedValueInjectorSection(diagnostics);
-}
-
-function renderSaveSlotEditDryRunSampleComparatorPreview(diagnostics) {
-  return renderSaveSlotEditDryRunSampleComparatorSection(diagnostics);
-}
-
-function renderSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics) {
-  return renderSaveSlotEditSampleBridgeBlockerSection(diagnostics);
-}
-
-function renderSaveSlotEditProducedResultBridgeContractPreview(diagnostics) {
-  return renderSaveSlotEditProducedResultBridgeSection(diagnostics);
-}
-
-function renderSaveSlotEditBridgeTransitionChecklistPreview(diagnostics) {
-  return renderSaveSlotEditBridgeTransitionSection(diagnostics);
-}
-
-function renderSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics) {
-  return renderSaveSlotEditValidatorResultSourceAdapterSection(diagnostics);
-}
-
-function renderSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics) {
-  return renderSaveSlotEditSelectedSourceHandoffSection(diagnostics);
-}
-
-function renderSaveSlotEditAdapterRunnerPreflightPreview(diagnostics) {
-  return renderSaveSlotEditAdapterRunnerPreflightSection(diagnostics);
-}
-
-function renderSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics) {
-  return renderSaveSlotEditConfirmationSourceSelectionSection(diagnostics);
-}
-
-function renderSaveSlotEditConfirmationInputShellContractPreview(diagnostics) {
-  return renderSaveSlotEditConfirmationInputShellSection(diagnostics);
-}
-
-function renderSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics) {
-  return renderSaveSlotEditConfirmationMatchReviewSection(diagnostics);
-}
-
-function renderSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics) {
-  return renderSaveSlotEditSubmitRunnerBlockerSection(diagnostics);
-}
-
-function renderSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics) {
-  return renderSaveSlotEditFinalApplyRunnerHandoffSection(diagnostics);
-}
-
-function renderSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics) {
-  return renderSaveSlotEditApplyRunnerPayloadShapeSection(diagnostics);
-}
-
-function renderSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics) {
-  return renderSaveSlotEditPayloadBridgeCompatibilitySection(diagnostics);
-}
-
-function renderSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
-  return renderSaveSlotEditValidatorApplyGateBridgeSection(diagnostics);
-}
-
-function createSaveSlotDraftDiffSummary(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotDraftDiffSummary(diagnostics);
-}
-
-function createSaveSlotEditInputSchemaPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditInputSchemaPreview(diagnostics);
-}
-
-function createSaveSlotEditValidationMatrix(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidationMatrix(diagnostics);
-}
-
-function createSaveSlotEditValidationRuleDrilldown(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidationRuleDrilldown(diagnostics);
-}
-
-function createSaveSlotEditSamplePayloadPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditSamplePayloadPreview(diagnostics);
-}
-
-function createSaveSlotEditValidatorDryRunPlan(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorDryRunPlan(diagnostics);
-}
-
-function createSaveSlotEditValidatorRegistryContract(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorRegistryContract(diagnostics);
-}
-
-function createSaveSlotEditValidatorResultSchemaPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorResultSchemaPreview(diagnostics);
-}
-
-function createSaveSlotEditValidatorExecutableRegistry(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorExecutableRegistry(diagnostics);
-}
-
-function createSaveSlotEditValidatorExecutableDryRunPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorExecutableDryRunPreview(diagnostics);
-}
-
-function createSaveSlotEditProposedValueInjectorPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditProposedValueInjectorPreview(diagnostics);
-}
-
-function createSaveSlotEditDryRunSampleComparatorPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditDryRunSampleComparatorPreview(diagnostics);
-}
-
-function createSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditSampleBridgeBlockerSummaryPreview(diagnostics);
-}
-
-function createSaveSlotEditProducedResultBridgeContractPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditProducedResultBridgeContractPreview(diagnostics);
-}
-
-function createSaveSlotEditBridgeTransitionChecklistPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditBridgeTransitionChecklistPreview(diagnostics);
-}
-
-function createSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorResultSourceAdapterPlanPreview(diagnostics);
-}
-
-function createSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditSelectedSourceHandoffContractPreview(diagnostics);
-}
-
-function createSaveSlotEditAdapterRunnerPreflightPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditAdapterRunnerPreflightPreview(diagnostics);
-}
-
-function createSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationSourceSelectionContractPreview(diagnostics);
-}
-
-function createSaveSlotEditConfirmationInputShellContractPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationInputShellContractPreview(diagnostics);
-}
-
-function createSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditConfirmationMatchReviewSummaryPreview(diagnostics);
-}
-
-function createSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditSubmitRunnerBlockerContractPreview(diagnostics);
-}
-
-function createSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditFinalApplyRunnerHandoffChecklistPreview(diagnostics);
-}
-
-function createSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditApplyRunnerPayloadShapePreview(diagnostics);
-}
-
-function createSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditPayloadBridgeCompatibilitySummaryPreview(diagnostics);
-}
-
-function createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotEditValidatorApplyGateBridgePreview(diagnostics);
-}
-
-function createSaveSlotRecoveryRehearsalPreview(diagnostics, options = {}) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotRecoveryRehearsalPreview(diagnostics, options);
-}
-
-function createSaveSlotApplyGateChecklist(diagnostics, options = {}) {
-  return SAVE_SLOT_EDIT_PREVIEW_COMPOSITION.createSaveSlotApplyGateChecklist(diagnostics, options);
-}
-
 function applyBalanceCandidateFilter(candidateId) {
   const registryMeta = manifest.balanceTuningRegistry || {};
   const candidates = Array.isArray(registryMeta.tuningCandidates) ? registryMeta.tuningCandidates : [];
@@ -1565,24 +949,13 @@ function persistContentBulkPatchPackageInput() {
 function applyContentBulkPatchPackageInput() {
   const textarea = elements.panelDetail?.querySelector("[data-content-bulk-package-json]");
   const draftText = textarea ? textarea.value : String(contentBulkPatchPackageInput.draftText || "");
-  contentBulkPatchPackageInput = {
-    draftText,
-    appliedText: draftText,
-    sourceName: draftText.trim() ? "pasted-package.json" : "",
-    parseError: ""
-  };
+  contentBulkPatchPackageInput = createContentBulkPatchPackageAppliedInput(contentBulkPatchPackageInput, draftText);
   persistContentBulkPatchPackageInput();
   refreshContentBulkPatchPackageAdapterPreview();
 }
 
 function applyContentBulkPatchPackageSample() {
-  const sampleText = JSON.stringify(createContentBulkPatchPackageAdapterTemplate(), null, 2);
-  contentBulkPatchPackageInput = {
-    draftText: sampleText,
-    appliedText: sampleText,
-    sourceName: "project-regressor-content-bulk-package-template.json",
-    parseError: ""
-  };
+  contentBulkPatchPackageInput = createContentBulkPatchPackageSampleInput();
   persistContentBulkPatchPackageInput();
   refreshContentBulkPatchPackageAdapterPreview();
 }
@@ -1607,47 +980,20 @@ function refreshContentBulkPatchReadinessPlans(filteredCandidatePreview = {}) {
 }
 
 function createContentBulkPatchPackageAdapterPreviewFromInput() {
-  contentBulkPatchPackageParseError = "";
-  const appliedText = String(contentBulkPatchPackageInput.appliedText || "").trim();
-  if (!appliedText) return createContentBulkPatchPackageAdapterPreview();
-  try {
-    return createContentBulkPatchPackageAdapterPreview(JSON.parse(appliedText));
-  } catch (error) {
-    contentBulkPatchPackageParseError = error?.message || "JSON parse error";
-    return createContentBulkPatchPackageAdapterPreview();
-  }
+  const result = createContentBulkPatchPackagePreviewFromInput(contentBulkPatchPackageInput);
+  contentBulkPatchPackageParseError = result.parseError;
+  return result.preview;
 }
 
 function createContentBulkPatchFilePatchDraftExportFromInput() {
-  const appliedText = String(contentBulkPatchPackageInput.appliedText || "").trim();
-  if (!appliedText) {
-    return createContentBulkPatchFilePatchDraftExport(createContentBulkPatchPackageAdapterTemplate(), {
-      sourceName: "project-regressor-content-bulk-package-template.json",
-      adapterPreview: contentBulkPatchPackageAdapterPreview,
-    });
-  }
-  try {
-    return createContentBulkPatchFilePatchDraftExport(JSON.parse(appliedText), {
-      sourceName: contentBulkPatchPackageInput.sourceName || "pasted-package.json",
-      adapterPreview: contentBulkPatchPackageAdapterPreview,
-    });
-  } catch {
-    return createContentBulkPatchFilePatchDraftExport(createContentBulkPatchPackageAdapterTemplate(), {
-      sourceName: "project-regressor-content-bulk-package-template.json",
-    });
-  }
+  return createContentBulkPatchFilePatchDraftExportFromPackageInput(
+    contentBulkPatchPackageInput,
+    contentBulkPatchPackageAdapterPreview,
+  );
 }
 
 function createRuntimeVfxBulkIntakePreviewFromInput() {
-  const appliedText = String(contentBulkPatchPackageInput.appliedText || "").trim();
-  if (!appliedText) {
-    return createRuntimeVfxBulkIntakePreview(createRuntimeVfxBulkIntakeTemplate(), COMBAT_VFX_PLACEMENT_PREVIEW);
-  }
-  try {
-    return createRuntimeVfxBulkIntakePreview(JSON.parse(appliedText), COMBAT_VFX_PLACEMENT_PREVIEW);
-  } catch {
-    return createRuntimeVfxBulkIntakePreview(createRuntimeVfxBulkIntakeTemplate(), COMBAT_VFX_PLACEMENT_PREVIEW);
-  }
+  return createRuntimeVfxBulkIntakePreviewFromPackageInput(contentBulkPatchPackageInput, COMBAT_VFX_PLACEMENT_PREVIEW);
 }
 
 function persistCombatVfxDetailFilter() {
