@@ -911,6 +911,10 @@ export const KO_KR_TEXT = {
       "무기",
       "공격력과 기본 공격 이펙트에 가장 직접적으로 영향을 주는 장비 슬롯입니다."
     ],
+    "slot:OffHand": [
+      "보조무기",
+      "방패, 마법서, 보조 단검처럼 한손 주무기와 함께 쓰는 장비 슬롯입니다. 양손 무기 장착 중에는 비활성화됩니다."
+    ],
     "slot:Helmet": [
       "투구",
       "머리 방어구 슬롯입니다. 방어력과 보조 옵션이 붙을 수 있습니다."
@@ -1039,6 +1043,9 @@ export const KO_KR_TEXT = {
     emptyEquipmentList: "아직 획득한 전리품이 없습니다.",
     emptySlot: "빈 슬롯",
     emptyEquipped: "비어 있음",
+    disabled: "비활성화",
+    offHandDisabledReason: "양손 무기 장착 중",
+    offHandUnavailable: "현재 주무기와 함께 사용할 수 없는 보조무기입니다.",
     equipped: "장착",
     itemIcon: "{name} 아이콘",
     emptyItemIcon: "{name} 빈 아이콘 슬롯",
@@ -1075,6 +1082,7 @@ export const KO_KR_TEXT = {
     equipmentFallback: "장비",
     slotMarks: {
       Weapon: "검",
+      OffHand: "보",
       Helmet: "투",
       Armor: "갑",
       Gloves: "장",
@@ -1165,6 +1173,8 @@ export const KO_KR_TEXT = {
   equipmentActions: {
     equipped: "{itemName} 장착.",
     unequipped: "{itemName} 해제.",
+    offHandBlocked: "현재 주무기와 함께 사용할 수 없는 보조무기입니다.",
+    offHandAutoUnequipped: "양손 무기 장착으로 {itemName}이 보조무기 슬롯에서 해제되었습니다.",
     attack: "공격",
     defense: "방어",
     stanceChanged: "전술 스탠스 변경: {stanceLabel}.",
@@ -2096,6 +2106,7 @@ export const KO_KR_TEXT = {
       DIVINE: "신성",
       CHA: "매력",
       Weapon: "무기",
+      OffHand: "보조무기",
       Helmet: "투구",
       Armor: "갑옷",
       Gloves: "장갑",
@@ -2146,8 +2157,14 @@ export const KO_KR_TEXT = {
     equipmentNames: {
       rusty_sword: "녹슨 훈련검",
       hunter_bow: "견습 헌터의 활",
+      apprentice_wand: "견습 마도 완드",
+      training_greatsword: "훈련용 양손대검",
+      apprentice_staff: "견습 양손지팡이",
       golem_fist: "골렘 핵 철퇴",
       rift_blade: "균열 절단검",
+      round_wood_shield: "둥근 나무 방패",
+      apprentice_grimoire: "견습 마법서",
+      backup_dagger: "예비 단검",
       worn_gloves: "낡은 전투 장갑",
       wolf_leather_armor: "그림자 늑대 가죽갑옷",
       swift_boots: "숲길 추적자의 신발",

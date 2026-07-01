@@ -1,4 +1,4 @@
-import { equipInventoryItem } from "./equipmentActions.js?v=675";
+import { canEquipOffHand, equipInventoryItem } from "./equipmentActions.js?v=675";
 import { equipmentScore } from "./equipmentScore.js?v=675";
 import { t, tf } from "../localization/index.js?v=675";
 
@@ -17,6 +17,7 @@ export function equipRecommendedItems({ equipmentState, inventory, getItem }) {
       itemId: candidate.item.id,
       item: candidate.item,
       slot: candidate.slot,
+      getItem,
     });
     if (!result.equipped) break;
 
@@ -56,6 +57,7 @@ function bestEquipmentCandidate(inventory, equipmentState, getItem) {
 
 function resolveRecommendedSlot(item, equipmentState, getItem) {
   if (!item) return null;
+  if (item.slot === "OffHand" && !canEquipOffHand({ equipmentState, offHandItem: item, getItem })) return null;
   if (item.slot !== "Ring") return item.slot;
   if (!equipmentState.Ring1) return "Ring1";
   if (!equipmentState.Ring2) return "Ring2";

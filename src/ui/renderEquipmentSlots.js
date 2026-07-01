@@ -1,5 +1,6 @@
 import { t, tf } from "../localization/index.js?v=675";
 import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=675";
+import { isOffHandSlotDisabled } from "../state/equipmentActions.js?v=675";
 
 export function renderEquipmentSlots(
   equipmentState,
@@ -17,7 +18,8 @@ export function renderEquipmentSlots(
       const entry = equipmentState[slot];
       const item = entry ? getItem(entry.itemId) : null;
       const iconPath = getItemIconPath(item);
-      return `<div class="slot ${item ? "is-equipped" : "is-empty"}">
+      const offHandDisabled = slot === "OffHand" && isOffHandSlotDisabled(equipmentState, getItem);
+      return `<div class="slot ${item ? "is-equipped" : "is-empty"}${offHandDisabled ? " is-disabled" : ""}">
         ${itemIconSlot({
           item,
           iconPath,
@@ -30,11 +32,13 @@ export function renderEquipmentSlots(
           <div class="muted">${
             item
               ? `<span class="rarity-${item.rarity} info-term" tabindex="0" role="button" ${itemInfoAttrs(item, displayName, optionText)}>${escapeHtml(item.name)}</span>`
-              : t("inventoryUi.emptyEquipped")
+              : offHandDisabled
+                ? t("inventoryUi.offHandDisabledReason")
+                : t("inventoryUi.emptyEquipped")
           }</div>
         </div>
         <div class="slot-actions">
-          <span class="slot-state">${item ? t("inventoryUi.equipped") : t("inventoryUi.emptySlot")}</span>
+          <span class="slot-state">${offHandDisabled ? t("inventoryUi.disabled") : item ? t("inventoryUi.equipped") : t("inventoryUi.emptySlot")}</span>
           ${
             item
               ? `<button class="inventory-action-button inventory-action-button-unequip" data-unequip="${slot}" aria-label="${escapeHtml(tf("inventoryUi.unequipAria", { name: displayName(slot) }))}">${escapeHtml(t("inventoryUi.unequip"))}</button>`

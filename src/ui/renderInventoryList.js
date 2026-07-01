@@ -1,4 +1,5 @@
 import { equipmentScoreDelta } from "../state/equipmentScore.js?v=675";
+import { canEquipOffHand } from "../state/equipmentActions.js?v=675";
 import { t, tf } from "../localization/index.js?v=675";
 import { byId, escapeHtml, itemIconSlot, itemInfoAttrs } from "./inventoryRenderHelpers.js?v=675";
 
@@ -27,8 +28,13 @@ export function createInventoryListRows(inventory, equipmentState, getItem, disp
             ? tf("inventoryUi.valueNegative", { value: scoreDelta })
             : t("inventoryUi.sameValue");
       const rarityScore = RARITY_ORDER[item.rarity] || 0;
-      const actionLabel = isEquipment && isFilledTargetSlot(item, equipmentState) ? t("inventoryUi.replace") : t("inventoryUi.equip");
-      return { entry, item, isEquipment, scoreDelta, scoreClass, scoreText, rarityScore, actionLabel, displayName, optionText };
+      const blockedReason = isEquipment ? equipmentBlockedReason(item, equipmentState, getItem) : "";
+      const actionLabel = blockedReason
+        ? t("inventoryUi.disabled")
+        : isEquipment && isFilledTargetSlot(item, equipmentState)
+          ? t("inventoryUi.replace")
+          : t("inventoryUi.equip");
+      return { entry, item, isEquipment, scoreDelta, scoreClass, scoreText, rarityScore, actionLabel, blockedReason, displayName, optionText };
     })
     .filter(Boolean);
 }
@@ -61,7 +67,7 @@ export function renderInventoryList(rows = [], displayName, optionText, getItemI
         right.rarityScore - left.rarityScore ||
         left.item.name.localeCompare(right.item.name, "ko"),
     )
-    .map(({ entry, item, isEquipment, scoreClass, scoreText, actionLabel }) => {
+    .map(({ entry, item, isEquipment, scoreClass, scoreText, actionLabel, blockedReason }) => {
       const iconPath = getItemIconPath(item);
       const metaText = isEquipment
         ? `${displayName(item.slot)}${t("inventoryUi.separator")}${optionText(item)}`
@@ -77,7 +83,7 @@ export function renderInventoryList(rows = [], displayName, optionText, getItemI
         </div>
         <div class="item-actions">
           <span class="item-score">${escapeHtml(scoreText)}</span>
-          ${isEquipment ? `<button class="inventory-action-button inventory-action-button-equip" data-equip="${item.id}">${escapeHtml(actionLabel)}</button>` : ""}
+          ${isEquipment ? `<button class="inventory-action-button inventory-action-button-equip" data-equip="${item.id}"${blockedReason ? " disabled" : ""}${blockedReason ? ` title="${escapeHtml(blockedReason)}"` : ""}>${escapeHtml(actionLabel)}</button>` : ""}
         </div>
       </div>`;
     })
@@ -97,4 +103,11 @@ function isFilledTargetSlot(item, equipmentState) {
   if (!item || !equipmentState) return false;
   if (item.slot !== "Ring") return Boolean(equipmentState[item.slot]);
   return Boolean(equipmentState.Ring1 && equipmentState.Ring2);
+}
+
+function equipmentBlockedReason(item, equipmentState, getItem) {
+  if (item?.slot !== "OffHand") return "";
+  return canEquipOffHand({ equipmentState, offHandItem: item, getItem })
+    ? ""
+    : t("inventoryUi.offHandUnavailable");
 }

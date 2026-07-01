@@ -1446,6 +1446,8 @@ function equipItem(itemId) {
     itemId,
     item,
     slot: resolveEquipmentSlot(item, state.equipment),
+    getItem,
+    getItemName: (equippedItemId) => getItem(equippedItemId)?.name || equippedItemId,
   });
   if (!result.equipped) return;
   state.inventory = result.inventory;

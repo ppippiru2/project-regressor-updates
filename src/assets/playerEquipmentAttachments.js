@@ -484,6 +484,7 @@ const ITEM_APPEARANCE_BY_ID = Object.freeze({
 
 const VISUAL_SLOT_BY_EQUIPMENT_SLOT = Object.freeze({
   Weapon: "mainhand",
+  OffHand: "offhand",
   Offhand: "offhand",
   Helmet: "head",
   Armor: "torso",
